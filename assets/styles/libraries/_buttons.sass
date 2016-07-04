@@ -1,0 +1,107 @@
+.btn
+	&.active, &:active
+		box-shadow: none
+.btn-gray
+	+button-variant($btn-gray-color, $btn-gray-bg, $btn-gray-border)
+.btn-white
+	+button-variant($btn-white-color, $btn-white-bg, $btn-white-border)
+.btn-outline
+	background: transparent
+	&.btn-primary
+		+button-outline-variant($btn-primary-bg)
+	&.btn-success
+		+button-outline-variant($btn-success-bg)
+	&.btn-warning
+		+button-outline-variant($btn-warning-bg)
+	&.btn-danger
+		+button-outline-variant($btn-danger-bg)
+	&.btn-info
+		+button-outline-variant($btn-info-bg)
+	&.btn-gray
+		+button-outline-variant($btn-gray-bg)
+	&.btn-white
+		+button-outline-variant($btn-white-border)
+
+// buttons style for design editor tools
+// .btn-dark
+	// +button-variant($gray-light, transparent, RGBA(72, 82, 99, 1))
+
+// Social buttons
+.btn-fb, .btn-tw, .btn-gplus
+	color: white
+	&:hover, &:active, &:focus
+		color: white
+.btn-fb
+	background: #4F5FC7
+	&:active, &.active, &:hover
+		background: darken(#4F5FC7, 8%)
+.btn-tw
+	background: #49B7F1
+	&:active, &.active, &:hover
+		background: darken(#49B7F1, 8%)
+.btn-gplus
+	background: #CC5A4A
+	&:active, &.active, &:hover
+		background: darken(#CC5A4A, 8%)
+
+// Button padding cancellation (for better alignment on container edges)
+.btn-unpadded-left
+	padding-left: 0px
+.btn-unpadded-right
+	padding-right: 0px
+
+// Squared style, for buttons with icons but no text
+.btn:empty
+	padding-right: $padding-base-horizontal/2
+	padding-left: $padding-base-horizontal/2
+	&.ion, &.pe
+		&:before, &:after
+			margin: 0px
+	&.btn-lg
+		padding-right: $padding-large-horizontal/2
+		padding-left: $padding-large-horizontal/2
+	&.btn-xs
+		padding-right: $padding-xs-horizontal/2
+		padding-left: $padding-xs-horizontal/2
+	&.btn-sm
+		padding-right: $padding-small-horizontal/2
+		padding-left: $padding-small-horizontal/2
+
+// Icons
+.btn.ion, .btn.pe
+	&:not(:empty)
+		padding-left: $padding-base-horizontal/2
+		&.btn-lg
+			padding-left: $padding-large-horizontal/2
+		&.btn-xs
+			padding-left: $padding-xs-horizontal/2
+		&.btn-sm
+			padding-left: $padding-small-horizontal/2
+	&:before
+		margin-right: 10px
+
+// //IonIcons
+.btn.ion
+	&:before
+		font-size: $font-size-base*1.75
+		line-height: 0px
+		vertical-align: middle
+	&.btn-lg
+		&:before
+			font-size: $font-size-large*1.75
+	&.btn-sm, .btn-xs
+		&:before
+			font-size: $font-size-small*1.75
+
+// // //Pixeden
+.btn.pe
+	&:before
+		font-size: $font-size-base*1.5
+		line-height: 0px
+		vertical-align: middle
+	&.btn-lg
+		&:before
+			font-size: $font-size-large*1.5
+	&.btn-sm, .btn-xs
+		&:before
+			font-size: $font-size-small*1.5

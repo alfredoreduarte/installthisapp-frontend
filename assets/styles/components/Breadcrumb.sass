@@ -1,0 +1,27 @@
+.ita-breadcrumb
+	&:hover
+		.ita-breadcrumb-list
+			li
+				margin-left: 10px
+.ita-breadcrumb-list
+	margin-left: 0px
+	li
+		vertical-align: middle
+		margin: 0px
+		padding: 0px
+		margin-left: -15px
+		+transition(margin-left $animation-speed-base linear)
+		&:first-child
+			margin-left: 0px
+		&:last-child:not(:first-child)
+			border-left: $gray-lighter 1px solid
+			padding-left: 10px
+			margin-left: 10px
+		a
+			img
+				border-radius: $border-radius-base
+				max-height: 30px
+.ita-breadcrumb-title
+	font-size: 41px
+	&:hover
+		text-decoration: none

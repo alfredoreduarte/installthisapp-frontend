@@ -1,0 +1,75 @@
+// Bourbon Sass Library
+// @import "bourbon"
+@import "~bourbon/app/assets/stylesheets/bourbon"
+// @import bourbon/app/assets/stylesheets/bourbon
+
+// Font Awesome
+// @import	libraries/font-awesome/variables
+// @import	font-awesome/scss/font-awesome
+
+// IonIcons
+// @import	libraries/Ionicons/variables
+// @import	Ionicons/scss/ionicons
+
+// pixeden-stroke-7-icon
+// @import	libraries/pixeden-stroke-7-icon/variables
+// @import	pixeden-stroke-7-icon/pe-icon-7-stroke/scss/pe-icon-7-stroke
+
+// Bootstrap
+@import	libraries/variables
+// @import bootstrap-sass/assets/stylesheets/bootstrap
+@import "~bootstrap-sass/assets/stylesheets/bootstrap"
+// @import "bootstrap-sass/bootstrap"
+
+// Bootstrap Slider
+// @import	libraries/seiyria-bootstrap-slider
+
+// Animate.css
+// @import animate.css/animate
+
+// Spinner
+// @import react-activity/src/styles
+
+// Mixins
+// @import "mixins/*"
+@import mixins/buttons
+@import mixins/outline-buttons
+@import mixins/placeholders
+
+// Bootstrap Class Extensions
+// @import "libraries/*"
+@import libraries/buttons
+@import libraries/type
+@import libraries/forms
+
+// Custom Components
+// @import "components/*"
+@import components/App
+@import components/Table
+@import components/Sidebar
+@import components/Breadcrumb
+@import components/Checkbox
+@import components/SearchForm
+@import components/DashboardTitleBar
+@import components/StatusIndicator
+@import components/User
+
+// React Select
+.react-select-top
+	.Select-menu-outer
+		top: auto
+		bottom: 100%
+
+html.turbolinks-progress-bar::before
+	background-color: $brand-success !important
+	height: 3px !important
+
+// Annoying outline on focused elements on Google Chrome
+*:focus
+	outline: none !important
+
+body
+	font-weight: $font-weight-global
+// sticky bootstrap menu
+.affix
+	top: 20px

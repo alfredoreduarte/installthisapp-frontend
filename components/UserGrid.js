@@ -1,0 +1,14 @@
+import React, { Component, PropTypes } from 'react'
+import Summary from '../components/Summary'
+import User from '../components/User'
+
+const users = ['alfredo', 'jose', 're']
+
+const UserGrid = ({ active }) => (
+	<div>
+		<h3 className="ita-section-title">Latest Users</h3>
+		{users.map( u => <div className="col-md-2" key={u}><User name={u} small={true} /></div>)}
+	</div>
+)
+
+export default UserGrid

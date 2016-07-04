@@ -1,0 +1,106 @@
+.ita-table-toolbar
+	width: 100%
+	margin-bottom: 12px
+
+.ita-table-view-second-row
+	margin-top: 	18px
+
+.ita-table-tools-selected
+	display: 		inline-block
+	height: 		36px
+	vertical-align: middle
+
+.ita-table-tools-selected
+	.btn
+		color: $brand-info
+
+.ita-table
+	table-layout: fixed
+	border-collapse: separate
+	border-spacing: 0px 8px
+	thead
+		tr
+			th
+				font-weight: $font-weight-normal
+				padding-top: 10px
+				padding-bottom: 10px
+				color: $gray-light
+				cursor: default !important
+				&, &:focus
+					outline: none !important
+	tbody
+		tr
+			&:hover
+				td
+					border-top-width: 1px
+					border-color: $gray-light
+					&:first-child
+						border-left-width: 1px
+						border-left-color: $gray-light
+						border-radius: $border-radius-base 0px 0px $border-radius-base
+					&:last-child
+						border-right-width: 1px
+						border-right-color: $gray-light
+						border-radius: 0px $border-radius-base $border-radius-base 0px
+			&.selected
+				>td
+					border-top-width: 1px
+					border-color: $brand-info
+					&:first-child
+						border-left-width: 1px
+						border-left-color: $brand-info
+						border-radius: $border-radius-base 0px 0px $border-radius-base
+					&:last-child
+						border-right-width: 1px
+						border-right-color: $brand-info
+						border-radius: 0px $border-radius-base $border-radius-base 0px
+			td
+				border-color: transparent
+				vertical-align: middle
+				+transition(border-color linear $animation-speed-base)
+				&:first-child
+					overflow: hidden
+					white-space: nowrap
+					text-overflow: ellipsis
+	>thead>tr>th, 
+	>thead>tr>td,
+	>tfoot>tr>td
+		border-bottom: none
+	>tbody>tr>td
+		border-color: $table-border-color
+		border-style: solid
+		border-top-width: 1px
+		border-bottom-width: 1px
+		border-left-width: 0px
+		border-right-width: 0px
+		border-top-color: transparent
+		&:first-child
+			border-left-width: 1px
+			border-left-color: transparent
+		&:last-child
+			border-right-width: 1px
+			border-right-color: transparent
+
+.ita-table-body-align-middle
+	tbody
+		tr
+			td
+				vertical-align: middle
+
+// Reactable empty dataset
+.ita-table .reactable-no-data
+	text-align: center
+
+// icons
+.ita-table
+	.visible-on-hover
+		visibility: hidden
+		opacity: 0
+		+transition(opacity $animation-speed-base linear)
+	tbody tr:hover .visible-on-hover
+		visibility: visible
+		opacity: 1
+.icon-tool-big
+	&:before
+		font-size: 24px !important
+		line-height: 1

@@ -1,0 +1,15 @@
+{
+	"verbose": false,
+	"ignore": [
+		"components/*", 
+		"containers/*", 
+		"assets/*", 
+		"store/*", 
+		"reducers/*", 
+		"actions/*", 
+		"routes.js",
+		"index.&",
+		"index.html",
+		"index.html"
+	]
+}
