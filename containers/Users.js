@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
-import { getCurrentUsersByText } from '../selectors/users'
+import { getCurrentUsers } from '../selectors/users'
 import { selectUser } from '../actions/actionCreators'
 import { Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import { Checkbox } from 'react-icheck'
@@ -100,7 +100,7 @@ const Users = ({ users, handleUserSelect, selectedUserIds }) => (
 
 const mapStateToProps = (state, props) => {
 	return { 
-		users: _.values(getCurrentUsersByText(state, props)),
+		users: _.values(getCurrentUsers(state, props)),
 		selectedUserIds: state.selectedUserIds
 	}
 };
