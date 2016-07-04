@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import TimeAgo from 'react-timeago'
-import StatusIndicator from './StatusIndicator'
-import FbPhoto from './FbPhoto'
+import StatusIndicator from 'components/StatusIndicator'
+import FbPhoto from 'components/FbPhoto'
 
 const User = ({ name, small, id }) => (
 	<div className={`media ita-user ${small ? 'ita-user-small' : ''}`}>

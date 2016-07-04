@@ -1,6 +1,6 @@
 import _ from 'lodash'
-import { stringContains } from '../lib/stringmatch'
 import { createSelector } from 'reselect'
+import { stringContains } from 'lib/stringmatch'
 
 const appsSelector = (state, props) => state.entities.apps
 const currentAppChecksum = (state, props) => props.params.checksum

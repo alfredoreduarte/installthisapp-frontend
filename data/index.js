@@ -24,14 +24,17 @@ const data = {
 				{
 					id: 1342923825725048,
 					name: "Rodrigo Keen",
+					createdOn: "2016-05-01T20:46:22.000-04:00",
 				},
 				{
 					id: 1315096875183600,
 					name: "Mikhail Herrero",
+					createdOn: "2016-02-01T20:46:22.000-04:00",
 				},
 				{
 					id: 1097180737021047,
 					name: "Jorge Díaz",
+					createdOn: "2016-03-01T20:46:22.000-04:00",
 				}
 			]
 		},
@@ -50,6 +53,7 @@ const data = {
 				{
 					id: 10208910337057839,
 					name: "User de otra app",
+					createdOn: "2016-05-01T20:46:22.000-04:00",
 				},
 			]
 		}

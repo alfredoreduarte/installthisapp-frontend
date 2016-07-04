@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
-import StatusIndicator from './StatusIndicator'
+import StatusIndicator from 'components/StatusIndicator'
 
 const App = ({ 
 	gridSize,

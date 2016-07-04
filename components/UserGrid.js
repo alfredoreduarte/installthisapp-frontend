@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import Summary from '../components/Summary'
-import User from '../components/User'
+import Summary from 'components/Summary'
+import User from 'components/User'
 
 const UserGrid = ({ users }) => (
 	<div>

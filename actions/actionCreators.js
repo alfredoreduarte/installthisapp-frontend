@@ -24,6 +24,13 @@ export const selectUser = id => {
 	}
 }
 
+export const sortUsersBy = key => {
+	return {
+		type: 'SORT_USERS',
+		payload: key
+	}
+}
+
 export const searchText = payload => {
 	return {
 		type: 'SEARCH_TEXT',

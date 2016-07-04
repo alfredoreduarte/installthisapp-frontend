@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import StatusIndicator from './StatusIndicator'
+import StatusIndicator from 'components/StatusIndicator'
 
 const values = [999, 12, 234, 23]
 

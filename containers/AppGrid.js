@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import App from '../components/App'
-import { getAppsByText } from '../selectors/apps'
+import App from 'components/App'
+import { getAppsByText } from 'selectors/apps'
 
 const AppGrid = ({ apps }) => (
 	<div>

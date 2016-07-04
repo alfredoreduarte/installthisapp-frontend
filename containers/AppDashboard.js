@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
-import { getCurrentUsers } from '../selectors/users'
-import Summary from '../components/Summary'
-import UserGrid from '../components/UserGrid'
+import { getCurrentUsers } from 'selectors/users'
+import Summary from 'components/Summary'
+import UserGrid from 'components/UserGrid'
 
 const AppDashboard = ({ users }) => (
 	<div className="">

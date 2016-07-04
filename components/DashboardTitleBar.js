@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import { Navbar, NavDropdown, DropdownButton, MenuItem } from 'react-bootstrap'
 import { Link, IndexLink } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
-import SearchForm from './SearchForm'
-import TitleBar from './TitleBar'
+import SearchForm from 'components/SearchForm'
+import TitleBar from 'components/TitleBar'
 
 const DashboardTitleBar = () => (
 	<div>

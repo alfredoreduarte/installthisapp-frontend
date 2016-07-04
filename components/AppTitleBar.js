@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { Navbar, NavDropdown, MenuItem } from 'react-bootstrap'
 import { Link, IndexLink } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
-import SearchForm from './SearchForm'
+import SearchForm from 'components/SearchForm'
 
 const AppTitleBar = ({ installed = true, scheduled = false, title }) => (
 	<div>

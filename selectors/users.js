@@ -1,18 +1,16 @@
 import _ from 'lodash'
 import { createSelector } from 'reselect'
-import { stringContains } from '../lib/stringmatch'
-import { getCurrentApp } from './apps'
+import { stringContains } from 'lib/stringmatch'
+import { getCurrentApp } from 'selectors/apps'
 
 const usersSelector = state => state.entities.users
 const filterTextSelector = state => state.filterText
+const usersSorterSelector = state => state.usersSorting
 
-const currentUsersSelector = (users, app) => {
+const usersForCurrentApp = (users, app, sorter) => {
 	if (app) {
-		const selectedUsers = _.filter(
-			users,
-			user => _.includes(app.users, user.id)
-		)
-		return selectedUsers
+		const selectedUsers = _.filter(users, u => _.includes(app.users, u.id))
+		return _.sortBy(selectedUsers, sorter)
 	}
 	else{
 		return []
@@ -26,7 +24,8 @@ const currentUsersByText = (users, text) => {
 export const getCurrentUsers = createSelector(
 	usersSelector,
 	getCurrentApp,
-	currentUsersSelector
+	usersSorterSelector,
+	usersForCurrentApp
 )
 
 export const getCurrentUsersByText = createSelector(

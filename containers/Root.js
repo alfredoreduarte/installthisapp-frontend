@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { Provider, connect } from 'react-redux'
 import { Router } from 'react-router'
-import routes from '../routes'
-import { fetchAdminMock } from '../actions/actionCreators'
+import routes from 'routes'
+import { fetchAdminMock } from 'actions/actionCreators'
 
 class Root extends Component {
 	componentDidMount() {
