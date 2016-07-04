@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { getCurrentApp } from '../selectors/app'
+import { getCurrentApp } from '../selectors/apps'
 import AppNavBar from '../components/AppNavBar'
 import AppTitleBar from '../components/AppTitleBar'
 import Sidebar from '../components/Sidebar'

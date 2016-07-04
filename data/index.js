@@ -23,15 +23,15 @@ const data = {
 			users: [
 				{
 					id: 1342923825725048,
-					name: "User 1",
+					name: "Rodrigo Keen",
 				},
 				{
 					id: 1315096875183600,
-					name: "User 2",
+					name: "Mikhail Herrero",
 				},
 				{
 					id: 1097180737021047,
-					name: "User 3",
+					name: "Jorge Díaz",
 				}
 			]
 		},

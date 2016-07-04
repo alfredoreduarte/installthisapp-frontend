@@ -1,8 +1,10 @@
 import _ from 'lodash'
 import { createSelector } from 'reselect'
-import { getCurrentApp } from './app'
+import { stringContains } from '../lib/stringmatch'
+import { getCurrentApp } from './apps'
 
 const usersSelector = state => state.entities.users
+const filterTextSelector = state => state.filterText
 
 const currentUsersSelector = (users, app) => {
 	if (app) {
@@ -18,7 +20,7 @@ const currentUsersSelector = (users, app) => {
 }
 
 const currentUsersByText = (users, text) => {
-	users.filter((user) => user.startsWith(text));
+	return users.filter(user => stringContains(user.name, text))
 }
 
 export const getCurrentUsers = createSelector(
@@ -29,5 +31,6 @@ export const getCurrentUsers = createSelector(
 
 export const getCurrentUsersByText = createSelector(
 	getCurrentUsers,
+	filterTextSelector,
 	currentUsersByText
 )
