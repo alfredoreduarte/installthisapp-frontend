@@ -5,6 +5,7 @@
 		"containers/*", 
 		"assets/*", 
 		"store/*", 
+		"data/*", 
 		"reducers/*", 
 		"actions/*", 
 		"routes.js",

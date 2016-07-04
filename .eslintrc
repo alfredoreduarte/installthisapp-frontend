@@ -9,7 +9,6 @@
 	},
 	"parser": "babel-eslint",
 	"rules": {
-		"jsx-pascal-case": 2,
 		"no-param-reassign": 2,
 		"strict": [2, "never"],
 		"babel/generator-star-spacing": 1,

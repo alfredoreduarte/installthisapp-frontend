@@ -4,10 +4,10 @@ import { Link, IndexLink } from 'react-router'
 const Sidebar = () => (
 	<div className="col-md-2 col-xs-12 ita-main-menu">
 		<ul className="list-unstyled">
-			<li><IndexLink to="">Dashboard</IndexLink></li>
+			<li><IndexLink to="" activeClassName="active">Dashboard</IndexLink></li>
 			<li><Link to="analytics">Analytics</Link></li>
 			<li><Link to="design">Design</Link></li>
-			<li><Link to="users">Users</Link></li>
+			<li><Link to="users" activeClassName="active">Users</Link></li>
 			<li>
 				<Link to="preferences">Preferences</Link>
 				<ul className="list-unstyled">

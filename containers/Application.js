@@ -7,10 +7,10 @@ const Application = ({ children, loaded }) => (
 	</div>
 )
 
-const mapStateToProps = ({ adminUser }) => {
+const mapStateToProps = state => {
 	return { 
-		loaded: adminUser.name ? true : false
+		loaded: state.admin.name ? true : false
 	}
-};
+}
 
-export default connect(mapStateToProps)(Application);
+export default connect(mapStateToProps)(Application)

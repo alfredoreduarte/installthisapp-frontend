@@ -1,4 +1,4 @@
-const adminUser = (state = {}, action) => {
+const admin = (state = {}, action) => {
 	switch (action.type) {
 		case 'RECEIVE_ADMIN':
 			return Object.assign({}, state, action.payload)
@@ -7,4 +7,4 @@ const adminUser = (state = {}, action) => {
 	}
 }
 
-export default adminUser;
+export default admin;

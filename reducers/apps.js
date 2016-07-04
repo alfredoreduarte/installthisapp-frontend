@@ -1,8 +1,9 @@
-const apps = (state = [], action) => {
+const apps = (state = {}, action) => {
 	switch (action.type) {
-		case 'RECEIVE_APPS':
-			return action.payload
 		default:
+			if (action.entities && action.entities.apps) {
+				return Object.assign({}, state, action.entities.apps)
+			}
 			return state;
 	}
 }

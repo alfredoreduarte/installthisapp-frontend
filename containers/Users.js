@@ -1,26 +1,19 @@
 import React, { Component, PropTypes } from 'react'
+import _ from 'lodash'
+import { connect } from 'react-redux'
+import { getCurrentUsersByText } from '../selectors/users'
+import { selectUser } from '../actions/actionCreators'
 import { Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import { Checkbox } from 'react-icheck'
 import SearchForm from '../components/SearchForm'
 import User from '../components/User'
 
-const usersArray = [
-	{
-		id: 1,
-		name: 'Alfredo',
-	},
-	{
-		id: 2,
-		name: 'Jose',
-	}
-]
-
-const Users = () => (
+const Users = ({ users, handleUserSelect, selectedUserIds }) => (
 	<div className="ita-table-view">
 		<div className="ita-table-toolbar">
 			<div className="row">
 				<div className="col-md-12">
-					<h3 className="ita-page-title">Users <small className=""> / 10 users selected</small></h3>
+					<h3 className="ita-page-title">Users <small className=""> / {selectedUserIds.length} user{selectedUserIds.length > 1 ? 's' : ''} selected</small></h3>
 				</div>
 			</div>
 			<div className="row">
@@ -63,15 +56,15 @@ const Users = () => (
 						<span>First seen</span>
 					</th>
 					<th className="text-right">
-						<Checkbox checkboxClass="icheckbox-ita icon-tool-big pull-right"/>
+						<Checkbox checkboxClass="icheckbox-ita icon-tool-big pull-right" />
 					</th>
 				</tr>
 			</thead>
 			<tbody>
-				{usersArray.map(user => 
+				{users.map(user => 
 				<tr>
 					<td>
-						<User name={user.name} small />
+						<User name={user.name} id={user.id} small />
 					</td>
 					<td>
 						datetime
@@ -91,7 +84,10 @@ const Users = () => (
 								</a>
 							</li>
 							<li>
-								<Checkbox checkboxClass="icheckbox-ita icon-tool-big pull-right"/>
+								<Checkbox 
+									checkboxClass="icheckbox-ita icon-tool-big pull-right"
+									onChange={() => handleUserSelect(user.id)}
+								/>
 							</li>
 						</ul>
 					</td>
@@ -102,4 +98,20 @@ const Users = () => (
 	</div>
 )
 
-export default Users
+const mapStateToProps = (state, props) => {
+	return { 
+		users: _.values(getCurrentUsersByText(state, props)),
+		selectedUserIds: state.selectedUserIds
+	}
+};
+
+const mapDispatchToProps = (dispatch, props) => {
+	return { 
+		handleUserSelect: id => {
+			console.log('user selected', id)
+			dispatch(selectUser(id))
+		}
+	}
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Users)

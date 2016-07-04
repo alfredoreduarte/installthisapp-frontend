@@ -1,12 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import TimeAgo from 'react-timeago'
 import StatusIndicator from './StatusIndicator'
+import FbPhoto from './FbPhoto'
 
-const User = ({ name, small }) => (
+const User = ({ name, small, id }) => (
 	<div className={`media ita-user ${small ? 'ita-user-small' : ''}`}>
 		<div className="media-left media-middle">
 			<a href="javascript:void(0)">
-				<img className="media-object img-circle" src="/images/user.jpg" />
+				<FbPhoto className="media-object img-circle" id={id} />
 			</a>
 		</div>
 		<div className="media-body media-middle">

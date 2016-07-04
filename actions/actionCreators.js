@@ -1,17 +1,33 @@
 import 'isomorphic-fetch'
+import { normalize, arrayOf } from 'normalizr'
+import * as schema from './schema'
 import data from '../data'
 
-const receiveAdminData = (json) => {
+const receiveAdmin = json => {
 	return {
 		type: 'RECEIVE_ADMIN',
 		payload: json
 	}
 }
 
-const receiveAppsData = (json) => {
+const receiveApps = ({ entities }) => {
 	return {
 		type: 'RECEIVE_APPS',
-		payload: json
+		entities
+	}
+}
+
+export const selectUser = id => {
+	return {
+		type: 'SELECT_USER',
+		id
+	}
+}
+
+export const searchText = payload => {
+	return {
+		type: 'SEARCH_TEXT',
+		payload
 	}
 }
 
@@ -21,8 +37,12 @@ export function fetchAdminMock(){
 		return fetch(url)
 				.then(response => response.json())
 				.then(json =>{
-					dispatch(receiveAdminData(data.adminUser))
-					dispatch(receiveAppsData(data.apps))
+					const normalized = normalize(data, {
+						apps: arrayOf(schema.app),
+						pages: arrayOf(schema.page)
+					})
+					dispatch(receiveAdmin(normalized.result.admin))
+					dispatch(receiveApps(normalized))
 				})
 				.catch(exception =>
 					console.log('parsing failed', exception)

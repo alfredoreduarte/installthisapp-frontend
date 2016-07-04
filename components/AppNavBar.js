@@ -33,7 +33,7 @@ const AppNavBar = ({ name }) => (
 
 const mapStateToProps = (state) => {
 	return { 
-		name: state.adminUser.name
+		name: state.admin.name
 	}
 }
 

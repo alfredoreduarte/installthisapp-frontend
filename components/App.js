@@ -16,7 +16,7 @@ const App = ({
 					<br />
 					<br />
 					<br />
-					<Link to={"/apps/2LR0CD"} className="btn btn-white btn-outline">Go To Dashboard</Link>
+					<Link to={`/apps/${checksum}`} className="btn btn-white btn-outline">Go To Dashboard</Link>
 					<br/>
 					<br/>
 					<a href="javascript:void(0)" className="btn btn-white btn-outline btn-xs">Delete</a>

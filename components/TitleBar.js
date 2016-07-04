@@ -1,7 +1,7 @@
 import React from 'react'
 
 const TitleBar = ({ title, children }) => (
-	<div className="ita-main-app-toolbar col-md-12">
+	<div className="col-md-12 ita-main-app-toolbar">
 		<div className="row">
 			<div className="col-md-6">
 				<span className="h1 weight-thin text-primary">{title}</span>
