@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
-import { getCurrentUsers } from 'selectors/users'
+import { getUsersForCurrentApp } from 'selectors/users'
 import Summary from 'components/Summary'
 import UserGrid from 'components/UserGrid'
 
@@ -14,7 +14,7 @@ const AppDashboard = ({ users }) => (
 
 const mapStateToProps = (state, props) => {
 	return { 
-		users: _.values(getCurrentUsers(state, props))
+		users: _.values(getUsersForCurrentApp(state, props))
 	}
 }
 

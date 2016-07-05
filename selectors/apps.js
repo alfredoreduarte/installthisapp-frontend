@@ -2,32 +2,18 @@ import _ from 'lodash'
 import { createSelector } from 'reselect'
 import { stringContains } from 'lib/stringmatch'
 
-const appsSelector = (state, props) => state.entities.apps
-const currentAppChecksum = (state, props) => props.params.checksum
-const filterTextSelector = state => state.filterText
-
-const appSelector = (apps, id = null) => {
-	if (id) {
-		return apps[id]
-	}
-	{
-		return _.values(apps)
-	}
-}
-
-export const getAllApps = createSelector(
-	appsSelector,
-	appSelector
-)
+export const getAllApps = (state, props) => _.values(state.entities.apps)
+const getCurrentAppChecksum = (state, props) => props.params.checksum
+const getFilterText = state => state.filterText
 
 export const getCurrentApp = createSelector(
-	appsSelector,
-	currentAppChecksum,
-	appSelector
+	getAllApps,
+	getCurrentAppChecksum,
+	(apps, checksum) => _.find(apps, app => app.checksum == checksum)
 )
 
-export const getAppsByText = createSelector(
+export const getAllAppsByText = createSelector(
 	getAllApps,
-	filterTextSelector,
+	getFilterText,
 	(apps, text) => _.values(apps).filter(app => stringContains(app.title, text))
 )

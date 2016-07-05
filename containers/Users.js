@@ -1,11 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
-import _ from 'lodash'
 import Select from 'react-select'
 import { Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Checkbox } from 'react-icheck'
-import { getCurrentUsersByText } from 'selectors/users'
+import { getCurrentUsersByKeyword } from 'selectors/users'
 import { selectUser, sortUsersBy } from 'actions/actionCreators'
 import SearchForm from 'components/SearchForm'
 import User from 'components/User'
@@ -87,7 +86,7 @@ const Users = ({
 			</thead>
 			<tbody>
 				{users.map(user => 
-				<tr>
+				<tr key={user.id}>
 					<td>
 						<User name={user.name} id={user.id} small />
 					</td>
@@ -114,7 +113,7 @@ const Users = ({
 
 const mapStateToProps = (state, props) => {
 	return { 
-		users: _.values(getCurrentUsersByText(state, props)),
+		users: getCurrentUsersByKeyword(state, props),
 		selectedUserIds: state.selectedUserIds,
 		sortBy: state.usersSorting
 	}

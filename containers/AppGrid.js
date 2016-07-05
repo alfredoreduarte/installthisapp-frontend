@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import App from 'components/App'
-import { getAppsByText } from 'selectors/apps'
+import { getAllAppsByText } from 'selectors/apps'
 
 const AppGrid = ({ apps }) => (
 	<div>
@@ -12,7 +12,7 @@ const AppGrid = ({ apps }) => (
 
 const mapStateToProps = (state, props) => {
 	return { 
-		apps: getAppsByText(state, props) // Convert an object containing apps into an array
+		apps: getAllAppsByText(state, props) // Convert an object containing apps into an array
 	}
 }
 
