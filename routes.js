@@ -13,9 +13,11 @@ import Account from './containers/Account'
 export default (
 	<Route path="/" component={Application}>
 		<IndexRoute component={AdminDashboard} />
+		<Route path="create(/:step)" component={AdminDashboard} />
 		<Route path="apps/:checksum" component={AppDashboardContainer}>
 			<IndexRoute component={AppDashboard} />
 			<Route path="analytics" component={AppAnalytics} />
+			<Route path="design" component={AppPreferences} />
 			<Route path="users" component={Users} />
 			<Route path="preferences" component={AppPreferences} />
 		</Route>

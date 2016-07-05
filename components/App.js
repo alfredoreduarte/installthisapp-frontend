@@ -17,16 +17,29 @@ const App = ({
 					<br />
 					<br />
 					<br />
-					<Link to={`/apps/${checksum}`} className="btn btn-white btn-outline">Go To Dashboard</Link>
+					<Link to={`/apps/${checksum}`} className="btn btn-white btn-outline">
+						Go To Dashboard
+					</Link>
 					<br/>
 					<br/>
-					<a href="javascript:void(0)" className="btn btn-white btn-outline btn-xs">Delete</a>
+					<Link to="/" className="btn btn-white btn-outline btn-xs">
+						Delete
+					</Link>
 				</div>
 				<img src="/images/user.jpg" />
 			</div>
 			<div className="panel-footer text-center">
 				<StatusIndicator active={true} />{' '}
-				<Link to={`apps/${checksum}`} className="h5 ita-panel-screen-title text-relevant-title weight-normal font-size-large">{title}</Link>
+				<Link 
+					to={`apps/${checksum}`} 
+					className="
+						h5 
+						ita-panel-screen-title 
+						text-relevant-title 
+						weight-normal 
+						font-size-large">
+					{title}
+				</Link>
 				<br />
 				<small>{type}</small>
 			</div>

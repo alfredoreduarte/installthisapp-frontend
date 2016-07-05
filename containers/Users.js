@@ -117,7 +117,7 @@ const mapStateToProps = (state, props) => {
 		selectedUserIds: state.selectedUserIds,
 		sortBy: state.usersSorting
 	}
-};
+}
 
 const mapDispatchToProps = (dispatch, props) => ({
 	handleUserSelect: id => {

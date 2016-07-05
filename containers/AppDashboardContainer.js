@@ -6,11 +6,11 @@ import AppTitleBar from 'components/AppTitleBar'
 import Sidebar from 'components/Sidebar'
 import DashboardContentDecorator from 'containers/DashboardContentDecorator'
 
-const AppDashboardContainer = ({ children, currentApp }) => (
+const AppDashboardContainer = ({ children, currentApp, checksum }) => (
 	<div>
 		<AppNavBar />
 		<AppTitleBar title={currentApp.title} installed={currentApp.active} scheduled={currentApp.scheduled} />
-		<Sidebar />
+		<Sidebar checksum={checksum} />
 		<DashboardContentDecorator>
 			{children}
 		</DashboardContentDecorator>
@@ -20,7 +20,8 @@ const AppDashboardContainer = ({ children, currentApp }) => (
 const mapStateToProps = (state, props) => {
 	const currentApp = getCurrentApp(state, props)
 	return { 
-		currentApp: currentApp ? currentApp : {}
+		currentApp: currentApp ? currentApp : {},
+		checksum: props.params.checksum
 	}
 }
 
