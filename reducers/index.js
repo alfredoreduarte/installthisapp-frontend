@@ -9,6 +9,7 @@ import pages from 'reducers/pages'
 import selectedUserIds from 'reducers/selectedUserIds'
 import filterText from 'reducers/filterText'
 import usersSorting from 'reducers/usersSorting'
+import appsSorting from 'reducers/appsSorting'
 
 const entities = combineReducers({
 	apps,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
 	routing,
 	filterText,
 	usersSorting,
+	appsSorting,
 	selectedUserIds,
 	admin,
 	entities,

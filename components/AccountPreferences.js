@@ -21,7 +21,7 @@ const AccountPreferences = ({ user }) => (
 									<label className="control-label">Email</label>
 								</div>
 								<div className="col-md-8">
-									<input type="email" className="form-control" value={user.email} />
+									<input type="email" className="form-control" defaultValue={user.email} />
 								</div>
 							</div>
 						</div>

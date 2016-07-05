@@ -7,7 +7,8 @@ const App = ({
 	installed,
 	title,
 	type,
-	checksum 
+	checksum,
+	updatedOn 
 }) => (
 	<div className={`col-md-${gridSize}`}>
 		<div className="panel panel-default ita-panel-screen">

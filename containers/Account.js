@@ -6,21 +6,21 @@ import AccountSidebar from 'components/AccountSidebar'
 import DashboardContentDecorator from 'containers/DashboardContentDecorator'
 import AccountPreferences from 'components/AccountPreferences'
 
-const Account = ({ children, adminUser }) => (
+const Account = ({ children, admin }) => (
 	<div>
 		<AppNavBar />
 		<TitleBar title="My Account" />
 		<AccountSidebar />
 		<DashboardContentDecorator>
-			<AccountPreferences user={adminUser} />
+			<AccountPreferences user={admin} />
 			{children}
 		</DashboardContentDecorator>
 	</div>
 )
 
-const mapStateToProps = ({ adminUser }) => {
+const mapStateToProps = ({ admin }) => {
 	return { 
-		adminUser
+		admin
 	}
 };
 

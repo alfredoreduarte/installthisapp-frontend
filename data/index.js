@@ -17,6 +17,8 @@ const data = {
 			active: false,
 			scheduled: true,
 			page: 413,
+			createdOn: "2015-02-01T20:46:22.000-04:00",
+			updatedOn: "2016-02-01T20:46:22.000-04:00",
 			summary: [
 
 			],
@@ -41,11 +43,13 @@ const data = {
 		{
 			id: 231312,
 			checksum: "X91H7",
-			title: "Trivia dos",
+			title: "App dos",
 			type: "trivia",
 			active: true,
 			scheduled: false,
 			page: 411,
+			createdOn: "2015-03-01T20:46:22.000-04:00",
+			updatedOn: "2016-03-01T20:46:22.000-04:00",
 			summary: [
 
 			],

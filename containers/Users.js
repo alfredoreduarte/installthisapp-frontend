@@ -58,9 +58,9 @@ const Users = ({
 							value={sortBy}
 							options={[
 								{ value: 'name', label: 'Alphabetically' },
-								{ value: 'createdOn', label: 'Most Recent First' }
+								{ value: 'createdOn', label: 'Most Recent' }
 							]}
-							onChange={val => handleSort(val)}
+							onChange={val => handleSort(val.value)}
 						/>
 					</div>
 				</div>

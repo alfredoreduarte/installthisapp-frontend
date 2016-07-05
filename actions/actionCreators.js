@@ -31,6 +31,13 @@ export const sortUsersBy = key => {
 	}
 }
 
+export const sortAppsBy = key => {
+	return {
+		type: 'SORT_APPS',
+		payload: key
+	}
+}
+
 export const searchText = payload => {
 	return {
 		type: 'SEARCH_TEXT',

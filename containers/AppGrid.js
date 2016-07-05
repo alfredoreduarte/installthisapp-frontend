@@ -6,13 +6,13 @@ import { getAllAppsByText } from 'selectors/apps'
 
 const AppGrid = ({ apps }) => (
 	<div>
-		{apps.map( a => <App key={a.checksum} gridSize="3" title={a.title} type={a.type} checksum={a.checksum} installed={a.active} />)}
+		{apps.map( a => <App key={a.checksum} gridSize="3" title={a.title} type={a.type} checksum={a.checksum} updatedOn={a.updatedOn} installed={a.active} />)}
 	</div>
 )
 
 const mapStateToProps = (state, props) => {
 	return { 
-		apps: getAllAppsByText(state, props) // Convert an object containing apps into an array
+		apps: getAllAppsByText(state, props)
 	}
 }
 
