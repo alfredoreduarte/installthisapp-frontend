@@ -1,5 +1,5 @@
 import expect from 'expect'
-import users from '../../reducers/users'
+import users from 'reducers/users'
 
 describe('Reducers', () => {
 	describe('users', () => {

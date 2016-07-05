@@ -5,7 +5,7 @@ import { Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Checkbox } from 'react-icheck'
 import { getCurrentUsersByKeyword } from 'selectors/users'
-import { selectUser, sortUsersBy } from 'actions/actionCreators'
+import { selectUser, sortUsersBy } from 'actions/users'
 import SearchForm from 'components/SearchForm'
 import User from 'components/User'
 

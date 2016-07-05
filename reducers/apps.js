@@ -4,8 +4,8 @@ const apps = (state = {}, action) => {
 			if (action.entities && action.entities.apps) {
 				return Object.assign({}, state, action.entities.apps)
 			}
-			return state;
+			return state
 	}
 }
 
-export default apps;
+export default apps

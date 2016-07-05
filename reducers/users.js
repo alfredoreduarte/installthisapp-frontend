@@ -4,8 +4,8 @@ const users = (state = {}, action) => {
 			if (action.entities && action.entities.users) {
 				return Object.assign({}, state, action.entities.users)
 			}
-			return state;
+			return state
 	}
 }
 
-export default users;
+export default users

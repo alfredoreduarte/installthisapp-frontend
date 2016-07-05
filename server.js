@@ -22,7 +22,14 @@ else{
 
 // Images and other static asssets
 app.use('/images',  express.static(__dirname + '/assets/images'));
-// app.use(express.static(__dirname + '/client'));
+
+// Mock Rails Api
+app.use('/apps/create', function(req, res){
+	res.json(require('./data/apps.create'))
+})
+app.use('/admindata', function(req, res){
+	res.json(require('./data/admindata'))
+})
 
 // Serving static HTML
 app.get('/*', function(req, res){

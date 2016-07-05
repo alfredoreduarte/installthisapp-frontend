@@ -1,5 +1,5 @@
 import expect from 'expect'
-import apps from '../../reducers/apps'
+import apps from 'reducers/apps'
 
 describe('Reducers', () => {
 	describe('apps', () => {

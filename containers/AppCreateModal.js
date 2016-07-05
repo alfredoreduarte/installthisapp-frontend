@@ -1,6 +1,9 @@
 import React, { PropTypes } from 'react'
 import { Modal, Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import ModuleGrid from 'containers/ModuleGrid'
+import PageGrid from 'containers/PageGrid'
+import AppCreateForm from 'containers/AppCreateForm'
 
 const AppCreateModal = ({ show, step }) => (
 	<Modal show={show}>
@@ -9,9 +12,9 @@ const AppCreateModal = ({ show, step }) => (
 		</Modal.Header>
 
 		<Modal.Body>
-			{step == 1 ? <p>Paso uno</p> : null}
-			{step == 2 ? <p>Paso dos</p> : null}
-			{step == 3 ? <p>Paso tres</p> : null}
+			{step == 1 ? <ModuleGrid /> : null}
+			{step == 2 ? <PageGrid /> : null}
+			{step == 3 ? <AppCreateForm /> : null}
 		</Modal.Body>
 
 		<Modal.Footer>

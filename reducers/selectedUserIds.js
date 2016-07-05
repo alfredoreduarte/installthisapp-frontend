@@ -11,8 +11,8 @@ const selectedUserIds = (state = [], action) => {
 				action.id
 			]
 		default:
-			return state;
+			return state
 	}
 }
 
-export default selectedUserIds;
+export default selectedUserIds

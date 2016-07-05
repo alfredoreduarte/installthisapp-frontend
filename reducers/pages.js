@@ -4,8 +4,8 @@ const pages = (state = {}, action) => {
 			if (action.entities && action.entities.pages) {
 				return Object.assign({}, state, action.entities.pages)
 			}
-			return state;
+			return state
 	}
 }
 
-export default pages;
+export default pages

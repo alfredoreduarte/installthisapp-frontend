@@ -5,8 +5,8 @@ const filterText = (state = '', action) => {
 		case 'SEARCH_TEXT':
 			return action.payload
 		default:
-			return state;
+			return state
 	}
 }
 
-export default filterText;
+export default filterText

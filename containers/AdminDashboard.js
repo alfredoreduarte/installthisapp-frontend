@@ -15,7 +15,6 @@ const AdminDashboard = ({ showCreateModal, step }) => (
 )
 
 const mapStateToProps = (state, props) => {
-	console.log(props)
 	return { 
 		showCreateModal: props.route.path && props.route.path.indexOf('create') !== -1,
 		step: props.params.step ? props.params.step : 1

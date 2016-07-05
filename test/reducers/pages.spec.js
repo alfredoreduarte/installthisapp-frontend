@@ -1,5 +1,5 @@
 import expect from 'expect'
-import pages from '../../reducers/pages'
+import pages from 'reducers/pages'
 
 describe('Reducers', () => {
 	describe('pages', () => {

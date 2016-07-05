@@ -9,6 +9,8 @@
 		"reducers/*", 
 		"selectors/*", 
 		"actions/*", 
+		"test/*", 
+		"schema/*", 
 		"routes.js",
 		"index.&",
 		"index.html",

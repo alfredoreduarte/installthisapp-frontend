@@ -1,7 +1,7 @@
 import 'isomorphic-fetch'
 import { normalize, arrayOf } from 'normalizr'
-import * as schema from './schema'
-import data from '../data'
+import * as schema from 'schema'
+import * as CONFIG from 'config.dev'
 
 const receiveAdmin = json => {
 	return {
@@ -14,20 +14,6 @@ const receiveApps = ({ entities }) => {
 	return {
 		type: 'RECEIVE_APPS',
 		entities
-	}
-}
-
-export const selectUser = id => {
-	return {
-		type: 'SELECT_USER',
-		id
-	}
-}
-
-export const sortUsersBy = key => {
-	return {
-		type: 'SORT_USERS',
-		payload: key
 	}
 }
 
@@ -46,12 +32,12 @@ export const searchText = payload => {
 }
 
 export function fetchAdminMock(){
-	const url = 'http://rest.learncode.academy/api/wstern/users';
+	const url = CONFIG.BASE_URL + '/admindata'
 	return dispatch => {
 		return fetch(url)
 				.then(response => response.json())
 				.then(json =>{
-					const normalized = normalize(data, {
+					const normalized = normalize(json, {
 						apps: arrayOf(schema.app),
 						pages: arrayOf(schema.page)
 					})

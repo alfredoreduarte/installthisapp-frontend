@@ -23,10 +23,4 @@ Root.propTypes = {
 	history: PropTypes.object.isRequired
 }
 
-const mapStateToProps = (state) => {
-	return { 
-		// loaded: adminUser.name ? true : false
-	}
-};
-
-export default connect(mapStateToProps)(Root);
+export default connect()(Root)

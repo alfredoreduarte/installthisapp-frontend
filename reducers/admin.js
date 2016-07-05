@@ -3,8 +3,8 @@ const admin = (state = {}, action) => {
 		case 'RECEIVE_ADMIN':
 			return Object.assign({}, state, action.payload)
 		default:
-			return state;
+			return state
 	}
 }
 
-export default admin;
+export default admin

@@ -1,8 +1,4 @@
-// 
-// Mock data to simulate API responses
-// 
-
-const data = {
+module.exports = {
 	admin: {
 		id: 1,
 		name: 'Alfredo Re',
@@ -64,7 +60,7 @@ const data = {
 			]
 		}
 	],
-	pages: [,
+	pages: [
 		{
 			id: 411,
 			identifier: 123423423,
@@ -77,5 +73,3 @@ const data = {
 		}
 	]
 }
-
-export default data

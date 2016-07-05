@@ -10,7 +10,7 @@ import Users from './containers/Users'
 import AppPreferences from './containers/AppPreferences'
 import Account from './containers/Account'
 
-export default (
+const routes = (
 	<Route path="/" component={Application}>
 		<IndexRoute component={AdminDashboard} />
 		<Route path="create(/:step)" component={AdminDashboard} />
@@ -24,3 +24,5 @@ export default (
 		<Route path="account" component={Account} />
 	</Route>
 )
+
+export default routes

@@ -26,6 +26,7 @@ module.exports = {
 		})
 	],
 	resolve: {
+		root: [ __dirname + '/' ],
 		extensions: ['', '.js', '.jsx']
 	},
 	module: {

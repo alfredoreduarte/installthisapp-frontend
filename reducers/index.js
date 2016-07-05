@@ -10,6 +10,7 @@ import selectedUserIds from 'reducers/selectedUserIds'
 import filterText from 'reducers/filterText'
 import usersSorting from 'reducers/usersSorting'
 import appsSorting from 'reducers/appsSorting'
+import newApp from 'reducers/newApp'
 
 const entities = combineReducers({
 	apps,
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
 	appsSorting,
 	selectedUserIds,
 	admin,
+	newApp,
 	entities,
 	form: formReducer
 })
