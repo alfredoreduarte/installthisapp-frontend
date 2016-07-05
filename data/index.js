@@ -1,8 +1,10 @@
-import v4 from 'node-uuid'
+// 
+// Mock data to simulate API responses
+// 
 
 const data = {
 	admin: {
-		id: v4(),
+		id: 1,
 		name: 'Alfredo Re',
 		firstName: 'Alfredo',
 		lastName: 'Re',
