@@ -9,7 +9,7 @@ import DashboardContentDecorator from 'containers/DashboardContentDecorator'
 const AppDashboardContainer = ({ children, currentApp, checksum }) => (
 	<div>
 		<AppNavBar />
-		<AppTitleBar title={currentApp.title} installed={currentApp.active} scheduled={currentApp.scheduled} />
+		<AppTitleBar title={currentApp.title} status={currentApp.status} scheduled={currentApp.scheduled} />
 		<Sidebar checksum={checksum} />
 		<DashboardContentDecorator>
 			{children}

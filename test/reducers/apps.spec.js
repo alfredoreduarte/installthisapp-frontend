@@ -7,29 +7,39 @@ describe('Reducers', () => {
 			const initialState = {}
 			expect(apps(undefined, {})).toEqual(initialState)
 		})
-		describe('When receiving data', () => {
-			it('should save the entities', () => {
-				const expectedResult = {
-					231312: {
-						id: 231312,
-						checksum: "X91H7",
-						title: "Trivia dos",
-						type: "trivia",
-						active: true,
-						scheduled: false,
-						page: 411,
-						summary: [],
-						users: [10208910337057839, 1097180737021047]
-					}
+		it('Should set app as deleted', () => {
+			const initialState = {
+				"9KW8J": {
+					id: 231312,
+					checksum: "9KW8J",
+					title: "App para borrar",
+					type: "trivia",
+					status: "ready",
+					scheduled: false,
+					page: 411,
+					summary: [],
+					users: []
 				}
-				const action = {
-					type: 'RECEIVE_APPS',
-					entities: {
-						apps: expectedResult
-					}
+			}
+			const expectedResult = {
+				"9KW8J": {
+					id: 231312,
+					checksum: "9KW8J",
+					title: "App para borrar",
+					type: "trivia",
+					status: "deleted",
+					scheduled: false,
+					page: 411,
+					summary: [],
+					users: []
 				}
-				expect(apps({}, action)).toEqual(expectedResult)
-			})
+			}
+			const checksum = '9KW8J'
+			const action = {
+				type: 'DELETE_APP',
+				checksum
+			}
+			expect(apps(initialState, action)).toEqual(expectedResult)
 		})
 	})
 })

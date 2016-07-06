@@ -2,11 +2,13 @@ import React, { Component, PropTypes } from 'react'
 import { Provider, connect } from 'react-redux'
 import { Router } from 'react-router'
 import routes from 'routes'
-import { fetchAdminMock } from 'actions/actionCreators'
+import { fetchAdmin } from 'actions/admin'
+import { fetchEntities } from 'actions/entities'
 
 class Root extends Component {
 	componentDidMount() {
-		this.props.dispatch(fetchAdminMock())
+		this.props.dispatch(fetchAdmin())
+		this.props.dispatch(fetchEntities())
 	}
 	render() {
 		const { store, history } = this.props

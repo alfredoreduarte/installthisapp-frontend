@@ -10,3 +10,8 @@ app.define({
 	users: arrayOf(user),
 	page
 })
+
+export const entities = {
+	apps: arrayOf(app),
+	pages: arrayOf(page)
+}

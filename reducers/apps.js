@@ -1,7 +1,11 @@
 const apps = (state = {}, action) => {
 	switch (action.type) {
-		case 'RECEIVE_APPS':
-			return Object.assign({}, state, action.entities.apps)
+		case 'DELETE_APP':
+			return Object.assign({}, state, {
+				[action.checksum]: Object.assign({}, state[action.checksum], {
+					status: 'deleted'
+				})
+			})
 		default:
 			return state
 	}

@@ -4,8 +4,8 @@ import nock from 'nock'
 import expect from 'expect'
 import { normalize, arrayOf } from 'normalizr'
 import * as schema from 'schema'
-import * as actions from 'actions/apps'
-const appsCreateResponse = require('data/apps.create')
+import * as actions from 'actions/entities'
+const entitiesResponse = require('data/entities')
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
@@ -14,12 +14,12 @@ describe('Async Actions', () => {
 	afterEach(() => {
 		nock.cleanAll()
 	})
-	it('posts new data and returns server response', () => {
-		nock('http://example.com/').get('/apps/create').reply(200, appsCreateResponse)
+	it('Gets entities from API', () => {
+		nock('http://example.com/').get('/admindata').reply(200, entitiesResponse)
 		const store = mockStore()
-		return store.dispatch(actions.postNewApp())
+		return store.dispatch(actions.fetchEntities())
 			.then(() => {
-				const normalized = normalize(appsCreateResponse, schema.app)
+				const normalized = normalize(entitiesResponse, schema.entities)
 				const expectedActions = [
 					{
 						type: 'RECEIVE_ENTITIES',
@@ -31,18 +31,5 @@ describe('Async Actions', () => {
 				const resultingActions = store.getActions()
 				expect(resultingActions).toEqual(expectedActions)
 			})
-	})
-})
-
-describe('Actions', () => {
-	describe('deleteApp', () => {
-		it("should generate action for marking app as deleted", () => {
-			const checksum = '9KW8J'
-			const expectedAction = {
-				type: 'DELETE_APP',
-				checksum
-			}
-			expect(actions.deleteApp(checksum)).toEqual(expectedAction)
-		})
 	})
 })

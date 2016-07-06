@@ -1,14 +1,17 @@
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import StatusIndicator from 'components/StatusIndicator'
+import { setAppToDelete } from 'actions/deleteApp'
 
 const App = ({ 
 	gridSize,
-	installed,
+	status,
 	title,
 	type,
 	checksum,
-	updatedOn 
+	updatedOn,
+	handleDeleteRequest 
 }) => (
 	<div className={`col-md-${gridSize}`}>
 		<div className="panel panel-default ita-panel-screen">
@@ -22,9 +25,9 @@ const App = ({
 					</Link>
 					<br/>
 					<br/>
-					<Link to="/" className="btn btn-white btn-outline btn-xs">
+					<button className="btn btn-white btn-outline btn-xs" onClick={() => handleDeleteRequest(checksum)}>
 						Delete
-					</Link>
+					</button>
 				</div>
 				<img src="/images/user.jpg" />
 			</div>
@@ -47,4 +50,10 @@ const App = ({
 	</div>
 )
 
-export default App
+const mapDispatchToProps = (dispatch, ownProps) => {
+	return { 
+		handleDeleteRequest: checksum => dispatch(setAppToDelete(checksum))
+	}
+}
+
+export default connect(undefined, mapDispatchToProps)(App)

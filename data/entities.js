@@ -1,18 +1,11 @@
 module.exports = {
-	admin: {
-		id: 1,
-		name: 'Alfredo Re',
-		firstName: 'Alfredo',
-		lastName: 'Re',
-		email: 'alfredoreduarte@gmail.com'
-	},
 	apps: [
 		{
 			id: 231315,
 			checksum: "LF7H3",
 			title: "Trivia uno",
 			type: "trivia",
-			active: false,
+			status: 'ready',
 			scheduled: true,
 			page: 413,
 			createdOn: "2015-02-01T20:46:22.000-04:00",
@@ -43,7 +36,7 @@ module.exports = {
 			checksum: "X91H7",
 			title: "App dos",
 			type: "trivia",
-			active: true,
+			status: 'installed',
 			scheduled: false,
 			page: 411,
 			createdOn: "2015-03-01T20:46:22.000-04:00",

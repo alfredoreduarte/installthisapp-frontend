@@ -1,7 +1,10 @@
 const admin = (state = {}, action) => {
 	switch (action.type) {
 		case 'RECEIVE_ADMIN':
-			return Object.assign({}, state, action.payload)
+			if (action.payload) {
+				return action.payload
+			}
+			return state
 		default:
 			return state
 	}

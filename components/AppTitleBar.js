@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 import { Navbar, NavDropdown, MenuItem } from 'react-bootstrap'
 import { Link, IndexLink } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
 import SearchForm from 'components/SearchForm'
 
-const AppTitleBar = ({ installed = true, scheduled = false, title }) => (
+const AppTitleBar = ({ installed, scheduled = false, title }) => (
 	<div>
 		<div className="col-md-12 ita-main-app-toolbar">
 			<div className="row">
@@ -37,4 +38,10 @@ const AppTitleBar = ({ installed = true, scheduled = false, title }) => (
 	</div>
 )
 
-export default AppTitleBar
+const mapStateToProps = (state, ownProps) => {
+	return { 
+		installed: ownProps.status == 'installed' ? true : false
+	}
+}
+
+export default connect(mapStateToProps)(AppTitleBar)

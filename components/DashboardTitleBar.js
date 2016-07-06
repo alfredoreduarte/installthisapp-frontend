@@ -4,7 +4,7 @@ import Select from 'react-select'
 import { Navbar, NavDropdown, DropdownButton, MenuItem } from 'react-bootstrap'
 import { Link, IndexLink } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
-import { sortAppsBy } from 'actions/actionCreators'
+import { sortAppsBy } from 'actions/appsSorting'
 import SearchForm from 'components/SearchForm'
 import TitleBar from 'components/TitleBar'
 
