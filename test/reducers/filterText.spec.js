@@ -11,8 +11,17 @@ describe('Reducers', () => {
 			it('should save search string', () => {
 				const expectedResult = 'keyword'
 				const action = {
-					type: 'SEARCH_TEXT',
+					type: 'UPDATE_FILTERTEXT',
 					payload: expectedResult
+				}
+				expect(filterText({}, action)).toEqual(expectedResult)
+			})
+		})
+		describe('When route state changes', () => {
+			it('should reset the search string', () => {
+				const expectedResult = ''
+				const action = {
+					type: '@@router/LOCATION_CHANGE'
 				}
 				expect(filterText({}, action)).toEqual(expectedResult)
 			})

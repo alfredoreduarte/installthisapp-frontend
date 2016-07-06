@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { push } from 'react-router-redux'
 import { setNewAppTitle } from 'actions/newApp'
+import { postNewApp } from 'actions/apps'
 
 const AppCreateForm = ({ handleSubmit, handleTextChange }) => (
 	<div className="container-fluid">
@@ -20,7 +21,8 @@ const mapDispatchToProps = (dispatch, props) => ({
 		dispatch(setNewAppTitle(text))
 	},
 	handleSubmit: () => {
-		dispatch(push('/'))	
+		// dispatch(push('/'))
+		dispatch(postNewApp())
 	}
 })
 

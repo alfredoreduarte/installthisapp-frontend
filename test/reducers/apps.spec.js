@@ -23,7 +23,7 @@ describe('Reducers', () => {
 					}
 				}
 				const action = {
-					type: null,
+					type: 'RECEIVE_APPS',
 					entities: {
 						apps: expectedResult
 					}

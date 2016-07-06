@@ -3,35 +3,22 @@ import { normalize, arrayOf } from 'normalizr'
 import * as schema from 'schema'
 import * as CONFIG from 'config.dev'
 
-const receiveAdmin = json => {
-	return {
-		type: 'RECEIVE_ADMIN',
-		payload: json
-	}
-}
+const receiveAdmin = json => ({
+	type: 'RECEIVE_ADMIN',
+	payload: json
+})
 
-const receiveApps = ({ entities }) => {
-	return {
-		type: 'RECEIVE_APPS',
-		entities
-	}
-}
+const receiveApps = ({ entities }) => ({
+	type: 'RECEIVE_APPS',
+	entities
+})
 
-export const sortAppsBy = key => {
-	return {
-		type: 'SORT_APPS',
-		payload: key
-	}
-}
+export const sortAppsBy = key => ({
+	type: 'SORT_APPS',
+	payload: key
+})
 
-export const searchText = payload => {
-	return {
-		type: 'SEARCH_TEXT',
-		payload
-	}
-}
-
-export function fetchAdminMock(){
+export const fetchAdminMock = () => {
 	const url = CONFIG.BASE_URL + '/admindata'
 	return dispatch => {
 		return fetch(url)

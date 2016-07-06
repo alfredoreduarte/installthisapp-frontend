@@ -25,6 +25,7 @@ app.use('/images',  express.static(__dirname + '/assets/images'));
 
 // Mock Rails Api
 app.use('/apps/create', function(req, res){
+	console.log(req)
 	res.json(require('./data/apps.create'))
 })
 app.use('/admindata', function(req, res){

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { searchText } from 'actions/actionCreators'
+import { searchText } from 'actions/filterText'
 
 export default class SearchForm extends Component {
 	componentDidMount() {
