@@ -1,0 +1,41 @@
+.ita-bottom-bar
+	display: flex
+	align-items: center
+	justify-content: space-between
+	height: 60px
+	padding: 0px 20px
+	height: $ita-bottom-bar-height
+	border-right: 342px transparent solid
+	border-right: $ita-side-bar-width transparent solid
+	background: #2C333E
+	position: fixed
+	bottom: 0
+	left: 0
+	right: 0
+	width: 100%
+	z-index: $zindex-navbar-fixed
+	&.hidden
+		// @extend .animated
+		// @extend .slideOutDown
+.ita-screens-list
+	> li
+		&:first-child
+			> a
+				padding-left: 15px
+		> a
+			display: block
+			color: $ita-bottom-bar-active-color
+			&:hover
+				text-decoration: none
+				color: lighten($ita-bottom-bar-active-color, 10)
+			.ion
+				color: $ita-bottom-bar-inactive-color
+				margin: 0px 15px
+.ita-devices-list
+	li
+		line-height: $ita-bottom-bar-height
+		margin-right: 25px
+		a
+			color: $ita-bottom-bar-inactive-color
+			&.selected
+				color: $ita-bottom-bar-active-color

@@ -29,7 +29,7 @@ const AppTitleBar = ({ installed, scheduled = false, title }) => (
 					{installed ? <Link to='/create' className="btn btn-lg btn-gray btn-outline">Uninstall</Link> : null}
 					<ul className="list-inline">
 						{scheduled ? <li><small><a href=""><u>Scheduled for <b>Wed 14, Sept.</b></u></a></small></li> : null}
-						{!installed ? <li><p><small><a href=""><u>Schedule</u></a></small></p></li> : null}
+						{!scheduled ? <li><p><small><a href=""><u>Schedule</u></a></small></p></li> : null}
 						{!installed ? <li><p><small><a href=""><u>Preview</u></a></small></p></li> : null}
 					</ul>
 				</div>

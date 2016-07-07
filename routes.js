@@ -9,6 +9,7 @@ import AppAnalytics from './containers/AppAnalytics'
 import Users from './containers/Users'
 import AppPreferences from './containers/AppPreferences'
 import Account from './containers/Account'
+import DesignEditor from './containers/DesignEditor'
 
 const routes = (
 	<Route path="/" component={Application}>
@@ -17,10 +18,10 @@ const routes = (
 		<Route path="apps/:checksum" component={AppDashboardContainer}>
 			<IndexRoute component={AppDashboard} />
 			<Route path="analytics" component={AppAnalytics} />
-			<Route path="design" component={AppPreferences} />
 			<Route path="users" component={Users} />
 			<Route path="preferences" component={AppPreferences} />
 		</Route>
+		<Route path="apps/:checksum/design" component={DesignEditor} />
 		<Route path="account" component={Account} />
 	</Route>
 )

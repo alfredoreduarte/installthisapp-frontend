@@ -1,19 +1,17 @@
 {
 	"verbose": false,
 	"ignore": [
-		"components/*", 
-		"containers/*", 
-		"assets/*", 
-		"store/*", 
-		"data/*", 
-		"reducers/*", 
-		"selectors/*", 
-		"actions/*", 
-		"test/*", 
-		"schema/*", 
+		"components/*",
+		"containers/*",
+		"assets/*",
+		"store/*",
+		"reducers/*",
+		"selectors/*",
+		"actions/*",
+		"test/*",
+		"schema/*",
 		"routes.js",
 		"index.&",
-		"index.html",
 		"index.html"
 	]
 }

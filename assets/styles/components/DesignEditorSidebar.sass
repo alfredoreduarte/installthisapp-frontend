@@ -1,0 +1,98 @@
+.ita-side-bar
+	height: 100%
+	background: #363E4B
+	position: fixed
+	bottom: 0
+	top: 0
+	right: 0
+	width: 342px
+	width: $ita-side-bar-width
+	padding-bottom: $ita-bottom-bar-height
+	z-index: $zindex-navbar-fixed
+	display: flex
+	flex-direction: column
+	&.hidden
+		// @extend .animated
+		// @extend .slideOutRight
+.ita-side-bar-tools
+	height: 100%
+.ita-side-bar-content
+	padding: 12px 12px
+	position: relative
+	color: white
+.ita-side-bar-header
+	background: #2C333E
+	flex-shrink: 0
+	.ita-side-bar-content
+		display: flex
+		justify-content: space-between
+		align-items: center
+.ita-scrollable-area
+	overflow-y: scroll
+	overflow-x: hidden
+	padding-top: 24px
+.ita-sidebar-block
+	margin-bottom: 20px
+	white-space: nowrap
+	label
+		vertical-align: middle
+		margin-bottom: 0px
+$ita-sidebar-col-width: 10
+@while $ita-sidebar-col-width <= 100
+	.ita-sidebar-col-#{$ita-sidebar-col-width}
+		width: percentage($ita-sidebar-col-width/ 100)
+		display: inline-block
+		white-space: normal
+		padding-right: 12px
+		&:last-child
+			padding-right: 0px
+	$ita-sidebar-col-width: $ita-sidebar-col-width+10
+// spin
++keyframes(activityBarPivotAnimation)
+	0%
+		left: 0%
+	50%
+		left: 95%
+	100%
+		left: 0%
+.ita-activity-bar
+	height: 2px
+	width: 100%
+	position: relative
+	+transform(scaleY(0))
+	+transition(all 100ms ease-in)
+	&.ita-activity-bar-busy
+		opacity: 1
+		+transform(scaleY(1))
+		+transition(all 100ms ease-out)
+		.ita-activity-bar-pivot
+			+animation-name(activityBarPivotAnimation)
+	.ita-activity-bar-pivot
+		width: 5%
+		height: 100%
+		background: $brand-success
+		position: absolute
+		top: 0px
+		left: 0px
+		+animation-duration(2s)
+		+animation-timing-function(ease)
+		+animation-iteration-count(infinite)
+// tabs
+.ita-sidebar-tabs
+	display: flex
+	flex-shrink: 0
+	.ita-sidebar-tab
+		height: 34px
+		flex-grow: 1
+		justify-content: center
+		align-items: center
+		display: flex
+		font-size: 10px
+		color: $gray-light
+		border-bottom: 1px solid $gray-light
+		text-transform: uppercase
+		font-weight: 500
+		cursor: pointer
+		&.active, &:hover
+			border-bottom-color: white
+			color: white
