@@ -10,18 +10,21 @@ describe('Reducers', () => {
 		it('Should provide the initial state', () => {
 			const initialState = {
 				currentSelector: [],
-				ruleset: {}
+				ruleset: {},
+				results: [],
 			}
 			expect(styles(undefined, {})).toEqual(initialState)
 		})
 		it('Should save parsed css object', () => {
 			const initialState = {
 				currentSelector: [],
-				ruleset: {}
+				ruleset: {},
+				results: [],
 			}
 			const expectedResult = {
 				currentSelector: [],
-				ruleset: parsedCss
+				ruleset: parsedCss,
+				results: [],
 			}
 			const action = {
 				type: 'RECEIVE_STYLES',

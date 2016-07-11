@@ -18,6 +18,13 @@ export const setCurrentSelector = selector => {
 	}
 }
 
+export const modifyDesign = object => {
+	return {
+		type: 'SET_STYLES_RESULT',
+		payload: object
+	}
+}
+
 export const fetchStyles = checksum => {
 	return (dispatch) => {
 		const url = CONFIG.BASE_URL + `/apps/styles/${checksum}`

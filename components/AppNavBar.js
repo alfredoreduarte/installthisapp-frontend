@@ -1,3 +1,4 @@
+require('isomorphic-fetch')
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Navbar, NavDropdown, MenuItem } from 'react-bootstrap'
@@ -18,6 +19,48 @@ const AppNavBar = ({ name }) => (
 						<Link to='/create' className="link-no-underline text-success">
 							New App
 						</Link>
+					</button>
+				</li>
+				<li className="">
+					<button onClick={ () => {
+						fetch('https://local.installthisapp.com/top_fans_realtime', {
+							method: 'POST',
+							headers: {
+								'Accept': 'application/json',
+								'Content-Type': 'application/json'
+							},
+							body: JSON.stringify(
+								{ 
+									object: "page", 
+									entry: [
+										{
+											id: "187169648074506", 
+											changes: [
+												{
+													value: {
+														verb: "add", 
+														sender_id: 819249868192387, 
+														item: "like", 
+														parent_id: "187169648074506_502821043176030", 
+														post_id: "187169648074506_502821043176030", 
+														created_time: 1468261498, 
+														sender_name: "Orxan  Alizade"
+													}, 
+													field: "feed"
+												}
+											], 
+											time: 1468261498
+										}
+									]
+								}
+							)
+						})
+						.then(response => response.text())
+						.then(text =>{
+							console.log(text)
+						})
+					}} className="btn btn-success btn-sm btn-outline navbar-btn">
+						Post top fans
 					</button>
 				</li>
 				<NavDropdown eventKey={3} title={name}>
