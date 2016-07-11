@@ -1,12 +1,12 @@
-var path = require('path');
-var express = require('express');
-var webpack = require('webpack');
-var config = require('./webpack.config.dev');
+var path = require('path')
+var express = require('express')
+var webpack = require('webpack')
+var config = require('./webpack.config.dev')
 
-const app = express();
-const compiler = webpack(config);
+const app = express()
+const compiler = webpack(config)
 
-const isDeveloping = process.env.NODE_ENV !== 'production';
+const isDeveloping = process.env.NODE_ENV !== 'production'
 
 // Hot Module Reloading
 if (isDeveloping) {
@@ -14,14 +14,15 @@ if (isDeveloping) {
 		noInfo: true,
 		publicPath: config.output.publicPath
 	}));
-	app.use(require('webpack-hot-middleware')(compiler));
+	app.use(require('webpack-hot-middleware')(compiler))
 }
 else{
-	app.use('/static',  express.static(__dirname + '/dist'));
+	app.use('/static',  express.static(__dirname + '/dist'))
 }
 
 // Images and other static asssets
-app.use('/images',  express.static(__dirname + '/assets/images'));
+app.use('/images',  express.static(__dirname + '/assets/images'))
+app.use('/styles',  express.static(__dirname + '/assets/styles'))
 
 // Mock Rails Api
 app.get('/admin', function(req, res){
@@ -32,6 +33,14 @@ app.get('/entities', function(req, res){
 })
 app.post('/apps/create', function(req, res){
 	res.json(require('./data/apps.create'))
+})
+app.get('/apps/styles/:checksum', function(req, res){
+	res.sendFile(path.join(__dirname, 'assets/styles/module.css'))
+})
+
+// Design editor iframe preview
+app.get('/designpreview', function(req, res){
+	res.sendFile(path.join(__dirname, 'preview.html'))
 })
 
 // Serving static HTML

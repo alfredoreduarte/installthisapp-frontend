@@ -1,52 +1,57 @@
-import React, { Component, PropTypes } from 'react'
-import Select from'react-select'
+import React, { PropTypes } from 'react'
+import { connect } from 'react-redux'
+import PlatformSelector from'components/design-editor/PlatformSelector'
+import ResetButton from'components/design-editor/ResetButton'
+import ScreenSelector from'components/design-editor/ScreenSelector'
 
 const DesignEditorBottomBar = ({
-	screens = [
-		{ value: 'index', label: 'Inicio'},
-		{ value: 'thanks', label: 'Gracias'},
-	],
-	defaultScreen = 'index',
-	handleScreenChange = e => {
-		console.log('screen changed!', e.label)
-	},
-	platform = 'mobile',
-	handleDeviceChange = device => {
-		console.log('device changed!', device)
-	},
-	resetToDefaults = () => console.log('reset to defaults!')
+
+	// Screen Selector
+	screens,
+	currentScreen,
+	handleScreenChange,
+
+	// Platform Selector
+	platform,
+	handlePlatformChange,
+
+	// Reset design
+	resetToDefaults,
+
 }) => (
 	<div className="ita-bottom-bar">
-		<Select
-			clearable={false}
-			className="react-select-top"
-			searchable={false}
-			style={{width: '200px'}}
-			value={_.find(screens, {'value': defaultScreen})}
+		<ScreenSelector
+			value={currentScreen}
 			options={screens}
-			onChange={handleScreenChange}
-		/>
-		<div className="btn-group ita-btn-group-editor" role="group" data-toggle="buttons">
-			<button 
-				type="button" 
-				className={`btn ${platform == 'facebook' ? 'active' : null}`} 
-				onClick={() => handleDeviceChange('facebook')}>
-				<span className="glyphicon glyphicon-king"></span>
-			</button>
-			<button 
-				type="button" 
-				className={`btn ${platform == 'mobile' ? 'active' : null}`} 
-				onClick={() => handleDeviceChange('mobile')}>
-				<span className="glyphicon glyphicon-phone"></span>
-			</button>
-		</div>
-		<small 
-			className="text-muted" 
-			onClick={() => resetToDefaults()} 
-			style={{cursor: 'pointer'}}>
-			<i className="glyphicon glyphicon-fast-backward"></i> Reset to defaults
-		</small>
+			handleScreenChange={handleScreenChange}	
+		 />
+		<PlatformSelector platform={platform} handlePlatformChange={handlePlatformChange} />
+		<ResetButton handleReset={resetToDefaults} />
 	</div>
 )
 
-export default DesignEditorBottomBar
+DesignEditorBottomBar.propTypes = {
+	screens: PropTypes.array.isRequired,
+	currentScreen: PropTypes.string.isRequired,
+	platform: PropTypes.string.isRequired,
+	handleScreenChange: PropTypes.func.isRequired,
+	handlePlatformChange: PropTypes.func.isRequired,
+	resetToDefaults: PropTypes.func.isRequired,
+}
+
+const mapStateToProps = state => ({ 
+	screens: [
+		{ value: 'index', label: 'Inicio'},
+		{ value: 'thanks', label: 'Gracias'},
+	],
+	currentScreen: 'index',
+	platform: 'mobile',
+})
+
+const mapDispatchToProps = dispatch => ({ 
+	handleScreenChange: 	e 			=> console.log('screen changed!', e.label),
+	handlePlatformChange: 	platform 	=> console.log('platform changed!', platform),
+	resetToDefaults: 		() 			=> console.log('reset to defaults!'),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(DesignEditorBottomBar)

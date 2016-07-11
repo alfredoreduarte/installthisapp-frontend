@@ -3,12 +3,13 @@ var webpack = require('webpack');
 
 module.exports = {
 	devtool: 'source-map',
-	entry: [
-		'./client/app.js'
-	],
+	entry: {
+		dashboard: './index',
+		// preview: './preview'
+	},
 	output: {
 		path: path.join(__dirname, 'dist'),
-		filename: 'bundle.js',
+		filename: '[name].bundle.js',
 		publicPath: '/static/'
 	},
 	plugins: [
@@ -33,15 +34,22 @@ module.exports = {
 		loaders: [
 			// js
 			{
-				test: /\.(jsx|js)$/,
-				loaders: ['babel'],
-				include: path.join(__dirname, 'client')
+				test: /\.js$/,
+				loaders: [ 'babel' ],
+				exclude: /node_modules/,
+				include: __dirname
+			},
+			// sass
+			{
+				test: /\.(sass|scss)$/,
+				// include: path.join(__dirname, 'assets/styles'),
+				loaders: ['style', 'css', 'sass']
 			},
 			// css
 			{
-				test: /\.(css|sass|scss)$/,
-				include: path.join(__dirname, 'client/assets/styles'),
-				loaders: ['style', 'css', 'sass']
+				test: /\.(css)$/,
+				// include: path.join(__dirname, 'assets/styles'),
+				loaders: ['style', 'css']
 			},
 			// fonts
 			{

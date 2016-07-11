@@ -3,13 +3,13 @@ var webpack = require('webpack');
 
 module.exports = {
 	devtool: 'source-map',
-	entry: [
-		'webpack-hot-middleware/client',
-		'./index'
-	],
+	entry: {
+		dashboard: ['webpack-hot-middleware/client', './index'],
+		// preview: './preview'
+	},
 	output: {
 		path: path.join(__dirname, 'dist'),
-		filename: 'bundle.js',
+		filename: '[name].bundle.js',
 		publicPath: '/static/'
 	},
 	plugins: [

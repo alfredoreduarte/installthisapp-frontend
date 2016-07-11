@@ -10,6 +10,8 @@ import usersSorting from 'reducers/usersSorting'
 import appsSorting from 'reducers/appsSorting'
 import newApp from 'reducers/newApp'
 import deleteApp from 'reducers/deleteApp'
+import styles from 'reducers/styles'
+import mouseTrap from 'reducers/design-helper/mouseTrap'
 
 const rootReducer = combineReducers({
 	routing,
@@ -21,6 +23,8 @@ const rootReducer = combineReducers({
 	newApp,
 	deleteApp,
 	entities,
+	styles,
+	mouseTrap,
 	form: formReducer
 })
 

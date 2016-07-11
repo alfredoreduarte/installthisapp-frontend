@@ -1,25 +1,33 @@
-import React, { PropTypes } from 'react'
-import FontFamily from 'components/design-tools/FontFamily'
-import DesignEditorTools from 'containers/DesignEditorTools'
-import DesignEditorSidebarHeader from 'containers/DesignEditorSidebarHeader'
-import DesignEditorSidebarTabs from 'containers/DesignEditorSidebarTabs'
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
+import Header from 'containers/DesignEditorSidebarHeader'
+import Tabs from 'containers/DesignEditorSidebarTabs'
+import Tools from 'containers/DesignEditorTools'
+import { getRulesetForCurrentSelector as getRuleset } from 'selectors/styles'
 
-const DesignEditorSidebar = () => (
+const DesignEditorSidebar = ({ selector, ruleset }) => (
 	<div className="ita-side-bar">
-		
-		<DesignEditorSidebarHeader
+
+		<Header
 			handleClose={() => console.log('closing editor!')}
 			handleSave={() => console.log('saving design!')}
 			busy={true}
 		/>	
 
-		<DesignEditorSidebarTabs
+		<Tabs
 			handleTabs={tab => console.log('changed tab!', tab)}
 		/>
 
-		<DesignEditorTools />
+		<Tools selector={selector} ruleset={ruleset} />
 		
 	</div>
 )
 
-export default DesignEditorSidebar
+const mapStateToProps = state => {
+	const ruleset = getRuleset(state)
+	return {
+		ruleset
+	}
+}
+
+export default connect(mapStateToProps)(DesignEditorSidebar)
