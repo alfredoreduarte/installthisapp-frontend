@@ -38,11 +38,6 @@ app.get('/apps/styles/:checksum', function(req, res){
 	res.sendFile(path.join(__dirname, 'assets/styles/module.css'))
 })
 
-// Design editor iframe preview
-app.get('/designpreview', function(req, res){
-	res.sendFile(path.join(__dirname, 'preview.html'))
-})
-
 // Serving static HTML
 app.get('/*', function(req, res){
 	res.sendFile(path.join(__dirname, 'index.html'))

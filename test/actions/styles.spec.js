@@ -11,7 +11,7 @@ const checksum = '1KO8H'
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
-describe('Async Actions', () => {
+describe('Async Styles Actions', () => {
 	afterEach(() => {
 		nock.cleanAll()
 	})
@@ -32,12 +32,33 @@ describe('Async Actions', () => {
 				expect(resultingActions[0].payload).toBeAn(Object)
 			})
 	})
-	it("should create an action to save the current css selector with dots included", () => {
+	it("Should receive an event and dispatch actions to update MouseTrap coordinates and set the current selector", () => {
+		const platform = ''
+		const expectedAction = {}
+		expect(actions.handleHover(platform)).toEqual(expectedAction)
+	})
+})
+describe('Styles actions', () => {
+	it("should create an action to save the hovered element's css selector with dots included", () => {
 		const selector = ['game-title', 'page-title']
 		const expectedAction = {
-			type: 'SET_STYLES_SELECTOR',
+			type: 'SET_HOVERED_SELECTOR',
 			payload: ['.game-title', '.page-title']
 		}
-		expect(actions.setCurrentSelector(selector)).toEqual(expectedAction)
+		expect(actions.setHoveredSelector(selector)).toEqual(expectedAction)
+	})
+	it("should create an action to save the css selectors for the element being edited, with dots included", () => {
+		const expectedAction = {
+			type: 'SET_ACTIVE_SELECTOR'
+		}
+		expect(actions.setActiveSelector()).toEqual(expectedAction)
+	})
+	it("should create an action to toggle devices at design editor", () => {
+		const platform = 'facebook'
+		const expectedAction = {
+			type: 'SET_EDITOR_PLATFORM',
+			payload: platform
+		}
+		expect(actions.setPlatform(platform)).toEqual(expectedAction)
 	})
 })

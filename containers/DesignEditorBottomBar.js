@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import PlatformSelector from'components/design-editor/PlatformSelector'
-import ResetButton from'components/design-editor/ResetButton'
-import ScreenSelector from'components/design-editor/ScreenSelector'
+import PlatformSelector from 'components/design-editor/PlatformSelector'
+import ResetButton from 'components/design-editor/ResetButton'
+import ScreenSelector from 'components/design-editor/ScreenSelector'
+import { setPlatform } from 'actions/styles'
 
 const DesignEditorBottomBar = ({
 
@@ -45,13 +46,13 @@ const mapStateToProps = state => ({
 		{ value: 'thanks', label: 'Gracias'},
 	],
 	currentScreen: 'index',
-	platform: 'mobile',
+	platform: state.styles.platform,
 })
 
 const mapDispatchToProps = dispatch => ({ 
-	handleScreenChange: 	e 			=> console.log('screen changed!', e.label),
-	handlePlatformChange: 	platform 	=> console.log('platform changed!', platform),
-	resetToDefaults: 		() 			=> console.log('reset to defaults!'),
+	handleScreenChange: e => console.log('screen changed!', e.label),
+	handlePlatformChange: platform => dispatch(setPlatform(platform)),
+	resetToDefaults: () => console.log('reset to defaults!'),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(DesignEditorBottomBar)

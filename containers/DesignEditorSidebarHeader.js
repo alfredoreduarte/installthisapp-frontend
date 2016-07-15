@@ -7,7 +7,7 @@ const DesignEditorSidebarHeader = ({
 }) => (
 	<div className="ita-side-bar-header">
 		<div className="ita-side-bar-content">
-			<button className="btn" onClick={() => handleClose()}>
+			<button className="btn btn-default" onClick={() => handleClose()}>
 				<small>
 					<i className="glyphicon glyphicon-step-backward"></i> Back to Dashboard
 				</small>

@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import Header from 'containers/DesignEditorSidebarHeader'
 import Tabs from 'containers/DesignEditorSidebarTabs'
 import Tools from 'containers/DesignEditorTools'
-import { getRulesetForCurrentSelector as getRuleset } from 'selectors/styles'
+import { modifyDesign } from 'actions/styles'
+import { getRulesetForActiveSelector as getRuleset } from 'selectors/styles'
 
-const DesignEditorSidebar = ({ selector, ruleset }) => (
+const DesignEditorSidebar = ({ ruleset, selector, handleChange }) => (
 	<div className="ita-side-bar">
 
 		<Header
@@ -18,7 +19,7 @@ const DesignEditorSidebar = ({ selector, ruleset }) => (
 			handleTabs={tab => console.log('changed tab!', tab)}
 		/>
 
-		<Tools selector={selector} ruleset={ruleset} />
+		<Tools ruleset={ruleset} handleChange={handleChange} selector={selector} />
 		
 	</div>
 )
@@ -26,8 +27,15 @@ const DesignEditorSidebar = ({ selector, ruleset }) => (
 const mapStateToProps = state => {
 	const ruleset = getRuleset(state)
 	return {
-		ruleset
+		ruleset,
+		selector: state.styles.activeSelector
 	}
 }
 
-export default connect(mapStateToProps)(DesignEditorSidebar)
+const mapDispatchToProps = dispatch => {
+	return {
+		handleChange: (selector, property, value) => dispatch(modifyDesign(selector, property, value))
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DesignEditorSidebar)

@@ -181,15 +181,29 @@ module.exports = {
 			],
 			users: [
 				{
-					id: 10208910337057839,
-					name: "User de otra app",
-					createdOn: "2016-05-01T20:46:22.000-04:00",
+					id: 10206785510533116,
+					name: "Agueda Massa",
+					firstName: "Agueda",
+					createdOn: "2016-03-01T20:46:22.000-04:00",
 				},
 				{
-					id: 10154353197889721,
-					name: "Arelys Manqueo Zuñiga",
-					createdOn: "2016-05-01T20:46:22.000-04:00",
+					id: 1226562547355485,
+					name: "Laurie Jones",
+					firstName: "Laurie",
+					createdOn: "2016-03-01T20:46:22.000-04:00",
 				},
+				{
+					id: 10210144222381808,
+					name: "Lucas Broos",
+					firstName: "Lucas",
+					createdOn: "2016-03-01T20:46:22.000-04:00",
+				},
+				{
+					id: 10206832418270431,
+					name: "Sergio Villarreal",
+					firstName: "Sergio",
+					createdOn: "2016-03-01T20:46:22.000-04:00",
+				}
 			]
 		}
 	],

@@ -7,13 +7,13 @@ const PlatformSelector = ({
 	<div className="btn-group ita-btn-group-editor" role="group" data-toggle="buttons">
 		<button 
 			type="button" 
-			className={`btn ${platform == 'facebook' ? 'active' : null}`} 
+			className={`btn btn-default ${platform == 'facebook' ? 'active' : ''}`} 
 			onClick={() => handlePlatformChange('facebook')}>
 			<span className="glyphicon glyphicon-king"></span>
 		</button>
 		<button 
 			type="button" 
-			className={`btn ${platform == 'mobile' ? 'active' : null}`} 
+			className={`btn btn-default ${platform == 'mobile' ? 'active' : ''}`} 
 			onClick={() => handlePlatformChange('mobile')}>
 			<span className="glyphicon glyphicon-phone"></span>
 		</button>

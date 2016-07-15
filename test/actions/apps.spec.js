@@ -29,7 +29,11 @@ describe('Async Actions', () => {
 					}
 				]
 				const resultingActions = store.getActions()
-				expect(resultingActions).toEqual(expectedActions)
+				expect(resultingActions).toBeAn(Array)
+				expect(resultingActions[0]).toBeAn(Object)
+				expect(resultingActions[0].type).toEqual('RECEIVE_ENTITIES')
+				expect(resultingActions[0].response).toBeAn(Object)
+				expect(resultingActions[0].response.entities).toBeAn(Object)
 			})
 	})
 })
