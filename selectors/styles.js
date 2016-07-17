@@ -7,18 +7,6 @@ const getActiveStylesSelector = state => state.styles.activeSelector
 const getStylesObject = state => state.styles.ruleset
 const getStylesResult = state => state.styles.rules
 
-const printRules = rules => {
-	const losKeys = _.forIn(rules, (value, key) => {
-		console.log('value', value.value)
-		console.log('key', key)
-		return `${key}: ${value.value};`
-	})
-	const elString = `${losKeys.directive}: ${losKeys.value};`
-	console.log('los keys ', losKeys)
-	console.log('el string ', elString)
-	return elString
-}
-
 export const getStylesResultAsCss = createSelector(
 	getStylesResult,
 	getActiveStylesSelector,
@@ -36,7 +24,6 @@ export const getStylesResultAsCss = createSelector(
 			</style>`
 			return toReturn
 		})
-		console.log('toReturn', stylesArray)
 		return stylesArray
 	}
 )

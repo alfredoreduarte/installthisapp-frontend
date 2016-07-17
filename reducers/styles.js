@@ -1,7 +1,7 @@
 import _ from 'lodash'
 
 const styles = (state = {
-	platform: 'facebook',
+	platform: 'mobile',
 	hoveredSelector: [],
 	activeSelector: [],
 	ruleset: {},
@@ -26,7 +26,6 @@ const styles = (state = {
 				platform: action.payload
 			})
 		case 'SET_STYLES_RESULT':
-			// 
 			const { selectors, property, value } = action
 			const existingRule = _.find(state.rules, {selectors})
 			let rules = state.rules

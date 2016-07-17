@@ -33,9 +33,7 @@ const processStyles = (state) => {
 			}
 		}
 		const stringified = css.stringify(formatted)
-		const toReturn = `<style id="fdas">
-			${stringified}
-		</style>`
+		const toReturn = `<style>${stringified}</style>`
 		return toReturn
 	})
 	console.log('toReturn', stylesArray)

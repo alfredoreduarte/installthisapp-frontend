@@ -5,7 +5,7 @@ module.exports = {
 	devtool: 'source-map',
 	entry: {
 		dashboard: ['webpack-hot-middleware/client', './index'],
-		// preview: './preview'
+		trivia: './modules/trivia'
 	},
 	output: {
 		path: path.join(__dirname, 'dist'),
