@@ -44,10 +44,10 @@ app.get('/*', function(req, res){
 })
 
 // Running the server
-app.listen(8080, 'localhost', function(err){
+app.listen(process.env.PORT || 4000, 'localhost', function(err){
 	if (err) {
 		console.log(err)
 		return;
 	}
-	console.log('Listening at http://localhost:8080')
+	console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 })
