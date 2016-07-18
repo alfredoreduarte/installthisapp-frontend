@@ -2,24 +2,28 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-	devtool: 'source-map',
+	devtool: 'inline-source-map',
 	entry: {
 		dashboard: ['webpack-hot-middleware/client', './index'],
-		trivia: './modules/trivia'
+		// trivia: './modules/trivia'
 	},
 	output: {
-		path: path.join(__dirname, 'dist'),
+		path: path.join(__dirname, '/dist'),
 		filename: '[name].bundle.js',
+		chunkFilename: '[id].chunk.js',
 		publicPath: '/static/'
 	},
 	plugins: [
 		new webpack.optimize.CommonsChunkPlugin('common.js'),
 		new webpack.HotModuleReplacementPlugin(),
-		new webpack.NoErrorsPlugin()
+		new webpack.NoErrorsPlugin(),
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+		})
 	],
 	resolve: {
 		root: [ __dirname + '/' ],
-		extensions: ['', '.js', '.jsx']
+		extensions: ['', '.js']
 	},
 	module: {
 		loaders: [

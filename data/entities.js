@@ -3,8 +3,8 @@ module.exports = {
 		{
 			id: 231315,
 			checksum: "LF7H3",
-			title: "Trivia uno",
-			type: "trivia",
+			title: "Top Fans",
+			type: "top_fans",
 			status: 'ready',
 			scheduled: true,
 			page: 413,
@@ -169,7 +169,7 @@ module.exports = {
 		{
 			id: 231312,
 			checksum: "X91H7",
-			title: "App dos",
+			title: "Trivia",
 			type: "trivia",
 			status: 'installed',
 			scheduled: false,

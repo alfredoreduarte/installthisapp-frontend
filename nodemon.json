@@ -9,8 +9,10 @@
 		"selectors/*",
 		"actions/*",
 		"test/*",
+		"modules/*",
 		"schema/*",
 		"routes.js",
+		"routes/*",
 		"index.&",
 		"index.html"
 	]

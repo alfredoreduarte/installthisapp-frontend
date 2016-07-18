@@ -1,2 +1,0 @@
-webpackJsonp([2],[function(e,t,r){"use strict";function o(e){return e&&e.__esModule?e:{"default":e}}var n=r(1),s=o(n),u=r(23),a=r(25),d=r(47),c=r(187),i=o(c),l=r(191),f=o(l);r(438);var y=(0,f["default"])(),m=(0,d.syncHistoryWithStore)(a.browserHistory,y);(0,u.render)(s["default"].createElement(i["default"],{store:y,history:m}),document.getElementById("root"))}]);
-//# sourceMappingURL=dashboard.bundle.js.map

@@ -1,8 +1,8 @@
 module.exports = {
 	id: 23132,
 	checksum: "OI2J3",
-	title: "App recien creada",
-	type: "trivia",
+	title: "Top Fans",
+	type: "top_fans",
 	status: 'ready',
 	scheduled: false,
 	page: 413,

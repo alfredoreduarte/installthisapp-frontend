@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import { Link } from 'react-router'
 
 const DesignEditorSidebarHeader = ({
 	handleClose,
@@ -7,11 +8,11 @@ const DesignEditorSidebarHeader = ({
 }) => (
 	<div className="ita-side-bar-header">
 		<div className="ita-side-bar-content">
-			<button className="btn btn-default" onClick={() => handleClose()}>
+			<Link to="/" className="btn btn-default" onClick={() => handleClose()}>
 				<small>
 					<i className="glyphicon glyphicon-step-backward"></i> Back to Dashboard
 				</small>
-			</button>
+			</Link>
 			<button 
 				className="btn btn-default btn-sm btn-outline btn-success" 
 				onClick={() => handleSave()}>

@@ -22,7 +22,7 @@ const AppNavBar = ({ name }) => (
 						</Link>
 					</button>
 				</li>
-				<li className="">
+				<li className="hide">
 					<button onClick={ () => topFansTest(0) } className="btn btn-success btn-sm btn-outline navbar-btn">
 						Post top fans
 					</button>

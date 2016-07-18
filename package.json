@@ -9,8 +9,9 @@
     "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "build": "npm run clean && npm run build:webpack",
     "clean": "rimraf dist",
-    "start": "NODE_ENV=development nodemon server.js",
-    "start:production": "NODE_ENV=production nodemon server.js"
+    "postinstall": "npm run build",
+    "start:dev": "NODE_ENV=development nodemon server.js",
+    "start": "NODE_ENV=production nodemon server.js"
   },
   "keywords": [],
   "author": "",

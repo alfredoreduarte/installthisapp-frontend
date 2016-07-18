@@ -10,6 +10,7 @@ module.exports = {
 	output: {
 		path: path.join(__dirname, 'dist'),
 		filename: '[name].bundle.js',
+		chunkFilename: '[id].chunk.js',
 		publicPath: '/static/'
 	},
 	plugins: [
@@ -18,7 +19,7 @@ module.exports = {
 		new webpack.optimize.AggressiveMergingPlugin(),
 		new webpack.optimize.OccurenceOrderPlugin(),
 		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
 		}),
 		new webpack.optimize.UglifyJsPlugin({
 			compressor: {
@@ -28,7 +29,7 @@ module.exports = {
 	],
 	resolve: {
 		root: [ __dirname + '/' ],
-		extensions: ['', '.js', '.jsx']
+		extensions: ['', '.js']
 	},
 	module: {
 		loaders: [

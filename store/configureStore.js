@@ -20,10 +20,10 @@ export default function configureStore(preloadedState) {
 
 	if (module.hot) {
 		// Prevent hot reloading of routes: https://github.com/reactjs/react-router/issues/2704
-		module.hot.decline("../routes.js")
+		module.hot.decline("routes")
 		// Enable Webpack hot module replacement for reducers
-		module.hot.accept('../reducers', () => {
-			const nextRootReducer = require('../reducers').default
+		module.hot.accept('reducers', () => {
+			const nextRootReducer = require('reducers').default
 			store.replaceReducer(nextRootReducer)
 		})
 	}
