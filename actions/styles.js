@@ -43,7 +43,8 @@ export const setPlatform = platform => {
 
 export const fetchStyles = checksum => {
 	return (dispatch) => {
-		const url = CONFIG.BASE_URL + `/apps/styles/${checksum}`
+		// const url = CONFIG.BASE_URL + `/apps/styles/${checksum}`
+		const url = `/apps/styles/${checksum}`
 		return 	fetch(url)
 				.then(response => response.text())
 				.then(text =>{
