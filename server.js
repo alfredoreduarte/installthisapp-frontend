@@ -44,7 +44,7 @@ app.get('/*', function(req, res){
 })
 
 // Running the server
-app.listen(process.env.PORT || 4000, 'localhost', function(err){
+app.listen(process.env.PORT || 4000, function(err){
 	if (err) {
 		console.log(err)
 		return;
