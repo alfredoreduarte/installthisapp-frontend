@@ -44,10 +44,10 @@ app.get('/*', function(req, res){
 })
 
 // Running the server
-app.listen(4000, 'localhost', function(err){
+app.listen(8080, 'localhost', function(err){
 	if (err) {
 		console.log(err)
 		return;
 	}
-	console.log('Listening at http://localhost:4000')
+	console.log('Listening at http://localhost:8080')
 })
