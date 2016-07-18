@@ -11,7 +11,8 @@ export const receiveEntities = (entities) => ({
 })
 
 export const fetchEntities = () => {
-	const url = CONFIG.BASE_URL + '/entities'
+	// const url = CONFIG.BASE_URL + '/entities'
+	const url = '/entities'
 	return dispatch => {
 		return fetch(url)
 				.then(response => response.json())

@@ -7,7 +7,8 @@ export const receiveAdmin = json => ({
 })
 
 export const fetchAdmin = () => {
-	const url = CONFIG.BASE_URL + '/admin'
+	// const url = CONFIG.BASE_URL + '/admin'
+	const url = '/admin'
 	return dispatch => {
 		return fetch(url)
 				.then(response => response.json())
