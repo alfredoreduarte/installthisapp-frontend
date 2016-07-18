@@ -3,6 +3,9 @@ var express = require('express')
 var webpack = require('webpack')
 var config = require('./webpack.config.dev')
 
+process.env.PORT = process.env.PORT || 4000;
+process.env.HOST = process.env.HOST || 'localhost';
+
 const app = express()
 const compiler = webpack(config)
 
@@ -44,7 +47,7 @@ app.get('/*', function(req, res){
 })
 
 // Running the server
-app.listen(process.env.PORT || 4000, function(err){
+app.listen(process.env.PORT, function(err){
 	if (err) {
 		console.log(err)
 		return;
