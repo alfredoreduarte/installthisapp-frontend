@@ -1,4 +1,4 @@
-module.exports = {
+export default (store) => ({
 	path: 'apps/:type/:checksum',
 	getComponents(nextState, cb) {
 		require.ensure([], require => {
@@ -24,7 +24,7 @@ module.exports = {
 		require('routes/Analytics'),
 		require('routes/Users'),
 		require('routes/Preferences'),
-		require('modules/trivia/routes'),
+		require('modules/trivia/routes').default(store),
 		require('modules/top_fans/routes'),
 	]
-}
+})

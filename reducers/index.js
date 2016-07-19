@@ -13,19 +13,51 @@ import deleteApp from 'reducers/deleteApp'
 import styles from 'reducers/styles'
 import mouseTrap from 'reducers/design-helper/mouseTrap'
 
-const rootReducer = combineReducers({
-	routing,
-	filterText,
-	usersSorting,
-	appsSorting,
-	selectedUserIds,
-	admin,
-	newApp,
-	deleteApp,
-	entities,
-	styles,
-	mouseTrap,
-	form: formReducer
-})
+// const rootReducer = combineReducers({
+// 	routing,
+// 	filterText,
+// 	usersSorting,
+// 	appsSorting,
+// 	selectedUserIds,
+// 	admin,
+// 	newApp,
+// 	deleteApp,
+// 	entities,
+// 	styles,
+// 	mouseTrap,
+// 	form: formReducer
+// })
 
-export default rootReducer
+const createReducer = asyncReducers => {
+	// return combineReducers({
+	// 	users,
+	// 	posts,
+	// 	...asyncReducers
+	// });
+	return combineReducers({
+		routing,
+		filterText,
+		usersSorting,
+		appsSorting,
+		selectedUserIds,
+		admin,
+		newApp,
+		deleteApp,
+		entities,
+		styles,
+		mouseTrap,
+		form: formReducer,
+		...asyncReducers
+	})
+}
+
+export default createReducer
+// export default rootReducer
+
+export const injectAsyncReducer = (store, name, asyncReducer) => {
+	console.log('asyncReducer')
+	console.log(asyncReducer)
+	if (!store.asyncReducers) { store.asyncReducers = {} } 
+	store.asyncReducers[name] = asyncReducer
+	store.replaceReducer(createReducer(store.asyncReducers))
+}

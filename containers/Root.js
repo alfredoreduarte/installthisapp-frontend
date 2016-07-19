@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { Provider, connect } from 'react-redux'
 import { Router } from 'react-router'
-import rootRoute from 'routes'
+// import rootRoute from 'routes'
+import { createRoutes } from 'routes'
 import { fetchAdmin } from 'actions/admin'
 import { fetchEntities } from 'actions/entities'
 
@@ -12,9 +13,10 @@ class Root extends Component {
 	}
 	render() {
 		const { store, history } = this.props
+		const routes = createRoutes(store)
 		return (
 			<Provider store={store}>
-				<Router history={history} routes={rootRoute} />
+				<Router history={history} routes={routes} />
 			</Provider>
 		)
 	}

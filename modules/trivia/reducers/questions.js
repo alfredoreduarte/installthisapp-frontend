@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-const entities = (state = {}, action) => {
+const questions = (state = { question: 'question uno'}, action) => {
 	switch (action.type) {
 		case 'ADD_QUESTION':
 			return state
@@ -9,4 +9,4 @@ const entities = (state = {}, action) => {
 	}
 }
 
-export default entities
+export default questions
