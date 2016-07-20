@@ -6,7 +6,8 @@ const getUrl = () => {
 		case 'test':
 			return 'http://localhost:4000'
 		default:
-			return 'http://' + process.env.HOST + ':' + process.env.PORT
+			// return 'http://' + process.env.HOST + ':' + process.env.PORT
+			return '/'
 	}
 }
 
