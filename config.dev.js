@@ -9,7 +9,8 @@ const getUrl = () => {
 			// return 'https://' + process.env.HOST + ':' + process.env.PORT
 			return ''
 		case 'development':
-			return 'http://' + process.env.HOST + ':' + process.env.PORT
+			// return 'http://' + process.env.HOST + ':' + process.env.PORT
+			return 'http://local.installthisapp.com'
 		default:
 			return 'http://' + process.env.HOST + ':' + process.env.PORT
 	}

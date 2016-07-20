@@ -9,6 +9,7 @@ export default (store) => ({
 					modal: true,
 					getComponents(nextState, cb) {
 						require.ensure([], (require) => {
+							// Uncomment these lines to load reducers asyncronously
 							// let questionsReducer = require('modules/trivia/reducers').default
 							// injectAsyncReducer(store, 'trivia', questionsReducer)
 							cb(null, {
@@ -22,6 +23,7 @@ export default (store) => ({
 					path: 'answers',
 					getComponents(nextState, cb) {
 						require.ensure([], (require) => {
+							// Uncomment these lines to load reducers asyncronously
 							// let answersReducer = require('modules/trivia/reducers/answers').default
 							// injectAsyncReducer(store, 'answers', answersReducer)
 							cb(null, {
