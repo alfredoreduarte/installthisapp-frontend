@@ -29,11 +29,6 @@ import mouseTrap from 'reducers/design-helper/mouseTrap'
 // })
 
 const createReducer = asyncReducers => {
-	// return combineReducers({
-	// 	users,
-	// 	posts,
-	// 	...asyncReducers
-	// });
 	return combineReducers({
 		routing,
 		filterText,
@@ -47,12 +42,11 @@ const createReducer = asyncReducers => {
 		styles,
 		mouseTrap,
 		form: formReducer,
-		...asyncReducers
+		asyncReducers
 	})
 }
 
 export default createReducer
-// export default rootReducer
 
 export const injectAsyncReducer = (store, name, asyncReducer) => {
 	if (!store.asyncReducers) { store.asyncReducers = {} }
