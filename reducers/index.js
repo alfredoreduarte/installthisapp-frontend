@@ -4,7 +4,7 @@ import { routerReducer as routing } from 'react-router-redux'
 
 import entities from 'reducers/entities'
 import admin from 'reducers/admin'
-import selectedUserIds from 'reducers/selectedUserIds'
+import selectedItems from 'reducers/selectedItems'
 import filterText from 'reducers/filterText'
 import usersSorting from 'reducers/usersSorting'
 import appsSorting from 'reducers/appsSorting'
@@ -18,7 +18,7 @@ import mouseTrap from 'reducers/design-helper/mouseTrap'
 // 	filterText,
 // 	usersSorting,
 // 	appsSorting,
-// 	selectedUserIds,
+// 	selectedItems,
 // 	admin,
 // 	newApp,
 // 	deleteApp,
@@ -39,7 +39,7 @@ const createReducer = asyncReducers => {
 		filterText,
 		usersSorting,
 		appsSorting,
-		selectedUserIds,
+		selectedItems,
 		admin,
 		newApp,
 		deleteApp,
@@ -55,9 +55,7 @@ export default createReducer
 // export default rootReducer
 
 export const injectAsyncReducer = (store, name, asyncReducer) => {
-	console.log('asyncReducer')
-	console.log(asyncReducer)
-	if (!store.asyncReducers) { store.asyncReducers = {} } 
+	if (!store.asyncReducers) { store.asyncReducers = {} }
 	store.asyncReducers[name] = asyncReducer
 	store.replaceReducer(createReducer(store.asyncReducers))
 }

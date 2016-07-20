@@ -1,5 +1,5 @@
-export const selectUser = id => ({
-	type: 'SELECT_USER',
+export const selectItemOnTable = id => ({
+	type: 'SELECT_ITEM',
 	id
 })
 

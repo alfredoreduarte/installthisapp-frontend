@@ -29,17 +29,17 @@ import { Route, IndexRoute } from 'react-router'
 // console.log(dashboardRoutes)
 
 export const createRoutes = store => ({
-	path: '/',
+	path: '/(/apps)(/create)(/:step)',
 	component: require('containers/Application').default,
 	indexRoute: {
 		component: require('containers/AdminDashboard').default
 	},
 	childRoutes: [
 		require('routes/Dashboard').default(store),
-		{
-			path: 'create(/:step)',
-			component: require('containers/AdminDashboard').default,
-		},
+		// {
+		// 	path: 'create(/:step)',
+		// 	component: require('containers/AdminDashboard').default,
+		// },
 		require('routes/Design'),
 		require('routes/Account'),
 	]

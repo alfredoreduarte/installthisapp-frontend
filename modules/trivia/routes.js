@@ -5,17 +5,18 @@ export default (store) => ({
 		require.ensure([], (require) => {
 			cb(null, [
 				{
-					path: 'questions',
+					path: 'questions(/create)',
+					modal: true,
 					getComponents(nextState, cb) {
 						require.ensure([], (require) => {
-							let questionsReducer = require('modules/trivia/reducers/questions').default
-							injectAsyncReducer(store, 'questions', questionsReducer)
+							let questionsReducer = require('modules/trivia/reducers/entities').default
+							injectAsyncReducer(store, 'trivia', questionsReducer)
 							cb(null, {
 								main: require('modules/trivia/components/Questions').default,
 								sidebar: require('modules/trivia/sidebar').default,
 							})
 						})
-					}				
+					}
 				},
 				{
 					path: 'answers',

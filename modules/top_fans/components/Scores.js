@@ -5,13 +5,13 @@ import { Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Checkbox } from 'react-icheck'
 import { getCurrentUsersByKeyword } from 'selectors/users'
-import { selectUser, sortUsersBy } from 'actions/users'
+import { selectItemOnTable, sortUsersBy } from 'actions/users'
 import SearchForm from 'components/SearchForm'
 import User from 'components/User'
 
 const Users = ({ 
 	users, 
-	selectedUserIds,
+	selectedItems,
 	sortBy,
 	handleUserSelect, 
 	handleUserSelectBatch,
@@ -23,9 +23,9 @@ const Users = ({
 				<div className="col-md-12">
 					<h3 className="ita-page-title">
 						Scores 
-						<small className={selectedUserIds.length ? '' : 'hide'}>
-							{' '}/ {selectedUserIds.length} 
-							{' '}user{selectedUserIds.length > 1 ? 's' : ''} selected
+						<small className={selectedItems.length ? '' : 'hide'}>
+							{' '}/ {selectedItems.length} 
+							{' '}user{selectedItems.length > 1 ? 's' : ''} selected
 						</small>
 					</h3>
 				</div>
@@ -36,7 +36,7 @@ const Users = ({
 				</div>
 				<div className="col-md-8 text-right">
 					<ul className="ita-table-tools-selected list-inline list-no-margin">
-						<li className={selectedUserIds.length ? '' : 'hide'}>
+						<li className={selectedItems.length ? '' : 'hide'}>
 							<a 
 								href="javascript:void(0)" 
 								className='
@@ -77,7 +77,7 @@ const Users = ({
 					</th>
 					<th className="text-right">
 						<Checkbox 
-							checked={selectedUserIds.length == users.length}
+							checked={selectedItems.length == users.length}
 							checkboxClass="icheckbox-ita icon-tool-big pull-right"
 							onChange={() => handleUserSelectBatch(users)}
 						 />
@@ -97,7 +97,7 @@ const Users = ({
 						<ul className="list-inline list-no-margin">
 							<li>
 								<Checkbox 
-									checked={selectedUserIds.indexOf(user.id) !== -1 ? true : false}
+									checked={selectedItems.indexOf(user.id) !== -1 ? true : false}
 									checkboxClass="icheckbox-ita icon-tool-big pull-right"
 									onChange={() => handleUserSelect(user.id)}
 								/>
@@ -114,17 +114,17 @@ const Users = ({
 const mapStateToProps = (state, props) => {
 	return { 
 		users: getCurrentUsersByKeyword(state, props),
-		selectedUserIds: state.selectedUserIds,
+		selectedItems: state.selectedItems,
 		sortBy: state.usersSorting
 	}
 }
 
 const mapDispatchToProps = (dispatch, props) => ({
 	handleUserSelect: id => {
-		dispatch(selectUser(id))
+		dispatch(selectItemOnTable(id))
 	},
 	handleUserSelectBatch: users => {
-		users.map(user => dispatch(selectUser(user.id)))
+		users.map(user => dispatch(selectItemOnTable(user.id)))
 	},
 	handleSort: sorter => dispatch(sortUsersBy(sorter))
 })

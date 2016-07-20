@@ -28,6 +28,8 @@ describe('Async Styles Actions', () => {
 					}
 				]
 				const resultingActions = store.getActions()
+				console.log('loresu')
+				console.log(resultingActions)
 				expect(resultingActions[0].type).toEqual('RECEIVE_STYLES')
 				expect(resultingActions[0].payload).toBeAn(Object)
 			})

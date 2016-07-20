@@ -40,6 +40,16 @@ app.post('/apps/create', function(req, res){
 app.get('/apps/styles/:checksum', function(req, res){
 	res.sendFile(path.join(__dirname, 'assets/styles/module.css'))
 })
+// Trivia
+app.get('/entities.trivia', function(req, res){
+	res.json(require('./data/entities.trivia'))
+})
+app.post('/trivia/questions/delete', function(req, res){
+	res.json({status: 'ok'})
+})
+app.post('/trivia/questions/create', function(req, res){
+	res.json(require('./data/questions.create'))
+})
 
 // Serving static HTML
 app.get('/*', function(req, res){

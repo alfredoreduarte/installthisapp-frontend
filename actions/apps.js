@@ -12,8 +12,8 @@ export const deleteApp = checksum => ({
 export const postDeleteApp = () => {
 	return (dispatch, getState) => {
 		const checksum = getState().deleteApp.checksum
-		// const url = CONFIG.BASE_URL + `/apps/delete/${checksum}`
-		const url = `/apps/delete/${checksum}`
+		const url = CONFIG.BASE_URL + `/apps/delete/${checksum}`
+		// const url = `/apps/delete/${checksum}`
 		return 	fetch(url)
 				.then(response => response.json())
 				.then(json =>{
@@ -26,8 +26,8 @@ export const postDeleteApp = () => {
 }
 
 export const postNewApp = () => {
-	// const url = CONFIG.BASE_URL + '/apps/create'
-	const url = '/apps/create'
+	const url = CONFIG.BASE_URL + '/apps/create'
+	// const url = '/apps/create'
 	return (dispatch, getState) => {
 		const newAppData = getState().newApp
 		return fetch(url, {

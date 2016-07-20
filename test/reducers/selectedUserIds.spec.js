@@ -1,20 +1,20 @@
 import expect from 'expect'
-import selectedUserIds from 'reducers/selectedUserIds'
+import selectedItems from 'reducers/selectedItems'
 
 describe('Reducers', () => {
-	describe('selectedUserIds', () => {
+	describe('selectedItems', () => {
 		const initialState = []
 		it('Should provide the initial state', () => {
-			expect(selectedUserIds(undefined, {})).toEqual(initialState)
+			expect(selectedItems(undefined, {})).toEqual(initialState)
 		})
-		describe('should handle SELECT_USER action', () => {
+		describe('should handle SELECT_ITEM action', () => {
 			it('when the ID was not selected, add it', () => {
-				expect(selectedUserIds({}, { type: 'SELECT_USER', id: 1 })).toEqual([1])
+				expect(selectedItems({}, { type: 'SELECT_ITEM', id: 1 })).toEqual([1])
 			})
 			it('when the ID was already selected, remove it', () => {
 				const state = [1, 2, 3]
 
-				expect(selectedUserIds(state, { type: 'SELECT_USER', id: 1 })).toEqual([2, 3])
+				expect(selectedItems(state, { type: 'SELECT_ITEM', id: 1 })).toEqual([2, 3])
 			})
 		})
 	})

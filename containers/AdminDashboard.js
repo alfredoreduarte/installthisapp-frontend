@@ -23,16 +23,16 @@ const AdminDashboard = ({
 		<AppGrid />
 		<AppCreateModal show={showCreateModal} step={step} />
 		<AppDeleteModal 
-			show={showDeleteModal} 
-			app={appToBeDeleted} 
+			show={showDeleteModal}
+			app={appToBeDeleted}
 			cancel={cancelAppDeletion}
 			proceed={proceedWithAppDeletion} />
 	</div>
 )
 
 const mapStateToProps = (state, props) => {
-	return { 
-		showCreateModal: props.route.path && props.route.path.indexOf('create') !== -1,
+	return {
+		showCreateModal: props.location.pathname.indexOf('/apps/create') !== -1,
 		showDeleteModal: state.deleteApp.checksum ? true: false,
 		appToBeDeleted: state.deleteApp.checksum ? getAppToBeDeleted(state, props) : {},
 		step: props.params.step ? props.params.step : 1

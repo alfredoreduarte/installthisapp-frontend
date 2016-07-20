@@ -1,31 +1,39 @@
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
 import Select from 'react-select'
+import { Link } from 'react-router'
 import { Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Checkbox } from 'react-icheck'
-import { getCurrentUsersByKeyword } from 'selectors/users'
-import { selectUser, sortUsersBy } from 'actions/users'
+import { getQuestionsForCurrentApp } from 'modules/trivia/selectors/questions'
+import { selectItemOnTable, sortUsersBy } from 'actions/users'
 import SearchForm from 'components/SearchForm'
 import User from 'components/User'
+import { fetchTriviaEntities } from 'modules/trivia/actions/entities'
+import { postDeleteQuestions } from 'modules/trivia/actions/questions'
+import QuestionsCreate from 'modules/trivia/components/QuestionsCreate'
 
-const Users = ({ 
-	users, 
-	selectedUserIds,
-	sortBy,
-	handleUserSelect, 
-	handleUserSelectBatch,
-	handleSort
+const Questions = ({
+	questions,
+	selectedIds,
+	handleSelect, 
+	handleSelectBatch,
+	handleDelete,
+	handleDeleteBatch,
+	questionsCreatePath,
+	showCreateModal,
+	closeUrl,
 }) => (
 	<div className="ita-table-view">
+		<QuestionsCreate show={showCreateModal} closeUrl={closeUrl} />
 		<div className="ita-table-toolbar">
 			<div className="row">
 				<div className="col-md-12">
 					<h3 className="ita-page-title">
 						Questions 
-						<small className={selectedUserIds.length ? '' : 'hide'}>
-							{' '}/ {selectedUserIds.length} 
-							{' '}user{selectedUserIds.length > 1 ? 's' : ''} selected
+						<small className={selectedIds.length ? '' : 'hide'}>
+							{' '}/ {selectedIds.length} 
+							{' '}question{selectedIds.length > 1 ? 's' : ''} selected
 						</small>
 					</h3>
 				</div>
@@ -36,32 +44,26 @@ const Users = ({
 				</div>
 				<div className="col-md-8 text-right">
 					<ul className="ita-table-tools-selected list-inline list-no-margin">
-						<li className={selectedUserIds.length ? '' : 'hide'}>
-							<a 
-								href="javascript:void(0)" 
-								className='
+						<li className={selectedIds.length ? '' : 'hide'}>
+							<a
+								onClick={() => handleDeleteBatch(questions)}
+								className="
 									icon-tool-big 
 									btn 
 									btn-squared 
-									glyphicon 
-									glyphicon-cloud-download'></a>
+									glyphicon glyphicon-trash"
+								>
+							</a>
 						</li>
 					</ul>
 				</div>
 				<div className="col-md-3 col-md-offset-9">
-					<div className="ita-table-view-second-row">
-						<Select
-							searchable={false}
-							autosize={false}
-							clearable={false}
-							name="form-field-name"
-							value={sortBy}
-							options={[
-								{ value: 'name', label: 'Alphabetically' },
-								{ value: 'createdOn', label: 'Most Recent' }
-							]}
-							onChange={val => handleSort(val)}
-						/>
+					<div className="ita-table-view-second-row text-right">
+						<Link 
+							to={questionsCreatePath}
+							className="btn btn-sm btn-success">
+							Create Question
+						</Link>
 					</div>
 				</div>
 			</div>
@@ -77,29 +79,38 @@ const Users = ({
 					</th>
 					<th className="text-right">
 						<Checkbox 
-							checked={selectedUserIds.length == users.length}
+							checked={questions.length > 0 && selectedIds.length == questions.length}
 							checkboxClass="icheckbox-ita icon-tool-big pull-right"
-							onChange={() => handleUserSelectBatch(users)}
+							onChange={() => handleSelectBatch(questions)}
 						 />
 					</th>
 				</tr>
 			</thead>
 			<tbody>
-				{users.map(user => 
-				<tr key={user.id}>
+				{questions.map(q => 
+				<tr key={q.id}>
 					<td>
-						<User name={user.name} id={user.id} small />
+						{q.text}
 					</td>
 					<td>
-						{user.createdOn}
+						{q.createdOn}
 					</td>
 					<td className="text-right">
 						<ul className="list-inline list-no-margin">
 							<li>
+								<a
+									onClick={() => handleDelete(q.id)}
+									className='
+										icon-tool-big 
+										btn 
+										btn-squared 
+										glyphicon glyphicon-trash'></a>
+							</li>
+							<li>
 								<Checkbox 
-									checked={selectedUserIds.indexOf(user.id) !== -1 ? true : false}
+									checked={selectedIds.indexOf(q.id) !== -1 ? true : false}
 									checkboxClass="icheckbox-ita icon-tool-big pull-right"
-									onChange={() => handleUserSelect(user.id)}
+									onChange={() => handleSelect(q.id)}
 								/>
 							</li>
 						</ul>
@@ -112,21 +123,35 @@ const Users = ({
 )
 
 const mapStateToProps = (state, props) => {
+	const questions = getQuestionsForCurrentApp(state, props)
+	const createString = '/create'
+	const pathname = props.location.pathname
 	return { 
-		users: getCurrentUsersByKeyword(state, props),
-		selectedUserIds: state.selectedUserIds,
-		sortBy: state.usersSorting
+		questions,
+		selectedIds: state.selectedItems,
+		closeUrl: pathname.substring(0, pathname.length - createString.length),
+		questionsCreatePath: props.location.pathname + '/create',
+		showCreateModal: props.location.pathname.indexOf('/questions/create') !== -1,
 	}
 }
 
-const mapDispatchToProps = (dispatch, props) => ({
-	handleUserSelect: id => {
-		dispatch(selectUser(id))
-	},
-	handleUserSelectBatch: users => {
-		users.map(user => dispatch(selectUser(user.id)))
-	},
-	handleSort: sorter => dispatch(sortUsersBy(sorter))
-})
+const mapDispatchToProps = (dispatch, props) => {
+	dispatch(fetchTriviaEntities())
+	return {
+		handleSelect: id => {
+			dispatch(selectItemOnTable(id))
+		},
+		handleSelectBatch: questions => {
+			questions.map(q => dispatch(selectItemOnTable(q.id)))
+		},
+		handleDelete: id => {
+			dispatch(postDeleteQuestions([id]))
+		},
+		handleDeleteBatch: questions => {
+			const ids = questions.map(q => q.id)
+			dispatch(postDeleteQuestions(ids))
+		}
+	}
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Users)
+export default connect(mapStateToProps, mapDispatchToProps)(Questions)

@@ -14,10 +14,10 @@ describe('Actions', () => {
 		it("should create an action to add user to the selected group", () => {
 			const id = 5
 			const expectedAction = {
-				type: 'SELECT_USER',
+				type: 'SELECT_ITEM',
 				id
 			}
-			expect(actions.selectUser(id)).toEqual(expectedAction)
+			expect(actions.selectItemOnTable(id)).toEqual(expectedAction)
 		})
 	})
 })

@@ -9,11 +9,11 @@ describe('Reducers', () => {
 	describe('styles', () => {
 		it('Should provide the initial state', () => {
 			const initialState = {
-				platform: 'facebook',
+				platform: 'mobile',
 				hoveredSelector: [],
 				activeSelector: [],
 				ruleset: {},
-				results: {},
+				rules: []
 			}
 			expect(styles(undefined, {})).toEqual(initialState)
 		})
