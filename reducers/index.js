@@ -13,6 +13,9 @@ import deleteApp from 'reducers/deleteApp'
 import styles from 'reducers/styles'
 import mouseTrap from 'reducers/design-helper/mouseTrap'
 
+// Modules
+import trivia from 'modules/trivia/reducers/'
+
 // const rootReducer = combineReducers({
 // 	routing,
 // 	filterText,
@@ -42,6 +45,7 @@ const createReducer = asyncReducers => {
 		styles,
 		mouseTrap,
 		form: formReducer,
+		trivia,
 		asyncReducers
 	})
 }
