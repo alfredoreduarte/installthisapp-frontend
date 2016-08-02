@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>InstalThisApp</title>
+</head>
+<body>
+	<div id="root"></div>
+	<script src="/static/common.js"></script>
+	<script src="/static/dashboard.bundle.js"></script>
+	<script>
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId      : '<%=FACEBOOK_APP_ID%>',
+				xfbml      : true,
+				version    : 'v2.7'
+			});
+		};
+		(function(d, s, id){
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+</body>
+</html>

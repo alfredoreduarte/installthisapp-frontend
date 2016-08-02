@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Provider, connect } from 'react-redux'
 import { Router } from 'react-router'
-// import rootRoute from 'routes'
 import { createRoutes } from 'routes'
 import { fetchAdmin } from 'actions/admin'
 import { fetchEntities } from 'actions/entities'

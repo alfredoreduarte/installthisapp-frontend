@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ITA Landing</title>
+</head>
+<body>
+	<h1>ITA Landing</h1>
+	<button onclick="javascript:login()">Login</button>
+	<script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
+	<script>
+		var saveCookie = function(name, value){
+			Cookies.set(name, value);
+		}
+
+		var login = function(){
+			FB.login(function(response) {
+				console.log('response', response)
+				$.ajax({
+					type: "POST",
+					url: 'https://local.installthisapp.com/admin_users.json',
+					data: {
+						signed_request: response.authResponse.signedRequest
+					},
+					success: function(res){
+						saveCookie('api_key', res)
+						console.log(res)
+						top.location = 'https://localui.installthisapp.com:4000/'
+					},
+					dataType: 'text'
+				});
+				if (response.authResponse) {
+					console.log('Welcome!  Fetching your information.... ');
+					FB.api('/me', function(response) {
+						console.log('Good to see you, ' + response.name + '.');
+					});
+				} else {
+					console.log('User cancelled login or did not fully authorize.');
+				}
+			});
+		}
+
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId      : '<%=FACEBOOK_APP_ID%>',
+				xfbml      : true,
+				version    : 'v2.7'
+			});
+		};
+
+		(function(d, s, id){
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+</body>
+</html>

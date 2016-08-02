@@ -4,12 +4,29 @@ import { getCurrentApp } from 'selectors/apps'
 import AppNavBar from 'components/AppNavBar'
 import AppTitleBar from 'components/AppTitleBar'
 import Sidebar from 'components/Sidebar'
+import { install, uninstall } from 'actions/apps'
 import DashboardContentDecorator from 'containers/DashboardContentDecorator'
 
-const AppDashboardContainer = ({ children, currentApp, checksum, main, sidebar, type }) => (
+const AppDashboardContainer = ({ 
+	children, 
+	currentApp, 
+	checksum, 
+	main, 
+	sidebar, 
+	type, 
+	facebookPageIdentifier, 
+	handleInstall,
+	handleUninstall,
+}) => (
 	<div>
 		<AppNavBar />
-		<AppTitleBar title={currentApp.title} status={currentApp.status} scheduled={currentApp.scheduled} />
+		<AppTitleBar 
+			facebookPageIdentifier={facebookPageIdentifier}
+			title={currentApp.title} 
+			status={currentApp.status} 
+			scheduled={currentApp.scheduled}
+			handleInstall={handleInstall}
+			handleUninstall={handleUninstall} />
 		<Sidebar checksum={checksum} type={type}>
 			{sidebar}
 		</Sidebar>
@@ -22,10 +39,18 @@ const AppDashboardContainer = ({ children, currentApp, checksum, main, sidebar, 
 const mapStateToProps = (state, props) => {
 	const currentApp = getCurrentApp(state, props)
 	return { 
+		facebookPageIdentifier: currentApp ? currentApp.facebookPageIdentifier : '',
 		currentApp: currentApp ? currentApp : {},
 		checksum: props.params.checksum,
 		type: props.params.type,
 	}
 }
 
-export default connect(mapStateToProps)(AppDashboardContainer)
+const mapDispatchToProps = (dispatch, props) => {
+	return {
+		handleInstall: () => dispatch(install(props.params.checksum)),
+		handleUninstall: () => dispatch(uninstall(props.params.checksum)),
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppDashboardContainer)

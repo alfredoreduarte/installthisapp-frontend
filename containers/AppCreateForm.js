@@ -21,7 +21,6 @@ const mapDispatchToProps = (dispatch, props) => ({
 		dispatch(setNewAppTitle(text))
 	},
 	handleSubmit: () => {
-		// dispatch(push('/'))
 		dispatch(postNewApp())
 	}
 })

@@ -3,11 +3,11 @@ import TimeAgo from 'react-timeago'
 import StatusIndicator from 'components/StatusIndicator'
 import FbPhoto from 'components/FbPhoto'
 
-const User = ({ name, small, id }) => (
+const User = ({ name, small, identifier }) => (
 	<div className={`media ita-user ${small ? 'ita-user-small' : ''}`}>
 		<div className="media-left media-middle">
 			<a href="javascript:void(0)">
-				<FbPhoto className="media-object img-circle" id={id} />
+				<FbPhoto className="media-object img-circle" identifier={identifier} />
 			</a>
 		</div>
 		<div className="media-body media-middle">

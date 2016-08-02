@@ -10,7 +10,9 @@ const AppGrid = ({ apps }) => (
 			key={a.checksum} 
 			gridSize="3" 
 			title={a.title} 
-			type={a.type} 
+			applicationType={a.applicationType}
+			id={a.id}
+			facebookPageIdentifier={a.facebookPageIdentifier}
 			checksum={a.checksum} 
 			updatedOn={a.updatedOn} 
 			status={a.status} />)}
@@ -18,8 +20,9 @@ const AppGrid = ({ apps }) => (
 )
 
 const mapStateToProps = (state, props) => {
+	const apps = getAllAppsByText(state, props)
 	return { 
-		apps: getAllAppsByText(state, props)
+		apps
 	}
 }
 

@@ -9,7 +9,10 @@ const ModuleGrid = ({ modules, handleModuleSelection }) => (
 		{modules.map( module => {
 			return (
 				<div className="col-md-3" key={module}>
-					<div onClick={() => handleModuleSelection(module)}>{module}</div>
+					<button 
+						className="btn btn-default"
+						onClick={() => handleModuleSelection(module)} 
+						style={{height: '50px', background: '#f3f3f3'}}>{module}</button>
 				</div>
 			)
 		})}
@@ -25,7 +28,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => ({
 	handleModuleSelection: type => {
 		dispatch(setNewAppModule(type))
-		dispatch(push('/create/2'))
+		dispatch(push('/apps/create/2'))
 	}
 })
 

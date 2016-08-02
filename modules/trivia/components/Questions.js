@@ -15,6 +15,7 @@ import QuestionsCreate from 'modules/trivia/components/QuestionsCreate'
 
 const Questions = ({
 	questions,
+	checksum,
 	selectedIds,
 	handleSelect, 
 	handleSelectBatch,
@@ -25,7 +26,7 @@ const Questions = ({
 	closeUrl,
 }) => (
 	<div className="ita-table-view">
-		<QuestionsCreate show={showCreateModal} closeUrl={closeUrl} />
+		<QuestionsCreate show={showCreateModal} closeUrl={closeUrl} checksum={checksum} />
 		<div className="ita-table-toolbar">
 			<div className="row">
 				<div className="col-md-12">
@@ -123,11 +124,13 @@ const Questions = ({
 )
 
 const mapStateToProps = (state, props) => {
+	const checksum = props.params.checksum
 	const questions = getQuestionsForCurrentApp(state, props)
 	const createString = '/create'
 	const pathname = props.location.pathname
 	return { 
 		questions,
+		checksum,
 		selectedIds: state.selectedItems,
 		closeUrl: pathname.substring(0, pathname.length - createString.length),
 		questionsCreatePath: props.location.pathname + '/create',
@@ -136,7 +139,7 @@ const mapStateToProps = (state, props) => {
 }
 
 const mapDispatchToProps = (dispatch, props) => {
-	dispatch(fetchTriviaEntities())
+	dispatch(fetchTriviaEntities(props.params.checksum))
 	return {
 		handleSelect: id => {
 			dispatch(selectItemOnTable(id))
@@ -145,11 +148,11 @@ const mapDispatchToProps = (dispatch, props) => {
 			questions.map(q => dispatch(selectItemOnTable(q.id)))
 		},
 		handleDelete: id => {
-			dispatch(postDeleteQuestions([id]))
+			dispatch(postDeleteQuestions(props.params.checksum, [id]))
 		},
 		handleDeleteBatch: questions => {
 			const ids = questions.map(q => q.id)
-			dispatch(postDeleteQuestions(ids))
+			dispatch(postDeleteQuestions(props.params.checksum, ids))
 		}
 	}
 }

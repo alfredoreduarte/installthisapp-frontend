@@ -17,17 +17,17 @@ const AppNavBar = ({ name }) => (
 			<ul className="nav navbar-nav navbar-right">
 				<li className="">
 					<button className="btn btn-success btn-sm btn-outline navbar-btn">
-						<Link to='/create' className="link-no-underline text-success">
+						<Link to='/apps/create' className="link-no-underline text-success">
 							New App
 						</Link>
 					</button>
 				</li>
-				<li className="hide">
+				<li className="">
 					<button onClick={ () => topFansTest(0) } className="btn btn-success btn-sm btn-outline navbar-btn">
 						Post top fans
 					</button>
 				</li>
-				<NavDropdown eventKey={3} title={name}>
+				<NavDropdown eventKey={3} title={name} id="account-dropdown">
 					<LinkContainer to={{ pathname: '/account' }}>
 						<MenuItem eventKey={3.3}>My Account</MenuItem>
 					</LinkContainer>

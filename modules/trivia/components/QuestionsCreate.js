@@ -142,7 +142,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
 	return {
 		handleSubmit: obj => {
-			dispatch(postNewQuestion(obj))
+			dispatch(postNewQuestion(props.checksum, obj))
 			browserHistory.push(props.closeUrl)
 		}
 	}

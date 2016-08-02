@@ -3,23 +3,29 @@ import { normalize, arrayOf } from 'normalizr'
 import * as schema from 'modules/trivia/schema'
 import * as CONFIG from 'config.dev'
 import { receiveTriviaEntities } from 'modules/trivia/actions/entities'
+import Cookies from 'js-cookie'
 
 export const deleteQuestion = id => ({
 	type: 'TRIVIA/DELETE_QUESTION',
 	id
 })
 
-export const postDeleteQuestions = ids => {
+export const postDeleteQuestions = (checksum, ids) => {
 	return dispatch => {
-		const url = CONFIG.BASE_URL + `/trivia/questions/delete`
-		// const url = `/apps/delete/${checksum}`
+		const url = CONFIG.BASE_URL + `/applications/${checksum}/questions_destroy.json`
+		const api_key = Cookies.get('api_key')
 		return 	fetch(url, {
 					method: 'POST',
-					body: ids
+					headers: {
+						'Authorization': `Token token="${api_key}"`,
+						'Content-Type': `application/json`,
+					},
+					body: JSON.stringify({
+						id: ids
+					})
 				})
 				.then(response => response.json())
 				.then(json =>{
-					console.log('se borro', json)
 					ids.map(id => dispatch(deleteQuestion(id)))
 				})
 				.catch(exception =>
@@ -28,33 +34,33 @@ export const postDeleteQuestions = ids => {
 	}
 }
 
-export const postNewQuestion = (newQuestion) => {
-	const url = CONFIG.BASE_URL + `/trivia/questions/create`
-	console.log('data', newQuestion)
-	const newQuestionData = newQuestion || {
-		text: 'new question',
-		options: [
-			{
-				text: 'option 1',
-				correct: false,
-			},
-			{
-				text: 'option 2',
-				correct: true,
-			}
-		]
+export const postNewQuestion = (checksum, newQuestion) => {
+	const url = CONFIG.BASE_URL + `/applications/${checksum}/questions_create.json`
+	const api_key = Cookies.get('api_key')
+	const options_attributes = newQuestion.options.map(option => {
+		return {
+			text: option.text,
+			correct: option.correct,
+		}
+	})
+	const newQuestionData = {
+		question: {
+			text: newQuestion.text,
+			options_attributes,
+		}
 	}
-	// const url = '/apps/create'
 	return (dispatch, getState) => {
-		// const newAppData = getState().newApp
 		return fetch(url, {
 					method: 'POST',
-					body: newQuestionData
+					headers: {
+						'Authorization': `Token token="${api_key}"`,
+						'Content-Type': `application/json`,
+					},
+					body: JSON.stringify(newQuestionData)
 				})
 				.then(response => response.json())
 				.then(json =>{
 					const normalized = normalize(json, schema.question)
-					console.log(normalized)
 					dispatch(receiveTriviaEntities(normalized.entities))
 				})
 				.catch(exception =>

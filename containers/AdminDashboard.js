@@ -7,7 +7,7 @@ import AppCreateModal from 'containers/AppCreateModal'
 import AppDeleteModal from 'components/AppDeleteModal'
 import { getAppToBeDeleted } from 'selectors/apps'
 import { setAppToDelete } from 'actions/deleteApp'
-import { deleteApp } from 'actions/apps'
+import { deleteApp, postDeleteApp } from 'actions/apps'
 
 const AdminDashboard = ({ 
 	showCreateModal,
@@ -43,6 +43,7 @@ const mapDispatchToProps = (dispatch, props) => {
 		cancelAppDeletion: () => dispatch(setAppToDelete(null)),
 		proceedWithAppDeletion: checksum => {
 			dispatch(deleteApp(checksum))
+			dispatch(postDeleteApp(checksum))
 			dispatch(setAppToDelete(null))
 		}
 	}

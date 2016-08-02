@@ -3,12 +3,15 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import StatusIndicator from 'components/StatusIndicator'
 import { setAppToDelete } from 'actions/deleteApp'
+import FbPhoto from 'components/FbPhoto'
 
 const App = ({ 
 	gridSize,
 	status,
 	title,
-	type,
+	applicationType,
+	facebookPageIdentifier,
+	id,
 	checksum,
 	updatedOn,
 	handleDeleteRequest 
@@ -20,7 +23,7 @@ const App = ({
 					<br />
 					<br />
 					<br />
-					<Link to={`/apps/${type}/${checksum}`} className="btn btn-white btn-outline">
+					<Link to={`/apps/${applicationType}/${checksum}`} className="btn btn-white btn-outline">
 						Go To Dashboard
 					</Link>
 					<br/>
@@ -29,7 +32,7 @@ const App = ({
 						Delete
 					</button>
 				</div>
-				<img src="/images/user.jpg" />
+				<FbPhoto identifier={facebookPageIdentifier} />
 			</div>
 			<div className="panel-footer text-center">
 				<StatusIndicator active={true} />{' '}
@@ -44,7 +47,7 @@ const App = ({
 					{title}
 				</Link>
 				<br />
-				<small>{type}</small>
+				<small>{applicationType}</small>
 			</div>
 		</div>
 	</div>
@@ -52,7 +55,10 @@ const App = ({
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 	return { 
-		handleDeleteRequest: checksum => dispatch(setAppToDelete(checksum))
+		handleDeleteRequest: checksum => {
+			console.log('app to delete!', checksum)
+			dispatch(setAppToDelete(checksum))
+		}
 	}
 }
 
