@@ -41,7 +41,7 @@ const mapDispatchToProps = (dispatch, props) => {
 				.then(response => response.text())
 				.then(text =>{
 					window.canvasApiKey = text
-					dispatch(push(`/${window.checksum}/logged`))
+					dispatch(push(`/${window.canvasId}/${window.checksum}/logged`))
 					dispatch(fetchEntities(window.checksum))
 				})
 				.catch(exception =>

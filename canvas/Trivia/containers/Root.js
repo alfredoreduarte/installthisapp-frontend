@@ -15,8 +15,8 @@ class Root extends Component {
 		return (
 			<Provider store={store}>
 				<Router history={history}>
-					<Route path="/(:checksum)/logged" component={Index}/>
-					<Route path="/(:checksum)" component={Login}/>
+					<Route path={`/${window.canvasId}/(:checksum)/logged`} component={Index}/>
+					<Route path={`/${window.canvasId}/(:checksum)`} component={Login}/>
 				</Router>
 			</Provider>
 		)

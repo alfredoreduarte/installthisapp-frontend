@@ -13,8 +13,8 @@ switch (process.env.NODE_ENV){
 		var facebookAppId = '1075605565855278'
 		var apiUrl = 'https://stage.installthisapp.com'
 	default:
-		var facebookAppId = '1075605565855278'
-		var apiUrl = 'https://stage.installthisapp.com'
+		var facebookAppId = '1061199640593119'
+		var apiUrl = 'https://local.installthisapp.com'
 }
 // Config
 
@@ -63,15 +63,16 @@ app.use('/node_modules',  express.static(__dirname + '/node_modules'))
 var triviaRouter = express.Router()
 var triviaSubdomain = 'app1-localui'
 var triviaCanvasId = 'app1'
-app.use(subdomain(triviaSubdomain, triviaRouter))
+// app.use(subdomain(triviaSubdomain, triviaRouter))
+app.use(triviaRouter)
 var bodyParser = require('body-parser');
 var canvasParser = bodyParser.urlencoded({ extended: true })
 var fetch = require('isomorphic-fetch');
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'
-triviaRouter.get('/favicon.ico', function(req, res) {
-	res.send(200)
+triviaRouter.get('/app1/favicon.ico', function(req, res) {
+	res.sendStatus(200)
 })
-triviaRouter.post('/', canvasParser, function(req, res) {
+triviaRouter.post(`/${triviaCanvasId}`, canvasParser, function(req, res) {
 	fetch(`${apiUrl}/test_auth.json`, {
 		method: 'POST',
 		headers: {
@@ -86,6 +87,7 @@ triviaRouter.post('/', canvasParser, function(req, res) {
 	.then(json =>{
 		res.render('canvas', {
 			module: 'trivia',
+			canvasId: triviaCanvasId,
 			checksum: json.checksum,
 			facebookAppId: json.fb_application_id,
 		})
@@ -97,7 +99,7 @@ triviaRouter.post('/', canvasParser, function(req, res) {
 		}
 	)
 })
-triviaRouter.get('/(:checksum)', canvasParser, function(req, res) {
+triviaRouter.get(`/${triviaCanvasId}/(:checksum)`, canvasParser, function(req, res) {
 	fetch(`${apiUrl}/standalone_auth.json`, {
 		method: 'POST',
 		headers: {
@@ -113,6 +115,7 @@ triviaRouter.get('/(:checksum)', canvasParser, function(req, res) {
 	.then(json =>{
 		res.render('canvas', {
 			module: 'trivia',
+			canvasId: triviaCanvasId,
 			checksum: json.checksum,
 			facebookAppId: json.fb_application_id,
 		})
