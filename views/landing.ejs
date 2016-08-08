@@ -46,7 +46,7 @@
 					success: function(res){
 						saveCookie('api_key', res)
 						console.log('success!')
-						top.location = 'https://localui.installthisapp.com:4000/d'
+						top.location = 'https://' + window.location.host + '/d'
 					},
 					dataType: 'text'
 				});
