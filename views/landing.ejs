@@ -4,16 +4,19 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="/static/landing/styles.sass" />
+	<link rel="stylesheet" media="all" href="//fonts.googleapis.com/css?family=Lato:400,300italic,300,400italic,700,700italic,100,100italic" data-turbolinks-track="true" />
+	<link rel="stylesheet" type="text/css" href="/landing/styles/styles.css" />
 	<title>InstallThisApp V3</title>
 </head>
 <body>
-	<!--  -->
+	<span id="our-clients" class="hide"></span>
 	<header class="jumbotron site-jumbotron white-text-area homepage-jumbotron home-header-2" id="large-header">
 		<div class="container">
 			<div class="homepage-jumbotron-content">
 				<h1 class="text-center site-title">Do you like trying new things?</h1>
-				<h2 class="text-center site-subtitle h3">Of course you do. That's why you're invited to the early preview of the new InstallThisApp.</h2>
+				<h2 class="text-center site-subtitle h3">
+					Of course you do. That's why you're invited to the early preview of the new InstallThisApp.
+				</h2>
 				<div class="text-center">
 					<span href="#" class="btn btn-lg btn-primary site-cta cta-glow">Start now</span>
 					<button onclick="javascript:login()" class="btn btn-lg btn-primary site-cta absolute-horizontal-center" data-loading-text="Please wait...">Start now</button>
@@ -22,13 +25,13 @@
 		</div>
 		<canvas id="demo-canvas" class="hidden-xs hidden-sm"></canvas>
 	</header>
-	<!--  -->
 
 
 
 
 
-	<script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="/landing/landing.js"></script>
+	<!-- <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script> -->
 	<script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 	<script>
 		var saveCookie = function(name, value){

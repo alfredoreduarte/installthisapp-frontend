@@ -5,10 +5,10 @@ module.exports = {
 	devtool: 'source-map',
 	entry: {
 		dashboard: './index',
-		// preview: './preview'
+		trivia: './canvas/Trivia/index'
 	},
 	output: {
-		path: path.join(__dirname, 'dist'),
+		path: path.join(__dirname, '/dist'),
 		filename: '[name].bundle.js',
 		chunkFilename: '[id].chunk.js',
 		publicPath: '/static/'
