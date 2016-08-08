@@ -9,9 +9,11 @@ switch (process.env.NODE_ENV){
 	case 'development':
 		var facebookAppId = '1061199640593119'
 		var apiUrl = 'https://local.installthisapp.com'
+		break
 	case 'production':
 		var facebookAppId = '1075605565855278'
 		var apiUrl = 'https://stage.installthisapp.com'
+		break
 	default:
 		var facebookAppId = '1061199640593119'
 		var apiUrl = 'https://local.installthisapp.com'
