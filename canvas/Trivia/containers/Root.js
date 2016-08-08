@@ -17,6 +17,7 @@ class Root extends Component {
 				<Router history={history}>
 					<Route path={`/${window.canvasId}/(:checksum)/logged`} component={Index}/>
 					<Route path={`/${window.canvasId}/(:checksum)`} component={Login}/>
+					<Route path={`/${window.canvasId}`} component={Login}/>
 				</Router>
 			</Provider>
 		)

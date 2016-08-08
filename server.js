@@ -153,11 +153,22 @@ if (process.env.NODE_ENV == 'development') {
 }
 
 // Running the server
-app.listen(process.env.PORT, function(err){
-// var server = https.createServer(options, app).listen(process.env.PORT, function(err){
-	if (err) {
-		console.log(err)
-		return;
-	}
-	console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
-})
+// Config
+if (process.env.NODE_ENV == 'development') {
+	var server = https.createServer(options, app).listen(process.env.PORT, function(err){
+		if (err) {
+			console.log(err)
+			return;
+		}
+		console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+	})
+}
+else{
+	app.listen(process.env.PORT, function(err){
+		if (err) {
+			console.log(err)
+			return;
+		}
+		console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+	})	
+}
