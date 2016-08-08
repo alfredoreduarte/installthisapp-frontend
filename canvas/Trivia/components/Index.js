@@ -3,32 +3,40 @@ import { connect } from 'react-redux'
 import CountDown from './CountDown'
 import Question from './Question'
 import OptionList from './OptionList'
-import { advanceCountDown, toggleCountDown, postAnswers, setChecksum } from 'canvas/Trivia/actions'
-import { getUnansweredQuestion, getQuestionWithOptions } from 'canvas/Trivia/selectors/questions'
+import { advanceCountDown, toggleCountDown, saveAnswer, postAnswers, answerQuestion } from 'canvas/Trivia/actions'
+import { getQuestionWithOptions } from 'canvas/Trivia/selectors/questions'
 
 class Index extends Component {
 	componentDidMount() {
+		const { countDownRunning, time, toggleCountDown, question, postAnswers } = this.props
 		let interval = setInterval(() => {
-			if (this.props.time > 0 && this.props.countDownRunning) {
-				this.props.startCounter()
+			if (!countDownRunning) return false
+			if (time > 0) {
+				// this.props.startCounter()
 			}
 			else{
-				this.props.toggleCountDown()
-				this.props.postAnswers()
+				toggleCountDown()
+				// this.props.postAnswers()
 				clearInterval(interval)
 			}
-		}, 1000)
+		}, 1000)	
 	}
 	render(){
-		const { time, question, loading } = this.props
+		const { time, question, loading, saveAnswer, postAnswers } = this.props
+		console.log('viene question', question)
+		if (!question && !loading) {
+			postAnswers()
+		}
 		return (
 			<div className="col-sm-12">
-				{loading 
+				{loading || !question
 				? <h1>Loading</h1>
 				: <div>
 				<CountDown time={time} />
 				<Question text={question.text} />
-				<OptionList options={question.options} />
+				<OptionList 
+					options={question.options} 
+					handleClick={(optionId, correct) => saveAnswer(question.id, optionId, correct)}  />
 				</div>}
 			</div>
 		)
@@ -36,7 +44,6 @@ class Index extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-	const conOptions = getQuestionWithOptions(state)
 	return {
 		time: state.settings.timeOut,
 		countDownRunning: state.settings.countDownRunning,
@@ -46,11 +53,13 @@ const mapStateToProps = (state, props) => {
 }
 
 const mapDispatchToProps = (dispatch, props) => {
-	console.log('elcheckcito', props.location.query.checksum)
-	dispatch(setChecksum(props.location.query.checksum))
 	return {
 		startCounter: () => dispatch(advanceCountDown()),
 		toggleCountDown: () => dispatch(toggleCountDown()),
+		saveAnswer: (questionId, optionId, correct) => {
+			dispatch(saveAnswer(questionId, optionId, correct))
+			dispatch(answerQuestion(questionId))
+		},
 		postAnswers: () => dispatch(postAnswers()),
 	}
 }

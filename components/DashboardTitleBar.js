@@ -11,7 +11,7 @@ import TitleBar from 'components/TitleBar'
 const DashboardTitleBar = ({ sortBy, handleSort }) => (
 	<div>
 		<TitleBar title="Your Apps and Pages">
-			<Link to='/apps/create' className="btn btn-success btn-lg">
+			<Link to='/d/apps/create' className="btn btn-success btn-lg">
 				New App
 			</Link>
 		</TitleBar>

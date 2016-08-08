@@ -32,7 +32,7 @@ const AdminDashboard = ({
 
 const mapStateToProps = (state, props) => {
 	return {
-		showCreateModal: props.location.pathname.indexOf('/apps/create') !== -1,
+		showCreateModal: props.location.pathname.indexOf('/d/apps/create') !== -1,
 		showDeleteModal: state.deleteApp.checksum ? true: false,
 		appToBeDeleted: state.deleteApp.checksum ? getAppToBeDeleted(state, props) : {},
 		step: props.params.step ? props.params.step : 1

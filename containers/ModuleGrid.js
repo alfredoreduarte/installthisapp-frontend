@@ -28,7 +28,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => ({
 	handleModuleSelection: type => {
 		dispatch(setNewAppModule(type))
-		dispatch(push('/apps/create/2'))
+		dispatch(push('/d/apps/create/2'))
 	}
 })
 

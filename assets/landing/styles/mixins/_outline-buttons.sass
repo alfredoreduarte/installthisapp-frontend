@@ -1,0 +1,11 @@
+=button-outline-variant($color, $border:"")
+	@if $border == ""
+		$border: $color
+	color: $color
+	border-color: $border
+	box-shadow: none
+	&:hover, &:active, &:focus, &[disabled]
+		color: $color
+		border-color: $border
+		box-shadow: none
+		background: transparent

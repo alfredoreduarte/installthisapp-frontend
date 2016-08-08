@@ -4,11 +4,36 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>ITA Landing</title>
+	<link rel="stylesheet" type="text/css" href="/static/landing/styles.sass" />
+	<title>InstallThisApp V3</title>
 </head>
 <body>
-	<h1>ITA Landing</h1>
-	<button onclick="javascript:login()">Login</button>
+	<!-- <h1>InstallThisApp V3</h1> -->
+	<!-- <button onclick="javascript:login()">Login</button> -->
+
+
+
+
+	<!--  -->
+	<header class="jumbotron site-jumbotron white-text-area homepage-jumbotron home-header-2" id="large-header">
+		<div class="container">
+			<div class="homepage-jumbotron-content">
+				<h1 class="text-center site-title">Do you like trying new things?</h1>
+				<h2 class="text-center site-subtitle h3">Of course you do. That's why you're invited to the early preview of the new InstallThisApp.</h2>
+				<div class="text-center">
+					<span href="#" class="btn btn-lg btn-primary site-cta cta-glow">Start now</span>
+					<button onclick="javascript:login()" class="btn btn-lg btn-primary site-cta absolute-horizontal-center" data-loading-text="Please wait...">Start now</button>
+				</div>
+			</div>
+		</div>
+		<canvas id="demo-canvas" class="hidden-xs hidden-sm"></canvas>
+	</header>
+	<!--  -->
+
+
+
+
+
 	<script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 	<script>
@@ -18,17 +43,16 @@
 
 		var login = function(){
 			FB.login(function(response) {
-				console.log('response', response)
 				$.ajax({
 					type: "POST",
-					url: 'https://local.installthisapp.com/admin_users.json',
+					url: '<%=apiUrl%>/admin_users.json',
 					data: {
 						signed_request: response.authResponse.signedRequest
 					},
 					success: function(res){
 						saveCookie('api_key', res)
-						console.log(res)
-						top.location = 'https://localui.installthisapp.com:4000/'
+						console.log('success!')
+						top.location = 'https://localui.installthisapp.com:4000/d'
 					},
 					dataType: 'text'
 				});
@@ -45,7 +69,7 @@
 
 		window.fbAsyncInit = function() {
 			FB.init({
-				appId      : '<%=FACEBOOK_APP_ID%>',
+				appId      : '<%=facebookAppId%>',
 				xfbml      : true,
 				version    : 'v2.7'
 			});

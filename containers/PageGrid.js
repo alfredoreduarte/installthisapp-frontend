@@ -38,7 +38,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => ({
 	handlePageSelection: id => {
 		dispatch(setNewAppPage(id))
-		dispatch(push('/apps/create/3'))
+		dispatch(push('/d/apps/create/3'))
 	},
 	handlePermissionRequest: () => {
 		fbLogin(response => {

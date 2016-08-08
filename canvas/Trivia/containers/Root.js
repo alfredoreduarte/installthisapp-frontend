@@ -1,20 +1,22 @@
 import React, { Component, PropTypes } from 'react'
 import { Provider, connect } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
+import { setChecksum } from 'canvas/Trivia/actions/'
 import Index from 'canvas/Trivia/components/Index'
-import { fetchEntities } from 'canvas/Trivia/actions/'
+import Login from 'canvas/Trivia/components/Login'
 
 class Root extends Component {
 	componentDidMount() {
-		console.log('props', this.props)
-		this.props.dispatch(fetchEntities())
+		const { dispatch } = this.props
+		dispatch(setChecksum(window.checksum))
 	}
 	render() {
 		const { store, history } = this.props
 		return (
 			<Provider store={store}>
 				<Router history={history}>
-					<Route path="/" component={Index}/>
+					<Route path="/(:checksum)/logged" component={Index}/>
+					<Route path="/(:checksum)" component={Login}/>
 				</Router>
 			</Provider>
 		)

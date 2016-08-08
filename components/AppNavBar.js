@@ -17,7 +17,7 @@ const AppNavBar = ({ name }) => (
 			<ul className="nav navbar-nav navbar-right">
 				<li className="">
 					<button className="btn btn-success btn-sm btn-outline navbar-btn">
-						<Link to='/apps/create' className="link-no-underline text-success">
+						<Link to='/d/apps/create' className="link-no-underline text-success">
 							New App
 						</Link>
 					</button>

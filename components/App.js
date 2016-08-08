@@ -23,7 +23,7 @@ const App = ({
 					<br />
 					<br />
 					<br />
-					<Link to={`/apps/${applicationType}/${checksum}`} className="btn btn-white btn-outline">
+					<Link to={`/d/apps/${applicationType}/${checksum}`} className="btn btn-white btn-outline">
 						Go To Dashboard
 					</Link>
 					<br/>

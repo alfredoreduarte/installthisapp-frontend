@@ -1,5 +1,5 @@
 export default (store) => ({
-	path: '/apps/:type/:checksum',
+	path: '/d/apps/:type/:checksum',
 	getComponents(nextState, cb) {
 		require.ensure([], require => {
 			cb(null, require('containers/AppDashboardContainer').default)

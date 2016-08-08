@@ -1,10 +1,10 @@
 import React from 'react'
 import Option from './Option'
 
-const OptionList = ({ options }) => (
+const OptionList = ({ options, handleClick }) => (
 	<div className="list-group">
 		{options.map(o => {
-			return <Option key={o.id} id={o.id} text={o.text} handleClick={id => console.log('clicked option', id)} />
+			return <Option key={o.id} id={o.id} text={o.text} correct={o.correct} handleClick={() => handleClick(o.id, o.correct)} />
 		})}
 	</div>
 )

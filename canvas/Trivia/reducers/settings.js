@@ -4,7 +4,7 @@ const settings = (state = {
 	checksum: null,
 	timeOut: 9999, 
 	order: 'ASC', 
-	countDownRunning: true,
+	countDownRunning: false,
 	isFetching: true,
 }, action) => {
 	switch (action.type) {

@@ -1,0 +1,55 @@
++text-emphasis-variant('.text-gray-light', $gray-light)
++text-emphasis-variant('.text-relevant-title', $gray-dark)
+
+.weight-normal
+	font-weight: $font-weight-normal
+.weight-thin
+	font-weight: $font-weight-thin
+.weight-light
+	font-weight: $font-weight-light
+
+.font-size-large
+	font-size: $font-size-large
+
+.ita-section-title
+	color: $gray-light
+	font-weight: $font-weight-light
+	margin-bottom: 25px
+.ita-page-title
+	margin-top: 0px
+	font-size: $font-size-h3+2
+.text-red
+	color: red
+
+//overwriting text color helpers
+.text-primary
+	color: $brand-primary
+.text-success
+	color: $brand-success
+
+// dashed underline for links
+.ita-dashed-link
+	text-decoration: none
+	border-bottom: 1px dashed $link-color
+	&:hover, &:focus, &:active
+		text-decoration: none
+// gray links
+.link-no-color
+	color: $gray-light
+	.link-no-color:hover, .link-no-color:focus, .link-no-color:active
+		color: $link-color
+// unstyled links
+.link-no-underline, .link-no-underline:hover, .link-no-underline:focus, .link-no-underline:active
+	text-decoration: none
+
+//small font-weight correction
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 
+	small, .small
+		font-weight: $headings-font-family
+
+// lists
+.list-no-margin
+	margin-bottom: 0px
+	li:last-child
+		padding-right: 0px

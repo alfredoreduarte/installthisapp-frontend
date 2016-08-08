@@ -17,20 +17,20 @@ export const fetchEntities = () => {
 	const api_key = Cookies.get('api_key')
 	return dispatch => {
 		return fetch(url, {
-					method: 'GET',
-					headers: {
-						'Authorization': `Token token="${api_key}"`,
-					}
-				})
-				.then(response => response.json())
-				.then(json =>{
-					const camelizedJson = humps.camelizeKeys(json)
-					console.log(camelizedJson)
-					const normalized = normalize(camelizedJson, schema.entities)
-					dispatch(receiveEntities(normalized.entities))
-				})
-				.catch(exception =>
-					console.log('parsing failed', exception)
-				)
+				method: 'GET',
+				headers: {
+					'Authorization': `Token token="${api_key}"`,
+				}
+			})
+			.then(response => response.json())
+			.then(json =>{
+				const camelizedJson = humps.camelizeKeys(json)
+				console.log(camelizedJson)
+				const normalized = normalize(camelizedJson, schema.entities)
+				dispatch(receiveEntities(normalized.entities))
+			})
+			.catch(exception =>
+				console.log('parsing failed', exception)
+			)
 	}
 }

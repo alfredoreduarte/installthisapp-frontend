@@ -61,6 +61,7 @@
     "react-addons-update": "^15.2.1",
     "react-bootstrap": "^0.30.0-rc.2",
     "react-dom": "^15.1.0",
+    "react-facebook-login": "^3.1.0",
     "react-frame-component": "^0.6.1",
     "react-icheck": "^0.3.3",
     "react-redux": "^4.4.5",

@@ -21,7 +21,7 @@ const AppCreateModal = ({ show, step }) => (
 			<LinkContainer to={{ pathname: '/' }}>
 				<Button>Close</Button>
 			</LinkContainer>
-			<LinkContainer to={{ pathname: '/apps/create/' + (parseInt(step) + 1) }}>
+			<LinkContainer to={{ pathname: '/d/apps/create/' + (parseInt(step) + 1) }}>
 				<Button bsStyle="success">Next</Button>
 			</LinkContainer>
 		</Modal.Footer>
