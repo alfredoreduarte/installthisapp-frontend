@@ -96,11 +96,10 @@ export const postNewApp = () => {
 				})
 				.then(response => response.json())
 				.then(json =>{
-					console.log(json)
 					const camelizedJson = humps.camelizeKeys(json)
 					const normalized = normalize(camelizedJson, schema.app)
 					dispatch(receiveEntities(normalized.entities))
-					dispatch(push(`/apps/${camelizedJson.applicationType}/${camelizedJson.checksum}`))
+					dispatch(push(`/d/apps/${camelizedJson.applicationType}/${camelizedJson.checksum}`))
 				})
 				.catch(exception =>
 					console.log('postNewApp: parsing failed', exception)

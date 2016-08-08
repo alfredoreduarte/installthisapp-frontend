@@ -133,19 +133,21 @@ app.get('/', function(req, res) {
 	})
 });
 app.get('/d*', function(req, res){
-	// res.sendFile(path.join(__dirname, 'index.html'))
 	res.render('dashboard', {
 		facebookAppId: facebookAppId
 	})
 })
 
-var fs = require('fs'),
-    http = require('http'),
-    https = require('https');
-var options = {
-    key: fs.readFileSync('./ssl/server.key'),
-    cert: fs.readFileSync('./ssl/STAR_installthisapp_com.crt'),
-};
+var options = {}
+if (process.env.NODE_ENV == 'development') {
+	var fs = require('fs'),
+		http = require('http'),
+		https = require('https');
+	var options = {
+		key: fs.readFileSync('./ssl/server.key'),
+		cert: fs.readFileSync('./ssl/STAR_installthisapp_com.crt'),
+	}
+}
 
 // Running the server
 // app.listen(process.env.PORT, function(err){

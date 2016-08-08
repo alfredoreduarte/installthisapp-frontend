@@ -5,14 +5,14 @@ const getUrl = () => {
 	switch (process.env.NODE_ENV){
 		case 'test':
 			return 'http://installthisapp.local:4000'
-		case 'production':
-			// return 'https://' + process.env.HOST + ':' + process.env.PORT
-			// return ''
-			return 'https://stage.installthisapp.com'
 		case 'development':
 			// return 'http://' + process.env.HOST + ':' + process.env.PORT
 			return 'https://local.installthisapp.com'
 			// return 'https://stage.installthisapp.com'
+		case 'production':
+			// return 'https://' + process.env.HOST + ':' + process.env.PORT
+			// return ''
+			return 'https://stage.installthisapp.com'
 		default:
 			return 'http://' + process.env.HOST + ':' + process.env.PORT
 	}
