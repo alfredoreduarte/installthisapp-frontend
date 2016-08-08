@@ -153,8 +153,8 @@ if (process.env.NODE_ENV == 'development') {
 }
 
 // Running the server
-// app.listen(process.env.PORT, function(err){
-var server = https.createServer(options, app).listen(process.env.PORT, function(err){
+app.listen(process.env.PORT, function(err){
+// var server = https.createServer(options, app).listen(process.env.PORT, function(err){
 	if (err) {
 		console.log(err)
 		return;
