@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 import App from 'components/App'
-import { getAllAppsByText } from 'selectors/apps'
 
 const AppGrid = ({ apps }) => (
 	<div>
@@ -19,11 +17,4 @@ const AppGrid = ({ apps }) => (
 	</div>
 )
 
-const mapStateToProps = (state, props) => {
-	const apps = getAllAppsByText(state, props)
-	return { 
-		apps
-	}
-}
-
-export default connect(mapStateToProps)(AppGrid)
+export default AppGrid

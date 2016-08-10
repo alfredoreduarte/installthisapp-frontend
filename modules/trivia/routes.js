@@ -20,6 +20,21 @@ export default (store) => ({
 					}
 				},
 				{
+					path: 'questions/edit/:questionId',
+					modal: true,
+					getComponents(nextState, cb) {
+						require.ensure([], (require) => {
+							// Uncomment these lines to load reducers asyncronously
+							// let questionsReducer = require('modules/trivia/reducers').default
+							// injectAsyncReducer(store, 'trivia', questionsReducer)
+							cb(null, {
+								main: require('modules/trivia/components/Questions').default,
+								sidebar: require('modules/trivia/sidebar').default,
+							})
+						})
+					}
+				},
+				{
 					path: 'answers',
 					getComponents(nextState, cb) {
 						require.ensure([], (require) => {

@@ -6,7 +6,63 @@ import { LinkContainer } from 'react-router-bootstrap'
 import SearchForm from 'components/SearchForm'
 import FbPhoto from 'components/FbPhoto'
 
-const AppTitleBar = ({ installed, scheduled = false, title, facebookPageIdentifier, handleInstall, handleUninstall }) => (
+const AppTitleBarButtons = ({ 
+	status,
+	scheduled = false,
+	handleInstall,
+	handleUninstall,
+}) => (
+	<div>
+		{status == 'installed' ?
+			<div>
+				<button className="btn btn-lg btn-primary btn-outline">Share</button>
+				<button onClick={() => handleUninstall()} className="btn btn-lg btn-gray btn-outline">Uninstall</button>
+			</div>
+		:	
+			""
+		}
+
+		{status == 'uninstalled' || status == 'ready' ?
+			<button onClick={() => handleInstall()} className="btn btn-lg btn-success">Install</button>
+		:	
+			""
+		}
+
+		{status == 'installing' ?
+			<button className="btn btn-lg btn-success" disabled>Installing...</button>
+		:
+			""
+		}
+
+		{status == 'uninstalling' ?
+			<div>
+				<button className="btn btn-lg btn-primary btn-outline" disabled>Share</button>
+				<button className="btn btn-lg btn-gray btn-outline" disabled>Uninstalling</button>
+			</div>
+		:
+			""
+		}
+		
+		{scheduled ? 
+			<ul className="list-inline"><li><small><a href=""><u>Scheduled for <b>Wed 14, Sept.</b></u></a></small></li></ul>
+		:
+			<ul className="list-inline">
+				<li><p><small><a href=""><u>Schedule</u></a></small></p></li>
+				<li><p><small><a href=""><u>Preview</u></a></small></p></li>
+			</ul>
+		}
+	</div>
+)
+
+const AppTitleBar = ({ 
+	installed, 
+	scheduled = false, 
+	title, 
+	facebookPageIdentifier, 
+	status, 
+	handleInstall, 
+	handleUninstall
+}) => (
 	<div>
 		<div className="col-md-12 ita-main-app-toolbar">
 			<div className="row">
@@ -25,24 +81,11 @@ const AppTitleBar = ({ installed, scheduled = false, title, facebookPageIdentifi
 					</div>
 				</div>
 				<div className="col-md-6 text-right">
-					{!installed ? <button onClick={() => handleInstall()} className="btn btn-lg btn-success">Install</button> : null}
-					{installed ? <Link to='/create' className="btn btn-lg btn-primary btn-outline">Share</Link> : null}
-					{installed ? <button onClick={() => handleUninstall()} className="btn btn-lg btn-gray btn-outline">Uninstall</button> : null}
-					<ul className="list-inline">
-						{scheduled ? <li><small><a href=""><u>Scheduled for <b>Wed 14, Sept.</b></u></a></small></li> : null}
-						{!scheduled ? <li><p><small><a href=""><u>Schedule</u></a></small></p></li> : null}
-						{!installed ? <li><p><small><a href=""><u>Preview</u></a></small></p></li> : null}
-					</ul>
+					<AppTitleBarButtons status={status} handleInstall={handleInstall} handleUninstall={handleUninstall} />
 				</div>
 			</div>
 		</div>
 	</div>
 )
 
-const mapStateToProps = (state, ownProps) => {
-	return { 
-		installed: ownProps.status == 'installed' ? true : false
-	}
-}
-
-export default connect(mapStateToProps)(AppTitleBar)
+export default AppTitleBar

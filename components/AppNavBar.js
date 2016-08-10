@@ -1,4 +1,3 @@
-require('isomorphic-fetch')
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Navbar, NavDropdown, MenuItem } from 'react-bootstrap'
@@ -10,7 +9,7 @@ const AppNavBar = ({ name }) => (
 	<Navbar fluid={true}>
 		<Navbar.Header>
 			<Navbar.Brand>
-				<IndexLink to="/"><b>Install</b>This<b>App</b></IndexLink>
+				<IndexLink to="/d"><b>Install</b>This<b>App</b></IndexLink>
 			</Navbar.Brand>
 		</Navbar.Header>
 		<div className="collapse navbar-collapse text-right">
@@ -22,16 +21,16 @@ const AppNavBar = ({ name }) => (
 						</Link>
 					</button>
 				</li>
-				<li className="">
-					<button onClick={ () => topFansTest(0) } className="btn btn-success btn-sm btn-outline navbar-btn">
+				<li className="hide">
+					<button onClick={() => topFansTest(0)} className="btn btn-success btn-sm btn-outline navbar-btn">
 						Post top fans
 					</button>
 				</li>
 				<NavDropdown eventKey={3} title={name} id="account-dropdown">
-					<LinkContainer to={{ pathname: '/account' }}>
+					<LinkContainer to={{ pathname: '/d/account' }}>
 						<MenuItem eventKey={3.3}>My Account</MenuItem>
 					</LinkContainer>
-					<MenuItem eventKey={3.2} href="/logout">Logout</MenuItem>
+					<MenuItem eventKey={3.2} href="/">Logout</MenuItem>
 				</NavDropdown>
 			</ul>
 		</div>

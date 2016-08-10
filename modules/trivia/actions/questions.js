@@ -3,6 +3,7 @@ import { normalize, arrayOf } from 'normalizr'
 import * as schema from 'modules/trivia/schema'
 import * as CONFIG from 'config.dev'
 import { receiveTriviaEntities } from 'modules/trivia/actions/entities'
+import humps from 'humps'
 import Cookies from 'js-cookie'
 
 export const deleteQuestion = id => ({
@@ -35,17 +36,26 @@ export const postDeleteQuestions = (checksum, ids) => {
 }
 
 export const postNewQuestion = (checksum, newQuestion) => {
-	const url = CONFIG.BASE_URL + `/applications/${checksum}/questions_create.json`
+	let url
+	if (newQuestion.id) {
+		url = CONFIG.BASE_URL + `/applications/${checksum}/questions_update.json`
+	}
+	else{
+		url = CONFIG.BASE_URL + `/applications/${checksum}/questions_create.json`
+	}
 	const api_key = Cookies.get('api_key')
 	const options_attributes = newQuestion.options.map(option => {
+		const optionId = newQuestion.id ? option.id : null
 		return {
 			text: option.text,
+			id: optionId,
 			correct: option.correct,
 		}
 	})
 	const newQuestionData = {
 		question: {
 			text: newQuestion.text,
+			id: newQuestion.id,
 			options_attributes,
 		}
 	}
@@ -60,7 +70,8 @@ export const postNewQuestion = (checksum, newQuestion) => {
 				})
 				.then(response => response.json())
 				.then(json =>{
-					const normalized = normalize(json, schema.question)
+					const camelizedJson = humps.camelizeKeys(json)
+					const normalized = normalize(camelizedJson, schema.entities)
 					dispatch(receiveTriviaEntities(normalized.entities))
 				})
 				.catch(exception =>

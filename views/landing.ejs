@@ -25,11 +25,6 @@
 		</div>
 		<canvas id="demo-canvas" class="hidden-xs hidden-sm"></canvas>
 	</header>
-
-
-
-
-
 	<script type="text/javascript" src="/landing/landing.js"></script>
 	<!-- <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script> -->
 	<script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
@@ -61,6 +56,8 @@
 				} else {
 					console.log('User cancelled login or did not fully authorize.');
 				}
+			}, {
+				scope: 'email'
 			});
 		}
 

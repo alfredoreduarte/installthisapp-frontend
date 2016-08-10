@@ -1,10 +1,11 @@
 import 'isomorphic-fetch'
 import * as CONFIG from 'config.dev'
 import Cookies from 'js-cookie'
+import { fbLogin, fbCheckPagesPerms } from 'lib/facebook'
 
-export const receiveAdmin = json => ({
+export const receiveAdmin = payload => ({
 	type: 'RECEIVE_ADMIN',
-	payload: json
+	payload
 })
 
 export const fetchAdmin = () => {
@@ -15,8 +16,6 @@ export const fetchAdmin = () => {
 					method: 'GET',
 					headers: {
 						'Authorization': `Token token="${api_key}"`,
-						// 'Accept': 'application/json',
-						// 'Content-Type': 'application/json'
 					}
 				})
 				.then(response => response.json())

@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
+import _ from 'lodash'
 import Select from 'react-select'
 import { Link } from 'react-router'
 import { Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Checkbox } from 'react-icheck'
 import { getQuestionsForCurrentApp } from 'modules/trivia/selectors/questions'
+import { getAllOptions } from 'modules/trivia/selectors/options'
 import { selectItemOnTable, sortUsersBy } from 'actions/users'
 import SearchForm from 'components/SearchForm'
 import User from 'components/User'
@@ -22,11 +24,17 @@ const Questions = ({
 	handleDelete,
 	handleDeleteBatch,
 	questionsCreatePath,
+	questionsEditPath,
 	showCreateModal,
+	questionToEdit,
 	closeUrl,
 }) => (
 	<div className="ita-table-view">
-		<QuestionsCreate show={showCreateModal} closeUrl={closeUrl} checksum={checksum} />
+		<QuestionsCreate 
+			show={showCreateModal} 
+			closeUrl={closeUrl} 
+			checksum={checksum} 
+			initialQuestion={questionToEdit} />
 		<div className="ita-table-toolbar">
 			<div className="row">
 				<div className="col-md-12">
@@ -39,7 +47,7 @@ const Questions = ({
 					</h3>
 				</div>
 			</div>
-			<div className="row">
+			<div className={questions.length > 0 ? "row" : "hide"}>
 				<div className="col-md-4">
 					<SearchForm />
 				</div>
@@ -69,6 +77,7 @@ const Questions = ({
 				</div>
 			</div>
 		</div>
+		{questions.length > 0 ? 
 		<Table className="ita-table">
 			<thead>
 				<tr>
@@ -76,7 +85,7 @@ const Questions = ({
 						<span>Name</span>
 					</th>
 					<th>
-						<span>First seen</span>
+						<span>Created on</span>
 					</th>
 					<th className="text-right">
 						<Checkbox 
@@ -99,6 +108,15 @@ const Questions = ({
 					<td className="text-right">
 						<ul className="list-inline list-no-margin">
 							<li>
+								<Link
+									to={questionsEditPath + `/${q.id}`}
+									className='
+										icon-tool-big 
+										btn 
+										btn-squared 
+										glyphicon glyphicon-pencil'></Link>
+							</li>
+							<li>
 								<a
 									onClick={() => handleDelete(q.id)}
 									className='
@@ -120,21 +138,65 @@ const Questions = ({
 				)}
 			</tbody>
 		</Table>
+		:
+		<div className="row">
+			<div className="col-sm-12">
+				<div className="ita-empty text-center">
+					<br />
+					<br />
+					<h4 className="weight-thin animated fadeInDown">
+						There are no questions yet, create the first one
+					</h4>
+					<br />
+					<br />
+					<img 
+						src="/images/dashboard-empty.png"
+						style={{height: '100px'}}
+						className="ita-empty-illustration animated fadeInUp" />
+					<br />
+					<br />
+					<p>
+						<Link 
+							to={questionsCreatePath}
+							className="btn btn-success animated fadeInUp">
+							Create Question
+						</Link>
+					</p>
+				</div>
+			</div>
+		</div>
+		}
 	</div>
 )
 
 const mapStateToProps = (state, props) => {
-	const checksum = props.params.checksum
 	const questions = getQuestionsForCurrentApp(state, props)
+	const allOptions = getAllOptions(state)
+	let questionToEdit = null
+	if (props.params.questionId && questions.length > 0) {
+		const question = _.find(questions, {'id': parseInt(props.params.questionId)})
+		const options = _.filter(allOptions, o => {
+			return question.options.indexOf(o.id) > -1
+		})
+		questionToEdit = {
+			text: question.text,
+			id: question.id,
+			options
+		}
+	} 
+	const checksum = props.params.checksum
 	const createString = '/create'
 	const pathname = props.location.pathname
+	const showModal = pathname.indexOf('/questions/create') !== -1 || pathname.indexOf('/questions/edit') !== -1
 	return { 
 		questions,
 		checksum,
 		selectedIds: state.selectedItems,
 		closeUrl: pathname.substring(0, pathname.length - createString.length),
 		questionsCreatePath: props.location.pathname + '/create',
-		showCreateModal: props.location.pathname.indexOf('/questions/create') !== -1,
+		questionsEditPath: props.location.pathname + '/edit',
+		questionToEdit,
+		showCreateModal: showModal,
 	}
 }
 
@@ -153,6 +215,9 @@ const mapDispatchToProps = (dispatch, props) => {
 		handleDeleteBatch: questions => {
 			const ids = questions.map(q => q.id)
 			dispatch(postDeleteQuestions(props.params.checksum, ids))
+			dispatch({
+				type: 'RESET_SELECTED_ITEMS'
+			})
 		}
 	}
 }

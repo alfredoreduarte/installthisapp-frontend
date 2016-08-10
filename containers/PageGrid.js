@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import FacebookLogin from 'react-facebook-login'
 import { push } from 'react-router-redux'
 import { setNewAppPage } from 'actions/newApp'
 import { fetchFacebookPages } from 'actions/pages'
@@ -12,18 +13,40 @@ const PageGrid = ({ pages, handlePageSelection, handlePermissionRequest }) => (
 		{pages.length > 0 
 		? pages.map( page => {
 			return (
-				<div className="col-md-3" key={page.id}>
-					<button 
-						className="btn btn-default"
-						onClick={() => handlePageSelection(page.identifier)} 
-						style={{height: '50px', background: '#f3f3f3'}}>{page.name}</button>
+				<div className="col-md-4" key={page.id}>
+					<div 
+						className="media ita-page media-stacked text-center" 
+						onClick={() => handlePageSelection(page.identifier)}>
+						<div className="media-left media-middle">
+							<a href="javascript:void(0);">
+								<img 
+									className="media-object img-rounded" 
+									style={{height: '50px'}}
+									src={`https://graph.facebook.com/${page.identifier}/picture?type=large`} />
+							</a>
+						</div>
+						<div className="media-body media-middle">
+							<a href="javascript:void(0);">
+								<h6 className="media-heading text-relevant-title weight-normal font-size-large">
+									{page.name}
+								</h6>
+							</a>
+							<p className="hide"><small>{page.name} Likes</small></p>
+						</div>
+					</div>
 				</div>
 			)
 		})
 		:
 		<div className="text-center">
-			<p>No pages</p>
-			<button className="btn btn-primary" onClick={() => handlePermissionRequest()}>Get facebook pages</button>
+			<p>Seems like we still don't know your Facebook Pages</p>
+			<FacebookLogin
+				appId={window.appId}
+				cssClass="btn btn-primary btn-lg"
+				scope="manage_pages"
+				autoLoad={false}
+				textButton="Get Facebook Pages"
+				callback={response => handlePermissionRequest(response)} />
 		</div>
 		}
 	</div>
@@ -40,11 +63,8 @@ const mapDispatchToProps = (dispatch, props) => ({
 		dispatch(setNewAppPage(id))
 		dispatch(push('/d/apps/create/3'))
 	},
-	handlePermissionRequest: () => {
-		fbLogin(response => {
-			console.log(response)
-			dispatch(fetchFacebookPages())
-		})
+	handlePermissionRequest: response => {
+		dispatch(fetchFacebookPages())
 	}
 })
 

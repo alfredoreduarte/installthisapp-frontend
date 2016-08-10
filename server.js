@@ -55,6 +55,7 @@ else{
 app.use('/images',  express.static(__dirname + '/assets/images'))
 app.use('/styles',  express.static(__dirname + '/assets/styles'))
 app.use('/landing',  express.static(__dirname + '/assets/landing'))
+app.use('/canvas',  express.static(__dirname + '/assets/canvas'))
 app.use('/node_modules',  express.static(__dirname + '/node_modules'))
 
 // ======================
@@ -74,6 +75,12 @@ var fetch = require('isomorphic-fetch');
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'
 triviaRouter.get('/app1/favicon.ico', function(req, res) {
 	res.sendStatus(200)
+})
+triviaRouter.use(function(req, res, next) {
+	if(req.url.substr(-1) == '/' && req.url.length > 1)
+		res.redirect(301, req.url.slice(0, -1))
+	else
+		next()
 })
 triviaRouter.post(`/${triviaCanvasId}`, canvasParser, function(req, res) {
 	fetch(`${apiUrl}/test_auth.json`, {
@@ -102,7 +109,7 @@ triviaRouter.post(`/${triviaCanvasId}`, canvasParser, function(req, res) {
 		}
 	)
 })
-triviaRouter.get(`/${triviaCanvasId}/(:checksum)`, canvasParser, function(req, res) {
+triviaRouter.get(`/${triviaCanvasId}/:checksum*`, canvasParser, function(req, res) {
 	fetch(`${apiUrl}/standalone_auth.json`, {
 		method: 'POST',
 		headers: {
@@ -132,6 +139,12 @@ triviaRouter.get(`/${triviaCanvasId}/(:checksum)`, canvasParser, function(req, r
 })
 
 // Serving static HTML
+app.use(function(req, res, next) {
+	if(req.url.substr(-1) == '/' && req.url.length > 1)
+		res.redirect(301, req.url.slice(0, -1))
+	else
+		next()
+})
 app.get('/', function(req, res) {
 	res.render('landing', {
 		apiUrl,

@@ -11,24 +11,18 @@ export const fetchFacebookPages = () => {
 	return (dispatch, getState) => {
 		const newAppData = getState().newApp
 		return fetch(url, {
-					method: 'GET',
-					headers: {
-						'Authorization': `Token token="${api_key}"`,
-					},
-				})
-				.then(response => response.json())
-				.then(json =>{
-					// console.log('json', json)
-					// const normalized = normalize(json, schema.app)
-					const normalized = normalize(json, schema.entities)
-					// const normalized = normalize(json, {
-					// 	pages: arrayOf(schema.page)
-					// })
-					// console.log('normalized', normalized)
-					dispatch(receiveEntities(normalized.entities))
-				})
-				.catch(exception =>
-					console.log('postNewApp: parsing failed', exception)
-				)
+				method: 'GET',
+				headers: {
+					'Authorization': `Token token="${api_key}"`,
+				},
+			})
+			.then(response => response.json())
+			.then(json =>{
+				const normalized = normalize(json, schema.entities)
+				dispatch(receiveEntities(normalized.entities))
+			})
+			.catch(exception =>
+				console.log('postNewApp: parsing failed', exception)
+			)
 	}
 }

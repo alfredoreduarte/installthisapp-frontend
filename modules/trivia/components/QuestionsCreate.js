@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link, browserHistory } from 'react-router'
+import _ from 'lodash'
 import update from 'react-addons-update'
 import v4 from 'node-uuid'
 import { connect } from 'react-redux'
@@ -13,26 +14,53 @@ class QuestionsCreate extends Component {
 		this.state = {
 			question: this.props.initialQuestion || this.getDefaultStruct()
 		}
+		this.resetForm = this.resetForm.bind(this)
 		this.close = this.close.bind(this)
 		this.handleAddOption = this.handleAddOption.bind(this)
+		this.getCorrectState = this.getCorrectState.bind(this)
 		this.getDefaultStruct = this.getDefaultStruct.bind(this)
 		this.getOptionDefaultStruct = this.getOptionDefaultStruct.bind(this)
 		this.handleQuestionChange = this.handleQuestionChange.bind(this)
 		this.handleOptionChange = this.handleOptionChange.bind(this)
 		this.handleOptionToggle = this.handleOptionToggle.bind(this)
 	}
+	componentWillReceiveProps(nextProps) {
+		this.setState({
+			question: nextProps.initialQuestion || this.getDefaultStruct()
+		})
+	}
+	resetForm(){
+		this.setState({
+			question: this.getDefaultStruct()
+		})
+	}
+	getCorrectState(){
+		this.state
+		if (this.state) {
+			const len = _.filter(this.state.question.options, o => o.correct)
+			if (len.length > 0) {
+				return false
+			}
+			else{
+				return true
+			}
+		}
+		else{
+			return true
+		}
+	}
 	getOptionDefaultStruct(){
 		return {
 			text: null,
-			correct: false,
+			correct: this.getCorrectState(),
 			position: 0,
 			deleted: false,
-			_tmpId: v4()
+			id: v4()
 		}
 	}
 	getDefaultStruct() {
 		return {
-			text: null,
+			text: '',
 			options: [
 				this.getOptionDefaultStruct()
 			]
@@ -57,7 +85,7 @@ class QuestionsCreate extends Component {
 		})
 	}
 	handleOptionChange(val, index){
-		const beingChanged = _.find(this.state.question.options, {'_tmpId': index})
+		const beingChanged = _.find(this.state.question.options, {'id': index})
 		const newArray = this.state.question.options
 		const newElem = beingChanged
 		newElem.text = val
@@ -70,9 +98,9 @@ class QuestionsCreate extends Component {
 		})
 	}
 	handleOptionToggle(index){
-		const beingChanged = _.find(this.state.question.options, {'_tmpId': index})
+		const beingChanged = _.find(this.state.question.options, {'id': index})
 		const changedArray = this.state.question.options.map(elem => {
-			elem.correct = elem._tmpId == beingChanged._tmpId ? true : false 
+			elem.correct = elem.id == beingChanged.id ? true : false 
 			return elem
 		})
 		const newOptionsState = Object.assign({}, this.state.question, {
@@ -83,12 +111,22 @@ class QuestionsCreate extends Component {
 		})
 	}
 	close(){
-		browserHistory.push(this.props.closeUrl)
+		this.resetForm()
+		browserHistory.push(this.props.closeUrl)		
 	}
 	render() {
 		const { show, handleSubmit, closeUrl } = this.props
+		const { question } = this.state
+		const { 
+			resetForm, 
+			close, 
+			handleQuestionChange, 
+			handleOptionChange, 
+			handleOptionToggle, 
+			handleAddOption
+		} = this
 		return (
-			<Modal show={show} onHide={this.close}>
+			<Modal show={show} onHide={close}>
 				<Modal.Header closeButton>
 					<Modal.Title>New question</Modal.Title>
 				</Modal.Header>
@@ -97,26 +135,26 @@ class QuestionsCreate extends Component {
 						<label className="h4">Question</label>
 						<input 
 							type="text" 
-							value={this.state.question.text} 
+							value={question.text} 
 							className="form-control"
-							onChange={this.handleQuestionChange} />
+							onChange={handleQuestionChange} />
 					</div>
 					<div className="form-group">
 						<label>Options</label>
 					</div>
-					{this.state.question.options.map(option => (
+					{question.options.map(option => (
 						<OptionField 
-							key={option._tmpId} 
+							key={option.id} 
 							text={option.text}
 							correct={option.correct}
-							onChange={e => this.handleOptionChange(e.target.value, option._tmpId)}
-							onToggle={() => this.handleOptionToggle(option._tmpId)} />
+							onChange={e => handleOptionChange(e.target.value, option.id)}
+							onToggle={() => handleOptionToggle(option.id)} />
 						)
 					)}
 					<div className="form-group">
 						<p className="text-right"><Button 
 							className="btn btn-xs btn-primary" 
-							onClick={() => this.handleAddOption()}
+							onClick={() => handleAddOption()}
 							>Add Option
 						</Button></p>
 					</div>
@@ -124,7 +162,10 @@ class QuestionsCreate extends Component {
 				<Modal.Footer>
 					<Button 
 						className="btn btn-lg btn-success" 
-						onClick={() => handleSubmit(this.state.question)}>
+						onClick={() => {
+							handleSubmit(question)
+							resetForm()
+						}}>
 						Save Question
 					</Button>
 				</Modal.Footer>

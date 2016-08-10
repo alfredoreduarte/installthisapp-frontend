@@ -1,11 +1,15 @@
 import React, { Component, PropTypes } from 'react'
-import Summary from 'components/Summary'
-import UserGrid from 'components/UserGrid'
+import { connect } from 'react-redux'
 
-const Preferences = ({ active }) => (
+const Preferences = ({ children, checksum }) => (
 	<div className="">
-		preferences
+		{React.cloneElement(children, { checksum })}
 	</div>
 )
 
-export default Preferences
+const mapStateToProps = (state, props) => {
+	return {
+		checksum: props.params.checksum
+	}
+}
+export default connect(mapStateToProps)(Preferences)

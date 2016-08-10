@@ -5,16 +5,20 @@ import { push } from 'react-router-redux'
 import { setNewAppTitle } from 'actions/newApp'
 import { postNewApp } from 'actions/apps'
 
-const AppCreateForm = ({ handleSubmit, handleTextChange }) => (
+const AppCreateForm = ({ handleSubmit, handleTextChange, busy }) => (
 	<div className="container-fluid">
-		<label>Título de la app</label>
+		<label>Title</label>
 		<input 
 			type="text" 
 			className="form-control" 
 			onChange={e => handleTextChange(e.target.value)} />
-		<button className="btn btn-success" onClick={handleSubmit}>Guardar</button>
+		<button className="btn btn-success" onClick={handleSubmit} disabled={busy}>{busy ? 'Creating...' : 'Create'}</button>
 	</div>
 )
+
+const mapStateToProps = state => ({
+	busy: state.activityIndicators.appCreation
+})
 
 const mapDispatchToProps = (dispatch, props) => ({
 	handleTextChange: text => {
@@ -22,7 +26,10 @@ const mapDispatchToProps = (dispatch, props) => ({
 	},
 	handleSubmit: () => {
 		dispatch(postNewApp())
+		dispatch({
+			type: 'TOGGLE_ACTIVITY/CREATING_APP'
+		})
 	}
 })
 
-export default connect(undefined, mapDispatchToProps)(AppCreateForm)
+export default connect(mapStateToProps, mapDispatchToProps)(AppCreateForm)

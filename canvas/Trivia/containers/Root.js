@@ -4,6 +4,19 @@ import { Router, Route, IndexRoute } from 'react-router'
 import { setChecksum } from 'canvas/Trivia/actions/'
 import Index from 'canvas/Trivia/components/Index'
 import Login from 'canvas/Trivia/components/Login'
+import Thanks from 'canvas/Trivia/components/Thanks'
+import AlreadyPlayed from 'canvas/Trivia/components/AlreadyPlayed'
+
+const requireAuth = (nextState, replace) => {
+	if (window.canvasApiKey) {
+		
+	}
+	else{
+		replace({
+			pathname: `/${window.canvasId}/${window.checksum}/login`,
+		})
+	}
+}
 
 class Root extends Component {
 	componentDidMount() {
@@ -15,9 +28,19 @@ class Root extends Component {
 		return (
 			<Provider store={store}>
 				<Router history={history}>
-					<Route path={`/${window.canvasId}/(:checksum)/logged`} component={Index}/>
-					<Route path={`/${window.canvasId}/(:checksum)`} component={Login}/>
-					<Route path={`/${window.canvasId}`} component={Login}/>
+					<Route 
+						path={`/${window.canvasId}(/:checksum)`} 
+						onEnter={requireAuth}
+						component={Index} />
+					<Route 
+						path={`/${window.canvasId}/:checksum/thanks`}
+						component={Thanks}/>
+					<Route 
+						path={`/${window.canvasId}/:checksum/already-played`}
+						component={AlreadyPlayed}/>
+					<Route 
+						path={`/${window.canvasId}/:checksum/login`} 
+						component={Login}/>
 				</Router>
 			</Provider>
 		)

@@ -35,7 +35,7 @@ const App = ({
 				<FbPhoto identifier={facebookPageIdentifier} />
 			</div>
 			<div className="panel-footer text-center">
-				<StatusIndicator active={true} />{' '}
+				<StatusIndicator active={status == 'installed'} />{' '}
 				<Link 
 					to={`apps/${checksum}`} 
 					className="

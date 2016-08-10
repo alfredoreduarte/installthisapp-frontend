@@ -6,20 +6,58 @@ import Cookies from 'js-cookie'
 import { fetchEntities } from 'canvas/Trivia/actions/'
 import 'isomorphic-fetch'
 
-const Login = ({ digestFacebookResponse }) => (
-	<div className="col-sm-12 text-center">
-		<FacebookLogin
-			appId={window.appId}
-			cssClass="btn btn-primary btn-lg"
-			autoLoad={true}
-			textButton="Sign In"
-			callback={response => digestFacebookResponse(response)} />
-	</div>
-)
+class Login extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			logging: false
+		}
+		this.digestFacebookResponse = this.digestFacebookResponse.bind(this)
+	}
+	componentDidMount() {
+		
+	}
+	digestFacebookResponse(response) {
+		this.setState({
+			logging: true
+		})
+		this.props.digestFacebookResponse(response)
+	}
+	render(){
+		const { digestFacebookResponse, title } = this.props
+		return (
+			<div className="text-center">
+				<div
+					style={{
+						position: 'absolute',
+						top: '20%',
+						left: '50%',
+						transform: 'translate(-50%)'
+					}}
+				>
+				<h1 className="text-center" style={{color: 'white'}}>{title}</h1>
+				{!this.state.logging ?
+				<FacebookLogin
+					appId={window.appId}
+					cssClass="btn btn-primary btn-lg"
+					autoLoad={true}
+					textButton="Sign In"
+					callback={response => this.digestFacebookResponse(response)} />
+				:
+				<button
+					className="btn btn-primary btn-lg" disabled={true}>
+					Please wait...
+				</button>
+				}
+				</div>
+			</div>
+		)
+	}
+}
 
 const mapStateToProps = (state, props) => {
 	return {
-		
+		title: state.settings.applicationTitle
 	}
 }
 
@@ -41,7 +79,8 @@ const mapDispatchToProps = (dispatch, props) => {
 				.then(response => response.text())
 				.then(text =>{
 					window.canvasApiKey = text
-					dispatch(push(`/${window.canvasId}/${window.checksum}/logged`))
+					// dispatch(push(`/${window.canvasId}/${window.checksum}/logged`))
+					dispatch(push(`/${window.canvasId}/${window.checksum}`))
 					dispatch(fetchEntities(window.checksum))
 				})
 				.catch(exception =>

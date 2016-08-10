@@ -1,5 +1,6 @@
 import 'isomorphic-fetch'
 import { normalize, arrayOf } from 'normalizr'
+import { push } from 'react-router-redux'
 import * as schema from 'canvas/Trivia/schema'
 import * as CONFIG from 'config.dev'
 import humps from 'humps'
@@ -70,6 +71,7 @@ export const fetchEntities = checksum => {
 					}
 					else{
 						console.log('already answered all questions')
+						dispatch(push(`/${window.canvasId}/${window.checksum}/already-played`))
 					}
 				})
 				.catch(exception =>

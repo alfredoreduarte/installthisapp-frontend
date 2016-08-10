@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import _ from 'lodash'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { push } from 'react-router-redux'
@@ -8,11 +9,36 @@ const ModuleGrid = ({ modules, handleModuleSelection }) => (
 	<div className="container-fluid">
 		{modules.map( module => {
 			return (
-				<div className="col-md-3" key={module}>
-					<button 
-						className="btn btn-default"
-						onClick={() => handleModuleSelection(module)} 
-						style={{height: '50px', background: '#f3f3f3'}}>{module}</button>
+				<div className="col-md-4" key={module}>
+					<div className="media media-stacked text-center">
+						<div className="media-left media-middle">
+							<a
+								href="javascript:void()"
+								onClick={() => handleModuleSelection(module)}>
+								<img 
+									className="media-object img-rounded" 
+									src={`/images/module-icons/${module}.png`} />
+							</a>
+						</div>
+						<div className="media-body media-middle">
+							<a
+								href="javascript:void()"
+								onClick={() => handleModuleSelection(module)}>
+								<h5 
+								className="
+									media-heading 
+									text-relevant-title 
+									weight-normal 
+									font-size-large 
+									text-capitalize">
+									{_.replace(module, '_', ' ')}
+								</h5>
+							</a>
+							<p>
+								<small>Description Mattis Sem Malesuada Tortor</small>
+							</p>
+						</div>
+					</div>
 				</div>
 			)
 		})}
@@ -21,7 +47,7 @@ const ModuleGrid = ({ modules, handleModuleSelection }) => (
 
 const mapStateToProps = (state, props) => {
 	return { 
-		modules: ['trivia', 'top_fans']
+		modules: ['trivia']
 	}
 }
 

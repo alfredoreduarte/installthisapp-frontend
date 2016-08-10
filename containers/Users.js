@@ -88,7 +88,7 @@ const Users = ({
 				{users.map(user => 
 				<tr key={user.id}>
 					<td>
-						<User name={user.name} id={user.id} small />
+						<User name={user.name} identifier={user.identifier} small />
 					</td>
 					<td>
 						{user.createdOn}

@@ -24,4 +24,4 @@ const mapStateToProps = ({ admin }) => {
 	}
 };
 
-export default connect(mapStateToProps)(Account);
+export default connect(mapStateToProps)(Account)

@@ -12,6 +12,26 @@ export const deleteApp = checksum => ({
 	checksum
 })
 
+export const toggleAppInstalling = checksum => ({
+	type: 'INSTALLING_APP',
+	checksum
+})
+
+export const toggleAppUninstalling = checksum => ({
+	type: 'UNINSTALLING_APP',
+	checksum
+})
+
+export const toggleAppInstalled = checksum => ({
+	type: 'INSTALL_APP',
+	checksum
+})
+
+export const toggleAppUninstalled = checksum => ({
+	type: 'UNINSTALL_APP',
+	checksum
+})
+
 export const postDeleteApp = checksum => {
 	return (dispatch, getState) => {
 		const api_key = Cookies.get('api_key')
@@ -45,6 +65,11 @@ export const install = checksum => {
 				.then(response => response.json())
 				.then(json =>{
 					console.log('se instalo?', json)
+					const camelizedJson = humps.camelizeKeys(json)
+					console.log(camelizedJson)
+					const normalized = normalize(camelizedJson, schema.entities)
+					dispatch(receiveEntities(normalized.entities))
+					dispatch(toggleAppInstalled(checksum))
 				})
 				.catch(exception =>
 					console.log('postNewApp: parsing failed', exception)
@@ -65,6 +90,7 @@ export const uninstall = checksum => {
 				.then(response => response.json())
 				.then(json =>{
 					console.log('se desinstalo?', json)
+					dispatch(toggleAppUninstalled(checksum))
 				})
 				.catch(exception =>
 					console.log('postNewApp: parsing failed', exception)
@@ -100,6 +126,9 @@ export const postNewApp = () => {
 					const normalized = normalize(camelizedJson, schema.app)
 					dispatch(receiveEntities(normalized.entities))
 					dispatch(push(`/d/apps/${camelizedJson.applicationType}/${camelizedJson.checksum}`))
+					dispatch({
+						type: 'TOGGLE_ACTIVITY/CREATING_APP'
+					})
 				})
 				.catch(exception =>
 					console.log('postNewApp: parsing failed', exception)

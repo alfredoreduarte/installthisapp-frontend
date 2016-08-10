@@ -9,6 +9,13 @@ const entities = (state = { apps: {}, users: {}, pages: {} }, action) => {
 			return Object.assign({}, state, {
 				apps: apps(state.apps, action)
 			})
+		case 'INSTALL_APP':
+		case 'INSTALLING_APP':
+		case 'UNINSTALLING_APP':
+		case 'UNINSTALL_APP':
+			return Object.assign({}, state, {
+				apps: apps(state.apps, action)
+			})
 		case 'RECEIVE_ENTITIES':
 			return _.merge({}, state, action.response.entities)
 		default:
