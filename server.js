@@ -2,8 +2,6 @@ var path = require('path')
 var express = require('express')
 var cors = require('express-cors')
 var subdomain = require('express-subdomain')
-var webpack = require('webpack')
-var config = require('./webpack.config.dev')
 // Config
 switch (process.env.NODE_ENV){
 	case 'development':
@@ -35,12 +33,14 @@ app.use(cors({
 		'*.installthisapp.local:*',
 	]
 }))
-const compiler = webpack(config)
 
 const isDeveloping = process.env.NODE_ENV !== 'production'
 
 // Hot Module Reloading
 if (isDeveloping) {
+	var webpack = require('webpack')
+	var config = require('./webpack.config.dev')
+	const compiler = webpack(config)
 	app.use(require('webpack-dev-middleware')(compiler, {
 		noInfo: true,
 		publicPath: config.output.publicPath
