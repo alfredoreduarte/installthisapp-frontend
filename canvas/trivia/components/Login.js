@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import FacebookLogin from 'react-facebook-login'
 import { push } from 'react-router-redux'
+import * as CONFIG from 'config.dev'
 import Cookies from 'js-cookie'
 import { fetchEntities } from 'canvas/trivia/actions/'
 import 'isomorphic-fetch'
@@ -65,7 +66,8 @@ const mapDispatchToProps = (dispatch, props) => {
 	return {
 		digestFacebookResponse: response => {
 			if (response.signedRequest) {
-				fetch('https://local.installthisapp.com/users.json', {
+				const url = CONFIG.BASE_URL + '/users.json'
+				fetch(url, {
 					method: 'POST',
 					headers: {
 						'Accept': 'application/json',

@@ -51,7 +51,7 @@ export const setChecksum = checksum => ({
 })
 
 export const fetchEntities = checksum => {
-	const url = `https://local.installthisapp.com/${checksum}/canvas_entities.json`
+	const url = CONFIG.BASE_URL + '/${checksum}/canvas_entities.json`
 	return dispatch => {
 		return fetch(url, {
 					method: 'GET',
@@ -97,7 +97,7 @@ export const postAnswers = () => {
 			answers: getState().answers
 		}
 		const checksum = getState().settings.checksum
-		const url = `https://local.installthisapp.com/${checksum}/save.json`
+		const url = CONFIG.BASE_URL + '/${checksum}/save.json`
 		return fetch(url, {
 					method: 'POST',
 					headers: {

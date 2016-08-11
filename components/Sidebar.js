@@ -11,7 +11,7 @@ const ExternalLinksMenu = ({ checksum, facebookPageIdentifier, fbAppId, fbAppCan
 		</li>
 		<li>
 			<a 
-			href={`https://localui.installthisapp.com:4000/${fbAppCanvasId}/${checksum}`}
+			href={`/${fbAppCanvasId}/${checksum}`}
 			target="_blank"
 			className="text-success">View as website</a>
 		</li>
