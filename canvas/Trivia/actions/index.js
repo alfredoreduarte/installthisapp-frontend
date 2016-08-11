@@ -1,7 +1,7 @@
 import 'isomorphic-fetch'
 import { normalize, arrayOf } from 'normalizr'
 import { push } from 'react-router-redux'
-import * as schema from 'canvas/Trivia/schema'
+import * as schema from 'canvas/trivia/schema'
 import * as CONFIG from 'config.dev'
 import humps from 'humps'
 

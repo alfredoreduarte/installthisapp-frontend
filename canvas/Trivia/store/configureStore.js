@@ -3,7 +3,7 @@ import createLogger from 'redux-logger'
 import { routerMiddleware } from 'react-router-redux'
 import { combineReducers, createStore, compose, applyMiddleware } from 'redux'
 import { browserHistory } from 'react-router'
-import createReducer from '../reducers'
+import createReducer from 'canvas/trivia/reducers'
 
 const reactRouterMiddleware = routerMiddleware(browserHistory)
 

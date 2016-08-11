@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import CountDown from './CountDown'
-import Question from './Question'
-import OptionList from './OptionList'
+import CountDown from 'canvas/trivia/components/CountDown'
+import Question from 'canvas/trivia/components/Question'
+import OptionList from 'canvas/trivia/components/OptionList'
 import { 
 	advanceCountDown, 
 	toggleCountDown, 
 	saveAnswer, 
 	postAnswers, 
 	answerQuestion
-} from 'canvas/Trivia/actions'
-import { getQuestionWithOptions } from 'canvas/Trivia/selectors/questions'
+} from 'canvas/trivia/actions'
+import { getQuestionWithOptions } from 'canvas/trivia/selectors/questions'
 
 class Index extends Component {
 	componentDidMount() {

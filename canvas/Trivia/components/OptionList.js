@@ -1,5 +1,5 @@
 import React from 'react'
-import Option from './Option'
+import Option from 'canvas/trivia/components/Option'
 
 const OptionList = ({ options, handleClick }) => (
 	<div className="list-group">

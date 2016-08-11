@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import FacebookLogin from 'react-facebook-login'
 import { push } from 'react-router-redux'
 import Cookies from 'js-cookie'
-import { fetchEntities } from 'canvas/Trivia/actions/'
+import { fetchEntities } from 'canvas/trivia/actions/'
 import 'isomorphic-fetch'
 
 class Login extends Component {
