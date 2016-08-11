@@ -37,26 +37,26 @@ app.use(cors({
 const isDeveloping = process.env.NODE_ENV !== 'production'
 
 // Hot Module Reloading
-if (isDeveloping) {
+if (!isDeveloping) {
 	var webpack = require('webpack')
 	var config = require('./webpack.config.dev')
 	const compiler = webpack(config)
 	app.use(require('webpack-dev-middleware')(compiler, {
 		noInfo: true,
 		publicPath: config.output.publicPath
-	}));
+	}))
 	app.use(require('webpack-hot-middleware')(compiler))
 }
 else{
-	app.use('/static',  express.static(__dirname + '/dist'))
+	app.use('/static', express.static(__dirname + '/dist'))
 }
 
 // Images and other static asssets
-app.use('/images',  express.static(__dirname + '/assets/images'))
-app.use('/styles',  express.static(__dirname + '/assets/styles'))
-app.use('/landing',  express.static(__dirname + '/assets/landing'))
-app.use('/canvas',  express.static(__dirname + '/assets/canvas'))
-app.use('/node_modules',  express.static(__dirname + '/node_modules'))
+app.use('/images', express.static(__dirname + '/assets/images'))
+app.use('/styles', express.static(__dirname + '/assets/styles'))
+app.use('/landing', express.static(__dirname + '/assets/landing'))
+app.use('/canvas', express.static(__dirname + '/assets/canvas'))
+app.use('/node_modules', express.static(__dirname + '/node_modules'))
 
 // ======================
 // Trivia
@@ -82,6 +82,7 @@ triviaRouter.use(function(req, res, next) {
 	else
 		next()
 })
+triviaRouter.use('/static', express.static(__dirname + '/dist'))
 triviaRouter.post(`/${triviaCanvasId}`, canvasParser, function(req, res) {
 	fetch(`${apiUrl}/test_auth.json`, {
 		method: 'POST',
