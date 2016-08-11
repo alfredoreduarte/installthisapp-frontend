@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Navbar, NavDropdown, MenuItem } from 'react-bootstrap'
 import { Link, IndexLink } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
-import topFansTest from 'lib/topFansTest'
+// import topFansTest from 'lib/topFansTest'
 
 const AppNavBar = ({ name }) => (
 	<Navbar fluid={true}>
@@ -22,7 +22,7 @@ const AppNavBar = ({ name }) => (
 					</button>
 				</li>
 				<li className="hide">
-					<button onClick={() => topFansTest(0)} className="btn btn-success btn-sm btn-outline navbar-btn">
+					<button onClick={() => console.log(0)} className="btn btn-success btn-sm btn-outline navbar-btn">
 						Post top fans
 					</button>
 				</li>
