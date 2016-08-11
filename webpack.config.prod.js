@@ -5,7 +5,7 @@ module.exports = {
 	devtool: 'source-map',
 	entry: {
 		dashboard: './index',
-		trivia: './canvas/Trivia/index'
+		trivia: './canvas/trivia/index'
 	},
 	output: {
 		path: path.join(__dirname, '/dist'),
