@@ -37,7 +37,7 @@ app.use(cors({
 const isDeveloping = process.env.NODE_ENV !== 'production'
 
 // Hot Module Reloading
-if (!isDeveloping) {
+if (isDeveloping) {
 	var webpack = require('webpack')
 	var config = require('./webpack.config.dev')
 	const compiler = webpack(config)
