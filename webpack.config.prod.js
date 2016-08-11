@@ -4,8 +4,7 @@ var webpack = require('webpack')
 module.exports = {
 	devtool: 'source-map',
 	entry: {
-		dashboard: './index',
-		trivia: './canvas/trivia/index'
+		modulo: './canvas/trivia/index'
 	},
 	output: {
 		path: path.join(__dirname, '/dist'),
