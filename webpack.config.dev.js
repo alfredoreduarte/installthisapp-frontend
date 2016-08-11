@@ -17,9 +17,9 @@ module.exports = {
 		new webpack.optimize.CommonsChunkPlugin('common.js'),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoErrorsPlugin(),
-		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
-		})
+		// new webpack.DefinePlugin({
+		// 	'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+		// })
 	],
 	resolve: {
 		root: [ __dirname + '/' ],
