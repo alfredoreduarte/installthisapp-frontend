@@ -6,7 +6,7 @@
   "scripts": {
     "test": "NODE_ENV=test NODE_PATH=$NODE_PATH:$PWD/ mocha --recursive --compilers js:babel-core/register",
     "test:watch": "npm test -- --watch",
-    "build:webpack": "NODE_ENV=production webpack -p --config webpack.config.prod.js",
+    "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "build": "npm run clean && npm run build:webpack",
     "clean": "rimraf dist",
     "postinstall": "npm run build",
