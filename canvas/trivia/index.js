@@ -6,7 +6,14 @@ import Root from 'canvas/trivia/containers/Root'
 import configureStore from 'canvas/trivia/store/configureStore'
 require('assets/canvas/base.sass')
 
-const store = configureStore()
+const store = configureStore({
+	applicationData: {
+		checksum: window.checksum,
+		// apiKey: window.canvasApiKey,
+		canvasId: window.canvasId,
+		appId: window.appId,
+	}
+})
 const history = syncHistoryWithStore(browserHistory, store)
 
 render(

@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Provider, connect } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
-import { setChecksum } from 'canvas/trivia/actions/'
 import Index from 'canvas/trivia/components/Index'
 import Login from 'canvas/trivia/components/Login'
 import Thanks from 'canvas/trivia/components/Thanks'
@@ -21,7 +20,6 @@ const requireAuth = (nextState, replace) => {
 class Root extends Component {
 	componentDidMount() {
 		const { dispatch } = this.props
-		dispatch(setChecksum(window.checksum))
 	}
 	render() {
 		const { store, history } = this.props

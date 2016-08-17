@@ -4,7 +4,6 @@ import AppNavBar from 'components/AppNavBar'
 import TitleBar from 'components/TitleBar'
 import AccountSidebar from 'components/AccountSidebar'
 import DashboardContentDecorator from 'containers/DashboardContentDecorator'
-import AccountPreferences from 'components/AccountPreferences'
 
 const Account = ({ children, admin }) => (
 	<div>
@@ -12,8 +11,7 @@ const Account = ({ children, admin }) => (
 		<TitleBar title="My Account" />
 		<AccountSidebar />
 		<DashboardContentDecorator>
-			<AccountPreferences user={admin} />
-			{children}
+			{React.cloneElement(children, { admin })}
 		</DashboardContentDecorator>
 	</div>
 )

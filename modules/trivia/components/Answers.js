@@ -21,6 +21,7 @@ const Answers = ({
 	handleSelectBatch,
 	handleDelete,
 	handleDeleteBatch,
+	fetchAgain,
 }) => (
 	<div className="ita-table-view">
 		<div className="ita-table-toolbar">
@@ -36,8 +37,11 @@ const Answers = ({
 				</div>
 			</div>
 			<div className="row">
-				<div className="col-md-4 hide">
-					<SearchForm />
+				<div className="col-md-4">
+					{false ? <SearchForm /> : null}
+					<button className="btn btn-default btn-sm" onClick={() => fetchAgain()}>
+						<span className="glyphicon glyphicon-refresh"></span>
+					</button>
 				</div>
 				<div className={answers.length > 0 ? "col-md-8 text-right" : "hide"}>
 					<ul className="ita-table-tools-selected list-inline list-no-margin">
@@ -90,7 +94,7 @@ const Answers = ({
 						<User name={a.user.name} identifier={a.user.identifier} small />
 					</td>
 					<td>
-						<p><b>Score</b>: {a.qualification} %</p>
+						<p><b>Score</b>: {parseInt(a.qualification)} %</p>
 						<p>Correct Answers: {a.totalCorrectAnswers}</p>
 						<p>Incorrect Answers: {a.totalAnswers - a.totalCorrectAnswers}</p>
 					</td>
@@ -156,6 +160,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
 	dispatch(fetchTriviaEntities(props.params.checksum))
 	return {
+		fetchAgain: () => dispatch(fetchTriviaEntities(props.params.checksum)),
 		handleSelect: id => {
 			dispatch(selectItemOnTable(id))
 		},

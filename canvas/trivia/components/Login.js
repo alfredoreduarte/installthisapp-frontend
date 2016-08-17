@@ -1,11 +1,8 @@
+import 'isomorphic-fetch'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import FacebookLogin from 'react-facebook-login'
-import { push } from 'react-router-redux'
-import * as CONFIG from 'config.dev'
-import Cookies from 'js-cookie'
-import { fetchEntities } from 'canvas/trivia/actions/'
-import 'isomorphic-fetch'
+import { digestFacebookResponse } from 'canvas/trivia/actions/user'
 
 class Login extends Component {
 	constructor(props) {
@@ -64,37 +61,7 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
 	return {
-		digestFacebookResponse: response => {
-			if (response.signedRequest) {
-				const url = CONFIG.BASE_URL + '/users.json'
-				fetch(url, {
-					method: 'POST',
-					headers: {
-						'Accept': 'application/json',
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify({
-						signed_request: response.signedRequest,
-						checksum: window.checksum
-					})
-				})
-				.then(response => response.text())
-				.then(text =>{
-					window.canvasApiKey = text
-					// dispatch(push(`/${window.canvasId}/${window.checksum}/logged`))
-					dispatch(push(`/${window.canvasId}/${window.checksum}`))
-					dispatch(fetchEntities(window.checksum))
-				})
-				.catch(exception =>
-					{
-						console.log('Login: parsing failed', exception)
-					}
-				)
-			}
-			else{
-				console.log('response', response)
-			}
-		}
+		digestFacebookResponse: res => dispatch(digestFacebookResponse(res))
 	}
 }
 

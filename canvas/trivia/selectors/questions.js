@@ -1,9 +1,9 @@
 import _ from 'lodash'
 import { createSelector } from 'reselect'
 
-const allQuestions = state => _.values(state.entities.questions)
-const allOptions = state => _.values(state.entities.options)
-const answeredQuestions = state => state.answeredQuestions
+export const allQuestions = state => _.values(state.entities.questions)
+export const allOptions = state => _.values(state.entities.options)
+export const answeredQuestions = state => state.answeredQuestions
 
 const getUnansweredQuestion = createSelector(
 	allQuestions,
@@ -31,4 +31,10 @@ export const getQuestionWithOptions = createSelector(
 			return null
 		}
 	}
+)
+
+export const hasAnsweredAllQuestions = createSelector(
+	answeredQuestions,
+	allQuestions,
+	(answersArray, questions) => Object.keys(questions).length == answersArray.length
 )

@@ -1,17 +1,12 @@
 import _ from 'lodash'
 
 const settings = (state = { 
-	checksum: null,
 	timeOut: 9999, 
 	order: 'ASC', 
 	countDownRunning: false,
 	isFetching: true,
 }, action) => {
 	switch (action.type) {
-		case 'SET_CHECKSUM':
-			return Object.assign({}, state, {
-				checksum: action.checksum
-			})
 		case 'RECEIVE_SETTINGS':
 			return _.merge({}, state, action.settings)
 		case 'COUNTDOWN_PROGRESS':
