@@ -1,11 +1,11 @@
 import _ from 'lodash'
 import { createSelector } from 'reselect'
-import { getCurrentAppChecksum } from 'selectors/apps'
+import { getCurrentApp } from 'selectors/apps'
 
-const getAllAnswers = state => state.answers
+const getAllAnswers = state => _.filter(_.values(state.trivia.answers), a => a.status != 'deleted')
 
-export const getQuestionsForCurrentApp = createSelector(
-	getAllQuestions,
-	getCurrentAppChecksum,
-	(answers, checksum) => _.filter(answers, a => q.appChecksum == checksum)
+export const getAnswersForCurrentApp = createSelector(
+	getAllAnswers,
+	getCurrentApp,
+	(answers, app) => _.filter(answers, a => a.applicationId == app.id)
 )

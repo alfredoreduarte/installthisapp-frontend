@@ -1,9 +1,11 @@
-import _ from 'lodash'
-
-const answers = (state = { answer: 'answer uno'}, action) => {
+const answers = (state = {}, action) => {
 	switch (action.type) {
-		case 'ADD_ANSWER':
-			return state
+		case 'TRIVIA/DELETE_ANSWER':
+			return Object.assign({}, state, {
+				[action.id]: Object.assign({}, state[action.id], {
+					status: 'deleted'
+				})
+			})
 		default:
 			return state
 	}

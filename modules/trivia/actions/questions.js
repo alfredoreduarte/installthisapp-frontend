@@ -45,11 +45,13 @@ export const postNewQuestion = (checksum, newQuestion) => {
 	}
 	const api_key = Cookies.get('api_key')
 	const options_attributes = newQuestion.options.map(option => {
-		const optionId = newQuestion.id ? option.id : null
+		const optionId = newQuestion.id && parseInt(option.id) == option.id ? option.id : null
+		const destroy = option._destroy ? option._destroy : false
 		return {
 			text: option.text,
 			id: optionId,
 			correct: option.correct,
+			_destroy: destroy,
 		}
 	})
 	const newQuestionData = {

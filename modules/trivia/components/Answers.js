@@ -1,21 +1,26 @@
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
+import _ from 'lodash'
 import Select from 'react-select'
+import { Link } from 'react-router'
 import { Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Checkbox } from 'react-icheck'
-import { getCurrentUsersByKeyword } from 'selectors/users'
-import { selectItemOnTable, sortUsersBy } from 'actions/users'
+import { getAnswersForCurrentApp } from 'modules/trivia/selectors/answers'
+import { selectItemOnTable } from 'actions/users'
 import SearchForm from 'components/SearchForm'
+import { fetchTriviaEntities } from 'modules/trivia/actions/entities'
+import { postDeleteAnswers } from 'modules/trivia/actions/answers'
 import User from 'components/User'
 
-const Users = ({ 
-	users, 
-	selectedItems,
-	sortBy,
-	handleUserSelect, 
-	handleUserSelectBatch,
-	handleSort
+const Answers = ({
+	answers,
+	checksum,
+	selectedIds,
+	handleSelect, 
+	handleSelectBatch,
+	handleDelete,
+	handleDeleteBatch,
 }) => (
 	<div className="ita-table-view">
 		<div className="ita-table-toolbar">
@@ -23,83 +28,91 @@ const Users = ({
 				<div className="col-md-12">
 					<h3 className="ita-page-title">
 						Answers 
-						<small className={selectedItems.length ? '' : 'hide'}>
-							{' '}/ {selectedItems.length} 
-							{' '}user{selectedItems.length > 1 ? 's' : ''} selected
+						<small className={selectedIds.length ? '' : 'hide'}>
+							{' '}/ {selectedIds.length} 
+							{' '}answer{selectedIds.length > 1 ? 's' : ''} selected
 						</small>
 					</h3>
 				</div>
 			</div>
 			<div className="row">
-				<div className="col-md-4">
+				<div className="col-md-4 hide">
 					<SearchForm />
 				</div>
-				<div className="col-md-8 text-right">
+				<div className={answers.length > 0 ? "col-md-8 text-right" : "hide"}>
 					<ul className="ita-table-tools-selected list-inline list-no-margin">
-						<li className={selectedItems.length ? '' : 'hide'}>
-							<a 
-								href="javascript:void(0)" 
-								className='
+						<li className={selectedIds.length ? '' : 'hide'}>
+							<a
+								onClick={() => handleDeleteBatch(answers)}
+								className="
 									icon-tool-big 
 									btn 
 									btn-squared 
-									glyphicon 
-									glyphicon-cloud-download'></a>
+									glyphicon glyphicon-trash"
+								>
+							</a>
 						</li>
 					</ul>
 				</div>
-				<div className="col-md-3 col-md-offset-9">
-					<div className="ita-table-view-second-row">
-						<Select
-							searchable={false}
-							autosize={false}
-							clearable={false}
-							name="form-field-name"
-							value={sortBy}
-							options={[
-								{ value: 'name', label: 'Alphabetically' },
-								{ value: 'createdOn', label: 'Most Recent' }
-							]}
-							onChange={val => handleSort(val)}
-						/>
+				<div className={answers.length > 0 ? "col-md-3 col-md-offset-9" : "hide"}>
+					<div className="ita-table-view-second-row text-right">
+						
 					</div>
 				</div>
 			</div>
 		</div>
+		{answers.length > 0 ? 
 		<Table className="ita-table">
 			<thead>
 				<tr>
 					<th>
-						<span>Name</span>
+						<span>User</span>
 					</th>
 					<th>
-						<span>First seen</span>
+						<span>Answers</span>
+					</th>
+					<th>
+						<span>Last answered on</span>
 					</th>
 					<th className="text-right">
 						<Checkbox 
-							checked={selectedItems.length == users.length}
+							checked={answers.length > 0 && selectedIds.length == answers.length}
 							checkboxClass="icheckbox-ita icon-tool-big pull-right"
-							onChange={() => handleUserSelectBatch(users)}
+							onChange={() => handleSelectBatch(answers)}
 						 />
 					</th>
 				</tr>
 			</thead>
 			<tbody>
-				{users.map(user => 
-				<tr key={user.id}>
+				{answers.map(a => 
+				<tr key={a.id}>
 					<td>
-						<User name={user.name} id={user.id} small />
+						<User name={a.user.name} identifier={a.user.identifier} small />
 					</td>
 					<td>
-						{user.createdOn}
+						<p><b>Score</b>: {a.qualification} %</p>
+						<p>Correct Answers: {a.totalCorrectAnswers}</p>
+						<p>Incorrect Answers: {a.totalAnswers - a.totalCorrectAnswers}</p>
+					</td>
+					<td>
+						{a.createdOn}
 					</td>
 					<td className="text-right">
 						<ul className="list-inline list-no-margin">
 							<li>
+								<a
+									onClick={() => handleDelete(a.id)}
+									className='
+										icon-tool-big 
+										btn 
+										btn-squared 
+										glyphicon glyphicon-trash'></a>
+							</li>
+							<li>
 								<Checkbox 
-									checked={selectedItems.indexOf(user.id) !== -1 ? true : false}
+									checked={selectedIds.indexOf(a.id) !== -1 ? true : false}
 									checkboxClass="icheckbox-ita icon-tool-big pull-right"
-									onChange={() => handleUserSelect(user.id)}
+									onChange={() => handleSelect(a.id)}
 								/>
 							</li>
 						</ul>
@@ -108,25 +121,58 @@ const Users = ({
 				)}
 			</tbody>
 		</Table>
+		:
+		<div className="row">
+			<div className="col-sm-12">
+				<div className="ita-empty text-center">
+					<br />
+					<br />
+					<h4 className="weight-thin animated fadeInDown">
+						There are no answers yet
+					</h4>
+					<br />
+					<br />
+					<img 
+						src="/images/dashboard-empty.png"
+						style={{height: '100px'}}
+						className="ita-empty-illustration animated fadeInUp" />
+				</div>
+			</div>
+		</div>
+		}
 	</div>
 )
 
 const mapStateToProps = (state, props) => {
+	const answers = getAnswersForCurrentApp(state, props)
+	const checksum = props.params.checksum
 	return { 
-		users: getCurrentUsersByKeyword(state, props),
-		selectedItems: state.selectedItems,
-		sortBy: state.usersSorting
+		answers,
+		checksum,
+		selectedIds: state.selectedItems,
 	}
 }
 
-const mapDispatchToProps = (dispatch, props) => ({
-	handleUserSelect: id => {
-		dispatch(selectItemOnTable(id))
-	},
-	handleUserSelectBatch: users => {
-		users.map(user => dispatch(selectItemOnTable(user.id)))
-	},
-	handleSort: sorter => dispatch(sortUsersBy(sorter))
-})
+const mapDispatchToProps = (dispatch, props) => {
+	dispatch(fetchTriviaEntities(props.params.checksum))
+	return {
+		handleSelect: id => {
+			dispatch(selectItemOnTable(id))
+		},
+		handleSelectBatch: questions => {
+			questions.map(q => dispatch(selectItemOnTable(q.id)))
+		},
+		handleDelete: id => {
+			dispatch(postDeleteAnswers(props.params.checksum, [id]))
+		},
+		handleDeleteBatch: questions => {
+			const ids = questions.map(q => q.id)
+			dispatch(postDeleteAnswers(props.params.checksum, ids))
+			dispatch({
+				type: 'RESET_SELECTED_ITEMS'
+			})
+		}
+	}
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Users)
+export default connect(mapStateToProps, mapDispatchToProps)(Answers)

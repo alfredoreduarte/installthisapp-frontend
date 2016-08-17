@@ -47,11 +47,11 @@ const Questions = ({
 					</h3>
 				</div>
 			</div>
-			<div className={questions.length > 0 ? "row" : "hide"}>
+			<div className="row">
 				<div className="col-md-4">
 					<SearchForm />
 				</div>
-				<div className="col-md-8 text-right">
+				<div className={questions.length > 0 ? "col-md-8 text-right" : "hide"}>
 					<ul className="ita-table-tools-selected list-inline list-no-margin">
 						<li className={selectedIds.length ? '' : 'hide'}>
 							<a
@@ -66,7 +66,7 @@ const Questions = ({
 						</li>
 					</ul>
 				</div>
-				<div className="col-md-3 col-md-offset-9">
+				<div className={questions.length > 0 ? "col-md-3 col-md-offset-9" : "hide"}>
 					<div className="ita-table-view-second-row text-right">
 						<Link 
 							to={questionsCreatePath}

@@ -17,6 +17,7 @@ class QuestionsCreate extends Component {
 		this.resetForm = this.resetForm.bind(this)
 		this.close = this.close.bind(this)
 		this.handleAddOption = this.handleAddOption.bind(this)
+		this.handleDeleteOption = this.handleDeleteOption.bind(this)
 		this.getCorrectState = this.getCorrectState.bind(this)
 		this.getDefaultStruct = this.getDefaultStruct.bind(this)
 		this.getOptionDefaultStruct = this.getOptionDefaultStruct.bind(this)
@@ -55,6 +56,7 @@ class QuestionsCreate extends Component {
 			correct: this.getCorrectState(),
 			position: 0,
 			deleted: false,
+			_destroy: false,
 			id: v4()
 		}
 	}
@@ -65,6 +67,28 @@ class QuestionsCreate extends Component {
 				this.getOptionDefaultStruct()
 			]
 		}
+	}
+	handleDeleteOption(id) {
+		const options = this.state.question.options.map(option => {
+			if (option.id == id) {
+				option['_destroy'] = true
+			}
+			return option
+		})
+		console.log('new options', options)
+		const newData = update(this.state.question, {
+			options: {$set: options}
+		})
+		this.setState({
+			question: newData
+		}, () => {
+			const correctOption = _.filter(this.state.question.options, {'correct': true, '_destroy': false})
+			console.log('corrects', correctOption)
+			if (correctOption.length == 0) {
+				const newCorrect = _.find(this.state.question.options, {'_destroy': false})
+				this.handleOptionToggle(newCorrect.id)
+			}
+		})
 	}
 	handleAddOption() {
 		const newIndex = this.state.question.options.length
@@ -98,7 +122,10 @@ class QuestionsCreate extends Component {
 		})
 	}
 	handleOptionToggle(index){
+		console.log('handleOptionToggle', index)
 		const beingChanged = _.find(this.state.question.options, {'id': index})
+
+		console.log('beingChanged', beingChanged)
 		const changedArray = this.state.question.options.map(elem => {
 			elem.correct = elem.id == beingChanged.id ? true : false 
 			return elem
@@ -118,8 +145,9 @@ class QuestionsCreate extends Component {
 		const { show, handleSubmit, closeUrl } = this.props
 		const { question } = this.state
 		const { 
-			resetForm, 
-			close, 
+			resetForm,
+			close,
+			handleDeleteOption,
 			handleQuestionChange, 
 			handleOptionChange, 
 			handleOptionToggle, 
@@ -142,15 +170,16 @@ class QuestionsCreate extends Component {
 					<div className="form-group">
 						<label>Options</label>
 					</div>
-					{question.options.map(option => (
-						<OptionField 
-							key={option.id} 
-							text={option.text}
-							correct={option.correct}
-							onChange={e => handleOptionChange(e.target.value, option.id)}
-							onToggle={() => handleOptionToggle(option.id)} />
-						)
-					)}
+					{question.options.map(option => {
+						if (option['_destroy']) {return}
+						return <OptionField 
+									key={option.id} 
+									text={option.text}
+									correct={option.correct}
+									onChange={e => handleOptionChange(e.target.value, option.id)}
+									onDelete={e => handleDeleteOption(option.id)}
+									onToggle={() => handleOptionToggle(option.id)} />
+					})}
 					<div className="form-group">
 						<p className="text-right"><Button 
 							className="btn btn-xs btn-primary" 

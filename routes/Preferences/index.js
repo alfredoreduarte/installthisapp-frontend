@@ -9,7 +9,7 @@ module.exports = {
 		})
 	},
 	indexRoute: {
-		component: require('containers/AdminDashboard').default
+		component: require('components/AppConfiguration').default
 	},
 	childRoutes: [
 		{

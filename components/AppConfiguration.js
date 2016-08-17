@@ -3,14 +3,15 @@ import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { postDeleteApp, deleteApp } from 'actions/apps'
 
-const AppConfiguration = ({ checksum }) => (
-	<div>
+const AppConfiguration = ({ checksum, title, updateApp }) => (
+	<form onSubmit={updateApp}>
 		<div className="row">
 			<div className="col-md-4">
-				<h3 className="ita-page-title">Preferences</h3>
+				<h3 className="ita-page-title">Preferences <small>(coming soon)</small></h3>
 			</div>
 			<div className="col-md-8 text-right">
 				<button
+					type="submit"
 					className="btn btn-primary btn-outline btn-sm">
 					Save
 				</button>
@@ -28,7 +29,7 @@ const AppConfiguration = ({ checksum }) => (
 									<span className="help-block">Will show un on the Page Tab</span>
 								</div>
 								<div className="col-md-8">
-									<input type="text" name="application[title]" className="form-control" defaultValue="App title" />
+									<input type="text" className="form-control" value={title} />
 								</div>
 							</div>
 							{1 == 0 ? <div className="form-group">
@@ -49,10 +50,10 @@ const AppConfiguration = ({ checksum }) => (
 				</div>
 			</div>
 		</div>
-	</div>
+	</form>
 )
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, props) => {
 	return {
 		
 	}
