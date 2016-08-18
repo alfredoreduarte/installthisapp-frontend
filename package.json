@@ -10,7 +10,7 @@
     "build": "npm run clean && npm run build:webpack",
     "clean": "rimraf dist",
     "postinstall": "npm run build",
-    "start:dev": "NODE_ENV=development nodemon server.js",
+    "dev": "NODE_ENV=development nodemon server.js",
     "start": "NODE_ENV=production nodemon server.js"
   },
   "keywords": [],
