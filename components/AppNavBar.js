@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Navbar, NavDropdown, MenuItem } from 'react-bootstrap'
 import { Link, IndexLink } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
-import topFansTest from 'lib/topFansTest'
 
 const AppNavBar = ({ name }) => (
 	<Navbar fluid={true}>
@@ -19,11 +18,6 @@ const AppNavBar = ({ name }) => (
 						<Link to='/d/apps/create' className="link-no-underline text-success">
 							New App
 						</Link>
-					</button>
-				</li>
-				<li className="">
-					<button onClick={() => topFansTest()} className="btn btn-success btn-sm btn-outline navbar-btn">
-						Post top fans
 					</button>
 				</li>
 				<NavDropdown eventKey={3} title={name} id="account-dropdown">

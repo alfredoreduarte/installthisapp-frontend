@@ -1,51 +1,35 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-// import Loading from 'canvas/trivia/components/Loading'
-// import CountDown from 'canvas/trivia/components/CountDown'
-// import Question from 'canvas/trivia/components/Question'
-// import OptionList from 'canvas/trivia/components/OptionList'
-// import { advanceCountDown, saveAnswer } from 'canvas/trivia/actions'
-// import { getQuestionWithOptions, hasAnsweredAllQuestions } from 'canvas/trivia/selectors/questions'
+import { ListGroup, ListGroupItem } from 'react-bootstrap'
+import ListItem from 'canvas/top_fans/components/ListItem'
+import { getLikes } from 'canvas/top_fans/selectors/likes'
 
-class Index extends Component {
-	componentDidMount() {
-		// const { runTime } = this.props
-		// this.interval = setInterval(() => {
-		// 	runTime()
-		// }, 1000)
-	}
-	componentWillUnmount() {
-		// clearInterval(this.interval)
-	}
-	render(){
-		// const { time, question, loading, saveAnswer } = this.props
-		return (
-			<div className="col-sm-12">
-				Top Fans!
-			</div>
-		)
-	}
-}
+const Index = ({ likes }) => (
+	<div className="col-sm-12">
+		<h1 style={{color: 'white'}}>Top Fans!</h1>
+		<ListGroup>
+			{likes.map( like => 
+				<ListItem 
+					key={like.id.userIdentifier} 
+					id={like.id.userIdentifier} 
+					name={like.id.userName} 
+					likes={like.likes} />
+			)}
+		</ListGroup>
+	</div>
+)
 
 const mapStateToProps = state => {
-	// const question = getQuestionWithOptions(state)
-	// const { timeOut, countDownRunning, isFetching } = state.settings
+	const likes = getLikes(state)
 	return {
-		// time: timeOut,
-		// finished: hasAnsweredAllQuestions(state),
-		// loading: isFetching,
-		// question,
-		// countDownRunning,
+		likes
 	}
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
-		// saveAnswer: (questionId, optionId, correct) => {
-		// 	dispatch(saveAnswer(questionId, optionId, correct))
-		// },
-		// runTime: () => dispatch(advanceCountDown())
+		
 	}
 }
 

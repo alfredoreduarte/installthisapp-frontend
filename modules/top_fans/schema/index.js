@@ -1,16 +1,15 @@
 import { Schema, arrayOf } from 'normalizr'
 
-export const question = new Schema('questions', {
+export const like = new Schema('likes', {
 	idAttribute: 'id'
 })
-export const option = new Schema('options')
-export const answer = new Schema('answers')
+// export const option = new Schema('options')
+// export const answer = new Schema('answers')
 
-question.define({
-	options: arrayOf(option)
-})
+// question.define({
+// 	options: arrayOf(option)
+// })
 
 export const entities = {
-	questions: arrayOf(question),
-	answers: arrayOf(answer),
+	likes: arrayOf(like)
 }

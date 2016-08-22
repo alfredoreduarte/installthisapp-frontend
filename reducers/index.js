@@ -16,6 +16,7 @@ import activityIndicators from 'reducers/activityIndicators'
 
 // Modules
 import trivia from 'modules/trivia/reducers/'
+import topFans from 'modules/top_fans/reducers/'
 
 // const rootReducer = combineReducers({
 // 	routing,
@@ -48,6 +49,7 @@ const createReducer = asyncReducers => {
 		activityIndicators,
 		form: formReducer,
 		trivia,
+		topFans,
 		asyncReducers
 	})
 }

@@ -6,12 +6,16 @@ import { connect } from 'react-redux'
 import { Checkbox } from 'react-icheck'
 import { fetchTopFansEntities } from 'modules/top_fans/actions/entities'
 import { getCurrentUsersByKeyword } from 'selectors/users'
+import { getLikesForPage } from 'modules/top_fans/selectors/likes'
 import { selectItemOnTable, sortUsersBy } from 'actions/users'
 import SearchForm from 'components/SearchForm'
 import User from 'components/User'
+import topFansTest from 'lib/topFansTest'
 
-const Scoreboard = ({ 
+const Scoreboard = ({
+	likes,
 	users, 
+	fetch,
 	selectedItems,
 	sortBy,
 	handleUserSelect, 
@@ -36,6 +40,12 @@ const Scoreboard = ({
 					<SearchForm />
 				</div>
 				<div className="col-md-8 text-right">
+					<button className="btn btn-default" onClick={fetch}>
+						Refresh
+					</button>
+					<button onClick={() => topFansTest()} className="btn btn-default">
+						Post demo fans data to API
+					</button>
 					<ul className="ita-table-tools-selected list-inline list-no-margin">
 						<li className={selectedItems.length ? '' : 'hide'}>
 							<a 
@@ -74,36 +84,30 @@ const Scoreboard = ({
 						<span>Name</span>
 					</th>
 					<th>
-						<span>First seen</span>
+						<span>Likes</span>
 					</th>
-					<th className="text-right">
-						<Checkbox 
-							checked={selectedItems.length == users.length}
-							checkboxClass="icheckbox-ita icon-tool-big pull-right"
-							onChange={() => handleUserSelectBatch(users)}
-						 />
+					<th>
+						<span>Comments</span>
+					</th>
+					<th>
+						<span>Score</span>
 					</th>
 				</tr>
 			</thead>
 			<tbody>
-				{users.map(user => 
-				<tr key={user.id}>
+				{likes.map(like => 
+				<tr key={like.id.userIdentifier}>
 					<td>
-						<User name={user.name} identifier={user.identifier} small />
+						<User name={like.id.userName} identifier={like.id.userIdentifier} small />
 					</td>
 					<td>
-						{user.createdOn}
+						{like.likes}
 					</td>
-					<td className="text-right">
-						<ul className="list-inline list-no-margin">
-							<li>
-								<Checkbox 
-									checked={selectedItems.indexOf(user.id) !== -1 ? true : false}
-									checkboxClass="icheckbox-ita icon-tool-big pull-right"
-									onChange={() => handleUserSelect(user.id)}
-								/>
-							</li>
-						</ul>
+					<td>
+						coming soon
+					</td>
+					<td>
+						<b>score pts.</b>
 					</td>
 				</tr>
 				)}
@@ -114,6 +118,7 @@ const Scoreboard = ({
 
 const mapStateToProps = (state, props) => {
 	return { 
+		likes: getLikesForPage(state, props),
 		users: getCurrentUsersByKeyword(state, props),
 		selectedItems: state.selectedItems,
 		sortBy: state.usersSorting
@@ -129,7 +134,8 @@ const mapDispatchToProps = (dispatch, props) => {
 		handleUserSelectBatch: users => {
 			users.map(user => dispatch(selectItemOnTable(user.id)))
 		},
-		handleSort: sorter => dispatch(sortUsersBy(sorter))
+		handleSort: sorter => dispatch(sortUsersBy(sorter)),
+		fetch: () => dispatch(fetchTopFansEntities(props.params.checksum))
 	}
 }
 

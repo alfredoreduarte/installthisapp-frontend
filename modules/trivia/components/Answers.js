@@ -40,7 +40,7 @@ const Answers = ({
 				<div className="col-md-4">
 					{false ? <SearchForm /> : null}
 					<button className="btn btn-default btn-sm" onClick={() => fetchAgain()}>
-						<span className="glyphicon glyphicon-refresh"></span>
+						Refresh table
 					</button>
 				</div>
 				<div className={answers.length > 0 ? "col-md-8 text-right" : "hide"}>
