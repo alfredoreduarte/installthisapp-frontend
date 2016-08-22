@@ -25,6 +25,6 @@ export default (store) => ({
 		require('routes/Users'),
 		require('routes/Preferences'),
 		require('modules/trivia/routes').default(store),
-		require('modules/top_fans/routes'),
+		require('modules/top_fans/routes').default(store),
 	]
 })

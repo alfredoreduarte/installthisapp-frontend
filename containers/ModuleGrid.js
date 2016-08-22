@@ -47,7 +47,7 @@ const ModuleGrid = ({ modules, handleModuleSelection }) => (
 
 const mapStateToProps = (state, props) => {
 	return { 
-		modules: ['trivia']
+		modules: ['trivia', 'top_fans']
 	}
 }
 

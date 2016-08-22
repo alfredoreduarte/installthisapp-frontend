@@ -4,12 +4,13 @@ import Select from 'react-select'
 import { Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Checkbox } from 'react-icheck'
+import { fetchTopFansEntities } from 'modules/top_fans/actions/entities'
 import { getCurrentUsersByKeyword } from 'selectors/users'
 import { selectItemOnTable, sortUsersBy } from 'actions/users'
 import SearchForm from 'components/SearchForm'
 import User from 'components/User'
 
-const Users = ({ 
+const Scoreboard = ({ 
 	users, 
 	selectedItems,
 	sortBy,
@@ -22,7 +23,7 @@ const Users = ({
 			<div className="row">
 				<div className="col-md-12">
 					<h3 className="ita-page-title">
-						Scores 
+						Scoreboard 
 						<small className={selectedItems.length ? '' : 'hide'}>
 							{' '}/ {selectedItems.length} 
 							{' '}user{selectedItems.length > 1 ? 's' : ''} selected
@@ -88,7 +89,7 @@ const Users = ({
 				{users.map(user => 
 				<tr key={user.id}>
 					<td>
-						<User name={user.name} id={user.id} small />
+						<User name={user.name} identifier={user.identifier} small />
 					</td>
 					<td>
 						{user.createdOn}
@@ -119,14 +120,17 @@ const mapStateToProps = (state, props) => {
 	}
 }
 
-const mapDispatchToProps = (dispatch, props) => ({
-	handleUserSelect: id => {
-		dispatch(selectItemOnTable(id))
-	},
-	handleUserSelectBatch: users => {
-		users.map(user => dispatch(selectItemOnTable(user.id)))
-	},
-	handleSort: sorter => dispatch(sortUsersBy(sorter))
-})
+const mapDispatchToProps = (dispatch, props) => {
+	dispatch(fetchTopFansEntities(props.params.checksum))
+	return {
+		handleUserSelect: id => {
+			dispatch(selectItemOnTable(id))
+		},
+		handleUserSelectBatch: users => {
+			users.map(user => dispatch(selectItemOnTable(user.id)))
+		},
+		handleSort: sorter => dispatch(sortUsersBy(sorter))
+	}
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Users)
+export default connect(mapStateToProps, mapDispatchToProps)(Scoreboard)

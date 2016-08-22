@@ -25,7 +25,7 @@ export const fetchEntities = () => {
 			.then(response => response.json())
 			.then(json =>{
 				const camelizedJson = humps.camelizeKeys(json)
-				console.log(camelizedJson)
+				// console.log(camelizedJson)
 				const normalized = normalize(camelizedJson, schema.entities)
 				dispatch(receiveEntities(normalized.entities))
 			})

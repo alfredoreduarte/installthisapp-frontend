@@ -1,13 +1,13 @@
-module.exports = {
+export default (store) => ({
 	getChildRoutes(partialNextState, cb) {
 		require.ensure([], (require) => {
 			cb(null, [
 				{
-					path: 'scores',
+					path: 'scoreboard',
 					getComponents(nextState, cb) {
 						require.ensure([], (require) => {
 							cb(null, {
-								main: require('modules/top_fans/components/Scores').default,
+								main: require('modules/top_fans/components/Scoreboard').default,
 								sidebar: require('modules/top_fans/sidebar').default,
 							})
 						})
@@ -16,4 +16,4 @@ module.exports = {
 			])
 		})
 	},
-}
+})

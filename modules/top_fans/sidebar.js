@@ -4,7 +4,7 @@ import { Link, IndexLink } from 'react-router'
 
 const Sidebar = ({ checksum, type }) => (
 	<ul className="list-unstyled">
-		<li><Link to={`/apps/${type}/${checksum}/scores`} activeClassName="active">Scores</Link></li>
+		<li><Link to={`/d/apps/${type}/${checksum}/scoreboard`} activeClassName="active">Scoreboard</Link></li>
 	</ul>
 )
 

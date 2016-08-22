@@ -5,7 +5,8 @@ module.exports = {
 	devtool: 'inline-source-map',
 	entry: {
 		dashboard: ['webpack-hot-middleware/client', './index'],
-		trivia: './canvas/trivia/index'
+		trivia: './canvas/trivia/index',
+		top_fans: './canvas/top_fans/index',
 	},
 	output: {
 		path: path.join(__dirname, '/dist'),
