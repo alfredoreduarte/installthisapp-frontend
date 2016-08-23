@@ -8,26 +8,23 @@ import GameSample from 'components/GameSample'
 
 const DesignHelper = ({ coords, handleHover, handleClick }) => (
 	<div>
-		<MouseTrap 
-			pos={coords} 
-			handleClick={() => handleClick()}
-		/>
+		<MouseTrap pos={coords} handleClick={handleClick} />
 		<div className="actualGame" onMouseOver={handleHover}>
 			<GameSample />
 		</div>
 	</div>
 )
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = state => {
 	return { 
 		coords: state.mouseTrap
 	}
 }
 
-const mapDispatchToProps = (dispatch, props) => {
+const mapDispatchToProps = dispatch => {
 	return {
 		handleHover: e => dispatch(handleHover(e)),
-		handleClick: () => dispatch(setActiveSelector())
+		handleClick: e => dispatch(setActiveSelector())
 	}
 }
 

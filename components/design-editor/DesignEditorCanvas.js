@@ -11,7 +11,12 @@ const DesignEditorCanvas = ({ platform, styles }) => (
 		<div className={`ita-canvas ${platform}`}>
 			<Frame 
 				className="ita-canvas-frame"
-				head={<link type='text/css' rel='stylesheet' href='/styles/module.css' />}>
+				head={
+					<link 
+						type='text/css' 
+						rel='stylesheet' 
+						href='https://degleanuj61sc.cloudfront.net/application_assets/9S87FM/images/3_styles_original.css' />
+				}>
 				<div className="styles" dangerouslySetInnerHTML={{__html: styles}}></div>
 				<DesignHelper />
 			</Frame>
@@ -36,7 +41,7 @@ const processStyles = (state) => {
 		const toReturn = `<style>${stringified}</style>`
 		return toReturn
 	})
-	console.log('toReturn', stylesArray)
+	// console.log('toReturn', stylesArray)
 	return stylesArray.join(' ')
 }
 

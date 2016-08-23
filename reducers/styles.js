@@ -25,6 +25,22 @@ const styles = (state = {
 			return Object.assign({}, state, {
 				platform: action.payload
 			})
+		case 'SET_INITIAL_TAG':
+			let ruless = state.rules
+			ruless.push({
+				type: 'rule',
+				selectors,
+				declarations: [
+					{
+						type: 'declaration',
+						property,
+						value
+					}
+				]
+			})
+			return Object.assign({}, state, {
+				rules: ruless
+			})
 		case 'SET_STYLES_RESULT':
 			const { selectors, property, value } = action
 			const existingRule = _.find(state.rules, {selectors})
@@ -59,6 +75,8 @@ const styles = (state = {
 					}
 				}
 			}
+			// Acá está lo interesante
+			// tengo que correr esto cuando se hace click
 			else{
 				rules.push({
 					type: 'rule',

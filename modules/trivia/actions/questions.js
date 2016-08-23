@@ -20,6 +20,7 @@ export const postDeleteQuestions = (checksum, ids) => {
 					headers: {
 						'Authorization': `Token token="${api_key}"`,
 						'Content-Type': `application/json`,
+						'Accept': 'application/json',
 					},
 					body: JSON.stringify({
 						id: ids

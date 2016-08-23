@@ -20,7 +20,7 @@ const DesignEditorBottomBar = ({
 	resetToDefaults,
 
 }) => (
-	<div className="ita-bottom-bar">
+	<div className="ita-bottom-bar hide">
 		<ScreenSelector
 			value={currentScreen}
 			options={screens}

@@ -7,6 +7,14 @@ const getActiveStylesSelector = state => state.styles.activeSelector
 const getStylesObject = state => state.styles.ruleset
 const getStylesResult = state => state.styles.rules
 
+const getAllRules = createSelector(
+	getStylesObject,
+	styles => {
+		const allRules = _.filter(styles.stylesheet.rules, {'type': 'rule'})
+		return allRules
+	}
+)
+
 export const getStylesResultAsCss = createSelector(
 	getStylesResult,
 	getActiveStylesSelector,
@@ -30,9 +38,8 @@ export const getStylesResultAsCss = createSelector(
 
 export const getRulesetForActiveSelector = createSelector(
 	getActiveStylesSelector,
-	getStylesObject,
-	(selectorArray, styles) => {
-		const allRules = _.filter(styles.stylesheet.rules, {'type': 'rule'})
+	getAllRules,
+	(selectorArray, allRules) => {
 		const selectedRules = _.filter(allRules, rule => {
 			const intersection = _.intersection(rule.selectors, selectorArray)
 			return intersection.length > 0 ? true : false

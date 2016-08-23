@@ -3,8 +3,10 @@ import { connect } from 'react-redux'
 import { Navbar, NavDropdown, MenuItem } from 'react-bootstrap'
 import { Link, IndexLink } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
+import { push } from 'react-router-redux'
+import Cookies from 'js-cookie'
 
-const AppNavBar = ({ name }) => (
+const AppNavBar = ({ name, logout }) => (
 	<Navbar fluid={true}>
 		<Navbar.Header>
 			<Navbar.Brand>
@@ -24,7 +26,7 @@ const AppNavBar = ({ name }) => (
 					<LinkContainer to={{ pathname: '/d/account' }}>
 						<MenuItem eventKey={3.3}>My Account</MenuItem>
 					</LinkContainer>
-					<MenuItem eventKey={3.2} href="/">Logout</MenuItem>
+					<MenuItem eventKey={3.2} href="/" onClick={() => logout()}>Logout</MenuItem>
 				</NavDropdown>
 			</ul>
 		</div>
@@ -37,4 +39,10 @@ const mapStateToProps = (state) => {
 	}
 }
 
-export default connect(mapStateToProps)(AppNavBar);
+const mapDispatchToProps = dispatch => {
+	return {
+		logout: () => Cookies.remove('api_key')
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppNavBar);

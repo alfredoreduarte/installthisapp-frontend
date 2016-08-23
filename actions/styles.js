@@ -2,14 +2,7 @@ import 'isomorphic-fetch'
 import css from 'css'
 import * as CONFIG from 'config.dev'
 import { updateCoords } from 'actions/design-helper/mouseTrap'
-
-export const receiveStyles = string => {
-	const cssObject = css.parse(string)
-	return {
-		type: 'RECEIVE_STYLES',
-		payload: cssObject
-	}
-}
+import { readFromApi } from 'api'
 
 export const setHoveredSelector = selector => {
 	const classesWithDots = selector.map(sel => '.' + sel)
@@ -26,6 +19,7 @@ export const setActiveSelector = () => {
 }
 
 export const modifyDesign = (selectors, property, value) => {
+	console.log('modify', selectors)
 	return {
 		type: 'SET_STYLES_RESULT',
 		selectors,
@@ -41,19 +35,33 @@ export const setPlatform = platform => {
 	}
 }
 
-export const fetchStyles = checksum => {
-	return (dispatch) => {
-		const url = CONFIG.BASE_URL + `/apps/styles/${checksum}`
-		// const url = `/apps/styles/${checksum}`
-		return 	fetch(url)
-				.then(response => response.text())
-				.then(text =>{
-					dispatch(receiveStyles(text))
+const receiveStyles = string => {
+	const cssObject = css.parse(string)
+	return {
+		type: 'RECEIVE_STYLES',
+		payload: cssObject
+	}
+}
+
+const fetchFromAws = url => {
+	return dispatch => {
+		return fetch(url, {
+					method: 'GET'
 				})
+				.then(response => response.text())
+				.then(text => dispatch(receiveStyles(text)))
 				.catch(exception =>
-					console.log('fetchStyles: parsing failed', exception)
+					console.log('parsing failed', exception)
 				)
 	}
+}
+
+export const fetchStyles = checksum => {
+	return dispatch =>
+		readFromApi(`applications/${checksum}/styles.json`, response => {
+			console.log(response.stylesheet_url)
+			dispatch(fetchFromAws(response.stylesheet_url))
+		})
 }
 
 // HoverHandler

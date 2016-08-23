@@ -28,6 +28,7 @@ class Design extends Component {
 }
 
 const mapStateToProps = state => {
+	// Para saber si ya se cargó el css
 	const loaded = state.styles.ruleset.stylesheet ? true : false
 	return { 
 		loaded,

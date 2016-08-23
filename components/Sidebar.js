@@ -28,8 +28,8 @@ const Sidebar = ({ installed, checksum, type, children, menu, facebookPageIdenti
 		<ul className="list-unstyled">
 			<li><IndexLink to={`/d/apps/${type}/${checksum}`} activeClassName="active">Dashboard</IndexLink></li>
 			<li><Link to={`/d/apps/${type}/${checksum}/analytics`} activeClassName="active">Analytics</Link></li>
-			<li className="hide"><Link to={`/d/apps/${type}/${checksum}/design`} activeClassName="active">Design</Link></li>
-			<li><a href="javascript:void(0)" activeClassName="active">Design <small>(coming soon)</small></a></li>
+			<li className=""><Link to={`/d/apps/${type}/${checksum}/design`} activeClassName="active">Design</Link></li>
+			<li className="hide"><Link to="" activeClassName="active">Design <small>(coming soon)</small></Link></li>
 			<li><Link to={`/d/apps/${type}/${checksum}/users`} activeClassName="active">Users</Link></li>
 		</ul>
 		{children}

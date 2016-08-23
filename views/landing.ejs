@@ -32,7 +32,8 @@
 		var saveCookie = function(name, value){
 			Cookies.set(name, value);
 		}
-
+		console.log('current cookie')
+		console.log(Cookies.get('api_key'))
 		var login = function(){
 			FB.login(function(response) {
 				$.ajax({

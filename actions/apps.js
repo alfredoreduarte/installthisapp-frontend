@@ -1,11 +1,9 @@
-import 'isomorphic-fetch'
 import { normalize, arrayOf } from 'normalizr'
 import * as schema from 'schema'
 import { push } from 'react-router-redux'
-import * as CONFIG from 'config.dev'
 import { receiveEntities } from 'actions/entities'
-import Cookies from 'js-cookie'
 import humps from 'humps'
+import { readFromApi, writeToApi, deleteFromApi } from 'api'
 
 export const deleteApp = checksum => ({
 	type: 'DELETE_APP',
@@ -33,105 +31,49 @@ export const toggleAppUninstalled = checksum => ({
 })
 
 export const postDeleteApp = checksum => {
-	return (dispatch, getState) => {
-		const api_key = Cookies.get('api_key')
-		const url = CONFIG.BASE_URL + `/applications/${checksum}.json`
-		return 	fetch(url, {
-					method: 'DELETE',
-					headers: {
-						'Authorization': `Token token="${api_key}"`,
-					}
-				})
-				.then(response => response.json())
-				.then(json =>{
-					console.log('se borro', json)
-				})
-				.catch(exception =>
-					console.log('postNewApp: parsing failed', exception)
-				)
+	return dispatch => {
+		deleteFromApi(`applications/${checksum}.json`, null, response => console.log(response))
 	}
 }
 
 export const install = checksum => {
-	return (dispatch, getState) => {
-		const api_key = Cookies.get('api_key')
-		const url = CONFIG.BASE_URL + `/applications/${checksum}/install.json`
-		return 	fetch(url, {
-					method: 'POST',
-					headers: {
-						'Authorization': `Token token="${api_key}"`,
-					}
-				})
-				.then(response => response.json())
-				.then(json =>{
-					console.log('se instalo?', json)
-					const camelizedJson = humps.camelizeKeys(json)
-					console.log(camelizedJson)
-					const normalized = normalize(camelizedJson, schema.entities)
-					dispatch(receiveEntities(normalized.entities))
-					dispatch(toggleAppInstalled(checksum))
-				})
-				.catch(exception =>
-					console.log('postNewApp: parsing failed', exception)
-				)
-	}
+	return dispatch => 
+		writeToApi(`applications/${checksum}/install.json`, null, response => {
+			const camelizedJson = humps.camelizeKeys(response)
+			const normalized = normalize(camelizedJson, schema.entities)
+			dispatch(receiveEntities(normalized.entities))
+			dispatch(toggleAppInstalled(checksum))
+		})
 }
 
 export const uninstall = checksum => {
-	return (dispatch, getState) => {
-		const api_key = Cookies.get('api_key')
-		const url = CONFIG.BASE_URL + `/applications/${checksum}/uninstall.json`
-		return 	fetch(url, {
-					method: 'POST',
-					headers: {
-						'Authorization': `Token token="${api_key}"`,
-					}
-				})
-				.then(response => response.json())
-				.then(json =>{
-					console.log('se desinstalo?', json)
-					dispatch(toggleAppUninstalled(checksum))
-				})
-				.catch(exception =>
-					console.log('postNewApp: parsing failed', exception)
-				)
+	return dispatch => 
+		writeToApi(`applications/${checksum}/uninstall.json`, null, response => {
+			dispatch(toggleAppUninstalled(checksum))
+		})
+}
+
+const digestDataBeforePostingNewApp = data => {
+	return {
+		application: {
+			facebook_page_identifier: data.pageId,
+			application_type: data.module,
+			title: data.title,
+		}
 	}
 }
 
 export const postNewApp = () => {
-	const url = CONFIG.BASE_URL + '/applications.json'
-	const api_key = Cookies.get('api_key')
-	console.log('create app request')
 	return (dispatch, getState) => {
-		const newAppData = getState().newApp
-		const params = {
-			application: {
-				facebook_page_identifier: newAppData.pageId,
-				application_type: newAppData.module,
-				title: newAppData.title,
-			}
-		}
-		return fetch(url, {
-					method: 'POST',
-					headers: {
-						'Authorization': `Token token="${api_key}"`,
-						'Accept': 'application/json',
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify(params),
-				})
-				.then(response => response.json())
-				.then(json =>{
-					const camelizedJson = humps.camelizeKeys(json)
-					const normalized = normalize(camelizedJson, schema.app)
-					dispatch(receiveEntities(normalized.entities))
-					dispatch(push(`/d/apps/${camelizedJson.applicationType}/${camelizedJson.checksum}`))
-					dispatch({
-						type: 'TOGGLE_ACTIVITY/CREATING_APP'
-					})
-				})
-				.catch(exception =>
-					console.log('postNewApp: parsing failed', exception)
-				)
+		const params = digestDataBeforePostingNewApp(getState().newApp)
+		writeToApi(`applications.json`, params, response => {
+			const camelizedJson = humps.camelizeKeys(response)
+			const normalized = normalize(camelizedJson, schema.app)
+			dispatch(receiveEntities(normalized.entities))
+			dispatch(push(`/d/apps/${camelizedJson.applicationType}/${camelizedJson.checksum}`))
+			dispatch({
+				type: 'TOGGLE_ACTIVITY/CREATING_APP'
+			})
+		})
 	}
 }
