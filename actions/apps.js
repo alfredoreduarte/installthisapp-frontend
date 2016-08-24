@@ -5,6 +5,11 @@ import { receiveEntities } from 'actions/entities'
 import humps from 'humps'
 import { readFromApi, writeToApi, deleteFromApi } from 'api'
 
+export const setCurrentAppChecksum = checksum => ({
+	type: 'SET_CURRENT_APP',
+	checksum
+})
+
 export const deleteApp = checksum => ({
 	type: 'DELETE_APP',
 	checksum

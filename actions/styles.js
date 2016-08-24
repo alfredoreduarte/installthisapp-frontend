@@ -56,16 +56,19 @@ const fetchFromAws = url => {
 }
 
 export const fetchStyles = checksum => {
-	return dispatch =>
+	return (dispatch, getState) => {
+		// const checksum = getState().admin.currentApp
 		readFromApi(`applications/${checksum}/styles.json`, response => {
 			dispatch(fetchFromAws(response.stylesheet_url))
 		})
+	}	
 }
 
 export const saveStyles = () => {
 	return (dispatch, getState) => {
 		const cssString = css.stringify(getState().styles.ruleset)
-		writeToApi(`applications/9S87FM/save_app_from_editor.json`, {
+		const checksum = getState().admin.currentApp
+		writeToApi(`applications/${checksum}/save_app_from_editor.json`, {
 				css: cssString,
 				messages: {hola: 'chau'}
 			}, response => {

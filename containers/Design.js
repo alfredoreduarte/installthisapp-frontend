@@ -1,31 +1,24 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import Canvas from 'components/design-editor/DesignEditorCanvas'
 import Sidebar from 'containers/DesignEditorSidebar'
 import BottomBar from 'containers/DesignEditorBottomBar'
+import { setCurrentAppChecksum } from 'actions/apps'
 import { fetchStyles } from 'actions/styles'
 
-class Design extends Component {
-	componentDidMount() {
-		this.props.kickFetchStyles()
-	}
-	render(){
-		const { loaded, platform } = this.props
-		return (
+const Design = ({ loaded, platform }) => (
+	<div>
+		{loaded ? (
 			<div>
-				{loaded ? (
-					<div>
-						<Canvas
-							platform={platform}
-							/>
-						<Sidebar />
-						<BottomBar />
-					</div>
-				) : 'cargando estilos'}
+				<Canvas
+					platform={platform}
+					/>
+				<Sidebar />
+				<BottomBar />
 			</div>
-		)
-	}
-}
+		) : 'cargando estilos'}
+	</div>
+)
 
 const mapStateToProps = state => {
 	// Para saber si ya se cargó el css
@@ -37,8 +30,10 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = (dispatch, props) => {
-	return { 
-		kickFetchStyles: () => dispatch(fetchStyles(props.params.checksum))
+	dispatch(setCurrentAppChecksum(props.params.checksum))
+	dispatch(fetchStyles(props.params.checksum))
+	return {
+		
 	}
 }
 
