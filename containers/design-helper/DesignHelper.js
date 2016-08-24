@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 import MouseTrap from 'components/design-helper/MouseTrap'
-import { updateCoords, updateSelector } from 'actions/design-helper/mouseTrap'
 import { setActiveSelector, handleHover } from 'actions/styles'
 import GameSample from 'components/GameSample'
 
@@ -15,17 +14,13 @@ const DesignHelper = ({ coords, handleHover, handleClick }) => (
 	</div>
 )
 
-const mapStateToProps = state => {
-	return { 
-		coords: state.mouseTrap
-	}
-}
+const mapStateToProps = state => ({
+	coords: state.mouseTrap
+})
 
-const mapDispatchToProps = dispatch => {
-	return {
-		handleHover: e => dispatch(handleHover(e)),
-		handleClick: e => dispatch(setActiveSelector())
-	}
-}
+const mapDispatchToProps = dispatch => ({
+	handleHover: e => dispatch(handleHover(e)),
+	handleClick: e => dispatch(setActiveSelector())
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(DesignHelper)

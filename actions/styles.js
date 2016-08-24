@@ -2,10 +2,10 @@ import 'isomorphic-fetch'
 import css from 'css'
 import * as CONFIG from 'config.dev'
 import { updateCoords } from 'actions/design-helper/mouseTrap'
-import { readFromApi } from 'api'
+import { readFromApi, writeToApi } from 'api'
 
 export const setHoveredSelector = selector => {
-	const classesWithDots = selector.map(sel => '.' + sel)
+	const classesWithDots = selector.map( sel => '.' + sel )
 	return {
 		type: 'SET_HOVERED_SELECTOR',
 		payload: classesWithDots
@@ -18,10 +18,9 @@ export const setActiveSelector = () => {
 	}
 }
 
-export const modifyDesign = (selectors, property, value) => {
-	console.log('modify', selectors)
+export const modifyWholeSheet = (selectors, property, value) => {
 	return {
-		type: 'SET_STYLES_RESULT',
+		type: 'MODIFY_STYLE',
 		selectors,
 		property,
 		value
@@ -59,9 +58,20 @@ const fetchFromAws = url => {
 export const fetchStyles = checksum => {
 	return dispatch =>
 		readFromApi(`applications/${checksum}/styles.json`, response => {
-			console.log(response.stylesheet_url)
 			dispatch(fetchFromAws(response.stylesheet_url))
 		})
+}
+
+export const saveStyles = () => {
+	return (dispatch, getState) => {
+		const cssString = css.stringify(getState().styles.ruleset)
+		writeToApi(`applications/9S87FM/save_app_from_editor.json`, {
+				css: cssString,
+				messages: {hola: 'chau'}
+			}, response => {
+				console.log(response)
+			})
+	}
 }
 
 // HoverHandler

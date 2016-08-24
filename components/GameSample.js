@@ -2,8 +2,8 @@ import React from 'react'
 
 const GameSample = () => (
 	<div>
-		<h1 className="game-title ita-cali-question-text">App Title</h1>
-		<p className="text-success ita-subtitle">Maecenas sed diam</p>
+		<h1 className="game-title ita-cali-countdown-text">9999</h1>
+		<p className="text-success ita-cali-question-text">Maecenas sed diam</p>
 	</div>
 )
 

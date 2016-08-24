@@ -6,7 +6,7 @@ const DesignEditorSidebarHeader = ({
 	handleSave,
 	busy
 }) => (
-	<div className="ita-side-bar-header hide">
+	<div className="ita-side-bar-header">
 		<div className="ita-side-bar-content">
 			<Link to="/" className="btn btn-default" onClick={() => handleClose()}>
 				<small>

@@ -3,15 +3,15 @@ import { connect } from 'react-redux'
 import Header from 'containers/DesignEditorSidebarHeader'
 import Tabs from 'containers/DesignEditorSidebarTabs'
 import Tools from 'containers/DesignEditorTools'
-import { modifyDesign } from 'actions/styles'
+import { modifyWholeSheet, saveStyles } from 'actions/styles'
 import { getRulesetForActiveSelector as getRuleset } from 'selectors/styles'
 
-const DesignEditorSidebar = ({ ruleset, selector, handleChange }) => (
+const DesignEditorSidebar = ({ ruleset, selector, handleChange, handleSave }) => (
 	<div className="ita-side-bar">
 
 		<Header
 			handleClose={() => console.log('closing editor!')}
-			handleSave={() => console.log('saving design!')}
+			handleSave={handleSave}
 			busy={true}
 		/>	
 
@@ -34,7 +34,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		handleChange: (selector, property, value) => dispatch(modifyDesign(selector, property, value))
+		handleChange: (selector, property, value) => dispatch(modifyWholeSheet(selector, property, value)),
+		handleSave: () => dispatch(saveStyles()),
 	}
 }
 

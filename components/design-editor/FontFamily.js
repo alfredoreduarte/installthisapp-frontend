@@ -12,21 +12,20 @@ const FontFamily = ({
 		{ value: 'Oswald', label: 'Oswald' },
 		{ value: 'Proxima Nova', label: 'Proxima Nova' },
 	],
-	handleChange,
-	defaultValue,
+	onChange,
+	value,
 }) => (
 	<Select
 		clearable={false}
-		value={defaultValue}
+		value={value}
 		options={values}
-		onChange={e => handleChange(e.label)}
+		onChange={e => onChange(e.label)}
 	/>
 )
 
 FontFamily.propTypes = {
-	defaultValue: PropTypes.string.isRequired,
-	// values: PropTypes.array.isRequired,
-	handleChange: PropTypes.func.isRequired,
+	value: PropTypes.string.isRequired,
+	onChange: PropTypes.func.isRequired,
 }
 
 export default FontFamily

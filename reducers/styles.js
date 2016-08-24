@@ -5,8 +5,6 @@ const styles = (state = {
 	hoveredSelector: [],
 	activeSelector: [],
 	ruleset: {},
-	rules: [
-	]
 }, action) => {
 	switch (action.type) {
 		case 'RECEIVE_STYLES':
@@ -25,73 +23,51 @@ const styles = (state = {
 			return Object.assign({}, state, {
 				platform: action.payload
 			})
-		case 'SET_INITIAL_TAG':
-			let ruless = state.rules
-			ruless.push({
-				type: 'rule',
-				selectors,
-				declarations: [
-					{
-						type: 'declaration',
-						property,
-						value
-					}
-				]
-			})
-			return Object.assign({}, state, {
-				rules: ruless
-			})
-		case 'SET_STYLES_RESULT':
-			const { selectors, property, value } = action
-			const existingRule = _.find(state.rules, {selectors})
-			let rules = state.rules
-			if (existingRule) {
-				const index = rules.indexOf(existingRule)
-				const existingDeclaration = _.find(existingRule.declarations, {property})
-				const declarations = existingRule.declarations
-				if (existingDeclaration) {
-					const declarationIndex = existingRule.declarations.indexOf(existingDeclaration)
-					declarations[declarationIndex] = {
-						type: 'declaration',
-						property,
-						value
-					}
-					rules[index] = {
-						type: 'rule',
-						selectors,
-						declarations
-					}
+		case 'MODIFY_STYLE':
+			// Los comentarios son referencias a funciones en la versión pre-redux
+			// parseCssRules
+			// creo un array de rules que van a ser modificados
+			const rulesBeingEdited = _.filter(state.ruleset.stylesheet.rules, function(rule){
+				// veo si hay classnames en común entre el rule y lo seleccionado, y si el rule es de tipo 'rule'
+				if (_.intersection(rule.selectors, action.selectors).length > 0 && rule.type == 'rule') {
+					return true
 				}
 				else{
-					declarations.push({
-						type: 'declaration',
-						property,
-						value
-					})
-					rules[index] = {
-						type: 'rule',
-						selectors,
-						declarations
-					}
+					return false
 				}
-			}
-			// Acá está lo interesante
-			// tengo que correr esto cuando se hace click
-			else{
-				rules.push({
-					type: 'rule',
-					selectors,
-					declarations: [
-						{
-							type: 'declaration',
-							property,
-							value
-						}
-					]
+			})
+			// handleChange
+			const newEditedRules = rulesBeingEdited.map( rule => {
+				const newDeclarations = rule.declarations.map( declaration => {
+					if (declaration.property == action.property) {
+						return Object.assign({}, declaration, {
+							value: action.value
+						})
+					}
+					else{
+						return declaration
+					}
 				})
-			}
+				return Object.assign({}, rule, {
+					declarations: newDeclarations
+				})
+			})
+			// replaceRule
+			const newRules = state.ruleset.stylesheet.rules.map(rule => {
+				if (_.intersection(rule.selectors, action.selectors).length > 0) {
+					if (newEditedRules.length > 1) { console.error('newEditedRules contains more than one element') }
+					return newEditedRules[0]
+				}
+				else{
+					return rule
+				}
+			})
 			return Object.assign({}, state, {
-				rules
+				ruleset: Object.assign({}, state.ruleset, {
+					stylesheet: Object.assign({}, state.ruleset.stylesheet, {
+						rules: newRules
+					})
+				})
 			})
 		default:
 			return state
