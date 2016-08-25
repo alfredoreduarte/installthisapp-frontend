@@ -4,6 +4,15 @@ import * as CONFIG from 'config.dev'
 import { updateCoords } from 'actions/design-helper/mouseTrap'
 import { readFromApi, writeToApi } from 'api'
 
+export const fetchJsonTest = () => {
+	return (dispatch, getState) => {
+		const checksum = getState().admin.currentApp
+		readFromApi(`applications/${checksum}/jsontest.json`, response => {
+			console.log(response)
+		})
+	}
+}
+
 export const setHoveredSelector = selector => {
 	const classesWithDots = selector.map( sel => '.' + sel )
 	return {

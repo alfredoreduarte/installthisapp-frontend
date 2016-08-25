@@ -4,7 +4,7 @@ import Canvas from 'components/design-editor/DesignEditorCanvas'
 import Sidebar from 'containers/DesignEditorSidebar'
 import BottomBar from 'containers/DesignEditorBottomBar'
 import { setCurrentAppChecksum } from 'actions/apps'
-import { fetchStyles } from 'actions/styles'
+import { fetchStyles, fetchJsonTest } from 'actions/styles'
 
 const Design = ({ loaded, platform }) => (
 	<div>
@@ -32,6 +32,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, props) => {
 	dispatch(setCurrentAppChecksum(props.params.checksum))
 	dispatch(fetchStyles(props.params.checksum))
+	dispatch(fetchJsonTest())
 	return {
 		
 	}
