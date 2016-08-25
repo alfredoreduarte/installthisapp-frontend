@@ -6,6 +6,13 @@ const apps = (state = {}, action) => {
 					status: 'deleted'
 				})
 			})
+		case 'SET_APP_FB_APPLICATION':
+			return Object.assign({}, state, {
+				[action.checksum]: Object.assign({}, state[action.checksum], {
+					fbApplication: action.fbApplication,
+					fbApplicationId: action.fbApplication.id,
+				})
+			})
 		case 'INSTALL_APP':
 			return Object.assign({}, state, {
 				[action.checksum]: Object.assign({}, state[action.checksum], {

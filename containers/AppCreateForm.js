@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 import { push } from 'react-router-redux'
 import { setNewAppTitle } from 'actions/newApp'
 import { postNewApp } from 'actions/apps'
+import { turnOnActivityCreatingApp } from 'actions/activityIndicators'
 
 const AppCreateForm = ({ handleSubmit, handleTextChange, busy }) => (
 	<div className="container-fluid">
@@ -26,9 +27,7 @@ const mapDispatchToProps = (dispatch, props) => ({
 	},
 	handleSubmit: () => {
 		dispatch(postNewApp())
-		dispatch({
-			type: 'TOGGLE_ACTIVITY/CREATING_APP'
-		})
+		dispatch(turnOnActivityCreatingApp())
 	}
 })
 

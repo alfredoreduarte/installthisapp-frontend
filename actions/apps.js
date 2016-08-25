@@ -35,6 +35,12 @@ export const toggleAppUninstalled = checksum => ({
 	checksum
 })
 
+export const setAppFbApplication = (fbApplication, checksum) => ({
+	type: 'SET_APP_FB_APPLICATION',
+	checksum,
+	fbApplication,
+})
+
 export const postDeleteApp = checksum => {
 	return dispatch => {
 		deleteFromApi(`applications/${checksum}.json`, null, response => console.log(response))
@@ -45,9 +51,12 @@ export const install = checksum => {
 	return dispatch => 
 		writeToApi(`applications/${checksum}/install.json`, null, response => {
 			const camelizedJson = humps.camelizeKeys(response)
-			const normalized = normalize(camelizedJson, schema.entities)
-			dispatch(receiveEntities(normalized.entities))
+			console.log('camel')
+			console.log(camelizedJson)
+			// const normalized = normalize(camelizedJson, schema.entities)
+			// dispatch(receiveEntities(normalized.entities))
 			dispatch(toggleAppInstalled(checksum))
+			dispatch(setAppFbApplication(camelizedJson, checksum))
 		})
 }
 
@@ -76,9 +85,11 @@ export const postNewApp = () => {
 			const normalized = normalize(camelizedJson, schema.app)
 			dispatch(receiveEntities(normalized.entities))
 			dispatch(push(`/d/apps/${camelizedJson.applicationType}/${camelizedJson.checksum}`))
-			dispatch({
-				type: 'TOGGLE_ACTIVITY/CREATING_APP'
-			})
+			// Commented out because we actually have to wait for the js chunk to download 
+			// Moved to containers/AppDashboardContainer.js
+			// dispatch({
+			// 	type: 'TOGGLE_ACTIVITY/CREATING_APP'
+			// })
 		})
 	}
 }

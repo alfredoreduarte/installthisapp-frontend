@@ -28,6 +28,7 @@ export const getAllAppsByText = createSelector(
 	appsSorterSelector,
 	(apps, text, appsSorting) => {
 		const currentApps = _.values(apps).filter(app => stringContains(app.title, text))
-		return _.sortBy(currentApps, appsSorting)
+		const order = appsSorting == 'updatedOn' ? 'desc' : 'asc'
+		return _.orderBy(currentApps, appsSorting, order)
 	}
 )

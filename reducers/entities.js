@@ -13,6 +13,7 @@ const entities = (state = { apps: {}, users: {}, pages: {} }, action) => {
 		case 'INSTALLING_APP':
 		case 'UNINSTALLING_APP':
 		case 'UNINSTALL_APP':
+		case 'SET_APP_FB_APPLICATION':
 			return Object.assign({}, state, {
 				apps: apps(state.apps, action)
 			})

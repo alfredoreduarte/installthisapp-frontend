@@ -1,11 +1,16 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import Spinner from 'react-spinkit'
 import StatusIndicator from 'components/StatusIndicator'
 import { setAppToDelete } from 'actions/deleteApp'
+import { turnOnActivityLoadingApp, turnOffActivityLoadingApp } from 'actions/activityIndicators'
 import FbPhoto from 'components/FbPhoto'
 
 const App = ({ 
+	loadingDashboard,
+	otherAppsLoading,
+	toggleLoading,
 	gridSize,
 	status,
 	title,
@@ -17,13 +22,22 @@ const App = ({
 	handleDeleteRequest 
 }) => (
 	<div className={`col-md-${gridSize}`}>
-		<div className="panel panel-default ita-panel-screen">
+		<div className={`panel panel-default ita-panel-screen ${otherAppsLoading ? 'greyed-out' : ''}`}>
 			<div className="panel-body">
+				<FbPhoto identifier={facebookPageIdentifier} />
+				{loadingDashboard ? 
+					<div className="ita-panel-overlay-spinner">
+						<Spinner spinnerName="circle" noFadeIn={true} />
+					</div>
+				:
 				<div className="ita-panel-overlay">
 					<br />
 					<br />
 					<br />
-					<Link to={`/d/apps/${applicationType}/${checksum}`} className="btn btn-white btn-outline">
+					<Link 
+						to={`/d/apps/${applicationType}/${checksum}`} 
+						onClick={toggleLoading}
+						className="btn btn-white btn-outline">
 						Go To Dashboard
 					</Link>
 					<br/>
@@ -32,7 +46,7 @@ const App = ({
 						Delete
 					</button>
 				</div>
-				<FbPhoto identifier={facebookPageIdentifier} />
+				}
 			</div>
 			<div className="panel-footer text-center">
 				<StatusIndicator active={status == 'installed'} />{' '}
@@ -53,13 +67,23 @@ const App = ({
 	</div>
 )
 
+const mapStateToProps = (state, props) => {
+	const appLoading = state.activityIndicators.appChecksumDashboardLoading
+	const loadingDashboard = appLoading == props.checksum
+	return { 
+		otherAppsLoading: appLoading && !loadingDashboard,
+		loadingDashboard,
+	}
+}
+
 const mapDispatchToProps = (dispatch, ownProps) => {
 	return { 
 		handleDeleteRequest: checksum => {
 			console.log('app to delete!', checksum)
 			dispatch(setAppToDelete(checksum))
-		}
+		},
+		toggleLoading: () => dispatch(turnOnActivityLoadingApp(ownProps.checksum)),
 	}
 }
 
-export default connect(undefined, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)
