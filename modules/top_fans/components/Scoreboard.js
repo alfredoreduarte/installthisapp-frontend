@@ -10,7 +10,7 @@ import { getLikesForPage } from 'modules/top_fans/selectors/likes'
 import { selectItemOnTable, sortUsersBy } from 'actions/users'
 import SearchForm from 'components/SearchForm'
 import User from 'components/User'
-import topFansTest from 'lib/topFansTest'
+// import topFansTest from 'lib/topFansTest'
 
 const Scoreboard = ({
 	likes,
@@ -43,7 +43,7 @@ const Scoreboard = ({
 					<button className="btn btn-default" onClick={fetch}>
 						Refresh
 					</button>
-					<button onClick={() => topFansTest()} className="btn btn-default">
+					<button onClick={() => console.log('test disabled')} className="btn btn-default">
 						Post demo fans data to API
 					</button>
 					<ul className="ita-table-tools-selected list-inline list-no-margin">

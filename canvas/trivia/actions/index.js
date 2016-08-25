@@ -14,6 +14,7 @@ import humps from 'humps'
 // FIX NEEDED!: Ahora mismo settings.done es un parche feo para no hacer submit dos veces, porque el state
 // se actualiza asincronamente y no tenemos callback para saber cuando se terminaron de responder
 // las preguntas
+// Tip: sucede al dejar el tiempo corriendo y que se marquen todas como incorrectas
 // 
 const prePostAnswers = () => {
 	return (dispatch, getState) => {
