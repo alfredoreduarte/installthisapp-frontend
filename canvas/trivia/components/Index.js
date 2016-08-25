@@ -9,14 +9,13 @@ import { advanceCountDown, saveAnswer } from 'canvas/trivia/actions'
 import { getQuestionWithOptions, hasAnsweredAllQuestions } from 'canvas/trivia/selectors/questions'
 
 class Index extends Component {
-	componentDidMount() {
-		const { runTime } = this.props
-		this.interval = setInterval(() => {
-			runTime()
-		}, 1000)
-	}
-	componentWillUnmount() {
-		clearInterval(this.interval)
+	componentWillReceiveProps(nextProps) {
+		const { runTime, loading, countDownRunning, time } = nextProps
+		if (countDownRunning && !loading) {
+			setTimeout(() => {
+				runTime()
+			}, 1000)
+		}
 	}
 	render(){
 		const { time, question, loading, saveAnswer } = this.props

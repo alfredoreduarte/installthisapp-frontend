@@ -1,13 +1,21 @@
 import { Schema, arrayOf } from 'normalizr'
 
-export const question = new Schema('questions')
-export const option = new Schema('options')
+const question = new Schema(
+	'questions', 
+	{
+		defaults: { 
+			answered: false
+		}
+	}
+)
+
+const option = new Schema('options')
 
 question.define({
 	options: arrayOf(option)
 })
 
-export const entities = {
+export const payload = {
 	questions: arrayOf(question),
 	options: arrayOf(option)
 }

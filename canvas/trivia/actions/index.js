@@ -2,45 +2,66 @@ import 'isomorphic-fetch'
 import { normalize, arrayOf } from 'normalizr'
 import { push } from 'react-router-redux'
 import * as schema from 'canvas/trivia/schema'
-import { hasAnsweredAllQuestions, allQuestions, allOptions, answeredQuestions } from 'canvas/trivia/selectors/questions'
+import { 
+	hasAnsweredAllQuestions, 
+	allQuestions, 
+	allOptions,
+} from 'canvas/trivia/selectors/questions'
 import * as CONFIG from 'config.dev'
 import humps from 'humps'
 
+// 
+// FIX NEEDED!: Ahora mismo settings.done es un parche feo para no hacer submit dos veces, porque el state
+// se actualiza asincronamente y no tenemos callback para saber cuando se terminaron de responder
+// las preguntas
+// 
 const prePostAnswers = () => {
 	return (dispatch, getState) => {
-		dispatch(toggleActivityIndicator())
-		dispatch(postAnswers())
-			.then(success => {
-				dispatch(toggleActivityIndicator())
-				dispatch(push(`/${window.canvasId}/${window.checksum}/thanks`))
-			}, failure => {
-				console.log('FAILURE', failure)
-			}
-		)
+		if (!getState().settings.done) {
+			dispatch({
+				type: 'TOGGLE_DONE'
+			})
+			dispatch(toggleActivityIndicator())
+			console.log('fetching', getState().settings.done)
+			dispatch(postAnswers())
+				.then(success => {
+					dispatch(toggleActivityIndicator())
+					dispatch(push(`/${window.canvasId}/${window.checksum}/thanks`))
+				}, failure => {
+					console.log('FAILURE', failure)
+				}
+			)
+		}
 	}
 }
 const handleUnansweredQuestions = () => {
 	return (dispatch, getState) => {
 		const questions = allQuestions(getState())
 		const options = allOptions(getState())
-		const answeredQuestionsArray = answeredQuestions(getState())
+		const unansweredQuestionsArray = []
 		questions.map(q => {
-			if (answeredQuestionsArray.indexOf(q.id) < 0) {
-				const option = _.find(options, o => {
-					if (o.correct == false && q.options.indexOf(o.id) > -1) {
-						return o
-					}
-				})
-				dispatch(saveAnswer(q.id, option.id, false))
+			if (!q.answered) {
+				unansweredQuestionsArray.push(q.id)
 			}
+		})
+		unansweredQuestionsArray.map(id => {
+			const singleQuestion = _.find(questions, {id})
+			const option = _.find(options, o => !o.correct && singleQuestion.options.indexOf(o.id) > -1 )
+			dispatch(saveAnswer(id, option.id, false))
 		})
 	}
 }
 export const advanceCountDown = () => {
 	return (dispatch, getState) => {
 		const { timeOut } = getState().settings
-		if (timeOut == 0) {
-			hasAnsweredAllQuestions(getState()) ? dispatch(prePostAnswers()) : dispatch(handleUnansweredQuestions())
+		if ( timeOut == 1 ) {
+			if ( hasAnsweredAllQuestions(getState()) ) {
+				dispatch(prePostAnswers())
+			}
+			else {
+				dispatch(handleUnansweredQuestions())
+				dispatch(toggleCountDown())
+			}
 		}
 		else{
 			dispatch({
@@ -61,14 +82,6 @@ export function toggleCountDown(){
 		type: 'TOGGLE_COUNTDOWN'
 	}
 }
-
-// export function answerQuestion(id){
-// 	return {
-// 		type: 'ANSWER_QUESTION',
-// 		id
-// 	}
-// }
-// 
 
 export const receiveEntities = entities => ({
 	type: 'RECEIVE_ENTITIES',
@@ -91,7 +104,7 @@ export const loginCallback = () => {
 export const fetchEntities = () => {
 	return (dispatch, getState) => {
 		const { checksum, canvasId } = getState().applicationData
-		const url = CONFIG.BASE_URL + `/${checksum}/canvas_entities.json`
+		const url = CONFIG.BASE_URL + `/${checksum}/jsontest.json`
 		return fetch(url, {
 					method: 'GET',
 					headers: {
@@ -100,22 +113,23 @@ export const fetchEntities = () => {
 				})
 				.then(response => response.json())
 				.then(json =>{
-					if (json.status == 'ok') {
-						const camelizedJson = humps.camelizeKeys(json)
-						const normalized = normalize(camelizedJson, schema.entities)
-						if (Object.keys(normalized.entities.questions).length) {
-							dispatch(receiveEntities(normalized.entities))
-							dispatch(receiveGameSettings(camelizedJson.settings))
-							dispatch(push(`/${canvasId}/${checksum}`))
-							dispatch(toggleActivityIndicator())
-							dispatch(toggleCountDown())
+					const camelizedJson = humps.camelizeKeys(json)
+					const payload = normalize(camelizedJson.payload, schema.payload)
+					const settings = camelizedJson.settings
+					const isEmpty = _.isEmpty(payload.entities.questions)
+					if (!isEmpty) {
+						dispatch(receiveEntities(payload.entities))
+						dispatch(receiveGameSettings(settings))
+						dispatch(toggleActivityIndicator())
+						if (_.filter(payload.entities.questions, { 'answered': false }).length == 0) {
+							dispatch(push(`/${canvasId}/${checksum}/thanks`))
 						}
 						else{
-							// no hay preguntas
+							dispatch(push(`/${canvasId}/${checksum}`))
+							dispatch(toggleCountDown())
 						}
 					}
-					else if (json.status == 'already_answered') {
-						// no hay preguntas
+					else {
 						dispatch(push(`/${canvasId}/${checksum}/already-played`))
 					}
 				})
@@ -127,19 +141,23 @@ export const fetchEntities = () => {
 
 export const saveAnswer = (questionId, optionId, correct) =>{
 	return (dispatch, getState) => {
-		dispatch({
-			type: 'ANSWER_QUESTION',
-			id: questionId		
-		})
-		dispatch({
-			type: 'SAVE_ANSWER',
-			payload: {
-				questionId,
-				optionId,
-				correct
-			}
-		})
-		if (hasAnsweredAllQuestions(getState())) {dispatch(prePostAnswers())}
+		if ( hasAnsweredAllQuestions(getState()) ) {
+			dispatch(prePostAnswers())
+		}
+		else {
+			dispatch({
+				type: 'ANSWER_QUESTION',
+				id: questionId		
+			})
+			dispatch({
+				type: 'SAVE_ANSWER',
+				payload: {
+					questionId,
+					optionId,
+					correct
+				}
+			})
+		}
 	}
 }
 

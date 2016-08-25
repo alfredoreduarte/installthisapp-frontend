@@ -3,16 +3,16 @@ import { createSelector } from 'reselect'
 
 export const allQuestions = state => _.values(state.entities.questions)
 export const allOptions = state => _.values(state.entities.options)
-export const answeredQuestions = state => state.answeredQuestions
+// export const answeredQuestions = state => state.answeredQuestions
 
 const getUnansweredQuestion = createSelector(
 	allQuestions,
-	answeredQuestions,
-	(questions, answeredArray) => {
-		return _.find(questions, q => {
-			return answeredArray.indexOf(q.id) < 0
-		})
-	}
+	// answeredQuestions,
+	questions => _.find(questions, {'answered': false})
+		// return _.find(questions, q => {
+		// 	return answeredArray.indexOf(q.id) < 0
+		// })
+	// }
 )
 
 export const getQuestionWithOptions = createSelector(
@@ -34,7 +34,6 @@ export const getQuestionWithOptions = createSelector(
 )
 
 export const hasAnsweredAllQuestions = createSelector(
-	answeredQuestions,
-	allQuestions,
-	(answersArray, questions) => Object.keys(questions).length == answersArray.length
+	getUnansweredQuestion,
+	question => question ? false : true
 )

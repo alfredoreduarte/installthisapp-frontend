@@ -1,10 +1,9 @@
 import _ from 'lodash'
 
-const settings = (state = { 
-	timeOut: 9999, 
-	order: 'ASC', 
+const settings = (state = {
 	countDownRunning: false,
 	isFetching: true,
+	done: false,
 }, action) => {
 	switch (action.type) {
 		case 'RECEIVE_SETTINGS':
@@ -16,6 +15,10 @@ const settings = (state = {
 		case 'TOGGLE_ACTIVITY_INDICATOR':
 			return Object.assign({}, state, {
 				isFetching: !state.isFetching
+			})
+		case 'TOGGLE_DONE':
+			return Object.assign({}, state, {
+				done: true
 			})
 		case 'TOGGLE_COUNTDOWN':
 			return Object.assign({}, state, {
