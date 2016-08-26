@@ -1,16 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import Loading from 'canvas/trivia/components/Loading'
-import CountDown from 'canvas/trivia/components/CountDown'
-import Question from 'canvas/trivia/components/Question'
-import OptionList from 'canvas/trivia/components/OptionList'
+import IndexView from 'canvas/trivia/components/IndexView'
 import { advanceCountDown, saveAnswer } from 'canvas/trivia/actions'
 import { getQuestionWithOptions, hasAnsweredAllQuestions } from 'canvas/trivia/selectors/questions'
 
 class Index extends Component {
 	componentWillReceiveProps(nextProps) {
-		const { runTime, loading, countDownRunning, time } = nextProps
+		const { runTime, loading, countDownRunning } = nextProps
 		if (countDownRunning && !loading) {
 			setTimeout(() => {
 				runTime()
@@ -18,24 +15,8 @@ class Index extends Component {
 		}
 	}
 	render(){
-		const { time, question, loading, saveAnswer } = this.props
 		return (
-			<div className="col-sm-12">
-				{loading ? <Loading /> : null }
-				{!loading && question ? 
-				<div>
-					<CountDown 
-						time={time} />
-					<Question 
-						text={question.text} />
-					<OptionList 
-						options={question.options} 
-						handleClick={(optionId, correct) => saveAnswer(question.id, optionId, correct)} />
-				</div>
-				:
-				null
-				}
-			</div>
+			<IndexView { ...this.props } />
 		)
 	}
 }
@@ -45,7 +26,6 @@ const mapStateToProps = state => {
 	const { timeOut, countDownRunning, isFetching } = state.settings
 	return {
 		time: timeOut,
-		finished: hasAnsweredAllQuestions(state),
 		loading: isFetching,
 		question,
 		countDownRunning,

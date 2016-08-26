@@ -9,7 +9,7 @@ const DesignEditorCanvas = ({ platform, styles }) => (
 		<div className={`ita-canvas ${platform}`}>
 			<Frame className="ita-canvas-frame">
 				<div className="styles" dangerouslySetInnerHTML={{__html: styles}}></div>
-				<DesignHelper />
+				<DesignHelper fakeState={{state: 'fakeStateTakenFromArrayOfStates'}} />
 			</Frame>
 		</div>
 	</div>

@@ -10,7 +10,7 @@
     "build": "npm run clean && npm run build:webpack",
     "clean": "rimraf dist",
     "postinstall": "npm run build",
-    "dev": "NODE_ENV=development nodemon server.js",
+    "dev": "NODE_ENV=development webpack-dashboard -c magenta -- nodemon server.js",
     "start": "NODE_ENV=production nodemon server.js"
   },
   "keywords": [],
@@ -93,6 +93,7 @@
     "nock": "^8.0.0",
     "react-addons-test-utils": "^15.2.0",
     "redux-mock-store": "^1.1.2",
-    "sinon": "^1.17.4"
+    "sinon": "^1.17.4",
+    "webpack-dashboard": "^0.1.8"
   }
 }
