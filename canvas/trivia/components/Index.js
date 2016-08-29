@@ -13,6 +13,10 @@ class Index extends Component {
 				runTime()
 			}, 1000)
 		}
+		// CHANCHITO
+		if (!this.props.question) {
+			this.props.saveAnswer()
+		}
 	}
 	render(){
 		return (
