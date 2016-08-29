@@ -86,7 +86,7 @@
     "rimraf": "^2.5.4",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.2",
+    "webpack": "^1.13.2"
   },
   "devDependencies": {
     "enzyme": "^2.3.0",
