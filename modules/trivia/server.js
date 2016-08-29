@@ -39,6 +39,7 @@ triviaRouter.post(`/${triviaCanvasId}`, canvasParser, function(req, res) {
 	.then(response => response.json())
 	.then(json =>{
 		res.render('canvas', {
+			apiUrl,
 			module: 'trivia',
 			canvasId: triviaCanvasId,
 			checksum: json.checksum,
@@ -67,6 +68,7 @@ triviaRouter.get(`/${triviaCanvasId}/:checksum*`, canvasParser, function(req, re
 	.then(response => response.json())
 	.then(json =>{
 		res.render('canvas', {
+			apiUrl,
 			module: 'trivia',
 			canvasId: triviaCanvasId,
 			checksum: json.checksum,
