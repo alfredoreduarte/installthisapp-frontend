@@ -25,7 +25,7 @@ export const getFromApi = (endpoint, success = temporaryEmptyFunction) => {
 						return response.json()
 					case 401:
 						console.log('Not authorized')
-						top.location.href = '/'
+						// top.location.href = '/'
 						return
 					default:
 						console.log('Status: ' + response.status)
@@ -58,7 +58,7 @@ export const patchToApi = (endpoint, body = null, success = temporaryEmptyFuncti
 						return response.json()
 					case 401:
 						console.log('Not authorized')
-						top.location.href = '/'
+						// top.location.href = '/'
 						return
 					default:
 						console.log('Status: ' + response.status)
@@ -90,7 +90,7 @@ export const postToApi = (endpoint, body = null, success = temporaryEmptyFunctio
 						return response.json()
 					case 401:
 						console.log('Not authorized')
-						top.location.href = '/'
+						// top.location.href = '/'
 						return
 					default:
 						console.log('Status: ' + response.status)
@@ -122,7 +122,7 @@ export const deleteFromApi = (endpoint, body = null, success = temporaryEmptyFun
 						return response.json()
 					case 401:
 						console.log('Not authorized')
-						top.location.href = '/'
+						// top.location.href = '/'
 						return
 					default:
 						console.log('Status: ' + response.status)
