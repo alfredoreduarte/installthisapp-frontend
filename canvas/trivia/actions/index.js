@@ -106,7 +106,7 @@ export const loginCallback = () => {
 export const fetchEntities = () => {
 	return (dispatch, getState) => {
 		const { checksum, canvasId } = getState().applicationData
-		const url = CONFIG.BASE_URL + `/${checksum}/jsontest.json`
+		const url = CONFIG.API_URL + `/${checksum}/jsontest.json`
 		return fetch(url, {
 					method: 'GET',
 					headers: {
@@ -169,7 +169,7 @@ export const postAnswers = () => {
 		const body = {
 			answers: getState().answers
 		}
-		const url = CONFIG.BASE_URL + `/${checksum}/save.json`
+		const url = CONFIG.API_URL + `/${checksum}/save.json`
 		return fetch(url, {
 					method: 'POST',
 					headers: {

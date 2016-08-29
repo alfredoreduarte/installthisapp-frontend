@@ -1,7 +1,7 @@
 import 'isomorphic-fetch'
 import Cookies from 'js-cookie'
 import humps from 'humps'
-import { BASE_URL } from 'config'
+import { API_URL } from 'config'
 
 const processBody = body => body ? JSON.stringify(humps.decamelizeKeys(body)) : null
 const processResponse = res => humps.camelizeKeys(res)
@@ -12,7 +12,7 @@ const temporaryEmptyFunction = arg => {
 
 export const getFromApi = (endpoint, success = temporaryEmptyFunction) => {
 	const api_key = Cookies.get('api_key')
-	return 	fetch(BASE_URL + '/' + endpoint, {
+	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'GET',
 				headers: {
 					'Authorization': `Token token="${api_key}"`,
@@ -44,7 +44,7 @@ export const getFromApi = (endpoint, success = temporaryEmptyFunction) => {
 
 export const patchToApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
 	const api_key = Cookies.get('api_key')
-	return 	fetch(BASE_URL + '/' + endpoint, {
+	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'PATCH',
 				headers: {
 					'Authorization': `Token token="${api_key}"`,
@@ -76,7 +76,7 @@ export const patchToApi = (endpoint, body = null, success = temporaryEmptyFuncti
 
 export const postToApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
 	const api_key = Cookies.get('api_key')
-	return 	fetch(BASE_URL + '/' + endpoint, {
+	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'POST',
 				headers: {
 					'Authorization': `Token token="${api_key}"`,
@@ -108,7 +108,7 @@ export const postToApi = (endpoint, body = null, success = temporaryEmptyFunctio
 
 export const deleteFromApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
 	const api_key = Cookies.get('api_key')
-	return 	fetch(BASE_URL + '/' + endpoint, {
+	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'DELETE',
 				headers: {
 					'Authorization': `Token token="${api_key}"`,

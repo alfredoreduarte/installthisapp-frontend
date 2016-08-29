@@ -13,7 +13,7 @@ export const receiveTopFansEntities = (entities) => ({
 })
 
 export const fetchTopFansEntities = (checksum) => {
-	const url = CONFIG.BASE_URL + `/applications/${checksum}/likes.json`
+	const url = CONFIG.API_URL + `/applications/${checksum}/likes.json`
 	const api_key = Cookies.get('api_key')
 	return dispatch => {
 		return fetch(url, {

@@ -13,7 +13,7 @@ export const deleteQuestion = id => ({
 
 export const postDeleteQuestions = (checksum, ids) => {
 	return dispatch => {
-		const url = CONFIG.BASE_URL + `/applications/${checksum}/questions_destroy.json`
+		const url = CONFIG.API_URL + `/applications/${checksum}/questions_destroy.json`
 		const api_key = Cookies.get('api_key')
 		return 	fetch(url, {
 					method: 'POST',
@@ -39,10 +39,10 @@ export const postDeleteQuestions = (checksum, ids) => {
 export const postNewQuestion = (checksum, newQuestion) => {
 	let url
 	if (newQuestion.id) {
-		url = CONFIG.BASE_URL + `/applications/${checksum}/questions_update.json`
+		url = CONFIG.API_URL + `/applications/${checksum}/questions_update.json`
 	}
 	else{
-		url = CONFIG.BASE_URL + `/applications/${checksum}/questions_create.json`
+		url = CONFIG.API_URL + `/applications/${checksum}/questions_create.json`
 	}
 	const api_key = Cookies.get('api_key')
 	const options_attributes = newQuestion.options.map(option => {

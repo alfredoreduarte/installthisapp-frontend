@@ -13,7 +13,7 @@ export const receiveTriviaEntities = (entities) => ({
 })
 
 export const fetchTriviaEntities = (checksum) => {
-	const url = CONFIG.BASE_URL + `/applications/${checksum}/questions.json`
+	const url = CONFIG.API_URL + `/applications/${checksum}/questions.json`
 	const api_key = Cookies.get('api_key')
 	return dispatch => {
 		return fetch(url, {

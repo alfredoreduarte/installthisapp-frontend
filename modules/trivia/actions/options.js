@@ -13,7 +13,7 @@ export const deleteOption = id => ({
 
 export const postDeleteOptions = (checksum, ids) => {
 	return dispatch => {
-		const url = CONFIG.BASE_URL + `/applications/${checksum}/questions_destroy.json`
+		const url = CONFIG.API_URL + `/applications/${checksum}/questions_destroy.json`
 		const api_key = Cookies.get('api_key')
 		return 	fetch(url, {
 					method: 'POST',

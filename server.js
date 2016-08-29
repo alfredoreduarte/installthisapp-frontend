@@ -2,10 +2,12 @@ var path = require('path')
 var express = require('express')
 var cors = require('express-cors')
 var subdomain = require('express-subdomain')
-var serverConfig = require('./server.config')
+// var serverConfig = require('./server.config')
 
-var facebookAppId = serverConfig.getFacebookAppId()
-var apiUrl = serverConfig.getApiUrl()
+// var facebookAppId = serverConfig.getFacebookAppId()
+// var apiUrl = serverConfig.getApiUrl()
+var facebookAppId = process.env.FB_APP_ID || '1061199640593119'
+var apiUrl = process.env.API_URL || 'https://local.installthisapp.com'
 
 process.env.PORT = process.env.PORT || 4000
 process.env.HOST = process.env.HOST || 'localhost'
@@ -61,7 +63,7 @@ app.use(function(req, res, next) {
 })
 app.get('/', function(req, res) {
 	res.render('landing', {
-		env: process.env.ENV,
+		env: process.env.NODE_ENV,
 		apiurl: process.env.API_URL,
 		fbappid: process.env.FB_APP_ID,
 		apiUrl,

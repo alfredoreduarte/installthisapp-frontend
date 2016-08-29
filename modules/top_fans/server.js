@@ -1,7 +1,9 @@
 var express = require('express')
-var serverConfig = require('../../server.config')
-var facebookAppId = serverConfig.getFacebookAppId()
-var apiUrl = serverConfig.getApiUrl()
+// var serverConfig = require('../../server.config')
+// var facebookAppId = serverConfig.getFacebookAppId()
+// var apiUrl = serverConfig.getApiUrl()
+// var facebookAppId = process.env.FB_APP_ID || '1061199640593119'
+var apiUrl = process.env.API_URL || 'https://local.installthisapp.com'
 // #############
 // Canvas
 // #############
