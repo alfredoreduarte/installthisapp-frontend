@@ -1,7 +1,8 @@
 import 'isomorphic-fetch'
 import Cookies from 'js-cookie'
 import humps from 'humps'
-import { API_URL } from 'config'
+// import { API_URL } from 'config'
+const API_URL = process.env.API_URL
 
 const processBody = body => body ? JSON.stringify(humps.decamelizeKeys(body)) : null
 const processResponse = res => humps.camelizeKeys(res)
