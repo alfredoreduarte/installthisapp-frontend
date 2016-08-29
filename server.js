@@ -3,7 +3,6 @@ var express = require('express')
 var cors = require('express-cors')
 var subdomain = require('express-subdomain')
 var serverConfig = require('./server.config')
-var DashboardPlugin = require('webpack-dashboard/plugin')
 
 var facebookAppId = serverConfig.getFacebookAppId()
 var apiUrl = serverConfig.getApiUrl()
@@ -25,6 +24,7 @@ const isDeveloping = process.env.NODE_ENV !== 'production'
 if (isDeveloping) {
 	var webpack = require('webpack')
 	var config = require('./webpack.config.dev')
+	var DashboardPlugin = require('webpack-dashboard/plugin')
 	const compiler = webpack(config)
 	compiler.apply(new DashboardPlugin())
 	app.use(require('webpack-dev-middleware')(compiler, {
