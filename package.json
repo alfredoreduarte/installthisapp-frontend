@@ -87,8 +87,6 @@
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.2",
-    "webpack-dev-middleware": "^1.6.1",
-    "webpack-hot-middleware": "^2.12.2"
   },
   "devDependencies": {
     "enzyme": "^2.3.0",
@@ -98,6 +96,8 @@
     "react-addons-test-utils": "^15.2.0",
     "redux-mock-store": "^1.1.2",
     "sinon": "^1.17.4",
-    "webpack-dashboard": "^0.1.8"
+    "webpack-dashboard": "^0.1.8",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-hot-middleware": "^2.12.2"
   }
 }
