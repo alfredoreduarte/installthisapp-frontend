@@ -9,14 +9,15 @@
 <body>
 	<div id="root"></div>
 	<script>
-		window.appId = "<%= facebookAppId %>";
+		window.apiUrl = "<%= apiUrl %>";
+		window.facebookAppId = "<%= facebookAppId %>";
 	</script>
 	<script src="/static/common.js"></script>
 	<script src="/static/dashboard.bundle.js"></script>
 	<script>
 		window.fbAsyncInit = function() {
 			FB.init({
-				appId      : window.appId,
+				appId      : window.facebookAppId,
 				xfbml      : true,
 				version    : 'v2.7'
 			});

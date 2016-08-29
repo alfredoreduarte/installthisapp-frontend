@@ -41,7 +41,7 @@ const PageGrid = ({ pages, handlePageSelection, handlePermissionRequest }) => (
 		<div className="text-center">
 			<p>Seems like we still don't know your Facebook Pages</p>
 			<FacebookLogin
-				appId={window.appId}
+				appId={window.facebookAppId}
 				cssClass="btn btn-primary btn-lg"
 				scope="manage_pages"
 				autoLoad={false}

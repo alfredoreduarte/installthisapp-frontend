@@ -36,7 +36,7 @@ class Login extends Component {
 				<h1 className="text-center" style={{color: 'white'}}>{title}</h1>
 				{!this.state.logging ?
 				<FacebookLogin
-					appId={window.appId}
+					appId={window.facebookAppId}
 					cssClass="btn btn-primary btn-lg"
 					autoLoad={true}
 					textButton="Sign In"

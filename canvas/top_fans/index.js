@@ -11,7 +11,7 @@ const store = configureStore({
 		checksum: window.checksum,
 		// apiKey: window.canvasApiKey,
 		canvasId: window.canvasId,
-		appId: window.appId,
+		appId: window.facebookAppId,
 	}
 })
 const history = syncHistoryWithStore(browserHistory, store)
