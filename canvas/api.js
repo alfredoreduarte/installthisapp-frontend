@@ -35,6 +35,7 @@ export const getFromApi = (endpoint, success) => {
 			.then(json => {
 				const camelizedJson = humps.camelizeKeys(json)
 				success(camelizedJson)
+				return Promise.resolve(camelizedJson)
 			})
 			.catch(exception =>
 				console.log('parsing failed', exception)
@@ -61,6 +62,7 @@ export const writeToApiWithoutAuth = (endpoint, body = null, success) => {
 			.then(json => {
 				const camelizedJson = humps.camelizeKeys(json)
 				success(camelizedJson)
+				return Promise.resolve(camelizedJson)
 			})
 			.catch(exception => console.log('parsing failed', exception))
 }
@@ -91,6 +93,7 @@ export const postToApi = (endpoint, body = null, success) => {
 			.then(json => {
 				const camelizedJson = humps.camelizeKeys(json)
 				success(camelizedJson)
+				return Promise.resolve(camelizedJson)
 			})
 			.catch(exception =>
 				console.log('parsing failed', exception)
@@ -123,6 +126,7 @@ export const deleteFromApi = (endpoint, body = null, success) => {
 			.then(json => {
 				const camelizedJson = humps.camelizeKeys(json)
 				success(camelizedJson)
+				return Promise.resolve(camelizedJson)
 			})
 			.catch(exception =>
 				console.log('parsing failed', exception)
