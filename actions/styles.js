@@ -1,6 +1,6 @@
 import 'isomorphic-fetch'
 import css from 'css'
-import * as CONFIG from 'config.dev'
+import * as CONFIG from 'config'
 import { updateCoords } from 'actions/design-helper/mouseTrap'
 import { getFromApi, postToApi } from 'api'
 

@@ -7,7 +7,7 @@ import {
 	allQuestions, 
 	allOptions,
 } from 'canvas/trivia/selectors/questions'
-import * as CONFIG from 'config.dev'
+import * as CONFIG from 'config'
 import humps from 'humps'
 import { getFromApi } from 'canvas/api'
 

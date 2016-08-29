@@ -1,7 +1,7 @@
 import 'isomorphic-fetch'
 import { normalize, arrayOf } from 'normalizr'
 import * as schema from 'modules/trivia/schema'
-import * as CONFIG from 'config.dev'
+import * as CONFIG from 'config'
 import humps from 'humps'
 import Cookies from 'js-cookie'
 

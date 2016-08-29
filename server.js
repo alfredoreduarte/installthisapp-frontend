@@ -6,8 +6,8 @@ var subdomain = require('express-subdomain')
 
 // var facebookAppId = serverConfig.getFacebookAppId()
 // var apiUrl = serverConfig.getApiUrl()
-var facebookAppId = process.env.FB_APP_ID
-var apiUrl = process.env.API_URL
+var facebookAppId = process.env.FB_APP_ID || '1061199640593119'
+var apiUrl = process.env.API_URL || 'https://local.installthisapp.com'
 
 process.env.PORT = process.env.PORT || 4000
 process.env.HOST = process.env.HOST || 'localhost'
@@ -47,11 +47,11 @@ app.use('/canvas', express.static(__dirname + '/assets/canvas'))
 app.use('/node_modules', express.static(__dirname + '/node_modules'))
 
 // Trivia
-var triviaRouter = require('./modules/trivia/server.js');
+var triviaRouter = require('./modules/trivia/server.js')
 app.use(triviaRouter)
 
 // Top Fans
-var topFansRouter = require('./modules/top_fans/server.js');
+var topFansRouter = require('./modules/top_fans/server.js')
 app.use(topFansRouter)
 
 // Serving static HTML
@@ -66,7 +66,7 @@ app.get('/', function(req, res) {
 		apiUrl,
 		facebookAppId,
 	})
-});
+})
 app.get('/d*', function(req, res){
 	res.render('dashboard', {
 		apiUrl,
@@ -78,7 +78,7 @@ var options = {}
 if (process.env.NODE_ENV == 'development') {
 	var fs = require('fs'),
 		http = require('http'),
-		https = require('https');
+		https = require('https')
 	var options = {
 		key: fs.readFileSync('./ssl/server.key'),
 		cert: fs.readFileSync('./ssl/STAR_installthisapp_com.crt'),
@@ -91,17 +91,17 @@ if (process.env.NODE_ENV == 'development') {
 	var server = https.createServer(options, app).listen(process.env.PORT, function(err){
 		if (err) {
 			console.log(err)
-			return;
+			return
 		}
-		console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+		console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env)
 	})
 }
 else{
 	app.listen(process.env.PORT, function(err){
 		if (err) {
 			console.log(err)
-			return;
+			return
 		}
-		console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+		console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env)
 	})	
 }
