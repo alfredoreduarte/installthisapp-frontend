@@ -4,8 +4,7 @@ import { getCurrentApp } from 'selectors/apps'
 import AppNavBar from 'components/AppNavBar'
 import AppTitleBar from 'components/AppTitleBar'
 import Sidebar from 'components/Sidebar'
-import { setCurrentAppChecksum, install, uninstall, toggleAppInstalling, toggleAppUninstalling } from 'actions/apps'
-import { turnOffActivityCreatingApp, turnOffActivityLoadingApp } from 'actions/activityIndicators'
+import { install, uninstall, toggleAppInstalling, toggleAppUninstalling } from 'actions/apps'
 import DashboardContentDecorator from 'containers/DashboardContentDecorator'
 
 const AppDashboardContainer = ({ 
@@ -47,29 +46,20 @@ const AppDashboardContainer = ({
 
 const mapStateToProps = (state, props) => {
 	const currentApp = getCurrentApp(state, props)
-	let appId
-	let canvasId
-	if (currentApp) {
-		if (currentApp.fbApplication) {
-			appId = currentApp.fbApplication.appId || null
-			canvasId = currentApp.fbApplication.canvasId || null
-		}
-	}
+	const fbAppId = currentApp.fbApplication ? currentApp.fbApplication.appId : null
+	const fbAppCanvasId = currentApp.fbApplication ? currentApp.fbApplication.canvasId : null
 	return { 
 		facebookPageIdentifier: currentApp ? currentApp.facebookPageIdentifier : '',
-		fbAppId: appId,
-		fbAppCanvasId: canvasId,
-		currentApp: currentApp ? currentApp : {},
+		fbAppId,
+		fbAppCanvasId,
+		currentApp,
 		checksum: props.params.checksum,
 		type: props.params.type,
-		status: currentApp ? currentApp.status : 'ready',
+		status: currentApp.status,
 	}
 }
 
 const mapDispatchToProps = (dispatch, props) => {
-	dispatch(setCurrentAppChecksum(props.params.checksum))
-	dispatch(turnOffActivityCreatingApp())
-	dispatch(turnOffActivityLoadingApp())
 	return {
 		handleInstall: () => {
 			dispatch(toggleAppInstalling(props.params.checksum))

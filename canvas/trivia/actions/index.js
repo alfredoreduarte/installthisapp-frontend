@@ -9,6 +9,7 @@ import {
 } from 'canvas/trivia/selectors/questions'
 import * as CONFIG from 'config.dev'
 import humps from 'humps'
+import { getFromApi } from 'canvas/api'
 
 // 
 // FIX NEEDED!: Ahora mismo settings.done es un parche feo para no hacer submit dos veces, porque el state

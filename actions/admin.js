@@ -1,6 +1,6 @@
 import { fbLogin, fbCheckPagesPerms } from 'lib/facebook'
-import { fetchEntities } from 'actions/entities'
-import { readFromApi } from 'api'
+import { toggleActivityUpdatingAdmin } from 'actions/activityIndicators'
+import { getFromApi, patchToApi } from 'api'
 
 export const receiveAdmin = payload => ({
 	type: 'RECEIVE_ADMIN',
@@ -8,9 +8,22 @@ export const receiveAdmin = payload => ({
 })
 
 export const fetchAdmin = () => {
-	return dispatch => 
-		readFromApi('admin_users.json', response => {
+	return dispatch => getFromApi('admin_users.json').then( response => dispatch(receiveAdmin(response)))
+}
+
+export const updateInfo = () => {
+	return (dispatch, getState) => {
+		dispatch(toggleActivityUpdatingAdmin())
+		const formData = getState().form.adminUserProfile.values
+		const body = {
+			admin_user: formData
+		}
+		patchToApi(
+			`admin_users/${getState().admin.id}.json`, 
+			body
+		).then( response => {
 			dispatch(receiveAdmin(response))
-			dispatch(fetchEntities())
+			dispatch(toggleActivityUpdatingAdmin())
 		})
+	}
 }

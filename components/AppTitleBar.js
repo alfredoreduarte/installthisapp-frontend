@@ -47,8 +47,8 @@ const AppTitleBarButtons = ({
 			<ul className="list-inline"><li><small><a href=""><u>Scheduled for <b>Wed 14, Sept.</b></u></a></small></li></ul>
 		:
 			<ul className="list-inline">
-				<li><p><small><a href="javascript:void(0)"><u>Schedule</u></a></small></p></li>
-				<li><p><small><a href="javascript:void(0)"><u>Preview</u></a></small></p></li>
+				<li className="hide"><p><small><a href="javascript:void(0)"><u>Schedule</u></a></small></p></li>
+				<li className="hide"><p><small><a href="javascript:void(0)"><u>Preview</u></a></small></p></li>
 			</ul>
 		}
 	</div>

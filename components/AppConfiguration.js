@@ -1,25 +1,43 @@
 import React, { Component, PropTypes } from 'react'
 import { push } from 'react-router-redux'
+import Select from 'react-select'
+import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import { postDeleteApp, deleteApp } from 'actions/apps'
+import { update } from 'actions/apps'
+import { getCurrentApp } from 'selectors/apps'
 
-const AppConfiguration = ({ checksum, title, updateApp }) => (
-	<form onSubmit={updateApp}>
+const FacebookPageField = () => (
+	<Select
+		searchable={true}
+		autosize={false}
+		clearable={false}
+		name="form-field-name"
+		value={'name'}
+		options={[
+			{ value: 'name', label: 'Alphabetically' },
+			{ value: 'createdOn', label: 'Most Recent' }
+		]}
+		onChange={val => console.log(val)}
+	/>
+)
+
+let AppConfiguration = ({ handleSubmit, fetching }) => (
+	<form onSubmit={handleSubmit}>
 		<div className="row">
 			<div className="col-md-4">
-				<h3 className="ita-page-title">Preferences <small>(coming soon)</small></h3>
+				<h3 className="ita-page-title">Preferences</h3>
 			</div>
 			<div className="col-md-8 text-right">
-				<button
+				<button 
 					type="submit"
-					className="btn btn-primary btn-outline btn-sm">
-					Save
+					className="btn btn-sm btn-primary btn-outline" disabled={fetching}>
+					{fetching ? 'Saving...' : 'Save'}
 				</button>
 			</div>
 		</div>
 		<hr />
 		<div className="row">
-			<div className="col-md-12">
+			<div className="col-md-6">
 				<div className="panel panel-default">
 					<div className="panel-body">
 						<div className="form-horizontal">
@@ -29,20 +47,17 @@ const AppConfiguration = ({ checksum, title, updateApp }) => (
 									<span className="help-block">Will show un on the Page Tab</span>
 								</div>
 								<div className="col-md-8">
-									<input type="text" className="form-control" value={title} />
+									<Field
+										name="title"
+										type="text" 
+										className="form-control" 
+										component="input" />
 								</div>
 							</div>
-							{1 == 0 ? <div className="form-group">
+							<div className="form-group hide">
 								<label className="col-md-4 control-label">Facebook Page</label>
 								<div className="col-md-8">
-									select
-								</div>
-							</div>
-							: null }
-							<div className="form-group hide">
-								<label className="col-md-4 control-label">Available Platforms</label>
-								<div className="col-md-8">
-									
+									<Field name="facebookPageId" component={FacebookPageField}/>
 								</div>
 							</div>
 						</div>
@@ -53,14 +68,23 @@ const AppConfiguration = ({ checksum, title, updateApp }) => (
 	</form>
 )
 
-const mapStateToProps = (state, props) => {
+AppConfiguration = reduxForm({
+	form: 'appPreferences',
+})(AppConfiguration)
+
+const mapStateToProps = (state, ownProps) => {
 	return {
-		
+		fetching: state.activityIndicators.updatingApp,
+		initialValues: ownProps.currentApp,
 	}
 }
+
 const mapDispatchToProps = dispatch => {
-	return {
-		
+	return { 
+		handleSubmit: e => {
+			e.preventDefault()
+			dispatch(update())
+		}
 	}
 }
 

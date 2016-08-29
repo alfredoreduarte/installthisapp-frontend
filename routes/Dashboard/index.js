@@ -1,4 +1,7 @@
-export default (store) => ({
+import { setCurrentAppChecksum } from 'actions/apps'
+import { turnOffActivityCreatingApp, turnOffActivityLoadingApp } from 'actions/activityIndicators'
+
+export default (store, dispatch) => ({
 	path: '/d/apps/:type/:checksum',
 	getComponents(nextState, cb) {
 		require.ensure([], require => {
@@ -7,6 +10,13 @@ export default (store) => ({
 			// 	main: require('containers/AppDashboardContainer').default,
 			// 	sidebar: require('modules/' + nextState.params.type + '/sidebar').default,
 			// })
+		})
+	},
+	onEnter: (nextState, replace, next) => {
+		dispatch(setCurrentAppChecksum(nextState.params.checksum)).then(() => {
+			dispatch(turnOffActivityCreatingApp())
+			dispatch(turnOffActivityLoadingApp())
+			next()
 		})
 	},
 	indexRoute: {

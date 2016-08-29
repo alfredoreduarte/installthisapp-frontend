@@ -7,10 +7,7 @@ const admin = (state = {
 				currentApp: action.checksum
 			})
 		case 'RECEIVE_ADMIN':
-			if (action.payload) {
-				return action.payload
-			}
-			return state
+			return Object.assign({}, state, action.payload)
 		default:
 			return state
 	}

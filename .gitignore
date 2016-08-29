@@ -39,3 +39,4 @@ Thumbs.db
 # Project
 node_modules
 dist
+.sublime-project

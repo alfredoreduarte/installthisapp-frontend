@@ -1,7 +1,7 @@
 import { normalize, arrayOf } from 'normalizr'
 import * as schema from 'schema'
 import humps from 'humps'
-import { readFromApi } from 'api'
+import { getFromApi } from 'api'
 
 export const receiveEntities = entities => ({
 	type: 'RECEIVE_ENTITIES',
@@ -12,7 +12,7 @@ export const receiveEntities = entities => ({
 
 export const fetchEntities = () => {
 	return dispatch =>
-		readFromApi('admin_user_properties.json', response => {
+		getFromApi('admin_user_properties.json').then( response => {
 			const camelizedJson = humps.camelizeKeys(response)
 			const normalized = normalize(camelizedJson, schema.entities)
 			dispatch(receiveEntities(normalized.entities))

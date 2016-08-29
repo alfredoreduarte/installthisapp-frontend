@@ -20,6 +20,6 @@ const mapStateToProps = ({ admin }) => {
 	return { 
 		admin
 	}
-};
+}
 
 export default connect(mapStateToProps)(Account)

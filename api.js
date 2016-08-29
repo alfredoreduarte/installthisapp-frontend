@@ -1,8 +1,16 @@
 import 'isomorphic-fetch'
 import Cookies from 'js-cookie'
+import humps from 'humps'
 import { BASE_URL } from 'config'
 
-export const readFromApi = (endpoint, success) => {
+const processBody = body => body ? JSON.stringify(humps.decamelizeKeys(body)) : null
+const processResponse = res => humps.camelizeKeys(res)
+
+const temporaryEmptyFunction = arg => {
+	console.log('temporaryEmptyFunction')
+}
+
+export const getFromApi = (endpoint, success = temporaryEmptyFunction) => {
 	const api_key = Cookies.get('api_key')
 	return 	fetch(BASE_URL + '/' + endpoint, {
 				method: 'GET',
@@ -26,45 +34,23 @@ export const readFromApi = (endpoint, success) => {
 				}
 			})
 			.then(json => {
-				success(json)
+				success(processResponse(json))
+				return Promise.resolve(json)
 			})
 			.catch(exception =>
 				console.log('parsing failed', exception)
 			)
 }
 
-export const writeToApiWithoutAuth = (endpoint, body = null, success) => {
-	const bodyToSend = body ? JSON.stringify(body) : null
-	return 	fetch(BASE_URL + '/' + endpoint, {
-				method: 'POST',
-				headers: {
-					'Content-Type': `application/json`,
-				},
-				body: bodyToSend,
-			})
-			.then(response => {
-				switch(response.status){
-					case 200:
-						return response.json()
-					default:
-						console.log('Status: ' + response.status)
-						return
-				}
-			})
-			.then(json => success(json))
-			.catch(exception => console.log('parsing failed', exception))
-}
-
-export const writeToApi = (endpoint, body = null, success) => {
+export const patchToApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
 	const api_key = Cookies.get('api_key')
-	const bodyToSend = body ? JSON.stringify(body) : null
 	return 	fetch(BASE_URL + '/' + endpoint, {
-				method: 'POST',
+				method: 'PATCH',
 				headers: {
 					'Authorization': `Token token="${api_key}"`,
 					'Content-Type': `application/json`,
 				},
-				body: bodyToSend,
+				body: processBody(body),
 			})
 			.then(response => {
 				switch(response.status){
@@ -80,23 +66,55 @@ export const writeToApi = (endpoint, body = null, success) => {
 				}
 			})
 			.then(json => {
-				success(json)
+				success(processResponse(json))
+				return Promise.resolve()
 			})
 			.catch(exception =>
 				console.log('parsing failed', exception)
 			)
 }
 
-export const deleteFromApi = (endpoint, body = null, success) => {
+export const postToApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
 	const api_key = Cookies.get('api_key')
-	const bodyToSend = body ? JSON.stringify(body) : null
+	return 	fetch(BASE_URL + '/' + endpoint, {
+				method: 'POST',
+				headers: {
+					'Authorization': `Token token="${api_key}"`,
+					'Content-Type': `application/json`,
+				},
+				body: processBody(body),
+			})
+			.then(response => {
+				switch(response.status){
+					case 200:
+						return response.json()
+					case 401:
+						console.log('Not authorized')
+						top.location.href = '/'
+						return
+					default:
+						console.log('Status: ' + response.status)
+						return
+				}
+			})
+			.then(json => {
+				success(processResponse(json))
+				return Promise.resolve()
+			})
+			.catch(exception =>
+				console.log('parsing failed', exception)
+			)
+}
+
+export const deleteFromApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
+	const api_key = Cookies.get('api_key')
 	return 	fetch(BASE_URL + '/' + endpoint, {
 				method: 'DELETE',
 				headers: {
 					'Authorization': `Token token="${api_key}"`,
 					'Content-Type': `application/json`,
 				},
-				body: bodyToSend,
+				body: processBody(body),
 			})
 			.then(response => {
 				switch(response.status){
@@ -112,7 +130,8 @@ export const deleteFromApi = (endpoint, body = null, success) => {
 				}
 			})
 			.then(json => {
-				success(json)
+				success(processResponse(json))
+				return Promise.resolve()
 			})
 			.catch(exception =>
 				console.log('parsing failed', exception)

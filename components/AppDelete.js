@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
-import { postDeleteApp, deleteApp } from 'actions/apps'
+import { destroy } from 'actions/apps'
 
 const AppDelete = ({ checksum, handleDelete }) => (
 	<div>
@@ -38,16 +38,12 @@ const AppDelete = ({ checksum, handleDelete }) => (
 
 const mapStateToProps = state => {
 	return {
-		// checksum: 
+		checksum: state.admin.currentApp,
 	}
 }
 const mapDispatchToProps = dispatch => {
 	return {
-		handleDelete: checksum => {
-			dispatch(postDeleteApp(checksum))
-			dispatch(deleteApp(checksum))
-			dispatch(push('/d'))
-		}
+		handleDelete: checksum => dispatch(destroy(checksum))
 	}
 }
 

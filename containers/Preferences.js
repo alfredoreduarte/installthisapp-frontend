@@ -6,14 +6,13 @@ class Preferences extends Component {
 	render(){
 		const {
 			children,
-			checksum,
-			title,
+			currentApp,
 			updateApp,
 		} = this.props
-		if (title) {
+		if (currentApp.title) {
 			return (
 				<div className="">
-					{React.cloneElement(children, { checksum, title })}
+					{React.cloneElement(children, { currentApp })}
 				</div>		
 			)
 		}
@@ -25,18 +24,14 @@ class Preferences extends Component {
 
 const mapStateToProps = (state, props) => {
 	const currentApp = getCurrentApp(state, props) || {}
-	console.log('currenapp', currentApp)
 	return {
-		title: currentApp.title,
-		checksum: currentApp.checksum,
+		currentApp,
 	}
 }
 
 const mapDispatchToProps = (state, props) => {
 	return {
-		updateApp: () => {
-
-		}
+		
 	}
 }
 

@@ -2,18 +2,18 @@ import { normalize, arrayOf } from 'normalizr'
 import * as schema from 'schema'
 import { push } from 'react-router-redux'
 import { receiveEntities } from 'actions/entities'
-import humps from 'humps'
-import { readFromApi, writeToApi, deleteFromApi } from 'api'
+import { toggleActivityUpdatingAppSettings } from 'actions/activityIndicators'
+import { getFromApi, postToApi, deleteFromApi, patchToApi } from 'api'
 
-export const setCurrentAppChecksum = checksum => ({
-	type: 'SET_CURRENT_APP',
-	checksum
-})
-
-export const deleteApp = checksum => ({
-	type: 'DELETE_APP',
-	checksum
-})
+export const setCurrentAppChecksum = checksum => {
+	return dispatch => {
+		dispatch({
+			type: 'SET_CURRENT_APP',
+			checksum
+		})
+		return Promise.resolve()
+	}
+}
 
 export const toggleAppInstalling = checksum => ({
 	type: 'INSTALLING_APP',
@@ -25,46 +25,48 @@ export const toggleAppUninstalling = checksum => ({
 	checksum
 })
 
-export const toggleAppInstalled = checksum => ({
-	type: 'INSTALL_APP',
-	checksum
-})
+export const updateApp = (checksum, payload) => {
+	return {
+		type: 'UPDATE_APP',
+		checksum,
+		payload
+	}
+}
 
-export const toggleAppUninstalled = checksum => ({
-	type: 'UNINSTALL_APP',
-	checksum
-})
-
-export const setAppFbApplication = (fbApplication, checksum) => ({
-	type: 'SET_APP_FB_APPLICATION',
-	checksum,
-	fbApplication,
-})
-
-export const postDeleteApp = checksum => {
+export const destroy = checksum => {
 	return dispatch => {
-		deleteFromApi(`applications/${checksum}.json`, null, response => console.log(response))
+		deleteFromApi(`applications/${checksum}.json`, null, res => {
+			dispatch(updateApp(checksum, res))
+			dispatch(push('/d'))
+		})
 	}
 }
 
 export const install = checksum => {
 	return dispatch => 
-		writeToApi(`applications/${checksum}/install.json`, null, response => {
-			const camelizedJson = humps.camelizeKeys(response)
-			console.log('camel')
-			console.log(camelizedJson)
-			// const normalized = normalize(camelizedJson, schema.entities)
-			// dispatch(receiveEntities(normalized.entities))
-			dispatch(toggleAppInstalled(checksum))
-			dispatch(setAppFbApplication(camelizedJson, checksum))
-		})
+		postToApi(`applications/${checksum}/install.json`, null, res => dispatch(updateApp(checksum, res)))
 }
 
 export const uninstall = checksum => {
 	return dispatch => 
-		writeToApi(`applications/${checksum}/uninstall.json`, null, response => {
-			dispatch(toggleAppUninstalled(checksum))
-		})
+		postToApi(`applications/${checksum}/uninstall.json`, null, res => dispatch(updateApp(checksum, res)))
+}
+
+export const update = () => {
+	return (dispatch, getState) => {
+		dispatch(toggleActivityUpdatingAppSettings())
+		const body = {
+			application: getState().form.appPreferences.values
+		}
+		patchToApi(
+			`applications/${getState().admin.currentApp}.json`, 
+			body, 
+			res => {
+				dispatch(updateApp(getState().admin.currentApp, res))
+				dispatch(toggleActivityUpdatingAppSettings())
+			}
+		)
+	}
 }
 
 const digestDataBeforePostingNewApp = data => {
@@ -80,11 +82,10 @@ const digestDataBeforePostingNewApp = data => {
 export const postNewApp = () => {
 	return (dispatch, getState) => {
 		const params = digestDataBeforePostingNewApp(getState().newApp)
-		writeToApi(`applications.json`, params, response => {
-			const camelizedJson = humps.camelizeKeys(response)
-			const normalized = normalize(camelizedJson, schema.app)
+		postToApi(`applications.json`, params, res => {
+			const normalized = normalize(res, schema.app)
 			dispatch(receiveEntities(normalized.entities))
-			dispatch(push(`/d/apps/${camelizedJson.applicationType}/${camelizedJson.checksum}`))
+			dispatch(push(`/d/apps/${res.applicationType}/${res.checksum}`))
 			// Commented out because we actually have to wait for the js chunk to download 
 			// Moved to containers/AppDashboardContainer.js
 			// dispatch({

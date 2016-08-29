@@ -79,7 +79,6 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
 	return { 
 		handleDeleteRequest: checksum => {
-			console.log('app to delete!', checksum)
 			dispatch(setAppToDelete(checksum))
 		},
 		toggleLoading: () => dispatch(turnOnActivityLoadingApp(ownProps.checksum)),

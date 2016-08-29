@@ -14,3 +14,11 @@ export const turnOnActivityLoadingApp = checksum => ({
 export const turnOffActivityLoadingApp = () => ({
 	type: 'TOGGLE_ACTIVITY_OFF/LOADING_APP'
 })
+
+export const toggleActivityUpdatingAdmin = () => ({
+	type: 'TOGGLE_ACTIVITY/UPDATING_ADMIN'
+})
+
+export const toggleActivityUpdatingAppSettings = () => ({
+	type: 'TOGGLE_ACTIVITY/UPDATING_APP_SETTINGS'
+})

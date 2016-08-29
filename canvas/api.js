@@ -1,7 +1,15 @@
 import 'isomorphic-fetch'
+import humps from 'humps'
 import { BASE_URL } from 'config'
 
-export const readFromApi = (endpoint, success) => {
+const processBody = body => body ? JSON.stringify(humps.decamelizeKeys(body)) : null
+const processResponse = res => humps.camelizeKeys(res)
+
+const temporaryEmptyFunction = arg => {
+	console.log('temporaryEmptyFunction')
+}
+
+export const getFromApi = (endpoint, success) => {
 	const api_key = window.canvasApiKey
 	return 	fetch(BASE_URL + '/' + endpoint, {
 				method: 'GET',
@@ -25,7 +33,8 @@ export const readFromApi = (endpoint, success) => {
 				}
 			})
 			.then(json => {
-				success(json)
+				const camelizedJson = humps.camelizeKeys(json)
+				success(camelizedJson)
 			})
 			.catch(exception =>
 				console.log('parsing failed', exception)
@@ -33,13 +42,12 @@ export const readFromApi = (endpoint, success) => {
 }
 
 export const writeToApiWithoutAuth = (endpoint, body = null, success) => {
-	const bodyToSend = body ? JSON.stringify(body) : null
 	return 	fetch(BASE_URL + '/' + endpoint, {
 				method: 'POST',
 				headers: {
 					'Content-Type': `application/json`,
 				},
-				body: bodyToSend,
+				body: processBody(body),
 			})
 			.then(response => {
 				switch(response.status){
@@ -50,20 +58,22 @@ export const writeToApiWithoutAuth = (endpoint, body = null, success) => {
 						return
 				}
 			})
-			.then(json => success(json))
+			.then(json => {
+				const camelizedJson = humps.camelizeKeys(json)
+				success(camelizedJson)
+			})
 			.catch(exception => console.log('parsing failed', exception))
 }
 
-export const writeToApi = (endpoint, body = null, success) => {
+export const postToApi = (endpoint, body = null, success) => {
 	const api_key = window.canvasApiKey
-	const bodyToSend = body ? JSON.stringify(body) : null
 	return 	fetch(BASE_URL + '/' + endpoint, {
 				method: 'POST',
 				headers: {
 					'Authorization': `Token token="${api_key}"`,
 					'Content-Type': `application/json`,
 				},
-				body: bodyToSend,
+				body: processBody(body),
 			})
 			.then(response => {
 				switch(response.status){
@@ -79,7 +89,8 @@ export const writeToApi = (endpoint, body = null, success) => {
 				}
 			})
 			.then(json => {
-				success(json)
+				const camelizedJson = humps.camelizeKeys(json)
+				success(camelizedJson)
 			})
 			.catch(exception =>
 				console.log('parsing failed', exception)
@@ -88,14 +99,13 @@ export const writeToApi = (endpoint, body = null, success) => {
 
 export const deleteFromApi = (endpoint, body = null, success) => {
 	const api_key = window.canvasApiKey
-	const bodyToSend = body ? JSON.stringify(body) : null
 	return 	fetch(BASE_URL + '/' + endpoint, {
 				method: 'DELETE',
 				headers: {
 					'Authorization': `Token token="${api_key}"`,
 					'Content-Type': `application/json`,
 				},
-				body: bodyToSend,
+				body: processBody(body),
 			})
 			.then(response => {
 				switch(response.status){
@@ -111,7 +121,8 @@ export const deleteFromApi = (endpoint, body = null, success) => {
 				}
 			})
 			.then(json => {
-				success(json)
+				const camelizedJson = humps.camelizeKeys(json)
+				success(camelizedJson)
 			})
 			.catch(exception =>
 				console.log('parsing failed', exception)

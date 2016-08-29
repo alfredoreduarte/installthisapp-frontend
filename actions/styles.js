@@ -2,12 +2,12 @@ import 'isomorphic-fetch'
 import css from 'css'
 import * as CONFIG from 'config.dev'
 import { updateCoords } from 'actions/design-helper/mouseTrap'
-import { readFromApi, writeToApi } from 'api'
+import { getFromApi, postToApi } from 'api'
 
 export const fetchJsonTest = () => {
 	return (dispatch, getState) => {
 		const checksum = getState().admin.currentApp
-		readFromApi(`applications/${checksum}/jsontest.json`, response => {
+		getFromApi(`applications/${checksum}/jsontest.json`, response => {
 			console.log(response)
 		})
 	}
@@ -67,7 +67,7 @@ const fetchFromAws = url => {
 export const fetchStyles = checksum => {
 	return (dispatch, getState) => {
 		// const checksum = getState().admin.currentApp
-		readFromApi(`applications/${checksum}/styles.json`, response => {
+		getFromApi(`applications/${checksum}/styles.json`, response => {
 			dispatch(fetchFromAws(response.stylesheet_url))
 		})
 	}	
@@ -77,7 +77,7 @@ export const saveStyles = () => {
 	return (dispatch, getState) => {
 		const cssString = css.stringify(getState().styles.ruleset)
 		const checksum = getState().admin.currentApp
-		writeToApi(`applications/${checksum}/save_app_from_editor.json`, {
+		postToApi(`applications/${checksum}/save_app_from_editor.json`, {
 				css: cssString,
 				messages: {hola: 'chau'}
 			}, response => {
