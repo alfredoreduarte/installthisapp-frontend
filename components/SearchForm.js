@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { searchText } from 'actions/filterText'
 
-export default class SearchForm extends Component {
+class SearchForm extends Component {
 	componentDidMount() {
 		this.refs.searchFormInput.focus()
 	}
