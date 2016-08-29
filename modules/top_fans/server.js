@@ -39,6 +39,7 @@ topFansRouter.post(`/${topFansCanvasId}`, canvasParser, function(req, res) {
 	.then(response => response.json())
 	.then(json =>{
 		res.render('canvas', {
+			apiUrl,
 			module: 'top_fans',
 			canvasId: topFansCanvasId,
 			checksum: json.checksum,
@@ -67,6 +68,7 @@ topFansRouter.get(`/${topFansCanvasId}/:checksum*`, canvasParser, function(req, 
 	.then(response => response.json())
 	.then(json =>{
 		res.render('canvas', {
+			apiUrl,
 			module: 'top_fans',
 			canvasId: topFansCanvasId,
 			checksum: json.checksum,

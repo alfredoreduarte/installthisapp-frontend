@@ -6,8 +6,8 @@ var subdomain = require('express-subdomain')
 
 // var facebookAppId = serverConfig.getFacebookAppId()
 // var apiUrl = serverConfig.getApiUrl()
-var facebookAppId = process.env.FB_APP_ID
-var apiUrl = process.env.API_URL
+var facebookAppId = process.env.FB_APP_ID || '1061199640593119'
+var apiUrl = process.env.API_URL || 'https://local.installthisapp.com'
 
 process.env.PORT = process.env.PORT || 4000
 process.env.HOST = process.env.HOST || 'localhost'
