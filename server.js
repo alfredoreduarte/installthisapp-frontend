@@ -63,6 +63,9 @@ app.use(function(req, res, next) {
 })
 app.get('/', function(req, res) {
 	res.render('landing', {
+		env: process.env.NODE_ENV,
+		apiiurl: process.env.API_URL,
+		fbappid: process.env.FB_APP_ID,
 		apiUrl,
 		facebookAppId,
 	})

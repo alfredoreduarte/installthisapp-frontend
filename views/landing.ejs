@@ -32,6 +32,8 @@
 		var saveCookie = function(name, value){
 			Cookies.set(name, value);
 		}
+		console.log('env')
+		console.log('<%=apiiurl%>')
 		var login = function(){
 			FB.login(function(response) {
 				$.ajax({
