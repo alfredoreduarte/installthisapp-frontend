@@ -6,8 +6,8 @@ var subdomain = require('express-subdomain')
 
 // var facebookAppId = serverConfig.getFacebookAppId()
 // var apiUrl = serverConfig.getApiUrl()
-var facebookAppId = process.env.FB_APP_ID || '1061199640593119'
-var apiUrl = process.env.API_URL || 'https://local.installthisapp.com'
+var facebookAppId = process.env.FB_APP_ID
+var apiUrl = process.env.API_URL
 
 process.env.PORT = process.env.PORT || 4000
 process.env.HOST = process.env.HOST || 'localhost'
@@ -63,16 +63,13 @@ app.use(function(req, res, next) {
 })
 app.get('/', function(req, res) {
 	res.render('landing', {
-		env: process.env.NODE_ENV,
-		apiurl: process.env.API_URL,
 		apiUrl,
 		facebookAppId,
 	})
 });
 app.get('/d*', function(req, res){
 	res.render('dashboard', {
-		apiurl: process.env.API_URL,
-		facebookAppId: facebookAppId
+		facebookAppId,
 	})
 })
 

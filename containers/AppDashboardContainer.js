@@ -5,6 +5,7 @@ import AppNavBar from 'components/AppNavBar'
 import AppTitleBar from 'components/AppTitleBar'
 import Sidebar from 'components/Sidebar'
 import { install, uninstall, toggleAppInstalling, toggleAppUninstalling } from 'actions/apps'
+import { turnOffActivityLoadingApp } from 'actions/activityIndicators'
 import DashboardContentDecorator from 'containers/DashboardContentDecorator'
 
 const AppDashboardContainer = ({ 
@@ -60,6 +61,7 @@ const mapStateToProps = (state, props) => {
 }
 
 const mapDispatchToProps = (dispatch, props) => {
+	dispatch(turnOffActivityLoadingApp())
 	return {
 		handleInstall: () => {
 			dispatch(toggleAppInstalling(props.params.checksum))

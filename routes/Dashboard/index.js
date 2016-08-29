@@ -15,7 +15,7 @@ export default (store, dispatch) => ({
 	onEnter: (nextState, replace, next) => {
 		dispatch(setCurrentAppChecksum(nextState.params.checksum)).then(() => {
 			dispatch(turnOffActivityCreatingApp())
-			dispatch(turnOffActivityLoadingApp())
+			// dispatch(turnOffActivityLoadingApp())
 			next()
 		})
 	},
