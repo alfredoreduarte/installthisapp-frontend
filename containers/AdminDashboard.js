@@ -14,6 +14,7 @@ import { deleteApp, destroy } from 'actions/apps'
 
 const AdminDashboard = ({ 
 	apps,
+	filterText,
 	showCreateModal,
 	showDeleteModal,
 	appToBeDeleted,
@@ -24,7 +25,7 @@ const AdminDashboard = ({
 }) => (
 	<div>
 		<AppNavBar />
-		{apps.length > 0 ? 
+		{apps.length > 0 || filterText ? 
 			<div>
 				<DashboardTitleBar />
 				<DashboardToolBar />
@@ -45,10 +46,11 @@ const AdminDashboard = ({
 const mapStateToProps = (state, props) => {
 	return {
 		apps: getAllAppsByText(state, props),
+		filterText: state.filterText,
 		showCreateModal: props.location.pathname.indexOf('/d/apps/create') !== -1,
 		showDeleteModal: state.deleteApp.checksum ? true: false,
 		appToBeDeleted: state.deleteApp.checksum ? getAppToBeDeleted(state, props) : {},
-		step: props.params.step ? props.params.step : 1
+		step: props.params.step || 1
 	}
 }
 const mapDispatchToProps = (dispatch, props) => {

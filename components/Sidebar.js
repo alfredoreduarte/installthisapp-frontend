@@ -1,28 +1,35 @@
 import React, { Component, PropTypes } from 'react'
 import { Link, IndexLink } from 'react-router'
 
-const ExternalLinksMenu = ({ checksum, facebookPageIdentifier, fbAppId, fbAppCanvasId }) => (
-	<ul className="list-unstyled">
-		<li>
-			<a 
-			href={`https://www.facebook.com/pages/${facebookPageIdentifier}/${facebookPageIdentifier}?sk=app_${fbAppId}`}
-			target="_blank"
-			className="text-primary">View on Facebook</a>
-		</li>
-		<li>
-			<a 
-			href={`/${fbAppCanvasId}/${checksum}`}
-			target="_blank"
-			className="text-success">View as website</a>
-		</li>
-	</ul>
+const ExternalLinksMenu = ({ checksum, fbPageIdentifier, fbAppId, fbAppCanvasId }) => (
+	<div>
+		<ul className="list-unstyled">
+			<li>
+				<a 
+				href={`https://facebook.com/pages/${fbPageIdentifier}/${fbPageIdentifier}?sk=app_${fbAppId}`}
+				target="_blank"
+				className="text-primary">
+					View on Facebook <small><span className="glyphicon glyphicon-share"></span></small>
+				</a>
+			</li>
+			<li>
+				<a 
+				href={`/${fbAppCanvasId}/${checksum}`}
+				target="_blank"
+				className="text-success">
+					View as a website <small><span className="glyphicon glyphicon-share"></span></small>
+				</a>
+			</li>
+		</ul>
+		<hr/>
+	</div>
 )
 
 const Sidebar = ({ installed, checksum, type, children, menu, facebookPageIdentifier, fbAppId, fbAppCanvasId }) => (
 	<div className="col-md-2 col-xs-12 ita-main-menu">
 		{installed ? <ExternalLinksMenu 
 			checksum={checksum}
-			facebookPageIdentifier={facebookPageIdentifier}
+			fbPageIdentifier={facebookPageIdentifier}
 			fbAppId={fbAppId} 
 			fbAppCanvasId={fbAppCanvasId} /> : null}
 		<ul className="list-unstyled">

@@ -2,10 +2,6 @@ var path = require('path')
 var express = require('express')
 var cors = require('express-cors')
 var subdomain = require('express-subdomain')
-// var serverConfig = require('./server.config')
-
-// var facebookAppId = serverConfig.getFacebookAppId()
-// var apiUrl = serverConfig.getApiUrl()
 var facebookAppId = process.env.FB_APP_ID || '1061199640593119'
 var apiUrl = process.env.API_URL || 'https://local.installthisapp.com'
 
@@ -86,7 +82,6 @@ if (process.env.NODE_ENV == 'development') {
 }
 
 // Running the server
-// Config
 if (process.env.NODE_ENV == 'development') {
 	var server = https.createServer(options, app).listen(process.env.PORT, function(err){
 		if (err) {
