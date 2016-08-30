@@ -7,9 +7,8 @@ import { getFromApi, postToApi } from 'api'
 export const fetchJsonTest = () => {
 	return (dispatch, getState) => {
 		const checksum = getState().admin.currentApp
-		getFromApi(`applications/${checksum}/jsontest.json`, response => {
-			console.log(response)
-		})
+		return getFromApi(`applications/${checksum}/jsontest.json`)
+				.then(response => console.log(response))
 	}
 }
 
@@ -67,9 +66,8 @@ const fetchFromAws = url => {
 export const fetchStyles = checksum => {
 	return (dispatch, getState) => {
 		// const checksum = getState().admin.currentApp
-		getFromApi(`applications/${checksum}/styles.json`, response => {
-			dispatch(fetchFromAws(response.stylesheet_url))
-		})
+		return getFromApi(`applications/${checksum}/styles.json`)
+				.then(response => dispatch(fetchFromAws(response.stylesheetUrl)))
 	}	
 }
 
@@ -77,12 +75,11 @@ export const saveStyles = () => {
 	return (dispatch, getState) => {
 		const cssString = css.stringify(getState().styles.ruleset)
 		const checksum = getState().admin.currentApp
-		postToApi(`applications/${checksum}/save_app_from_editor.json`, {
-				css: cssString,
-				messages: {hola: 'chau'}
-			}, response => {
-				console.log(response)
-			})
+		return postToApi(`applications/${checksum}/save_app_from_editor.json`, 
+				{
+					css: cssString,
+					messages: {hola: 'chau'}
+				}).then(response => console.log(response))
 	}
 }
 

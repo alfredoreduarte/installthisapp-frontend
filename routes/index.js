@@ -33,6 +33,6 @@ export const createRoutes = (store, dispatch) => ({
 			},
 		},
 		require('routes/Dashboard').default(store, dispatch),
-		require('routes/Design'),
+		require('routes/Design').default(store, dispatch),
 	]
 })
