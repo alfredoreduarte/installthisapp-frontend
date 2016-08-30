@@ -50,7 +50,7 @@ const mapStateToProps = (state, props) => {
 	const fbAppId = currentApp.fbApplication ? currentApp.fbApplication.appId : null
 	const fbAppCanvasId = currentApp.fbApplication ? currentApp.fbApplication.canvasId : null
 	return { 
-		facebookPageIdentifier: currentApp ? currentApp.facebookPageIdentifier : '',
+		facebookPageIdentifier: currentApp.facebookPageIdentifier,
 		fbAppId,
 		fbAppCanvasId,
 		currentApp,

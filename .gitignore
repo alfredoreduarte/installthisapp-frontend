@@ -37,6 +37,7 @@ ehthumbs.db
 Thumbs.db
 
 # Project
+ssl
 node_modules
 dist
 .sublime-project

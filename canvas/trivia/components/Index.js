@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import IndexView from 'canvas/trivia/components/IndexView'
 import { advanceCountDown, saveAnswer } from 'canvas/trivia/actions'
 import { getQuestionWithOptions, hasAnsweredAllQuestions } from 'canvas/trivia/selectors/questions'
+import Loading from 'canvas/trivia/components/Loading'
+import IndexView from 'canvas/trivia/components/IndexView'
 
 class Index extends Component {
 	componentWillReceiveProps(nextProps) {
@@ -19,9 +20,8 @@ class Index extends Component {
 		}
 	}
 	render(){
-		return (
-			<IndexView { ...this.props } />
-		)
+		const { loading, question } = this.props
+		return !loading && question ? <IndexView { ...this.props } /> : <Loading />
 	}
 }
 

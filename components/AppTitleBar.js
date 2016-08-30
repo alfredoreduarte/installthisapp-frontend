@@ -15,7 +15,7 @@ const AppTitleBarButtons = ({
 	<div>
 		{status == 'installed' ?
 			<div>
-				<button className="btn btn-lg btn-primary btn-outline">Share</button>
+				<button className="btn btn-lg btn-primary btn-outline hide">Share</button>
 				<button onClick={() => handleUninstall()} className="btn btn-lg btn-gray btn-outline">Uninstall</button>
 			</div>
 		:	
@@ -36,7 +36,7 @@ const AppTitleBarButtons = ({
 
 		{status == 'uninstalling' ?
 			<div>
-				<button className="btn btn-lg btn-primary btn-outline" disabled>Share</button>
+				<button className="btn btn-lg btn-primary btn-outline hide" disabled>Share</button>
 				<button className="btn btn-lg btn-gray btn-outline" disabled>Uninstalling</button>
 			</div>
 		:

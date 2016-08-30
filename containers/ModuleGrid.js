@@ -6,10 +6,10 @@ import { push } from 'react-router-redux'
 import { setNewAppModule } from 'actions/newApp'
 
 const ModuleGrid = ({ modules, handleModuleSelection }) => (
-	<div className="container-fluid">
+	<div className="container-flex">
 		{modules.map( module => {
 			return (
-				<div className="col-md-4" key={module}>
+				<div className="col-flex" key={module}>
 					<div className="media media-stacked text-center">
 						<div className="media-left media-middle">
 							<a
@@ -31,7 +31,7 @@ const ModuleGrid = ({ modules, handleModuleSelection }) => (
 									weight-normal 
 									font-size-large 
 									text-capitalize">
-									{_.replace(module, '_', ' ')}
+									{_.capitalize(_.replace(module, '_', ' '))}
 								</h5>
 							</a>
 							<p>
@@ -45,11 +45,9 @@ const ModuleGrid = ({ modules, handleModuleSelection }) => (
 	</div>
 )
 
-const mapStateToProps = (state, props) => {
-	return { 
-		modules: ['trivia', 'top_fans']
-	}
-}
+const mapStateToProps = state => ({ 
+	modules: ['trivia', 'top_fans']
+})
 
 const mapDispatchToProps = (dispatch, props) => ({
 	handleModuleSelection: type => {
