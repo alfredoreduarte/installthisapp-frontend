@@ -11,7 +11,7 @@ export default (store, dispatch) => ({
 	},
 	onEnter: (nextState, replace, next) => {
 		dispatch(setCurrentAppChecksum(nextState.params.checksum)).then(() => {
-			dispatch(fetchStyles(nextState.params.checksum)).then(() => {
+			dispatch(fetchStyles()).then(() => {
 				dispatch(fetchJsonTest()).then(() => {
 					next()
 				})

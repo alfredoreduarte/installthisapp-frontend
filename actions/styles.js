@@ -63,9 +63,9 @@ const fetchFromAws = url => {
 	}
 }
 
-export const fetchStyles = checksum => {
+export const fetchStyles = () => {
 	return (dispatch, getState) => {
-		// const checksum = getState().admin.currentApp
+		const checksum = getState().admin.currentApp
 		return getFromApi(`applications/${checksum}/styles.json`)
 				.then(response => dispatch(fetchFromAws(response.stylesheetUrl)))
 	}	
