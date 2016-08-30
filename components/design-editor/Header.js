@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 
-const DesignEditorSidebarHeader = ({
+const Header = ({
 	handleClose,
 	handleSave,
 	busy
@@ -25,14 +25,14 @@ const DesignEditorSidebarHeader = ({
 	</div>
 )
 
-DesignEditorSidebarHeader.propTypes = {
+Header.propTypes = {
 	handleClose: PropTypes.func.isRequired,
 	handleSave: PropTypes.func.isRequired,
 	busy: PropTypes.bool
 }
 
-DesignEditorSidebarHeader.defaultProps = {
+Header.defaultProps = {
 	busy: false,
 }
 
-export default DesignEditorSidebarHeader
+export default Header

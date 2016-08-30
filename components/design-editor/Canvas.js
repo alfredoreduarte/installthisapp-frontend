@@ -4,7 +4,7 @@ import Frame from 'react-frame-component'
 import DesignHelper from 'containers/design-helper/DesignHelper'
 import { getStringifiedRuleset } from 'selectors/styles'
 
-const DesignEditorCanvas = ({ platform, styles }) => (
+const Canvas = ({ platform, styles }) => (
 	<div className="row">
 		<div className={`ita-canvas ${platform}`}>
 			<Frame className="ita-canvas-frame">
@@ -15,7 +15,7 @@ const DesignEditorCanvas = ({ platform, styles }) => (
 	</div>
 )
 
-DesignEditorCanvas.propTypes = {
+Canvas.propTypes = {
 	platform: PropTypes.string.isRequired,
 }
 
@@ -23,4 +23,4 @@ const mapStateToProps = (state, props) => ({
 	styles: getStringifiedRuleset(state)
 })
 
-export default connect(mapStateToProps)(DesignEditorCanvas)
+export default connect(mapStateToProps)(Canvas)
