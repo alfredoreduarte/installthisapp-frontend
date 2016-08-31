@@ -1,0 +1,33 @@
+.ita-color-picker-trigger
+	width: 25px
+	height: 25px
+	border: 1px solid $gray-dark
+	box-shadow: 0px 0px 0px 1px white
+	border-radius: 50px
+	position: relative
+	top: 8px
+	display: inline-block
+	position: relative
+	text-align: center
+	overflow: hidden
+	line-height: 1.5
+	.icon
+		&:before
+			font-size: 14px
+.ita-color-picker-tool-override > div
+	box-sizing: border-box !important
+	width: 100% !important
+	box-shadow: none !important
+	margin: 0px !important
+	color: $text-color
+.ita-color-picker-container, .ita-color-picker-icon
+	display: none
+.ita-color-picker-trigger-input:checked ~ .ita-color-picker-label
+	.ita-color-picker-icon
+		display: block
+		@extend .animated
+		@extend .rotateIn
+.ita-color-picker-trigger-input:checked ~ .ita-color-picker-label ~ .ita-color-picker-container
+	display: block
+	@extend .animated
+	@extend .fadeIn

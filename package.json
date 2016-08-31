@@ -21,6 +21,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "animate.css": "^3.5.1",
     "babel-core": "^6.9.1",
     "babel-eslint": "^6.0.4",
     "babel-loader": "^6.2.4",
@@ -33,6 +34,7 @@
     "babel-preset-react-hmre": "^1.1.1",
     "body-parser": "^1.15.2",
     "bootstrap-sass": "^3.3.6",
+    "bootstrap-slider": "^9.2.0",
     "bourbon": "^4.2.7",
     "classnames": "^2.2.5",
     "css": "^2.2.1",
@@ -64,6 +66,7 @@
     "react": "^15.3.1",
     "react-addons-update": "^15.3.1",
     "react-bootstrap": "^0.30.3",
+    "react-color": "^2.2.6",
     "react-dom": "^15.3.1",
     "react-facebook-login": "^3.1.0",
     "react-frame-component": "^0.6.5",

@@ -5,7 +5,7 @@ const ResetButton = ({
 }) => (
 	<div>
 		<button 
-			className="btn btn-default text-muted" 
+			className="btn btn-primary btn-outline text-muted" 
 			onClick={() => handleReset()} 
 			style={{cursor: 'pointer'}}>
 			<i className="glyphicon glyphicon-fast-backward"></i> Reset to defaults

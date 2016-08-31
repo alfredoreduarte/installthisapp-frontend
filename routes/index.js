@@ -9,7 +9,23 @@ export const createRoutes = (store, dispatch) => ({
 	indexRoute: {
 		component: require('containers/AdminDashboard').default
 	},
+	onChange: (prevState, nextState, replace, next) => {
+		console.log('lol change', nextState)
+		if (nextState.location.pathname == '/d') {
+			console.log('vuelve a raiz')			
+			dispatch(fetchAdmin()).then(() => {
+				dispatch(fetchEntities()).then(() => {
+					next()
+				})
+			})
+		}
+		else{
+			console.log('nav interna')
+			next()
+		}
+	},
 	onEnter: (nextState, replace, next) => {
+		console.log('va a hacer fetch')
 		dispatch(fetchAdmin()).then(() => {
 			dispatch(fetchEntities()).then(() => {
 				next()

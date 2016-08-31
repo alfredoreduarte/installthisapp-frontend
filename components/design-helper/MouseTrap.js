@@ -13,6 +13,7 @@ const MouseTrap = ({
 		className="ita-design-editor-daemon" 
 		style={{
 			position: 'absolute',
+			zIndex: 1,
 			top: `${pos.y}px`,
 			left: `${pos.x}px`,
 			width: `${pos.w}px`,

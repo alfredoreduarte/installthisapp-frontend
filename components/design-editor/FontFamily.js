@@ -3,8 +3,8 @@ import Select from 'react-select'
 
 const FontFamily = ({
 	values,
-	onChange,
 	value,
+	onChange,
 }) => (
 	<Select
 		clearable={false}

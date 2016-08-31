@@ -16,6 +16,7 @@ export default function configureStore(preloadedState) {
 		preloadedState,
 		compose(
 			applyMiddleware(thunkMiddleware, reactRouterMiddleware, logger),
+			// applyMiddleware(thunkMiddleware, reactRouterMiddleware),
 			window.devToolsExtension ? window.devToolsExtension() : (f) => f
 		)
 	)
