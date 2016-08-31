@@ -10,7 +10,8 @@ import BottomBar from 'components/design-editor/BottomBar'
 import PlatformSelector from 'components/design-editor/PlatformSelector'
 import ResetButton from 'components/design-editor/ResetButton'
 import ScreenSelector from 'components/design-editor/ScreenSelector'
-import Tools from 'containers/DesignEditorTools'
+import ToolSet from 'components/design-editor/ToolSet'
+import Tool from 'components/design-editor/Tool'
 
 const Design = ({
 	platform,
@@ -42,7 +43,15 @@ const Design = ({
 			<Tabs
 				handleTabs={tab => console.log('changed tab!', tab)}
 			/>
-			<Tools declarations={declarations} handleChange={handleChange} />
+			<ToolSet>
+				{declarations.map( declaration => 
+					<Tool 
+						key={declaration.property}
+						property={declaration.property}
+						value={declaration.value}
+						handleChange={handleChange} />
+				)}
+			</ToolSet>
 		</Sidebar>
 		<BottomBar>
 			<ScreenSelector
