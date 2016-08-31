@@ -1,6 +1,7 @@
 import 'isomorphic-fetch'
 import css from 'css'
 import { updateCoords } from 'actions/design-helper/mouseTrap'
+import { toggleActivitySavingDesign } from 'actions/activityIndicators'
 import { getFromApi, postToApi } from 'api'
 
 export const fetchJsonTest = () => {
@@ -75,13 +76,14 @@ export const fetchStyles = () => {
 
 export const saveStyles = () => {
 	return (dispatch, getState) => {
+		dispatch(toggleActivitySavingDesign())
 		const cssString = css.stringify(getState().styles.ruleset)
 		const checksum = getState().admin.currentApp
 		return postToApi(`applications/${checksum}/save_app_from_editor.json`, 
 				{
 					css: cssString,
 					messages: {hola: 'chau'}
-				}).then(response => console.log(response))
+				}).then(response => dispatch(toggleActivitySavingDesign()))
 	}
 }
 

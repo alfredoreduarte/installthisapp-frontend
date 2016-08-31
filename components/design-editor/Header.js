@@ -14,9 +14,10 @@ const Header = ({
 				</small>
 			</Link>
 			<button 
+				disabled={busy}
 				className="btn btn-default btn-sm btn-outline btn-success" 
 				onClick={() => handleSave()}>
-				Save
+				{busy ? 'Saving...' : 'Save'}
 			</button>
 		</div>
 		<div className={`ita-activity-bar ${busy ? 'ita-activity-bar-busy' : null}`}>

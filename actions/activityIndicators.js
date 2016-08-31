@@ -22,3 +22,7 @@ export const toggleActivityUpdatingAdmin = () => ({
 export const toggleActivityUpdatingAppSettings = () => ({
 	type: 'TOGGLE_ACTIVITY/UPDATING_APP_SETTINGS'
 })
+
+export const toggleActivitySavingDesign = () => ({
+	type: 'TOGGLE_ACTIVITY/SAVING_DESIGN'
+})

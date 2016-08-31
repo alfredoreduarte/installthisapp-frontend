@@ -1,4 +1,5 @@
 const activityIndicators = (state = {
+	savingDesign: false,
 	updatingAdmin: false,
 	updatingApp: false,
 	appCreation: false,
@@ -8,6 +9,10 @@ const activityIndicators = (state = {
 		case 'TOGGLE_ACTIVITY/UPDATING_ADMIN':
 			return Object.assign({}, state, {
 				updatingAdmin: !state.updatingAdmin
+			})
+		case 'TOGGLE_ACTIVITY/SAVING_DESIGN':
+			return Object.assign({}, state, {
+				savingDesign: !state.savingDesign
 			})
 		case 'TOGGLE_ACTIVITY/UPDATING_APP_SETTINGS':
 			return Object.assign({}, state, {

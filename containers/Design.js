@@ -14,6 +14,7 @@ import ToolSet from 'components/design-editor/ToolSet'
 import Tool from 'components/design-editor/Tool'
 
 const Design = ({
+	saving,
 	platform,
 
 	// Sidebar
@@ -38,7 +39,7 @@ const Design = ({
 			<Header
 				handleClose={() => console.log('closing editor!')}
 				handleSave={handleSave}
-				busy={true}
+				busy={saving}
 			/>
 			<Tabs
 				handleTabs={tab => console.log('changed tab!', tab)}
@@ -66,6 +67,7 @@ const Design = ({
 )
 
 const mapStateToProps = state => ({ 
+	saving: state.activityIndicators.savingDesign,
 	platform: state.styles.platform,
 	declarations: getDeclarations(state),
 	screens: [
