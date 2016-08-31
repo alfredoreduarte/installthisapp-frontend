@@ -40,6 +40,7 @@ topFansRouter.post(`/${topFansCanvasId}`, canvasParser, function(req, res) {
 			canvasId: topFansCanvasId,
 			checksum: json.checksum,
 			facebookAppId: json.fb_application_id,
+			stylesheetUrl: json.stylesheet_url,
 		})
 	})
 	.catch(exception =>
@@ -69,6 +70,7 @@ topFansRouter.get(`/${topFansCanvasId}/:checksum*`, canvasParser, function(req, 
 			canvasId: topFansCanvasId,
 			checksum: json.checksum,
 			facebookAppId: json.fb_application_id,
+			stylesheetUrl: json.stylesheet_url,
 		})
 	})
 	.catch(exception =>

@@ -8,7 +8,7 @@ const Header = ({
 }) => (
 	<div className="ita-side-bar-header">
 		<div className="ita-side-bar-content">
-			<Link to="/d" className="btn btn-primary btn-outline" onClick={() => handleClose()}>
+			<Link to="/d" className="" onClick={() => handleClose()}>
 				<small>
 					<i className="glyphicon glyphicon-menu-left"></i> Back to Dashboard
 				</small>

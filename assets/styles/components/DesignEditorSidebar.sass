@@ -4,9 +4,10 @@
 	position: fixed
 	bottom: 0
 	top: 0
-	right: 0
-	width: 342px
+	left: 0
+	width: $ita-side-bar-max-width
 	width: $ita-side-bar-width
+	max-width: $ita-side-bar-max-width
 	padding-bottom: $ita-bottom-bar-height
 	z-index: $zindex-navbar-fixed
 	display: flex
@@ -17,7 +18,7 @@
 .ita-side-bar-tools
 	height: 100%
 .ita-side-bar-content
-	padding: 12px 12px
+	padding: 16px 24px
 	position: relative
 	color: white
 .ita-side-bar-header
@@ -30,10 +31,19 @@
 .ita-scrollable-area
 	overflow-y: scroll
 	overflow-x: hidden
-	padding-top: 24px
+	// padding-top: 24px
 .ita-sidebar-block
-	margin-bottom: 20px
+	padding-top: 12px
+	padding-bottom: 12px
 	white-space: nowrap
+	opacity: .5
+	// @extend .animated
+	// @extend .slideInLeft
+	+transition(opacity linear $animation-speed-base)
+	&:hover
+		opacity: 1
+	&:hover ~ &
+		opacity: .2
 	label
 		vertical-align: middle
 		margin-bottom: 0px

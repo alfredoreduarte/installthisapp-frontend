@@ -4,12 +4,11 @@ const ResetButton = ({
 	handleReset
 }) => (
 	<div>
-		<button 
-			className="btn btn-primary btn-outline text-muted" 
+		<a 
 			onClick={() => handleReset()} 
 			style={{cursor: 'pointer'}}>
-			<i className="glyphicon glyphicon-fast-backward"></i> Reset to defaults
-		</button>
+			<small><i className="glyphicon glyphicon-repeat"></i> Reset to defaults</small>
+		</a>
 	</div>
 )
 

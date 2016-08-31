@@ -31,6 +31,46 @@ const Tool = ({ property, value, handleChange }) => (
 			case 'margin-bottom':
 				return null
 				break
+			case 'font-weight':
+				return <div class="checkbox">
+					<label>
+						<input 
+							type="checkbox" 
+							defaultChecked={value == 'bold'} 
+							onChange={e => handleChange(property, e.target.checked ? 'bold' : 'inherit')} />
+						{' '}Bold
+					</label>
+				</div>
+			case 'font-style':
+				return <div class="checkbox">
+					<label>
+						<input 
+							type="checkbox" 
+							defaultChecked={value == 'italic'} 
+							onChange={e => handleChange(property, e.target.checked ? 'italic' : 'inherit')} />
+						{' '}Italics
+					</label>
+				</div>
+			case 'text-decoration':
+				return <div class="checkbox">
+					<label>
+						<input 
+							type="checkbox" 
+							defaultChecked={value == 'underline'} 
+							onChange={e => handleChange(property, e.target.checked ? 'underline' : 'inherit')} />
+						{' '}Underline
+					</label>
+				</div>
+			case 'text-transform':
+				return <div class="checkbox">
+					<label>
+						<input 
+							type="checkbox" 
+							defaultChecked={value == 'uppercase'} 
+							onChange={e => handleChange(property, e.target.checked ? 'uppercase' : 'inherit')} />
+						{' '}All-caps
+					</label>
+				</div>
 			default:
 				return <div>
 					<label>{property}</label>

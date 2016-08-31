@@ -55,13 +55,13 @@ const Design = ({
 			</ToolSet>
 		</Sidebar>
 		<BottomBar>
+			<ResetButton handleReset={resetToDefaults} />
 			<ScreenSelector
 				value={currentScreen}
 				options={screens}
 				handleScreenChange={handleScreenChange}	
 			 />
 			<PlatformSelector platform={platform} handlePlatformChange={handlePlatformChange} />
-			<ResetButton handleReset={resetToDefaults} />
 		</BottomBar>
 	</div>
 )

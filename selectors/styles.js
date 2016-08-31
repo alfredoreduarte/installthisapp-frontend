@@ -33,6 +33,6 @@ export const getDeclarationsForCurrentSelector = createSelector(
 				}
 			})
 		})
-		return _.flattenDeep(rulesCollection)
+		return _.orderBy(_.flattenDeep(rulesCollection), 'property')
 	}
 )
