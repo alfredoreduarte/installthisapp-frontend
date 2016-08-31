@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-const DesignEditorSidebarTabs = ({
+const Tabs = ({
 	handleTabs	
 }) => (
 	<div className="ita-sidebar-tabs hide">
@@ -9,8 +9,8 @@ const DesignEditorSidebarTabs = ({
 	</div>
 )
 
-DesignEditorSidebarTabs.propTypes = {
+Tabs.propTypes = {
 	handleTabs: PropTypes.func.isRequired,
 }
 
-export default DesignEditorSidebarTabs
+export default Tabs

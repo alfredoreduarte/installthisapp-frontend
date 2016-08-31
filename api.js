@@ -34,8 +34,9 @@ export const getFromApi = (endpoint, success = temporaryEmptyFunction) => {
 				}
 			})
 			.then(json => {
-				success(processResponse(json))
-				return Promise.resolve(json)
+				const response = processResponse(json)
+				success(response)
+				return Promise.resolve(response)
 			})
 			.catch(exception =>
 				console.log('parsing failed', exception)
@@ -66,8 +67,9 @@ export const patchToApi = (endpoint, body = null, success = temporaryEmptyFuncti
 				}
 			})
 			.then(json => {
-				success(processResponse(json))
-				return Promise.resolve(json)
+				const response = processResponse(json)
+				success(response)
+				return Promise.resolve(response)
 			})
 			.catch(exception =>
 				console.log('parsing failed', exception)
@@ -98,8 +100,9 @@ export const postToApi = (endpoint, body = null, success = temporaryEmptyFunctio
 				}
 			})
 			.then(json => {
-				success(processResponse(json))
-				return Promise.resolve(json)
+				const response = processResponse(json)
+				success(response)
+				return Promise.resolve(response)
 			})
 			.catch(exception =>
 				console.log('parsing failed', exception)
@@ -130,8 +133,9 @@ export const deleteFromApi = (endpoint, body = null, success = temporaryEmptyFun
 				}
 			})
 			.then(json => {
-				success(processResponse(json))
-				return Promise.resolve(json)
+				const response = processResponse(json)
+				success(response)
+				return Promise.resolve(response)
 			})
 			.catch(exception =>
 				console.log('parsing failed', exception)

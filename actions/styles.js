@@ -1,15 +1,13 @@
 import 'isomorphic-fetch'
 import css from 'css'
-import * as CONFIG from 'config'
 import { updateCoords } from 'actions/design-helper/mouseTrap'
 import { getFromApi, postToApi } from 'api'
 
 export const fetchJsonTest = () => {
 	return (dispatch, getState) => {
 		const checksum = getState().admin.currentApp
-		getFromApi(`applications/${checksum}/jsontest.json`, response => {
-			console.log(response)
-		})
+		return getFromApi(`applications/${checksum}/jsontest.json`)
+				.then(response => console.log(response))
 	}
 }
 
@@ -27,13 +25,16 @@ export const setActiveSelector = () => {
 	}
 }
 
-export const modifyWholeSheet = (selectors, property, value) => {
-	return {
-		type: 'MODIFY_STYLE',
-		selectors,
-		property,
-		value
-	}
+export const modifyWholeSheet = (property, value) => {
+	return (dispatch, getState) => {
+		const selectors = getState().styles.activeSelector
+		return dispatch({
+			type: 'MODIFY_STYLE',
+			selectors,
+			property,
+			value,
+		})
+	}	
 }
 
 export const setPlatform = platform => {
@@ -64,12 +65,11 @@ const fetchFromAws = url => {
 	}
 }
 
-export const fetchStyles = checksum => {
+export const fetchStyles = () => {
 	return (dispatch, getState) => {
-		// const checksum = getState().admin.currentApp
-		getFromApi(`applications/${checksum}/styles.json`, response => {
-			dispatch(fetchFromAws(response.stylesheet_url))
-		})
+		const checksum = getState().admin.currentApp
+		return getFromApi(`applications/${checksum}/styles.json`)
+				.then(response => dispatch(fetchFromAws(response.stylesheetUrl)))
 	}	
 }
 
@@ -77,12 +77,11 @@ export const saveStyles = () => {
 	return (dispatch, getState) => {
 		const cssString = css.stringify(getState().styles.ruleset)
 		const checksum = getState().admin.currentApp
-		postToApi(`applications/${checksum}/save_app_from_editor.json`, {
-				css: cssString,
-				messages: {hola: 'chau'}
-			}, response => {
-				console.log(response)
-			})
+		return postToApi(`applications/${checksum}/save_app_from_editor.json`, 
+				{
+					css: cssString,
+					messages: {hola: 'chau'}
+				}).then(response => console.log(response))
 	}
 }
 

@@ -1,8 +1,27 @@
 import React, { PropTypes } from 'react'
-import Select from'react-select'
+import Select from 'react-select'
 
 const FontFamily = ({
-	values = [
+	values,
+	onChange,
+	value,
+}) => (
+	<Select
+		clearable={false}
+		value={value.slice(1, -1)}
+		options={values}
+		onChange={e => onChange(`"${e.value}"`)}
+	/>
+)
+
+FontFamily.propTypes = {
+	values: PropTypes.array,
+	value: PropTypes.string.isRequired,
+	onChange: PropTypes.func.isRequired,
+}
+
+FontFamily.defaultProps = {
+	values: [
 		{ value: 'Times New Roman', label: 'Times New Roman' },
 		{ value: 'Arial', label: 'Arial' },
 		{ value: 'Verdana', label: 'Verdana' },
@@ -11,21 +30,7 @@ const FontFamily = ({
 		{ value: 'Open Sans', label: 'Open Sans' },
 		{ value: 'Oswald', label: 'Oswald' },
 		{ value: 'Proxima Nova', label: 'Proxima Nova' },
-	],
-	onChange,
-	value,
-}) => (
-	<Select
-		clearable={false}
-		value={value}
-		options={values}
-		onChange={e => onChange(e.label)}
-	/>
-)
-
-FontFamily.propTypes = {
-	value: PropTypes.string.isRequired,
-	onChange: PropTypes.func.isRequired,
+	]
 }
 
 export default FontFamily

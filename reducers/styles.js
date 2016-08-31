@@ -24,19 +24,15 @@ const styles = (state = {
 				platform: action.payload
 			})
 		case 'MODIFY_STYLE':
-			// Los comentarios son referencias a funciones en la versión pre-redux
-			// parseCssRules
-			// creo un array de rules que van a ser modificados
-			const rulesBeingEdited = _.filter(state.ruleset.stylesheet.rules, function(rule){
-				// veo si hay classnames en común entre el rule y lo seleccionado, y si el rule es de tipo 'rule'
-				if (_.intersection(rule.selectors, action.selectors).length > 0 && rule.type == 'rule') {
-					return true
-				}
-				else{
-					return false
-				}
+			// Los comentarios con * son referencias a funciones en la versión pre-redux
+			// *parseCssRules
+			// Creo un array de rules que van a ser modificados
+			// Esto ahorra loops más costosos al crear los rules con valores alterados
+			const rulesBeingEdited = _.filter(state.ruleset.stylesheet.rules, rule =>{
+				// veo si hay clases en común entre el rule y lo seleccionado
+				return _.intersection(rule.selectors, action.selectors).length > 0
 			})
-			// handleChange
+			// *handleChange
 			const newEditedRules = rulesBeingEdited.map( rule => {
 				const newDeclarations = rule.declarations.map( declaration => {
 					if (declaration.property == action.property) {
@@ -44,23 +40,18 @@ const styles = (state = {
 							value: action.value
 						})
 					}
-					else{
-						return declaration
-					}
+					return declaration
 				})
 				return Object.assign({}, rule, {
 					declarations: newDeclarations
 				})
 			})
-			// replaceRule
+			// *replaceRule
 			const newRules = state.ruleset.stylesheet.rules.map(rule => {
 				if (_.intersection(rule.selectors, action.selectors).length > 0) {
-					if (newEditedRules.length > 1) { console.error('newEditedRules contains more than one element') }
-					return newEditedRules[0]
+					return _.find(newEditedRules, newRule => _.isEqual(newRule.selectors, rule.selectors))
 				}
-				else{
-					return rule
-				}
+				return rule
 			})
 			return Object.assign({}, state, {
 				ruleset: Object.assign({}, state.ruleset, {

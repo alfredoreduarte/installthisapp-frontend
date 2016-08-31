@@ -17,15 +17,22 @@ const getAllRules = createSelector(
 	}
 )
 
-export const getRulesetForActiveSelector = createSelector(
+export const getDeclarationsForCurrentSelector = createSelector(
 	getActiveStylesSelector,
 	getAllRules,
 	(selectorArray, allRules) => {
-		// console.log('selectorArray', selectorArray)
 		const selectedRules = _.filter(allRules, rule => {
 			const intersection = _.intersection(rule.selectors, selectorArray)
 			return intersection.length > 0 ? true : false
 		})
-		return selectedRules
+		const rulesCollection = selectedRules.map( obj => {
+			return obj.declarations.map( dec => {
+				return {
+					property: dec.property,
+					value: dec.value
+				}
+			})
+		})
+		return _.flattenDeep(rulesCollection)
 	}
 )

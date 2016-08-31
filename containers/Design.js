@@ -1,41 +1,86 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Canvas from 'components/design-editor/DesignEditorCanvas'
-import Sidebar from 'containers/DesignEditorSidebar'
-import BottomBar from 'containers/DesignEditorBottomBar'
-import { setCurrentAppChecksum } from 'actions/apps'
-import { fetchStyles, fetchJsonTest } from 'actions/styles'
+import { getDeclarationsForCurrentSelector as getDeclarations } from 'selectors/styles'
+import { modifyWholeSheet, saveStyles, setPlatform } from 'actions/styles'
+import Canvas from 'components/design-editor/Canvas'
+import Sidebar from 'components/design-editor/Sidebar'
+import Header from 'components/design-editor/Header'
+import Tabs from 'components/design-editor/Tabs'
+import BottomBar from 'components/design-editor/BottomBar'
+import PlatformSelector from 'components/design-editor/PlatformSelector'
+import ResetButton from 'components/design-editor/ResetButton'
+import ScreenSelector from 'components/design-editor/ScreenSelector'
+import ToolSet from 'components/design-editor/ToolSet'
+import Tool from 'components/design-editor/Tool'
 
-const Design = ({ loaded, platform }) => (
+const Design = ({
+	platform,
+
+	// Sidebar
+	declarations,
+	handleChange, 
+	handleSave,
+
+	// Screen Selector
+	screens,
+	currentScreen,
+	handleScreenChange,
+
+	// Platform Selector
+	handlePlatformChange,
+
+	// Reset design
+	resetToDefaults,
+}) => (
 	<div>
-		{loaded ? (
-			<div>
-				<Canvas
-					platform={platform}
-					/>
-				<Sidebar />
-				<BottomBar />
-			</div>
-		) : 'cargando estilos'}
+		<Canvas platform={platform} />
+		<Sidebar>
+			<Header
+				handleClose={() => console.log('closing editor!')}
+				handleSave={handleSave}
+				busy={true}
+			/>
+			<Tabs
+				handleTabs={tab => console.log('changed tab!', tab)}
+			/>
+			<ToolSet>
+				{declarations.map( declaration => 
+					<Tool 
+						key={declaration.property}
+						property={declaration.property}
+						value={declaration.value}
+						handleChange={handleChange} />
+				)}
+			</ToolSet>
+		</Sidebar>
+		<BottomBar>
+			<ScreenSelector
+				value={currentScreen}
+				options={screens}
+				handleScreenChange={handleScreenChange}	
+			 />
+			<PlatformSelector platform={platform} handlePlatformChange={handlePlatformChange} />
+			<ResetButton handleReset={resetToDefaults} />
+		</BottomBar>
 	</div>
 )
 
-const mapStateToProps = state => {
-	// Para saber si ya se cargó el css
-	const loaded = state.styles.ruleset.stylesheet ? true : false
-	return { 
-		loaded,
-		platform: state.styles.platform,
-	}
-}
+const mapStateToProps = state => ({ 
+	platform: state.styles.platform,
+	declarations: getDeclarations(state),
+	screens: [
+		{ value: 'index', label: 'Inicio'},
+		{ value: 'thanks', label: 'Gracias'},
+	],
+	currentScreen: 'index',
+})
 
-const mapDispatchToProps = (dispatch, props) => {
-	dispatch(setCurrentAppChecksum(props.params.checksum))
-	dispatch(fetchStyles(props.params.checksum))
-	dispatch(fetchJsonTest())
-	return {
-		
-	}
-}
+const mapDispatchToProps = (dispatch, props) => ({
+	handleChange: (property, value) => dispatch(modifyWholeSheet(property, value)),
+	handleSave: () => dispatch(saveStyles()),
+	handleScreenChange: e => console.log('screen changed!', e.label),
+	handlePlatformChange: platform => dispatch(setPlatform(platform)),
+	resetToDefaults: () => console.log('reset to defaults!'),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Design)
