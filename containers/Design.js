@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getRulesetForActiveSelector as getRuleset } from 'selectors/styles'
+import { getDeclarationsForCurrentSelector as getProperties } from 'selectors/styles'
 import { modifyWholeSheet, saveStyles, setPlatform } from 'actions/styles'
 import Canvas from 'components/design-editor/Canvas'
 import Sidebar from 'components/design-editor/Sidebar'
@@ -16,8 +16,7 @@ const Design = ({
 	platform,
 
 	// Sidebar
-	ruleset, 
-	selector, 
+	declarations,
 	handleChange, 
 	handleSave,
 
@@ -43,7 +42,7 @@ const Design = ({
 			<Tabs
 				handleTabs={tab => console.log('changed tab!', tab)}
 			/>
-			<Tools ruleset={ruleset} handleChange={handleChange} selector={selector} />
+			<Tools declarations={declarations} handleChange={handleChange} />
 		</Sidebar>
 		<BottomBar>
 			<ScreenSelector
@@ -59,8 +58,7 @@ const Design = ({
 
 const mapStateToProps = state => ({ 
 	platform: state.styles.platform,
-	ruleset: getRuleset(state),
-	selector: state.styles.activeSelector,
+	declarations: getDeclarations(state),
 	screens: [
 		{ value: 'index', label: 'Inicio'},
 		{ value: 'thanks', label: 'Gracias'},
@@ -69,7 +67,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch, props) => ({
-	handleChange: (selector, property, value) => dispatch(modifyWholeSheet(selector, property, value)),
+	handleChange: (property, value) => dispatch(modifyWholeSheet(property, value)),
 	handleSave: () => dispatch(saveStyles()),
 	handleScreenChange: e => console.log('screen changed!', e.label),
 	handlePlatformChange: platform => dispatch(setPlatform(platform)),

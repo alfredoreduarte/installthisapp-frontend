@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import FontFamily from 'components/design-editor/FontFamily'
 
-const DesignEditorTools = ({ declarations, onChange }) => (
+const DesignEditorTools = ({ declarations, handleChange }) => (
 	<div className="ita-side-bar-content ita-scrollable-area ita-side-bar-tools">
 		{declarations.map( declaration => {
 			const { property, value } = declaration
@@ -11,7 +11,7 @@ const DesignEditorTools = ({ declarations, onChange }) => (
 					return (
 						<FontFamily
 							key={property}
-							onChange={newValue => onChange(property, newValue)}
+							onChange={newValue => handleChange(property, newValue)}
 							value={value}
 						/>
 					)
@@ -24,7 +24,7 @@ const DesignEditorTools = ({ declarations, onChange }) => (
 								type="text" 
 								className="form-control" 
 								value={value} 
-								onChange={e => onChange(property, e.target.value)} />
+								onChange={e => handleChange(property, e.target.value)} />
 						</div>
 					)
 			}
@@ -32,18 +32,12 @@ const DesignEditorTools = ({ declarations, onChange }) => (
 	</div>
 )
 
-const mapStateToProps = (state, props) => {
-	const declarations = props.ruleset.map( rule => rule.declarations.map( declaration => declaration ) )
-	return {
-		declarations: declarations[0] || [],
-	}
-}
+const mapStateToProps = (state, props) => ({
+	
+})
 
-const mapDispatchToProps = (dispatch, props) => {
-	const { handleChange, selector } = props
-	return {
-		onChange: (property, value) => handleChange(selector, property, value)
-	}
-}
+const mapDispatchToProps = (dispatch, props) => ({
+	
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(DesignEditorTools)

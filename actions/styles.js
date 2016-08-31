@@ -1,6 +1,5 @@
 import 'isomorphic-fetch'
 import css from 'css'
-import * as CONFIG from 'config.dev'
 import { updateCoords } from 'actions/design-helper/mouseTrap'
 import { getFromApi, postToApi } from 'api'
 
@@ -26,13 +25,16 @@ export const setActiveSelector = () => {
 	}
 }
 
-export const modifyWholeSheet = (selectors, property, value) => {
-	return {
-		type: 'MODIFY_STYLE',
-		selectors,
-		property,
-		value
-	}
+export const modifyWholeSheet = (property, value) => {
+	return (dispatch, getState) => {
+		const selectors = getState().styles.activeSelector
+		return dispatch({
+			type: 'MODIFY_STYLE',
+			selectors,
+			property,
+			value,
+		})
+	}	
 }
 
 export const setPlatform = platform => {
