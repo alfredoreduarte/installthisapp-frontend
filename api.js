@@ -3,19 +3,24 @@ import Cookies from 'js-cookie'
 import humps from 'humps'
 import { API_URL } from 'config'
 
+const apiKey = Cookies.get('api_key')
+
 const processBody = body => body ? JSON.stringify(humps.decamelizeKeys(body)) : null
 const processResponse = res => humps.camelizeKeys(res)
 
-const temporaryEmptyFunction = arg => {
-	console.log('temporaryEmptyFunction')
+const temporaryEmptyFunction = arg => console.log('temporaryEmptyFunction')
+
+const processUnauthorized = () => {
+	console.log('Not authorized')
+	top.location.href = '/'
+	return true
 }
 
 export const getFromApi = (endpoint, success = temporaryEmptyFunction) => {
-	const api_key = Cookies.get('api_key')
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'GET',
 				headers: {
-					'Authorization': `Token token="${api_key}"`,
+					'Authorization': `Token token="${apiKey}"`,
 					'Content-Type': `application/json`,
 				}
 			})
@@ -23,10 +28,7 @@ export const getFromApi = (endpoint, success = temporaryEmptyFunction) => {
 				switch(response.status){
 					case 200:
 						return response.json()
-					case 401:
-						console.log('Not authorized')
-						// top.location.href = '/'
-						return
+					case 401: processUnauthorized()
 					default:
 						console.log('Status: ' + response.status)
 						// top.location.href = '/'
@@ -44,11 +46,10 @@ export const getFromApi = (endpoint, success = temporaryEmptyFunction) => {
 }
 
 export const patchToApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
-	const api_key = Cookies.get('api_key')
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'PATCH',
 				headers: {
-					'Authorization': `Token token="${api_key}"`,
+					'Authorization': `Token token="${apiKey}"`,
 					'Content-Type': `application/json`,
 				},
 				body: processBody(body),
@@ -57,10 +58,7 @@ export const patchToApi = (endpoint, body = null, success = temporaryEmptyFuncti
 				switch(response.status){
 					case 200:
 						return response.json()
-					case 401:
-						console.log('Not authorized')
-						// top.location.href = '/'
-						return
+					case 401: processUnauthorized()
 					default:
 						console.log('Status: ' + response.status)
 						return
@@ -77,11 +75,10 @@ export const patchToApi = (endpoint, body = null, success = temporaryEmptyFuncti
 }
 
 export const postToApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
-	const api_key = Cookies.get('api_key')
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'POST',
 				headers: {
-					'Authorization': `Token token="${api_key}"`,
+					'Authorization': `Token token="${apiKey}"`,
 					'Content-Type': `application/json`,
 				},
 				body: processBody(body),
@@ -90,10 +87,7 @@ export const postToApi = (endpoint, body = null, success = temporaryEmptyFunctio
 				switch(response.status){
 					case 200:
 						return response.json()
-					case 401:
-						console.log('Not authorized')
-						// top.location.href = '/'
-						return
+					case 401: processUnauthorized()
 					default:
 						console.log('Status: ' + response.status)
 						return
@@ -110,11 +104,10 @@ export const postToApi = (endpoint, body = null, success = temporaryEmptyFunctio
 }
 
 export const deleteFromApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
-	const api_key = Cookies.get('api_key')
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'DELETE',
 				headers: {
-					'Authorization': `Token token="${api_key}"`,
+					'Authorization': `Token token="${apiKey}"`,
 					'Content-Type': `application/json`,
 				},
 				body: processBody(body),
@@ -123,10 +116,7 @@ export const deleteFromApi = (endpoint, body = null, success = temporaryEmptyFun
 				switch(response.status){
 					case 200:
 						return response.json()
-					case 401:
-						console.log('Not authorized')
-						// top.location.href = '/'
-						return
+					case 401: processUnauthorized()
 					default:
 						console.log('Status: ' + response.status)
 						return

@@ -25,14 +25,48 @@ export const getDeclarationsForCurrentSelector = createSelector(
 			const intersection = _.intersection(rule.selectors, selectorArray)
 			return intersection.length > 0 ? true : false
 		})
-		const rulesCollection = selectedRules.map( obj => {
+		let temp = {
+			property: 'texts',
+			value: [],
+		}
+		let rulesCollection = selectedRules.map( obj => {
 			return obj.declarations.map( dec => {
+				if (dec.property == 'font-weight' || dec.property == 'text-transform' || dec.property == 'text-decoration' || dec.property == 'font-style') {
+					console.log('ep!', dec.property)
+					temp.value.push({
+						property: dec.property,
+						value: dec.value
+					})
+					return null
+				}
 				return {
 					property: dec.property,
 					value: dec.value
 				}
 			})
 		})
-		return _.orderBy(_.flattenDeep(rulesCollection), 'property')
+		rulesCollection = _.flattenDeep(rulesCollection)
+		console.log('pre', rulesCollection)
+		rulesCollection = _.filter(rulesCollection, o => o != null)
+		if (rulesCollection.length) {
+			rulesCollection.push(temp)
+		}
+		console.log('queda asi', rulesCollection)
+		return _.orderBy(rulesCollection, elem => {
+			const order = {
+				'font-family': 1,
+				'text-align': 2,
+				'texts': 3,
+				'color': 4,
+				'border-color': 5,
+				'background-color': 6,
+				'font-size': 7,
+				'font-weight': 8,
+				'font-style': 9,
+				'text-decoration': 10,
+				'text-transform': 11,
+			}
+			return order[elem.property]
+		})
 	}
 )

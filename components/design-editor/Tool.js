@@ -3,6 +3,7 @@ import FontFamily from 'components/design-editor/FontFamily'
 import TextAlign from 'components/design-editor/TextAlign'
 import Slider from 'components/design-editor/Slider'
 import ColorPicker from 'components/design-editor/ColorPicker'
+import TextStyles from 'components/design-editor/TextStyles'
 
 const Tool = ({ property, value, handleChange }) => (
 	<div className="ita-sidebar-block">
@@ -20,8 +21,6 @@ const Tool = ({ property, value, handleChange }) => (
 				return <ColorPicker property={property} onChange={val => handleChange(property, val)} value={value} />
 				break
 			case 'font-size':
-			case 'line-height':
-			case 'letter-spacing':
 				return <Slider property={property} onChange={val => handleChange(property, val)} value={value} />
 				break
 			case 'text-shadow':
@@ -29,20 +28,24 @@ const Tool = ({ property, value, handleChange }) => (
 			case 'position':
 			case 'border':
 			case 'margin-bottom':
+			case 'line-height':
+			case 'letter-spacing':
 				return null
 				break
+			case 'texts':
+				return <TextStyles onChange={(prop, val) => handleChange(prop, val)} value={value} />
 			case 'font-weight':
-				return <div class="checkbox">
+				return <div className="checkbox">
 					<label>
 						<input 
 							type="checkbox" 
-							defaultChecked={value == 'bold'} 
+							checked={value == 'bold'} 
 							onChange={e => handleChange(property, e.target.checked ? 'bold' : 'inherit')} />
 						{' '}Bold
 					</label>
 				</div>
 			case 'font-style':
-				return <div class="checkbox">
+				return <div className="checkbox">
 					<label>
 						<input 
 							type="checkbox" 
@@ -52,7 +55,7 @@ const Tool = ({ property, value, handleChange }) => (
 					</label>
 				</div>
 			case 'text-decoration':
-				return <div class="checkbox">
+				return <div className="checkbox">
 					<label>
 						<input 
 							type="checkbox" 
@@ -62,7 +65,7 @@ const Tool = ({ property, value, handleChange }) => (
 					</label>
 				</div>
 			case 'text-transform':
-				return <div class="checkbox">
+				return <div className="checkbox">
 					<label>
 						<input 
 							type="checkbox" 

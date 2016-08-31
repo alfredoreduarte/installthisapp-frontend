@@ -1,21 +1,23 @@
 import React, { PropTypes } from 'react'
+import { ButtonToolbar, ButtonGroup, Button, Glyphicon } from 'react-bootstrap'
 
 const TextAlign = ({
 	options,
 	value,
 	onChange,
 }) => (
-	<div className="btn-group ita-btn-group-editor" data-toggle="buttons">
+	<ButtonToolbar>
+	<ButtonGroup className="ita-btn-group-editor">
 		{options.map( o => 
-			<label
+			<Button
 				key={o} 
-				className={`btn ${value == o ? 'active' : null}`} 
+				className={`${value == o ? 'active' : null}`} 
 				onClick={() => onChange(o)}>
-				<span className={`glyphicon glyphicon-align-${o}`}></span>
-				<input type="radio" name="text-align" value={o} defaultChecked={value == o} />
-			</label>
+				<Glyphicon glyph={`align-${o}`}></Glyphicon>
+			</Button>
 		)}
-	</div>
+	</ButtonGroup>
+	</ButtonToolbar>
 )
 
 TextAlign.propTypes = {

@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react'
 import _ from 'lodash'
-// import Slider as BootSlider from 'bootstrap-slider'
+import Slider from 'react-rangeslider'
 
-const Slider = ({
+const SliderControl = ({
 	value,
 	property,
 	onChange,
@@ -13,14 +13,12 @@ const Slider = ({
 				{_.capitalize(_.replace(property, '-', ' '))}
 			</label>
 		</div>
-		<div className="ita-flex-block">
-			<input
-				type="range" 
-				min="0"
-				max="50"
+		<div className="ita-flex-block ita-flex-box ita-flex-items-center">
+			<Slider
 				value={parseInt(value)}
-				onChange={e => onChange(e.target.value + 'px')}
-			/>
+				min={0}
+				max={100}
+				onChange={val => onChange(val + 'px')} />
 		</div>
 		<div className="ita-flex-shrink">
 			<input 
@@ -34,10 +32,10 @@ const Slider = ({
 	</div>
 )
 
-Slider.propTypes = {
+SliderControl.propTypes = {
 	value: PropTypes.string.isRequired,
 	property: PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
 }
 
-export default Slider
+export default SliderControl
