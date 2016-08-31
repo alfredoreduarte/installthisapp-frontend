@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import Select from'react-select'
+import Select from 'react-select'
 
 const FontFamily = ({
 	values = [
@@ -19,7 +19,7 @@ const FontFamily = ({
 		clearable={false}
 		value={value}
 		options={values}
-		onChange={e => onChange(e.label)}
+		onChange={e => onChange(e.value)}
 	/>
 )
 

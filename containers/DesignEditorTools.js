@@ -1,5 +1,4 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
+import React, { PropTypes } from 'react'
 import FontFamily from 'components/design-editor/FontFamily'
 
 const DesignEditorTools = ({ declarations, handleChange }) => (
@@ -11,33 +10,17 @@ const DesignEditorTools = ({ declarations, handleChange }) => (
 					return (
 						<FontFamily
 							key={property}
-							onChange={newValue => handleChange(property, newValue)}
-							value={value}
+							onChange={newValue => {
+								const sanitizedValue = `"${newValue}"`
+								handleChange(property, sanitizedValue)
+							}}
+							value={value.slice(1, -1)}
 						/>
 					)
 					break
-				default:
-					return (
-						<div key={property}>
-							<label>{property}</label>
-							<input 
-								type="text" 
-								className="form-control" 
-								value={value} 
-								onChange={e => handleChange(property, e.target.value)} />
-						</div>
-					)
 			}
 		})}
 	</div>
 )
 
-const mapStateToProps = (state, props) => ({
-	
-})
-
-const mapDispatchToProps = (dispatch, props) => ({
-	
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(DesignEditorTools)
+export default DesignEditorTools
