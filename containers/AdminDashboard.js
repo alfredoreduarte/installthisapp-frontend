@@ -6,6 +6,7 @@ import AppNavBar from 'components/AppNavBar'
 import DashboardTitleBar from 'components/DashboardTitleBar'
 import DashboardToolBar from 'components/DashboardToolBar'
 import AdminDashboardEmpty from 'components/AdminDashboardEmpty'
+import NoAppsMatching from 'components/NoAppsMatching'
 import AppCreateModal from 'containers/AppCreateModal'
 import AppDeleteModal from 'components/AppDeleteModal'
 import { getAppToBeDeleted, getAllAppsByText } from 'selectors/apps'
@@ -29,7 +30,7 @@ const AdminDashboard = ({
 			<div>
 				<DashboardTitleBar />
 				<DashboardToolBar />
-				<AppGrid apps={apps} /> 
+				{apps.length > 0 ? <AppGrid apps={apps} /> : <NoAppsMatching />}
 			</div>
 		: 
 			<AdminDashboardEmpty />

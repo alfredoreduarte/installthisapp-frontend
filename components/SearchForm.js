@@ -20,22 +20,18 @@ class SearchForm extends Component {
 					placeholder="Type here to search" 
 					ref="searchFormInput" />
 			</form>
-		);
+		)
 	}
 }
 
 const mapStateToProps = (state, props) => {
 	return { 
-		// users: _.values(getCurrentUsers(state, props))
+		
 	}
-};
+}
 
-const mapDispatchToProps = (dispatch, props) => {
-	return { 
-		handleSearchChange: text => {
-			dispatch(searchText(text))
-		}
-	}
-};
+const mapDispatchToProps = (dispatch, props) => ({ 
+	handleSearchChange: text => dispatch(searchText(text))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchForm)

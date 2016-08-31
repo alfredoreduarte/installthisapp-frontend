@@ -8,7 +8,7 @@ import TitleBar from 'components/TitleBar'
 
 const DashboardTitleBar = () => (
 	<div>
-		<TitleBar title="Your Apps and Pages">
+		<TitleBar title="Your Apps">
 			<Link to='/d/apps/create' className="btn btn-success btn-lg">
 				New App
 			</Link>
