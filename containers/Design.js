@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getDeclarationsForCurrentSelector as getProperties } from 'selectors/styles'
+import { getDeclarationsForCurrentSelector as getDeclarations } from 'selectors/styles'
 import { modifyWholeSheet, saveStyles, setPlatform } from 'actions/styles'
 import Canvas from 'components/design-editor/Canvas'
 import Sidebar from 'components/design-editor/Sidebar'
