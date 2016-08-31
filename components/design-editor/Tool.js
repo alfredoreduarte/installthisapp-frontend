@@ -7,7 +7,14 @@ const Tool = ({ property, value, handleChange }) => {
 			return <FontFamily onChange={val => handleChange(property, val)} value={value} />
 			break
 		default:
-			return <div>{property}</div>
+			return <div>
+				<label>{property}</label>
+				<input 
+					type="text" 
+					className="form-control" 
+					value={value} 
+					onChange={e => handleChange(property, e.target.value)} />
+			</div>
 	}
 }
 
