@@ -88,7 +88,7 @@ if (process.env.NODE_ENV == 'development') {
 			console.log(err)
 			return
 		}
-		console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env)
+		console.log("Express server listening on port %d in %s mode.", this.address().port, app.settings.env)
 	})
 }
 else{
@@ -97,6 +97,6 @@ else{
 			console.log(err)
 			return
 		}
-		console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env)
+		console.log("Express server listening on port %d in %s mode.", this.address().port, app.settings.env)
 	})	
 }
