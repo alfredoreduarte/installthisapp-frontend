@@ -16,6 +16,7 @@ class Login extends Component {
 		
 	}
 	digestFacebookResponse(response) {
+		console.log('facebook response', response)
 		this.setState({
 			logging: true
 		})

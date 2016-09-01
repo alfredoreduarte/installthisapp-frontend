@@ -6,6 +6,7 @@ export const digestFacebookResponse = response => {
 	return (dispatch, getState) => {
 		const { checksum } = getState().applicationData
 		const { signedRequest } = response
+		console.log('signedRequest', signedRequest)
 		const body = {
 			signedRequest,
 			checksum,
