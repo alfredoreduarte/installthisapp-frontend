@@ -17,10 +17,17 @@ class Login extends Component {
 	}
 	digestFacebookResponse(response) {
 		console.log('facebook response', response)
-		this.setState({
-			logging: true
-		})
-		this.props.digestFacebookResponse(response)
+		if (response.status == 'not_authorized') {
+			this.setState({
+				logging: false
+			})	
+		}
+		else {
+			this.setState({
+				logging: true
+			})
+			this.props.digestFacebookResponse(response)
+		}
 	}
 	render(){
 		const { digestFacebookResponse, title } = this.props
