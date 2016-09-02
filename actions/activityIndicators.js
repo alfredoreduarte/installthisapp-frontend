@@ -26,3 +26,7 @@ export const toggleActivityUpdatingAppSettings = () => ({
 export const toggleActivitySavingDesign = () => ({
 	type: 'TOGGLE_ACTIVITY/SAVING_DESIGN'
 })
+
+export const toggleActivityLoadingPages = () => ({
+	type: 'TOGGLE_ACTIVITY/LOADING_PAGES'
+})
