@@ -1,9 +1,12 @@
 import React, { PropTypes } from 'react'
 import FontFamily from 'components/design-editor/FontFamily'
+import BackgroundSize from 'components/design-editor/BackgroundSize'
 import TextAlign from 'components/design-editor/TextAlign'
 import Slider from 'components/design-editor/Slider'
 import ColorPicker from 'components/design-editor/ColorPicker'
+import BackgroundRepeat from 'components/design-editor/BackgroundRepeat'
 import TextStyles from 'components/design-editor/TextStyles'
+import ImageUploader from 'components/design-editor/ImageUploader'
 
 const Tool = ({ property, value, handleChange }) => (
 	<div className="ita-sidebar-block">
@@ -20,8 +23,17 @@ const Tool = ({ property, value, handleChange }) => (
 			case 'background-color':
 				return <ColorPicker property={property} onChange={val => handleChange(property, val)} value={value} />
 				break
+			case 'background-image':
+				return <ImageUploader property={property} onChange={val => handleChange(property, val)} value={value} />
+				break
 			case 'font-size':
 				return <Slider property={property} onChange={val => handleChange(property, val)} value={value} />
+				break
+			case 'background-size':
+				return <BackgroundSize property={property} onChange={val => handleChange(property, val)} value={value} />
+				break
+			case 'background-repeat':
+				return <BackgroundRepeat onChange={val => handleChange(property, val)} value={value} />
 				break
 			case 'text-shadow':
 			case 'padding':
@@ -30,50 +42,13 @@ const Tool = ({ property, value, handleChange }) => (
 			case 'margin-bottom':
 			case 'line-height':
 			case 'letter-spacing':
+			case 'direction':
+			case 'background-position':
+			case 'background-attachment':
 				return null
 				break
 			case 'texts':
 				return <TextStyles onChange={(prop, val) => handleChange(prop, val)} value={value} />
-			case 'font-weight':
-				return <div className="checkbox">
-					<label>
-						<input 
-							type="checkbox" 
-							checked={value == 'bold'} 
-							onChange={e => handleChange(property, e.target.checked ? 'bold' : 'inherit')} />
-						{' '}Bold
-					</label>
-				</div>
-			case 'font-style':
-				return <div className="checkbox">
-					<label>
-						<input 
-							type="checkbox" 
-							defaultChecked={value == 'italic'} 
-							onChange={e => handleChange(property, e.target.checked ? 'italic' : 'inherit')} />
-						{' '}Italics
-					</label>
-				</div>
-			case 'text-decoration':
-				return <div className="checkbox">
-					<label>
-						<input 
-							type="checkbox" 
-							defaultChecked={value == 'underline'} 
-							onChange={e => handleChange(property, e.target.checked ? 'underline' : 'inherit')} />
-						{' '}Underline
-					</label>
-				</div>
-			case 'text-transform':
-				return <div className="checkbox">
-					<label>
-						<input 
-							type="checkbox" 
-							defaultChecked={value == 'uppercase'} 
-							onChange={e => handleChange(property, e.target.checked ? 'uppercase' : 'inherit')} />
-						{' '}All-caps
-					</label>
-				</div>
 			default:
 				return <div>
 					<label>{property}</label>

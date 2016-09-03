@@ -15,9 +15,14 @@ const styles = (state = {
 			return Object.assign({}, state, {
 				hoveredSelector: action.payload
 			})
-		case 'SET_ACTIVE_SELECTOR':
+		case 'RESET_ACTIVE_SELECTOR':
 			return Object.assign({}, state, {
-				activeSelector: state.hoveredSelector
+				activeSelector: [],
+			})
+		case 'SET_ACTIVE_SELECTOR':
+			const activeSelector = action.payload ? action.payload : state.hoveredSelector
+			return Object.assign({}, state, {
+				activeSelector,
 			})
 		case 'SET_EDITOR_PLATFORM':
 			return Object.assign({}, state, {

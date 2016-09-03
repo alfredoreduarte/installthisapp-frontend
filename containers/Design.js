@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { getDeclarationsForCurrentSelector as getDeclarations } from 'selectors/styles'
-import { modifyWholeSheet, saveStyles, setPlatform } from 'actions/styles'
+import { modifyWholeSheet, saveStyles, setPlatform, setHoveredSelector, resetActiveSelector, setActiveSelector } from 'actions/styles'
 import Canvas from 'components/design-editor/Canvas'
 import Sidebar from 'components/design-editor/Sidebar'
 import Header from 'components/design-editor/Header'
@@ -21,6 +21,10 @@ const Design = ({
 	declarations,
 	handleChange, 
 	handleSave,
+
+	// Tabs
+	showBody,
+	resetSidebar,
 
 	// Screen Selector
 	screens,
@@ -42,7 +46,8 @@ const Design = ({
 				busy={saving}
 			/>
 			<Tabs
-				handleTabs={tab => console.log('changed tab!', tab)}
+				showBody={showBody}
+				resetSidebar={resetSidebar}
 			/>
 			<ToolSet>
 				{declarations.map( declaration => 
@@ -80,6 +85,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch, props) => ({
 	handleChange: (property, value) => dispatch(modifyWholeSheet(property, value)),
 	handleSave: () => dispatch(saveStyles()),
+	showBody: val => dispatch(setActiveSelector(['body'])),
+	resetSidebar: () => dispatch(resetActiveSelector()),
 	handleScreenChange: e => console.log('screen changed!', e.label),
 	handlePlatformChange: platform => dispatch(setPlatform(platform)),
 	resetToDefaults: () => console.log('reset to defaults!'),

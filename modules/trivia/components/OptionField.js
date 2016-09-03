@@ -1,23 +1,25 @@
 import React from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
-import { Modal, Button, FormGroup, ControlLabel, InputGroup, FormControl } from 'react-bootstrap'
+import { Modal, Button, FormGroup, ControlLabel, InputGroup, FormControl, Glyphicon } from 'react-bootstrap'
 import { postNewQuestion } from 'modules/trivia/actions/questions'
 
 const OptionField = ({ text, onChange, onToggle, onDelete, correct }) => (
 	<FormGroup>
 		<InputGroup>
-			<FormControl type="text" value={text} onChange={onChange} />
 			<InputGroup.Button>
 				<Button 
 					onClick={onToggle}
-					className={correct ? 'btn-success' : 'btn-danger'}>
+					className={correct ? 'btn-outline btn-success' : 'btn-outline btn-default'}>
 					{correct ? 'Correct' : 'Incorrect'}
 				</Button>
+			</InputGroup.Button>
+			<FormControl type="text" value={text || ''} onChange={onChange} />
+			<InputGroup.Button>
 				<Button 
 					onClick={onDelete}
-					className={'btn-info'}>
-					Delete
+					className={'btn-danger btn-outline'}>
+					<Glyphicon glyph="trash" />
 				</Button>
 			</InputGroup.Button>
 		</InputGroup>

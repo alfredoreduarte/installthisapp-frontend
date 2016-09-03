@@ -25,15 +25,17 @@ export const getDeclarationsForCurrentSelector = createSelector(
 			const intersection = _.intersection(rule.selectors, selectorArray)
 			return intersection.length > 0 ? true : false
 		})
-		let temp = {
+		// 
+		// Collect text styles
+		// 
+		let textStyles = {
 			property: 'texts',
 			value: [],
 		}
 		let rulesCollection = selectedRules.map( obj => {
 			return obj.declarations.map( dec => {
 				if (dec.property == 'font-weight' || dec.property == 'text-transform' || dec.property == 'text-decoration' || dec.property == 'font-style') {
-					console.log('ep!', dec.property)
-					temp.value.push({
+					textStyles.value.push({
 						property: dec.property,
 						value: dec.value
 					})
@@ -46,12 +48,10 @@ export const getDeclarationsForCurrentSelector = createSelector(
 			})
 		})
 		rulesCollection = _.flattenDeep(rulesCollection)
-		console.log('pre', rulesCollection)
 		rulesCollection = _.filter(rulesCollection, o => o != null)
-		if (rulesCollection.length) {
-			rulesCollection.push(temp)
+		if (rulesCollection.length && textStyles.value.length) {
+			rulesCollection.push(textStyles)
 		}
-		console.log('queda asi', rulesCollection)
 		return _.orderBy(rulesCollection, elem => {
 			const order = {
 				'font-family': 1,
@@ -61,10 +61,7 @@ export const getDeclarationsForCurrentSelector = createSelector(
 				'border-color': 5,
 				'background-color': 6,
 				'font-size': 7,
-				'font-weight': 8,
-				'font-style': 9,
-				'text-decoration': 10,
-				'text-transform': 11,
+				'background-image': 8,
 			}
 			return order[elem.property]
 		})

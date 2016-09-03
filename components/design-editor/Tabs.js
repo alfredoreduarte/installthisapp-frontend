@@ -1,16 +1,18 @@
 import React, { PropTypes } from 'react'
 
 const Tabs = ({
-	handleTabs	
+	showBody,
+	resetSidebar,	
 }) => (
-	<div className="ita-sidebar-tabs hide">
-		<div className="ita-sidebar-tab" onClick={() => handleTabs('elem')}>Component</div>
-		<div className="ita-sidebar-tab" onClick={() => handleTabs('doc')}>Page</div>
+	<div className="ita-sidebar-tabs">
+		<div className="ita-sidebar-tab" onClick={() => resetSidebar()}>Component</div>
+		<div className="ita-sidebar-tab" onClick={() => showBody()}>Page</div>
 	</div>
 )
 
 Tabs.propTypes = {
-	handleTabs: PropTypes.func.isRequired,
+	showBody: PropTypes.func.isRequired,
+	resetSidebar: PropTypes.func.isRequired,
 }
 
 export default Tabs

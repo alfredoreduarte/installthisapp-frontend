@@ -74,6 +74,34 @@ export const patchToApi = (endpoint, body = null, success = temporaryEmptyFuncti
 			)
 }
 
+export const postFileToApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
+	return 	fetch(API_URL + '/' + endpoint, {
+				method: 'POST',
+				headers: {
+					'Authorization': `Token token="${apiKey}"`,
+				},
+				body: body,
+			})
+			.then(response => {
+				switch(response.status){
+					case 200:
+						return response.json()
+					case 401: processUnauthorized()
+					default:
+						console.log('Status: ' + response.status)
+						return
+				}
+			})
+			.then(json => {
+				const response = processResponse(json)
+				success(response)
+				return Promise.resolve(response)
+			})
+			.catch(exception =>
+				console.log('parsing failed', exception)
+			)
+}
+
 export const postToApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'POST',

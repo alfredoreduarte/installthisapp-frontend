@@ -2,7 +2,7 @@ import 'isomorphic-fetch'
 import css from 'css'
 import { updateCoords } from 'actions/design-helper/mouseTrap'
 import { toggleActivitySavingDesign } from 'actions/activityIndicators'
-import { getFromApi, postToApi } from 'api'
+import { getFromApi, postToApi, postFileToApi } from 'api'
 
 export const fetchJsonTest = () => {
 	return (dispatch, getState) => {
@@ -13,16 +13,30 @@ export const fetchJsonTest = () => {
 }
 
 export const setHoveredSelector = selector => {
-	const classesWithDots = selector.map( sel => '.' + sel )
+	const classesWithDots = selector.map( sel => sel == 'body' ? sel : `.${sel}`)
 	return {
 		type: 'SET_HOVERED_SELECTOR',
 		payload: classesWithDots
 	}
 }
 
-export const setActiveSelector = () => {
+export const resetActiveSelector = () => {
 	return {
-		type: 'SET_ACTIVE_SELECTOR'
+		type: 'RESET_ACTIVE_SELECTOR'
+	}
+}
+
+export const setActiveSelector = (selectors = false) => {
+	if (selectors) {
+		return {
+			type: 'SET_ACTIVE_SELECTOR',
+			payload: selectors
+		}
+	}
+	else {
+		return {
+			type: 'SET_ACTIVE_SELECTOR'
+		}
 	}
 }
 
@@ -84,6 +98,20 @@ export const saveStyles = () => {
 					css: cssString,
 					messages: {hola: 'chau'}
 				}).then(response => dispatch(toggleActivitySavingDesign()))
+	}
+}
+
+export const saveImage = body => {
+	return (dispatch, getState) => {
+		console.log('body', body)
+		dispatch(toggleActivitySavingDesign())
+		const checksum = getState().admin.currentApp
+		return postFileToApi(`applications/${checksum}/save_image_from_new_editor.json`, body)
+				.then(response => {
+					console.log('res', response)
+					dispatch(toggleActivitySavingDesign())
+					return Promise.resolve(response)
+				})
 	}
 }
 

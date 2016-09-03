@@ -15,12 +15,12 @@ const DesignHelper = ({ coords, handleHover, handleClick }) => (
 )
 
 const mapStateToProps = state => ({
-	coords: state.mouseTrap
+	coords: state.mouseTrap,
 })
 
 const mapDispatchToProps = dispatch => ({
 	handleHover: e => dispatch(handleHover(e)),
-	handleClick: e => dispatch(setActiveSelector())
+	handleClick: e => dispatch(setActiveSelector()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(DesignHelper)

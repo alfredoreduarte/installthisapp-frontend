@@ -75,18 +75,24 @@ class QuestionsCreate extends Component {
 			}
 			return option
 		})
-		console.log('new options', options)
 		const newData = update(this.state.question, {
 			options: {$set: options}
 		})
 		this.setState({
 			question: newData
 		}, () => {
-			const correctOption = _.filter(this.state.question.options, {'correct': true, '_destroy': false})
-			console.log('corrects', correctOption)
-			if (correctOption.length == 0) {
-				const newCorrect = _.find(this.state.question.options, {'_destroy': false})
-				this.handleOptionToggle(newCorrect.id)
+			const existingOptions = _.filter(this.state.question.options, {'_destroy': false})
+			console.log('elem', existingOptions)
+			console.log('length', existingOptions.length)
+			if (existingOptions.length == 0) {
+				this.handleAddOption()
+			}
+			else {
+				const correctOption = _.filter(this.state.question.options, {'correct': true, '_destroy': false})
+				if (correctOption.length == 0) {
+					const newCorrect = _.find(this.state.question.options, {'_destroy': false})
+					this.handleOptionToggle(newCorrect.id)
+				}
 			}
 		})
 	}
@@ -163,7 +169,8 @@ class QuestionsCreate extends Component {
 						<label className="h4">Question</label>
 						<input 
 							type="text" 
-							value={question.text} 
+							autoFocus
+							value={question.text || ''}
 							className="form-control"
 							onChange={handleQuestionChange} />
 					</div>
@@ -182,7 +189,7 @@ class QuestionsCreate extends Component {
 					})}
 					<div className="form-group">
 						<p className="text-right"><Button 
-							className="btn btn-xs btn-primary" 
+							className="btn btn-xs btn-primary btn-outline" 
 							onClick={() => handleAddOption()}
 							>Add Option
 						</Button></p>
