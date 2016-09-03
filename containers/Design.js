@@ -23,6 +23,7 @@ const Design = ({
 	handleSave,
 
 	// Tabs
+	componentsOrBody,
 	showBody,
 	resetSidebar,
 
@@ -46,6 +47,7 @@ const Design = ({
 				busy={saving}
 			/>
 			<Tabs
+				componentsOrBody={componentsOrBody}
 				showBody={showBody}
 				resetSidebar={resetSidebar}
 			/>
@@ -74,6 +76,7 @@ const Design = ({
 const mapStateToProps = state => ({ 
 	saving: state.activityIndicators.savingDesign,
 	platform: state.styles.platform,
+	componentsOrBody: state.styles.componentsOrBody,
 	declarations: getDeclarations(state),
 	screens: [
 		{ value: 'index', label: 'Inicio'},

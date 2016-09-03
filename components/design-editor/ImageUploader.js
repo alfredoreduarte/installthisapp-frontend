@@ -22,8 +22,8 @@ const ImageUploader = ({
 				name="asset[attachment]"
 				title={value}
 				accept=".png,.gif,.jpg,.jpeg"
-				placeholder={value}
-				className="btn btn-gray btn-outline"
+				placeholder="Upload Image"
+				className="btn btn-sm btn-gray btn-outline"
 				onChange={handleLocalChange} />
 		</div>
 	</div>

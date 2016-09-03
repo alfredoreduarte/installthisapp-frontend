@@ -7,13 +7,12 @@ const getActiveStylesSelector = state => state.styles.activeSelector
 const getStylesObject = state => state.styles.ruleset
 const getStylesResult = state => state.styles.rules
 
-export const getStringifiedRuleset = state => `<style>${css.stringify(state.styles.ruleset)}</style>`
+export const getStringifiedRuleset = state => state.styles.ruleset.type ? `<style>${css.stringify(state.styles.ruleset)}</style>` : null
 
 const getAllRules = createSelector(
 	getStylesObject,
 	styles => {
-		const allRules = _.filter(styles.stylesheet.rules, {'type': 'rule'})
-		return allRules
+		return styles.stylesheet ? _.filter(styles.stylesheet.rules, {'type': 'rule'}) : []
 	}
 )
 

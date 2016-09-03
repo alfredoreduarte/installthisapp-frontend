@@ -15,4 +15,9 @@ export default (store, dispatch) => ({
 			})
 		})
 	},
+	onLeave: (prevState) => {
+		dispatch({
+			type: 'RESET_EDITOR'
+		})
+	},
 })

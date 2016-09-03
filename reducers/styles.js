@@ -2,11 +2,20 @@ import _ from 'lodash'
 
 const styles = (state = {
 	platform: 'mobile',
+	componentsOrBody: 'components',
 	hoveredSelector: [],
 	activeSelector: [],
 	ruleset: {},
 }, action) => {
 	switch (action.type) {
+		case 'RESET_EDITOR':
+			return {
+				platform: 'mobile',
+				componentsOrBody: 'components',
+				hoveredSelector: [],
+				activeSelector: [],
+				ruleset: {},
+			}
 		case 'RECEIVE_STYLES':
 			return Object.assign({}, state, {
 				ruleset: action.payload
@@ -18,11 +27,14 @@ const styles = (state = {
 		case 'RESET_ACTIVE_SELECTOR':
 			return Object.assign({}, state, {
 				activeSelector: [],
+				componentsOrBody: 'components'
 			})
 		case 'SET_ACTIVE_SELECTOR':
 			const activeSelector = action.payload ? action.payload : state.hoveredSelector
+			const componentsOrBody = action.payload ? 'body' : 'components'
 			return Object.assign({}, state, {
 				activeSelector,
+				componentsOrBody,
 			})
 		case 'SET_EDITOR_PLATFORM':
 			return Object.assign({}, state, {
