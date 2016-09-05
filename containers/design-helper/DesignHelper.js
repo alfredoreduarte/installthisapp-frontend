@@ -2,13 +2,13 @@ import React, { PropTypes } from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 import MouseTrap from 'components/design-helper/MouseTrap'
-import { setActiveSelector, handleHover } from 'actions/styles'
+import { setActiveSelector, handleHover, resetMouseTrap } from 'actions/styles'
 import GameSample from 'components/GameSample'
 
-const DesignHelper = ({ coords, handleHover, handleClick }) => (
+const DesignHelper = ({ coords, handleHover, handleMouseOut, handleClick }) => (
 	<div>
 		<MouseTrap pos={coords} handleClick={handleClick} />
-		<div className="actualGame" onMouseOver={handleHover}>
+		<div onMouseOver={handleHover}>
 			<GameSample />
 		</div>
 	</div>
@@ -20,6 +20,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
 	handleHover: e => dispatch(handleHover(e)),
+	handleMouseOut: e => dispatch(resetMouseTrap(e)),
 	handleClick: e => dispatch(setActiveSelector()),
 })
 
