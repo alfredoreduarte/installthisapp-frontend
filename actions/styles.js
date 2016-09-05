@@ -8,7 +8,7 @@ export const fetchJsonTest = () => {
 	return (dispatch, getState) => {
 		const checksum = getState().admin.currentApp
 		return getFromApi(`applications/${checksum}/jsontest.json`)
-				.then(response => console.log(response))
+				.then(response => console.log('jsontest', response))
 	}
 }
 

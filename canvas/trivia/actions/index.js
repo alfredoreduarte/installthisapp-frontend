@@ -1,4 +1,3 @@
-import 'isomorphic-fetch'
 import { normalize, arrayOf } from 'normalizr'
 import { push } from 'react-router-redux'
 import * as schema from 'canvas/trivia/schema'
@@ -7,9 +6,7 @@ import {
 	allQuestions, 
 	allOptions,
 } from 'canvas/trivia/selectors/questions'
-import * as CONFIG from 'config'
-import humps from 'humps'
-import { getFromApi } from 'canvas/api'
+import { getFromApi, postToApi } from 'canvas/api'
 
 // 
 // FIX NEEDED!: Ahora mismo settings.done es un parche feo para no hacer submit dos veces, porque el state
@@ -24,7 +21,6 @@ const prePostAnswers = () => {
 				type: 'TOGGLE_DONE'
 			})
 			dispatch(toggleActivityIndicator())
-			console.log('fetching', getState().settings.done)
 			dispatch(postAnswers())
 				.then(success => {
 					dispatch(toggleActivityIndicator())
@@ -85,6 +81,11 @@ export function toggleCountDown(){
 	}
 }
 
+export const receiveMessages = payload => ({
+	type: 'RECEIVE_MESSAGES',
+	payload,
+})
+
 export const receiveEntities = entities => ({
 	type: 'RECEIVE_ENTITIES',
 	response: {
@@ -100,44 +101,44 @@ export const receiveGameSettings = settings => ({
 export const loginCallback = () => {
 	return dispatch => {
 		dispatch(fetchEntities())
+		dispatch(fetchMessages())
 	}
 }
 
 export const fetchEntities = () => {
 	return (dispatch, getState) => {
 		const { checksum, canvasId } = getState().applicationData
-		const url = CONFIG.API_URL + `/${checksum}/jsontest.json`
-		return fetch(url, {
-					method: 'GET',
-					headers: {
-						'Authorization': `Token token="${window.canvasApiKey}"`,
-					}
-				})
-				.then(response => response.json())
-				.then(json =>{
-					const camelizedJson = humps.camelizeKeys(json)
-					const payload = normalize(camelizedJson.payload, schema.payload)
-					const settings = camelizedJson.settings
-					const isEmpty = _.isEmpty(payload.entities.questions)
-					if (!isEmpty) {
-						dispatch(receiveEntities(payload.entities))
-						dispatch(receiveGameSettings(settings))
-						dispatch(toggleActivityIndicator())
-						if (_.filter(payload.entities.questions, { 'answered': false }).length == 0) {
-							dispatch(push(`/${canvasId}/${checksum}/thanks`))
-						}
-						else{
-							dispatch(push(`/${canvasId}/${checksum}`))
-							dispatch(toggleCountDown())
-						}
-					}
-					else {
-						dispatch(push(`/${canvasId}/${checksum}/already-played`))
-					}
-				})
-				.catch(exception =>
-					console.log('parsing failed', exception)
-				)
+		return getFromApi(`/${checksum}/jsontest.json`).then( json => {
+			console.log('return ', json)
+			const payload = normalize(json.payload, schema.payload)
+			const settings = json.settings
+			const isEmpty = _.isEmpty(payload.entities.questions)
+			if (!isEmpty) {
+				dispatch(receiveEntities(payload.entities))
+				dispatch(receiveGameSettings(settings))
+				dispatch(toggleActivityIndicator())
+				if (_.filter(payload.entities.questions, { 'answered': false }).length == 0) {
+					dispatch(push(`/${canvasId}/${checksum}/thanks`))
+				}
+				else{
+					dispatch(push(`/${canvasId}/${checksum}`))
+					dispatch(toggleCountDown())
+				}
+			}
+			else {
+				dispatch(push(`/${canvasId}/${checksum}/already-played`))
+			}
+		})
+	}
+}
+
+export const fetchMessages = () => {
+	return (dispatch, getState) => {
+		const { checksum, canvasId } = getState().applicationData
+		return getFromApi(`/${checksum}/static_messages.json`).then( json => {
+			console.log('msgs ', json)
+			dispatch(receiveMessages(json))
+		})
 	}
 }
 
@@ -169,22 +170,8 @@ export const postAnswers = () => {
 		const body = {
 			answers: getState().answers
 		}
-		const url = CONFIG.API_URL + `/${checksum}/save.json`
-		return fetch(url, {
-					method: 'POST',
-					headers: {
-						'Authorization': `Token token="${window.canvasApiKey}"`,
-						'Accept': 'application/json',
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify(body)
-				})
-				.then(response => response.json())
-				.then(json =>{
-					console.log('answers posted and received', json)
-				})
-				.catch(exception =>
-					console.log('parsing failed', exception)
-				)
+		return postToApi(`/${checksum}/save.json`, body).then( json => {
+			console.log('answers posted and received', json)
+		})
 	}
 }

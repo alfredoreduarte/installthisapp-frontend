@@ -8,7 +8,7 @@ const SliderControl = ({
 	onChange,
 }) => (
 	<div className="ita-flex-box ita-flex-box-horizontal">
-		<div className="ita-flex-shrink">
+		<div className="ita-flex-shrink ita-flex-items-center ita-flex-box">
 			<label>
 				{_.capitalize(_.replace(property, '-', ' '))}
 			</label>

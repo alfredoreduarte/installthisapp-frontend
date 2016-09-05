@@ -5,11 +5,9 @@ import { API_URL } from 'config'
 const processBody = body => body ? JSON.stringify(humps.decamelizeKeys(body)) : null
 const processResponse = res => humps.camelizeKeys(res)
 
-const temporaryEmptyFunction = arg => {
-	console.log('temporaryEmptyFunction')
-}
+const temporaryEmptyFunction = arg => console.log('temporaryEmptyFunction')
 
-export const getFromApi = (endpoint, success) => {
+export const getFromApi = (endpoint, success = temporaryEmptyFunction) => {
 	const api_key = window.canvasApiKey
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'GET',
@@ -42,7 +40,7 @@ export const getFromApi = (endpoint, success) => {
 			)
 }
 
-export const writeToApiWithoutAuth = (endpoint, body = null, success) => {
+export const writeToApiWithoutAuth = (endpoint, body = null, success = temporaryEmptyFunction) => {
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'POST',
 				headers: {
@@ -67,7 +65,7 @@ export const writeToApiWithoutAuth = (endpoint, body = null, success) => {
 			.catch(exception => console.log('parsing failed', exception))
 }
 
-export const postToApi = (endpoint, body = null, success) => {
+export const postToApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
 	const api_key = window.canvasApiKey
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'POST',
@@ -100,7 +98,7 @@ export const postToApi = (endpoint, body = null, success) => {
 			)
 }
 
-export const deleteFromApi = (endpoint, body = null, success) => {
+export const deleteFromApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
 	const api_key = window.canvasApiKey
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'DELETE',

@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { Provider, connect } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
-import Index from 'canvas/trivia/components/Index'
 import Login from 'canvas/trivia/components/Login'
-import Thanks from 'canvas/trivia/components/Thanks'
-import AlreadyPlayed from 'canvas/trivia/components/AlreadyPlayed'
+import Index from 'canvas/trivia/containers/Index'
+import Thanks from 'canvas/trivia/containers/Thanks'
+import AlreadyPlayed from 'canvas/trivia/containers/AlreadyPlayed'
 
 const requireAuth = (nextState, replace) => {
 	if (window.canvasApiKey) {

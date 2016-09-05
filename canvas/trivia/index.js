@@ -9,7 +9,6 @@ require('assets/canvas/base.sass')
 const store = configureStore({
 	applicationData: {
 		checksum: window.checksum,
-		// apiKey: window.canvasApiKey,
 		canvasId: window.canvasId,
 		appId: window.facebookAppId,
 	}

@@ -39,7 +39,7 @@ const Design = ({
 	resetToDefaults,
 }) => (
 	<div>
-		<Canvas platform={platform} />
+		<Canvas platform={platform} fakeState={{state: 'fakeStateTakenFromArrayOfStates'}} />
 		<Sidebar>
 			<Header
 				handleClose={() => console.log('closing editor!')}

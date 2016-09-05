@@ -36,8 +36,6 @@ const ColorPicker = ({
 			marginBottom: '10px',
 			marginTop: '13px',
 			position: 'relative',
-			// display: this.state.displayColorPicker == true ? 'block' : 'none',
-			// display: 'block',
 		}}>
 			<span 
 				className="glyphicon glyphicon-triangle-top" 

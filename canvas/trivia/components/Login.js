@@ -1,4 +1,3 @@
-import 'isomorphic-fetch'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import FacebookLogin from 'react-facebook-login'
@@ -10,27 +9,15 @@ class Login extends Component {
 		this.state = {
 			logging: false
 		}
-		this.digestFacebookResponse = this.digestFacebookResponse.bind(this)
+		this.fbCallback = this.fbCallback.bind(this)
 	}
-	componentDidMount() {
-		
-	}
-	digestFacebookResponse(response) {
-		console.log('facebook response', response)
-		if (response.status == 'not_authorized') {
-			this.setState({
-				logging: false
-			})	
-		}
-		else {
-			this.setState({
-				logging: true
-			})
-			this.props.digestFacebookResponse(response)
-		}
+	fbCallback(response) {
+		this.setState({
+			logging: response.status != 'not_authorized'
+		}, () => this.props.processResponse(response))
 	}
 	render(){
-		const { digestFacebookResponse, title } = this.props
+		const { title } = this.props
 		return (
 			<div className="text-center">
 				<div
@@ -42,35 +29,25 @@ class Login extends Component {
 					}}
 				>
 				<h1 className="text-center" style={{color: 'white'}}>{title}</h1>
-				{!this.state.logging ?
 				<FacebookLogin
 					appId={window.facebookAppId}
 					cssClass="btn btn-primary btn-lg"
 					autoLoad={true}
-					textButton="Sign In"
-					callback={response => this.digestFacebookResponse(response)} />
-				:
-				<button
-					className="btn btn-primary btn-lg" disabled={true}>
-					Please wait...
-				</button>
-				}
+					disabled={this.state.logging}
+					textButton={this.state.logging ? "Please wait..." : "Sign In"}
+					callback={response => this.fbCallback(response)} />
 				</div>
 			</div>
 		)
 	}
 }
 
-const mapStateToProps = (state, props) => {
-	return {
-		title: state.settings.applicationTitle
-	}
-}
+const mapStateToProps = state => ({
+	title: state.settings.applicationTitle
+})
 
-const mapDispatchToProps = (dispatch, props) => {
-	return {
-		digestFacebookResponse: res => dispatch(digestFacebookResponse(res))
-	}
-}
+const mapDispatchToProps = (dispatch, props) => ({
+	processResponse: res => dispatch(digestFacebookResponse(res))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

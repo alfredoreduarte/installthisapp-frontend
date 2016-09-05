@@ -4,12 +4,12 @@ import Frame from 'react-frame-component'
 import DesignHelper from 'containers/design-helper/DesignHelper'
 import { getStringifiedRuleset } from 'selectors/styles'
 
-const Canvas = ({ platform, styles }) => (
+const Canvas = ({ platform, fakeState, styles }) => (
 	<div className="row">
 		<div className={`ita-canvas ${platform}`}>
 			<Frame className="ita-canvas-frame">
 				<div className="styles" dangerouslySetInnerHTML={{__html: styles}}></div>
-				<DesignHelper fakeState={{state: 'fakeStateTakenFromArrayOfStates'}} />
+				<DesignHelper fakeState={fakeState} />
 			</Frame>
 		</div>
 	</div>

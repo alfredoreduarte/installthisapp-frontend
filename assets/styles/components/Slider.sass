@@ -4,14 +4,14 @@
 
 /* Variables should be defined outside of this file     */
 /* doing it here just to keep things together in github */
-$baseLineHeight:  4px
-$baseBorderRadius: 4px
-$sliderHandleSize: 25px
+$baseLineHeight:  18px
+$baseBorderRadius: 100px
+$sliderHandleSize: 14px
 $sliderMargin: 15px
 
 .rangeslider
 	position: relative
-	background: $gray-editor-ui
+	border: 1px solid $gray-editor-ui
 	.rangeslider__fill, .rangeslider__handle
 		position: absolute
 	&, .rangeslider__fill
@@ -31,14 +31,14 @@ $sliderMargin: 15px
 	margin: 0px 12px
 	.rangeslider__fill
 		height: 100%
-		+slider_background-image(#89cdef, #81bfde, #f7f7f7)
+		// +slider_background-image(#89cdef, #81bfde, #f7f7f7)
 		border-radius: $baseBorderRadius
 		top: 0
 	.rangeslider__handle
 		width:  $sliderHandleSize
 		height: $sliderHandleSize
 		border-radius: $sliderHandleSize/2
-		top: (($sliderHandleSize/2) * -1) +1
+		top: 1px
 // Rangeslider - Vertical slider
 .rangeslider-vertical
 	margin: 20px auto
@@ -47,7 +47,7 @@ $sliderMargin: 15px
 	background: none
 	.rangeslider__fill
 		width: 100%
-		+slider_background-image(#89cdef, #81bfde, #f7f7f7)
+		// +slider_background-image(#89cdef, #81bfde, #f7f7f7)
 		box-shadow: none
 		bottom: 0
 	.rangeslider__handle
