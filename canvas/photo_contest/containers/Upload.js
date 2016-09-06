@@ -22,7 +22,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		uploadPhoto: e => {
-			// const input = e.target
 			let formData = new FormData()
 			formData.append('photo[caption]', document.querySelector("[name='photo[caption]']").value)
 			formData.append('photo[attachment]', document.querySelector("[name='photo[attachment]']").files[0])

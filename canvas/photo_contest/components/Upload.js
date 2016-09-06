@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router'
-import Photo from 'canvas/photo_contest/components/Photo'
 
 const Upload = ({ uploadPhoto, backUrl }) => (
 	<div className="container">
@@ -23,14 +22,14 @@ const Upload = ({ uploadPhoto, backUrl }) => (
 		<div className="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 			<div className="form-group">
 				<label>Photo</label>
-				<input type="file" name="photo[attachment]" onChange={uploadPhoto} />
+				<input type="file" className="form-control" name="photo[attachment]" />
 			</div>
 			<div className="form-group">
 				<label>Caption</label>
 				<textarea className="form-control" name="photo[caption]" />
 			</div>
 			<div className="form-group">
-				<button className="btn btn-primary">Upload Photo</button>
+				<button className="btn btn-primary" onClick={uploadPhoto}>Upload Photo</button>
 			</div>
 		</div>
 	</div>

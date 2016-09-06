@@ -51,7 +51,7 @@ class Login extends Component {
 				{!this.state.logging ?
 				<FacebookLogin
 					appId={window.facebookAppId}
-					cssClass="btn btn-primary btn-lg"
+					cssClass={`btn btn-primary btn-lg ${this.state.logging ? 'disabled' : null}`}
 					autoLoad={true}
 					textButton="Sign In"
 					onClick={() => this.handleClick()}

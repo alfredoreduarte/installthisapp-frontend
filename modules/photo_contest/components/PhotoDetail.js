@@ -1,44 +1,51 @@
 import React, { Component } from 'react'
 import { Link, browserHistory } from 'react-router'
+import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { Modal, Button } from 'react-bootstrap'
 import { getPhotoById } from 'modules/photo_contest/selectors/photos'
 import { getVotesForPhoto } from 'modules/photo_contest/selectors/votes'
 import User from 'components/User'
 
-const PhotoDetail = ({ show, user, url, caption, votes }) => (
-	<Modal show={show}>
+const PhotoDetail = ({ show, user, thumbnailUrl, assetUrl, caption, votes, handleClose }) => (
+	<Modal show={show} onHide={handleClose}>
 		<Modal.Header closeButton>
 			<Modal.Title>{user.name}'s photo</Modal.Title>
 		</Modal.Header>
 		<Modal.Body>
-			<img 
-				src={url} 
-				style={{width: '100px'}} 
-				className="img-responsive img-rounded" />
-			<h4>Caption</h4>
-			<p>{caption}</p>
-			<h4>Votes: {votes.length}</h4>
-			<ul>
+			<div className="row">
+				<div className="col-md-6">
+					<a href={assetUrl} target="_blank">
+						<img 
+						src={thumbnailUrl}
+						className="img-responsive img-rounded" />
+					</a>
+				</div>
+				<div className="col-md-6">
+					<h5><b>{votes.length} votes</b></h5>
+					<p>{caption}</p>
+				</div>
+			</div>
+			<hr/>
+			<h5><b>Voters</b></h5>
+			<ul className="list-group">
 				{votes.map( vote => 
-					<li key={vote.id}>
+					<li key={vote.id} className="list-group-item">
 						<User name={vote.user.name} identifier={vote.user.identifier} small />
 					</li>
 				)}
 			</ul>
 		</Modal.Body>
-		<Modal.Footer>
-			
-		</Modal.Footer>
 	</Modal>
 )
 
 const mapStateToProps = (state, props) => {
-	const { user, assetUrl, caption } = getPhotoById(state, props.photoId)
+	const { user, thumbnailUrl, assetUrl, caption } = getPhotoById(state, props.photoId)
 	const votes = getVotesForPhoto(state, props.photoId)
 	return {
 		user,
-		url: assetUrl,
+		thumbnailUrl,
+		assetUrl,
 		caption,
 		votes,
 	}
@@ -46,7 +53,10 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
 	return {
-		
+		handleClose: () => {
+			console.log('close!')
+			dispatch(push(props.backUrl))
+		}
 	}
 }
 

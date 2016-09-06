@@ -2,22 +2,23 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { postVote } from 'canvas/photo_contest/actions/votes'
-import { allPhotos } from 'canvas/photo_contest/selectors/photos'
+import { currentPhoto } from 'canvas/photo_contest/selectors/photos'
 import Loading from 'canvas/photo_contest/components/Loading'
-import IndexView from 'canvas/photo_contest/components/Index'
+import SingleView from 'canvas/photo_contest/components/SingleView'
 
-class Index extends Component {
+class SinglePhoto extends Component {
 	render(){
 		const { loading } = this.props
-		return !loading ? <IndexView { ...this.props } /> : <Loading />
+		return !loading ? <SingleView { ...this.props } /> : <Loading />
 	}
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, props) => {
+	console.log('losprops', props)
 	return {
-		photos: allPhotos(state),
+		photo: currentPhoto(state, props),
 		uploadUrl: `/${window.canvasId}/${window.checksum}/upload`,
-		singlePhotoUrl: `/${window.canvasId}/${window.checksum}`,
+		backUrl: `/${window.canvasId}/${window.checksum}`,
 		loading: false,
 	}
 }
@@ -34,4 +35,4 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Index)
+export default connect(mapStateToProps, mapDispatchToProps)(SinglePhoto)

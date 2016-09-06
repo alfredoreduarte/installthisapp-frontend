@@ -31,9 +31,8 @@ class Login extends Component {
 				<h1 className="text-center" style={{color: 'white'}}>{title}</h1>
 				<FacebookLogin
 					appId={window.facebookAppId}
-					cssClass="btn btn-primary btn-lg"
+					cssClass={`btn btn-primary btn-lg ${this.state.logging ? 'disabled' : null}`}
 					autoLoad={true}
-					disabled={this.state.logging}
 					textButton={this.state.logging ? "Please wait..." : "Sign In"}
 					callback={response => this.fbCallback(response)} />
 				</div>

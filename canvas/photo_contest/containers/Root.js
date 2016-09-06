@@ -4,6 +4,7 @@ import { Router, Route, IndexRoute } from 'react-router'
 import Login from 'canvas/photo_contest/components/Login'
 import Index from 'canvas/photo_contest/containers/Index'
 import Upload from 'canvas/photo_contest/containers/Upload'
+import SinglePhoto from 'canvas/photo_contest/containers/SinglePhoto'
 import { loginCallback } from 'canvas/photo_contest/actions'
 
 const requireAuth = (nextState, replace, next) => {
@@ -40,6 +41,10 @@ class Root extends Component {
 					<Route 
 						path={`/${window.canvasId}/:checksum/login`} 
 						component={Login}/>
+					<Route 
+						path={`/${window.canvasId}/:checksum/:photoId`}
+						onEnter={(nextState, replace, next) => getPhotos(nextState, replace, next, dispatch)}
+						component={SinglePhoto} />
 				</Router>
 			</Provider>
 		)

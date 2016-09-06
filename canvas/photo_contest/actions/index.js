@@ -29,9 +29,8 @@ export const receiveGameSettings = settings => ({
 
 export const loginCallback = () => {
 	return dispatch => {
-		dispatch(fetchEntities())
+		return dispatch(fetchEntities())
 		// dispatch(fetchMessages())
-		return Promise.resolve()
 	}
 }
 
@@ -44,6 +43,7 @@ export const fetchEntities = () => {
 			const settings = json.settings
 			dispatch(receiveEntities(payload.entities))
 			dispatch(receiveGameSettings(settings))
+			return Promise.resolve()
 		})
 	}
 }

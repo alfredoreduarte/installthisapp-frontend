@@ -1,9 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router'
-// import Masonry from 'react-masonry-component'
 import Photo from 'canvas/photo_contest/components/Photo'
 
-const Index = ({ photos, handleVote, uploadUrl }) => (
+const Index = ({ photos, handleVote, uploadUrl, singlePhotoUrl }) => (
 	<div className="container">
 		<div className="col-sm-12 ita-title-bar">
 			<div className="ita-cali-title">This is the main heading</div>
@@ -30,8 +29,9 @@ const Index = ({ photos, handleVote, uploadUrl }) => (
 						name={photo.user.name}
 						votes={photo.votes.length} 
 						voted={true}
+						singlePhotoUrl={singlePhotoUrl}
 						handleVote={() => handleVote(photo.id)}
-						photoUrl={photo.assetUrl} />
+						photoUrl={photo.thumbnailUrl} />
 				</div>
 			)}
 		</div>

@@ -16,6 +16,7 @@ import User from 'components/User'
 
 const Photos = ({
 	viewPhoto,
+	backUrl,
 	detailUrl,
 	photos,
 	selectedIds,
@@ -29,6 +30,7 @@ const Photos = ({
 		{viewPhoto ? <PhotoDetail 
 			show={viewPhoto ? true : false}
 			photoId={viewPhoto}
+			backUrl={backUrl}
 			/> : null}
 		<div className="ita-table-toolbar">
 			<div className="row">
@@ -144,7 +146,9 @@ const Photos = ({
 
 const mapStateToProps = (state, props) => {
 	const viewPhoto = props.params.photoId
+	console.log('location', props)
 	return { 
+		backUrl: `/d/apps/${props.params.type}/${props.params.checksum}/photos`,
 		photos: getPhotosForCurrentApp(state, props),
 		selectedIds: state.selectedItems,
 		detailUrl: props.location.pathname,

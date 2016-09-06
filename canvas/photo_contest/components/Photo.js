@@ -1,8 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router'
 
-const Photo = ({ caption, name, votes, voted, photoUrl, handleVote }) => (
+const Photo = ({ id, caption, name, votes, voted, photoUrl, handleVote, singlePhotoUrl }) => (
 	<div className="ita-photo-element">
-		<img src={photoUrl} className="img-responsive" />
+		<Link to={`${singlePhotoUrl}/${id}`}>
+			<img src={photoUrl} className="img-responsive" />
+		</Link>
 		<div className="caption">
 			<div>
 				<span className="ita-cali-vote-count">{votes}</span>
