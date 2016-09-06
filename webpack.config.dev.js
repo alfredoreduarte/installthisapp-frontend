@@ -7,6 +7,7 @@ module.exports = {
 		dashboard: ['webpack-hot-middleware/client', './index'],
 		trivia: './canvas/trivia/index',
 		top_fans: './canvas/top_fans/index',
+		photo_contest: './canvas/photo_contest/index',
 	},
 	output: {
 		path: path.join(__dirname, '/dist'),

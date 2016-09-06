@@ -1,0 +1,53 @@
+// Bourbon Sass Library
+@import "~bourbon/app/assets/stylesheets/bourbon"
+
+// Bootstrap
+@import	libraries/variables
+@import "~bootstrap-sass/assets/stylesheets/bootstrap"
+
+// Titles
+.ita-title-bar
+	padding-top: 20px
+	padding-bottom: 20px
+.ita-cali-title
+	font-size: 36px
+	color: #333
+	font-weight: bold
+	text-align: center
+.ita-cali-subtitle
+	font-size: 24px
+	color: #333
+	font-weight: normal
+	text-align: center
+// Toolbar
+.ita-toolbar
+	padding: 20px 0px
+
+// Photo
+.ita-photo-element
+	position: relative
+	.caption
+		position: absolute
+		bottom: 0
+		left: 0
+		right: 0
+		padding: 5%
+		+linear-gradient(transparent, black)
+.ita-cali-photo-name
+	color: white
+	font-size: 14px
+	font-weight: 200
+.ita-cali-vote-count
+	color: white
+	font-size: 20px
+	font-weight: 200
+.ita-cali-vote-label
+	color: white
+	font-size: 10px
+	font-weight: 200
+.ita-cali-vote-button
+	color: white
+	font-size: 22px
+	cursor: pointer
+.ita-cali-vote-button:hover, .ita-cali-vote-button--active
+	color: #FF0850

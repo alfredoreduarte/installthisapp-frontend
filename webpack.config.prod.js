@@ -7,6 +7,7 @@ module.exports = {
 		dashboard: 'index.js',
 		trivia: 'canvas/trivia/index.js',
 		top_fans: 'canvas/top_fans/index.js',
+		photo_contest: 'canvas/photo_contest/index.js',
 	},
 	output: {
 		path: path.join(__dirname, '/dist'),

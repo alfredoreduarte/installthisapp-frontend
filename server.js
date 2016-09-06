@@ -50,6 +50,10 @@ app.use(triviaRouter)
 var topFansRouter = require('./modules/top_fans/server.js')
 app.use(topFansRouter)
 
+// Photo Contest
+var photoContestRouter = require('./modules/photo_contest/server.js')
+app.use(photoContestRouter)
+
 // Serving static HTML
 app.use(function(req, res, next) {
 	if(req.url.substr(-1) == '/' && req.url.length > 1)

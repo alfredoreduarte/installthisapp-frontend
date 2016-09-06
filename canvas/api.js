@@ -8,11 +8,11 @@ const processResponse = res => humps.camelizeKeys(res)
 const temporaryEmptyFunction = arg => console.log('temporaryEmptyFunction')
 
 export const getFromApi = (endpoint, success = temporaryEmptyFunction) => {
-	const api_key = window.canvasApiKey
+	const apiKey = window.canvasApiKey
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'GET',
 				headers: {
-					'Authorization': `Token token="${api_key}"`,
+					'Authorization': `Token token="${apiKey}"`,
 					'Content-Type': `application/json`,
 				}
 			})
@@ -31,9 +31,9 @@ export const getFromApi = (endpoint, success = temporaryEmptyFunction) => {
 				}
 			})
 			.then(json => {
-				const camelizedJson = humps.camelizeKeys(json)
-				success(camelizedJson)
-				return Promise.resolve(camelizedJson)
+				const response = processResponse(json)
+				success(response)
+				return Promise.resolve(response)
 			})
 			.catch(exception =>
 				console.log('parsing failed', exception)
@@ -58,19 +58,50 @@ export const writeToApiWithoutAuth = (endpoint, body = null, success = temporary
 				}
 			})
 			.then(json => {
-				const camelizedJson = humps.camelizeKeys(json)
-				success(camelizedJson)
-				return Promise.resolve(camelizedJson)
+				const response = processResponse(json)
+				success(response)
+				return Promise.resolve(response)
 			})
 			.catch(exception => console.log('parsing failed', exception))
 }
 
-export const postToApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
-	const api_key = window.canvasApiKey
+export const postFileToApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
+	const apiKey = window.canvasApiKey
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'POST',
 				headers: {
-					'Authorization': `Token token="${api_key}"`,
+					'Authorization': `Token token="${apiKey}"`,
+				},
+				body: body,
+			})
+			.then(response => {
+				switch(response.status){
+					case 200:
+						return response.json()
+					case 401:
+						console.log('Not authorized')
+						return
+					default:
+						console.log('Status: ' + response.status)
+						return
+				}
+			})
+			.then(json => {
+				const response = processResponse(json)
+				success(response)
+				return Promise.resolve(response)
+			})
+			.catch(exception =>
+				console.log('parsing failed', exception)
+			)
+}
+
+export const postToApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
+	const apiKey = window.canvasApiKey
+	return 	fetch(API_URL + '/' + endpoint, {
+				method: 'POST',
+				headers: {
+					'Authorization': `Token token="${apiKey}"`,
 					'Content-Type': `application/json`,
 				},
 				body: processBody(body),
@@ -89,9 +120,9 @@ export const postToApi = (endpoint, body = null, success = temporaryEmptyFunctio
 				}
 			})
 			.then(json => {
-				const camelizedJson = humps.camelizeKeys(json)
-				success(camelizedJson)
-				return Promise.resolve(camelizedJson)
+				const response = processResponse(json)
+				success(response)
+				return Promise.resolve(response)
 			})
 			.catch(exception =>
 				console.log('parsing failed', exception)
@@ -99,11 +130,11 @@ export const postToApi = (endpoint, body = null, success = temporaryEmptyFunctio
 }
 
 export const deleteFromApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
-	const api_key = window.canvasApiKey
+	const apiKey = window.canvasApiKey
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'DELETE',
 				headers: {
-					'Authorization': `Token token="${api_key}"`,
+					'Authorization': `Token token="${apiKey}"`,
 					'Content-Type': `application/json`,
 				},
 				body: processBody(body),
@@ -122,9 +153,9 @@ export const deleteFromApi = (endpoint, body = null, success = temporaryEmptyFun
 				}
 			})
 			.then(json => {
-				const camelizedJson = humps.camelizeKeys(json)
-				success(camelizedJson)
-				return Promise.resolve(camelizedJson)
+				const response = processResponse(json)
+				success(response)
+				return Promise.resolve(response)
 			})
 			.catch(exception =>
 				console.log('parsing failed', exception)

@@ -34,7 +34,8 @@ export default (store, dispatch) => ({
 		require('routes/Analytics'),
 		require('routes/Users'),
 		require('routes/Preferences'),
-		require('modules/trivia/routes').default(store),
-		require('modules/top_fans/routes').default(store),
+		require('modules/trivia/routes').default(store, dispatch),
+		require('modules/top_fans/routes').default(store, dispatch),
+		require('modules/photo_contest/routes').default(store, dispatch),
 	]
 })

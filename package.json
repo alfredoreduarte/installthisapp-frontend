@@ -70,6 +70,7 @@
     "react-file-input": "^0.2.5",
     "react-frame-component": "^0.6.5",
     "react-icheck": "^0.3.4",
+    "react-masonry-component": "^4.2.1",
     "react-rangeslider": "^1.0.3",
     "react-redux": "^4.4.5",
     "react-router": "^2.7.0",
