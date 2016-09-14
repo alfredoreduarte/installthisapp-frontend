@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import Photo from 'canvas/photo_contest/components/Photo'
 import Header from 'canvas/photo_contest/components/Header'
-import ToolBar from 'canvas/photo_contest/components/ToolBar'
 
 const Index = ({ photos, handleVote, uploadUrl, singlePhotoUrl }) => (
 	<div className="container">
