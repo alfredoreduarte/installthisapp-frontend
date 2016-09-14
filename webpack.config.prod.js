@@ -45,6 +45,12 @@ module.exports = {
 				exclude: /node_modules/,
 				include: __dirname
 			},
+			// images
+			{
+				test: /\.(png|jpg|jpeg|gif)$/,
+				// include: path.join(__dirname, 'assets/styles'),
+				loaders: ['file']
+			},
 			// sass
 			{
 				test: /\.(sass|scss)$/,
