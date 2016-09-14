@@ -6,7 +6,7 @@ import Header from 'canvas/photo_contest/components/Header'
 const Index = ({ photos, handleVote, uploadUrl, singlePhotoUrl }) => (
 	<div className="container">
 		<Header title={'This is the main heading'} subtitle={'Nibh Mattis Ridiculus Egestas'} />
-		<ToolBar uploadUrl={uploadUrl} />
+		
 		<div className="">
 			<div className="row">
 				{photos.map( photo => 
