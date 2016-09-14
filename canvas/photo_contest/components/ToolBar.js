@@ -20,13 +20,18 @@ const ToolBar = ({ uploadUrl = '', backUrl = '' }) => (
 			<Link to={backUrl} style={styles.button} className="ita-cali-button--secondary">← Back</Link>
 			}
 		</div>
-		{backUrl == '' ? <div style={{...styles.toolbarCell, flex: 2, justifyContent: 'center'}}>
+		{backUrl == '' ? <div style={Object.assign({}, styles.toolbarCell, {
+			flex: 2,
+			justifyContent: 'center'
+		})}>
 			<span style={styles.tabItem} className="ita-cali-sorter ita-cali-sorter--active">Most Voted</span>
 			{' | '}
 			<span style={styles.tabItem} className="ita-cali-sorter">Most Recent</span>
 		</div> : null}
 		{uploadUrl != '' ? 
-		<div style={{...styles.toolbarCell, justifyContent: 'flex-end'}}>
+		<div style={Object.assign({}, styles.toolbarCell, {
+			justifyContent: 'flex-end'
+		})}>
 			<Link to={uploadUrl} style={styles.button} className="ita-cali-button">Upload Photo</Link>
 		</div> : null}
 	</div>
