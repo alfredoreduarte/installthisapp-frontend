@@ -38,7 +38,7 @@ const Sidebar = ({ installed, checksum, type, children, menu, facebookPageIdenti
 			<li className="">
 				<Link to={`/d/apps/${type}/${checksum}/design`} activeClassName="active">Design</Link>
 				<br/>
-				<small style={{fontSize: '12px'}}>temporarily trivia-exclusive</small>
+				<small style={{fontSize: '12px'}}>only trivia/photo contest</small>
 			</li>
 			<li className="hide"><Link to="" activeClassName="active">Design <small>(coming soon)</small></Link></li>
 			<li><Link to={`/d/apps/${type}/${checksum}/users`} activeClassName="active">Users</Link></li>
