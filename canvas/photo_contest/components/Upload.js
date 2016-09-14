@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import Header from 'canvas/photo_contest/components/Header'
-// import ToolBar from 'canvas/photo_contest/components/ToolBar'
+import ToolBar from 'canvas/photo_contest/components/ToolBar'
 
 const Upload = ({ uploadPhoto, backUrl }) => (
 	<div className="container">
 		<Header title={'Upload Photo'} subtitle={''} />
-		
+		<ToolBar backUrl={backUrl} />
 		<div className="col-xs-12 col-sm-6">
 			<div className="form-group">
 				<label className="ita-cali-form-label">Photo</label>
