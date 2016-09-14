@@ -1,48 +1,30 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
-import Photo from 'canvas/photo_contest/components/Photo'
+import Header from 'canvas/photo_contest/components/Header'
+import ToolBar from 'canvas/photo_contest/components/ToolBar'
 
 const SingleView = ({ photo, voted = true, handleVote, backUrl, uploadUrl }) => (
 	<div className="container">
-		<div className="col-sm-12 ita-title-bar">
-			<div className="ita-cali-title">This is the main heading</div>
-			<div className="ita-cali-subtitle">Nibh Mattis Ridiculus Egestas</div>
-		</div>
-		<div className="col-sm-12">
-			<div className="row ita-toolbar">
-				<div className="col-sm-4">
-					<Link to={backUrl} className="btn btn-primary btn-sm">Back</Link>
-				</div>
-				<div className="col-sm-4 text-center">
-					
-				</div>
-				<div className="col-sm-4 text-right">
-					<Link to={uploadUrl} className="btn btn-primary btn-sm">Upload Photo</Link>
-				</div>
-			</div>
-		</div>
-		<div className="">
+		<Header title={'This is the main heading'} subtitle={'Nibh Mattis Ridiculus Egestas'} />
+		<ToolBar backUrl={backUrl} uploadUrl={uploadUrl} />
+		<div className="row">
 			<div className="col-sm-12">
-				<div className="ita-photo-element">
+				<div style={styles.photo}>
 					<img src={photo.assetUrl} className="img-responsive" />
-					<div className="caption">
-						<div className="row">
+					<div style={styles.caption}>
+						<div style={styles.metadata}>
 							<div>
-								<span className="ita-cali-vote-count">{photo.votes.length}</span>
+								<p className="ita-cali-caption-full">{photo.caption}</p>
+								<p className="ita-cali-name-full">{photo.user.name}</p>
+								<span className="ita-cali-vote-count--full">{photo.votes.length}</span>
 								{' '}
-								<span className="ita-cali-vote-label">votes</span>
+								<span className="ita-cali-vote-label--full">votes</span>
 							</div>
-							<div className="ita-cali-photo-name pull-left">{photo.user.name}</div>
-							<div className="pull-right">
-								<a 
-									className={`ita-cali-vote-button ${voted ? 'ita-cali-vote-button--active' : null}`} 
-									onClick={() => handleVote(photo.id)}>
-									<span className="glyphicon glyphicon-heart"></span>
-								</a>
-							</div>
-						</div>
-						<div className="row">
-							<p className="ita-cali-photo-caption">{photo.caption}</p>
+							<a
+								style={styles.voteButton}
+								onClick={() => handleVote(photo.id)}>
+								<span className={`glyphicon glyphicon-heart ita-cali-heart-full${voted ? '--active' : null}`}></span>
+							</a>
 						</div>
 					</div>
 				</div>
@@ -50,5 +32,32 @@ const SingleView = ({ photo, voted = true, handleVote, backUrl, uploadUrl }) => 
 		</div>
 	</div>
 )
+
+const styles = {
+	metadata: {
+		display: 'flex',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+	},
+	photo: {
+		marginBottom: '20px',
+		position: 'relative',
+	},
+	voteButton: {
+		cursor: 'pointer',
+		fontSize: '40px',
+	},
+	caption: {
+		padding: '2%',
+	}
+}
+
+SingleView.propTypes = {
+	photo: PropTypes.object.isRequired,
+	voted: PropTypes.bool.isRequired,
+	handleVote: PropTypes.func.isRequired,
+	backUrl: PropTypes.string.isRequired,
+	uploadUrl: PropTypes.string.isRequired,
+}
 
 export default SingleView

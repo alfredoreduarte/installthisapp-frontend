@@ -14,7 +14,6 @@ class SinglePhoto extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-	console.log('losprops', props)
 	return {
 		photo: currentPhoto(state, props),
 		uploadUrl: `/${window.canvasId}/${window.checksum}/upload`,

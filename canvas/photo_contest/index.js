@@ -4,7 +4,8 @@ import { browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import Root from 'canvas/photo_contest/containers/Root'
 import configureStore from 'canvas/photo_contest/store/configureStore'
-require('assets/canvas/photo_contest.sass')
+// require('assets/canvas/base.sass')
+// require('assets/canvas/photo_contest.sass')
 
 const store = configureStore({
 	applicationData: {

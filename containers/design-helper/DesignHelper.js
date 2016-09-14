@@ -5,11 +5,11 @@ import MouseTrap from 'components/design-helper/MouseTrap'
 import { setActiveSelector, handleHover, resetMouseTrap } from 'actions/styles'
 import GameSample from 'components/GameSample'
 
-const DesignHelper = ({ coords, handleHover, handleMouseOut, handleClick }) => (
+const DesignHelper = ({ previews, coords, handleHover, handleMouseOut, handleClick }) => (
 	<div>
 		<MouseTrap pos={coords} handleClick={handleClick} />
 		<div onMouseOver={handleHover}>
-			<GameSample />
+			<GameSample previews={previews} />
 		</div>
 	</div>
 )

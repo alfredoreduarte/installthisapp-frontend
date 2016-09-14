@@ -4,12 +4,17 @@ import Frame from 'react-frame-component'
 import DesignHelper from 'containers/design-helper/DesignHelper'
 import { getStringifiedRuleset } from 'selectors/styles'
 
-const Canvas = ({ platform, fakeState, styles }) => (
+const Canvas = ({ previews, platform, fakeState, styles }) => (
 	<div className="row">
 		<div className={`ita-canvas ${platform}`}>
-			<Frame className="ita-canvas-frame">
+			<Frame 
+				className="ita-canvas-frame" 
+				head={
+					<link 
+						rel="stylesheet" 
+						href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />}>
 				<div className="styles" dangerouslySetInnerHTML={{__html: styles}}></div>
-				<DesignHelper fakeState={fakeState} />
+				<DesignHelper fakeState={fakeState} previews={previews} />
 			</Frame>
 		</div>
 	</div>

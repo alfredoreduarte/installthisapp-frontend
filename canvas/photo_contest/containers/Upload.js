@@ -26,7 +26,7 @@ const mapDispatchToProps = dispatch => {
 			formData.append('photo[caption]', document.querySelector("[name='photo[caption]']").value)
 			formData.append('photo[attachment]', document.querySelector("[name='photo[attachment]']").files[0])
 			dispatch(postPhoto(formData)).then( response => {
-				// props.onChange(`url(${response.assetUrl})`)
+				dispatch(push(`/${window.canvasId}/${window.checksum}/${response.id}`))
 			})
 		}
 	}

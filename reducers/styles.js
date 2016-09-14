@@ -1,21 +1,22 @@
 import _ from 'lodash'
 
-const styles = (state = {
-	platform: 'mobile',
+const initialState = {
+	platform: 'facebook',
+	screen: 'index',
 	componentsOrBody: 'components',
 	hoveredSelector: [],
 	activeSelector: [],
 	ruleset: {},
-}, action) => {
+}
+
+const styles = (state = initialState, action) => {
 	switch (action.type) {
 		case 'RESET_EDITOR':
-			return {
-				platform: 'mobile',
-				componentsOrBody: 'components',
-				hoveredSelector: [],
-				activeSelector: [],
-				ruleset: {},
-			}
+			return initialState
+		case 'SET_SCREEN':
+			return Object.assign({}, state, {
+				screen: action.screen
+			})
 		case 'RECEIVE_STYLES':
 			return Object.assign({}, state, {
 				ruleset: action.payload

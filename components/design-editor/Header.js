@@ -8,11 +8,11 @@ const Header = ({
 }) => (
 	<div className="ita-side-bar-header">
 		<div className="ita-side-bar-content">
-			<Link to="/d" className="" onClick={() => handleClose()}>
+			<a href="javascript:void(0)" className="" onClick={handleClose}>
 				<small>
 					<i className="glyphicon glyphicon-menu-left"></i> Back to Dashboard
 				</small>
-			</Link>
+			</a>
 			<button 
 				disabled={busy}
 				className="btn btn-default btn-sm btn-outline btn-success" 

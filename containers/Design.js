@@ -1,7 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 import { getDeclarationsForCurrentSelector as getDeclarations } from 'selectors/styles'
-import { modifyWholeSheet, saveStyles, setPlatform, setHoveredSelector, resetActiveSelector, setActiveSelector } from 'actions/styles'
+import { 
+	setCurrentScreen,
+	modifyWholeSheet, 
+	saveStyles, 
+	setPlatform, 
+	setHoveredSelector, 
+	resetMouseTrap,
+	resetActiveSelector, 
+	setActiveSelector,
+} from 'actions/styles'
 import Canvas from 'components/design-editor/Canvas'
 import Sidebar from 'components/design-editor/Sidebar'
 import Header from 'components/design-editor/Header'
@@ -13,6 +23,16 @@ import ScreenSelector from 'components/design-editor/ScreenSelector'
 import ToolSet from 'components/design-editor/ToolSet'
 import Tool from 'components/design-editor/Tool'
 
+// Provisorio
+import PreviewsTrivia from 'canvas/trivia/containers/Previews'
+import PreviewsPhotoContest from 'canvas/photo_contest/containers/Previews'
+// Provisorio
+
+const screens = {
+	trivia: PreviewsTrivia.screens,
+	photo_contest: PreviewsPhotoContest.screens,
+}
+
 const Design = ({
 	saving,
 	platform,
@@ -21,6 +41,7 @@ const Design = ({
 	declarations,
 	handleChange, 
 	handleSave,
+	handleClose,
 
 	// Tabs
 	componentsOrBody,
@@ -29,6 +50,7 @@ const Design = ({
 
 	// Screen Selector
 	screens,
+	previews,
 	currentScreen,
 	handleScreenChange,
 
@@ -39,10 +61,10 @@ const Design = ({
 	resetToDefaults,
 }) => (
 	<div>
-		<Canvas platform={platform} fakeState={{state: 'fakeStateTakenFromArrayOfStates'}} />
+		<Canvas previews={previews} platform={platform} fakeState={{state: 'fakeStateTakenFromArrayOfStates'}} />
 		<Sidebar>
 			<Header
-				handleClose={() => console.log('closing editor!')}
+				handleClose={handleClose}
 				handleSave={handleSave}
 				busy={saving}
 			/>
@@ -62,7 +84,7 @@ const Design = ({
 			</ToolSet>
 		</Sidebar>
 		<BottomBar>
-			<ResetButton handleReset={resetToDefaults} />
+			{false ? <ResetButton handleReset={resetToDefaults} /> : null}
 			<ScreenSelector
 				value={currentScreen}
 				options={screens}
@@ -73,24 +95,28 @@ const Design = ({
 	</div>
 )
 
-const mapStateToProps = state => ({ 
-	saving: state.activityIndicators.savingDesign,
-	platform: state.styles.platform,
-	componentsOrBody: state.styles.componentsOrBody,
-	declarations: getDeclarations(state),
-	screens: [
-		{ value: 'index', label: 'Inicio'},
-		{ value: 'thanks', label: 'Gracias'},
-	],
-	currentScreen: 'index',
-})
+const mapStateToProps = (state, props) => {
+	return {
+		saving: state.activityIndicators.savingDesign,
+		platform: state.styles.platform,
+		componentsOrBody: state.styles.componentsOrBody,
+		declarations: getDeclarations(state),
+		screens: screens[props.params.type],
+		previews: props.params.type,
+		currentScreen: state.styles.screen,
+	}
+}
 
 const mapDispatchToProps = (dispatch, props) => ({
 	handleChange: (property, value) => dispatch(modifyWholeSheet(property, value)),
 	handleSave: () => dispatch(saveStyles()),
+	handleClose: () => dispatch(push(`/d/apps/${props.params.type}/${props.params.checksum}`)),
 	showBody: val => dispatch(setActiveSelector(['body'])),
 	resetSidebar: () => dispatch(resetActiveSelector()),
-	handleScreenChange: e => console.log('screen changed!', e.label),
+	handleScreenChange: e => {
+		dispatch(resetMouseTrap())
+		dispatch(setCurrentScreen(e.value))
+	},
 	handlePlatformChange: platform => dispatch(setPlatform(platform)),
 	resetToDefaults: () => console.log('reset to defaults!'),
 })

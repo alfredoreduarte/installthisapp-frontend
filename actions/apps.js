@@ -75,12 +75,14 @@ const digestDataBeforePostingNewApp = data => {
 			facebook_page_identifier: data.pageId,
 			application_type: data.module,
 			title: data.title,
-		}
+		},
+		initial_stylesheet: data.stylesheet
 	}
 }
 
 export const postNewApp = () => {
 	return (dispatch, getState) => {
+		const body = getState().newApp
 		const params = digestDataBeforePostingNewApp(getState().newApp)
 		postToApi(`applications.json`, params, res => {
 			const normalized = normalize(res, schema.app)

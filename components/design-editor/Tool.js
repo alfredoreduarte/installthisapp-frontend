@@ -20,9 +20,15 @@ const Tool = ({ property, value, handleChange }) => (
 				break
 			case 'color':
 			case 'border-color':
+			case 'border-bottom-color':
+			case 'border-left-color':
+			case 'border-right-color':
+			case 'border-top-color':
 			case 'background-color':
+			case 'background':
 				return <ColorPicker property={property} onChange={val => handleChange(property, val)} value={value} />
 				break
+			case 'background':
 			case 'background-image':
 				return <ImageUploader property={property} onChange={val => handleChange(property, val)} value={value} />
 				break

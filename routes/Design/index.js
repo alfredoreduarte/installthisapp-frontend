@@ -6,12 +6,17 @@ export default (store, dispatch) => ({
 	getComponent(nextState, cb) {
 		require.ensure([], require => {
 			cb(null, require('containers/Design').default)
+			// cb(null, {
+			// 	editor: require('containers/Design').default,
+			// 	preview: require('canvas/' + nextState.params.type + '/components/Previews').default,
+			// })
 		})
 	},
 	onEnter: (nextState, replace, next) => {
 		dispatch(setCurrentAppChecksum(nextState.params.checksum)).then(() => {
 			dispatch(fetchStyles()).then(() => {
-				dispatch(fetchJsonTest()).then(() => next())
+				// dispatch(fetchJsonTest()).then(() => next())
+				next()
 			})
 		})
 	},

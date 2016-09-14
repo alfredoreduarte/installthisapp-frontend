@@ -4,6 +4,13 @@ import { updateCoords } from 'actions/design-helper/mouseTrap'
 import { toggleActivitySavingDesign } from 'actions/activityIndicators'
 import { getFromApi, postToApi, postFileToApi } from 'api'
 
+export const setCurrentScreen = screen => {
+	return {
+		type: 'SET_SCREEN',
+		screen,
+	}
+}
+
 export const fetchJsonTest = () => {
 	return (dispatch, getState) => {
 		const checksum = getState().admin.currentApp
