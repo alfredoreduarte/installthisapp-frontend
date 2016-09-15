@@ -14,6 +14,7 @@ class Upload extends Component {
 
 const mapStateToProps = state => {
 	return {
+		...state.messages,
 		loading: false,
 		backUrl: `/${window.canvasId}/${window.checksum}`,
 	}

@@ -31,7 +31,6 @@ const styles = (state = initialState, action) => {
 				})
 			})
 		case 'RECEIVE_MESSAGES':
-			console.log('vinieron!', action.payload)
 			return { ...state, messages: action.payload }
 		case 'RECEIVE_STYLES':
 			return Object.assign({}, state, {
