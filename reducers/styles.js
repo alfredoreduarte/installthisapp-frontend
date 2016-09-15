@@ -21,9 +21,9 @@ const styles = (state = initialState, action) => {
 				screen: action.screen
 			})
 		case 'SET_MESSAGE_KEY':
-			return { ...state, ... {currentMessageKey: state.hoveredMessageKey} }
+			return { ...state, ...{currentMessageKey: state.hoveredMessageKey} }
 		case 'SET_HOVERED_KEY':
-			return { ...state, ... {hoveredMessageKey: action.payload} }
+			return { ...state, ...{hoveredMessageKey: action.payload} }
 		case 'EDIT_MESSAGES':
 			return Object.assign({}, state, {
 				messages: Object.assign({}, state.messages, {
