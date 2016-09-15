@@ -1,5 +1,5 @@
 import { setCurrentAppChecksum } from 'actions/apps'
-import { fetchStyles, fetchJsonTest } from 'actions/styles'
+import { fetchStyles, fetchJsonTest, fetchMessages } from 'actions/styles'
 
 export default (store, dispatch) => ({
 	path: '/d/apps/:type/:checksum/design',
@@ -16,7 +16,8 @@ export default (store, dispatch) => ({
 		dispatch(setCurrentAppChecksum(nextState.params.checksum)).then(() => {
 			dispatch(fetchStyles()).then(() => {
 				// dispatch(fetchJsonTest()).then(() => next())
-				next()
+				dispatch(fetchMessages()).then(() => next())
+				// next()
 			})
 		})
 	},

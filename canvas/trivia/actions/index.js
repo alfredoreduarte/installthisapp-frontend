@@ -6,7 +6,7 @@ import {
 	allQuestions, 
 	allOptions,
 } from 'canvas/trivia/selectors/questions'
-import { getFromApi, postToApi } from 'canvas/api'
+import { getFromApi, postToApi, getExternal } from 'canvas/api'
 
 // 
 // FIX NEEDED!: Ahora mismo settings.done es un parche feo para no hacer submit dos veces, porque el state
@@ -100,8 +100,7 @@ export const receiveGameSettings = settings => ({
 
 export const loginCallback = () => {
 	return dispatch => {
-		dispatch(fetchEntities())
-		dispatch(fetchMessages())
+		return dispatch(fetchMessages()).then(() => dispatch(fetchEntities()))
 	}
 }
 
@@ -109,7 +108,6 @@ export const fetchEntities = () => {
 	return (dispatch, getState) => {
 		const { checksum, canvasId } = getState().applicationData
 		return getFromApi(`/${checksum}/jsontest.json`).then( json => {
-			console.log('return ', json)
 			const payload = normalize(json.payload, schema.payload)
 			const settings = json.settings
 			const isEmpty = _.isEmpty(payload.entities.questions)
@@ -135,9 +133,10 @@ export const fetchEntities = () => {
 export const fetchMessages = () => {
 	return (dispatch, getState) => {
 		const { checksum, canvasId } = getState().applicationData
-		return getFromApi(`/${checksum}/static_messages.json`).then( json => {
-			console.log('msgs ', json)
+		console.log('va a traer de aca', window.messagesUrl)
+		return getExternal(window.messagesUrl).then( json => {
 			dispatch(receiveMessages(json))
+			return Promise.resolve()
 		})
 	}
 }

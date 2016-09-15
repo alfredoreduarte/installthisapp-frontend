@@ -14,7 +14,10 @@ class Login extends Component {
 	fbCallback(response) {
 		this.setState({
 			logging: response.status != 'not_authorized'
-		}, () => this.props.processResponse(response))
+		})
+		if (response.status != 'not_authorized') {
+			this.props.processResponse(response)
+		}
 	}
 	render(){
 		const { title } = this.props
@@ -28,7 +31,8 @@ class Login extends Component {
 						transform: 'translate(-50%)'
 					}}
 				>
-				<h1 className="text-center" style={{color: 'white'}}>{title}</h1>
+				<h1 className="text-center">{title}</h1>
+				<h3 className="text-center">Please sign in to participate.</h3>
 				<FacebookLogin
 					appId={window.facebookAppId}
 					cssClass={`btn btn-primary btn-lg ${this.state.logging ? 'disabled' : null}`}

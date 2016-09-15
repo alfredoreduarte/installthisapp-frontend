@@ -7,6 +7,34 @@ const processResponse = res => humps.camelizeKeys(res)
 
 const temporaryEmptyFunction = arg => console.log('temporaryEmptyFunction')
 
+export const getExternal = (url, success = temporaryEmptyFunction) => {
+	return 	fetch(url, {
+				method: 'GET',
+			})
+			.then(response => {
+				switch(response.status){
+					case 200:
+						return response.json()
+					case 401:
+						console.log('Not authorized')
+						// top.location.href = '/'
+						return
+					default:
+						console.log('Status: ' + response.status)
+						// top.location.href = '/'
+						return
+				}
+			})
+			.then(json => {
+				const response = processResponse(json)
+				success(response)
+				return Promise.resolve(response)
+			})
+			.catch(exception =>
+				console.log('parsing failed', exception)
+			)
+}
+
 export const getFromApi = (endpoint, success = temporaryEmptyFunction) => {
 	const apiKey = window.canvasApiKey
 	return 	fetch(API_URL + '/' + endpoint, {

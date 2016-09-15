@@ -2,9 +2,10 @@ import React, { PropTypes } from 'react'
 
 // Screens
 import Index from 'canvas/trivia/components/Index'
-import Message from 'canvas/trivia/components/Message'
+import AlreadyPlayed from 'canvas/trivia/components/AlreadyPlayed'
+import Thanks from 'canvas/trivia/components/Thanks'
 
-const Previews = ({ screen }) => {
+const Previews = ({ screen, messages }) => {
 	switch (screen) {
 		case 'index':
 			return (
@@ -28,15 +29,19 @@ const Previews = ({ screen }) => {
 						]
 					}}
 					time={255}
-					handleClick={() => {}}
+					handleAnswer={() => {}}
 				 />
 			)
 			break
 		case 'alreadyPlayed':
-			return <Message title={`You've already played`} foot={`pie`} />
+			return <AlreadyPlayed 
+				title={messages.alreadyPlayed} 
+				foot={` `} />
 			break
 		case 'thanks':
-			return <Message title={`Thanks for playing`} foot={`foot`} />
+			return <Thanks 
+				title={messages.thankYou} 
+				foot={`foot`} />
 			break
 		default: 
 			return <div>empty</div>

@@ -2,8 +2,10 @@ import { normalize, arrayOf } from 'normalizr'
 import * as schema from 'schema'
 import { push } from 'react-router-redux'
 import { receiveEntities } from 'actions/entities'
+import { getCurrentAppByState } from 'selectors/apps'
 import { toggleActivityUpdatingAppSettings } from 'actions/activityIndicators'
 import { getFromApi, postToApi, deleteFromApi, patchToApi } from 'api'
+import dictionary from 'modules/messages'
 
 export const setCurrentAppChecksum = checksum => {
 	return dispatch => {
@@ -84,7 +86,8 @@ export const postNewApp = () => {
 	return (dispatch, getState) => {
 		const body = getState().newApp
 		const params = digestDataBeforePostingNewApp(getState().newApp)
-		postToApi(`applications.json`, params, res => {
+		const defaultMessages = JSON.stringify(dictionary[params.application.application_type])
+		postToApi(`applications.json`, {...params, ...{initial_messages_json: defaultMessages} }, res => {
 			const normalized = normalize(res, schema.app)
 			dispatch(receiveEntities(normalized.entities))
 			dispatch(push(`/d/apps/${res.applicationType}/${res.checksum}`))

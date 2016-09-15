@@ -2,9 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { getDeclarationsForCurrentSelector as getDeclarations } from 'selectors/styles'
+import { getCurrentMessageKey, getCurrentMessageValue } from 'selectors/styles'
 import { 
 	setCurrentScreen,
 	modifyWholeSheet, 
+	setCurrentMessage, 
+	editMessage, 
 	saveStyles, 
 	setPlatform, 
 	setHoveredSelector, 
@@ -36,8 +39,12 @@ const screens = {
 const Design = ({
 	saving,
 	platform,
+	setEditingMessage,
 
 	// Sidebar
+	currentMessageKey,
+	currentMessageValue,
+	handleMessageChange, 
 	declarations,
 	handleChange, 
 	handleSave,
@@ -61,7 +68,10 @@ const Design = ({
 	resetToDefaults,
 }) => (
 	<div>
-		<Canvas previews={previews} platform={platform} fakeState={{state: 'fakeStateTakenFromArrayOfStates'}} />
+		<Canvas 
+			previews={previews} 
+			setEditingMessage={setEditingMessage} 
+			platform={platform} />
 		<Sidebar>
 			<Header
 				handleClose={handleClose}
@@ -74,6 +84,14 @@ const Design = ({
 				resetSidebar={resetSidebar}
 			/>
 			<ToolSet>
+				{currentMessageKey ? <div>
+					<label>Editor de texto</label>
+					<input 
+						type="text" 
+						className="form-control"
+						value={currentMessageValue} 
+						onChange={e => handleMessageChange(currentMessageKey, e.target.value)} />
+				</div> : null}
 				{declarations.map( declaration => 
 					<Tool 
 						key={declaration.property}
@@ -104,10 +122,14 @@ const mapStateToProps = (state, props) => {
 		screens: screens[props.params.type],
 		previews: props.params.type,
 		currentScreen: state.styles.screen,
+		currentMessageKey: getCurrentMessageKey(state),
+		currentMessageValue: getCurrentMessageValue(state),
 	}
 }
 
 const mapDispatchToProps = (dispatch, props) => ({
+	setEditingMessage: key => dispatch(setCurrentMessage(key)),
+	handleMessageChange: (key, value) => dispatch(editMessage(key, value)),
 	handleChange: (property, value) => dispatch(modifyWholeSheet(property, value)),
 	handleSave: () => dispatch(saveStyles()),
 	handleClose: () => dispatch(push(`/d/apps/${props.params.type}/${props.params.checksum}`)),

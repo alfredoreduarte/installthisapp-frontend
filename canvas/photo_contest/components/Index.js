@@ -4,10 +4,15 @@ import Photo from 'canvas/photo_contest/components/Photo'
 import Header from 'canvas/photo_contest/components/Header'
 import ToolBar from 'canvas/photo_contest/components/ToolBar'
 
-const Index = ({ photos, handleVote, uploadUrl, singlePhotoUrl }) => (
+const Index = ({ title, subtitle, uploadButton, mostVoted, mostRecent, photos, handleVote, uploadUrl, singlePhotoUrl }) => (
 	<div className="container">
-		<Header title={'This is the main heading'} subtitle={'Nibh Mattis Ridiculus Egestas'} />
-		<ToolBar uploadUrl={uploadUrl} />
+		<Header title={title} subtitle={subtitle} />
+		<ToolBar 
+			uploadUrl={uploadUrl} 
+			uploadButton={uploadButton}
+			mostRecent={mostRecent}
+			mostVoted={mostVoted}
+			 />
 		<div className="">
 			<div className="row">
 				{photos.map( photo => 

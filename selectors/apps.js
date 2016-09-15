@@ -6,6 +6,7 @@ export const getAllApps = (state, props) => {
 	return _.filter(_.values(state.entities.apps), app => app.status != 'deleted')
 }
 export const getCurrentAppChecksum = (state, props) => props.params.checksum
+export const getCurrentAppChecksumByState = state => state.admin.currentApp
 const getFilterText = state => state.filterText
 const appsSorterSelector = state => state.appsSorting
 const getAppToBeDeletedChecksum = state => state.deleteApp.checksum
@@ -13,6 +14,12 @@ const getAppToBeDeletedChecksum = state => state.deleteApp.checksum
 export const getCurrentApp = createSelector(
 	getAllApps,
 	getCurrentAppChecksum,
+	(apps, checksum) => _.find(apps, app => app.checksum == checksum)
+)
+
+export const getCurrentAppByState = createSelector(
+	getAllApps,
+	getCurrentAppChecksumByState,
 	(apps, checksum) => _.find(apps, app => app.checksum == checksum)
 )
 

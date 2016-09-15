@@ -6,14 +6,15 @@ import Index from 'canvas/trivia/containers/Index'
 import Thanks from 'canvas/trivia/containers/Thanks'
 import AlreadyPlayed from 'canvas/trivia/containers/AlreadyPlayed'
 
-const requireAuth = (nextState, replace) => {
+const requireAuth = (nextState, replace, next) => {
 	if (window.canvasApiKey) {
-		
+		next()
 	}
 	else{
 		replace({
 			pathname: `/${window.canvasId}/${window.checksum}/login`,
 		})
+		next()
 	}
 }
 
@@ -32,9 +33,11 @@ class Root extends Component {
 						component={Index} />
 					<Route 
 						path={`/${window.canvasId}/:checksum/thanks`}
+						onEnter={requireAuth}
 						component={Thanks}/>
 					<Route 
 						path={`/${window.canvasId}/:checksum/already-played`}
+						onEnter={requireAuth}
 						component={AlreadyPlayed}/>
 					<Route 
 						path={`/${window.canvasId}/:checksum/login`} 

@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Message from 'canvas/trivia/components/Message'
+import ThanksView from 'canvas/trivia/components/Thanks'
 
-const Thanks = ({ title, foot }) => <Message title={title} foot={foot} />
+const Thanks = ({ title, foot }) => <ThanksView title={title} foot={foot} />
 
 const mapStateToProps = state => ({
 	title: state.messages.thankYou,

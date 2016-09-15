@@ -15,6 +15,9 @@ class Index extends Component {
 
 const mapStateToProps = state => {
 	return {
+		...state.messages,
+		mostRecent: state.messages.mostRecent,
+		mostVoted: state.messages.mostVoted,
 		photos: allPhotos(state),
 		uploadUrl: `/${window.canvasId}/${window.checksum}/upload`,
 		singlePhotoUrl: `/${window.canvasId}/${window.checksum}`,

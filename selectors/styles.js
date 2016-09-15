@@ -6,6 +6,15 @@ const getHoveredStylesSelector = state => state.styles.hoveredSelector
 const getActiveStylesSelector = state => state.styles.activeSelector
 const getStylesObject = state => state.styles.ruleset
 const getStylesResult = state => state.styles.rules
+const getMessages = state => state.styles.messages
+
+export const getCurrentMessageKey = state => state.styles.currentMessageKey
+
+export const getCurrentMessageValue = createSelector(
+	getCurrentMessageKey,
+	getMessages,
+	(key, messages) => messages[key]
+)
 
 export const getStringifiedRuleset = state => state.styles.ruleset.type ? `<style>${css.stringify(state.styles.ruleset)}</style>` : null
 

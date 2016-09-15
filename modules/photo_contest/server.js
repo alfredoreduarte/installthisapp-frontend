@@ -39,6 +39,7 @@ photoContestRouter.post(`/${photoContestCanvasId}`, canvasParser, function(req, 
 			checksum: json.checksum,
 			facebookAppId: json.fb_application_id,
 			stylesheetUrl: json.stylesheet_url,
+			messagesUrl: json.messages_url,
 		})
 	})
 	.catch(exception =>
@@ -69,6 +70,7 @@ photoContestRouter.get(`/${photoContestCanvasId}/:checksum*`, canvasParser, func
 			checksum: json.checksum,
 			facebookAppId: json.fb_application_id,
 			stylesheetUrl: json.stylesheet_url,
+			messagesUrl: json.messages_url,
 		})
 	})
 	.catch(exception =>

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 
-const ToolBar = ({ uploadUrl = '', backUrl = '' }) => (
+const ToolBar = ({ uploadUrl = '', backUrl = '', uploadButton, mostVoted, mostRecent }) => (
 	<div style={styles.toolbar}>
 		<div style={styles.toolbarCell}>
 			{backUrl == '' ? 
@@ -21,12 +21,23 @@ const ToolBar = ({ uploadUrl = '', backUrl = '' }) => (
 			}
 		</div>
 		{backUrl == '' ? <div style={{...styles.toolbarCell, ...{flex: 2, justifyContent: 'center'}}}>
-			<span style={styles.tabItem} className="ita-cali-sorter ita-cali-sorter--active">Most Voted</span>
+			<span 
+				data-editable-message-key="mostVoted"
+				style={styles.tabItem} 
+				className="ita-cali-sorter ita-cali-sorter--active">{mostVoted}</span>
 			{' | '}
-			<span style={styles.tabItem} className="ita-cali-sorter">Most Recent</span>
+			<span 
+				data-editable-message-key="mostRecent"
+				style={styles.tabItem} 
+				className="ita-cali-sorter">{mostRecent}</span>
 		</div> : null}
 		{uploadUrl != '' ? <div style={{...styles.toolbarCell, ...{justifyContent: 'flex-end'}}}>
-			<Link to={uploadUrl} style={styles.button} className="ita-cali-button">Upload Photo</Link>
+			<Link 
+				to={uploadUrl} 
+				style={styles.button} 
+				className="ita-cali-button"
+				data-editable-message-key="uploadButton"
+				>{uploadButton}</Link>
 		</div> : null}
 	</div>
 )

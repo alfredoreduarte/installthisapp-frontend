@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react'
 
 const Header = ({ title, subtitle }) => (
 	<div style={styles.titleBar}>
-		<div className="ita-cali-title">This is the main heading</div>
-		<div className="ita-cali-subtitle">Nibh Mattis Ridiculus Egestas</div>
+		<div className="ita-cali-title" data-editable-message-key="title">{title}</div>
+		<div className="ita-cali-subtitle" data-editable-message-key="subtitle">{subtitle}</div>
 	</div>
 )
 

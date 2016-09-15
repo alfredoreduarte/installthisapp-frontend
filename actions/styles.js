@@ -2,7 +2,9 @@ import 'isomorphic-fetch'
 import css from 'css'
 import { updateCoords } from 'actions/design-helper/mouseTrap'
 import { toggleActivitySavingDesign } from 'actions/activityIndicators'
+import { getCurrentAppByState } from 'selectors/apps'
 import { getFromApi, postToApi, postFileToApi } from 'api'
+import dictionary from 'modules/messages'
 
 export const setCurrentScreen = screen => {
 	return {
@@ -16,6 +18,60 @@ export const fetchJsonTest = () => {
 		const checksum = getState().admin.currentApp
 		return getFromApi(`applications/${checksum}/jsontest.json`)
 				.then(response => console.log('jsontest', response))
+	}
+}
+
+export const setActiveEditedContent = () => {
+	return {
+		type: 'SET_MESSAGE_KEY'
+	}
+}
+
+export const setHoveredMessage = key => {
+	return {
+		type: 'SET_HOVERED_KEY',
+		payload: key,
+	}
+}
+
+export const editMessage = (key, value) => {
+	return {
+		type: 'EDIT_MESSAGES',
+		key,
+		value,
+	}
+}
+
+const fetchMessagesFromAws = url => {
+	return (dispatch, getState) => {
+		return fetch(url, {
+					method: 'GET',
+				})
+				.then(response => response.json())
+				.then(json => {
+					const currentApp = getCurrentAppByState(getState())
+					const defaultMessages = JSON.stringify(dictionary[currentApp.applicationType])
+					const messages = {...defaultMessages, ...json}
+					dispatch(receiveMessages(messages))
+				})
+				.catch(exception =>
+					console.log('parsing failed', exception)
+				)
+	}
+}
+
+export const fetchMessages = () => {
+	return (dispatch, getState) => {
+		const checksum = getState().admin.currentApp
+		return getFromApi(`applications/${checksum}/messages.json`)
+				.then(response => dispatch(fetchMessagesFromAws(response.messagesUrl)))
+	}
+}
+
+const receiveMessages = messages => {
+	return {
+		type: 'RECEIVE_MESSAGES',
+		payload: messages
 	}
 }
 
@@ -100,10 +156,14 @@ export const saveStyles = () => {
 		dispatch(toggleActivitySavingDesign())
 		const cssString = css.stringify(getState().styles.ruleset)
 		const checksum = getState().admin.currentApp
+		const currentApp = getCurrentAppByState(getState())
+		const defaultMessages = JSON.stringify(dictionary[currentApp.applicationType])
+		const editedMessages = getState().styles.messages
+		const messages = JSON.stringify({...defaultMessages, ...editedMessages})
 		return postToApi(`applications/${checksum}/save_app_from_editor.json`, 
 				{
 					css: cssString,
-					messages: {hola: 'chau'}
+					messages,
 				}).then(response => dispatch(toggleActivitySavingDesign()))
 	}
 }
@@ -139,6 +199,7 @@ const findEditableNodeOnHover = (dispatch, element) => {
 				h: element.getBoundingClientRect().height,
 			}
 			dispatch(updateCoords(data))
+			dispatch(setHoveredMessage(element.getAttribute('data-editable-message-key')))
 			dispatch(setHoveredSelector(classArray))
 		}
 		else{

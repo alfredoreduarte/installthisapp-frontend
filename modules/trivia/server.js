@@ -41,6 +41,7 @@ triviaRouter.post(`/${triviaCanvasId}`, canvasParser, function(req, res) {
 			checksum: json.checksum,
 			facebookAppId: json.fb_application_id,
 			stylesheetUrl: json.stylesheet_url,
+			messagesUrl: json.messages_url,
 		})
 	})
 	.catch(exception =>
@@ -71,6 +72,7 @@ triviaRouter.get(`/${triviaCanvasId}/:checksum*`, canvasParser, function(req, re
 			checksum: json.checksum,
 			facebookAppId: json.fb_application_id,
 			stylesheetUrl: json.stylesheet_url,
+			messagesUrl: json.messages_url,
 		})
 	})
 	.catch(exception =>

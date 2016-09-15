@@ -2,7 +2,7 @@ import { normalize, arrayOf } from 'normalizr'
 import { push } from 'react-router-redux'
 import * as schema from 'canvas/photo_contest/schema'
 import { allPhotos } from 'canvas/photo_contest/selectors/photos'
-import { getFromApi, postToApi } from 'canvas/api'
+import { getFromApi, postToApi, getExternal } from 'canvas/api'
 
 export function toggleActivityIndicator(){
 	return {
@@ -29,15 +29,14 @@ export const receiveGameSettings = settings => ({
 
 export const loginCallback = () => {
 	return dispatch => {
-		return dispatch(fetchEntities())
-		// dispatch(fetchMessages())
+		return dispatch(fetchEntities()).then(() => dispatch(fetchMessages()))
 	}
 }
 
 export const fetchEntities = () => {
 	return (dispatch, getState) => {
 		const { checksum, canvasId } = getState().applicationData
-		return getFromApi(`/${checksum}/viewmodel.json`).then( json => {
+		return getFromApi(`${checksum}/viewmodel.json`).then( json => {
 			console.log('return ', json)
 			const payload = normalize(json.payload, schema.payload)
 			const settings = json.settings
@@ -51,9 +50,9 @@ export const fetchEntities = () => {
 export const fetchMessages = () => {
 	return (dispatch, getState) => {
 		const { checksum, canvasId } = getState().applicationData
-		return getFromApi(`/${checksum}/static_messages.json`).then( json => {
-			console.log('msgs ', json)
+		return getExternal(window.messagesUrl).then( json => {
 			dispatch(receiveMessages(json))
+			return Promise.resolve()
 		})
 	}
 }

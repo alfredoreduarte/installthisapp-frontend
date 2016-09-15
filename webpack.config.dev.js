@@ -31,6 +31,13 @@ module.exports = {
 	},
 	module: {
 		loaders: [
+			// json
+			{
+				test: /\.json$/,
+				loaders: [ 'file' ],
+				exclude: /node_modules/,
+				include: __dirname
+			},
 			// js
 			{
 				test: /\.js$/,

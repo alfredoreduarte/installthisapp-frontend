@@ -6,17 +6,24 @@ import { getQuestionWithOptions, hasAnsweredAllQuestions } from 'canvas/trivia/s
 import Loading from 'canvas/trivia/components/Loading'
 import IndexView from 'canvas/trivia/components/Index'
 
+let primeravez = false
+
 class Index extends Component {
 	componentWillReceiveProps(nextProps) {
-		const { runTime, loading, countDownRunning } = nextProps
-		if (countDownRunning && !loading) {
+		const { runTime, loading, countDownRunning, time } = nextProps
+		console.log('lol', this.props.time, nextProps)
+		if (countDownRunning && !loading && this.props.time > nextProps.time) {
+			console.log('va a correr', nextProps)
+			if (!primeravez) {
+				primeravez = true
+			}
 			setTimeout(() => {
 				runTime()
 			}, 1000)
 		}
 		// CHANCHITO
 		if (!this.props.question) {
-			this.props.saveAnswer()
+			this.props.handleAnswer()
 		}
 	}
 	render(){
@@ -29,7 +36,7 @@ const mapStateToProps = state => {
 	const question = getQuestionWithOptions(state)
 	const { timeOut, countDownRunning, isFetching } = state.settings
 	return {
-		time: timeOut,
+		time: countDownRunning && !isFetching ? timeOut - 1 : timeOut,
 		loading: isFetching,
 		question,
 		countDownRunning,
@@ -38,7 +45,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		saveAnswer: (questionId, optionId, correct) => {
+		handleAnswer: (questionId, optionId, correct) => {
 			dispatch(saveAnswer(questionId, optionId, correct))
 		},
 		runTime: () => dispatch(advanceCountDown())

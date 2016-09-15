@@ -7,6 +7,9 @@ const initialState = {
 	hoveredSelector: [],
 	activeSelector: [],
 	ruleset: {},
+	hoveredMessageKey: null,
+	currentMessageKey: null,
+	messages: {},
 }
 
 const styles = (state = initialState, action) => {
@@ -17,6 +20,19 @@ const styles = (state = initialState, action) => {
 			return Object.assign({}, state, {
 				screen: action.screen
 			})
+		case 'SET_MESSAGE_KEY':
+			return { ...state, ... {currentMessageKey: state.hoveredMessageKey} }
+		case 'SET_HOVERED_KEY':
+			return { ...state, ... {hoveredMessageKey: action.payload} }
+		case 'EDIT_MESSAGES':
+			return Object.assign({}, state, {
+				messages: Object.assign({}, state.messages, {
+					[action.key]: action.value
+				})
+			})
+		case 'RECEIVE_MESSAGES':
+			console.log('vinieron!', action.payload)
+			return { ...state, messages: action.payload }
 		case 'RECEIVE_STYLES':
 			return Object.assign({}, state, {
 				ruleset: action.payload

@@ -3,7 +3,7 @@ import CountDown from 'canvas/trivia/components/CountDown'
 import Question from 'canvas/trivia/components/Question'
 import OptionList from 'canvas/trivia/components/OptionList'
 
-const Index = ({ question, time, handleClick }) => (
+const Index = ({ question, time, handleAnswer }) => (
 	<div>
 		<CountDown 
 			time={time} />
@@ -11,14 +11,14 @@ const Index = ({ question, time, handleClick }) => (
 			text={question.text} />
 		<OptionList 
 			options={question.options} 
-			handleClick={(optionId, correct) => handleClick(question.id, optionId, correct)} />
+			handleClick={(optionId, correct) => handleAnswer(question.id, optionId, correct)} />
 	</div>
 )
 
 Index.propTypes = {
 	question: PropTypes.object.isRequired,
 	time: PropTypes.number.isRequired,
-	handleClick: PropTypes.func.isRequired,
+	handleAnswer: PropTypes.func.isRequired,
 }
 
 export default Index

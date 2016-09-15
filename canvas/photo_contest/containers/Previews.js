@@ -64,10 +64,15 @@ const singlePhoto = (id, url, name) => ({
 
 const sequencer = new photoSequencer()
 
-const Previews = ({ screen }) => {
+const Previews = ({ screen, messages }) => {
 	switch (screen) {
 		case 'index':
 			return <Index
+				title={messages.title}
+				subtitle={messages.subtitle}
+				uploadButton={messages.uploadButton}
+				mostVoted={messages.mostVoted}
+				mostRecent={messages.mostRecent}
 				photos={[0,1,2,3,4,5,6].map(el => sequencer.getOne())}
 				handleVote={() => console.log('vote')}
 				uploadUrl={' '}
@@ -75,11 +80,21 @@ const Previews = ({ screen }) => {
 			 />
 		case 'upload':
 			return <Upload
+				title={messages.title}
+				subtitle={messages.subtitle}
+				uploadButton={messages.uploadButton}
+				mostVoted={messages.mostVoted}
+				mostRecent={messages.mostRecent}
 				uploadPhoto={() => console.log('vote')}
 				backUrl={' '}
 			 />
 		case 'single':
 			return <Single
+				title={messages.title}
+				subtitle={messages.subtitle}
+				uploadButton={messages.uploadButton}
+				mostVoted={messages.mostVoted}
+				mostRecent={messages.mostRecent}
 				photo={sequencer.getOne()}
 				voted={true}
 				handleVote={() => console.log('vote')}
