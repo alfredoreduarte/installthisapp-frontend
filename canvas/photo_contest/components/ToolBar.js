@@ -20,7 +20,7 @@ const ToolBar = ({ uploadUrl = '', backUrl = '' }) => (
 			<Link to={backUrl} style={styles.button} className="ita-cali-button--secondary">← Back</Link>
 			}
 		</div>
-		{backUrl == '' ? <div style={{...styles.toolbarCell, {flex: 2, justifyContent: 'center'}}}>
+		{backUrl == '' ? <div style={{...styles.toolbarCell, ...{flex: 2, justifyContent: 'center'}}}>
 			<span style={styles.tabItem} className="ita-cali-sorter ita-cali-sorter--active">Most Voted</span>
 			{' | '}
 			<span style={styles.tabItem} className="ita-cali-sorter">Most Recent</span>

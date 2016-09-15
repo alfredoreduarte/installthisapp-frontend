@@ -41,9 +41,12 @@ module.exports = {
 			// js
 			{
 				test: /\.js$/,
-				loaders: [ 'babel' ],
+				loaders: [ 'babel-loader' ],
 				exclude: /node_modules/,
-				include: __dirname
+				include: __dirname,
+				query: {
+					presets: ['es2015', 'react']
+				}
 			},
 			// images
 			{
