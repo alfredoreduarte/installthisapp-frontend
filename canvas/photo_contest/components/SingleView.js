@@ -3,10 +3,16 @@ import { Link } from 'react-router'
 import Header from 'canvas/photo_contest/components/Header'
 import ToolBar from 'canvas/photo_contest/components/ToolBar'
 
-const SingleView = ({ photo, voted = true, handleVote, backUrl, uploadUrl }) => (
+const SingleView = ({ title, subtitle, uploadButton, photo, voted = true, handleVote, backUrl, uploadUrl }) => (
 	<div className="container">
-		<Header title={'This is the main heading'} subtitle={'Nibh Mattis Ridiculus Egestas'} />
-		<ToolBar backUrl={backUrl} uploadUrl={uploadUrl} />
+		<Header title={title} subtitle={subtitle} />
+		<ToolBar 
+			backUrl={backUrl} 
+			uploadUrl={uploadUrl}
+			uploadButton={uploadButton}
+			mostRecent={mostRecent}
+			mostVoted={mostVoted}
+			 />
 		<div className="row">
 			<div className="col-sm-12">
 				<div style={styles.photo}>
