@@ -89,6 +89,10 @@ export const resetActiveSelector = () => {
 	}
 }
 
+export const setContentEditor = () => ({
+	type: 'SET_CONTENT_EDITOR'
+})
+
 export const setActiveSelector = (selectors = false) => {
 	if (selectors) {
 		return {

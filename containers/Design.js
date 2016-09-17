@@ -13,6 +13,7 @@ import {
 	setHoveredSelector, 
 	resetMouseTrap,
 	resetActiveSelector, 
+	setContentEditor,
 	setActiveSelector,
 } from 'actions/styles'
 import Canvas from 'components/design-editor/Canvas'
@@ -53,6 +54,7 @@ const Design = ({
 	// Tabs
 	componentsOrBody,
 	showBody,
+	showContentEditor,
 	resetSidebar,
 
 	// Screen Selector
@@ -82,9 +84,10 @@ const Design = ({
 				componentsOrBody={componentsOrBody}
 				showBody={showBody}
 				resetSidebar={resetSidebar}
+				showContentEditor={showContentEditor}
 			/>
 			<ToolSet>
-				{currentMessageKey ? <div>
+				{currentMessageKey && componentsOrBody == 'content' ? <div>
 					<label>Editor de texto</label>
 					<input 
 						type="text" 
@@ -134,6 +137,7 @@ const mapDispatchToProps = (dispatch, props) => ({
 	handleSave: () => dispatch(saveStyles()),
 	handleClose: () => dispatch(push(`/d/apps/${props.params.type}/${props.params.checksum}`)),
 	showBody: val => dispatch(setActiveSelector(['body'])),
+	showContentEditor: val => dispatch(setContentEditor()),
 	resetSidebar: () => dispatch(resetActiveSelector()),
 	handleScreenChange: e => {
 		dispatch(resetMouseTrap())
