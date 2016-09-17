@@ -95,13 +95,13 @@ const Design = ({
 						value={currentMessageValue} 
 						onChange={e => handleMessageChange(currentMessageKey, e.target.value)} />
 				</div> : null}
-				{declarations.map( declaration => 
+				{componentsOrBody != 'content' ? declarations.map( declaration => 
 					<Tool 
 						key={declaration.property}
 						property={declaration.property}
 						value={declaration.value}
 						handleChange={handleChange} />
-				)}
+				) : null}
 			</ToolSet>
 		</Sidebar>
 		<BottomBar>
