@@ -43,15 +43,15 @@ app.use('/canvas', express.static(__dirname + '/assets/canvas'))
 app.use('/node_modules', express.static(__dirname + '/node_modules'))
 
 // Trivia
-var triviaRouter = require('./modules/trivia/server.js')
+var triviaRouter = require('./canvas/trivia/server.js')
 app.use(triviaRouter)
 
 // Top Fans
-var topFansRouter = require('./modules/top_fans/server.js')
+var topFansRouter = require('./canvas/top_fans/server.js')
 app.use(topFansRouter)
 
 // Photo Contest
-var photoContestRouter = require('./modules/photo_contest/server.js')
+var photoContestRouter = require('./canvas/photo_contest/server.js')
 app.use(photoContestRouter)
 
 // Serving static HTML

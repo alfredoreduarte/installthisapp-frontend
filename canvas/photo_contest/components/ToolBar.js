@@ -1,7 +1,17 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 
-const ToolBar = ({ uploadUrl = '', backUrl = '', uploadButton, mostVoted, mostRecent }) => (
+const ToolBar = ({ 
+	uploadUrl = '', 
+	backUrl = '', 
+	uploadButton, 
+	mostVoted,
+	mostRecent,
+	sortPhotos,
+	sort,
+	search,
+	searchQuery,
+}) => (
 	<div style={styles.toolbar}>
 		<div style={styles.toolbarCell}>
 			{backUrl == '' ? 
@@ -10,11 +20,13 @@ const ToolBar = ({ uploadUrl = '', backUrl = '', uploadButton, mostVoted, mostRe
 					<i className="glyphicon glyphicon-search"></i>
 				</span>
 				<input 
-					onChange={e => console.log(e.target.value)}
+					onChange={e => search(e.target.value)}
 					type="text" 
 					className="form-control" 
 					style={styles.searchFormInput}
-					placeholder="Search" />
+					placeholder="Search"
+					value={searchQuery}
+					 />
 			</form>
 			:
 			<Link to={backUrl} style={styles.button} className="ita-cali-button--secondary">← Back</Link>
@@ -24,12 +36,17 @@ const ToolBar = ({ uploadUrl = '', backUrl = '', uploadButton, mostVoted, mostRe
 			<span 
 				data-editable-message-key="mostVoted"
 				style={styles.tabItem} 
-				className="ita-cali-sorter ita-cali-sorter--active">{mostVoted}</span>
-			{' | '}
+				onClick={() => sortPhotos('mostVoted')}
+				className={`ita-cali-sorter ${sort == 'mostVoted' ? 'ita-cali-sorter--active' : null}`}>
+					{mostVoted}
+				</span>
 			<span 
 				data-editable-message-key="mostRecent"
 				style={styles.tabItem} 
-				className="ita-cali-sorter">{mostRecent}</span>
+				onClick={() => sortPhotos('mostRecent')}
+				className={`ita-cali-sorter ${sort == 'mostRecent' ? 'ita-cali-sorter--active' : null}`}>
+					{mostRecent}
+				</span>
 		</div> : null}
 		{uploadUrl != '' ? <div style={{...styles.toolbarCell, ...{justifyContent: 'flex-end'}}}>
 			<Link 
@@ -83,6 +100,13 @@ const styles = {
 ToolBar.propTypes = {
 	uploadUrl: PropTypes.string,
 	backUrl: PropTypes.string,
+	uploadButton: PropTypes.string,
+	mostVoted: PropTypes.string,
+	mostRecent: PropTypes.string,
+	sort: PropTypes.oneOf(['mostRecent', 'mostVoted']),
+	searchQuery: PropTypes.string,
+	sortPhotos: PropTypes.func,
+	search: PropTypes.func,
 }
 
 export default ToolBar

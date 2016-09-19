@@ -1,21 +1,23 @@
 import React, { Component, PropTypes } from 'react'
 import { Provider, connect } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
+import Cookies from 'js-cookie'
 import Login from 'canvas/photo_contest/components/Login'
 import Index from 'canvas/photo_contest/containers/Index'
 import Upload from 'canvas/photo_contest/containers/Upload'
 import SinglePhoto from 'canvas/photo_contest/containers/SinglePhoto'
 import { loginCallback } from 'canvas/photo_contest/actions'
 
-const requireAuth = (nextState, replace, next) => {
-	if (window.canvasApiKey) {
-		next()
+const requireAuth = (nextState, replace) => {
+	if (Cookies.get('apiKey')) {
+		// next()
 	}
 	else{
 		replace({
 			pathname: `/${window.canvasId}/${window.checksum}/login`,
+			state: { nextPathname: nextState.location.pathname },
 		})
-		next()
+		// next()
 	}
 }
 

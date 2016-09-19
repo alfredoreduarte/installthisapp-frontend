@@ -19,7 +19,9 @@ const Photo = ({ id, name, votes, voted, photoUrl, handleVote, singlePhotoUrl = 
 					<a
 						style={styles.voteButton}
 						onClick={() => handleVote(id)}>
-						<span className={`glyphicon glyphicon-heart ita-cali-heart${voted ? '--active' : null}`}></span>
+						<span 
+							className={`glyphicon glyphicon-heart ita-cali-heart${voted ? '--active' : null}`}>
+						</span>
 					</a>
 				</div>
 			</div>
@@ -54,7 +56,10 @@ Photo.propTypes = {
 	id: PropTypes.number.isRequired,
 	name: PropTypes.string.isRequired,
 	votes: PropTypes.number.isRequired,
-	voted: PropTypes.bool.isRequired,
+	voted: PropTypes.oneOfType([
+		React.PropTypes.bool,
+		React.PropTypes.func,
+	]),
 	photoUrl: PropTypes.string.isRequired,
 	handleVote: PropTypes.func.isRequired,
 	singlePhotoUrl: PropTypes.string,

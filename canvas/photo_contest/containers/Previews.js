@@ -77,6 +77,10 @@ const Previews = ({ screen, messages }) => {
 				handleVote={() => console.log('vote')}
 				uploadUrl={' '}
 				singlePhotoUrl={''}
+				sortPhotos={() => console.log('sort')}
+				sort={'mostVoted'}
+				search={() => console.log('search')}
+				searchQuery={''}
 			 />
 		case 'upload':
 			return <Upload

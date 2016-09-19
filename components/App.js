@@ -22,7 +22,8 @@ const App = ({
 	handleDeleteRequest 
 }) => (
 	<div className={`col-md-${gridSize}`}>
-		<div className={`panel panel-default ita-panel-screen ${otherAppsLoading ? 'greyed-out' : ''}`}>
+		<div 
+			className={`panel panel-default ita-panel-screen ${otherAppsLoading ? 'greyed-out' : ''}`}>
 			<div className="panel-body">
 				<FbPhoto identifier={facebookPageIdentifier} />
 				{loadingDashboard ? 
@@ -42,7 +43,9 @@ const App = ({
 					</Link>
 					<br/>
 					<br/>
-					<button className="btn btn-white btn-outline btn-xs" onClick={() => handleDeleteRequest(checksum)}>
+					<button 
+						className="btn btn-white btn-outline btn-xs" 
+						onClick={() => handleDeleteRequest(checksum)}>
 						Delete
 					</button>
 				</div>
@@ -61,7 +64,11 @@ const App = ({
 					{title}
 				</Link>
 				<br />
-				<small>{applicationType}</small>
+				<small 
+					style={{fontSize: '10px'}}
+					className="text-uppercase text-muted">
+						<b>{applicationType.replace('_', ' ')}</b>
+				</small>
 			</div>
 		</div>
 	</div>

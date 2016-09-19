@@ -1,5 +1,7 @@
 .ita-panel-screen
 	+transition(-webkit-filter linear $animation-speed-base)
+	border-color: lighten($gray-lighter, 2)
+	box-shadow: 0px 2px 4px rgba(0,0,0,.05)
 	&.greyed-out
 		+filter(grayscale(1))
 		.ita-panel-overlay

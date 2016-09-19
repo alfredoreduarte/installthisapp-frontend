@@ -11,20 +11,24 @@ const vote = id => {
 	}
 }
 
-export const postVote = body => {
+export const postVote = id => {
 	return (dispatch, getState) => {
 		if (window.canvasApiKey) {
 			const { checksum } = getState().applicationData
-			return postFileToApi(`${checksum}/vote.json`, body)
+			let formData = new FormData()
+			formData.append('vote[photo_id]', id)
+			return postFileToApi(`${checksum}/vote.json`, formData)
 					.then(response => {
 						const payload = normalize(response, schema.photo)
 						dispatch(receiveEntities(payload.entities))
-						// dispatch(vote(response.photoId))
 						return Promise.resolve(response)
 					})
 		}
 		else {
-			dispatch(push(`/${window.canvasId}/${window.checksum}/login`))
+			dispatch(push({
+				pathname: `/${window.canvasId}/${window.checksum}/login`,
+				state: { nextPathname: `/${window.canvasId}/${window.checksum}/${id}` },
+			}))
 			return Promise.resolve({})
 		}
 	}

@@ -1,13 +1,12 @@
 import _ from 'lodash'
 
 const settings = (state = {
-	countDownRunning: false,
 	isFetching: true,
 	done: false,
 }, action) => {
 	switch (action.type) {
 		case 'RECEIVE_SETTINGS':
-			return _.merge({}, state, action.settings)
+			return { ...state, ...action.settings }
 		case 'COUNTDOWN_PROGRESS':
 			return Object.assign({}, state, {
 				timeOut: state.timeOut - 1

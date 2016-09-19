@@ -14,9 +14,13 @@ class SinglePhoto extends Component {
 }
 
 const mapStateToProps = (state, props) => {
+	const photo = currentPhoto(state, props)
 	return {
 		...state.messages,
-		photo: currentPhoto(state, props),
+		voted: _.filter(_.values(state.entities.votes), v => {
+			return v.userId == state.loggedUser.id && v.photoId == photo.id
+		}).length > 0,
+		photo,
 		uploadUrl: `/${window.canvasId}/${window.checksum}/upload`,
 		backUrl: `/${window.canvasId}/${window.checksum}`,
 		loading: false,
@@ -26,9 +30,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = dispatch => {
 	return {
 		handleVote: id => {
-			let formData = new FormData()
-			formData.append('vote[photo_id]', id)
-			dispatch(postVote(formData)).then( response => {
+			dispatch(postVote(id)).then( response => {
 				
 			})
 		}

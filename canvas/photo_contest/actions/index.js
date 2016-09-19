@@ -37,7 +37,6 @@ export const fetchEntities = () => {
 	return (dispatch, getState) => {
 		const { checksum, canvasId } = getState().applicationData
 		return getFromApi(`${checksum}/viewmodel.json`).then( json => {
-			console.log('return ', json)
 			const payload = normalize(json.payload, schema.payload)
 			const settings = json.settings
 			dispatch(receiveEntities(payload.entities))
