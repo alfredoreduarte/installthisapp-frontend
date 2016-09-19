@@ -1,9 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import Loading from 'containers/Loading'
 
 const Application = ({ children, loaded }) => (
-	<div className="container-fluid">
-		{loaded ? children : 'cargando'}
+	<div>
+		<Loading />
+		<div className="container-fluid">
+			{loaded ? children : 'cargando'}
+		</div>
 	</div>
 )
 

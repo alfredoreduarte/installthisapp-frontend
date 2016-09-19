@@ -1,3 +1,11 @@
+export const turnOnGlobalIndicator = () => ({
+	type: 'TOGGLE_ACTIVITY_ON/GLOBAL'
+})
+
+export const turnOffGlobalIndicator = () => ({
+	type: 'TOGGLE_ACTIVITY_OFF/GLOBAL'
+})
+
 export const turnOnActivityCreatingApp = () => ({
 	type: 'TOGGLE_ACTIVITY_ON/CREATING_APP'
 })

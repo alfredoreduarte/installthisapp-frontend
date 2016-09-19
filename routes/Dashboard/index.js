@@ -1,14 +1,21 @@
 import { setCurrentAppChecksum } from 'actions/apps'
-import { turnOffActivityCreatingApp, turnOffActivityLoadingApp } from 'actions/activityIndicators'
+import { 
+	turnOnGlobalIndicator, 
+	turnOffGlobalIndicator, 
+	turnOffActivityCreatingApp, 
+	turnOffActivityLoadingApp 
+} from 'actions/activityIndicators'
 
 export default (store, dispatch) => ({
 	path: '/d/apps/:type/:checksum',
 	getComponents(nextState, cb) {
+		dispatch(turnOnGlobalIndicator())
 		require.ensure([], require => {
+			dispatch(turnOffGlobalIndicator())
 			cb(null, require('containers/AppDashboardContainer').default)
 			// cb(null, {
-			// 	main: require('containers/AppDashboardContainer').default,
-			// 	sidebar: require('modules/' + nextState.params.type + '/sidebar').default,
+				// main: require('containers/AppDashboardContainer').default,
+				// sidebar: require('modules/' + nextState.params.type + '/sidebar').default,
 			// })
 		})
 	},

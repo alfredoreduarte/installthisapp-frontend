@@ -18,7 +18,6 @@ export const createRoutes = (store, dispatch) => ({
 			})
 		}
 		else{
-			console.log('nav interna')
 			next()
 		}
 	},

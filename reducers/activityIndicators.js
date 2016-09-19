@@ -1,4 +1,5 @@
 const activityIndicators = (state = {
+	globalIndicator: false,
 	loadingPages: false,
 	savingDesign: false,
 	updatingAdmin: false,
@@ -22,6 +23,14 @@ const activityIndicators = (state = {
 		case 'TOGGLE_ACTIVITY/UPDATING_APP_SETTINGS':
 			return Object.assign({}, state, {
 				updatingApp: !state.updatingApp
+			})
+		case 'TOGGLE_ACTIVITY_ON/GLOBAL':
+			return Object.assign({}, state, {
+				globalIndicator: true
+			})
+		case 'TOGGLE_ACTIVITY_OFF/GLOBAL':
+			return Object.assign({}, state, {
+				globalIndicator: false
 			})
 		case 'TOGGLE_ACTIVITY_ON/CREATING_APP':
 			return Object.assign({}, state, {
