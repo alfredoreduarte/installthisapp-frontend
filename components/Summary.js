@@ -7,7 +7,7 @@ const SummaryValue = ({ value }) => (
 	<div className="col-md-3">
 		<h2 className="ita-stats-summary-number text-center">{value}</h2>
 		<p className="text-gray-light text-center">
-			<StatusIndicator active={true} />
+			{false ? <StatusIndicator active={false} /> : null}
 			Dataset name
 		</p>
 	</div>

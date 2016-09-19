@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
 import _ from 'lodash'
+import TimeAgo from 'react-timeago'
 import Select from 'react-select'
 import { Link } from 'react-router'
 import { Table, DropdownButton, MenuItem } from 'react-bootstrap'
@@ -86,7 +87,7 @@ const Photos = ({
 						<span>Votes</span>
 					</th>
 					<th>
-						<span>Created on</span>
+						<span>Posted on</span>
 					</th>
 					<th className="text-right">
 						<Checkbox 
@@ -115,7 +116,7 @@ const Photos = ({
 						{p.votes.length}
 					</td>
 					<td>
-						{p.createdOn}
+						<TimeAgo date={p.createdOn} />
 					</td>
 					<td className="text-right">
 						<ul className="list-inline list-no-margin">

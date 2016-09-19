@@ -22,8 +22,10 @@ const PhotoDetail = ({ show, user, thumbnailUrl, assetUrl, caption, votes, handl
 					</a>
 				</div>
 				<div className="col-md-6">
+					<blockquote>
+						<p>{caption}</p>
+					</blockquote>
 					<h5><b>{votes.length} votes</b></h5>
-					<p>{caption}</p>
 				</div>
 			</div>
 			<hr/>

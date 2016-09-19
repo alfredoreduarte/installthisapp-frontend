@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
 import _ from 'lodash'
+import TimeAgo from 'react-timeago'
 import Select from 'react-select'
 import { Link } from 'react-router'
 import { Table, DropdownButton, MenuItem } from 'react-bootstrap'
@@ -73,10 +74,10 @@ const Answers = ({
 						<span>User</span>
 					</th>
 					<th>
-						<span>Answers</span>
+						<span>Last answered</span>
 					</th>
 					<th>
-						<span>Last answered on</span>
+						<span>Score</span>
 					</th>
 					<th className="text-right">
 						<Checkbox 
@@ -94,12 +95,29 @@ const Answers = ({
 						<User name={a.user.name} identifier={a.user.identifier} small />
 					</td>
 					<td>
-						<p><b>Score</b>: {parseInt(a.qualification)} %</p>
-						<p>Correct Answers: {a.totalCorrectAnswers}</p>
-						<p>Incorrect Answers: {a.totalAnswers - a.totalCorrectAnswers}</p>
+						<TimeAgo date={a.updatedOn} />
 					</td>
 					<td>
-						{a.createdOn}
+						<div className="progress ita-progressbar">
+							<div 
+								className="progress-bar progress-bar-success" 
+								style={{width: a.qualification + '%'}}>
+								<div className="ita-progressbar-label-default">
+									{parseInt(a.qualification)} %</div>
+								<div className="ita-progressbar-label-hover">
+									{a.totalCorrectAnswers}</div>
+							</div>
+							<div 
+								className="progress-bar progress-bar-danger" 
+								style={{width: parseInt(100 - a.qualification) + '%'}}>
+								<div className="ita-progressbar-label-default">
+									{parseInt((a.totalAnswers - a.totalCorrectAnswers) * 100 / a.totalAnswers) } %
+								</div>
+								<div className="ita-progressbar-label-hover">
+									{a.totalAnswers - a.totalCorrectAnswers}
+								</div>
+							</div>
+						</div>
 					</td>
 					<td className="text-right">
 						<ul className="list-inline list-no-margin">

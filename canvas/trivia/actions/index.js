@@ -107,7 +107,7 @@ export const loginCallback = () => {
 export const fetchEntities = () => {
 	return (dispatch, getState) => {
 		const { checksum, canvasId } = getState().applicationData
-		return getFromApi(`/${checksum}/jsontest.json`).then( json => {
+		return getFromApi(`${checksum}/jsontest.json`).then( json => {
 			const payload = normalize(json.payload, schema.payload)
 			const settings = json.settings
 			const isEmpty = _.isEmpty(payload.entities.questions)
@@ -169,7 +169,7 @@ export const postAnswers = () => {
 		const body = {
 			answers: getState().answers
 		}
-		return postToApi(`/${checksum}/save.json`, body).then( json => {
+		return postToApi(`${checksum}/save.json`, body).then( json => {
 			console.log('answers posted and received', json)
 		})
 	}
