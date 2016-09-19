@@ -21,6 +21,16 @@ const requireAuth = (nextState, replace) => {
 	}
 }
 
+const logout = (nextState, replace, next) => {
+	Cookies.remove('apiKey', { path: `/${window.canvasId}/${window.checksum}` })
+	Cookies.remove('api_key', { path: `/${window.canvasId}/${window.checksum}` })
+	Cookies.remove('loggedUserId', { path: `/${window.canvasId}/${window.checksum}` })
+	replace({
+		pathname: `/${window.canvasId}/${window.checksum}`,
+	})
+	next()
+}
+
 const getPhotos = (nextState, replace, next, dispatch) => dispatch(loginCallback()).then(() => next())
 
 class Root extends Component {
@@ -43,6 +53,10 @@ class Root extends Component {
 					<Route 
 						path={`/${window.canvasId}/:checksum/login`} 
 						component={Login}/>
+					<Route 
+						path={`/${window.canvasId}/:checksum/logout`}
+						onEnter={(nextState, replace, next) => logout(nextState, replace, next, dispatch)}
+						component={() => (<div></div>)} />
 					<Route 
 						path={`/${window.canvasId}/:checksum/:photoId`}
 						onEnter={(nextState, replace, next) => getPhotos(nextState, replace, next, dispatch)}
