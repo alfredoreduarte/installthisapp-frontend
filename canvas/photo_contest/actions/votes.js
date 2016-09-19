@@ -1,6 +1,7 @@
 import { postFileToApi } from 'canvas/api'
 import { push } from 'react-router-redux'
 import { normalize, arrayOf } from 'normalizr'
+import Cookies from 'js-cookie'
 import * as schema from 'canvas/photo_contest/schema'
 import { receiveEntities } from 'canvas/photo_contest/actions'
 
