@@ -40,4 +40,4 @@ Thumbs.db
 ssl
 node_modules
 dist
-.sublime-project
+.sublime-project.env

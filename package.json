@@ -1,20 +1,20 @@
 {
-  "name": "ita-admin",
+  "name": "ita-dashboard",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "clean": "rimraf dist",
     "test": "NODE_ENV=test NODE_PATH=$NODE_PATH:$PWD/ mocha --recursive --compilers js:babel-core/register",
     "test:watch": "npm test -- --watch",
     "build:webpack": "NODE_ENV=production webpack -p --config webpack.config.prod.js",
     "build": "npm run clean && npm run build:webpack",
-    "clean": "rimraf dist",
     "postinstall": "npm run build",
     "start": "NODE_ENV=development webpack-dashboard -c magenta -- nodemon server.js"
   },
   "engines": {
-    "node": "5.6.0",
-    "npm": "3.6.0"
+    "node": "5.11.0",
+    "npm": "3.8.6"
   },
   "keywords": [],
   "author": "",
