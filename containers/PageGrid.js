@@ -34,7 +34,7 @@ const PageGrid = ({ loading, pages, handlePageSelection, handlePermissionRequest
 				<div className="col-flex col-flex-basis-4" key={page.id}>
 					<div 
 						className="media ita-page media-stacked text-center" 
-						onClick={() => handlePageSelection(page.identifier)}>
+						onClick={() => handlePageSelection(page.id)}>
 						<div className="media-left media-middle">
 							<a href="javascript:void(0);">
 								<FbPhoto 

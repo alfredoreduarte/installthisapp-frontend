@@ -7,7 +7,7 @@ import { getFromApi } from 'api'
 export const fetchFacebookPages = () => {
 	return dispatch => {
 		dispatch(toggleActivityLoadingPages())
-		getFromApi('fetch_pages_from_facebook.json', response => {
+		getFromApi('admin_users/fb_pages/fetch.json', response => {
 			const normalized = normalize(response, schema.entities)
 			dispatch(receiveEntities(normalized.entities))
 			dispatch(toggleActivityLoadingPages())

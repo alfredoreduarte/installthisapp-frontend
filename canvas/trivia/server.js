@@ -1,5 +1,6 @@
 var express = require('express')
-var apiUrl = process.env.API_URL || 'https://local.installthisapp.com'
+// var apiUrl = process.env.API_URL || 'https://local.installthisapp.com'
+var apiUrl = process.env.API_URL || 'http://0.0.0.0:3000'
 // #############
 // Canvas
 // #############

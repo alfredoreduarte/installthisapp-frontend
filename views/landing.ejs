@@ -44,7 +44,7 @@
 					success: function(res){
 						saveCookie('api_key', res)
 						console.log('success!')
-						top.location = 'https://' + window.location.host + '/d'
+						top.location = location.protocol + '//' + window.location.host + '/d'
 					},
 					dataType: 'text'
 				});

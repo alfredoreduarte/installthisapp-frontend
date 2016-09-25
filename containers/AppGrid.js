@@ -10,7 +10,7 @@ const AppGrid = ({ apps }) => (
 			title={a.title} 
 			applicationType={a.applicationType}
 			id={a.id}
-			facebookPageIdentifier={a.facebookPageIdentifier}
+			facebookPageIdentifier={a.fbPage.identifier}
 			checksum={a.checksum} 
 			updatedOn={a.updatedOn} 
 			status={a.status} />)}

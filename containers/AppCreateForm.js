@@ -55,7 +55,7 @@ const mapDispatchToProps = (dispatch, props) => ({
 	handleSubmit: e => {
 		e.preventDefault()
 		dispatch(postNewApp())
-		dispatch(turnOnActivityCreatingApp())
+		// dispatch(turnOnActivityCreatingApp())
 	}
 })
 

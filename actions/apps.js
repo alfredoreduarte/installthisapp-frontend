@@ -6,6 +6,7 @@ import { getCurrentAppByState } from 'selectors/apps'
 import { toggleActivityUpdatingAppSettings } from 'actions/activityIndicators'
 import { getFromApi, postToApi, deleteFromApi, patchToApi } from 'api'
 import dictionary from 'modules/messages'
+import { triviaStyles } from 'modules/styles'
 
 export const setCurrentAppChecksum = checksum => {
 	return dispatch => {
@@ -74,7 +75,7 @@ export const update = () => {
 const digestDataBeforePostingNewApp = data => {
 	return {
 		application: {
-			facebook_page_identifier: data.pageId,
+			fb_page_id: data.pageId,
 			application_type: data.module,
 			title: data.title,
 		},
@@ -87,7 +88,13 @@ export const postNewApp = () => {
 		const body = getState().newApp
 		const params = digestDataBeforePostingNewApp(getState().newApp)
 		const defaultMessages = JSON.stringify(dictionary[params.application.application_type])
-		postToApi(`applications.json`, {...params, ...{initial_messages_json: defaultMessages} }, res => {
+		const defaultStyles = params.application.application_type == 'trivia' ? triviaStyles : null
+		postToApi(`applications.json`, {
+			...params, 
+			...{
+				initial_messages_json: defaultMessages,
+				initial_styles: defaultStyles,
+			} }, res => {
 			const normalized = normalize(res, schema.app)
 			dispatch(receiveEntities(normalized.entities))
 			dispatch(push(`/d/apps/${res.applicationType}/${res.checksum}`))

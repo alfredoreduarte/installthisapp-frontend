@@ -1,16 +1,17 @@
 var path = require('path')
 var express = require('express')
 var cors = require('express-cors')
-var subdomain = require('express-subdomain')
-// var facebookAppId = process.env.FB_APP_ID || '1061199640593119'
-var facebookAppId = process.env.FB_APP_ID
+// var subdomain = require('express-subdomain')
+var facebookAppId = process.env.FB_APP_ID || '1061199640593119'
+// var facebookAppId = process.env.FB_APP_ID
 // var apiUrl = process.env.API_URL || 'https://local.installthisapp.com'
-var apiUrl = process.env.API_URL
+var apiUrl = process.env.API_URL || 'http://0.0.0.0:3000'
+// var apiUrl = process.env.API_URL
 
-// process.env.PORT = process.env.PORT || 4000
-process.env.PORT = process.env.PORT
-// process.env.HOST = process.env.HOST || 'localhost'
-process.env.HOST = process.env.HOST
+process.env.PORT = process.env.PORT || 4000
+// process.env.PORT = process.env.PORT
+process.env.HOST = process.env.HOST || 'localhost'
+// process.env.HOST = process.env.HOST
 
 const app = express()
 app.set('view engine', 'ejs')

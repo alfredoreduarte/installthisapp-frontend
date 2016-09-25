@@ -12,7 +12,7 @@ const temporaryEmptyFunction = arg => console.log('temporaryEmptyFunction')
 
 const processUnauthorized = () => {
 	console.log('Not authorized')
-	top.location.href = '/'
+	// top.location.href = '/'
 	return true
 }
 
@@ -112,6 +112,8 @@ export const postToApi = (endpoint, body = null, success = temporaryEmptyFunctio
 				body: processBody(body),
 			})
 			.then(response => {
+				console.log('response')
+				console.log(response)
 				switch(response.status){
 					case 200:
 						return response.json()

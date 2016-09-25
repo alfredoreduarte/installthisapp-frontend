@@ -12,7 +12,7 @@ export const receiveEntities = entities => ({
 
 export const fetchEntities = () => {
 	return dispatch =>
-		getFromApi('admin_user_properties.json').then( response => {
+		getFromApi('admin_users/show.json').then( response => {
 			const camelizedJson = humps.camelizeKeys(response)
 			const normalized = normalize(camelizedJson, schema.entities)
 			dispatch(receiveEntities(normalized.entities))

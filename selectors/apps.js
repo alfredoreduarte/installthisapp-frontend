@@ -3,7 +3,12 @@ import { createSelector } from 'reselect'
 import { stringContains } from 'lib/stringmatch'
 
 export const getAllApps = (state, props) => {
-	return _.filter(_.values(state.entities.apps), app => app.status != 'deleted')
+	// return _.filter(_.values(state.entities.apps), app => app.status != 'deleted')
+	const apps = _.filter(_.values(state.entities.apps), app => app.status != 'deleted')
+	const appsWithPages = apps.map( app => {
+		return { ...app, ...{fbPage: state.entities.pages[app.fbPageId]} }
+	})
+	return appsWithPages
 }
 export const getCurrentAppChecksum = (state, props) => props.params.checksum
 export const getCurrentAppChecksumByState = state => state.admin.currentApp
