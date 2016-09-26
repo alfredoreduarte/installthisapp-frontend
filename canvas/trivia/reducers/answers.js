@@ -1,7 +1,7 @@
 const answers = (state = {
 	correct: 0,
 	incorrect: 0,
-	details: {}
+	details: [],
 }, action) => {
 	switch (action.type) {
 		case 'SAVE_ANSWER':
@@ -9,8 +9,11 @@ const answers = (state = {
 			const correctResult = correct ? state.correct + 1 : state.correct
 			const incorrectResult = correct ? state.incorrect : state.incorrect + 1
 			const correctInteger = correct ? 1 : 0
-			const detailsResult = Object.assign({}, state.details, {
-				[questionId]: [optionId, correctInteger]
+			let detailsResult = state.details
+			detailsResult.push({
+				question: questionId,
+				option: optionId,
+				correct: correctInteger,
 			})
 			return {
 				correct: correctResult,
