@@ -37,7 +37,7 @@ export const getExternal = (url, success = temporaryEmptyFunction) => {
 }
 
 export const getFromApi = (endpoint, success = temporaryEmptyFunction) => {
-	const apiKey = Cookies.get('apiKey')
+	const apiKey = Cookies.get('apiKey') || window.canvasApiKey
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'GET',
 				headers: {
@@ -95,7 +95,7 @@ export const writeToApiWithoutAuth = (endpoint, body = null, success = temporary
 }
 
 export const postFileToApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
-	const apiKey = Cookies.get('apiKey')
+	const apiKey = Cookies.get('apiKey') || window.canvasApiKey
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'POST',
 				headers: {
@@ -126,7 +126,7 @@ export const postFileToApi = (endpoint, body = null, success = temporaryEmptyFun
 }
 
 export const postToApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
-	const apiKey = Cookies.get('apiKey')
+	const apiKey = Cookies.get('apiKey') || window.canvasApiKey
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'POST',
 				headers: {
@@ -159,7 +159,7 @@ export const postToApi = (endpoint, body = null, success = temporaryEmptyFunctio
 }
 
 export const deleteFromApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
-	const apiKey = Cookies.get('apiKey')
+	const apiKey = Cookies.get('apiKey') || window.canvasApiKey
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'DELETE',
 				headers: {
