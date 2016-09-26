@@ -6,7 +6,7 @@ import { getCurrentAppByState } from 'selectors/apps'
 import { toggleActivityUpdatingAppSettings } from 'actions/activityIndicators'
 import { getFromApi, postToApi, deleteFromApi, patchToApi } from 'api'
 import dictionary from 'modules/messages'
-import { triviaStyles } from 'modules/styles'
+import { triviaStyles, photoContestStyles } from 'modules/styles'
 
 export const setCurrentAppChecksum = checksum => {
 	return dispatch => {
@@ -88,7 +88,8 @@ export const postNewApp = () => {
 		const body = getState().newApp
 		const params = digestDataBeforePostingNewApp(getState().newApp)
 		const defaultMessages = JSON.stringify(dictionary[params.application.application_type])
-		const defaultStyles = params.application.application_type == 'trivia' ? triviaStyles : null
+		let defaultStyles = params.application.application_type == 'trivia' ? triviaStyles : null
+		let defaultStyles = params.application.application_type == 'photo_contest' ? photoContestStyles : null
 		postToApi(`applications.json`, {
 			...params, 
 			...{
