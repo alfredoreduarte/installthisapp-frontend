@@ -88,8 +88,18 @@ export const postNewApp = () => {
 		const body = getState().newApp
 		const params = digestDataBeforePostingNewApp(getState().newApp)
 		const defaultMessages = JSON.stringify(dictionary[params.application.application_type])
-		let defaultStyles = params.application.application_type == 'trivia' ? triviaStyles : null
-		let defaultStyles = params.application.application_type == 'photo_contest' ? photoContestStyles : null
+		let defaultStyles
+		switch(params.application.application_type){
+			case 'trivia':
+				defaultStyles = triviaStyles
+				break
+			case 'photo_contest':
+				defaultStyles = photoContestStyles
+				break
+			default:
+				defaultStyles = photoContestStyles
+				break
+		}
 		postToApi(`applications.json`, {
 			...params, 
 			...{
