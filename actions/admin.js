@@ -1,6 +1,7 @@
 import { fbLogin, fbCheckPagesPerms } from 'lib/facebook'
 import { toggleActivityUpdatingAdmin } from 'actions/activityIndicators'
 import { getFromApi, patchToApi } from 'api'
+import Cookies from 'js-cookie'
 
 export const receiveAdmin = payload => ({
 	type: 'RECEIVE_ADMIN',
@@ -9,6 +10,13 @@ export const receiveAdmin = payload => ({
 
 export const fetchAdmin = () => {
 	return dispatch => getFromApi('admin_users.json').then( response => dispatch(receiveAdmin(response)))
+}
+
+export const logOut = () => {
+	return dispatch => {
+		Cookies.remove('api_key')
+		top.location.href = '/'
+	}
 }
 
 export const updateInfo = () => {

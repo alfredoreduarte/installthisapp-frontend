@@ -5,9 +5,11 @@ const topFans = (state = {
 }, action) => {
 	switch (action.type) {
 		case 'TOP_FANS/RECEIVE_ENTITIES':
-			return Object.assign({}, state, {
-				likes: _.merge({}, state.likes, action.response.entities)
-			})
+			console.log('action')
+			console.log(action)
+			const coso = { ...state, likes: action.response.entities }
+			console.log('coso', coso)
+			return coso
 		default:
 			return state
 	}
