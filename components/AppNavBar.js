@@ -5,6 +5,7 @@ import { Link, IndexLink } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
 import { push } from 'react-router-redux'
 import Cookies from 'js-cookie'
+import topFansTest from 'lib/topFansTest'
 
 const AppNavBar = ({ name, logout }) => (
 	<Navbar fluid={true}>
@@ -15,6 +16,13 @@ const AppNavBar = ({ name, logout }) => (
 		</Navbar.Header>
 		<div className="collapse navbar-collapse text-right">
 			<ul className="nav navbar-nav navbar-right">
+				<li className="">
+					<button 
+						onClick={() => topFansTest()}
+						className="btn btn-success btn-sm btn-outline navbar-btn">
+						TF Test
+					</button>
+				</li>
 				<li className="">
 					<button className="btn btn-success btn-sm btn-outline navbar-btn">
 						<Link to='/d/apps/create' className="link-no-underline text-success">
