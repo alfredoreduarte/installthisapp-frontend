@@ -1,4 +1,3 @@
-import 'isomorphic-fetch'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import FacebookLogin from 'react-facebook-login'
@@ -10,33 +9,20 @@ class Login extends Component {
 		this.state = {
 			logging: false
 		}
-		this.digestFacebookResponse = this.digestFacebookResponse.bind(this)
-		this.handleClick = this.handleClick.bind(this)
+		this.fbCallback = this.fbCallback.bind(this)
 	}
-	componentDidMount() {
-		
-	}
-	handleClick() {
-		this.setState({
-			logging: true
-		})
-	}
-	digestFacebookResponse(response) {
+	fbCallback(response) {
+		console.log('response')
 		console.log(response)
-		if (response.accessToken) {
-			this.setState({
-				logging: true
-			})
-			this.props.digestFacebookResponse(response)
-		}
-		else{
-			this.setState({
-				logging: false
-			})
+		this.setState({
+			logging: response.status != 'not_authorized'
+		})
+		if (response.status != 'not_authorized') {
+			this.props.processResponse(response)
 		}
 	}
 	render(){
-		const { digestFacebookResponse, title } = this.props
+		const { title } = this.props
 		return (
 			<div className="text-center">
 				<div
@@ -47,38 +33,26 @@ class Login extends Component {
 						transform: 'translate(-50%)'
 					}}
 				>
-				<h1 className="text-center" style={{color: 'white'}}>{title}</h1>
-				{!this.state.logging ?
+				<h1 className="text-center">{title}</h1>
+				<h3 className="text-center">Please sign in to participate.</h3>
 				<FacebookLogin
 					appId={window.facebookAppId}
 					cssClass={`btn btn-primary btn-lg ${this.state.logging ? 'disabled' : null}`}
 					autoLoad={true}
-					textButton="Sign In"
-					onClick={() => this.handleClick()}
-					callback={response => this.digestFacebookResponse(response)} />
-				:
-				<button
-					className="btn btn-primary btn-lg" disabled={true}>
-					Please wait...
-				</button>
-				}
+					textButton={this.state.logging ? "Please wait..." : "Sign In"}
+					callback={response => this.fbCallback(response)} />
 				</div>
 			</div>
 		)
 	}
 }
 
-const mapStateToProps = (state, props) => {
-	return {
-		// title: state.settings.applicationTitle
-		title: 'fake title check login.js'
-	}
-}
+const mapStateToProps = state => ({
+	title: 'App Title'
+})
 
-const mapDispatchToProps = (dispatch, props) => {
-	return {
-		digestFacebookResponse: res => dispatch(digestFacebookResponse(res))
-	}
-}
+const mapDispatchToProps = (dispatch, props) => ({
+	processResponse: res => dispatch(digestFacebookResponse(res))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

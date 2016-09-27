@@ -7,7 +7,8 @@ import { getLikes } from 'canvas/top_fans/selectors/likes'
 
 const Index = ({ likes }) => (
 	<div className="col-sm-12">
-		<h1 style={{color: 'white'}}>Top Fans!</h1>
+		<h1>Top Fans</h1>
+		<h1>People who liked the most posts on this page</h1>
 		<ListGroup>
 			{likes.map( like => 
 				<ListItem 

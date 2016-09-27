@@ -4,14 +4,15 @@ import { Router, Route, IndexRoute } from 'react-router'
 import Index from 'canvas/top_fans/components/Index'
 import Login from 'canvas/top_fans/components/Login'
 
-const requireAuth = (nextState, replace) => {
+const requireAuth = (nextState, replace, next) => {
 	if (window.canvasApiKey) {
-		
+		next()
 	}
 	else{
 		replace({
 			pathname: `/${window.canvasId}/${window.checksum}/login`,
 		})
+		next()
 	}
 }
 

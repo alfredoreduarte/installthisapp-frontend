@@ -1,7 +1,6 @@
 import { normalize, arrayOf } from 'normalizr'
 import { push } from 'react-router-redux'
 import { getFromApi } from 'canvas/api'
-import humps from 'humps'
 
 export const loginCallback = () => {
 	return dispatch => {
@@ -20,9 +19,10 @@ export const fetchEntities = () => {
 	return (dispatch, getState) =>{
 		const { checksum, canvasId } = getState().applicationData
 		getFromApi(`${checksum}/likes.json`, response => {
+			console.log('api res')
+			console.log(response)
 			if (response.status == 'ok') {
-				const camelizedJson = humps.camelizeKeys(response)
-				dispatch(receiveLikes(camelizedJson.likes))
+				dispatch(receiveLikes(response.likes))
 				dispatch(push(`/${canvasId}/${checksum}`))
 			}
 		})

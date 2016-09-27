@@ -1,8 +1,6 @@
 import _ from 'lodash'
 
-const applicationData = (state = { 
-	likes: [],
-}, action) => {
+const likes = (state = [], action) => {
 	switch (action.type) {
 		case 'RECEIVE_LIKES':
 			// return _.merge({}, state, action.response.entities)
@@ -14,4 +12,4 @@ const applicationData = (state = {
 	}
 }
 
-export default applicationData
+export default likes
