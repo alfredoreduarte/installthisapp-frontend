@@ -13,7 +13,6 @@ import User from 'components/User'
 // import topFansTest from 'lib/topFansTest'
 
 const Scoreboard = ({
-	fetchAgain,
 	likes,
 	users, 
 	fetch,
@@ -27,7 +26,7 @@ const Scoreboard = ({
 		<div className="ita-table-toolbar">
 			<div className="row">
 				<div className="col-md-12">
-					<h3 className="ita-page-title" onClick={fetchAgain}>
+					<h3 className="ita-page-title">
 						Scoreboard 
 						<small className={selectedItems.length ? '' : 'hide'}>
 							{' '}/ {selectedItems.length} 
@@ -43,9 +42,6 @@ const Scoreboard = ({
 				<div className="col-md-8 text-right">
 					<button className="btn btn-default" onClick={fetch}>
 						Refresh
-					</button>
-					<button onClick={() => console.log('test disabled')} className="btn btn-default">
-						Post demo fans data to API
 					</button>
 					<ul className="ita-table-tools-selected list-inline list-no-margin">
 						<li className={selectedItems.length ? '' : 'hide'}>
@@ -132,7 +128,6 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
 	dispatch(fetchTopFansEntities(props.params.checksum))
 	return {
-		fetchAgain: () => dispatch(fetchTopFansEntities(props.params.checksum)),
 		handleUserSelect: id => {
 			dispatch(selectItemOnTable(id))
 		},
