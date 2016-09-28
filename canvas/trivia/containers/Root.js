@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Provider, connect } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
+import Cookies from 'js-cookie'
 import Login from 'canvas/trivia/components/Login'
 import Index from 'canvas/trivia/containers/Index'
 import Thanks from 'canvas/trivia/containers/Thanks'
