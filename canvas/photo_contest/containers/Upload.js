@@ -15,6 +15,7 @@ class Upload extends Component {
 const mapStateToProps = state => {
 	return {
 		...state.messages,
+		busy: state.activityIndicators.photoUpload,
 		loading: false,
 		backUrl: `/${window.canvasId}/${window.checksum}`,
 	}

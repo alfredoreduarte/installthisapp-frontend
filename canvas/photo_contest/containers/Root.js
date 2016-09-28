@@ -9,7 +9,7 @@ import SinglePhoto from 'canvas/photo_contest/containers/SinglePhoto'
 import { loginCallback } from 'canvas/photo_contest/actions'
 
 const requireAuth = (nextState, replace) => {
-	if (Cookies.get('apiKey')) {
+	if (Cookies.get('apiKey') || window.canvasApiKey) {
 		// next()
 	}
 	else{

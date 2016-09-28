@@ -116,7 +116,7 @@ const Photos = ({
 						{p.votes.length}
 					</td>
 					<td>
-						<TimeAgo date={p.createdOn} />
+						<TimeAgo date={p.createdAt} />
 					</td>
 					<td className="text-right">
 						<ul className="list-inline list-no-margin">

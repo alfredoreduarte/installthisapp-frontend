@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import Header from 'canvas/photo_contest/components/Header'
 import ToolBar from 'canvas/photo_contest/components/ToolBar'
 
-const Upload = ({ uploadPhoto, backUrl }) => (
+const Upload = ({ uploadPhoto, backUrl, busy }) => (
 	<div className="container">
 		<Header title={'Upload Photo'} subtitle={''} />
 		<ToolBar backUrl={backUrl} />
@@ -19,7 +19,14 @@ const Upload = ({ uploadPhoto, backUrl }) => (
 				<textarea style={styles.input} className="form-control ita-cali-input" name="photo[caption]" rows={10} />
 			</div>
 			<div className="form-group text-right">
-				<button style={styles.button} className="ita-cali-button" onClick={uploadPhoto}>Upload Photo</button>
+				<button 
+					style={styles.button} 
+					className="ita-cali-button" 
+					onClick={uploadPhoto}
+					disabled={busy}
+					>
+					{busy ? 'Uploading...' : 'Upload Photo'}
+				</button>
 			</div>
 		</div>
 	</div>
@@ -42,6 +49,7 @@ const styles = {
 Upload.propTypes = {
 	uploadPhoto: PropTypes.func.isRequired,
 	backUrl: PropTypes.string.isRequired,
+	busy: PropTypes.bool.isRequired,
 }
 
 export default Upload

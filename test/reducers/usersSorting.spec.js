@@ -8,7 +8,7 @@ describe('Reducers', () => {
 			expect(usersSorting(undefined, {})).toEqual(initialState)
 		})
 		it('Should toggle sorting key', () => {
-			const expectedResult = 'createdOn'
+			const expectedResult = 'createdAt'
 			const action = {
 				type: 'SORT_USERS',
 				payload: expectedResult

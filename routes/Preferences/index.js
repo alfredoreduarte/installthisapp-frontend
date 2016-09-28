@@ -9,7 +9,15 @@ module.exports = {
 		})
 	},
 	indexRoute: {
-		component: require('components/AppConfiguration').default
+		component: require('components/AppConfiguration').default,
+		// getComponent(nextState, cb) {
+		// 	require.ensure([], (require) => {
+		// 		cb(null, {
+		// 			main: require('components/AppConfiguration').default,
+		// 			sidebar: require('modules/' + nextState.params.type + '/sidebar').default,
+		// 		})
+		// 	})
+		// },
 	},
 	childRoutes: [
 		{

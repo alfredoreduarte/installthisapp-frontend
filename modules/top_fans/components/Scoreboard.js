@@ -4,16 +4,17 @@ import Select from 'react-select'
 import { Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Checkbox } from 'react-icheck'
-import { fetchTopFansEntities } from 'modules/top_fans/actions/entities'
+import { fetchTopFansEntities, fetchTopFansSettings } from 'modules/top_fans/actions/entities'
 import { getCurrentUsersByKeyword } from 'selectors/users'
-import { getLikesForPage } from 'modules/top_fans/selectors/likes'
+import { getEntriesForPage } from 'modules/top_fans/selectors/entries'
 import { selectItemOnTable, sortUsersBy } from 'actions/users'
 import SearchForm from 'components/SearchForm'
 import User from 'components/User'
-// import topFansTest from 'lib/topFansTest'
 
 const Scoreboard = ({
-	likes,
+	likeMultiplier,
+	commentMultiplier,
+	entries,
 	users, 
 	fetch,
 	selectedItems,
@@ -66,7 +67,7 @@ const Scoreboard = ({
 							value={sortBy}
 							options={[
 								{ value: 'name', label: 'Alphabetically' },
-								{ value: 'createdOn', label: 'Most Recent' }
+								{ value: 'createdAt', label: 'Most Recent' }
 							]}
 							onChange={val => handleSort(val)}
 						/>
@@ -92,19 +93,23 @@ const Scoreboard = ({
 				</tr>
 			</thead>
 			<tbody>
-				{likes.map(like => 
-				<tr key={like.id.userIdentifier}>
+				{entries.map(entry => 
+				<tr key={entry.userIdentifier}>
 					<td>
-						<User name={like.id.userName} identifier={like.id.userIdentifier} small />
+						<User 
+							name={entry.userName} 
+							identifier={entry.userIdentifier} 
+							small
+							 />
 					</td>
 					<td>
-						{like.likes}
+						{entry.likes}
 					</td>
 					<td>
-						coming soon
+						{entry.comments}
 					</td>
 					<td>
-						<b>score pts.</b>
+						<b>{entry.likes * likeMultiplier + entry.comments * commentMultiplier}</b>
 					</td>
 				</tr>
 				)}
@@ -114,11 +119,10 @@ const Scoreboard = ({
 )
 
 const mapStateToProps = (state, props) => {
-	const likes = getLikesForPage(state, props)
-	console.log('los likes')
-	console.log(likes)
 	return { 
-		likes,
+		likeMultiplier: state.topFans.settings.pointsPerLike,
+		commentMultiplier: state.topFans.settings.pointsPerComment,
+		entries: getEntriesForPage(state, props),
 		users: getCurrentUsersByKeyword(state, props),
 		selectedItems: state.selectedItems,
 		sortBy: state.usersSorting
@@ -126,6 +130,7 @@ const mapStateToProps = (state, props) => {
 }
 
 const mapDispatchToProps = (dispatch, props) => {
+	dispatch(fetchTopFansSettings(props.params.checksum))
 	dispatch(fetchTopFansEntities(props.params.checksum))
 	return {
 		handleUserSelect: id => {

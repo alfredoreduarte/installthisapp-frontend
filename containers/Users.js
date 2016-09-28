@@ -58,7 +58,7 @@ const Users = ({
 							value={sortBy}
 							options={[
 								{ value: 'name', label: 'Alphabetically' },
-								{ value: 'createdOn', label: 'Most Recent' }
+								{ value: 'createdAt', label: 'Most Recent' }
 							]}
 							onChange={val => handleSort(val)}
 						/>
@@ -91,7 +91,7 @@ const Users = ({
 						<User name={user.name} identifier={user.identifier} small />
 					</td>
 					<td>
-						{user.createdOn}
+						{user.createdAt}
 					</td>
 					<td className="text-right">
 						<ul className="list-inline list-no-margin">

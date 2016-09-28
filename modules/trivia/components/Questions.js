@@ -103,7 +103,7 @@ const Questions = ({
 						{q.text}
 					</td>
 					<td>
-						{q.createdOn}
+						{q.createdAt}
 					</td>
 					<td className="text-right">
 						<ul className="list-inline list-no-margin">

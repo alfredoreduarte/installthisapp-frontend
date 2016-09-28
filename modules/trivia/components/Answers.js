@@ -95,7 +95,7 @@ const Answers = ({
 						<User name={a.user.name} identifier={a.user.identifier} small />
 					</td>
 					<td>
-						<TimeAgo date={a.updatedOn} />
+						<TimeAgo date={a.updatedAt} />
 					</td>
 					<td>
 						<div className="progress ita-progressbar">

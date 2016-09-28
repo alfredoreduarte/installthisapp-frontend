@@ -10,7 +10,7 @@ const state = {
 				index: 2,
 				appChecksum: "LF7H3",
 				text: "Pregunta dos",
-				createdOn: "2015-02-01T20:46:22.000-04:00",
+				createdAt: "2015-02-01T20:46:22.000-04:00",
 				updatedOn: "2016-02-01T20:46:22.000-04:00",
 				options: [ 89273, 3728]
 			},
@@ -19,7 +19,7 @@ const state = {
 				index: 1,
 				appChecksum: "DB9QK",
 				text: "Pregunta uno",
-				createdOn: "2015-03-01T20:46:22.000-04:00",
+				createdAt: "2015-03-01T20:46:22.000-04:00",
 				updatedOn: "2016-03-01T20:46:22.000-04:00",
 				options: []
 			}
@@ -41,7 +41,7 @@ describe('selectors', () => {
 					index: 2,
 					appChecksum: "LF7H3",
 					text: "Pregunta dos",
-					createdOn: "2015-02-01T20:46:22.000-04:00",
+					createdAt: "2015-02-01T20:46:22.000-04:00",
 					updatedOn: "2016-02-01T20:46:22.000-04:00",
 					options: [ 89273, 3728]
 				}

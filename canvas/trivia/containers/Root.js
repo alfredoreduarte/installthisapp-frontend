@@ -7,7 +7,7 @@ import Thanks from 'canvas/trivia/containers/Thanks'
 import AlreadyPlayed from 'canvas/trivia/containers/AlreadyPlayed'
 
 const requireAuth = (nextState, replace, next) => {
-	if (window.canvasApiKey) {
+	if (Cookies.get('apiKey') || window.canvasApiKey) {
 		next()
 	}
 	else{

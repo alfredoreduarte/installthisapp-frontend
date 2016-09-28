@@ -1,15 +1,15 @@
 import _ from 'lodash'
+import settings from 'modules/top_fans/reducers/settings'
 
 const topFans = (state = {
-	likes: {},
+	settings: {},
+	entries: {},
 }, action) => {
 	switch (action.type) {
+		case 'TOP_FANS/RECEIVE_SETTINGS':
+			return { ...state, settings: settings(state.settings, action) }
 		case 'TOP_FANS/RECEIVE_ENTITIES':
-			console.log('action')
-			console.log(action)
-			const coso = { ...state, likes: action.response.entities }
-			console.log('coso', coso)
-			return coso
+			return { ...state, entries: action.response.entities }
 		default:
 			return state
 	}

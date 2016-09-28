@@ -13,7 +13,7 @@ const ToolBar = ({
 	searchQuery,
 }) => (
 	<div style={styles.toolbar}>
-		<div style={styles.toolbarCell}>
+		<div style={styles.toolbarCell} className="hidden-xs">
 			{backUrl == '' ? 
 			<form className="input-group ita-cali-search-form" style={styles.searchForm}>
 				<span className="input-group-addon" style={styles.searchFormAddon}>

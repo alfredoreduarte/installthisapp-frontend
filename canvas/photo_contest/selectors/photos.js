@@ -15,7 +15,7 @@ export const sortedPhotos = createSelector(
 	(photos, sorting) => {
 		switch(sorting) {
 			case 'mostRecent': 
-				return _.orderBy(photos, p => Date.parse(p.createdOn), 'desc')
+				return _.orderBy(photos, p => Date.parse(p.createdAt), 'desc')
 			case 'mostVoted': 
 			default: 
 				return _.orderBy(photos, p => p.votes.length, 'desc')

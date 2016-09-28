@@ -90,6 +90,7 @@ const Previews = ({ screen, messages }) => {
 				mostVoted={messages.mostVoted}
 				mostRecent={messages.mostRecent}
 				uploadPhoto={() => console.log('vote')}
+				busy={false}
 				backUrl={' '}
 			 />
 		case 'single':

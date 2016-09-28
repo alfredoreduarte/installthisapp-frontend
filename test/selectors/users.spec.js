@@ -21,17 +21,17 @@ const state = {
 			{
 				id: 1,
 				name: "Rodrigo Keen",
-				createdOn: "2016-05-01T20:46:22.000-04:00",
+				createdAt: "2016-05-01T20:46:22.000-04:00",
 			},
 			{
 				id: 2,
 				name: "Alfredo Re",
-				createdOn: "2016-02-01T20:46:22.000-04:00",
+				createdAt: "2016-02-01T20:46:22.000-04:00",
 			},
 			{
 				id: 3,
 				name: "Mikhail Herrero",
-				createdOn: "2016-02-01T20:46:22.000-04:00",
+				createdAt: "2016-02-01T20:46:22.000-04:00",
 			}
 		]
 	}
@@ -49,12 +49,12 @@ describe('selectors', () => {
 				{
 					id: 3,
 					name: "Mikhail Herrero",
-					createdOn: "2016-02-01T20:46:22.000-04:00",
+					createdAt: "2016-02-01T20:46:22.000-04:00",
 				},
 				{
 					id: 1,
 					name: "Rodrigo Keen",
-					createdOn: "2016-05-01T20:46:22.000-04:00",
+					createdAt: "2016-05-01T20:46:22.000-04:00",
 				}
 			]
 			expect(getUsersForCurrentApp(state, props)).toEqual(expectedResult)
@@ -66,7 +66,7 @@ describe('selectors', () => {
 				{
 					id: 3,
 					name: "Mikhail Herrero",
-					createdOn: "2016-02-01T20:46:22.000-04:00",
+					createdAt: "2016-02-01T20:46:22.000-04:00",
 				}
 			]
 			expect(getCurrentUsersByKeyword(state, props)).toEqual(expectedResult)

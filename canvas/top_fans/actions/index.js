@@ -5,11 +5,12 @@ import { getFromApi } from 'canvas/api'
 export const loginCallback = () => {
 	return dispatch => {
 		dispatch(fetchEntities())
+		dispatch(fetchTopFansSettings())
 	}
 }
 
-export const receiveLikes = entities => ({
-	type: 'RECEIVE_LIKES',
+export const receiveEntries = entities => ({
+	type: 'RECEIVE_ENTRIES',
 	response: {
 		entities
 	}
@@ -18,13 +19,29 @@ export const receiveLikes = entities => ({
 export const fetchEntities = () => {
 	return (dispatch, getState) =>{
 		const { checksum, canvasId } = getState().applicationData
-		getFromApi(`${checksum}/likes.json`, response => {
+		getFromApi(`${checksum}/entries.json`, response => {
 			console.log('api res')
 			console.log(response)
 			if (response.status == 'ok') {
-				dispatch(receiveLikes(response.likes))
+				dispatch(receiveEntries(response))
 				dispatch(push(`/${canvasId}/${checksum}`))
 			}
+		})
+	}
+}
+
+export const receiveTopFansSettings = payload => ({
+	type: 'RECEIVE_SETTINGS',
+	payload,
+})
+
+export const fetchTopFansSettings = checksum => {
+	return (dispatch, getState) =>{
+		const { checksum, canvasId } = getState().applicationData
+		getFromApi(`${checksum}/settings.json`).then( response => {
+			console.log('settings')
+			console.log(response)
+			dispatch(receiveTopFansSettings(response))
 		})
 	}
 }

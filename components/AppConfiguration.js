@@ -15,7 +15,7 @@ const FacebookPageField = () => (
 		value={'name'}
 		options={[
 			{ value: 'name', label: 'Alphabetically' },
-			{ value: 'createdOn', label: 'Most Recent' }
+			{ value: 'createdAt', label: 'Most Recent' }
 		]}
 		onChange={val => console.log(val)}
 	/>
@@ -63,6 +63,11 @@ let AppConfiguration = ({ handleSubmit, fetching }) => (
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
+		<div className="row">
+			<div className="col-md-6">
+				[App-specific settings will show up here]
 			</div>
 		</div>
 	</form>
