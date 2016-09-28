@@ -12,19 +12,19 @@ const Previews = ({ screen, messages }) => {
 				<Index
 					question={{
 						id: 1,
-						text: 'hola',
+						text: 'Question text',
 						options: [
 							{
 								id: 1,
-								text: 'Fusce Vulputate Sollicitudin Parturient Mattis',
+								text: 'Answer text Vulputate Sollicitudin Parturient Mattis',
 							},
 							{
 								id: 2,
-								text: 'Cursus Purus Justo Sollicitudin Fermentum',
+								text: 'Answer text Cursus Purus Justo Sollicitudin Fermentum',
 							},
 							{
 								id: 3,
-								text: 'Malesuada Amet Consectetur Justo Porta',
+								text: 'Answer text Malesuada Amet Consectetur Justo Porta',
 							}
 						]
 					}}
