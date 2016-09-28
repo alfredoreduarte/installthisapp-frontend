@@ -5,6 +5,8 @@ import { ListGroup, ListGroupItem } from 'react-bootstrap'
 import ListItem from 'canvas/top_fans/components/ListItem'
 import { getEntries } from 'canvas/top_fans/selectors/entries'
 
+const handleScore = score => score ? score : 0
+
 const Index = ({ entries, likeMultiplier, commentMultiplier }) => (
 	<div className="col-sm-12">
 		<h1>Top Fans</h1>
@@ -14,7 +16,7 @@ const Index = ({ entries, likeMultiplier, commentMultiplier }) => (
 					key={entry.userIdentifier} 
 					id={entry.userIdentifier} 
 					name={entry.userName} 
-					score={entry.likes * likeMultiplier + entry.comments * commentMultiplier} 
+					score={handleScore(entry.likes) * likeMultiplier + handleScore(entry.comments) * commentMultiplier} 
 					likes={entry.likes}
 					comments={entry.comments}
 					 />

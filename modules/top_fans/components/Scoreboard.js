@@ -11,6 +11,8 @@ import { selectItemOnTable, sortUsersBy } from 'actions/users'
 import SearchForm from 'components/SearchForm'
 import User from 'components/User'
 
+const handleScore = score => score ? score : 0
+
 const Scoreboard = ({
 	likeMultiplier,
 	commentMultiplier,
@@ -109,7 +111,7 @@ const Scoreboard = ({
 						{entry.comments}
 					</td>
 					<td>
-						<b>{entry.likes * likeMultiplier + entry.comments * commentMultiplier}</b>
+						<b>{handleScore(entry.likes) * likeMultiplier + handleScore(entry.comments) * commentMultiplier}</b>
 					</td>
 				</tr>
 				)}
