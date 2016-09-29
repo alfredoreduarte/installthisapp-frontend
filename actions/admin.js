@@ -1,6 +1,8 @@
-import { fbLogin, fbCheckPagesPerms } from 'lib/facebook'
 import { toggleActivityUpdatingAdmin } from 'actions/activityIndicators'
 import { getFromApi, patchToApi } from 'api'
+import { normalize } from 'normalizr'
+import * as schema from 'schema'
+import { receiveEntities } from 'actions/entities'
 import Cookies from 'js-cookie'
 
 export const receiveAdmin = payload => ({
@@ -9,7 +11,22 @@ export const receiveAdmin = payload => ({
 })
 
 export const fetchAdmin = () => {
-	return dispatch => getFromApi('admin_users.json').then( response => dispatch(receiveAdmin(response)))
+	return dispatch => {
+		return getFromApi('admin_users/show.json').then( response => {
+			// Prepare entities for normalization
+			const entities = {
+				apps: response.adminUser.applications,
+				pages: response.adminUser.fbPages,
+			}
+			const normalized = normalize(entities, schema.entities)
+			dispatch(receiveEntities(normalized.entities))
+			// Sanitize admin user
+			const adminUser = { ...response.adminUser }
+			delete adminUser.applications
+			delete adminUser.fbPages
+			return dispatch(receiveAdmin(adminUser))
+		})
+	}
 }
 
 export const logOut = () => {

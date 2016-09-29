@@ -1,8 +1,3 @@
-import { normalize, arrayOf } from 'normalizr'
-import * as schema from 'schema'
-import humps from 'humps'
-import { getFromApi } from 'api'
-
 export const receiveEntities = entities => ({
 	type: 'RECEIVE_ENTITIES',
 	response: {
@@ -10,11 +5,10 @@ export const receiveEntities = entities => ({
 	}
 })
 
-export const fetchEntities = () => {
-	return dispatch =>
-		getFromApi('admin_users/show.json').then( response => {
-			const camelizedJson = humps.camelizeKeys(response)
-			const normalized = normalize(camelizedJson, schema.entities)
-			dispatch(receiveEntities(normalized.entities))
-		})
-}
+// export const fetchEntities = () => {
+// 	return dispatch =>
+// 		getFromApi('admin_users/show.json').then( response => {
+// 			const normalized = normalize(camelizedJson, schema.entities)
+// 			dispatch(receiveEntities(normalized.entities))
+// 		})
+// }

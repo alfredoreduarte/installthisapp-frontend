@@ -1,6 +1,7 @@
 export default {
-	"thankYou": "JS Thanks for playing 😁",
-	"alreadyPlayed": "LOL! You've already played the game",
-	"youLose": "Bummer. You just lost.",
-	"youWin": "Yay. You just won."
+	"title": "This is the main heading",
+	"subtitle": "This is the subtitle",
+	"likesLabel": "Likes",
+	"commentsLabel": "Comments",
+	"pointsLabel": "Points"
 }

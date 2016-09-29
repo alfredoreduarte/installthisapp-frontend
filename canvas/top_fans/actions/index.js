@@ -1,12 +1,12 @@
 import { normalize, arrayOf } from 'normalizr'
 import { push } from 'react-router-redux'
-import { getFromApi } from 'canvas/api'
+import { getFromApi, getExternal } from 'canvas/api'
 
 export const loginCallback = () => {
-	return dispatch => {
-		dispatch(fetchEntities())
-		dispatch(fetchTopFansSettings())
-	}
+	return dispatch => 
+		dispatch(fetchTopFansSettings()).then(() => 
+			dispatch(fetchMessages()).then(() => dispatch(fetchEntities()))
+		)
 }
 
 export const receiveEntries = entities => ({
@@ -17,11 +17,9 @@ export const receiveEntries = entities => ({
 })
 
 export const fetchEntities = () => {
-	return (dispatch, getState) =>{
+	return (dispatch, getState) => {
 		const { checksum, canvasId } = getState().applicationData
-		getFromApi(`${checksum}/entries.json`, response => {
-			console.log('api res')
-			console.log(response)
+		return getFromApi(`${checksum}/entries.json`, response => {
 			if (response.status == 'ok') {
 				dispatch(receiveEntries(response))
 				dispatch(push(`/${canvasId}/${checksum}`))
@@ -38,10 +36,23 @@ export const receiveTopFansSettings = payload => ({
 export const fetchTopFansSettings = checksum => {
 	return (dispatch, getState) =>{
 		const { checksum, canvasId } = getState().applicationData
-		getFromApi(`${checksum}/settings.json`).then( response => {
-			console.log('settings')
-			console.log(response)
+		return getFromApi(`${checksum}/settings.json`).then( response => {
 			dispatch(receiveTopFansSettings(response))
+		})
+	}
+}
+
+export const receiveMessages = payload => ({
+	type: 'RECEIVE_MESSAGES',
+	payload,
+})
+
+export const fetchMessages = () => {
+	return (dispatch, getState) => {
+		const { checksum, canvasId } = getState().applicationData
+		return getExternal(window.messagesUrl).then( json => {
+			dispatch(receiveMessages(json))
+			return Promise.resolve()
 		})
 	}
 }

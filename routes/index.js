@@ -1,7 +1,6 @@
 import React from 'react'
 import { Route, IndexRoute } from 'react-router'
 import { fetchAdmin } from 'actions/admin'
-import { fetchEntities } from 'actions/entities'
 
 export const createRoutes = (store, dispatch) => ({
 	path: '/d',
@@ -12,9 +11,7 @@ export const createRoutes = (store, dispatch) => ({
 	onChange: (prevState, nextState, replace, next) => {
 		if (nextState.location.pathname == '/d') {
 			dispatch(fetchAdmin()).then(() => {
-				dispatch(fetchEntities()).then(() => {
-					next()
-				})
+				next()
 			})
 		}
 		else{
@@ -23,9 +20,7 @@ export const createRoutes = (store, dispatch) => ({
 	},
 	onEnter: (nextState, replace, next) => {
 		dispatch(fetchAdmin()).then(() => {
-			dispatch(fetchEntities()).then(() => {
-				next()
-			})
+			next()
 		})
 	},
 	childRoutes: [

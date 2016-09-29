@@ -4,6 +4,7 @@ import { routerReducer as routing } from 'react-router-redux'
 import applicationData from 'canvas/top_fans/reducers/applicationData'
 import entries from 'canvas/top_fans/reducers/entries'
 import settings from 'canvas/top_fans/reducers/settings'
+import messages from 'canvas/top_fans/reducers/messages'
 // import entities from 'canvas/top_fans/reducers/entities'
 // import answeredQuestions from 'canvas/top_fans/reducers/answeredQuestions'
 // import answers from 'canvas/top_fans/reducers/answers'
@@ -15,6 +16,7 @@ const createReducer = asyncReducers => {
 		applicationData,
 		entries,
 		settings,
+		messages,
 		// entities,
 		// answeredQuestions,
 		// answers,

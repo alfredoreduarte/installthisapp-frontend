@@ -22,8 +22,11 @@ triviaRouter.use(function(req, res, next) {
 		next()
 })
 triviaRouter.use('/static', express.static(__dirname + '/dist'))
+// 
+// Auth from facebook page tab
+// 
 triviaRouter.post(`/${triviaCanvasId}`, canvasParser, function(req, res) {
-	fetch(`${apiUrl}/test_auth.json`, {
+	fetch(`${apiUrl}/auth.json`, {
 		method: 'POST',
 		headers: {
 			'Accept': 'application/json',
@@ -52,6 +55,9 @@ triviaRouter.post(`/${triviaCanvasId}`, canvasParser, function(req, res) {
 		}
 	)
 })
+// 
+// Auth outside of facebook
+// 
 triviaRouter.get(`/${triviaCanvasId}/:checksum*`, canvasParser, function(req, res) {
 	fetch(`${apiUrl}/standalone_auth.json`, {
 		method: 'POST',

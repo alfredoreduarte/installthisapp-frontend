@@ -1,11 +1,16 @@
 import React, { Component, PropTypes } from 'react'
 import { Provider, connect } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
-import Index from 'canvas/top_fans/components/Index'
+import { loginCallback } from 'canvas/top_fans/actions'
+import Index from 'canvas/top_fans/containers/Index'
 import Login from 'canvas/top_fans/components/Login'
+import Cookies from 'js-cookie'
 
-const requireAuth = (nextState, replace, next) => {
-	if (window.canvasApiKey) {
+const getData = (nextState, replace, next, dispatch) => dispatch(loginCallback()).then(() => next())
+
+const requireAuth = (nextState, replace, next, dispatch) => {
+	if (Cookies.get('apiKey') || window.canvasApiKey) {
+		// dispatch(loginCallback()).then(() => next())
 		next()
 	}
 	else{
@@ -17,17 +22,15 @@ const requireAuth = (nextState, replace, next) => {
 }
 
 class Root extends Component {
-	componentDidMount() {
-		const { dispatch } = this.props
-	}
 	render() {
-		const { store, history } = this.props
+		const { store, history, dispatch } = this.props
 		return (
 			<Provider store={store}>
 				<Router history={history}>
 					<Route 
 						path={`/${window.canvasId}(/:checksum)`} 
-						onEnter={requireAuth}
+						// onEnter={(nextState, replace, next) => requireAuth(nextState, replace, next, dispatch)}
+						onEnter={(nextState, replace, next) => getData(nextState, replace, next, dispatch)}
 						component={Index} />
 					<Route 
 						path={`/${window.canvasId}/:checksum/login`} 

@@ -2,6 +2,7 @@ import 'isomorphic-fetch'
 import Cookies from 'js-cookie'
 import humps from 'humps'
 import { API_URL } from 'config'
+import simulateDelay from 'lib/networkDelay'
 
 const apiKey = Cookies.get('api_key')
 
@@ -35,6 +36,7 @@ export const getFromApi = (endpoint, success = temporaryEmptyFunction) => {
 						return
 				}
 			})
+			.then(json => simulateDelay(json))
 			.then(json => {
 				const response = processResponse(json)
 				success(response)
@@ -64,6 +66,7 @@ export const patchToApi = (endpoint, body = null, success = temporaryEmptyFuncti
 						return
 				}
 			})
+			.then(json => simulateDelay(json))
 			.then(json => {
 				const response = processResponse(json)
 				success(response)
@@ -92,6 +95,7 @@ export const postFileToApi = (endpoint, body = null, success = temporaryEmptyFun
 						return
 				}
 			})
+			.then(json => simulateDelay(json))
 			.then(json => {
 				const response = processResponse(json)
 				success(response)
@@ -123,6 +127,7 @@ export const postToApi = (endpoint, body = null, success = temporaryEmptyFunctio
 						return
 				}
 			})
+			.then(json => simulateDelay(json))
 			.then(json => {
 				const response = processResponse(json)
 				success(response)
@@ -152,6 +157,7 @@ export const deleteFromApi = (endpoint, body = null, success = temporaryEmptyFun
 						return
 				}
 			})
+			.then(json => simulateDelay(json))
 			.then(json => {
 				const response = processResponse(json)
 				success(response)

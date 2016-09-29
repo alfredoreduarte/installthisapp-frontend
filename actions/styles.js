@@ -4,7 +4,6 @@ import { updateCoords } from 'actions/design-helper/mouseTrap'
 import { toggleActivitySavingDesign } from 'actions/activityIndicators'
 import { getCurrentAppByState } from 'selectors/apps'
 import { getFromApi, postToApi, postFileToApi } from 'api'
-import dictionary from 'modules/messages'
 
 export const setCurrentScreen = screen => {
 	return {
@@ -50,7 +49,7 @@ const fetchMessagesFromAws = url => {
 				.then(response => response.json())
 				.then(json => {
 					const currentApp = getCurrentAppByState(getState())
-					const defaultMessages = JSON.stringify(dictionary[currentApp.applicationType])
+					const defaultMessages = JSON.stringify(require(`modules/${currentApp.applicationType}/messages`).default)
 					const messages = {...defaultMessages, ...json}
 					dispatch(receiveMessages(messages))
 				})
@@ -161,7 +160,7 @@ export const saveStyles = () => {
 		const cssString = css.stringify(getState().styles.ruleset)
 		const checksum = getState().admin.currentApp
 		const currentApp = getCurrentAppByState(getState())
-		const defaultMessages = JSON.stringify(dictionary[currentApp.applicationType])
+		const defaultMessages = JSON.stringify(require(`modules/${currentApp.applicationType}/messages`).default)
 		const editedMessages = getState().styles.messages
 		const messages = JSON.stringify({...defaultMessages, ...editedMessages})
 		return postToApi(`applications/${checksum}/save_app_from_editor.json`, 

@@ -22,7 +22,7 @@ topFansRouter.use(function(req, res, next) {
 })
 topFansRouter.use('/static', express.static(__dirname + '/dist'))
 topFansRouter.post(`/${topFansCanvasId}`, canvasParser, function(req, res) {
-	fetch(`${apiUrl}/test_auth.json`, {
+	fetch(`${apiUrl}/auth.json`, {
 		method: 'POST',
 		headers: {
 			'Accept': 'application/json',

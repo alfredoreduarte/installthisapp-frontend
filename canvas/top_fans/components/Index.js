@@ -1,45 +1,43 @@
-import React, { Component } from 'react'
+import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
+import Header from 'canvas/top_fans/components/Header'
 import ListItem from 'canvas/top_fans/components/ListItem'
-import { getEntries } from 'canvas/top_fans/selectors/entries'
 
-const handleScore = score => score ? score : 0
-
-const Index = ({ entries, likeMultiplier, commentMultiplier }) => (
+const Index = ({ title, subtitle, entries, maxScore, likesLabel, commentsLabel, pointsLabel }) => (
 	<div className="col-sm-12">
-		<h1>Top Fans</h1>
-		<ListGroup>
-			{entries.map( entry => 
+		<div className="row">
+			<Header title={title} subtitle={subtitle} />
+		</div>
+		<div className="row">
+			{entries.map( (entry, index) => 
 				<ListItem 
+					likesLabel={likesLabel}
+					commentsLabel={commentsLabel}
+					pointsLabel={pointsLabel}
+					first={index == 0}
+					maxScore={maxScore}
 					key={entry.userIdentifier} 
-					id={entry.userIdentifier} 
+					identifier={entry.userIdentifier} 
 					name={entry.userName} 
-					score={handleScore(entry.likes) * likeMultiplier + handleScore(entry.comments) * commentMultiplier} 
+					score={entry.score} 
 					likes={entry.likes}
 					comments={entry.comments}
 					 />
 			)}
-		</ListGroup>
+		</div>
 	</div>
 )
 
-const mapStateToProps = state => {
-	const entries = getEntries(state)
-	console.log('entries')
-	console.log(entries)
-	return {
-		entries,
-		likeMultiplier: state.settings.pointsPerLike,
-		commentMultiplier: state.settings.pointsPerComment,
-	}
+Index.propTypes = {
+	title: PropTypes.string.isRequired,
+	subtitle: PropTypes.string.isRequired,
+	likesLabel: PropTypes.string.isRequired,
+	commentsLabel: PropTypes.string.isRequired,
+	pointsLabel: PropTypes.string.isRequired,
+	entries: PropTypes.array.isRequired,
+	maxScore: PropTypes.number.isRequired,
 }
 
-const mapDispatchToProps = dispatch => {
-	return {
-		
-	}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Index)
+export default Index

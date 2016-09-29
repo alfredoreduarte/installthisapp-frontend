@@ -5,8 +5,6 @@ import { receiveEntities } from 'actions/entities'
 import { getCurrentAppByState } from 'selectors/apps'
 import { toggleActivityUpdatingAppSettings } from 'actions/activityIndicators'
 import { getFromApi, postToApi, deleteFromApi, patchToApi } from 'api'
-import dictionary from 'modules/messages'
-import { triviaStyles, photoContestStyles } from 'modules/styles'
 
 export const setCurrentAppChecksum = checksum => {
 	return dispatch => {
@@ -87,19 +85,8 @@ export const postNewApp = () => {
 	return (dispatch, getState) => {
 		const body = getState().newApp
 		const params = digestDataBeforePostingNewApp(getState().newApp)
-		const defaultMessages = JSON.stringify(dictionary[params.application.application_type])
-		let defaultStyles
-		switch(params.application.application_type){
-			case 'trivia':
-				defaultStyles = triviaStyles
-				break
-			case 'photo_contest':
-				defaultStyles = photoContestStyles
-				break
-			default:
-				defaultStyles = photoContestStyles
-				break
-		}
+		const defaultMessages = JSON.stringify(require(`modules/${params.application.application_type}/messages`).default)
+		const defaultStyles = require(`!css!sass!../assets/canvas/${params.application.application_type}.sass`).toString()
 		postToApi(`applications.json`, {
 			...params, 
 			...{

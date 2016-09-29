@@ -4,7 +4,7 @@ import { browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import Root from 'canvas/top_fans/containers/Root'
 import configureStore from 'canvas/top_fans/store/configureStore'
-require('assets/canvas/base.sass')
+// require('assets/canvas/top_fans.sass')
 
 const store = configureStore({
 	applicationData: {

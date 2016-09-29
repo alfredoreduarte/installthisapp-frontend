@@ -3,11 +3,12 @@ const admin = (state = {
 }, action) => {
 	switch (action.type) {
 		case 'SET_CURRENT_APP':
-			return Object.assign({}, state, {
+			return { 
+				...state,
 				currentApp: action.checksum
-			})
+			}
 		case 'RECEIVE_ADMIN':
-			return Object.assign({}, state, action.payload)
+			return { ...state, ...action.payload }
 		default:
 			return state
 	}

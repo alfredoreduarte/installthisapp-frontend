@@ -32,6 +32,7 @@ const Tool = ({ property, value, handleChange }) => (
 			case 'background-image':
 				return <ImageUploader property={property} onChange={val => handleChange(property, val)} value={value} />
 				break
+			case 'border-width':
 			case 'font-size':
 				return <Slider property={property} onChange={val => handleChange(property, val)} value={value} />
 				break
@@ -45,12 +46,20 @@ const Tool = ({ property, value, handleChange }) => (
 			case 'padding':
 			case 'position':
 			case 'border':
+			case 'border-style':
+			case 'box-shadow':
 			case 'margin-bottom':
 			case 'line-height':
 			case 'letter-spacing':
 			case 'direction':
 			case 'background-position':
 			case 'background-attachment':
+			case '-webkit-animation-duration':
+			case 'animation-duration':
+			case '-webkit-animation-fill-mode':
+			case 'animation-fill-mode':
+			case '-webkit-animation-name':
+			case 'animation-name':
 				return null
 				break
 			case 'texts':

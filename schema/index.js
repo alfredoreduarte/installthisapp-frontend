@@ -14,4 +14,5 @@ app.define({
 export const entities = {
 	apps: arrayOf(app),
 	pages: arrayOf(page),
+	users: arrayOf(user),
 }

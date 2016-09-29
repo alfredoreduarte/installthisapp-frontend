@@ -34,9 +34,6 @@ const logout = (nextState, replace, next) => {
 const getPhotos = (nextState, replace, next, dispatch) => dispatch(loginCallback()).then(() => next())
 
 class Root extends Component {
-	componentDidMount() {
-		const { dispatch } = this.props
-	}
 	render() {
 		const { store, history, dispatch } = this.props
 		return (

@@ -30,11 +30,13 @@ import Tool from 'components/design-editor/Tool'
 // Provisorio
 import PreviewsTrivia from 'canvas/trivia/containers/Previews'
 import PreviewsPhotoContest from 'canvas/photo_contest/containers/Previews'
+import PreviewsTopFans from 'canvas/top_fans/containers/Previews'
 // Provisorio
 
 const screens = {
 	trivia: PreviewsTrivia.screens,
 	photo_contest: PreviewsPhotoContest.screens,
+	top_fans: PreviewsTopFans.screens,
 }
 
 const Design = ({
@@ -88,7 +90,7 @@ const Design = ({
 			/>
 			<ToolSet>
 				{currentMessageKey && componentsOrBody == 'content' ? <div>
-					<label>Editor de texto</label>
+					<label>Text content</label>
 					<input 
 						type="text" 
 						className="form-control"
