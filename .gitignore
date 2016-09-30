@@ -38,6 +38,7 @@ Thumbs.db
 
 # Project
 ssl
+ssl-dev
 node_modules
 dist
 .sublime-project

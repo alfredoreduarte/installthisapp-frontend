@@ -1,16 +1,18 @@
 var path = require('path')
 var express = require('express')
-var cors = require('express-cors')
+var forceSSL = require('express-force-ssl')
+// var cors = require('express-cors')
 var facebookAppId = process.env.FB_APP_ID
 var apiUrl = process.env.API_URL
 
 const app = express()
 app.set('view engine', 'ejs')
-app.use(cors({
-	allowedOrigins: [
-		'*.installthisapp.local:*',
-	]
-}))
+// app.use(cors({
+// 	allowedOrigins: [
+// 		'*.installthisapp.local:*',
+// 	]
+// }))
+app.use(forceSSL)
 
 const isDeveloping = process.env.NODE_ENV !== 'production'
 
@@ -76,8 +78,8 @@ if (process.env.NODE_ENV == 'development') {
 		http = require('http'),
 		https = require('https')
 	var options = {
-		key: fs.readFileSync('./ssl/server.key'),
-		cert: fs.readFileSync('./ssl/server.crt'),
+		key: fs.readFileSync('./ssl-dev/server.key'),
+		cert: fs.readFileSync('./ssl-dev/server.crt'),
 	}
 }
 

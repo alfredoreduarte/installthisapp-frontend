@@ -3,7 +3,6 @@ import React, { PropTypes } from 'react'
 const FbPhoto = ({ className, identifier, width, height, style }) => (
 	<img 
 		className={className} 
-		// src={`https://graph.facebook.com/${identifier}/picture?type=large`}
 		src={`https://graph.facebook.com/${identifier}/picture?width=100&height=100`}
 		style={{...style, width: width, height: height}}
 	/>
