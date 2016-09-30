@@ -1,5 +1,6 @@
 var path = require('path')
 var express = require('express')
+var helmet = require('helmet')
 var cors = require('express-cors')
 var facebookAppId = process.env.FB_APP_ID
 var apiUrl = process.env.API_URL
@@ -13,15 +14,18 @@ app.use(cors({
 }))
 
 // Forece SSl
-app.use(function(req, res, next) {
+// app.use(function(req, res, next) {
 // 	if(!req.secure) {
-	if(!req.headers['x-forwarded-proto'] !== 'https') {
-		var secureUrl = "https://" + req.headers['host'] + req.url; 
-		res.writeHead(301, { "Location":  secureUrl });
-		res.end();
-	}
-	next();
-});
+	// if(!req.headers['x-forwarded-proto'] !== 'https') {
+		// var secureUrl = "https://" + req.headers['host'] + req.url; 
+		// res.writeHead(301, { "Location":  secureUrl });
+		// res.end();
+	// }
+	// next();
+// });
+
+var ninetyDaysInMilliseconds = 7776000000;
+app.use(helmet.hsts({ maxAge: ninetyDaysInMilliseconds }))
 
 const isDeveloping = process.env.NODE_ENV !== 'production'
 
