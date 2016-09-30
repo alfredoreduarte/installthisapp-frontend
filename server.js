@@ -14,7 +14,8 @@ app.use(cors({
 
 // Forece SSl
 app.use(function(req, res, next) {
-	if(!req.secure) {
+// 	if(!req.secure) {
+	if(!req.headers['x-forwarded-proto'] !== 'https') {
 		var secureUrl = "https://" + req.headers['host'] + req.url; 
 		res.writeHead(301, { "Location":  secureUrl });
 		res.end();
@@ -86,8 +87,8 @@ if (process.env.NODE_ENV == 'development') {
 		http = require('http'),
 		https = require('https')
 	var options = {
-		key: fs.readFileSync('./ssl/server.key'),
-		cert: fs.readFileSync('./ssl/server.crt'),
+		key: fs.readFileSync('./ssl-dev/server.key'),
+		cert: fs.readFileSync('./ssl-dev/server.crt'),
 	}
 }
 
