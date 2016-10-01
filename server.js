@@ -1,30 +1,14 @@
 var path = require('path')
 var express = require('express')
 var helmet = require('helmet')
-var cors = require('express-cors')
-var facebookAppId = process.env.FB_APP_ID
-var apiUrl = process.env.API_URL
 
 const app = express()
 app.set('view engine', 'ejs')
-app.use(cors({
-	allowedOrigins: [
-		'*.installthisapp.local:*',
-	]
-}))
 
-// Forece SSl
-// app.use(function(req, res, next) {
-// 	if(!req.secure) {
-	// if(!req.headers['x-forwarded-proto'] !== 'https') {
-		// var secureUrl = "https://" + req.headers['host'] + req.url; 
-		// res.writeHead(301, { "Location":  secureUrl });
-		// res.end();
-	// }
-	// next();
-// });
-
-var ninetyDaysInMilliseconds = 7776000000;
+// 
+// Force SSL
+// 
+const ninetyDaysInMilliseconds = 7776000000;
 app.use(helmet.hsts({ maxAge: ninetyDaysInMilliseconds }))
 
 const isDeveloping = process.env.NODE_ENV !== 'production'
@@ -74,21 +58,20 @@ app.use(function(req, res, next) {
 })
 app.get('/', function(req, res) {
 	res.render('landing', {
-		apiUrl,
-		facebookAppId,
+		apiUrl: process.env.API_URL,
+		facebookAppId: process.env.FB_APP_ID,
 	})
 })
 app.get('/d*', function(req, res){
 	res.render('dashboard', {
-		apiUrl,
-		facebookAppId,
+		apiUrl: process.env.API_URL,
+		facebookAppId: process.env.FB_APP_ID,
 	})
 })
 
 var options = {}
 if (process.env.NODE_ENV == 'development') {
 	var fs = require('fs'),
-		http = require('http'),
 		https = require('https')
 	var options = {
 		key: fs.readFileSync('./ssl-dev/server.key'),
