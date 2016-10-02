@@ -5,11 +5,20 @@ var helmet = require('helmet')
 const app = express()
 app.set('view engine', 'ejs')
 
+var express_enforces_ssl = require('express-enforces-ssl');
+app.enable('trust proxy');
+app.use(express_enforces_ssl());
+
 // 
 // Force SSL
 // 
-const ninetyDaysInMilliseconds = 7776000000;
-app.use(helmet.hsts({ maxAge: ninetyDaysInMilliseconds }))
+const ninetyDaysInMilliseconds = 7776000000
+app.use(helmet.hsts({
+	maxAge: ninetyDaysInMilliseconds,
+	includeSubdomains: true,
+	preload: true,
+	force: true,
+}))
 
 const isDeveloping = process.env.NODE_ENV !== 'production'
 
@@ -69,18 +78,15 @@ app.get('/d*', function(req, res){
 	})
 })
 
-var options = {}
+// Running the server
 if (process.env.NODE_ENV == 'development') {
+	var options = {}
 	var fs = require('fs'),
 		https = require('https')
 	var options = {
 		key: fs.readFileSync('./ssl-dev/server.key'),
 		cert: fs.readFileSync('./ssl-dev/server.crt'),
 	}
-}
-
-// Running the server
-if (process.env.NODE_ENV == 'development') {
 	var server = https.createServer(options, app).listen(process.env.PORT, function(err){
 		if (err) {
 			console.log(err)

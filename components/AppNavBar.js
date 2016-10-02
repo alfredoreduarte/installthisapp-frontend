@@ -15,7 +15,7 @@ const AppNavBar = ({ name, logout }) => (
 		</Navbar.Header>
 		<div className="collapse navbar-collapse text-right">
 			<ul className="nav navbar-nav navbar-right">
-				<li className="">
+				<li className="hide">
 					<button className="btn btn-success btn-sm btn-outline navbar-btn">
 						<Link to='/d/apps/create' className="link-no-underline text-success">
 							New App
