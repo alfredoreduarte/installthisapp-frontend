@@ -53,6 +53,11 @@ export const uninstall = checksum => {
 		postToApi(`applications/${checksum}/uninstall.json`, null, res => dispatch(updateApp(checksum, res)))
 }
 
+export const getStatsSummary = checksum => {
+	return dispatch => 
+		postToApi(`applications/${checksum}/stats_summary.json`, null, res => dispatch(updateApp(checksum, res)))
+}
+
 export const update = () => {
 	return (dispatch, getState) => {
 		dispatch(toggleActivityUpdatingAppSettings())

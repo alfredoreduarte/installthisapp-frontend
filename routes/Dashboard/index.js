@@ -1,9 +1,9 @@
-import { setCurrentAppChecksum } from 'actions/apps'
+import { setCurrentAppChecksum, getStatsSummary } from 'actions/apps'
 import { 
 	turnOnGlobalIndicator, 
 	turnOffGlobalIndicator, 
 	turnOffActivityCreatingApp, 
-	turnOffActivityLoadingApp 
+	turnOffActivityLoadingApp,
 } from 'actions/activityIndicators'
 
 export default (store, dispatch) => ({
@@ -23,7 +23,8 @@ export default (store, dispatch) => ({
 		dispatch(setCurrentAppChecksum(nextState.params.checksum)).then(() => {
 			// dispatch(turnOffActivityCreatingApp())
 			// dispatch(turnOffActivityLoadingApp())
-			next()
+			dispatch(getStatsSummary(nextState.params.checksum)).then(() => next())
+			// next()
 		})
 	},
 	indexRoute: {
