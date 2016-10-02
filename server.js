@@ -12,7 +12,8 @@ app.use(express_enforces_ssl());
 // 
 // Force SSL
 // 
-const ninetyDaysInMilliseconds = 7776000000
+// const ninetyDaysInMilliseconds = 7776000000
+const ninetyDaysInMilliseconds = 10886400
 app.use(helmet.hsts({
 	maxAge: ninetyDaysInMilliseconds,
 	includeSubdomains: true,

@@ -31,9 +31,12 @@
 	<!-- <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script> -->
 	<script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 	<script>
-		window.Intercom("boot", {
-			app_id: "<%= process.env.INTERCOM_APP_ID %>"
-		})
+		// window.Intercom("boot", {
+		// 	app_id: "<%= process.env.INTERCOM_APP_ID %>"
+		// })
+		// window.intercomSettings = {
+		// 	app_id: "<%= process.env.INTERCOM_APP_ID %>"
+		// }
 		var saveCookie = function(name, value){
 			Cookies.set(name, value)
 		}
