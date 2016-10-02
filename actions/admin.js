@@ -24,6 +24,13 @@ export const fetchAdmin = () => {
 			const adminUser = { ...response.adminUser }
 			delete adminUser.applications
 			delete adminUser.fbPages
+			// Intercom
+			window.Intercom("update", {
+				name: adminUser.name,
+				email: adminUser.email,
+				created_at: adminUser.createdAt,
+			})
+			// Intercom
 			return dispatch(receiveAdmin(adminUser))
 		})
 	}

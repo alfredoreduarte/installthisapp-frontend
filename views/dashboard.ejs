@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/png" href="/images/favicon.png" />
 	<title>InstalThisApp</title>
+	<%- include('_intercom') %>
 </head>
 <body>
 	<div id="root"></div>
@@ -16,6 +17,9 @@
 	<script src="/static/common.js"></script>
 	<script src="/static/dashboard.bundle.js"></script>
 	<script>
+		window.Intercom("boot", {
+			app_id: "<%= process.env.INTERCOM_APP_ID %>"
+		})
 		window.fbAsyncInit = function() {
 			FB.init({
 				appId      : window.facebookAppId,

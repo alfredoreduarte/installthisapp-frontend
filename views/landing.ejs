@@ -7,7 +7,8 @@
 	<link rel="stylesheet" media="all" href="//fonts.googleapis.com/css?family=Lato:400,300italic,300,400italic,700,700italic,100,100italic" />
 	<link rel="stylesheet" type="text/css" href="/landing/styles/styles.css" />
 	<link rel="icon" type="image/png" href="/images/favicon.png" />
-	<title>InstallThisApp V3</title>
+	<title>InstallThisApp</title>
+	<%- include('_intercom') %>
 </head>
 <body>
 	<span id="our-clients" class="hide"></span>
@@ -30,6 +31,9 @@
 	<!-- <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script> -->
 	<script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 	<script>
+		window.Intercom("boot", {
+			app_id: "<%= process.env.INTERCOM_APP_ID %>"
+		})
 		var saveCookie = function(name, value){
 			Cookies.set(name, value)
 		}
