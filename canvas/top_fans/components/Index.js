@@ -18,9 +18,9 @@ const Index = ({ title, subtitle, entries, maxScore, likesLabel, commentsLabel, 
 					pointsLabel={pointsLabel}
 					first={index == 0}
 					maxScore={maxScore}
-					key={entry.userIdentifier} 
-					identifier={entry.userIdentifier} 
-					name={entry.userName} 
+					key={entry.senderId} 
+					identifier={entry.senderId} 
+					name={entry.senderName} 
 					score={entry.score} 
 					likes={entry.likes}
 					comments={entry.comments}

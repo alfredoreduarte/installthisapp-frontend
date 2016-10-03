@@ -7,7 +7,7 @@ import Summary from 'components/Summary'
 import UserGrid from 'components/UserGrid'
 
 const AppDashboard = ({ users, summary }) => (
-	<div className="">
+	<div>
 		<Summary data={summary} />
 		<UserGrid users={users} />
 	</div>

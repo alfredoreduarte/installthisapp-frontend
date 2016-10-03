@@ -96,11 +96,11 @@ const Scoreboard = ({
 			</thead>
 			<tbody>
 				{entries.map(entry => 
-				<tr key={entry.userIdentifier}>
+				<tr key={entry.senderId}>
 					<td>
 						<User 
-							name={entry.userName} 
-							identifier={entry.userIdentifier} 
+							name={entry.senderName} 
+							identifier={entry.senderId} 
 							small
 							 />
 					</td>

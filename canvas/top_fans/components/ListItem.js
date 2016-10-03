@@ -19,17 +19,6 @@ const ListItem = ({
 		className="ita-cali-score-bar" style={{
 		...styles.scoreBar, 
 		width: width,
-		// width: first ? '90%' : `80%`
-		// width: windowWidth > 810 && first ? '90%' : `${score * 100 / maxScore}%`
-		// width: first ? '90%' : `${score * 100 / maxScore}%`
-		// width: () => {
-		// 	if ( windowWidth > 810) {
-		// 		first ? '90%' : `${score * 100 / maxScore}%`
-		// 	}
-		// 	else {
-		// 		return '70%'
-		// 	}
-		// }
 	}}>
 		<div className="ita-cali-score-summary" style={styles.scoreSummary}>
 			<div>{likes} {likesLabel}</div>
@@ -103,13 +92,6 @@ ListItem.propTypes = {
 const mapStateToProps = (state, ownProps) => {
 	const { first, score, maxScore } = ownProps
 	let width
-	// if (window.screen.width > 810) {
-	console.log('document.body.clientWidth')
-	// console.log(document.body.clientWidth)
-	// console.log(window.screen.width)
-	// console.log(document.getElementById('idRequiredForListItemWidthQuery'))
-	// console.log(this.refs.idRequiredForListItemWidthQuery)
-	// console.log(document.getElementById('idRequiredForListItemWidthQuery').offsetWidth)
 	if (document.body.clientWidth > 810) {
 		width = first ? '80%' : `${score * 100 / maxScore}%`
 	}
