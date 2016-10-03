@@ -34,6 +34,7 @@ const styles = {
 		display: 'flex',
 		flexDirection: 'row',
 		justifyContent: 'center',
+		flexWrap: 'wrap',
 	}
 }
 
