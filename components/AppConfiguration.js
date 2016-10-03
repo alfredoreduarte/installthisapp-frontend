@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import _ from 'lodash'
 import { push } from 'react-router-redux'
 import Select from 'react-select'
 import { Field, reduxForm } from 'redux-form'
@@ -21,7 +22,7 @@ const FacebookPageField = () => (
 	/>
 )
 
-let AppConfiguration = ({ handleSubmit, fetching }) => (
+let AppConfiguration = ({ handleSubmit, fetching, specific }) => (
 	<form onSubmit={handleSubmit}>
 		<div className="row">
 			<div className="col-md-4">
@@ -65,9 +66,48 @@ let AppConfiguration = ({ handleSubmit, fetching }) => (
 				</div>
 			</div>
 		</div>
-		<div className="row">
+		<div className="row hide">
 			<div className="col-md-6">
-				[App-specific settings will show up here]
+				<div className="panel panel-default">
+					<div className="panel-body">
+						<div className="form-horizontal">
+							{specific.map(setting => 
+									<div className="form-group">
+									<div className="col-md-4">
+										<label className="control-label">{setting.key}</label>
+										<span className="help-block">Will show un on the Page Tab</span>
+									</div>
+									<div className="col-md-8">
+										{
+											typeof setting.value == 'string' ? 
+												<input
+													type="text" 
+													value={setting.value}
+													className="form-control" />
+											: null
+										}
+										{
+											typeof setting.value == 'number' ? 
+												<input
+													type="number" 
+													value={setting.value}
+													className="form-control" />
+											: null
+										}
+										{
+											typeof setting.value == 'boolean' ? 
+												<input
+													type="checkbox" 
+													defaultChecked={setting.value}
+													className="form-control" />
+											: null
+										}
+									</div>
+								</div>
+							)}
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</form>
@@ -78,9 +118,31 @@ AppConfiguration = reduxForm({
 })(AppConfiguration)
 
 const mapStateToProps = (state, ownProps) => {
+	const obj = ownProps.currentApp.setting.conf.preferences
+	// const obj = {
+	// 	"limit_switch": true,
+	// 	"limit": 5,
+	// 	"order": 0,
+	// 	"order_values": [
+	// 		"rand",
+	// 		"asc",
+	// 		"desc",
+	// 	],
+	// 	"time_limit_switch": true,
+	// 	"time_limit": 120,
+	// 	"show_summary": false
+	// }
+	let elarr = []
+	_.mapKeys(obj, (value, key) => {
+		elarr.push({
+			key,
+			value,
+		})
+	})
 	return {
 		fetching: state.activityIndicators.updatingApp,
 		initialValues: ownProps.currentApp,
+		specific: elarr,
 	}
 }
 
