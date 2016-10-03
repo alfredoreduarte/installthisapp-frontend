@@ -32,7 +32,7 @@ const mapStateToProps = state => {
 		entries,
 		likeMultiplier,
 		commentMultiplier,
-		maxScore: entries[0].score,
+		maxScore: entries.length > 0 ? entries[0].score : 0,
 	}
 }
 

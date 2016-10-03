@@ -8,7 +8,7 @@ import { sortAppsBy } from 'actions/appsSorting'
 import SearchForm from 'components/SearchForm'
 
 const DashboardToolBar = ({ sortBy, handleSort }) => (
-	<div className="col-md-12 ita-dashboard-tools">
+	<div className="col-md-12 ita-dashboard-tools hide">
 		<div className="row">
 			<div className="col-md-4">
 				<SearchForm />

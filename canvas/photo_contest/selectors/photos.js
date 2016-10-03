@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import { createSelector } from 'reselect'
 
+export const loggedUser = state => state.loggedUser
 export const allPhotos = state => _.values(state.entities.photos)
 export const currentSorting = state => state.sort
 export const searchQuery = state => state.search
@@ -30,4 +31,13 @@ export const photosBySearchQuery = createSelector(
 		const inc = _.includes(p.user.name.toLowerCase(), query.toLowerCase())
 		return inc
 	})
+)
+
+export const photosByUploaderId = createSelector(
+	allPhotos,
+	loggedUser,
+	(photos, user) => {
+		const elems = _.filter(photos, photo => photo.userId == user.id)
+		return elems
+	}
 )

@@ -30,6 +30,9 @@ export const receiveGameSettings = settings => ({
 export const loginCallback = () => {
 	return dispatch => {
 		return dispatch(fetchEntities()).then(() => dispatch(fetchMessages()))
+		// return dispatch(fetchEntities()).then(() => dispatch(fetchMessages())).then(() => {
+		// 	return dispatch(push(`/${window.canvasId}/${window.checksum}`))
+		// })
 	}
 }
 
@@ -39,9 +42,11 @@ export const fetchEntities = () => {
 		return getFromApi(`${checksum}/viewmodel.json`).then( json => {
 			const payload = normalize(json.payload, schema.payload)
 			const settings = json.settings
-			dispatch(receiveEntities(payload.entities))
 			dispatch(receiveGameSettings(settings))
+			dispatch(receiveEntities(payload.entities))
+			// return setTimeout(() => Promise.resolve(), 2000)
 			return Promise.resolve()
+			// return 
 		})
 	}
 }

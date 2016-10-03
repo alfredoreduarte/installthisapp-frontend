@@ -54,7 +54,7 @@ const singlePhoto = (id, url, name) => ({
 			id: id,
 		}
 	],
-	caption: 'Caption',
+	caption: 'Ligula Justo Vehicula Cras',
 	voted: true,
 	thumbnailUrl: url,
 	assetUrl: url,
@@ -70,10 +70,16 @@ const Previews = ({ screen, messages }) => {
 			return <Index
 				title={messages.title}
 				subtitle={messages.subtitle}
+				canUpload={true}
+				loggedUser={{id: 1}}
 				uploadButton={messages.uploadButton}
 				mostVoted={messages.mostVoted}
 				mostRecent={messages.mostRecent}
 				photos={[0,1,2,3,4,5,6].map(el => sequencer.getOne())}
+				votes={[{
+					userId: 1,
+					photoId: 1,
+				}]}
 				handleVote={() => console.log('vote')}
 				uploadUrl={' '}
 				singlePhotoUrl={''}
@@ -86,9 +92,10 @@ const Previews = ({ screen, messages }) => {
 			return <Upload
 				title={messages.title}
 				subtitle={messages.subtitle}
-				uploadButton={messages.uploadButton}
-				mostVoted={messages.mostVoted}
-				mostRecent={messages.mostRecent}
+				submitButton={messages.submitButton}
+				photoFormLabel={messages.photoFormLabel}
+				captionFormLabel={messages.captionFormLabel}
+				back={messages.back}
 				uploadPhoto={() => console.log('vote')}
 				busy={false}
 				backUrl={' '}

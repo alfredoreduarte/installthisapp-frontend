@@ -5,8 +5,9 @@ import { Link, IndexLink } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
 import { push } from 'react-router-redux'
 import { logOut } from 'actions/admin'
+import FbPhoto from 'components/FbPhoto'
 
-const AppNavBar = ({ name, logout }) => (
+const AppNavBar = ({ name, identifier, logout }) => (
 	<Navbar fluid={true}>
 		<Navbar.Header>
 			<Navbar.Brand>
@@ -22,9 +23,11 @@ const AppNavBar = ({ name, logout }) => (
 						</Link>
 					</button>
 				</li>
-				<NavDropdown eventKey={3} title={name} id="account-dropdown">
+				<NavDropdown eventKey={3} title={<FbPhoto identifier={parseInt(identifier)} width={32} height={32} className="img-circle" />} id="account-dropdown">
 					<LinkContainer to={{ pathname: '/d/account' }}>
-						<MenuItem eventKey={3.3}>My Account</MenuItem>
+						<MenuItem eventKey={3.3}>
+							My Account
+						</MenuItem>
 					</LinkContainer>
 					<MenuItem eventKey={3.2} href="javascript:void(0)" onClick={logout}>Logout</MenuItem>
 				</NavDropdown>
@@ -35,7 +38,8 @@ const AppNavBar = ({ name, logout }) => (
 
 const mapStateToProps = (state) => {
 	return { 
-		name: state.admin.name
+		name: state.admin.name,
+		identifier: state.admin.identifier,
 	}
 }
 

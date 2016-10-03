@@ -4,11 +4,3 @@ export const receiveEntities = entities => ({
 		entities
 	}
 })
-
-// export const fetchEntities = () => {
-// 	return dispatch =>
-// 		getFromApi('admin_users/show.json').then( response => {
-// 			const normalized = normalize(camelizedJson, schema.entities)
-// 			dispatch(receiveEntities(normalized.entities))
-// 		})
-// }

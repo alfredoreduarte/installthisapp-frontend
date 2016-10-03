@@ -1,5 +1,6 @@
 import { push } from 'react-router-redux'
 import { loginCallback } from 'canvas/photo_contest/actions/'
+import { photosByUploaderId } from 'canvas/photo_contest/selectors/photos'
 import { writeToApiWithoutAuth } from 'canvas/api'
 import Cookies from 'js-cookie'
 
@@ -22,7 +23,8 @@ export const digestFacebookResponse = (response, redirectUri) => {
 			Cookies.set('loggedUserId', response.id, { expires: 7, path: `/${canvasId}/${checksum}` })
 			dispatch(loginCallback()).then(() => {
 				dispatch(logUserIn(response.id))
-				if (redirectUri) {
+				const canUpload = photosByUploaderId(getState()).length == 0
+				if (redirectUri && canUpload) {
 					dispatch(push(redirectUri))
 				}
 				else {

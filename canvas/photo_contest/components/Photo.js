@@ -8,22 +8,21 @@ const Photo = ({ id, name, votes, voted, photoUrl, handleVote, singlePhotoUrl = 
 			<img src={photoUrl} className="img-responsive" />
 		</Link>
 		<div style={styles.caption}>
-			<div>
-				<span className="ita-cali-vote-count">{votes}</span>
-				{' '}
-				<span className="ita-cali-vote-label">votes</span>
-			</div>
 			<div style={styles.metadata}>
-				<div className="ita-cali-photo-name">{name}</div>
-				<div className="">
-					<a
-						style={styles.voteButton}
-						onClick={() => handleVote(id)}>
-						<span 
-							className={`glyphicon glyphicon-heart ita-cali-heart${voted ? '--active' : null}`}>
-						</span>
-					</a>
+				<div>
+					<span className="ita-cali-vote-count">{votes}</span>
+					{' '}
+					<span className="ita-cali-vote-label">votes</span><br/>
+					<div className="ita-cali-photo-name">{name}</div>
 				</div>
+				<a
+					style={{ ...styles.voteButton, cursor: voted ? 'not-allowed' : 'pointer' }}
+					disabled={voted}
+					onClick={() => !voted ? handleVote(id) : null}>
+					<span 
+						className={`glyphicon glyphicon-star${voted ? '' : '-empty'} ita-cali-vote-button${voted ? '--active' : ''}`}>
+					</span>
+				</a>
 			</div>
 		</div>
 	</div>
@@ -32,17 +31,18 @@ const Photo = ({ id, name, votes, voted, photoUrl, handleVote, singlePhotoUrl = 
 const styles = {
 	metadata: {
 		display: 'flex',
-		justifyContent: 'space-between'
+		alignItems: 'flex-end',
+		justifyContent: 'space-between',
 	},
 	photo: {
 		marginBottom: '20px',
 		position: 'relative',
 	},
 	voteButton: {
-		cursor: 'pointer',
+		fontSize: '20px',
 	},
 	caption: {
-		padding: '2% 5%',
+		padding: '5% 5%',
 		position: 'absolute',
 		bottom: 0,
 		left: 0,

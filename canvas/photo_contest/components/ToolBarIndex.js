@@ -4,8 +4,6 @@ import { Link } from 'react-router'
 const ToolBar = ({ 
 	canUpload,
 	uploadUrl,
-	backUrl,
-	back,
 	uploadButton, 
 	mostVoted,
 	mostRecent,
@@ -16,9 +14,37 @@ const ToolBar = ({
 }) => (
 	<div style={styles.toolbar}>
 		<div style={styles.toolbarCell} className="hidden-xs">
-			<Link to={backUrl} style={styles.button} className="ita-cali-button--secondary" data-editable-message-key="back">{back}</Link>
+			<form className="input-group ita-cali-search-form" style={styles.searchForm}>
+				<span className="input-group-addon" style={styles.searchFormAddon}>
+					<i className="glyphicon glyphicon-search"></i>
+				</span>
+				<input 
+					onChange={e => search(e.target.value)}
+					type="text" 
+					className="form-control" 
+					style={styles.searchFormInput}
+					placeholder="Search"
+					value={searchQuery}
+					 />
+			</form>
 		</div>
-		<div style={ {...styles.toolbarCell, justifyContent: 'flex-end'} }>
+		<div style={{...styles.toolbarCell, ...{flex: 2, justifyContent: 'center'}}}>
+			<span 
+				data-editable-message-key="mostVoted"
+				style={styles.tabItem} 
+				onClick={() => sortPhotos('mostVoted')}
+				className={`ita-cali-sorter ${sort == 'mostVoted' ? 'ita-cali-sorter--active' : null}`}>
+					{mostVoted}
+				</span>
+			<span 
+				data-editable-message-key="mostRecent"
+				style={styles.tabItem} 
+				onClick={() => sortPhotos('mostRecent')}
+				className={`ita-cali-sorter ${sort == 'mostRecent' ? 'ita-cali-sorter--active' : null}`}>
+					{mostRecent}
+				</span>
+		</div>
+		<div style={{...styles.toolbarCell, ...{justifyContent: 'flex-end'}}}>
 			{canUpload ? 
 				<Link 
 					to={uploadUrl} 
@@ -71,7 +97,6 @@ const styles = {
 
 ToolBar.propTypes = {
 	uploadUrl: PropTypes.string,
-	backUrl: PropTypes.string,
 	uploadButton: PropTypes.string,
 	mostVoted: PropTypes.string,
 	mostRecent: PropTypes.string,

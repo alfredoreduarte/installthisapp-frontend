@@ -21,7 +21,7 @@ const App = ({
 	updatedOn,
 	handleDeleteRequest 
 }) => (
-	<div className={`col-md-${gridSize}`}>
+	<div style={styles.app}>
 		<div 
 			className={`panel panel-default ita-panel-screen ${otherAppsLoading ? 'greyed-out' : ''}`}>
 			<div className="panel-body">
@@ -73,6 +73,13 @@ const App = ({
 		</div>
 	</div>
 )
+
+export const styles = {
+	app: {
+		width: '22%',
+		margin: '0px 1.5% 5%'
+	}
+}
 
 const mapStateToProps = (state, props) => {
 	const appLoading = state.activityIndicators.appChecksumDashboardLoading

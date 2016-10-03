@@ -51,10 +51,10 @@ const styles = (state = initialState, action) => {
 			})
 		case 'SET_ACTIVE_SELECTOR':
 			const activeSelector = action.payload ? action.payload : state.hoveredSelector
-			const componentsOrBody = action.payload ? 'body' : 'components'
+			// const componentsOrBody = action.payload ? 'body' : 'components'
 			return Object.assign({}, state, {
 				activeSelector,
-				componentsOrBody,
+				// componentsOrBody,
 			})
 		case 'SET_EDITOR_PLATFORM':
 			return Object.assign({}, state, {

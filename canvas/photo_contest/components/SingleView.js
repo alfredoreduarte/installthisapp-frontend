@@ -4,6 +4,8 @@ import Header from 'canvas/photo_contest/components/Header'
 import ToolBar from 'canvas/photo_contest/components/ToolBar'
 
 const SingleView = ({ 
+	canUpload,
+	// 
 	title, 
 	subtitle, 
 	uploadButton, 
@@ -18,6 +20,8 @@ const SingleView = ({
 	<div className="container">
 		<Header title={title} subtitle={subtitle} />
 		<ToolBar 
+			canUpload={canUpload} 
+			// 
 			backUrl={backUrl} 
 			uploadUrl={uploadUrl}
 			uploadButton={uploadButton}
@@ -38,9 +42,10 @@ const SingleView = ({
 						</div>
 						<a
 							style={styles.voteButton}
-							onClick={() => handleVote(photo.id)}>
+							disabled={voted}
+							onClick={() => !voted ? handleVote(photo.id) : null}>
 							<span 
-								className={`glyphicon glyphicon-heart ita-cali-heart-full${voted ? '--active' : null}`}>
+								className={`glyphicon glyphicon-star${voted ? '' : '-empty'} ita-cali-vote-button-full${voted ? '--active' : ''}`}>
 							</span>
 						</a>
 					</div>

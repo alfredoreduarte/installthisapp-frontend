@@ -46,11 +46,12 @@ const fetchMessagesFromAws = url => {
 		return fetch(url, {
 					method: 'GET',
 				})
-				.then(response => response.json())
+				.then(response => response.text())
 				.then(json => {
 					const currentApp = getCurrentAppByState(getState())
-					const defaultMessages = JSON.stringify(require(`modules/${currentApp.applicationType}/messages`).default)
-					const messages = {...defaultMessages, ...json}
+					let defaultMessages = require(`modules/${currentApp.applicationType}/messages`).default
+					const procJson = JSON.parse(json)
+					const messages = { ...defaultMessages, ...procJson}
 					dispatch(receiveMessages(messages))
 				})
 				.catch(exception =>
@@ -159,10 +160,8 @@ export const saveStyles = () => {
 		dispatch(toggleActivitySavingDesign())
 		const cssString = css.stringify(getState().styles.ruleset)
 		const checksum = getState().admin.currentApp
-		const currentApp = getCurrentAppByState(getState())
-		const defaultMessages = JSON.stringify(require(`modules/${currentApp.applicationType}/messages`).default)
 		const editedMessages = getState().styles.messages
-		const messages = JSON.stringify({...defaultMessages, ...editedMessages})
+		const messages = JSON.stringify(editedMessages)
 		return postToApi(`applications/${checksum}/save_app_from_editor.json`, 
 				{
 					css: cssString,

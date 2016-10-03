@@ -2,13 +2,14 @@ import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import Photo from 'canvas/photo_contest/components/Photo'
 import Header from 'canvas/photo_contest/components/Header'
-import ToolBar from 'canvas/photo_contest/components/ToolBar'
+import ToolBar from 'canvas/photo_contest/components/ToolBarIndex'
 
 const Index = ({ 
 	// Header
 	title,
 	subtitle,
 	// Toolbar 
+	canUpload,
 	sortPhotos,
 	uploadUrl,
 	uploadButton,
@@ -27,6 +28,7 @@ const Index = ({
 	<div className="container">
 		<Header title={title} subtitle={subtitle} />
 		<ToolBar 
+			canUpload={canUpload} 
 			uploadUrl={uploadUrl} 
 			uploadButton={uploadButton}
 			mostRecent={mostRecent}

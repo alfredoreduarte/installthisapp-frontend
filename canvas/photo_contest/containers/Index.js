@@ -4,7 +4,7 @@ import { push } from 'react-router-redux'
 import { postVote } from 'canvas/photo_contest/actions/votes'
 import { sortPhotos } from 'canvas/photo_contest/actions/sort'
 import { search } from 'canvas/photo_contest/actions/search'
-import { photosBySearchQuery } from 'canvas/photo_contest/selectors/photos'
+import { photosBySearchQuery, photosByUploaderId } from 'canvas/photo_contest/selectors/photos'
 import Loading from 'canvas/photo_contest/components/Loading'
 import IndexView from 'canvas/photo_contest/components/Index'
 
@@ -16,8 +16,10 @@ class Index extends Component {
 }
 
 const mapStateToProps = state => {
+	const ownPhoto = photosByUploaderId(state)
 	return {
 		...state.messages,
+		canUpload: ownPhoto.length == 0,
 		loggedUser: state.loggedUser,
 		votes: _.values(state.entities.votes),
 		sort: state.sort,

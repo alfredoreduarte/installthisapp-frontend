@@ -5,9 +5,10 @@ import { connect } from 'react-redux'
 import { Modal, Button } from 'react-bootstrap'
 import { getPhotoById } from 'modules/photo_contest/selectors/photos'
 import { getVotesForPhoto } from 'modules/photo_contest/selectors/votes'
+import { postDeleteVotes } from 'modules/photo_contest/actions/votes'
 import User from 'components/User'
 
-const PhotoDetail = ({ show, user, thumbnailUrl, assetUrl, caption, votes, handleClose }) => (
+const PhotoDetail = ({ show, user, thumbnailUrl, assetUrl, caption, votes, handleClose, handleVoteDelete }) => (
 	<Modal show={show} onHide={handleClose}>
 		<Modal.Header closeButton>
 			<Modal.Title>{user.name}'s photo</Modal.Title>
@@ -34,6 +35,9 @@ const PhotoDetail = ({ show, user, thumbnailUrl, assetUrl, caption, votes, handl
 				{votes.map( vote => 
 					<li key={vote.id} className="list-group-item">
 						<User name={vote.user.name} identifier={vote.user.identifier} small />
+						<button className="btn btn-sm btn-danger btn-outline" onClick={() => handleVoteDelete(vote.id)}>
+							Delete
+						</button>
 					</li>
 				)}
 			</ul>
@@ -55,6 +59,10 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
 	return {
+		handleVoteDelete: id => {
+			console.log('delete!')
+			dispatch(postDeleteVotes([id]))
+		},
 		handleClose: () => {
 			console.log('close!')
 			dispatch(push(props.backUrl))

@@ -29,7 +29,6 @@ const AdminDashboard = ({
 		{apps.length > 0 || filterText ? 
 			<div>
 				<DashboardTitleBar />
-				<DashboardToolBar />
 				{apps.length > 0 ? <AppGrid apps={apps} /> : <NoAppsMatching />}
 			</div>
 		: 

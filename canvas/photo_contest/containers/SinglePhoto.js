@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { postVote } from 'canvas/photo_contest/actions/votes'
-import { currentPhoto } from 'canvas/photo_contest/selectors/photos'
+import { currentPhoto, photosByUploaderId } from 'canvas/photo_contest/selectors/photos'
 import Loading from 'canvas/photo_contest/components/Loading'
 import SingleView from 'canvas/photo_contest/components/SingleView'
 
@@ -15,8 +15,10 @@ class SinglePhoto extends Component {
 
 const mapStateToProps = (state, props) => {
 	const photo = currentPhoto(state, props)
+	const ownPhoto = photosByUploaderId(state)
 	return {
 		...state.messages,
+		canUpload: ownPhoto.length == 0,
 		voted: _.filter(_.values(state.entities.votes), v => {
 			return v.userId == state.loggedUser.id && v.photoId == photo.id
 		}).length > 0,
