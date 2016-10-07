@@ -11,7 +11,8 @@ const AppNavBar = ({ name, identifier, logout }) => (
 	<Navbar fluid={true}>
 		<Navbar.Header>
 			<Navbar.Brand>
-				<IndexLink to="/d"><b>Install</b>This<b>App</b></IndexLink>
+				<IndexLink to="/d">
+					<b>Install</b>This<b>App</b> <span className="label label-sm label-default"><small>BETA</small></span></IndexLink>
 			</Navbar.Brand>
 		</Navbar.Header>
 		<div className="collapse navbar-collapse text-right">
