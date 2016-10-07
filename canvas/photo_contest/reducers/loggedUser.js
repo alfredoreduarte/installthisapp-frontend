@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie'
 
 const loggedUser = (state = { 
-	id: Cookies.get('loggedUserId') || null,
+	id: Cookies.get('loggedUserId') || window.loggedUserId,
 }, action) => {
 	switch (action.type) {
 		case 'LOG_USER_IN':

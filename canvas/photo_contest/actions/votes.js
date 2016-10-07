@@ -14,7 +14,8 @@ const vote = id => {
 
 export const postVote = id => {
 	return (dispatch, getState) => {
-		if (Cookies.get('apiKey')) {
+		const apiKey = Cookies.get('apiKey') || window.canvasApiKey
+		if (apiKey) {
 			const { checksum } = getState().applicationData
 			let formData = new FormData()
 			formData.append('vote[photo_id]', id)

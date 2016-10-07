@@ -7,7 +7,7 @@ import ModuleGrid from 'containers/ModuleGrid'
 import PageGrid from 'containers/PageGrid'
 import AppCreateForm from 'containers/AppCreateForm'
 
-const AppCreateModal = ({ show, step, handleClose, back }) => (
+const AppCreateModal = ({ show, step, handleClose, back, whoopsAlert }) => (
 	<Modal 
 		show={show} 
 		backdrop="static"
@@ -28,6 +28,11 @@ const AppCreateModal = ({ show, step, handleClose, back }) => (
 		</Modal.Header>
 
 		<Modal.Body>
+			{whoopsAlert && step == 1 ? 
+				<div className="alert alert-warning">
+					Whoops! That app is not quite ready yet. Available apps are: <b>Trivia</b>, <b>Photo Contest</b> and <b>Top Fans</b>.
+				</div>
+			: null }
 			{step == 1 ? <ModuleGrid /> : null}
 			{step == 2 ? <PageGrid /> : null}
 			{step == 3 ? <AppCreateForm /> : null}
@@ -35,8 +40,12 @@ const AppCreateModal = ({ show, step, handleClose, back }) => (
 	</Modal>
 )
 
+const mapStateToProps = (state, props) => ({
+	whoopsAlert: state.newApp.whoopsAlert,
+})
+
 const mapDispatchToProps = (dispatch, props) => ({
 	back: () => dispatch(goBack())
 })
 
-export default connect(undefined, mapDispatchToProps)(AppCreateModal)
+export default connect(mapStateToProps, mapDispatchToProps)(AppCreateModal)

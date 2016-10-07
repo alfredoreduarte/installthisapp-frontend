@@ -48,7 +48,7 @@ const ModuleGrid = ({ modules, futureModules, handleFutureModuleSelection, handl
 					<div className="media media-stacked text-center">
 						<div className="media-left media-middle">
 							<a
-								href="javascript:void()"
+								href="javascript:void(0)"
 								onClick={() => handleFutureModuleSelection(module)}>
 								<img 
 									className="media-object img-rounded" 
@@ -57,7 +57,7 @@ const ModuleGrid = ({ modules, futureModules, handleFutureModuleSelection, handl
 						</div>
 						<div className="media-body media-middle">
 							<a
-								href="javascript:void()"
+								href="javascript:void(0)"
 								onClick={() => handleFutureModuleSelection(module)}>
 								<h5 
 								className="
@@ -87,7 +87,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, props) => ({
 	handleFutureModuleSelection: type => {
-		// dispatch(setNewAppModule(type))
+		dispatch(setNewAppModule(type))
 		// dispatch(push('/d/apps/create/2'))
 		console.log('future module!')
 	},
