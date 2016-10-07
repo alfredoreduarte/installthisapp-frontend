@@ -19,6 +19,10 @@ export default (store, dispatch) => ({
 		})
 	},
 	onEnter: (nextState, replace, next) => {
+		analytics.page('App Design')
+		analytics.track('Feature used', {
+			type: 'App Design',
+		})
 		dispatch(setCurrentAppChecksum(nextState.params.checksum)).then(() => {
 			dispatch(fetchStyles()).then(() => {
 				// dispatch(fetchJsonTest()).then(() => next())

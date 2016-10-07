@@ -1,5 +1,11 @@
 module.exports = {
 	path: 'preferences',
+	onEnter: (nextState, replace) => {
+		analytics.page('App Preferences')
+		analytics.track('Feature used', {
+			type: 'App Preferences',
+		})
+	},
 	getComponent(nextState, cb) {
 		require.ensure([], (require) => {
 			cb(null, {

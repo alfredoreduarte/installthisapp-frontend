@@ -34,7 +34,7 @@ const Sidebar = ({ installed, checksum, type, children, menu, facebookPageIdenti
 			fbAppCanvasId={fbAppCanvasId} /> : null}
 		<ul className="list-unstyled">
 			<li><IndexLink to={`/d/apps/${type}/${checksum}`} activeClassName="active">Dashboard</IndexLink></li>
-			<li className="hide"><Link to={`/d/apps/${type}/${checksum}/analytics`} activeClassName="active">Analytics</Link></li>
+			<li><Link to={`/d/apps/${type}/${checksum}/analytics`} activeClassName="active">Analytics</Link></li>
 			<li><Link to={`/d/apps/${type}/${checksum}/design`} activeClassName="active">Design</Link></li>
 			<li className="hide"><Link to="" activeClassName="active">Design <small>(coming soon)</small></Link></li>
 			<li><Link to={`/d/apps/${type}/${checksum}/users`} activeClassName="active">Users</Link></li>
@@ -46,7 +46,7 @@ const Sidebar = ({ installed, checksum, type, children, menu, facebookPageIdenti
 				<ul className="list-unstyled">
 					<li className="hide"><Link to={`/d/apps/${type}/${checksum}/preferences`}>Localization</Link></li>
 					<li className="hide"><Link to={`/d/apps/${type}/${checksum}/preferences`}>Custom Scripts</Link></li>
-					<li><Link to={`/d/apps/${type}/${checksum}/preferences/delete`}><span className="text-red">Delete App</span></Link></li>
+					<li className="hide"><Link to={`/d/apps/${type}/${checksum}/preferences/delete`}><span className="text-red">Delete App</span></Link></li>
 				</ul>
 			</li>
 		</ul>

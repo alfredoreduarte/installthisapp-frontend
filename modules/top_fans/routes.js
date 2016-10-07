@@ -4,6 +4,12 @@ export default (store) => ({
 			cb(null, [
 				{
 					path: 'scoreboard',
+					onEnter: (nextState, replace) => {
+						analytics.page({
+							name:  'Scoreboard',
+							category: 'Top Fans',
+						})
+					},
 					getComponents(nextState, cb) {
 						require.ensure([], (require) => {
 							cb(null, {

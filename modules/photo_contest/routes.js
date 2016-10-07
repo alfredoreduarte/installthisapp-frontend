@@ -9,6 +9,10 @@ export default (store, dispatch) => ({
 					path: 'photos',
 					modal: true,
 					onEnter: (nextState, replace, next) => {
+						analytics.page({
+							name:  'Photos',
+							category: 'Photo Contest',
+						})
 						dispatch(fetchPhotoContestEntities(nextState.params.checksum)).then(() => {
 							next()
 						})

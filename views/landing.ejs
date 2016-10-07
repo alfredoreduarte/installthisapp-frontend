@@ -8,7 +8,6 @@
 	<link rel="stylesheet" type="text/css" href="/landing/styles/styles.css" />
 	<link rel="icon" type="image/png" href="/images/favicon.png" />
 	<title>InstallThisApp</title>
-	<%- include('_intercom') %>
 </head>
 <body>
 	<span id="our-clients" class="hide"></span>
@@ -28,15 +27,8 @@
 		<canvas id="demo-canvas" class="hidden-xs hidden-sm"></canvas>
 	</header>
 	<script type="text/javascript" src="/landing/landing.js"></script>
-	<!-- <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script> -->
 	<script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
 	<script>
-		// window.Intercom("boot", {
-		// 	app_id: "<%= process.env.INTERCOM_APP_ID %>"
-		// })
-		// window.intercomSettings = {
-		// 	app_id: "<%= process.env.INTERCOM_APP_ID %>"
-		// }
 		var saveCookie = function(name, value){
 			Cookies.set(name, value)
 		}
@@ -83,5 +75,7 @@
 		fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));
 	</script>
+	<%- include('_segment') %>
+	<script type="text/javascript">analytics.page()</script>
 </body>
 </html>

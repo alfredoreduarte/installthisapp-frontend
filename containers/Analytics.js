@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 
 const AppAnalytics = ({ active }) => (
 	<div className="">
-		Analytics
+		App analytics coming soon! 🚀
 	</div>
 )
 

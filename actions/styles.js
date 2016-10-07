@@ -157,6 +157,9 @@ export const fetchStyles = () => {
 
 export const saveStyles = () => {
 	return (dispatch, getState) => {
+		analytics.track('Feature used', {
+			type: 'Save design',
+		})
 		dispatch(toggleActivitySavingDesign())
 		const cssString = css.stringify(getState().styles.ruleset)
 		const checksum = getState().admin.currentApp

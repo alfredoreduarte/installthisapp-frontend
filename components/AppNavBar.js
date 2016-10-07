@@ -16,6 +16,13 @@ const AppNavBar = ({ name, identifier, logout }) => (
 		</Navbar.Header>
 		<div className="collapse navbar-collapse text-right">
 			<ul className="nav navbar-nav navbar-right">
+				<li className="">
+					<a 
+						style={{paddingTop: '20px', paddingBottom: '20px'}}
+						href='https://installthisapp.com/pricing' 
+						target="_blank"
+						className="link-no-underline text-success"><small>UPGRADE</small></a>
+				</li>
 				<li className="hide">
 					<button className="btn btn-success btn-sm btn-outline navbar-btn">
 						<Link to='/d/apps/create' className="link-no-underline text-success">

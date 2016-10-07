@@ -35,7 +35,11 @@ export const updateApp = (checksum, payload) => {
 }
 
 export const destroy = checksum => {
-	return dispatch => {
+	return (dispatch, getState) => {
+		const currentApp = getCurrentAppByState(getState())
+		analytics.track('Feature used', {
+			type: 'Delete app',
+		})
 		deleteFromApi(`applications/${checksum}.json`, null, res => {
 			dispatch(updateApp(checksum, res))
 			dispatch(push('/d'))
@@ -44,13 +48,26 @@ export const destroy = checksum => {
 }
 
 export const install = checksum => {
-	return dispatch => 
-		postToApi(`applications/${checksum}/install.json`, null, res => dispatch(updateApp(checksum, res)))
+	return (dispatch, getState) => {
+		const currentApp = getCurrentAppByState(getState())
+		analytics.track('Feature used', {
+			type: 'Install app',
+		})
+		analytics.track('App installed', {
+			module: currentApp.applicationType,
+		})
+		return postToApi(`applications/${checksum}/install.json`, null, res => dispatch(updateApp(checksum, res)))
+	}
 }
 
 export const uninstall = checksum => {
-	return dispatch => 
+	return (dispatch, getState) => {
+		const currentApp = getCurrentAppByState(getState())
+		analytics.track('Feature used', {
+			type: 'Uninstall',
+		})
 		postToApi(`applications/${checksum}/uninstall.json`, null, res => dispatch(updateApp(checksum, res)))
+	}
 }
 
 export const getStatsSummary = checksum => {
@@ -89,7 +106,13 @@ const digestDataBeforePostingNewApp = data => {
 export const postNewApp = () => {
 	return (dispatch, getState) => {
 		const body = getState().newApp
-		const params = digestDataBeforePostingNewApp(getState().newApp)
+		analytics.track('Feature used', {
+			type: 'Create app',
+		})
+		analytics.track('App Created', {
+			module: body.module,
+		})
+		const params = digestDataBeforePostingNewApp(body)
 		const defaultMessages = JSON.stringify(require(`modules/${params.application.application_type}/messages`).default)
 		const defaultStyles = require(`!css!sass!../assets/canvas/${params.application.application_type}.sass`).toString()
 		postToApi(`applications.json`, {

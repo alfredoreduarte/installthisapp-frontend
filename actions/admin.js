@@ -5,10 +5,16 @@ import * as schema from 'schema'
 import { receiveEntities } from 'actions/entities'
 import Cookies from 'js-cookie'
 
-export const receiveAdmin = payload => ({
-	type: 'RECEIVE_ADMIN',
-	payload
-})
+export const receiveAdmin = payload => {
+	analytics.identify(payload.id, {
+		name: payload.name,
+		email: payload.email,
+	})
+	return {
+		type: 'RECEIVE_ADMIN',
+		payload
+	}
+}
 
 export const fetchAdmin = () => {
 	return dispatch => {
@@ -24,13 +30,6 @@ export const fetchAdmin = () => {
 			const adminUser = { ...response.adminUser }
 			delete adminUser.applications
 			delete adminUser.fbPages
-			// Intercom
-			window.Intercom("update", {
-				name: adminUser.name,
-				email: adminUser.email,
-				created_at: adminUser.createdAt,
-			})
-			// Intercom
 			return dispatch(receiveAdmin(adminUser))
 		})
 	}

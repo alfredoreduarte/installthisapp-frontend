@@ -1,5 +1,11 @@
 module.exports = {
 	path: '/d/account',
+	onEnter: (nextState, replace) => {
+		analytics.page('Account')
+		analytics.track('Feature used', {
+			type: 'Account',
+		})
+	},
 	getComponent(nextState, cb) {
 		require.ensure([], (require) => {
 			cb(null, require('containers/Account').default)
@@ -11,6 +17,9 @@ module.exports = {
 	childRoutes: [
 		{
 			path: 'billing',
+			onEnter: (nextState, replace) => {
+				analytics.page('Account Billing')
+			},
 			getComponents(nextState, cb) {
 				require.ensure([], require => {
 					cb(null, require('components/Billing').default)
@@ -19,6 +28,9 @@ module.exports = {
 		},
 		{
 			path: 'team',
+			onEnter: (nextState, replace) => {
+				analytics.page('Account Team')
+			},
 			getComponents(nextState, cb) {
 				require.ensure([], require => {
 					cb(null, require('components/Team').default)
@@ -27,6 +39,9 @@ module.exports = {
 		},
 		{
 			path: 'referrals',
+			onEnter: (nextState, replace) => {
+				analytics.page('Account Referrals')
+			},
 			getComponents(nextState, cb) {
 				require.ensure([], require => {
 					cb(null, require('components/Referrals').default)

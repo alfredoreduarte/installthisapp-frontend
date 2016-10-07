@@ -20,6 +20,7 @@ export default (store, dispatch) => ({
 		})
 	},
 	onEnter: (nextState, replace, next) => {
+		analytics.page('App Dashboard')
 		dispatch(setCurrentAppChecksum(nextState.params.checksum)).then(() => {
 			// dispatch(turnOffActivityCreatingApp())
 			// dispatch(turnOffActivityLoadingApp())
