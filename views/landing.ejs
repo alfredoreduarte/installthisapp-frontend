@@ -76,6 +76,10 @@
 		}(document, 'script', 'facebook-jssdk'));
 	</script>
 	<%- include('_segment') %>
-	<script type="text/javascript">analytics.page()</script>
+	<script type="text/javascript">
+		analytics.page({
+			name:  'Home',
+		})
+	</script>
 </body>
 </html>
