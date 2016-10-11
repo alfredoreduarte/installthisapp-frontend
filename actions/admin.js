@@ -18,11 +18,11 @@ export const receiveAdmin = payload => {
 
 export const fetchAdmin = () => {
 	return dispatch => {
-		return getFromApi('admin_users/show.json').then( response => {
+		return getFromApi('admins/entities.json').then( response => {
 			// Prepare entities for normalization
 			const entities = {
-				apps: response.adminUser.applications,
-				pages: response.adminUser.fbPages,
+				apps: response.admin.applications,
+				// pages: response.adminUser.fbPages,
 			}
 			const normalized = normalize(entities, schema.entities)
 			dispatch(receiveEntities(normalized.entities))

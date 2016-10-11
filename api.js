@@ -13,7 +13,7 @@ const temporaryEmptyFunction = arg => console.log('temporaryEmptyFunction')
 
 const processUnauthorized = () => {
 	console.log('Not authorized')
-	top.location.href = '/'
+	// top.location.href = '/'
 	return true
 }
 

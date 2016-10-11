@@ -13,7 +13,7 @@
 	<span id="our-clients" class="hide"></span>
 	<header class="jumbotron site-jumbotron white-text-area homepage-jumbotron home-header-2" id="large-header">
 		<div class="container">
-			<div class="homepage-jumbotron-content">
+			<div class="homepage-jumbotron-content hide">
 				<h1 class="text-center site-title">Do you like trying new things?</h1>
 				<h2 class="text-center site-subtitle h3">
 					Of course you do. That's why you're invited to the early preview of the new InstallThisApp.
@@ -22,6 +22,18 @@
 					<span href="#" class="btn btn-lg btn-primary site-cta cta-glow">Start now</span>
 					<button onclick="javascript:login()" class="btn btn-lg btn-primary site-cta absolute-horizontal-center" data-loading-text="Please wait...">Start now</button>
 				</div>
+			</div>
+			<div>
+				<div class="form-group">
+					<input type="email" id="email" class="form-control" value="alfredo@agenciamoderna.com.py" placeholder="Email">
+				</div>
+				<div class="form-group">
+					<input type="password" id="password" class="form-control" value="minuevopass" placeholder="Password">
+				</div>
+				<p><button type="submit" class="btn btn-default" onclick="javascript:register();">Register</button></p>
+				<p><button type="submit" class="btn btn-default" onclick="javascript:login();">Login</button></p>
+				<br/>
+				<p><a href="/forgot"><small>Forgot your password?</small></a></p>
 			</div>
 		</div>
 		<canvas id="demo-canvas" class="hidden-xs hidden-sm"></canvas>
@@ -32,28 +44,92 @@
 		var saveCookie = function(name, value){
 			Cookies.set(name, value)
 		}
-		var login = function(){
-			FB.login(function(response) {
-				$.ajax({
-					type: "POST",
-					url: '<%= apiUrl %>/admin_users.json',
-					data: {
-						signed_request: response.authResponse.signedRequest
-					},
-					success: function(res){
-						saveCookie('api_key', res)
-						top.location = location.protocol + '//' + window.location.host + '/d'
-					},
-					dataType: 'text'
+		var register = function(){
+			var email = $('#email').val()
+			var password = $('#password').val()
+			fetch('<%= apiUrl %>/auth.json', {
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					email: $('#email').val(),
+					password: $('#password').val(),
+					confirm_success_url: 'https://localhost.ssl:3000'
 				})
-				if (response.authResponse) {
-					console.log('Welcome!  Fetching your information.... ')
-					FB.api('/me', function(response) {
-						console.log('Good to see you, ' + response.name + '.')
+			}).then(response => {
+				return response.json()
+			})
+			.then(json => {
+				console.log('register response')
+				console.log(json)
+				login(email, password)
+			})
+			.catch(exception =>
+				console.log('parsing failed', exception)
+			)
+		}
+		var login = function(email, password){
+			if (!email) {
+				email = $('#email').val()
+			}
+			if (!password) {
+				password = $('#password').val()
+			}
+			console.log('email', email)
+			console.log('password', password)
+			fetch('<%= apiUrl %>/auth/sign_in.json', {
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					email: email,
+					password: password
+				})
+			})
+			.then(response => {
+				saveCookie('access-token', response.headers.get('access-token'))
+				saveCookie('token-type', response.headers.get('token-type'))
+				saveCookie('client', response.headers.get('client'))
+				saveCookie('uid', response.headers.get('uid'))
+				return response.json()
+			})
+			.then(json => {
+				console.log('login response')
+				console.log(json)
+				top.location = location.protocol + '//' + window.location.host + '/d'
+			})
+			.catch(exception =>
+				console.log('parsing failed', exception)
+			)
+		}
+		var fbLogin = function(){
+			FB.login(function(response) {
+				fetch('<%= apiUrl %>/fb_profiles.json', {
+					method: 'POST',
+					headers: {
+						'Accept': 'application/json',
+						'Content-Type': 'application/json',
+						'access-token': Cookies.get('access-token'),
+						'token-type': Cookies.get('token-type'),
+						'uid': Cookies.get('uid'),
+						'client': Cookies.get('client'),
+					},
+					body: JSON.stringify({
+						authResponse: response.authResponse
 					})
-				} else {
-					console.log('User cancelled login or did not fully authorize.')
-				}
+				}).then(response => {
+					return response.json()
+				})
+				.then(json => {
+					console.log(json)
+				})
+				.catch(exception =>
+					console.log('parsing failed', exception)
+				)
 			}, {
 				scope: 'email'
 			})
