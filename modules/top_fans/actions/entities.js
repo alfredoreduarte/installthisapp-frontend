@@ -19,15 +19,20 @@ export const fetchTopFansEntities = checksum => {
 		getFromApi(`applications/${checksum}/entries.json`).then( response => {
 			console.log('tf ents')
 			console.log(response)
-			dispatch(receiveTopFansEntities(response))
+			if (response.status) {
+				dispatch(receiveTopFansEntities(response))
+			}
+			else{
+				console.log('app is not subscribed to any page')
+			}
 		})
 }
 
 export const fetchTopFansSettings = checksum => {
 	return dispatch => 
 		getFromApi(`applications/${checksum}/settings.json`).then( response => {
-			// console.log('settings')
-			// console.log(response)
+			console.log('top fans settings')
+			console.log(response)
 			dispatch(receiveTopFansSettings(response))
 		})
 }

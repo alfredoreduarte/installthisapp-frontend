@@ -22,7 +22,6 @@ const AppCreateModal = ({ show, step, handleClose, back, whoopsAlert }) => (
 					</span>
 				</a>
 				{step == 1 ? 'Pick an app' : null}
-				{step == 2 ? 'Select a Page' : null}
 				{step == 3 ? 'Name your app' : null}
 			</Modal.Title>
 		</Modal.Header>
@@ -30,11 +29,10 @@ const AppCreateModal = ({ show, step, handleClose, back, whoopsAlert }) => (
 		<Modal.Body>
 			{whoopsAlert && step == 1 ? 
 				<div className="alert alert-warning">
-					Whoops! That app is not quite ready yet. Available apps are: <b>Trivia</b>, <b>Photo Contest</b> and <b>Top Fans</b>.
+					Whoops! That app is not quite ready yet. The currently available app is <b>Top Fans</b>.
 				</div>
 			: null }
 			{step == 1 ? <ModuleGrid /> : null}
-			{step == 2 ? <PageGrid /> : null}
 			{step == 3 ? <AppCreateForm /> : null}
 		</Modal.Body>
 	</Modal>

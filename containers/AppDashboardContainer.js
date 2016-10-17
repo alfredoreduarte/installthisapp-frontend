@@ -14,8 +14,8 @@ const AppDashboardContainer = ({
 	checksum, 
 	main, 
 	sidebar, 
-	type, 
-	facebookPageIdentifier, 
+	applicationType, 
+	// facebookPageIdentifier, 
 	fbAppId,
 	fbAppCanvasId,
 	handleInstall,
@@ -24,7 +24,8 @@ const AppDashboardContainer = ({
 	<div>
 		<AppNavBar />
 		<AppTitleBar 
-			facebookPageIdentifier={facebookPageIdentifier}
+			// facebookPageIdentifier={facebookPageIdentifier}
+			applicationType={applicationType}
 			title={currentApp.title} 
 			status={currentApp.status} 
 			scheduled={currentApp.scheduled}
@@ -32,8 +33,8 @@ const AppDashboardContainer = ({
 			handleUninstall={handleUninstall} />
 		<Sidebar 
 			checksum={checksum} 
-			type={type} 
-			facebookPageIdentifier={facebookPageIdentifier}
+			type={applicationType} 
+			// facebookPageIdentifier={facebookPageIdentifier}
 			fbAppId={fbAppId} 
 			fbAppCanvasId={fbAppCanvasId} 
 			installed={currentApp.status == 'installed'}>
@@ -50,12 +51,12 @@ const mapStateToProps = (state, props) => {
 	const fbAppId = currentApp.fbApplication ? currentApp.fbApplication.appId : null
 	const fbAppCanvasId = currentApp.fbApplication ? currentApp.fbApplication.canvasId : null
 	return { 
-		facebookPageIdentifier: state.entities.pages[currentApp.fbPageId].identifier,
+		// facebookPageIdentifier: state.entities.pages[currentApp.fbPageId].identifier,
 		fbAppId,
 		fbAppCanvasId,
 		currentApp,
 		checksum: props.params.checksum,
-		type: props.params.type,
+		applicationType: props.params.type,
 		status: currentApp.status,
 	}
 }

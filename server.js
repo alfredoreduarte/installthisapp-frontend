@@ -72,6 +72,18 @@ app.get('/', function(req, res) {
 		facebookAppId: process.env.FB_APP_ID,
 	})
 })
+app.get('/signup', function(req, res) {
+	res.render('register', {
+		apiUrl: process.env.API_URL,
+		facebookAppId: process.env.FB_APP_ID,
+	})
+})
+app.get('/login', function(req, res) {
+	res.render('login', {
+		apiUrl: process.env.API_URL,
+		facebookAppId: process.env.FB_APP_ID,
+	})
+})
 app.get('/forgot', function(req, res) {
 	res.render('request-recovery', {
 		apiUrl: process.env.API_URL
@@ -94,6 +106,7 @@ app.get('/d*', function(req, res){
 
 // Running the server
 if (process.env.NODE_ENV == 'development') {
+// if (false) {
 	var options = {}
 	var fs = require('fs'),
 		https = require('https')

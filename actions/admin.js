@@ -1,5 +1,5 @@
 import { toggleActivityUpdatingAdmin } from 'actions/activityIndicators'
-import { getFromApi, patchToApi } from 'api'
+import { postToApi, getFromApi, patchToApi, deleteFromApi } from 'api'
 import { normalize } from 'normalizr'
 import * as schema from 'schema'
 import { receiveEntities } from 'actions/entities'
@@ -21,24 +21,30 @@ export const fetchAdmin = () => {
 		return getFromApi('admins/entities.json').then( response => {
 			// Prepare entities for normalization
 			const entities = {
-				apps: response.admin.applications,
-				// pages: response.adminUser.fbPages,
+				apps: response.applications,
+				pages: response.pages,
 			}
 			const normalized = normalize(entities, schema.entities)
 			dispatch(receiveEntities(normalized.entities))
 			// Sanitize admin user
-			const adminUser = { ...response.adminUser }
-			delete adminUser.applications
-			delete adminUser.fbPages
-			return dispatch(receiveAdmin(adminUser))
+			const admin = { ...response }
+			delete admin.applications
+			delete admin.pages
+			return dispatch(receiveAdmin(admin))
 		})
 	}
 }
 
 export const logOut = () => {
 	return dispatch => {
-		Cookies.remove('api_key')
-		top.location.href = '/'
+		// /auth/sign_out
+		// Cookies.remove('api_key')
+		// top.location.href = '/'
+		deleteFromApi(
+			'auth/sign_out.json'
+		).then( response => {
+			top.location.href = '/'
+		})
 	}
 }
 
@@ -46,15 +52,38 @@ export const updateInfo = () => {
 	return (dispatch, getState) => {
 		dispatch(toggleActivityUpdatingAdmin())
 		const formData = getState().form.adminUserProfile.values
-		const body = {
-			admin_user: formData
-		}
+		// const body = 
 		patchToApi(
-			`admin_users/${getState().admin.id}.json`, 
-			body
+			'auth.json', 
+			{
+				admin: {
+					name: formData.name,
+				}
+			}
 		).then( response => {
 			dispatch(receiveAdmin(response))
 			dispatch(toggleActivityUpdatingAdmin())
+		})
+	}
+}
+
+export const fbConnect = fbResponse => {
+	return dispatch => {
+		return postToApi('fb_profiles.json', {
+			signedRequest: fbResponse.signedRequest
+		}).then( response => {
+			// Prepare entities for normalization
+			const entities = {
+				apps: response.applications,
+				pages: response.pages,
+			}
+			const normalized = normalize(entities, schema.entities)
+			dispatch(receiveEntities(normalized.entities))
+			// Sanitize admin user
+			const admin = { ...response }
+			delete admin.applications
+			delete admin.pages
+			return dispatch(receiveAdmin(admin))
 		})
 	}
 }

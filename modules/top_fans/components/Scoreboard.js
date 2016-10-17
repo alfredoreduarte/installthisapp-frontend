@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { Checkbox } from 'react-icheck'
 import { fetchTopFansEntities, fetchTopFansSettings } from 'modules/top_fans/actions/entities'
 import { getCurrentUsersByKeyword } from 'selectors/users'
+import { getCurrentAppByState } from 'selectors/apps'
 import { getEntriesForPage } from 'modules/top_fans/selectors/entries'
 import { selectItemOnTable, sortUsersBy } from 'actions/users'
 import SearchForm from 'components/SearchForm'
@@ -121,9 +122,10 @@ const Scoreboard = ({
 )
 
 const mapStateToProps = (state, props) => {
+	const currentApp = getCurrentAppByState(state)
 	return { 
-		likeMultiplier: state.topFans.settings.pointsPerLike,
-		commentMultiplier: state.topFans.settings.pointsPerComment,
+		likeMultiplier: currentApp.setting.pointsPerLike,
+		commentMultiplier: currentApp.setting.pointsPerComment,
 		entries: getEntriesForPage(state, props),
 		users: getCurrentUsersByKeyword(state, props),
 		selectedItems: state.selectedItems,
@@ -132,8 +134,6 @@ const mapStateToProps = (state, props) => {
 }
 
 const mapDispatchToProps = (dispatch, props) => {
-	dispatch(fetchTopFansSettings(props.params.checksum))
-	dispatch(fetchTopFansEntities(props.params.checksum))
 	return {
 		handleUserSelect: id => {
 			dispatch(selectItemOnTable(id))

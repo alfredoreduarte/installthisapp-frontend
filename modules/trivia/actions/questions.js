@@ -1,10 +1,7 @@
-import 'isomorphic-fetch'
 import { normalize, arrayOf } from 'normalizr'
 import * as schema from 'modules/trivia/schema'
-import * as CONFIG from 'config'
 import { receiveTriviaEntities } from 'modules/trivia/actions/entities'
-import humps from 'humps'
-import Cookies from 'js-cookie'
+import { getFromApi, postToApi, deleteFromApi } from 'api'
 
 export const deleteQuestion = id => ({
 	type: 'TRIVIA/DELETE_QUESTION',
@@ -13,21 +10,12 @@ export const deleteQuestion = id => ({
 
 export const postDeleteQuestions = (checksum, ids) => {
 	return dispatch => {
-		const url = CONFIG.API_URL + `/applications/${checksum}/questions_destroy.json`
-		const api_key = Cookies.get('api_key')
-		return 	fetch(url, {
-					method: 'POST',
-					headers: {
-						'Authorization': `Token token="${api_key}"`,
-						'Content-Type': `application/json`,
-						'Accept': 'application/json',
-					},
-					body: JSON.stringify({
+		return 	deleteFromApi(`applications/${checksum}/questions_destroy.json`,
+					{
 						id: ids
-					})
-				})
-				.then(response => response.json())
-				.then(json =>{
+					}
+				)
+				.then(response =>{
 					ids.map(id => dispatch(deleteQuestion(id)))
 				})
 				.catch(exception =>
@@ -39,12 +27,11 @@ export const postDeleteQuestions = (checksum, ids) => {
 export const postNewQuestion = (checksum, newQuestion) => {
 	let url
 	if (newQuestion.id) {
-		url = CONFIG.API_URL + `/applications/${checksum}/questions_update.json`
+		url = `applications/${checksum}/questions_update.json`
 	}
 	else{
-		url = CONFIG.API_URL + `/applications/${checksum}/questions_create.json`
+		url = `applications/${checksum}/questions_create.json`
 	}
-	const api_key = Cookies.get('api_key')
 	const options_attributes = newQuestion.options.map(option => {
 		const optionId = newQuestion.id && parseInt(option.id) == option.id ? option.id : null
 		const destroy = option._destroy ? option._destroy : false
@@ -63,18 +50,9 @@ export const postNewQuestion = (checksum, newQuestion) => {
 		}
 	}
 	return (dispatch, getState) => {
-		return fetch(url, {
-					method: 'POST',
-					headers: {
-						'Authorization': `Token token="${api_key}"`,
-						'Content-Type': `application/json`,
-					},
-					body: JSON.stringify(newQuestionData)
-				})
-				.then(response => response.json())
-				.then(json =>{
-					const camelizedJson = humps.camelizeKeys(json)
-					const normalized = normalize(camelizedJson, schema.entities)
+		return postToApi(url, newQuestionData)
+				.then(response =>{
+					const normalized = normalize(response, schema.entities)
 					dispatch(receiveTriviaEntities(normalized.entities))
 				})
 				.catch(exception =>

@@ -8,17 +8,12 @@ import { postNewApp } from 'actions/apps'
 import { getPageForNewApp } from 'selectors/pages'
 import { turnOnActivityCreatingApp } from 'actions/activityIndicators'
 
-const AppCreateForm = ({ handleSubmit, handleTextChange, busy, moduleName, pageName, valid }) => (
+const AppCreateForm = ({ handleSubmit, handleTextChange, busy, moduleName, valid }) => (
 	<form className="container-fluid" onSubmit={handleSubmit}>
 		<Col xs={12} sm={12} md={4} mdOffset={4}>
 			<FormGroup>
 				<ControlLabel>App</ControlLabel>
 				<p>{moduleName}</p>
-			</FormGroup>
-			<hr/>
-			<FormGroup>
-				<ControlLabel>Facebook Page</ControlLabel>
-				<p>{pageName}</p>
 			</FormGroup>
 			<hr/>
 			<FormGroup>
@@ -45,7 +40,6 @@ const mapStateToProps = state => ({
 	busy: state.activityIndicators.appCreation,
 	valid: state.newApp.title,
 	moduleName: _.capitalize(_.replace(state.newApp.module, '_', ' ')),
-	pageName: getPageForNewApp(state).name,
 })
 
 const mapDispatchToProps = (dispatch, props) => ({

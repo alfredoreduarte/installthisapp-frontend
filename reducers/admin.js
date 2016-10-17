@@ -1,4 +1,5 @@
 const admin = (state = {
+	fbPageIdentifierForIntegration: '',
 	currentApp: null
 }, action) => {
 	switch (action.type) {
@@ -6,6 +7,11 @@ const admin = (state = {
 			return { 
 				...state,
 				currentApp: action.checksum
+			}
+		case 'SET_FB_PAGE_IDENTIFIER_FOR_INTEGRATION':
+			return { 
+				...state,
+				fbPageIdentifierForIntegration: action.payload
 			}
 		case 'RECEIVE_ADMIN':
 			return { ...state, ...action.payload }

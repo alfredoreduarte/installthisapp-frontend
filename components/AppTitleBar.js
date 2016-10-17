@@ -16,20 +16,20 @@ const AppTitleBarButtons = ({
 		{status == 'installed' ?
 			<div>
 				<button className="btn btn-lg btn-primary btn-outline hide">Share</button>
-				<button onClick={() => handleUninstall()} className="btn btn-lg btn-gray btn-outline">Uninstall</button>
+				<button onClick={() => handleUninstall()} className="btn btn-lg btn-gray btn-outline">Unpublish</button>
 			</div>
 		:	
 			""
 		}
 
 		{status == 'uninstalled' || status == 'ready' ?
-			<button onClick={() => handleInstall()} className="btn btn-lg btn-success">Install</button>
+			<button onClick={() => handleInstall()} className="btn btn-lg btn-success">Publish</button>
 		:	
 			""
 		}
 
 		{status == 'installing' ?
-			<button className="btn btn-lg btn-success" disabled>Installing...</button>
+			<button className="btn btn-lg btn-success" disabled>Publishing...</button>
 		:
 			""
 		}
@@ -37,7 +37,7 @@ const AppTitleBarButtons = ({
 		{status == 'uninstalling' ?
 			<div>
 				<button className="btn btn-lg btn-primary btn-outline hide" disabled>Share</button>
-				<button className="btn btn-lg btn-gray btn-outline" disabled>Uninstalling</button>
+				<button className="btn btn-lg btn-gray btn-outline" disabled>Unpublishing</button>
 			</div>
 		:
 			""
@@ -58,7 +58,8 @@ const AppTitleBar = ({
 	installed, 
 	scheduled = false, 
 	title, 
-	facebookPageIdentifier, 
+	// facebookPageIdentifier, 
+	applicationType,
 	status, 
 	handleInstall, 
 	handleUninstall
@@ -71,7 +72,9 @@ const AppTitleBar = ({
 						<ul className="list-inline ita-breadcrumb-list">
 							<li>
 								<IndexLink to="/">
-									<FbPhoto identifier={facebookPageIdentifier} />
+									<img 
+										className="img-rounded" 
+										src={`/images/module-icons/${applicationType}.png`} />
 								</IndexLink>
 							</li>
 							<li className="weight-thin text-primary">

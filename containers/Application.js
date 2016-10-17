@@ -13,7 +13,7 @@ const Application = ({ children, loaded }) => (
 
 const mapStateToProps = state => {
 	return { 
-		loaded: state.admin.name ? true : false
+		loaded: state.admin.email ? true : false
 	}
 }
 

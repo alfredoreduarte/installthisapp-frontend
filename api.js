@@ -13,16 +13,27 @@ const temporaryEmptyFunction = arg => console.log('temporaryEmptyFunction')
 
 const processUnauthorized = () => {
 	console.log('Not authorized')
-	// top.location.href = '/'
+	top.location.href = '/'
 	return true
 }
 
+const getAuthKeys = () => {
+	return {
+		'access-token': Cookies.get('access-token'),
+		'token-type': Cookies.get('token-type'),
+		'uid': Cookies.get('uid'),
+		'client': Cookies.get('client'),
+	}
+}
+
 export const getFromApi = (endpoint, success = temporaryEmptyFunction) => {
+	const authKeys = getAuthKeys()
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'GET',
 				headers: {
-					'Authorization': `Token token="${apiKey}"`,
-					'Content-Type': `application/json`,
+					'Accept': 'application/json',
+					'Content-Type': 'application/json',
+					...authKeys,
 				}
 			})
 			.then(response => {
@@ -39,6 +50,8 @@ export const getFromApi = (endpoint, success = temporaryEmptyFunction) => {
 			.then(json => simulateDelay(json))
 			.then(json => {
 				const response = processResponse(json)
+				console.log('res')
+				console.log(response)
 				success(response)
 				return Promise.resolve(response)
 			})
@@ -48,11 +61,13 @@ export const getFromApi = (endpoint, success = temporaryEmptyFunction) => {
 }
 
 export const patchToApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
+	const authKeys = getAuthKeys()
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'PATCH',
 				headers: {
-					'Authorization': `Token token="${apiKey}"`,
-					'Content-Type': `application/json`,
+					'Accept': 'application/json',
+					'Content-Type': 'application/json',
+					...authKeys,
 				},
 				body: processBody(body),
 			})
@@ -78,10 +93,11 @@ export const patchToApi = (endpoint, body = null, success = temporaryEmptyFuncti
 }
 
 export const postFileToApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
+	const authKeys = getAuthKeys()
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'POST',
 				headers: {
-					'Authorization': `Token token="${apiKey}"`,
+					...authKeys,
 				},
 				body: body,
 			})
@@ -107,11 +123,13 @@ export const postFileToApi = (endpoint, body = null, success = temporaryEmptyFun
 }
 
 export const postToApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
+	const authKeys = getAuthKeys()
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'POST',
 				headers: {
-					'Authorization': `Token token="${apiKey}"`,
-					'Content-Type': `application/json`,
+					'Accept': 'application/json',
+					'Content-Type': 'application/json',
+					...authKeys,
 				},
 				body: processBody(body),
 			})
@@ -139,11 +157,13 @@ export const postToApi = (endpoint, body = null, success = temporaryEmptyFunctio
 }
 
 export const deleteFromApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
+	const authKeys = getAuthKeys()
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'DELETE',
 				headers: {
-					'Authorization': `Token token="${apiKey}"`,
-					'Content-Type': `application/json`,
+					'Accept': 'application/json',
+					'Content-Type': 'application/json',
+					...authKeys,
 				},
 				body: processBody(body),
 			})

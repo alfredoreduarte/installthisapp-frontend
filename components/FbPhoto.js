@@ -1,11 +1,21 @@
 import React, { PropTypes } from 'react'
 
 const FbPhoto = ({ className, identifier, width, height, style }) => (
-	<img 
-		className={className} 
-		src={`https://graph.facebook.com/${identifier}/picture?width=100&height=100`}
-		style={{...style, width: width, height: height}}
-	/>
+	<span>
+		{identifier ?
+			<img 
+				className={className} 
+				src={`https://graph.facebook.com/${identifier}/picture?width=100&height=100`}
+				style={{...style, width: width, height: height}}
+			/>
+		:
+			<img 
+				className={className} 
+				src={`https://dummyimage.com/100x100/cccccc/fff.jpg&text=US`}
+				style={{...style, width: width, height: height}}
+			/>
+		}
+	</span>
 )
 
 FbPhoto.propTypes = {

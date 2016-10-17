@@ -118,7 +118,7 @@ AppConfiguration = reduxForm({
 })(AppConfiguration)
 
 const mapStateToProps = (state, ownProps) => {
-	const obj = ownProps.currentApp.setting.conf.preferences
+	// const obj = ownProps.currentApp.setting.conf.preferences
 	// const obj = {
 	// 	"limit_switch": true,
 	// 	"limit": 5,
@@ -133,12 +133,12 @@ const mapStateToProps = (state, ownProps) => {
 	// 	"show_summary": false
 	// }
 	let elarr = []
-	_.mapKeys(obj, (value, key) => {
-		elarr.push({
-			key,
-			value,
-		})
-	})
+	// _.mapKeys(obj, (value, key) => {
+	// 	elarr.push({
+	// 		key,
+	// 		value,
+	// 	})
+	// })
 	return {
 		fetching: state.activityIndicators.updatingApp,
 		initialValues: ownProps.currentApp,

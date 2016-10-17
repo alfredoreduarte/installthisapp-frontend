@@ -41,6 +41,7 @@ export default (store, dispatch) => ({
 	},
 	childRoutes: [
 		require('routes/Analytics'),
+		require('routes/Integrations'),
 		require('routes/Users'),
 		require('routes/Preferences'),
 		require('modules/trivia/routes').default(store, dispatch),

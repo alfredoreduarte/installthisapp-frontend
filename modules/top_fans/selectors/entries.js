@@ -9,8 +9,10 @@ export const getEntriesForPage = createSelector(
 	getCurrentApp,
 	(entries, app) => {
 		if (app) {
-			if (entries[app.fbPage.identifier]){
-				const selectedEntries = entries[app.fbPage.identifier]
+			// if (entries[app.fbPage.identifier]){
+			if (entries[app.setting.subscriptedFbPageIdentifier]){
+				// const selectedEntries = entries[app.fbPage.identifier]
+				const selectedEntries = entries[app.setting.subscriptedFbPageIdentifier]
 				return _.merge(selectedEntries.likes, selectedEntries.comments)
 			}
 			else{

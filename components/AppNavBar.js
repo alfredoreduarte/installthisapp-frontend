@@ -32,7 +32,7 @@ const AppNavBar = ({ name, identifier, logout }) => (
 					</button>
 				</li>
 				<NavDropdown eventKey={3} title={<FbPhoto identifier={parseInt(identifier)} width={32} height={32} className="img-circle" />} id="account-dropdown">
-					<LinkContainer to={{ pathname: '/d/account' }}>
+					<LinkContainer className="hide" to={{ pathname: '/d/account' }}>
 						<MenuItem eventKey={3.3}>
 							My Account
 						</MenuItem>

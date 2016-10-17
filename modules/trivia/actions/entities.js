@@ -1,9 +1,6 @@
-import 'isomorphic-fetch'
 import { normalize, arrayOf } from 'normalizr'
 import * as schema from 'modules/trivia/schema'
-import * as CONFIG from 'config'
-import humps from 'humps'
-import Cookies from 'js-cookie'
+import { getFromApi, postToApi } from 'api'
 
 export const receiveTriviaEntities = (entities) => ({
 	type: 'TRIVIA/RECEIVE_ENTITIES',
@@ -13,19 +10,10 @@ export const receiveTriviaEntities = (entities) => ({
 })
 
 export const fetchTriviaEntities = (checksum) => {
-	const url = CONFIG.API_URL + `/applications/${checksum}/questions.json`
-	const api_key = Cookies.get('api_key')
 	return dispatch => {
-		return fetch(url, {
-					method: 'GET',
-					headers: {
-						'Authorization': `Token token="${api_key}"`,
-					},
-				})
-				.then(response => response.json())
-				.then(json =>{
-					const camelizedJson = humps.camelizeKeys(json)
-					const normalized = normalize(camelizedJson, schema.entities)
+		return getFromApi(`applications/${checksum}/entities.json`)
+				.then(response =>{
+					const normalized = normalize(response, schema.entities)
 					dispatch(receiveTriviaEntities(normalized.entities))
 				})
 				.catch(exception =>

@@ -4,7 +4,7 @@ import { Link, IndexLink } from 'react-router'
 const ExternalLinksMenu = ({ checksum, fbPageIdentifier, fbAppId, fbAppCanvasId }) => (
 	<div>
 		<ul className="list-unstyled">
-			<li>
+			<li className="hide">
 				<a 
 				href={`https://facebook.com/pages/${fbPageIdentifier}/${fbPageIdentifier}?sk=app_${fbAppId}`}
 				target="_blank"
@@ -17,7 +17,7 @@ const ExternalLinksMenu = ({ checksum, fbPageIdentifier, fbAppId, fbAppCanvasId 
 				href={`/${fbAppCanvasId}/${checksum}`}
 				target="_blank"
 				className="text-success">
-					View as a website <small><span className="glyphicon glyphicon-share"></span></small>
+					Go to app <small><span className="glyphicon glyphicon-share"></span></small>
 				</a>
 			</li>
 		</ul>
@@ -35,6 +35,7 @@ const Sidebar = ({ installed, checksum, type, children, menu, facebookPageIdenti
 		<ul className="list-unstyled">
 			<li><IndexLink to={`/d/apps/${type}/${checksum}`} activeClassName="active">Dashboard</IndexLink></li>
 			<li><Link to={`/d/apps/${type}/${checksum}/analytics`} activeClassName="active">Analytics</Link></li>
+			<li><Link to={`/d/apps/${type}/${checksum}/integrations`} activeClassName="active">Integrations</Link></li>
 			<li><Link to={`/d/apps/${type}/${checksum}/design`} activeClassName="active">Design</Link></li>
 			<li className="hide"><Link to="" activeClassName="active">Design <small>(coming soon)</small></Link></li>
 			<li><Link to={`/d/apps/${type}/${checksum}/users`} activeClassName="active">Users</Link></li>

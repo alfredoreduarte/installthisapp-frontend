@@ -15,7 +15,7 @@ const App = ({
 	status,
 	title,
 	applicationType,
-	facebookPageIdentifier,
+	// facebookPageIdentifier,
 	id,
 	checksum,
 	updatedOn,
@@ -25,7 +25,8 @@ const App = ({
 		<div 
 			className={`panel panel-default ita-panel-screen ${otherAppsLoading ? 'greyed-out' : ''}`}>
 			<div className="panel-body">
-				<FbPhoto identifier={facebookPageIdentifier} />
+				<img 
+					src={`/images/module-icons/${applicationType}.png`} />
 				{loadingDashboard ? 
 					<div className="ita-panel-overlay-spinner">
 						<Spinner spinnerName="circle" noFadeIn={true} />
