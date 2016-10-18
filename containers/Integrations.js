@@ -35,7 +35,7 @@ const Integrations = ({
 				:
 				null}
 				{published && fbProfile == null ?
-					<p>2- <FacebookLogin
+					<p className={fbPages.length > 0 || !published ? 'text-muted' : null}>2- <FacebookLogin
 					appId={process.env.FB_APP_ID}
 					autoLoad={false}
 					scope={'manage_pages'}
@@ -43,11 +43,11 @@ const Integrations = ({
 					cssClass="btn btn-primary btn-sm"
 					callback={fbLoginCallback} /></p>
 				: null}
-				<p className={fbPages.length > 0 ? 'text-muted' : null}>
+				<p className={!fbProfile ? 'text-muted' : null}>
 					3- <button 
 						className="btn btn-default btn-sm" 
 						onClick={fetchPages} 
-						disabled={fbPages.length > 0}
+						disabled={!fbProfile}
 						>
 						Get your Facebook page list
 						</button>

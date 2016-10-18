@@ -11,6 +11,7 @@ const Index = ({ title, subtitle, entries, maxScore, likesLabel, commentsLabel, 
 		<div className="row">
 			<HeaderImage source={'https://uploads.intercomcdn.com/i/o/11827466/b600e1c0b0b5aa12337c83be/Header.jpg'} />
 		</div>
+		<Header title={title} subtitle={subtitle} />
 		<div className="row">
 			{entries.map( (entry, index) => 
 				<ListItem 

@@ -67,9 +67,6 @@ app.use(function(req, res, next) {
 		next()
 })
 app.get('/', function(req, res) {
-	console.log('elrecu')
-	console.log(req.get('host'))
-	console.log(process.env)
 	res.render('landing', {
 		apiUrl: process.env.API_URL,
 		facebookAppId: process.env.FB_APP_ID,
