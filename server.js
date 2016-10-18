@@ -92,6 +92,11 @@ app.get('/forgot', function(req, res) {
 		apiUrl: process.env.API_URL
 	})
 })
+app.get('/forgot/sent', function(req, res) {
+	res.render('recovery-email-sent', {
+		apiUrl: process.env.API_URL
+	})
+})
 app.get('/reset-password', function(req, res) {
 	res.render('reset-password', {
 		apiUrl: process.env.API_URL,

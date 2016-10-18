@@ -14,12 +14,9 @@
 	<header class="jumbotron site-jumbotron white-text-area homepage-jumbotron home-header-2" id="large-header">
 		<div class="container">
 			<div>
-				<h2>Forgot your password?</h2>
-				<h4>Type in your email and we'll send you a recovery link</h4>
-				<div class="form-group">
-					<input type="email" id="email" name="email" class="form-control" placeholder="Email">
-				</div>
-				<button type="submit" class="btn btn-default" onclick="javascript:forgot();">Send me the recovery link</button>
+				<h2>Check your email</h2>
+				<h4>We've sent you an email with instructions on how to change your password. Should arrive in a moment.</h4>
+				<p><a href="/">⃪ Back</a></p>
 			</div>
 		</div>
 	</header>
@@ -43,7 +40,6 @@
 			.then(json => {
 				console.log('forgot response')
 				console.log(json)
-				top.location = location.protocol + '//' + window.location.host + '/forgot/sent'
 			})
 			.catch(exception =>
 				console.log('parsing failed', exception)
