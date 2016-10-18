@@ -26,6 +26,7 @@ import ResetButton from 'components/design-editor/ResetButton'
 import ScreenSelector from 'components/design-editor/ScreenSelector'
 import ToolSet from 'components/design-editor/ToolSet'
 import Tool from 'components/design-editor/Tool'
+import TextContent from 'components/design-editor/TextContent'
 
 // Provisorio
 import PreviewsTrivia from 'canvas/trivia/containers/Previews'
@@ -45,6 +46,8 @@ const Design = ({
 	setEditingMessage,
 
 	// Sidebar
+	messagesDictionary,
+	// 
 	currentMessageKey,
 	currentMessageValue,
 	handleMessageChange, 
@@ -89,14 +92,27 @@ const Design = ({
 				showContentEditor={showContentEditor}
 			/>
 			<ToolSet>
-				{currentMessageKey && componentsOrBody == 'content' ? <div>
-					<label>Text content</label>
-					<input 
-						type="text" 
-						className="form-control"
-						value={currentMessageValue} 
-						onChange={e => handleMessageChange(currentMessageKey, e.target.value)} />
-				</div> : null}
+				{componentsOrBody == 'content' ?
+					<div>
+						<h4>Texts</h4>
+						<hr/>
+						{messagesDictionary.map( message => 
+							<TextContent 
+								key={message.key}
+								keyString={message.key}
+								value={message.value}
+								onChange={handleMessageChange}
+							 />
+						)}
+					</div>
+				: null}
+				{currentMessageKey && componentsOrBody == 'content' && false ? 
+					<TextContent 
+						keyString={currentMessageKey}
+						value={currentMessageValue}
+						onChange={handleMessageChange}
+					 />
+				: null}
 				{componentsOrBody != 'content' ? declarations.map( declaration => 
 					<Tool 
 						key={declaration.property}
@@ -119,6 +135,15 @@ const Design = ({
 )
 
 const mapStateToProps = (state, props) => {
+	var keys = _.keys(state.styles.messages)
+	const messages = _.map(keys, k => {
+		return {
+			key: k,
+			value: state.styles.messages[k],
+		}
+	})
+	console.log('losmesa')
+	console.log(messages)
 	return {
 		saving: state.activityIndicators.savingDesign,
 		platform: state.styles.platform,
@@ -127,6 +152,9 @@ const mapStateToProps = (state, props) => {
 		screens: screens[props.params.type],
 		previews: props.params.type,
 		currentScreen: state.styles.screen,
+		// 
+		messagesDictionary: messages,
+		// 
 		currentMessageKey: getCurrentMessageKey(state),
 		currentMessageValue: getCurrentMessageValue(state),
 	}

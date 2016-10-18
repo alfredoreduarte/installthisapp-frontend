@@ -1,34 +1,34 @@
 import React, { PropTypes } from 'react'
 import Select from 'react-select'
 
-const BackgroundSize = ({
+const TextOrientation = ({
 	values,
 	value,
 	onChange,
 }) => (
 	<div>
-		<label>Background Size</label>
+		<label>Text orientation</label>
 		<br/>
 		<Select
 			clearable={false}
 			value={value}
 			options={values}
-			onChange={e => onChange(`${e.value}`)}
+			onChange={e => onChange(e.value)}
 		/>
 	</div>
 )
 
-BackgroundSize.propTypes = {
+TextOrientation.propTypes = {
 	values: PropTypes.array,
 	value: PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
 }
 
-BackgroundSize.defaultProps = {
+TextOrientation.defaultProps = {
 	values: [
-		{ value: 'cover', label: 'Auto Stretch' },
-		{ value: 'auto', label: 'Original' },
+		{ value: 'ltr', label: 'Left to Right' },
+		{ value: 'rtl', label: 'Right to Left' },
 	]
 }
 
-export default BackgroundSize
+export default TextOrientation

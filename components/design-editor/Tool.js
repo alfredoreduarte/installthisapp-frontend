@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import FontFamily from 'components/design-editor/FontFamily'
+import TextOrientation from 'components/design-editor/TextOrientation'
 import BackgroundSize from 'components/design-editor/BackgroundSize'
 import TextAlign from 'components/design-editor/TextAlign'
 import Slider from 'components/design-editor/Slider'
@@ -42,6 +43,9 @@ const Tool = ({ property, value, handleChange }) => (
 			case 'background-repeat':
 				return <BackgroundRepeat onChange={val => handleChange(property, val)} value={value} />
 				break
+			case 'direction':
+				return <TextOrientation onChange={val => handleChange(property, val)} value={value} />
+				break
 			case 'text-shadow':
 			case 'padding':
 			case 'position':
@@ -51,7 +55,6 @@ const Tool = ({ property, value, handleChange }) => (
 			case 'margin-bottom':
 			case 'line-height':
 			case 'letter-spacing':
-			case 'direction':
 			case 'background-position':
 			case 'background-attachment':
 			case '-webkit-animation-duration':

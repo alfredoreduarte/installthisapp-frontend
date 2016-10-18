@@ -3,6 +3,7 @@ import { Provider, connect } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
 import { loginCallback } from 'canvas/top_fans/actions'
 import Index from 'canvas/top_fans/containers/Index'
+import Intro from 'canvas/top_fans/containers/Intro'
 import Login from 'canvas/top_fans/components/Login'
 import Cookies from 'js-cookie'
 
@@ -29,8 +30,12 @@ class Root extends Component {
 				<Router history={history}>
 					<Route 
 						path={`/${window.canvasId}(/:checksum)`} 
-						// onEnter={(nextState, replace, next) => requireAuth(nextState, replace, next, dispatch)}
 						onEnter={(nextState, replace, next) => getData(nextState, replace, next, dispatch)}
+						component={Intro} />
+					<Route 
+						path={`/${window.canvasId}(/:checksum)/scores`} 
+						// onEnter={(nextState, replace, next) => requireAuth(nextState, replace, next, dispatch)}
+						// onEnter={(nextState, replace, next) => getData(nextState, replace, next, dispatch)}
 						component={Index} />
 					<Route 
 						path={`/${window.canvasId}/:checksum/login`} 
