@@ -35,7 +35,7 @@ class Root extends Component {
 					<Route 
 						path={`/${window.canvasId}(/:checksum)/scores`} 
 						// onEnter={(nextState, replace, next) => requireAuth(nextState, replace, next, dispatch)}
-						// onEnter={(nextState, replace, next) => getData(nextState, replace, next, dispatch)}
+						onEnter={(nextState, replace, next) => getData(nextState, replace, next, dispatch)}
 						component={Index} />
 					<Route 
 						path={`/${window.canvasId}/:checksum/login`} 
