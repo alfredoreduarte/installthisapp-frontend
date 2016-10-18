@@ -26,7 +26,7 @@ triviaRouter.use('/static', express.static(__dirname + '/dist'))
 // Auth from facebook page tab
 // 
 triviaRouter.post(`/${triviaCanvasId}`, canvasParser, function(req, res) {
-	fetch(`${apiUrl}/auth.json`, {
+	fetch(`${apiUrl}/canvasauth.json`, {
 		method: 'POST',
 		headers: {
 			'Accept': 'application/json',

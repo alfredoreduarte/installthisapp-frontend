@@ -6,9 +6,11 @@ import HeaderImage from 'canvas/top_fans/components/HeaderImage'
 
 const Intro = () => (
 	<div className="col-sm-12">
-		<Link to={`/${window.canvasId}/${window.checksum}/scores`}>
-			<HeaderImage source={'https://uploads.intercomcdn.com/i/o/11827468/20f165b7d5095d40143e3c17/sabafon.jpg'} />
-		</Link>
+		<div className="row">
+			<Link to={`/${window.canvasId}/${window.checksum}/scores`}>
+				<HeaderImage source={'https://uploads.intercomcdn.com/i/o/11827468/20f165b7d5095d40143e3c17/sabafon.jpg'} />
+			</Link>
+		</div>
 	</div>
 )
 

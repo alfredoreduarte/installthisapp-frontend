@@ -20,7 +20,7 @@ photoContestRouter.use(function(req, res, next) {
 })
 photoContestRouter.use('/static', express.static(__dirname + '/dist'))
 photoContestRouter.post(`/${photoContestCanvasId}`, canvasParser, function(req, res) {
-	fetch(`${apiUrl}/auth.json`, {
+	fetch(`${apiUrl}/canvasauth.json`, {
 		method: 'POST',
 		headers: {
 			'Accept': 'application/json',
