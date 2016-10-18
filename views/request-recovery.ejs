@@ -10,30 +10,34 @@
 	<title>InstallThisApp</title>
 	<script type="text/javascript" src="/landing/landing.js"></script>
 	<script>
-		var forgot = function(){
-			var email = $('#email').val()
-			fetch('<%= apiUrl %>/auth/password.json', {
-				method: 'POST',
-				headers: {
-					'Accept': 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					email: $('#email').val(),
-					redirect_url: 'https://' + window.location.hostname + '/reset-password'
+		$(document).ready(function(){
+			$('#request-recovery').on('click', function(){
+				$('#request-recovery').attr('disabled', true)
+				$('#request-recovery').html('Sending...')
+				var email = $('#email').val()
+				fetch('<%= apiUrl %>/auth/password.json', {
+					method: 'POST',
+					headers: {
+						'Accept': 'application/json',
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						email: $('#email').val(),
+						redirect_url: 'https://' + window.location.hostname + '/reset-password'
+					})
+				}).then(response => {
+					return response.json()
 				})
-			}).then(response => {
-				return response.json()
+				.then(json => {
+					console.log('forgot response')
+					console.log(json)
+					top.location = location.protocol + '//' + window.location.host + '/forgot/sent'
+				})
+				.catch(exception =>
+					console.log('parsing failed', exception)
+				)
 			})
-			.then(json => {
-				console.log('forgot response')
-				console.log(json)
-				top.location = location.protocol + '//' + window.location.host + '/forgot/sent'
-			})
-			.catch(exception =>
-				console.log('parsing failed', exception)
-			)
-		}
+		})
 	</script>
 	<%- include('_segment') %>
 	<script type="text/javascript">
@@ -52,7 +56,7 @@
 				<div class="form-group">
 					<input type="email" id="email" name="email" class="form-control" placeholder="Email">
 				</div>
-				<button type="submit" class="btn btn-default" onclick="javascript:forgot();">Send me the recovery link</button>
+				<button type="submit" class="btn btn-default" id="request-recovery">Send me the recovery link</button>
 			</div>
 		</div>
 	</header>
