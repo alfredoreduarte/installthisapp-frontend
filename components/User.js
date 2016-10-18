@@ -6,14 +6,19 @@ import FbPhoto from 'components/FbPhoto'
 const User = ({ name, small, identifier }) => (
 	<div className={`media ita-user ${small ? 'ita-user-small' : ''}`}>
 		<div className="media-left media-middle">
-			<a href="javascript:void(0)">
+			<a href={`https://fb.com/${identifier}`} target="_blank">
 				<FbPhoto className="media-object img-circle" identifier={identifier} />
 			</a>
 		</div>
 		<div className="media-body media-middle">
-			<a href="javascript:void(0)" className={`media-heading text-relevant-title weight-normal ${small ? 'h5' : 'h4'}`}>{name}</a>
+			<a 
+				href={`https://fb.com/${identifier}`} 
+				target="_blank" 
+				className={`media-heading text-relevant-title weight-normal ${small ? 'h5' : 'h4'}`}>
+					{name}
+				</a>
 			{small ? null: <p><a href={"mailto:fdsa"}><small>email</small></a></p>}
-			{small ? null: <p><a href={"https://facebook.com/fdsa"} target="_blank"><small>fb.com/fdsa</small></a></p>}
+			{small ? null: <p><a href={`https://fb.com/${identifier}`} target="_blank"><small>fb.com/{identifier}</small></a></p>}
 			{small ? null: <p><small><TimeAgo date={Date.now()} /></small></p>}
 		</div>
 	</div>

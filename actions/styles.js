@@ -126,6 +126,14 @@ export const setPlatform = platform => {
 	}
 }
 
+export const resetDefaultStyles = () => {
+	return (dispatch, getState) => {
+		const currentApp = getCurrentAppByState(getState())
+		const defaultStyles = require(`!css!sass!../assets/canvas/${currentApp.applicationType}.sass`).toString()
+		dispatch(receiveStyles(defaultStyles))
+	}
+}
+
 const receiveStyles = string => {
 	const cssObject = css.parse(string)
 	return {

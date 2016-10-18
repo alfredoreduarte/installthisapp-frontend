@@ -44,8 +44,8 @@ const Scoreboard = ({
 					<SearchForm />
 				</div>
 				<div className="col-md-8 text-right">
-					<button className="btn btn-default" onClick={fetch}>
-						Refresh
+					<button className="btn btn-sm btn-default" onClick={fetch}>
+						Refresh list
 					</button>
 					<ul className="ita-table-tools-selected list-inline list-no-margin">
 						<li className={selectedItems.length ? '' : 'hide'}>
@@ -61,7 +61,7 @@ const Scoreboard = ({
 					</ul>
 				</div>
 				<div className="col-md-3 col-md-offset-9">
-					<div className="ita-table-view-second-row">
+					<div className="ita-table-view-second-row hide">
 						<Select
 							searchable={false}
 							autosize={false}

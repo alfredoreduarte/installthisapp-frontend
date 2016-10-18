@@ -4,6 +4,7 @@ import { push } from 'react-router-redux'
 import { getDeclarationsForCurrentSelector as getDeclarations } from 'selectors/styles'
 import { getCurrentMessageKey, getCurrentMessageValue } from 'selectors/styles'
 import { 
+	resetDefaultStyles,
 	setCurrentScreen,
 	modifyWholeSheet, 
 	setCurrentMessage, 
@@ -123,7 +124,7 @@ const Design = ({
 			</ToolSet>
 		</Sidebar>
 		<BottomBar>
-			{false ? <ResetButton handleReset={resetToDefaults} /> : null}
+			<ResetButton handleReset={resetToDefaults} />
 			<ScreenSelector
 				value={currentScreen}
 				options={screens}
@@ -174,7 +175,7 @@ const mapDispatchToProps = (dispatch, props) => ({
 		dispatch(setCurrentScreen(e.value))
 	},
 	handlePlatformChange: platform => dispatch(setPlatform(platform)),
-	resetToDefaults: () => console.log('reset to defaults!'),
+	resetToDefaults: () => dispatch(resetDefaultStyles()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Design)

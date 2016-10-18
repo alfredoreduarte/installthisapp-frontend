@@ -7,7 +7,7 @@ const ResetButton = ({
 		<a 
 			onClick={() => handleReset()} 
 			style={{cursor: 'pointer'}}>
-			<small><i className="glyphicon glyphicon-repeat"></i> Reset to defaults</small>
+			<small>Reset to default styles</small>
 		</a>
 	</div>
 )
