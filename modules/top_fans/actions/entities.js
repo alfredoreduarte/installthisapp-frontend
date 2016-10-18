@@ -17,10 +17,8 @@ export const receiveTopFansSettings = payload => ({
 export const fetchTopFansEntities = checksum => {
 	return dispatch => 
 		getFromApi(`applications/${checksum}/entries.json`).then( response => {
-			console.log('tf ents')
-			console.log(response)
 			if (response.status) {
-				dispatch(receiveTopFansEntities(response))
+				dispatch(receiveTopFansEntities(response.payload))
 			}
 			else{
 				console.log('app is not subscribed to any page')
