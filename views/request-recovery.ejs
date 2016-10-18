@@ -8,21 +8,6 @@
 	<link rel="stylesheet" type="text/css" href="/landing/styles/styles.css" />
 	<link rel="icon" type="image/png" href="/images/favicon.png" />
 	<title>InstallThisApp</title>
-</head>
-<body>
-	<span id="our-clients" class="hide"></span>
-	<header class="jumbotron site-jumbotron white-text-area homepage-jumbotron home-header-2" id="large-header">
-		<div class="container">
-			<div>
-				<h2>Forgot your password?</h2>
-				<h4>Type in your email and we'll send you a recovery link</h4>
-				<div class="form-group">
-					<input type="email" id="email" name="email" class="form-control" placeholder="Email">
-				</div>
-				<button type="submit" class="btn btn-default" onclick="javascript:forgot();">Send me the recovery link</button>
-			</div>
-		</div>
-	</header>
 	<script type="text/javascript" src="/landing/landing.js"></script>
 	<script>
 		var forgot = function(){
@@ -56,5 +41,20 @@
 			// name:  'Home',
 		// })
 	</script>
+</head>
+<body>
+	<span id="our-clients" class="hide"></span>
+	<header class="jumbotron site-jumbotron white-text-area homepage-jumbotron home-header-2" id="large-header">
+		<div class="container">
+			<div>
+				<h2>Forgot your password?</h2>
+				<h4>Type in your email and we'll send you a recovery link</h4>
+				<div class="form-group">
+					<input type="email" id="email" name="email" class="form-control" placeholder="Email">
+				</div>
+				<button type="submit" class="btn btn-default" onclick="javascript:forgot();">Send me the recovery link</button>
+			</div>
+		</div>
+	</header>
 </body>
 </html>
