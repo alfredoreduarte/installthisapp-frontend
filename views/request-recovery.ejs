@@ -35,7 +35,7 @@
 				},
 				body: JSON.stringify({
 					email: $('#email').val(),
-					redirect_url: 'https://localhost.ssl:5000/reset-password'
+					redirect_url: 'https://' + window.location.hostname + '/reset-password'
 				})
 			}).then(response => {
 				return response.json()

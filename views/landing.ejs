@@ -48,7 +48,7 @@
 				body: JSON.stringify({
 					email: $('#email').val(),
 					password: $('#password').val(),
-					confirm_success_url: 'https://localhost.ssl:5000/d?email_confirmed=true'
+					confirm_success_url: 'https://' + window.location.hostname + '/d?email_confirmed=true'
 				})
 			}).then(response => {
 				return response.json()
