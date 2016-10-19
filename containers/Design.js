@@ -114,7 +114,7 @@ const Design = ({
 						onChange={handleMessageChange}
 					 />
 				: null}
-				{componentsOrBody != 'content' ? declarations.map( declaration => 
+				{componentsOrBody != 'content' && declarations.length > 0 ? declarations.map( declaration => 
 					<Tool 
 						key={declaration.property}
 						property={declaration.property}
@@ -143,8 +143,6 @@ const mapStateToProps = (state, props) => {
 			value: state.styles.messages[k],
 		}
 	})
-	console.log('losmesa')
-	console.log(messages)
 	return {
 		saving: state.activityIndicators.savingDesign,
 		platform: state.styles.platform,

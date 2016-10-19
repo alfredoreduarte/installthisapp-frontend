@@ -37,7 +37,9 @@ if (isDeveloping) {
 	app.use(require('webpack-hot-middleware')(compiler))
 }
 else{
-	app.use('/static', express.static(__dirname + '/dist'))
+	app.use('/static', express.static(__dirname + '/dist', {
+		maxAge: 600000,
+	}))
 }
 
 // Images and other static asssets

@@ -1,10 +1,11 @@
 import React from 'react'
+import _ from 'lodash'
 import { Glyphicon } from 'react-bootstrap'
 
 const ToolSet = ({ children }) => 
 	<div className="ita-side-bar-content ita-scrollable-area ita-side-bar-tools">
 		{
-			children.length
+			_.compact(children).length
 			? 
 			children
 			:
