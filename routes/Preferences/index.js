@@ -27,6 +27,14 @@ module.exports = {
 	},
 	childRoutes: [
 		{
+			path: 'specific',
+			getComponents(nextState, cb) {
+				require.ensure([], require => {
+					cb(null, require('components/AppSpecificSettings').default)
+				})
+			}
+		},
+		{
 			path: 'delete',
 			getComponents(nextState, cb) {
 				require.ensure([], require => {

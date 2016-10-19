@@ -23,7 +23,7 @@ const FacebookPageField = () => (
 	/>
 )
 
-let AppConfiguration = ({ handleSubmit, fetching, specific, setting, updateSetting }) => (
+let AppConfiguration = ({ handleSubmit, fetching }) => (
 	<form onSubmit={handleSubmit}>
 		<div className="row">
 			<div className="col-md-4">
@@ -55,11 +55,6 @@ let AppConfiguration = ({ handleSubmit, fetching, specific, setting, updateSetti
 										className="form-control" 
 										component="input" />
 								</div>
-								<textarea rows="5" className="form-control" defaultValue={JSON.stringify(setting)} />
-								<button 
-									onClick={updateSetting} 
-									className="btn btn-primary">
-										Update setting</button>
 							</div>
 							<div className="form-group hide">
 								<label className="col-md-4 control-label">Facebook Page</label>
@@ -67,50 +62,6 @@ let AppConfiguration = ({ handleSubmit, fetching, specific, setting, updateSetti
 									<Field name="facebookPageId" component={FacebookPageField}/>
 								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div className="row hide">
-			<div className="col-md-6">
-				<div className="panel panel-default">
-					<div className="panel-body">
-						<div className="form-horizontal">
-							{specific.map(setting => 
-									<div className="form-group">
-									<div className="col-md-4">
-										<label className="control-label">{setting.key}</label>
-										<span className="help-block">Will show un on the Page Tab</span>
-									</div>
-									<div className="col-md-8">
-										{
-											typeof setting.value == 'string' ? 
-												<input
-													type="text" 
-													value={setting.value}
-													className="form-control" />
-											: null
-										}
-										{
-											typeof setting.value == 'number' ? 
-												<input
-													type="number" 
-													value={setting.value}
-													className="form-control" />
-											: null
-										}
-										{
-											typeof setting.value == 'boolean' ? 
-												<input
-													type="checkbox" 
-													defaultChecked={setting.value}
-													className="form-control" />
-											: null
-										}
-									</div>
-								</div>
-							)}
 						</div>
 					</div>
 				</div>
@@ -124,28 +75,17 @@ AppConfiguration = reduxForm({
 })(AppConfiguration)
 
 const mapStateToProps = (state, ownProps) => {
-	let elarr = []
 	return {
 		fetching: state.activityIndicators.updatingApp,
-		initialValues: ownProps.currentApp,
-		setting: ownProps.currentApp.setting,
-		specific: elarr,
+		initialValues: ownProps.currentApp
 	}
 }
 
 const mapDispatchToProps = dispatch => {
-	const elBody = {"subscriptedFbPageIdentifier":"","pointsPerLike":3,"pointsPerComment":2,"ignoredUserIdentifiers":[272699880986, 10209615042475034]}
 	return { 
 		handleSubmit: e => {
 			e.preventDefault()
 			dispatch(update())
-		},
-		updateSetting: () => {
-			postToApi('applications/H9G93W/update_setting.json', {
-				setting: elBody
-			}).then(response => {
-				console.log(response)
-			})
 		}
 	}
 }

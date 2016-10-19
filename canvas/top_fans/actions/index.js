@@ -22,7 +22,7 @@ export const fetchEntities = () => {
 		return getFromApi(`${checksum}/entries.json`, response => {
 			if (response.status == 'ok') {
 				dispatch(receiveEntries(response))
-				dispatch(push(`/${canvasId}/${checksum}`))
+				// dispatch(push(`/${canvasId}/${checksum}`))
 			}
 		})
 	}

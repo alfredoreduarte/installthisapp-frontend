@@ -93,6 +93,30 @@ export const update = () => {
 	}
 }
 
+export const updateAppSpecificSettings = () => {
+	return (dispatch, getState) => {
+		dispatch(toggleActivityUpdatingAppSettings())
+		const currentAppChecksum = getState().admin.currentApp
+		// ignoredUserIdentifiers must ALWAYS be an array
+		const setting = getState().form.appSpecificSettings.values
+		if (setting.ignoredUserIdentifiers && setting.ignoredUserIdentifiers.length > 0) {
+			setting.ignoredUserIdentifiers = setting.ignoredUserIdentifiers.split(",").map(Number)
+		}
+		if (setting.ignoredUserIdentifiers == "") {
+			setting.ignoredUserIdentifiers = []
+		}
+		postToApi(
+			`applications/${currentAppChecksum}/update_setting.json`, 
+			{
+				setting
+			}
+		).then(response => {
+			dispatch(updateApp(currentAppChecksum, response))
+			dispatch(toggleActivityUpdatingAppSettings())
+		})
+	}
+}
+
 const digestDataBeforePostingNewApp = data => {
 	return {
 		application: {
