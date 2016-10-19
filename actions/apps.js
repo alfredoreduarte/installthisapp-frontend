@@ -27,14 +27,6 @@ export const toggleAppUninstalling = checksum => ({
 	checksum
 })
 
-export const updateApp = (checksum, payload) => {
-	return {
-		type: 'UPDATE_APP',
-		checksum,
-		payload
-	}
-}
-
 export const destroy = checksum => {
 	return (dispatch, getState) => {
 		const currentApp = getCurrentAppByState(getState())
@@ -77,20 +69,27 @@ export const getStatsSummary = checksum => {
 		.then(res => dispatch(updateApp(checksum, res)))
 }
 
+export const updateApp = (checksum, payload) => {
+	return {
+		type: 'UPDATE_APP',
+		checksum,
+		payload
+	}
+}
+
 export const update = () => {
 	return (dispatch, getState) => {
 		dispatch(toggleActivityUpdatingAppSettings())
-		const body = {
-			application: getState().form.appPreferences.values
-		}
+		const currentAppChecksum = getState().admin.currentApp
 		patchToApi(
-			`applications/${getState().admin.currentApp}.json`, 
-			body, 
-			res => {
-				dispatch(updateApp(getState().admin.currentApp, res))
-				dispatch(toggleActivityUpdatingAppSettings())
+			`applications/${currentAppChecksum}.json`, 
+			{
+				application: getState().form.appPreferences.values
 			}
-		)
+		).then(response => {
+			dispatch(updateApp(currentAppChecksum, response))
+			dispatch(toggleActivityUpdatingAppSettings())
+		})
 	}
 }
 

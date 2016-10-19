@@ -4,6 +4,7 @@ import { push } from 'react-router-redux'
 import Select from 'react-select'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
+import { postToApi } from 'api'
 import { update } from 'actions/apps'
 import { getCurrentApp } from 'selectors/apps'
 
@@ -22,7 +23,7 @@ const FacebookPageField = () => (
 	/>
 )
 
-let AppConfiguration = ({ handleSubmit, fetching, specific }) => (
+let AppConfiguration = ({ handleSubmit, fetching, specific, setting, updateSetting }) => (
 	<form onSubmit={handleSubmit}>
 		<div className="row">
 			<div className="col-md-4">
@@ -54,6 +55,11 @@ let AppConfiguration = ({ handleSubmit, fetching, specific }) => (
 										className="form-control" 
 										component="input" />
 								</div>
+								<textarea rows="5" className="form-control" defaultValue={JSON.stringify(setting)} />
+								<button 
+									onClick={updateSetting} 
+									className="btn btn-primary">
+										Update setting</button>
 							</div>
 							<div className="form-group hide">
 								<label className="col-md-4 control-label">Facebook Page</label>
@@ -118,39 +124,28 @@ AppConfiguration = reduxForm({
 })(AppConfiguration)
 
 const mapStateToProps = (state, ownProps) => {
-	// const obj = ownProps.currentApp.setting.conf.preferences
-	// const obj = {
-	// 	"limit_switch": true,
-	// 	"limit": 5,
-	// 	"order": 0,
-	// 	"order_values": [
-	// 		"rand",
-	// 		"asc",
-	// 		"desc",
-	// 	],
-	// 	"time_limit_switch": true,
-	// 	"time_limit": 120,
-	// 	"show_summary": false
-	// }
 	let elarr = []
-	// _.mapKeys(obj, (value, key) => {
-	// 	elarr.push({
-	// 		key,
-	// 		value,
-	// 	})
-	// })
 	return {
 		fetching: state.activityIndicators.updatingApp,
 		initialValues: ownProps.currentApp,
+		setting: ownProps.currentApp.setting,
 		specific: elarr,
 	}
 }
 
 const mapDispatchToProps = dispatch => {
+	const elBody = {"subscriptedFbPageIdentifier":"","pointsPerLike":3,"pointsPerComment":2,"ignoredUserIdentifiers":[272699880986, 10209615042475034]}
 	return { 
 		handleSubmit: e => {
 			e.preventDefault()
 			dispatch(update())
+		},
+		updateSetting: () => {
+			postToApi('applications/H9G93W/update_setting.json', {
+				setting: elBody
+			}).then(response => {
+				console.log(response)
+			})
 		}
 	}
 }
