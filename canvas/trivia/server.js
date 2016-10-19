@@ -4,6 +4,7 @@ var apiUrl = process.env.API_URL || 'http://0.0.0.0:3000'
 // #############
 // Canvas
 // #############
+var cloudFrontUrl = process.env.CLOUDFRONT_URL
 var triviaRouter = express.Router()
 var triviaSubdomain = 'app1-localui'
 var triviaCanvasId = 'app1'
@@ -39,6 +40,7 @@ triviaRouter.post(`/${triviaCanvasId}`, canvasParser, function(req, res) {
 	.then(response => response.json())
 	.then(json =>{
 		res.render('canvas', {
+			cloudFrontUrl: cloudFrontUrl,
 			apiUrl,
 			module: 'trivia',
 			canvasId: triviaCanvasId,
@@ -73,6 +75,7 @@ triviaRouter.get(`/${triviaCanvasId}/:checksum*`, canvasParser, function(req, re
 	.then(response => response.json())
 	.then(json =>{
 		res.render('canvas', {
+			cloudFrontUrl: cloudFrontUrl,
 			apiUrl,
 			module: 'trivia',
 			canvasId: triviaCanvasId,

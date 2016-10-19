@@ -3,6 +3,7 @@ var apiUrl = process.env.API_URL || 'https://local.installthisapp.com'
 // #############
 // Canvas
 // #############
+var cloudFrontUrl = process.env.CLOUDFRONT_URL
 var topFansRouter = express.Router()
 var topFansSubdomain = 'app2-localui'
 var topFansCanvasId = 'app2'
@@ -35,6 +36,7 @@ topFansRouter.post(`/${topFansCanvasId}`, canvasParser, function(req, res) {
 	.then(response => response.json())
 	.then(json =>{
 		res.render('canvas', {
+			cloudFrontUrl: cloudFrontUrl,
 			apiUrl,
 			module: 'top_fans',
 			canvasId: topFansCanvasId,
@@ -66,6 +68,7 @@ topFansRouter.get(`/${topFansCanvasId}/:checksum*`, canvasParser, function(req, 
 	.then(response => response.json())
 	.then(json =>{
 		res.render('canvas', {
+			cloudFrontUrl: cloudFrontUrl,
 			apiUrl,
 			module: 'top_fans',
 			canvasId: topFansCanvasId,

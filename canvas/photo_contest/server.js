@@ -3,6 +3,7 @@ var apiUrl = process.env.API_URL || 'https://local.installthisapp.com'
 // #############
 // Canvas
 // #############
+var cloudFrontUrl = process.env.CLOUDFRONT_URL
 var photoContestRouter = express.Router()
 var photoContestCanvasId = 'app3'
 var bodyParser = require('body-parser');
@@ -33,6 +34,7 @@ photoContestRouter.post(`/${photoContestCanvasId}`, canvasParser, function(req, 
 	.then(response => response.json())
 	.then(json =>{
 		res.render('canvas', {
+			cloudFrontUrl: cloudFrontUrl,
 			apiUrl,
 			module: 'photo_contest',
 			canvasId: photoContestCanvasId,
@@ -64,6 +66,7 @@ photoContestRouter.get(`/${photoContestCanvasId}/:checksum*`, canvasParser, func
 	.then(response => response.json())
 	.then(json =>{
 		res.render('canvas', {
+			cloudFrontUrl: cloudFrontUrl,
 			apiUrl,
 			module: 'photo_contest',
 			canvasId: photoContestCanvasId,
