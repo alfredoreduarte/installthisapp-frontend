@@ -18,7 +18,7 @@
 		window.checksum = "<%= checksum %>";
 		window.messagesUrl = "<%= messagesUrl %>";
 	</script>
-	<script src="/static/common.js"></script>
-	<script src="/static/<%= module %>.bundle.js"></script>
+	<script src="<%= cloudFrontUrl %>/static/common.js"></script>
+	<script src="<%= cloudFrontUrl %>/static/<%= module %>.bundle.js"></script>
 </body>
 </html>

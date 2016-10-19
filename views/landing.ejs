@@ -30,8 +30,8 @@
 		</div>
 		<canvas id="demo-canvas" class="hidden-xs hidden-sm"></canvas>
 	</header>
-	<script type="text/javascript" src="<%= process.env.CLOUDFRONT_URL %>/landing/landing.js"></script>
-	<script type="text/javascript" src="<%= process.env.CLOUDFRONT_URL %>/node_modules/js-cookie/src/js.cookie.js"></script>
+	<script type="text/javascript" src="<%= cloudFrontUrl %>/landing/landing.js"></script>
+	<script type="text/javascript" src="<%= cloudFrontUrl %>/node_modules/js-cookie/src/js.cookie.js"></script>
 	<script>
 		var saveCookie = function(name, value){
 			Cookies.set(name, value)

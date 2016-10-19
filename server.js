@@ -9,6 +9,8 @@ var express_enforces_ssl = require('express-enforces-ssl');
 app.enable('trust proxy');
 app.use(express_enforces_ssl());
 
+var cloudFrontUrl = process.env.CLOUDFRONT_URL
+
 // 
 // Force SSL
 // 
@@ -70,34 +72,40 @@ app.use(function(req, res, next) {
 })
 app.get('/', function(req, res) {
 	res.render('landing', {
+		cloudFrontUrl: cloudFrontUrl,
 		apiUrl: process.env.API_URL,
 		facebookAppId: process.env.FB_APP_ID,
 	})
 })
 app.get('/signup', function(req, res) {
 	res.render('register', {
+		cloudFrontUrl: cloudFrontUrl,
 		apiUrl: process.env.API_URL,
 		facebookAppId: process.env.FB_APP_ID,
 	})
 })
 app.get('/login', function(req, res) {
 	res.render('login', {
+		cloudFrontUrl: cloudFrontUrl,
 		apiUrl: process.env.API_URL,
 		facebookAppId: process.env.FB_APP_ID,
 	})
 })
 app.get('/forgot', function(req, res) {
 	res.render('request-recovery', {
+		cloudFrontUrl: cloudFrontUrl,
 		apiUrl: process.env.API_URL
 	})
 })
 app.get('/forgot/sent', function(req, res) {
 	res.render('recovery-email-sent', {
+		cloudFrontUrl: cloudFrontUrl,
 		apiUrl: process.env.API_URL
 	})
 })
 app.get('/reset-password', function(req, res) {
 	res.render('reset-password', {
+		cloudFrontUrl: cloudFrontUrl,
 		apiUrl: process.env.API_URL,
 		clientId: req.query.client_id,
 		uid: req.query.uid,
@@ -106,6 +114,7 @@ app.get('/reset-password', function(req, res) {
 })
 app.get('/d*', function(req, res){
 	res.render('dashboard', {
+		cloudFrontUrl: cloudFrontUrl,
 		apiUrl: process.env.API_URL,
 		facebookAppId: process.env.FB_APP_ID,
 	})
