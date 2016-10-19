@@ -11,7 +11,10 @@ export const getEntriesForPage = createSelector(
 	getAllPages,
 	(entries, app, allPages) => {
 		if (app) {
+			console.log('alpage', allPages)
+			console.log('alapp', app)
 			const page = _.find(allPages, {'id': app.page})
+			console.log('lapage', page)
 			const identifier = parseInt(page.identifier)
 			console.log('elpage')
 			console.log(page)

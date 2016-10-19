@@ -5,6 +5,7 @@ import FbPhoto from 'canvas/top_fans/components/FbPhoto'
 
 const ListItem = ({ 
 	width,
+	userName,
 	identifier, 
 	likes, 
 	comments, 
@@ -22,6 +23,9 @@ const ListItem = ({
 	}}>
 		<div className="ita-cali-score-bar" style={{flex: 1}}></div>
 		<div style={styles.scoreContainer}>
+			<div className="ita-cali-user-meta" style={styles.userMeta}>
+				{userName}
+			</div>
 			<div className="ita-cali-score-summary" style={styles.scoreSummary}>
 				<div>{likes} {likesLabel}</div>
 				<div>{comments} {commentsLabel}</div>
@@ -52,6 +56,10 @@ const ListItem = ({
 )
 
 const styles = {
+	userMeta: {
+		display: 'flex',
+		alignItems: 'center',
+	},
 	scoreContainer: {
 		display: 'flex',
 		margin: '0px 20px',
@@ -96,6 +104,7 @@ const styles = {
 }
 
 ListItem.propTypes = {
+	userName: PropTypes.string.isRequired,
 	identifier: PropTypes.number.isRequired,
 	likes: PropTypes.number.isRequired,
 	comments: PropTypes.number.isRequired,

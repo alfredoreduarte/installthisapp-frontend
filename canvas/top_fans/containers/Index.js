@@ -25,8 +25,6 @@ const mapStateToProps = state => {
 			score,
 		}
 	})
-	console.log('entries')
-	console.log(JSON.stringify(entries))
 	return {
 		...state.messages,
 		entries,
