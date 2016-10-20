@@ -23,9 +23,9 @@ const ListItem = ({
 	}}>
 		<div className="ita-cali-score-bar" style={{flex: 1}}></div>
 		<div style={styles.scoreContainer}>
-			<div className="ita-cali-user-meta" style={styles.userMeta}>
+			<a href={`https://fb.com/${identifier}`} target="_blank" className="ita-cali-user-meta" style={styles.userMeta}>
 				{userName}
-			</div>
+			</a>
 			<div className="ita-cali-score-summary" style={styles.scoreSummary}>
 				<div>{likes} {likesLabel}</div>
 				<div>{comments} {commentsLabel}</div>
