@@ -151,5 +151,109 @@
 			name:  'Home',
 		})
 	</script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/lodash/4.16.4/lodash.min.js"></script>
+	<script type="text/javascript" src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+	<script>
+	const data = [
+		{
+			"sale": 4940870912,
+			"total": 5.5,
+			"datePlaced": "2013-03-06T00:01:00Z",
+			"email": "sil.ramosv@gmail.com",
+			"datePaid": "2013-03-08",
+			"refund": "",
+			"redundDate": "",
+			"chargeback": "",
+			"chargebackDate": "",
+			"productName": "Until 10k Fans | Setup",
+			"installmentNumber": ""
+		},
+		{
+			"sale": 4940870912,
+			"total": 5.5,
+			"datePlaced": "2013-03-06T00:01:00Z",
+			"email": "sil.ramosv@gmail.com",
+			"datePaid": "2013-03-08",
+			"refund": "",
+			"redundDate": "",
+			"chargeback": "",
+			"chargebackDate": "",
+			"productName": "Service day",
+			"installmentNumber": ""
+		}
+	]
+	var fetchLocal = () => {
+		data.map(elem => {
+			console.log(elem)
+			// console.log(elem.datePlaced)
+			const preproc = {
+				"email": elem.email,
+				"plan_name": elem.productName,
+				"plan_interval": elem.installmentNumber == null ? null : "Month",
+				"plan_value": elem.total,
+				"currency": "usd",
+				"start_date": elem.datePlaced, //"2015-06-11T00:00:00Z"
+				"end_date": null
+			}
+			postData(preproc)
+		})
+	}
+	var fetchData = function(){
+		fetch('https://api-staging.installthisapp.com/2coactivity.json', {
+			method: 'GET',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+				// ...authKeys,
+			}
+		})
+		.then(response => {
+			switch(response.status){
+				case 200:
+					return response.json()
+				case 401: processUnauthorized()
+				default:
+					console.log('Status: ' + response.status)
+					// top.location.href = '/'
+					return
+			}
+		})
+		.then(json => {
+			// console.log('eljason!', json)
+			_.sampleSize(json, 2).map(elem => {
+				console.log(elem["Date Paid"])
+			})
+		})
+		.catch(exception =>
+			console.log('parsing failed', exception)
+		)
+	}
+	var postData = body => {
+		fetch('https://www.profitwell.com/api/v1/transactions/', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': 'DE956261D9F707930EC43A8EEE10B7B1'
+			},
+			body: JSON.stringify(body)
+		})
+		.then(response => {
+			switch(response.status){
+				case 200:
+					return response.json()
+				case 401: processUnauthorized()
+				default:
+					console.log('Status: ' + response.status)
+					return
+			}
+		})
+		.then(json => {
+			console.log('eljason!', json)
+		})
+		.catch(exception =>
+			console.log('parsing failed', exception)
+		)
+	}
+	</script>
 </body>
 </html>
