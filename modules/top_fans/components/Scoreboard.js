@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
+import confirm from 'react-confirm2'
 import Select from 'react-select'
-import { Table, DropdownButton, MenuItem } from 'react-bootstrap'
+import { ButtonToolbar, Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Checkbox } from 'react-icheck'
-import { fetchTopFansEntities, fetchTopFansSettings } from 'modules/top_fans/actions/entities'
+import { fetchTopFansEntities, fetchTopFansSettings, cleanupTopFansEntities } from 'modules/top_fans/actions/entities'
 import { getCurrentUsersByKeyword } from 'selectors/users'
 import { getCurrentAppByState } from 'selectors/apps'
 import { getEntriesForPage } from 'modules/top_fans/selectors/entries'
@@ -20,6 +21,7 @@ const Scoreboard = ({
 	entries,
 	users, 
 	fetch,
+	cleanup,
 	selectedItems,
 	sortBy,
 	handleUserSelect, 
@@ -41,12 +43,17 @@ const Scoreboard = ({
 			</div>
 			<div className="row">
 				<div className="col-md-4">
-					<SearchForm />
+					<div className="hide"><SearchForm /></div>
 				</div>
 				<div className="col-md-8 text-right">
-					<button className="btn btn-sm btn-default" onClick={fetch}>
-						Refresh list
-					</button>
+					<ButtonToolbar>
+						<button className="btn btn-sm btn-danger pull-right" onClick={cleanup}>
+							Reset 
+						</button>
+						<button className="btn btn-sm btn-default pull-right" onClick={fetch}>
+							Refresh
+						</button>
+					</ButtonToolbar>
 					<ul className="ita-table-tools-selected list-inline list-no-margin">
 						<li className={selectedItems.length ? '' : 'hide'}>
 							<a 
@@ -142,7 +149,16 @@ const mapDispatchToProps = (dispatch, props) => {
 			users.map(user => dispatch(selectItemOnTable(user.id)))
 		},
 		handleSort: sorter => dispatch(sortUsersBy(sorter)),
-		fetch: () => dispatch(fetchTopFansEntities(props.params.checksum))
+		fetch: () => dispatch(fetchTopFansEntities(props.params.checksum)),
+		cleanup: () => {
+			confirm('Sure? This will delete ALL current scores', {
+				done: () => dispatch(cleanupTopFansEntities()),
+				confirmLabel: 'Delete all scores',
+				abortLabel: 'Cancel',
+				// unmount: () => console.log('unmounted'),
+				// close: () => console.log('close!'),
+			})
+		}
 	}
 }
 

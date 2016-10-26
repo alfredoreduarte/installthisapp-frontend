@@ -1,6 +1,7 @@
 import { normalize, arrayOf } from 'normalizr'
 import * as schema from 'modules/top_fans/schema'
 import { getFromApi } from 'api'
+import { getCurrentAppByState } from 'selectors/apps'
 
 export const receiveTopFansEntities = entities => ({
 	type: 'TOP_FANS/RECEIVE_ENTITIES',
@@ -33,4 +34,21 @@ export const fetchTopFansSettings = checksum => {
 			console.log(response)
 			dispatch(receiveTopFansSettings(response))
 		})
+}
+
+export const cleanupTopFansEntities = () => {
+	console.log('cleanup')
+	return (dispatch, getState) => {
+		const checksum = getCurrentAppByState(getState()).checksum
+		return getFromApi(`applications/${checksum}/reset_scores_for_page.json`).then( response => {
+			if (response.status) {
+				dispatch(receiveTopFansEntities(response.payload))
+				// dispatch(fetchTopFansSettings(checksum))
+				// console.log(response)
+			}
+			else{
+				console.log('error: ', response)
+			}
+		})
+	}
 }
