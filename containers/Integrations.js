@@ -31,7 +31,15 @@ const Integrations = ({
 						2- Connected Facebook profile:{' '}
 						<a 
 							href={`https://fb.com/${fbProfile.identifier}`} 
-							target="_blank">{fbProfile.name}</a></p>
+							target="_blank">{fbProfile.name}</a>
+						<FacebookLogin
+							appId={process.env.FB_APP_ID}
+							autoLoad={false}
+							scope={'manage_pages'}
+							fields="name,email,picture"
+							cssClass="btn btn-primary btn-sm"
+							callback={fbLoginCallback} />
+					</p>
 				:
 				null}
 				{published && fbProfile == null ?
