@@ -37,7 +37,8 @@ const Integrations = ({
 							autoLoad={false}
 							scope={'manage_pages'}
 							fields="name,email,picture"
-							cssClass="btn btn-primary btn-sm"
+							cssClass="btn btn-default btn-sm"
+							textButton="Refresh permissions"
 							callback={fbLoginCallback} />
 					</p>
 				:
