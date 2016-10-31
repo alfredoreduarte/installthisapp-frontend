@@ -68,22 +68,24 @@ export const updateInfo = () => {
 }
 
 export const fbConnect = fbResponse => {
-	return dispatch => {
-		return postToApi('fb_profiles.json', {
-			signedRequest: fbResponse.signedRequest
-		}).then( response => {
-			// Prepare entities for normalization
-			const entities = {
-				apps: response.applications,
-				pages: response.pages,
-			}
-			const normalized = normalize(entities, schema.entities)
-			dispatch(receiveEntities(normalized.entities))
-			// Sanitize admin user
-			const admin = { ...response }
-			delete admin.applications
-			delete admin.pages
-			return dispatch(receiveAdmin(admin))
-		})
-	}
+	console.log('fbResponse')
+	console.log(fbResponse)
+	// return dispatch => {
+	// 	return postToApi('fb_profiles.json', {
+	// 		signedRequest: fbResponse.signedRequest
+	// 	}).then( response => {
+	// 		// Prepare entities for normalization
+	// 		const entities = {
+	// 			apps: response.applications,
+	// 			pages: response.pages,
+	// 		}
+	// 		const normalized = normalize(entities, schema.entities)
+	// 		dispatch(receiveEntities(normalized.entities))
+	// 		// Sanitize admin user
+	// 		const admin = { ...response }
+	// 		delete admin.applications
+	// 		delete admin.pages
+	// 		return dispatch(receiveAdmin(admin))
+	// 	})
+	// }
 }
