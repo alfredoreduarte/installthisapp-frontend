@@ -75,6 +75,49 @@ const receiveMessages = messages => {
 	}
 }
 
+// images
+export const editImage = (key, value) => {
+	return {
+		type: 'EDIT_IMAGES',
+		key,
+		value,
+	}
+}
+const fetchImagesFromAws = url => {
+	return (dispatch, getState) => {
+		return fetch(url, {
+					method: 'GET',
+				})
+				.then(response => response.text())
+				.then(json => {
+					const currentApp = getCurrentAppByState(getState())
+					let defaultImages = require(`modules/${currentApp.applicationType}/images`).default
+					const procJson = JSON.parse(json)
+					const images = { ...defaultImages, ...procJson}
+					dispatch(receiveImages(images))
+				})
+				.catch(exception =>
+					console.log('parsing failed', exception)
+				)
+	}
+}
+
+export const fetchImages = () => {
+	return (dispatch, getState) => {
+		const checksum = getState().admin.currentApp
+		return getFromApi(`applications/${checksum}/images.json`)
+				.then(response => dispatch(fetchImagesFromAws(response.imagesUrl)))
+	}
+}
+
+const receiveImages = images => {
+	return {
+		type: 'RECEIVE_IMAGES',
+		payload: images
+	}
+}
+// images
+
 export const setHoveredSelector = selector => {
 	const classesWithDots = selector.map( sel => sel == 'body' ? sel : `.${sel}`)
 	return {
@@ -173,10 +216,13 @@ export const saveStyles = () => {
 		const checksum = getState().admin.currentApp
 		const editedMessages = getState().styles.messages
 		const messages = JSON.stringify(editedMessages)
+		const editedImages = getState().styles.images
+		const images = JSON.stringify(editedImages)
 		return postToApi(`applications/${checksum}/save_app_from_editor.json`, 
 				{
 					css: cssString,
 					messages,
+					images,
 				}).then(response => dispatch(toggleActivitySavingDesign()))
 	}
 }

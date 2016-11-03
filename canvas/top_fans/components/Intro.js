@@ -4,18 +4,22 @@ import { Link } from 'react-router'
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
 import HeaderImage from 'canvas/top_fans/components/HeaderImage'
 
-const Intro = () => (
+const Intro = ({ intro }) => (
 	<div className="col-sm-12">
 		<div className="row">
-			<Link to={`/${window.canvasId}/${window.checksum}/scores`}>
-				<HeaderImage source={'https://uploads.intercomcdn.com/i/o/11827468/20f165b7d5095d40143e3c17/sabafon.jpg'} />
-			</Link>
+			{window.canvasId ?
+				<Link to={`/${window.canvasId}/${window.checksum}/scores`}>
+					<HeaderImage source={intro} />
+				</Link>
+			:
+				<HeaderImage source={intro} />
+			}
 		</div>
 	</div>
 )
 
 Intro.propTypes = {
-	// title: PropTypes.string.isRequired,
+	// intro: PropTypes.string.isRequired,
 	// subtitle: PropTypes.string.isRequired,
 	// likesLabel: PropTypes.string.isRequired,
 	// commentsLabel: PropTypes.string.isRequired,

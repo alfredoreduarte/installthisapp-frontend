@@ -6,6 +6,7 @@ import { saveImage } from 'actions/styles'
 import { API_URL } from 'config'
 
 const ImageUploader = ({
+	imgOrBackground,
 	value,
 	property,
 	onChange,
@@ -24,7 +25,7 @@ const ImageUploader = ({
 				accept=".png,.gif,.jpg,.jpeg"
 				placeholder="Upload Image"
 				className="btn btn-sm btn-gray btn-outline"
-				onChange={handleLocalChange} />
+				onChange={e => handleLocalChange(e, imgOrBackground)} />
 		</div>
 	</div>
 )
@@ -40,12 +41,17 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch, props) => ({
-	handleLocalChange: (e) => {
+	handleLocalChange: (e, imgOrBackground) => {
 		const input = e.target
 		let formData = new FormData()
 		formData.append(input.name, input.files[0])
 		dispatch(saveImage(formData)).then(response => {
-			props.onChange(`url(${response.assetUrl})`)
+			if (imgOrBackground == 'img') {
+				props.onChange(response.assetUrl)
+			}
+			else {
+				props.onChange(`url(${response.assetUrl})`)
+			}			
 		})
 	},
 })

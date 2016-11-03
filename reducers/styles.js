@@ -2,7 +2,7 @@ import _ from 'lodash'
 
 const initialState = {
 	platform: 'facebook',
-	screen: 'index',
+	screen: 'intro',
 	componentsOrBody: 'components',
 	hoveredSelector: [],
 	activeSelector: [],
@@ -10,6 +10,7 @@ const initialState = {
 	hoveredMessageKey: null,
 	currentMessageKey: null,
 	messages: {},
+	images: {},
 }
 
 const styles = (state = initialState, action) => {
@@ -32,6 +33,14 @@ const styles = (state = initialState, action) => {
 			})
 		case 'RECEIVE_MESSAGES':
 			return { ...state, messages: action.payload }
+		case 'EDIT_IMAGES':
+			return Object.assign({}, state, {
+				images: Object.assign({}, state.images, {
+					[action.key]: action.value
+				})
+			})
+		case 'RECEIVE_IMAGES':
+			return { ...state, images: action.payload }
 		case 'RECEIVE_STYLES':
 			return Object.assign({}, state, {
 				ruleset: action.payload

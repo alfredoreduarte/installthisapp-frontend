@@ -6,10 +6,12 @@ import Header from 'canvas/top_fans/components/Header'
 import HeaderImage from 'canvas/top_fans/components/HeaderImage'
 import ListItem from 'canvas/top_fans/components/ListItem'
 
-const Index = ({ title, subtitle, entries, maxScore, likesLabel, commentsLabel, pointsLabel }) => (
+const LaImage = HeaderImage
+
+const Index = ({ header, footer, title, subtitle, entries, maxScore, likesLabel, commentsLabel, pointsLabel }) => (
 	<div className="col-sm-12">
 		<div className="row">
-			<HeaderImage source={'https://uploads.intercomcdn.com/i/o/11827466/b600e1c0b0b5aa12337c83be/Header.jpg'} />
+			<LaImage source={header} />
 		</div>
 		<Header title={title} subtitle={subtitle} />
 		<div className="row">
@@ -30,12 +32,14 @@ const Index = ({ title, subtitle, entries, maxScore, likesLabel, commentsLabel, 
 			)}
 		</div>
 		<div className="row">
-			<HeaderImage source={'https://uploads.intercomcdn.com/i/o/11827467/db60d96ccfedba85f9258d2a/header2.jpg'} />
+			<LaImage source={footer} />
 		</div>
 	</div>
 )
 
 Index.propTypes = {
+	// header: PropTypes.string.isRequired,
+	// footer: PropTypes.string.isRequired,
 	title: PropTypes.string.isRequired,
 	subtitle: PropTypes.string.isRequired,
 	likesLabel: PropTypes.string.isRequired,

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import IntroView from 'canvas/top_fans/components/Intro'
 
 class Intro extends Component {
@@ -8,4 +9,16 @@ class Intro extends Component {
 	}
 }
 
-export default Intro
+const mapStateToProps = state => {
+	return {
+		...state.images,
+	}
+}
+
+const mapDispatchToProps = dispatch => {
+	return {
+		
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Intro)

@@ -5,7 +5,12 @@ import { getFromApi, getExternal } from 'canvas/api'
 export const loginCallback = () => {
 	return dispatch => 
 		dispatch(fetchTopFansSettings()).then(() => 
-			dispatch(fetchMessages()).then(() => dispatch(fetchEntities()))
+			// dispatch(fetchMessages()).then(() => dispatch(fetchEntities()))
+			dispatch(fetchMessages()).then(() => {
+				dispatch(fetchImages()).then(() => {
+					dispatch(fetchEntities())
+				})
+			})
 		)
 }
 
@@ -20,7 +25,7 @@ export const fetchEntities = () => {
 	return (dispatch, getState) => {
 		const { checksum, canvasId } = getState().applicationData
 		return getFromApi(`${checksum}/entries.json`, response => {
-			if (response.status == 'ok') {
+			if (response.success) {
 				dispatch(receiveEntries(response))
 				// dispatch(push(`/${canvasId}/${checksum}`))
 			}
@@ -52,6 +57,23 @@ export const fetchMessages = () => {
 		const { checksum, canvasId } = getState().applicationData
 		return getExternal(window.messagesUrl).then( json => {
 			dispatch(receiveMessages(json))
+			return Promise.resolve()
+		})
+	}
+}
+
+// images
+
+export const receiveImages = payload => ({
+	type: 'RECEIVE_IMAGES',
+	payload,
+})
+
+export const fetchImages = () => {
+	return (dispatch, getState) => {
+		const { checksum, canvasId } = getState().applicationData
+		return getExternal(window.imagesUrl).then( json => {
+			dispatch(receiveImages(json))
 			return Promise.resolve()
 		})
 	}

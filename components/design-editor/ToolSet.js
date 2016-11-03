@@ -15,7 +15,7 @@ const ToolSet = ({ children }) =>
 					<Glyphicon glyph="pencil" />
 				</h1>
 				<h4>Nothing Selected</h4>
-				<p className="text-muted">Select an item from the right to edit its styles.</p>
+				<p className="text-muted">Select an item from the right to edit its styles, <br/> or click the <i>Content</i> tab at the top to edit texts and images.</p>
 			</div>
 		}
 	</div>

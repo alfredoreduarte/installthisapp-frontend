@@ -4,11 +4,11 @@ import PreviewsTrivia from 'canvas/trivia/containers/Previews'
 import PreviewsPhotoContest from 'canvas/photo_contest/containers/Previews'
 import PreviewsTopFans from 'canvas/top_fans/containers/Previews'
 
-const GameSample = ({ screen, previews, messages, coso }) => (
+const GameSample = ({ screen, previews, messages, images, coso }) => (
 	<div>
-		{previews == 'photo_contest' ? <PreviewsPhotoContest screen={screen} messages={messages} /> : null}
-		{previews == 'trivia' ? <PreviewsTrivia screen={screen} messages={messages} /> : null}
-		{previews == 'top_fans' ? <PreviewsTopFans screen={screen} messages={messages} /> : null}
+		{previews == 'photo_contest' ? <PreviewsPhotoContest screen={screen} messages={messages} images={images} /> : null}
+		{previews == 'trivia' ? <PreviewsTrivia screen={screen} messages={messages} images={images} /> : null}
+		{previews == 'top_fans' ? <PreviewsTopFans screen={screen} messages={messages} images={images} /> : null}
 	</div>
 )
 

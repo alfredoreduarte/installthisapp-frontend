@@ -9,6 +9,7 @@ import {
 	modifyWholeSheet, 
 	setCurrentMessage, 
 	editMessage, 
+	editImage, 
 	saveStyles, 
 	setPlatform, 
 	setHoveredSelector, 
@@ -24,6 +25,7 @@ import Tabs from 'components/design-editor/Tabs'
 import BottomBar from 'components/design-editor/BottomBar'
 import PlatformSelector from 'components/design-editor/PlatformSelector'
 import ResetButton from 'components/design-editor/ResetButton'
+import ImageUploader from 'components/design-editor/ImageUploader'
 import ScreenSelector from 'components/design-editor/ScreenSelector'
 import ToolSet from 'components/design-editor/ToolSet'
 import Tool from 'components/design-editor/Tool'
@@ -48,10 +50,12 @@ const Design = ({
 
 	// Sidebar
 	messagesDictionary,
+	imagesDictionary,
 	// 
 	currentMessageKey,
 	currentMessageValue,
 	handleMessageChange, 
+	handleImageChange, 
 	declarations,
 	handleChange, 
 	handleSave,
@@ -95,8 +99,21 @@ const Design = ({
 			<ToolSet>
 				{componentsOrBody == 'content' ?
 					<div>
-						<h4>Texts</h4>
+						<h4><u>Images</u></h4>
+						{imagesDictionary.map( image =>
+							<div> 
+							 <ImageUploader 
+							 	imgOrBackground="img"
+								key={image.key}
+							 	property={image.key} 
+							 	onChange={val => handleImageChange(image.key, val)} 
+							 	value={image.value} 
+							 />
+							 <br/>
+							 </div>
+						)}
 						<hr/>
+						<h4><u>Texts</u></h4>
 						{messagesDictionary.map( message => 
 							<TextContent 
 								key={message.key}
@@ -143,6 +160,13 @@ const mapStateToProps = (state, props) => {
 			value: state.styles.messages[k],
 		}
 	})
+	var imageKeys = _.keys(state.styles.images)
+	const images = _.map(imageKeys, k => {
+		return {
+			key: k,
+			value: state.styles.images[k],
+		}
+	})
 	return {
 		saving: state.activityIndicators.savingDesign,
 		platform: state.styles.platform,
@@ -154,6 +178,8 @@ const mapStateToProps = (state, props) => {
 		// 
 		messagesDictionary: messages,
 		// 
+		imagesDictionary: images,
+		// 
 		currentMessageKey: getCurrentMessageKey(state),
 		currentMessageValue: getCurrentMessageValue(state),
 	}
@@ -162,6 +188,10 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => ({
 	setEditingMessage: key => dispatch(setCurrentMessage(key)),
 	handleMessageChange: (key, value) => dispatch(editMessage(key, value)),
+	handleImageChange: (key, value) => {
+		dispatch(editImage(key, value))
+		dispatch(saveStyles())
+	},
 	handleChange: (property, value) => dispatch(modifyWholeSheet(property, value)),
 	handleSave: () => dispatch(saveStyles()),
 	handleClose: () => dispatch(push(`/d/apps/${props.params.type}/${props.params.checksum}`)),

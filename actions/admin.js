@@ -25,14 +25,14 @@ export const fetchAdmin = () => {
 				apps: response.applications,
 				pages: response.pages,
 			}
-			dispatch(receivePlans(response.plans)) // Receive plans list
+			// dispatch(receivePlans(response.plans)) // Receive plans list
 			const normalized = normalize(entities, schema.entities)
 			dispatch(receiveEntities(normalized.entities))
 			// Sanitize admin user
 			const admin = { ...response }
 			delete admin.applications
 			delete admin.pages
-			delete admin.plans
+			// delete admin.plans
 			return dispatch(receiveAdmin(admin))
 		})
 	}

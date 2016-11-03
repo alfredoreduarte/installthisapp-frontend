@@ -27,6 +27,7 @@ const mapStateToProps = state => {
 	})
 	return {
 		...state.messages,
+		...state.images,
 		entries,
 		likeMultiplier,
 		commentMultiplier,

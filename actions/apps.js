@@ -139,18 +139,23 @@ export const postNewApp = () => {
 		})
 		const params = digestDataBeforePostingNewApp(body)
 		const defaultMessages = JSON.stringify(require(`modules/${params.application.application_type}/messages`).default)
+		const defaultImages = JSON.stringify(require(`modules/${params.application.application_type}/images`).default)
 		const defaultStyles = require(`!css!sass!../assets/canvas/${params.application.application_type}.sass`).toString()
 		postToApi('applications.json', {
 			...params, 
 			...{
 				initial_messages_json: defaultMessages,
+				initial_images_json: defaultImages,
 				initial_styles: defaultStyles,
 			} 
 		}, response => {
 			if (response.success) {
-				const normalized = normalize(response, schema.app)
+				console.log('el! response')
+				console.log(response)
+				const normalized = normalize(response.app, schema.app)
+				console.log(normalized)
 				dispatch(receiveEntities(normalized.entities))
-				dispatch(push(`/d/apps/${res.applicationType}/${res.checksum}`))
+				dispatch(push(`/d/apps/${response.app.applicationType}/${response.app.checksum}`))
 				// Commented out because we actually have to wait for the js chunk to download 
 				// Moved to containers/AppDashboardContainer.js
 				// dispatch({
