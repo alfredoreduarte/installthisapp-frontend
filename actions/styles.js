@@ -101,7 +101,8 @@ const fetchImagesFromAws = url => {
 						console.log('parsing failed', exception)
 					)
 		}
-		else{
+		else {
+			const currentApp = getCurrentAppByState(getState())
 			let defaultImages = require(`modules/${currentApp.applicationType}/images`).default
 			const images = { ...defaultImages}
 			dispatch(receiveImages(images))
