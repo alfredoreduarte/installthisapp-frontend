@@ -21,21 +21,6 @@ import trivia from 'modules/trivia/reducers/'
 import topFans from 'modules/top_fans/reducers/'
 import photoContest from 'modules/photo_contest/reducers/'
 
-// const rootReducer = combineReducers({
-// 	routing,
-// 	filterText,
-// 	usersSorting,
-// 	appsSorting,
-// 	selectedItems,
-// 	admin,
-// 	newApp,
-// 	deleteApp,
-// 	entities,
-// 	styles,
-// 	mouseTrap,
-// 	form: formReducer
-// })
-
 const createReducer = asyncReducers => {
 	return combineReducers({
 		routing,
@@ -56,7 +41,7 @@ const createReducer = asyncReducers => {
 		trivia,
 		topFans,
 		photoContest,
-		asyncReducers
+		// asyncReducers: asyncReducers
 	})
 }
 
