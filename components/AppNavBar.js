@@ -7,7 +7,7 @@ import { push } from 'react-router-redux'
 import { logOut } from 'actions/admin'
 import FbPhoto from 'components/FbPhoto'
 
-const AppNavBar = ({ name, identifier, logout }) => (
+const AppNavBar = ({ name, identifier, logout, subscription }) => (
 	<Navbar fluid={true}>
 		<Navbar.Header>
 			<Navbar.Brand>
@@ -17,13 +17,19 @@ const AppNavBar = ({ name, identifier, logout }) => (
 		</Navbar.Header>
 		<div className="collapse navbar-collapse text-right">
 			<ul className="nav navbar-nav navbar-right">
+				{subscription ? 
 				<li className="">
-					<a 
-						style={{paddingTop: '20px', paddingBottom: '20px'}}
-						href='https://installthisapp.com/pricing' 
-						target="_blank"
-						className="link-no-underline text-success"><small>UPGRADE</small></a>
+					<Link to='/d/upgrade' className="link-no-underline text-success">
+						<small>UPGRADE</small>
+					</Link>
 				</li>
+				:
+				<li className="">
+					<Link to='/d/upgrade' className="link-no-underline text-success">
+						<small>UPGRADE</small>
+					</Link>
+				</li>
+				}
 				<li className="hide">
 					<button className="btn btn-success btn-sm btn-outline navbar-btn">
 						<Link to='/d/apps/create' className="link-no-underline text-success">
@@ -31,8 +37,17 @@ const AppNavBar = ({ name, identifier, logout }) => (
 						</Link>
 					</button>
 				</li>
-				<NavDropdown eventKey={3} title={<FbPhoto identifier={parseInt(identifier)} width={32} height={32} className="img-circle" />} id="account-dropdown">
-					<LinkContainer className="hide" to={{ pathname: '/d/account' }}>
+				<NavDropdown 
+					eventKey={3} 
+					title={
+						<FbPhoto 
+						identifier={parseInt(identifier)} 
+						width={26} 
+						height={26} 
+						className="img-circle" />
+					} 
+					id="account-dropdown">
+					<LinkContainer className="" to={{ pathname: '/d/account' }}>
 						<MenuItem eventKey={3.3}>
 							My Account
 						</MenuItem>
@@ -47,6 +62,7 @@ const AppNavBar = ({ name, identifier, logout }) => (
 const mapStateToProps = (state) => {
 	return { 
 		name: state.admin.name,
+		subscription: state.admin.subscription,
 		identifier: state.admin.identifier,
 	}
 }

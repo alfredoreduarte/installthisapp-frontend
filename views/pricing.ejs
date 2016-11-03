@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" media="all" href="//fonts.googleapis.com/css?family=Lato:400,300italic,300,400italic,700,700italic,100,100italic" />
+	<link rel="stylesheet" type="text/css" href="/landing/styles/styles.css" />
+	<link rel="icon" type="image/png" href="/images/favicon.png" />
+	<title>InstallThisApp</title>
+</head>
+<body>
+	<span id="our-clients" class="hide"></span>
+	<header class="jumbotron site-jumbotron white-text-area homepage-jumbotron home-header-2" id="large-header">
+		<div class="container">
+			<div>
+				<h2>Purchase</h2>
+				<form action="https://localhost.ssl:3000/subscriptions.json" method="POST">
+					<script
+						src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+						data-key="pk_test_m1qT4u49pPqliYXWOCCXMd6k"
+						data-email="alfredoreduarte@gmail.com"
+						data-amount="2900"
+						data-name="InstallThisApp"
+						data-label="Sign Me Up!"
+						data-description="Basic Plan Subscription"
+						data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+						data-locale="auto">
+					</script>
+				</form>
+			</div>
+		</div>
+	</header>
+	<script type="text/javascript" src="<%= cloudFrontUrl %>/landing/landing.js"></script>
+	<script>
+		
+	</script>
+	<%- include('_segment') %>
+	<script type="text/javascript">
+		// analytics.page({
+			// name:  'Home',
+		// })
+	</script>
+</body>
+</html>

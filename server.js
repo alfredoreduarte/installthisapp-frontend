@@ -112,6 +112,15 @@ app.get('/reset-password', function(req, res) {
 		token: req.query.token,
 	})
 })
+app.get('/pricing', function(req, res) {
+	res.render('pricing', {
+		cloudFrontUrl: cloudFrontUrl,
+		apiUrl: process.env.API_URL,
+		clientId: req.query.client_id,
+		uid: req.query.uid,
+		token: req.query.token,
+	})
+})
 app.get('/d*', function(req, res){
 	res.render('dashboard', {
 		cloudFrontUrl: cloudFrontUrl,

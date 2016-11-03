@@ -3,6 +3,7 @@ import { postToApi, getFromApi, patchToApi, deleteFromApi } from 'api'
 import { normalize } from 'normalizr'
 import * as schema from 'schema'
 import { receiveEntities } from 'actions/entities'
+import { receivePlans } from 'actions/plans'
 import Cookies from 'js-cookie'
 
 export const receiveAdmin = payload => {
@@ -24,12 +25,14 @@ export const fetchAdmin = () => {
 				apps: response.applications,
 				pages: response.pages,
 			}
+			dispatch(receivePlans(response.plans)) // Receive plans list
 			const normalized = normalize(entities, schema.entities)
 			dispatch(receiveEntities(normalized.entities))
 			// Sanitize admin user
 			const admin = { ...response }
 			delete admin.applications
 			delete admin.pages
+			delete admin.plans
 			return dispatch(receiveAdmin(admin))
 		})
 	}

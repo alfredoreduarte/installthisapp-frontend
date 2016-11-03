@@ -23,7 +23,7 @@ let AccountPreferences = ({ handleSubmit, fetching }) => (
 				<div className="panel panel-default">
 					<div className="panel-body">
 						<div className="form-horizontal">
-							<div className="form-group">
+							<div className="form-group hide">
 								<div className="col-md-4">
 									<label className="control-label">Name</label>
 								</div>

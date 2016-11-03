@@ -28,6 +28,7 @@ export const createRoutes = (store, dispatch) => ({
 	},
 	childRoutes: [
 		require('routes/Account'),
+		require('routes/Plans'),
 		{
 			path: '/d/apps/',
 			component: require('containers/Application').default,

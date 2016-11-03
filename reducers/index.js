@@ -4,6 +4,8 @@ import { routerReducer as routing } from 'react-router-redux'
 
 import entities from 'reducers/entities'
 import admin from 'reducers/admin'
+import plans from 'reducers/plans'
+import alerts from 'reducers/alerts'
 import selectedItems from 'reducers/selectedItems'
 import filterText from 'reducers/filterText'
 import usersSorting from 'reducers/usersSorting'
@@ -42,6 +44,8 @@ const createReducer = asyncReducers => {
 		appsSorting,
 		selectedItems,
 		admin,
+		plans,
+		alerts,
 		newApp,
 		deleteApp,
 		entities,
