@@ -106,6 +106,7 @@ const fetchImagesFromAws = url => {
 			let defaultImages = require(`modules/${currentApp.applicationType}/images`).default
 			const images = { ...defaultImages}
 			dispatch(receiveImages(images))
+			return Promise.resolve(true)
 		}
 	}
 }
