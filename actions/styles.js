@@ -85,20 +85,27 @@ export const editImage = (key, value) => {
 }
 const fetchImagesFromAws = url => {
 	return (dispatch, getState) => {
-		return fetch(url, {
-					method: 'GET',
-				})
-				.then(response => response.text())
-				.then(json => {
-					const currentApp = getCurrentAppByState(getState())
-					let defaultImages = require(`modules/${currentApp.applicationType}/images`).default
-					const procJson = JSON.parse(json)
-					const images = { ...defaultImages, ...procJson}
-					dispatch(receiveImages(images))
-				})
-				.catch(exception =>
-					console.log('parsing failed', exception)
-				)
+		if (url) {
+			return fetch(url, {
+						method: 'GET',
+					})
+					.then(response => response.text())
+					.then(json => {
+						const currentApp = getCurrentAppByState(getState())
+						let defaultImages = require(`modules/${currentApp.applicationType}/images`).default
+						const procJson = JSON.parse(json)
+						const images = { ...defaultImages, ...procJson}
+						dispatch(receiveImages(images))
+					})
+					.catch(exception =>
+						console.log('parsing failed', exception)
+					)
+		}
+		else{
+			let defaultImages = require(`modules/${currentApp.applicationType}/images`).default
+			const images = { ...defaultImages}
+			dispatch(receiveImages(images))
+		}
 	}
 }
 
