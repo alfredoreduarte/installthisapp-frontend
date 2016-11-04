@@ -5,39 +5,6 @@ import { connect } from 'react-redux'
 import { upgrade } from 'actions/billing'
 import TakeMoney from 'components/StripeButton'
 
-// const UpgradeBtns = ({ currentPlan, plans, upgrade, }) => (
-// 	<ul className="list-unstyled">
-// 		{plans.map(plan => {
-// 			const isCurrent = currentPlan == plan.id
-// 			return <li key={plan.id}>
-// 				<button 
-// 					key={plan.id} 
-// 					className={`btn btn-default ${isCurrent ? 'hide' : null}`} 
-// 					disabled={isCurrent}
-// 					onClick={() => {
-// 							isCurrent ? console.log('same!') : upgrade(plan.id)
-// 						}
-// 					}>
-// 					{isCurrent ? `${plan.name} - Current` : plan.name}
-// 				</button>
-// 			</li>
-// 		})}
-// 	</ul>
-// )
-
-// const BuyBtns = ({ currentPlan, plans }) => (
-// 	<div>
-// 		{plans.map(plan => 
-// 			<p key={plan.id}>
-// 				<TakeMoney 
-// 					planSlug={plan.id} 
-// 					planName={currentPlan == plan.id ? `${plan.name} - Current` : plan.name} 
-// 					price={plan.price} />
-// 			</p>
-// 		)}
-// 	</div>
-// )
-
 const ConditionalBuy = ({ upgrade, currentPlan, plan }) => (
 	<div>
 		{currentPlan ?
@@ -86,7 +53,7 @@ const Plans = ({
 			justifyContent: 'center'
 		}}>
 			{plans.map(plan =>
-			<div style={{width: '200px', margin: '0px 32px'}} key={plan.id}>
+			<div style={{width: '200px', margin: '0px 32px'}} key={plan.stripeId}>
 				<div 
 					className={`panel text-center ${plan.id == 'agency_development' ? 'panel-success' : 'panel-default'}`}>
 					<div className="panel-body">
@@ -97,9 +64,9 @@ const Plans = ({
 							{plan.copy.map(copy => <p key={copy}>{copy}</p>)}
 						</div>
 						<p style={{marginBottom: '50px'}}>
-							<sup>$</sup><span className="h1"><b>{plan.price}</b></span><sub>/mo</sub>
+							<sup>$</sup><span className="h1"><b>{plan.amount}</b></span><sub>/mo</sub>
 						</p>
-						{currentPlan == plan.id ?
+						{currentPlan == plan.stripeId ?
 							<button 
 								style={{letterSpacing: '1px', fontSize: '12px', fontWeight: '400'}}
 								className="btn btn-default text-uppercase">Current plan

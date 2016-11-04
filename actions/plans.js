@@ -2,7 +2,7 @@ import _ from 'lodash'
 
 const plansDictionary = [
 	{
-		id: "basic_development",
+		stripeId: "basic_development",
 		copy: [
 			'For solo businesses owners',
 			'Up to 5 apps',
@@ -10,7 +10,7 @@ const plansDictionary = [
 		],
 	},
 	{
-		id: "agency_development",
+		stripeId: "agency_development",
 		copy: [
 			'For a team of marketers and designers',
 			'Unlimited apps',
@@ -19,10 +19,9 @@ const plansDictionary = [
 			'Detailed campaign reports',
 			'Conversion funnel report',
 		],
-		price: 89.0,
 	},
 	{
-		id: "enterprise_development",
+		stripeId: "enterprise_development",
 		copy: [
 			'For big agencies and companies',
 			'Unlimited apps',
@@ -41,9 +40,13 @@ const plansDictionary = [
 
 export const receivePlans = plans => {
 	const processedPlans = plans.map(plan => {
+		console.log('el plan', plan)
+		const elPlan = _.find(plansDictionary, {'stripeId': plan.stripeId})
+		const amount = parseInt(plan.amount) / 100
 		return {
 			...plan,
-			copy: _.find(plansDictionary, {'id': plan.id}).copy
+			copy: elPlan.copy,
+			amount,
 		}
 	})
 	return {

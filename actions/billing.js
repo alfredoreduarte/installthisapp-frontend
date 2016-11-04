@@ -27,12 +27,12 @@ export const purchase = (token, plan, hasCustomer) => {
 	return dispatch => {
 		// If the admin already is a registered customer, we just create a new subscription
 		// Otherwise, we create a new customer attached to a subscription
-		const url = hasCustomer ? 'subscriptions.json' : 'customers.json'
+		// const url = hasCustomer ? 'subscriptions.json' : 'customers.json'
+		const url = '/payola/subscribe/subscription_plan/1.json'
 		postToApi(
 			url, 
 			{
 				...token,
-				plan,
 			}
 		).then(response => {
 			if (response.success) {
