@@ -46,6 +46,9 @@ const Scoreboard = ({
 					<div className="hide"><SearchForm /></div>
 				</div>
 				<div className="col-md-8 text-right">
+					{entries.length == 0 ?
+						null
+					:
 					<ButtonToolbar>
 						<button className="btn btn-sm btn-danger pull-right" onClick={cleanup}>
 							Reset 
@@ -54,6 +57,7 @@ const Scoreboard = ({
 							Refresh
 						</button>
 					</ButtonToolbar>
+					}
 					<ul className="ita-table-tools-selected list-inline list-no-margin">
 						<li className={selectedItems.length ? '' : 'hide'}>
 							<a 
@@ -85,46 +89,75 @@ const Scoreboard = ({
 				</div>
 			</div>
 		</div>
-		<Table className="ita-table">
-			<thead>
-				<tr>
-					<th>
-						<span>Name</span>
-					</th>
-					<th>
-						<span>Likes</span>
-					</th>
-					<th>
-						<span>Comments</span>
-					</th>
-					<th>
-						<span>Score</span>
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				{entries.map(entry => 
-				<tr key={entry.senderId}>
-					<td>
-						<User 
-							name={entry.senderName} 
-							identifier={entry.senderId} 
-							small
-							 />
-					</td>
-					<td>
-						{entry.likes}
-					</td>
-					<td>
-						{entry.comments}
-					</td>
-					<td>
-						<b>{handleScore(entry.likes) * likeMultiplier + handleScore(entry.comments) * commentMultiplier}</b>
-					</td>
-				</tr>
-				)}
-			</tbody>
-		</Table>
+		{entries.length == 0 ?
+			<div className="ita-empty text-center">
+				<h3 classNam="weight-thin animated fadeInDown">
+					There are no likes or comments yet.
+				</h3>
+				<h4 classNam="weight-thin animated fadeInDown">
+					Go shake up that Facebook Page!
+				</h4>
+				<p classNam="weight-thin animated fadeInDown">
+					(or make sure you've actually installed the <i>Integration</i>)
+				</p>
+				<br />
+				<br />
+				<img 
+					src="/images/dashboard-empty.png"
+					style={{height: '100px'}}
+					className="ita-empty-illustration animated fadeInUp" />
+				<br />
+				<br />
+				<p>
+					<button
+						onClick={fetch}
+						className="btn btn-success animated fadeInUp">
+						Check again
+					</button>
+				</p>
+			</div>
+		:
+			<Table className="ita-table">
+				<thead>
+					<tr>
+						<th>
+							<span>Name</span>
+						</th>
+						<th>
+							<span>Likes</span>
+						</th>
+						<th>
+							<span>Comments</span>
+						</th>
+						<th>
+							<span>Score</span>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{entries.map(entry => 
+					<tr key={entry.senderId}>
+						<td>
+							<User 
+								name={entry.senderName} 
+								identifier={entry.senderId} 
+								small
+								 />
+						</td>
+						<td>
+							{entry.likes}
+						</td>
+						<td>
+							{entry.comments}
+						</td>
+						<td>
+							<b>{handleScore(entry.likes) * likeMultiplier + handleScore(entry.comments) * commentMultiplier}</b>
+						</td>
+					</tr>
+					)}
+				</tbody>
+			</Table>
+		}
 	</div>
 )
 
