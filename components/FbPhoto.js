@@ -11,7 +11,7 @@ const FbPhoto = ({ className, identifier, width, height, style }) => (
 		:
 			<img 
 				className={className} 
-				src={`https://dummyimage.com/100x100/cccccc/fff.jpg&text=US`}
+				src={`https://dummyimage.com/100x100/cccccc/fff.jpg&text=IA`}
 				style={{...style, width: width, height: height}}
 			/>
 		}
