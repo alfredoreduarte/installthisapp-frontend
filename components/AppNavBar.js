@@ -18,13 +18,13 @@ const AppNavBar = ({ name, identifier, logout, subscription }) => (
 		<div className="collapse navbar-collapse text-right">
 			<ul className="nav navbar-nav navbar-right">
 				{subscription ? 
-				<li className="">
+				<li className="hide">
 					<Link to='/d/upgrade' className="link-no-underline text-success">
 						<small>UPGRADE</small>
 					</Link>
 				</li>
 				:
-				<li className="">
+				<li className="hide">
 					<Link to='/d/upgrade' className="link-no-underline text-success">
 						<small>UPGRADE</small>
 					</Link>

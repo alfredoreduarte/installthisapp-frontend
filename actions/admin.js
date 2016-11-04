@@ -34,7 +34,7 @@ export const fetchAdmin = () => {
 				apps: response.applications,
 				pages: response.pages,
 			}
-			dispatch(receivePlans(response.plans)) // Receive plans list
+			// dispatch(receivePlans(response.plans)) // Receive plans list
 			const normalized = normalize(entities, schema.entities)
 			dispatch(receiveEntities(normalized.entities))
 			// Sanitize admin user
@@ -47,7 +47,7 @@ export const fetchAdmin = () => {
 				applications: response.applications.length,
 				publishedApplications: _.filter(response.applications, {'status': 'installed'}).length,
 			})
-			delete admin.plans
+			// delete admin.plans
 			return dispatch(receiveAdmin(admin))
 		})
 	}
