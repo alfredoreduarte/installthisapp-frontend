@@ -8,39 +8,9 @@
 	<link rel="stylesheet" type="text/css" href="/landing/styles/styles.css" />
 	<link rel="icon" type="image/png" href="/images/favicon.png" />
 	<title>InstallThisApp</title>
-</head>
-<body>
-	<span id="our-clients" class="hide"></span>
-	<header class="jumbotron site-jumbotron white-text-area homepage-jumbotron home-header-2" id="large-header">
-		<div class="container">
-			<div class="homepage-jumbotron-conten">
-				<h1 class="text-center site-title">Sign in</h1>
-				<br/>
-				<!-- <h2 class="text-center site-subtitle h3">
-					Of course you do. That's why you're invited to the early preview of the new InstallThisApp.
-				</h2> -->
-				<div class="text-center hide">
-					<span href="#" class="btn btn-lg btn-primary site-cta cta-glow">Start now</span>
-					<button onclick="javascript:login()" class="btn btn-lg btn-primary site-cta absolute-horizontal-center" data-loading-text="Please wait...">Start now</button>
-				</div>
-			</div>
-			<div class="col-md-6 col-md-offset-3">
-				<div class="form-group">
-					<input type="email" id="email" class="form-control" placeholder="Email" required />
-				</div>
-				<div class="form-group">
-					<input type="password" id="password" class="form-control" placeholder="Password" required />
-				</div>
-				<p class="text-center"><button type="submit" class="btn btn-primary btn-lg" id="login-button">Login</button></p>
-				<br/>
-				<p style="font-size: 12px"><a href="/forgot"><small>Forgot your password?</small></a></p>
-				<p style="font-size: 12px"><a href="/signup"><small>Don't have an account?</small></a></p>
-			</div>
-		</div>
-		<canvas id="demo-canvas" class="hidden-xs hidden-sm"></canvas>
-	</header>
 	<script type="text/javascript" src="<%= cloudFrontUrl %>/landing/landing.js"></script>
 	<script type="text/javascript" src="<%= cloudFrontUrl %>/node_modules/js-cookie/src/js.cookie.js"></script>
+	<script type="text/javascript" src="<%= cloudFrontUrl %>/node_modules/whatwg-fetch/fetch.js"></script>
 	<script>
 		var saveCookie = function(name, value){
 			Cookies.set(name, value)
@@ -82,5 +52,36 @@
 	<script type="text/javascript">
 		analytics.page('Login')
 	</script>
+</head>
+<body>
+	<span id="our-clients" class="hide"></span>
+	<header class="jumbotron site-jumbotron white-text-area homepage-jumbotron home-header-2" id="large-header">
+		<div class="container">
+			<div class="homepage-jumbotron-conten">
+				<h1 class="text-center site-title">Sign in</h1>
+				<br/>
+				<!-- <h2 class="text-center site-subtitle h3">
+					Of course you do. That's why you're invited to the early preview of the new InstallThisApp.
+				</h2> -->
+				<div class="text-center hide">
+					<span href="#" class="btn btn-lg btn-primary site-cta cta-glow">Start now</span>
+					<button onclick="javascript:login()" class="btn btn-lg btn-primary site-cta absolute-horizontal-center" data-loading-text="Please wait...">Start now</button>
+				</div>
+			</div>
+			<div class="col-md-6 col-md-offset-3">
+				<div class="form-group">
+					<input type="email" id="email" class="form-control" placeholder="Email" required />
+				</div>
+				<div class="form-group">
+					<input type="password" id="password" class="form-control" placeholder="Password" required />
+				</div>
+				<p class="text-center"><button type="submit" class="btn btn-primary btn-lg" id="login-button">Login</button></p>
+				<br/>
+				<p style="font-size: 12px"><a href="/forgot"><small>Forgot your password?</small></a></p>
+				<p style="font-size: 12px"><a href="/signup"><small>Don't have an account?</small></a></p>
+			</div>
+		</div>
+		<canvas id="demo-canvas" class="hidden-xs hidden-sm"></canvas>
+	</header>
 </body>
 </html>

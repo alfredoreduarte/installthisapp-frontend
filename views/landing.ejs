@@ -8,6 +8,11 @@
 	<link rel="stylesheet" type="text/css" href="/landing/styles/styles.css" />
 	<link rel="icon" type="image/png" href="/images/favicon.png" />
 	<title>InstallThisApp</title>
+	<script type="text/javascript" src="<%= cloudFrontUrl %>/landing/landing.js"></script>
+	<%- include('_segment') %>
+	<script type="text/javascript">
+		analytics.page('Home')
+	</script>
 </head>
 <body>
 	<span id="our-clients" class="hide"></span>
@@ -30,10 +35,5 @@
 		</div>
 		<canvas id="demo-canvas" class="hidden-xs hidden-sm"></canvas>
 	</header>
-	<script type="text/javascript" src="<%= cloudFrontUrl %>/landing/landing.js"></script>
-	<%- include('_segment') %>
-	<script type="text/javascript">
-		analytics.page('Home')
-	</script>
 </body>
 </html>

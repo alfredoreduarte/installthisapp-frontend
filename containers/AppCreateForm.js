@@ -12,12 +12,12 @@ const AppCreateForm = ({ handleSubmit, handleTextChange, busy, moduleName, valid
 	<form className="container-fluid" onSubmit={handleSubmit}>
 		<Col xs={12} sm={12} md={4} mdOffset={4}>
 			<FormGroup>
-				<ControlLabel>App</ControlLabel>
+				<ControlLabel>App Type</ControlLabel>
 				<p>{moduleName}</p>
 			</FormGroup>
 			<hr/>
 			<FormGroup>
-				<ControlLabel>Title</ControlLabel>
+				<ControlLabel>App Title</ControlLabel>
 				<FormControl 
 					type="text"
 					autoFocus

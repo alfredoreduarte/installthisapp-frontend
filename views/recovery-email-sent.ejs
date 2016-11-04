@@ -8,19 +8,8 @@
 	<link rel="stylesheet" type="text/css" href="/landing/styles/styles.css" />
 	<link rel="icon" type="image/png" href="/images/favicon.png" />
 	<title>InstallThisApp</title>
-</head>
-<body>
-	<span id="our-clients" class="hide"></span>
-	<header class="jumbotron site-jumbotron white-text-area homepage-jumbotron home-header-2" id="large-header">
-		<div class="container">
-			<div>
-				<h2>Check your email</h2>
-				<h4>We've sent you an email with instructions on how to change your password. Should arrive in a moment.</h4>
-				<p><a href="/">⃪ Back</a></p>
-			</div>
-		</div>
-	</header>
 	<script type="text/javascript" src="<%= cloudFrontUrl %>/landing/landing.js"></script>
+	<script type="text/javascript" src="<%= cloudFrontUrl %>/node_modules/whatwg-fetch/fetch.js"></script>
 	<script>
 		var forgot = function(){
 			var email = $('#email').val()
@@ -50,5 +39,17 @@
 	<script type="text/javascript">
 		// analytics.page('Recovery email sent')
 	</script>
+</head>
+<body>
+	<span id="our-clients" class="hide"></span>
+	<header class="jumbotron site-jumbotron white-text-area homepage-jumbotron home-header-2" id="large-header">
+		<div class="container">
+			<div>
+				<h2>Check your email</h2>
+				<h4>We've sent you an email with instructions on how to change your password. Should arrive in a moment.</h4>
+				<p><a href="/">⃪ Back</a></p>
+			</div>
+		</div>
+	</header>
 </body>
 </html>
