@@ -86,13 +86,17 @@ export const updateInfo = () => {
 }
 
 export const fbConnect = fbResponse => {
-	console.log('fbResponse')
-	console.log(fbResponse)
 	return dispatch => {
+		dispatch({
+			type: 'TOGGLE_ACTIVITY/CONNECTING_FACEBOOK'
+		})
 		return postToApi('fb_profiles.json', {
 			identifier: fbResponse.id,
 			signedRequest: fbResponse.signedRequest,
 		}).then( response => {
+			dispatch({
+				type: 'TOGGLE_ACTIVITY/CONNECTING_FACEBOOK'
+			})
 			// Prepare entities for normalization
 			const entities = {
 				apps: response.applications,

@@ -1,0 +1,33 @@
+.react-sanfona-item
+	padding: 10px 10px
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,.04)
+	border: 1px solid #e4edf5
+	margin-bottom: 10px
+	border-radius: 3px
+	position: relative
+	&:after
+		content: '⚙'
+		position: absolute
+		top: 12px
+		left: 10px
+		width: 15px
+		height: 15px
+		font-size: 10px
+.react-sanfona-item-expanded
+	border-color: $brand-primary
+.react-sanfona-item-title
+	font-size: 14px
+	font-weight: 400
+	// border-bottom: 1px solid #f3f3f3
+	padding-left: 20px
+.react-sanfona-item-body
+	// padding-top: 15px
+.react-sanfona-item-body-wrapper
+	padding: 10px
+.accordion-disabled
+	pointer-events: none
+	opacity: .5
+.accordion-done
+	// border-color: $brand-success
+	&:after
+		content: '✅'

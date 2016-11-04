@@ -159,6 +159,9 @@ export const postNewApp = () => {
 
 export const installFacebookTab = () => {
 	return (dispatch, getState) => {
+		dispatch({
+			type: 'TOGGLE_ACTIVITY/INSTALLING_TAB'
+		})
 		const state = getState()
 		const currentApp = getCurrentAppByState(state)
 		const fbPageIdentifierForIntegration = state.admin.fbPageIdentifierForIntegration
@@ -168,6 +171,9 @@ export const installFacebookTab = () => {
 		return postToApi(`applications/${currentApp.checksum}/install_tab.json`, {
 			fbPageIdentifier: fbPageIdentifierForIntegration
 		}).then(response => {
+			dispatch({
+				type: 'TOGGLE_ACTIVITY/INSTALLING_TAB'
+			})
 			const entities = {
 				apps: response.applications,
 				pages: response.pages,

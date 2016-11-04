@@ -6,8 +6,18 @@ const activityIndicators = (state = {
 	updatingApp: false,
 	appCreation: false,
 	appChecksumDashboardLoading: null,
+	connectingToFacebook: false,
+	installingFacebookTab: false,
 }, action) => {
 	switch (action.type) {
+		case 'TOGGLE_ACTIVITY/INSTALLING_TAB':
+			return Object.assign({}, state, {
+				installingFacebookTab: !state.installingFacebookTab
+			})
+		case 'TOGGLE_ACTIVITY/CONNECTING_FACEBOOK':
+			return Object.assign({}, state, {
+				connectingToFacebook: !state.connectingToFacebook
+			})
 		case 'TOGGLE_ACTIVITY/UPDATING_ADMIN':
 			return Object.assign({}, state, {
 				updatingAdmin: !state.updatingAdmin
