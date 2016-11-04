@@ -16,7 +16,9 @@
 			Cookies.set(name, value)
 		}
 		$(document).ready(function(){
-			$('#login-button').on('click', function(){
+			$('#login-form').on('submit', function(e){
+				e.preventDefault();
+				console.log('login click')
 				$('#login-button').attr('disabled', true)
 				$('#login-button').html('Please wait...')
 				var email = $('#email').val()
@@ -68,7 +70,7 @@
 					<button onclick="javascript:login()" class="btn btn-lg btn-primary site-cta absolute-horizontal-center" data-loading-text="Please wait...">Start now</button>
 				</div>
 			</div>
-			<div class="col-md-6 col-md-offset-3">
+			<form id="login-form" class="col-md-6 col-md-offset-3">
 				<div class="form-group">
 					<input type="email" id="email" class="form-control" placeholder="Email" required />
 				</div>
@@ -79,7 +81,7 @@
 				<br/>
 				<p style="font-size: 12px"><a href="/forgot"><small>Forgot your password?</small></a></p>
 				<p style="font-size: 12px"><a href="/signup"><small>Don't have an account?</small></a></p>
-			</div>
+			</form>
 		</div>
 		<canvas id="demo-canvas" class="hidden-xs hidden-sm"></canvas>
 	</header>

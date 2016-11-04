@@ -83,7 +83,8 @@
 			)
 		}
 		$(document).ready(function(){
-			$('#signup-button').on('click', function(){
+			$('#signup-form').on('submit', function(e){
+				e.preventDefault();
 				ITAregister();
 			})
 		})
@@ -109,7 +110,7 @@
 					<button onclick="javascript:login()" class="btn btn-lg btn-primary site-cta absolute-horizontal-center" data-loading-text="Please wait...">Start now</button>
 				</div>
 			</div>
-			<div class="col-md-6 col-md-offset-3">
+			<form id="signup-form" class="col-md-6 col-md-offset-3">
 				<div class="form-group">
 					<input type="email" id="email" class="form-control" placeholder="Email" required />
 				</div>
@@ -120,7 +121,7 @@
 				<br/>
 				<br/>
 				<p class="text-right" style="font-size: 12px">Already have an account? <a href="/login">Login →</a></p>
-			</div>
+			</form>
 		</div>
 		<canvas id="demo-canvas" class="hidden-xs hidden-sm"></canvas>
 	</header>
