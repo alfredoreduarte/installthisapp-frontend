@@ -29,7 +29,7 @@ const Integrations = ({
 }) => (
 	<div>
 		<div className="col-md-6">
-			<h4>Facebook Integration {published ? 'true' : 'false'}</h4>
+			<h4>Facebook Integration</h4>
 			{tabInstalledInPage ? 
 			<div>
 				<p className="h5">Done! A tab has been installed in <i>{tabInstalledInPage}</i>, and real-time activity collection is working.</p>
