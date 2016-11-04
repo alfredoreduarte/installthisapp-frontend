@@ -30,9 +30,6 @@ export const toggleAppUninstalling = checksum => ({
 export const destroy = checksum => {
 	return (dispatch, getState) => {
 		const currentApp = getCurrentAppByState(getState())
-		analytics.track('Feature used', {
-			type: 'Delete app',
-		})
 		deleteFromApi(`applications/${checksum}.json`, null, res => {
 			dispatch(updateApp(checksum, res))
 			dispatch(push('/d'))
@@ -43,11 +40,8 @@ export const destroy = checksum => {
 export const install = checksum => {
 	return (dispatch, getState) => {
 		const currentApp = getCurrentAppByState(getState())
-		analytics.track('Feature used', {
-			type: 'Install app',
-		})
-		analytics.track('App installed', {
-			module: currentApp.applicationType,
+		analytics.track('App Installed', {
+			appType: currentApp.applicationType,
 		})
 		return postToApi(`applications/${checksum}/install.json`, null, res => dispatch(updateApp(checksum, res)))
 	}
@@ -56,9 +50,6 @@ export const install = checksum => {
 export const uninstall = checksum => {
 	return (dispatch, getState) => {
 		const currentApp = getCurrentAppByState(getState())
-		analytics.track('Feature used', {
-			type: 'Uninstall',
-		})
 		postToApi(`applications/${checksum}/uninstall.json`, null, res => dispatch(updateApp(checksum, res)))
 	}
 }
@@ -131,11 +122,8 @@ const digestDataBeforePostingNewApp = data => {
 export const postNewApp = () => {
 	return (dispatch, getState) => {
 		const body = getState().newApp
-		analytics.track('Feature used', {
-			type: 'Create app',
-		})
 		analytics.track('App Created', {
-			module: body.module,
+			appType: body.module,
 		})
 		const params = digestDataBeforePostingNewApp(body)
 		const defaultMessages = JSON.stringify(require(`modules/${params.application.application_type}/messages`).default)
@@ -174,8 +162,8 @@ export const installFacebookTab = () => {
 		const state = getState()
 		const currentApp = getCurrentAppByState(state)
 		const fbPageIdentifierForIntegration = state.admin.fbPageIdentifierForIntegration
-		analytics.track('Feature used', {
-			type: 'Install Facebook Tab',
+		analytics.track('Feature Used', {
+			featureType: 'Facebook Tab',
 		})
 		return postToApi(`applications/${currentApp.checksum}/install_tab.json`, {
 			fbPageIdentifier: fbPageIdentifierForIntegration
@@ -199,9 +187,6 @@ export const uninstallFacebookTab = () => {
 	return (dispatch, getState) => {
 		const state = getState()
 		const currentApp = getCurrentAppByState(state)
-		analytics.track('Feature used', {
-			type: 'Uninstall Facebook Tab',
-		})
 		// postToApi(`applications/${currentApp.checksum}/uninstall_tab.json`, null, res => dispatch(updateApp(currentApp.checksum, res)))
 		postToApi(`applications/${currentApp.checksum}/uninstall_tab.json`, null)
 		.then(response => {

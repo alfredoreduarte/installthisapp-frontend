@@ -74,6 +74,9 @@ export const fetchImages = () => {
 		const { checksum, canvasId } = getState().applicationData
 		return getExternal(window.imagesUrl).then( json => {
 			dispatch(receiveImages(json))
+			if (json.intro == null) {
+				dispatch(push(`/${canvasId}/${checksum}/scores`))
+			}
 			return Promise.resolve()
 		})
 	}

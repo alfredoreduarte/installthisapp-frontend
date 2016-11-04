@@ -2,8 +2,8 @@ module.exports = {
 	path: 'integrations',
 	onEnter: (nextState, replace) => {
 		analytics.page('App Integrations')
-		analytics.track('Feature used', {
-			type: 'App Integrations',
+		analytics.track('Feature Used', {
+			featureType: 'App Integrations',
 		})
 	},
 	getComponent(nextState, cb) {

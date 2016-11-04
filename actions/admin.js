@@ -7,14 +7,23 @@ import { receivePlans } from 'actions/plans'
 import Cookies from 'js-cookie'
 
 export const receiveAdmin = payload => {
-	analytics.identify(payload.id, {
-		name: payload.name,
-		email: payload.email,
-	})
 	return {
 		type: 'RECEIVE_ADMIN',
 		payload
 	}
+}
+
+const identifyAdmin = payload => {
+	analytics.identify(payload.id, {
+		name: payload.name,
+		email: payload.email,
+		created_at: payload.createdAt,
+		confirmed_at: payload.confirmedAt,
+		facebook_pages: payload.facebookPages,
+		applications: payload.applications,
+		published_applications: payload.publishedApplications,
+		plan: 'demo',
+	})
 }
 
 export const fetchAdmin = () => {
@@ -32,6 +41,12 @@ export const fetchAdmin = () => {
 			const admin = { ...response }
 			delete admin.applications
 			delete admin.pages
+			identifyAdmin({
+				...admin,
+				facebookPages: response.pages.length,
+				applications: response.applications.length,
+				publishedApplications: _.filter(response.applications, {'status': 'installed'}).length,
+			})
 			// delete admin.plans
 			return dispatch(receiveAdmin(admin))
 		})

@@ -8,10 +8,7 @@ export default (store) => ({
 					path: 'questions(/create)',
 					modal: true,
 					onEnter: (nextState, replace) => {
-						analytics.page({
-							name:  'Questions',
-							category: 'Trivia',
-						})
+						
 					},
 					getComponents(nextState, cb) {
 						require.ensure([], (require) => {
@@ -28,10 +25,7 @@ export default (store) => ({
 				{
 					path: 'questions/edit/:questionId',
 					onEnter: (nextState, replace) => {
-						analytics.page({
-							name:  'Answers',
-							category: 'Trivia',
-						})
+						
 					},
 					modal: true,
 					getComponents(nextState, cb) {

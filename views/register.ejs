@@ -64,8 +64,6 @@
 				return response.json()
 			})
 			.then(json => {
-				console.log('register response')
-				console.log(json)
 				login(email, password)
 			})
 			.catch(exception =>
@@ -91,10 +89,6 @@
 				})
 			})
 			.then(response => {
-				console.log(response.headers.get('access-token'))
-				console.log(response.headers.get('token-type'))
-				console.log(response.headers.get('client'))
-				console.log(response.headers.get('uid'))
 				saveCookie('access-token', response.headers.get('access-token'))
 				saveCookie('token-type', response.headers.get('token-type'))
 				saveCookie('client', response.headers.get('client'))
@@ -102,64 +96,18 @@
 				return response.json()
 			})
 			.then(json => {
-				console.log('login response')
-				console.log(json)
-				top.location = location.protocol + '//' + window.location.host + '/d'
+				analytics.track('Account Created', () => {
+					top.location = location.protocol + '//' + window.location.host + '/d'
+				})
 			})
 			.catch(exception =>
 				console.log('parsing failed', exception)
 			)
 		}
-		var fbLogin = function(){
-			FB.login(function(response) {
-				fetch('<%= apiUrl %>/fb_profiles.json', {
-					method: 'POST',
-					headers: {
-						'Accept': 'application/json',
-						'Content-Type': 'application/json',
-						'access-token': Cookies.get('access-token'),
-						'token-type': Cookies.get('token-type'),
-						'uid': Cookies.get('uid'),
-						'client': Cookies.get('client'),
-					},
-					body: JSON.stringify({
-						authResponse: response.authResponse
-					})
-				}).then(response => {
-					return response.json()
-				})
-				.then(json => {
-					console.log(json)
-				})
-				.catch(exception =>
-					console.log('parsing failed', exception)
-				)
-			}, {
-				scope: 'email'
-			})
-		}
-
-		window.fbAsyncInit = function() {
-			FB.init({
-				appId      : '<%=facebookAppId%>',
-				xfbml      : true,
-				version    : 'v2.7'
-			});
-		};
-
-		(function(d, s, id){
-		var js, fjs = d.getElementsByTagName(s)[0];
-		if (d.getElementById(id)) {return;}
-		js = d.createElement(s); js.id = id;
-		js.src = "//connect.facebook.net/en_US/sdk.js";
-		fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
 	</script>
 	<%- include('_segment') %>
 	<script type="text/javascript">
-		analytics.page({
-			name:  'Home',
-		})
+		analytics.page('Signup')
 	</script>
 </body>
 </html>

@@ -19,9 +19,7 @@ export const createRoutes = (store, dispatch) => ({
 		}
 	},
 	onEnter: (nextState, replace, next) => {
-		analytics.page({
-			name: 'Admin Dashboard'
-		})
+		analytics.page('Admin Dashboard')
 		dispatch(fetchAdmin()).then(() => {
 			next()
 		})
@@ -40,9 +38,7 @@ export const createRoutes = (store, dispatch) => ({
 			path: '/d/apps/create(/:step)',
 			component: require('containers/Application').default,
 			onEnter: (nextState, replace) => {
-				analytics.track('Feature used', {
-					type: 'App Creation Window',
-				})
+				
 			},
 			indexRoute: {
 				component: require('containers/AdminDashboard').default

@@ -2,8 +2,8 @@ module.exports = {
 	path: 'preferences',
 	onEnter: (nextState, replace) => {
 		analytics.page('App Preferences')
-		analytics.track('Feature used', {
-			type: 'App Preferences',
+		analytics.track('Feature Used', {
+			featureType: 'App Preferences',
 		})
 	},
 	getComponent(nextState, cb) {

@@ -26,7 +26,7 @@ const App = ({
 			className={`panel panel-default ita-panel-screen ${otherAppsLoading ? 'greyed-out' : ''}`}>
 			<div className="panel-body">
 				<img 
-					src={`/images/module-icons/${applicationType}.png`} />
+					src={`/images/module-icons/${applicationType}-big.png`} />
 				{loadingDashboard ? 
 					<div className="ita-panel-overlay-spinner">
 						<Spinner spinnerName="circle" noFadeIn={true} />

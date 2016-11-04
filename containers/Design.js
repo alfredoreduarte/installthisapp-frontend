@@ -101,10 +101,9 @@ const Design = ({
 					<div>
 						<h4><u>Images</u></h4>
 						{imagesDictionary.map( image =>
-							<div> 
+							<div key={image.key}> 
 							 <ImageUploader 
 							 	imgOrBackground="img"
-								key={image.key}
 							 	property={image.key} 
 							 	onChange={val => handleImageChange(image.key, val)} 
 							 	value={image.value} 
@@ -190,7 +189,9 @@ const mapDispatchToProps = (dispatch, props) => ({
 	handleMessageChange: (key, value) => dispatch(editMessage(key, value)),
 	handleImageChange: (key, value) => {
 		dispatch(editImage(key, value))
-		dispatch(saveStyles())
+		if (value && value !== 'none') {
+			dispatch(saveStyles())
+		}
 	},
 	handleChange: (property, value) => dispatch(modifyWholeSheet(property, value)),
 	handleSave: () => dispatch(saveStyles()),

@@ -29,7 +29,7 @@ const AppCreateModal = ({ show, step, handleClose, back, whoopsAlert }) => (
 		<Modal.Body>
 			{whoopsAlert && step == 1 ? 
 				<div className="alert alert-warning">
-					Whoops! That app is not quite ready yet. The currently available app is <b>Top Fans</b>.
+					Whoops! That app is not quite ready yet, but we're going to speed up development based on your preference. Our currently available apps are: <b>Top Fans</b>.
 				</div>
 			: null }
 			{step == 1 ? <ModuleGrid /> : null}

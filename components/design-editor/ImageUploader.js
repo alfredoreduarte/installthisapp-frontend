@@ -6,6 +6,7 @@ import { saveImage } from 'actions/styles'
 import { API_URL } from 'config'
 
 const ImageUploader = ({
+	clear,
 	imgOrBackground,
 	value,
 	property,
@@ -17,6 +18,7 @@ const ImageUploader = ({
 			<label>
 				{_.capitalize(_.replace(property, '-', ' '))}
 			</label>
+			<a style={{marginLeft: '10px'}} href="javascript:void(0)" onClick={() => clear(imgOrBackground)}><small>(clear)</small></a>
 		</div>
 		<div className="ita-flex-box ita-flex-items-center ita-flex-justify-end ita-flex-block text-right">
 			<FileInput 
@@ -31,7 +33,7 @@ const ImageUploader = ({
 )
 
 ImageUploader.propTypes = {
-	value: PropTypes.string.isRequired,
+	value: PropTypes.string,
 	property: PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
 }
@@ -54,6 +56,14 @@ const mapDispatchToProps = (dispatch, props) => ({
 			}			
 		})
 	},
+	clear: imgOrBackground => {
+		if (imgOrBackground == 'img') {
+			props.onChange(null)
+		}
+		else {
+			props.onChange(`none`)
+		}
+	}
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ImageUploader)

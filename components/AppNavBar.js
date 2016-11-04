@@ -63,7 +63,7 @@ const mapStateToProps = (state) => {
 	return { 
 		name: state.admin.name,
 		subscription: state.admin.subscription,
-		identifier: state.admin.identifier,
+		identifier: state.admin.fbProfile ? state.admin.fbProfile.identifier : null,
 	}
 }
 

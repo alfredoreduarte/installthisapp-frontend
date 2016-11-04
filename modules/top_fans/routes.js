@@ -13,10 +13,6 @@ export default (store, dispatch) => ({
 						// .then(() => {
 							dispatch(fetchTopFansEntities(nextState.params.checksum))
 								.then(() => {
-									analytics.page({
-										name:  'Scoreboard',
-										category: 'Top Fans',
-									})
 									next()
 								})
 						// })

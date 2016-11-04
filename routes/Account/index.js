@@ -2,9 +2,6 @@ module.exports = {
 	path: '/d/account',
 	onEnter: (nextState, replace) => {
 		analytics.page('Account')
-		analytics.track('Feature used', {
-			type: 'Account',
-		})
 	},
 	getComponent(nextState, cb) {
 		require.ensure([], (require) => {

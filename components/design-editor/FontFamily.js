@@ -27,9 +27,9 @@ FontFamily.defaultProps = {
 		{ value: 'Verdana', label: 'Verdana' },
 		{ value: 'Helvetica', label: 'Helvetica' },
 		{ value: 'Georgia', label: 'Georgia' },
-		{ value: 'Open Sans', label: 'Open Sans' },
-		{ value: 'Oswald', label: 'Oswald' },
-		{ value: 'Proxima Nova', label: 'Proxima Nova' },
+		// { value: 'Open Sans', label: 'Open Sans' },
+		// { value: 'Oswald', label: 'Oswald' },
+		// { value: 'Proxima Nova', label: 'Proxima Nova' },
 	]
 }
 
