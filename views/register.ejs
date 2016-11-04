@@ -51,26 +51,33 @@
 			$('#signup-button').html('Please wait...')
 			var email = $('#email').val()
 			var password = $('#password').val()
-			fetch('<%= apiUrl %>/auth.json', {
-				method: 'POST',
-				headers: {
-					'Accept': 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					email: $('#email').val(),
-					password: $('#password').val(),
-					confirm_success_url: 'https://' + window.location.hostname + '/d?email_confirmed=true'
+			if (email && password) {
+				fetch('<%= apiUrl %>/auth.json', {
+					method: 'POST',
+					headers: {
+						'Accept': 'application/json',
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						email: $('#email').val(),
+						password: $('#password').val(),
+						confirm_success_url: 'https://' + window.location.hostname + '/d?email_confirmed=true'
+					})
+				}).then(response => {
+					return response.json()
 				})
-			}).then(response => {
-				return response.json()
-			})
-			.then(json => {
-				login(email, password)
-			})
-			.catch(exception =>
-				console.log('parsing failed', exception)
-			)
+				.then(json => {
+					login(email, password)
+				})
+				.catch(exception =>
+					console.log('parsing failed', exception)
+				)
+			}
+			else{
+				$('#signup-button').attr('disabled', false)
+				$('#signup-button').html('Create Account')
+				alert('Email and password are mandatory')
+			}
 		}
 		var login = function(email, password){
 			if (!email) {
