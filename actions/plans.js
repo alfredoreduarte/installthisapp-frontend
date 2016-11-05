@@ -10,6 +10,14 @@ const plansDictionary = [
 		],
 	},
 	{
+		stripeId: "basic_staging",
+		copy: [
+			'For solo businesses owners',
+			'Up to 5 apps',
+			'1 Seat',
+		],
+	},
+	{
 		stripeId: "agency_development",
 		copy: [
 			'For a team of marketers and designers',
