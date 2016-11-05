@@ -53,7 +53,7 @@ export const receivePlans = plans => {
 		const amount = parseInt(plan.amount) / 100
 		return {
 			...plan,
-			copy: [],
+			copy: ['texto uno', 'texto dos'],
 			amount,
 		}
 	})
