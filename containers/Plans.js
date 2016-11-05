@@ -62,7 +62,7 @@ const Plans = ({
 							className="text-uppercase" 
 							style={{marginBottom: '50px', letterSpacing: '1px'}}><b>{plan.name}</b></h5>
 						<div className="text-muted" style={{marginBottom: '50px'}}>
-							{plan.copy.map(copy => <p key={copy}>{copy}</p>)}
+							
 						</div>
 						<p style={{marginBottom: '50px'}}>
 							<sup>$</sup><span className="h1"><b>{plan.amount}</b></span><sub>/mo</sub>
