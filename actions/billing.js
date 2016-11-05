@@ -23,16 +23,47 @@ export const cancel = () => {
 	}
 }
 
+export const simulatePurchase = () => {
+	return dispatch => {
+		// const url = 'payola/subscribe/subscription_plan/1.json'
+		const url = 'subscriptions.json'
+		postToApi(
+			url, 
+			{
+				planId: 1,
+				payolaPlanType: 'subscription_plan',
+				email: 'alfredoreduarte@gmail.com',
+				number: '4242424242424242',
+				expMonth: 12,
+				expYear: 19,
+				cvc: 129,
+			}
+		).then(response => {
+			if (response.success) {
+				dispatch(setAlert('Yay!', response))
+				// console.log('We are in business')
+				// location.reload()
+			}
+			else{
+				dispatch(setAlert('Error.', response.message))
+				console.log('Error', response)
+			}
+		})
+	}
+}
+
 export const purchase = (token, plan, hasCustomer) => {
 	return dispatch => {
 		// If the admin already is a registered customer, we just create a new subscription
 		// Otherwise, we create a new customer attached to a subscription
 		// const url = hasCustomer ? 'subscriptions.json' : 'customers.json'
-		const url = '/payola/subscribe/subscription_plan/1.json'
+		const url = 'payola/subscribe/subscription_plan/1.json'
+		console.log(token)
 		postToApi(
 			url, 
 			{
-				...token,
+				stripeToken: token.id,
+				stripeEmail: token.email,
 			}
 		).then(response => {
 			if (response.success) {

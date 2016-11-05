@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { goBack } from 'react-router-redux'
 import _ from 'lodash'
 import { connect } from 'react-redux'
-import { upgrade } from 'actions/billing'
+import { upgrade, simulatePurchase } from 'actions/billing'
 import TakeMoney from 'components/StripeButton'
 
 const ConditionalBuy = ({ upgrade, currentPlan, plan }) => (
@@ -29,6 +29,7 @@ const ConditionalBuy = ({ upgrade, currentPlan, plan }) => (
 )
 
 const Plans = ({ 
+	simul,
 	back,
 	currentPlan,
 	currentPlanName,
@@ -38,7 +39,7 @@ const Plans = ({
 	<div>
 		<div className="col-md-12">
 			<div className="page-header">
-				<a href="#" onClick={back}><small>⃪ Back</small></a>
+				<a href="#" onClick={simul}><small>⃪ Back</small></a>
 				<h1 className="text-center">Let's get you on the right plan!</h1>
 			</div>
 			<h4 
@@ -94,7 +95,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
 	upgrade: plan => dispatch(upgrade(plan)),
-	back: () => dispatch(goBack())
+	back: () => dispatch(goBack()),
+	simul: () => dispatch(simulatePurchase()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Plans)

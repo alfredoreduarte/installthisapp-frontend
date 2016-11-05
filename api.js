@@ -131,7 +131,8 @@ export const postToApi = (endpoint, body = null, success = temporaryEmptyFunctio
 					'Content-Type': 'application/json',
 					...authKeys,
 				},
-				body: processBody(body),
+				// body: processBody(body),
+				body: JSON.stringify(body),
 			})
 			.then(response => {
 				console.log('response')
