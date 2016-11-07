@@ -8,52 +8,6 @@
 	<link rel="stylesheet" type="text/css" href="/landing/styles/styles.css" />
 	<link rel="icon" type="image/png" href="/images/favicon.png" />
 	<title>InstallThisApp</title>
-	<script type="text/javascript" src="<%= cloudFrontUrl %>/landing/landing.js"></script>
-	<script type="text/javascript" src="<%= cloudFrontUrl %>/node_modules/js-cookie/src/js.cookie.js"></script>
-	<script type="text/javascript" src="<%= cloudFrontUrl %>/node_modules/whatwg-fetch/fetch.js"></script>
-	<script>
-		var saveCookie = function(name, value){
-			Cookies.set(name, value)
-		}
-		$(document).ready(function(){
-			$('#login-form').on('submit', function(e){
-				e.preventDefault();
-				console.log('login click')
-				$('#login-button').attr('disabled', true)
-				$('#login-button').html('Please wait...')
-				var email = $('#email').val()
-				var password = $('#password').val()
-				fetch('<%= apiUrl %>/auth/sign_in.json', {
-					method: 'POST',
-					headers: {
-						'Accept': 'application/json',
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({
-						email: email,
-						password: password
-					})
-				})
-				.then(response => {
-					saveCookie('access-token', response.headers.get('access-token'))
-					saveCookie('token-type', response.headers.get('token-type'))
-					saveCookie('client', response.headers.get('client'))
-					saveCookie('uid', response.headers.get('uid'))
-					return response.json()
-				})
-				.then(json => {
-					top.location = location.protocol + '//' + window.location.host + '/d'
-				})
-				.catch(exception =>
-					console.log('parsing failed', exception)
-				)
-			});
-		});
-	</script>
-	<%- include('_segment') %>
-	<script type="text/javascript">
-		analytics.page('Login')
-	</script>
 </head>
 <body>
 	<span id="our-clients" class="hide"></span>
@@ -85,5 +39,55 @@
 		</div>
 		<canvas id="demo-canvas" class="hidden-xs hidden-sm"></canvas>
 	</header>
+	<script type="text/javascript" src="<%= cloudFrontUrl %>/landing/landing.js"></script>
+	<script type="text/javascript" src="<%= cloudFrontUrl %>/node_modules/js-cookie/src/js.cookie.js"></script>
+	<script type="text/javascript" src="<%= cloudFrontUrl %>/node_modules/whatwg-fetch/fetch.js"></script>
+	<script>
+		var saveCookie = function(name, value){
+			Cookies.set(name, value)
+		}
+		$(document).ready(function(){
+			console.log('document ready')
+			$('#login-form').submit(function(e){
+				e.preventDefault();
+				console.log('on submit')
+				console.log('login click')
+				var email = $('#email').val()
+				var password = $('#password').val()
+				if (email && password) {
+					$('#login-button').attr('disabled', true)
+					$('#login-button').html('Please wait...')
+					fetch('<%= apiUrl %>/auth/sign_in.json', {
+						method: 'POST',
+						headers: {
+							'Accept': 'application/json',
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify({
+							email: email,
+							password: password
+						})
+					})
+					.then(response => {
+						saveCookie('access-token', response.headers.get('access-token'))
+						saveCookie('token-type', response.headers.get('token-type'))
+						saveCookie('client', response.headers.get('client'))
+						saveCookie('uid', response.headers.get('uid'))
+						return response.json()
+					})
+					.then(json => {
+						top.location = location.protocol + '//' + window.location.host + '/d'
+					})
+					.catch(exception =>
+						console.log('parsing failed', exception)
+					)
+				}
+			});
+		});
+	</script>
+	<%- include('_segment') %>
+	<script type="text/javascript">
+		analytics.page('Login')
+	</script>
 </body>
 </html>
