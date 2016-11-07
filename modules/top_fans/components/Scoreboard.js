@@ -91,13 +91,13 @@ const Scoreboard = ({
 		</div>
 		{entries.length == 0 ?
 			<div className="ita-empty text-center">
-				<h3 classNam="weight-thin animated fadeInDown">
+				<h3>
 					There are no likes or comments yet.
 				</h3>
-				<h4 classNam="weight-thin animated fadeInDown">
+				<h4>
 					Go shake up that Facebook Page!
 				</h4>
-				<p classNam="weight-thin animated fadeInDown">
+				<p>
 					(or make sure you've actually installed the <i>Integration</i>)
 				</p>
 				<br />
