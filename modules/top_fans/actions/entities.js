@@ -3,12 +3,15 @@ import * as schema from 'modules/top_fans/schema'
 import { getFromApi } from 'api'
 import { getCurrentAppByState } from 'selectors/apps'
 
-export const receiveTopFansEntities = entities => ({
-	type: 'TOP_FANS/RECEIVE_ENTITIES',
-	response: {
-		entities
+export const receiveTopFansEntities = entities => {
+	console.log('receiveTopFansEntities', entities)
+	return {
+		type: 'TOP_FANS/RECEIVE_ENTITIES',
+		response: {
+			entities
+		}
 	}
-})
+}
 
 export const receiveTopFansSettings = payload => ({
 	type: 'TOP_FANS/RECEIVE_SETTINGS',
@@ -30,8 +33,6 @@ export const fetchTopFansEntities = checksum => {
 export const fetchTopFansSettings = checksum => {
 	return dispatch => 
 		getFromApi(`applications/${checksum}/settings.json`).then( response => {
-			console.log('top fans settings')
-			console.log(response)
 			dispatch(receiveTopFansSettings(response))
 		})
 }

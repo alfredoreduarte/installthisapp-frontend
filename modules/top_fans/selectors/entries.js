@@ -5,27 +5,43 @@ import { getAllPages } from 'selectors/pages'
 
 const getAllEntries = state => state.topFans.entries
 
+// 
+// Merges two collections based on a common key
+// 
+const merge = (a, b, key) => {
+
+    function x(a) {
+        a.forEach(function (b) {
+            if (!(b[key] in obj)) {
+                obj[b[key]] = obj[b[key]] || {};
+                array.push(obj[b[key]]);
+            }
+            Object.keys(b).forEach(function (k) {
+                obj[b[key]][k] = b[k];
+            });
+        });
+    }
+
+    var array = [],
+        obj = {};
+
+    x(a);
+    x(b);
+    return array;
+}
+
 export const getEntriesForPage = createSelector(
 	getAllEntries,
 	getCurrentApp,
 	getAllPages,
 	(entries, app, allPages) => {
 		if (app && app.page) {
-			// console.log('alpage', allPages)
-			// console.log('alapp', app)
 			const page = _.find(allPages, {'id': app.page})
-			// console.log('lapage', page)
 			const identifier = parseInt(page.identifier)
-			// console.log('elpage')
-			// console.log(page)
-			// console.log(entries)
-			// if (entries[app.fbPage.identifier]){
-			// if (entries[app.setting.subscriptedFbPageIdentifier]){
 			if (entries[identifier]){
-				// const selectedEntries = entries[app.fbPage.identifier]
-				// const selectedEntries = entries[app.setting.subscriptedFbPageIdentifier]
 				const selectedEntries = entries[identifier]
-				return _.merge(selectedEntries.likes, selectedEntries.comments)
+				var arrResult = merge(selectedEntries.likes, selectedEntries.comments, 'senderId');
+				return arrResult
 			}
 			else{
 				return []
