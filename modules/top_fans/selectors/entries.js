@@ -40,7 +40,7 @@ export const getEntriesForPage = createSelector(
 			const identifier = parseInt(page.identifier)
 			if (entries[identifier]){
 				const selectedEntries = entries[identifier]
-				var arrResult = merge(selectedEntries.likes, selectedEntries.comments, 'senderId');
+				const arrResult = merge(selectedEntries.likes, selectedEntries.comments, 'senderId')
 				return arrResult
 			}
 			else{

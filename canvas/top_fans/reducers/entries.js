@@ -1,9 +1,12 @@
 import _ from 'lodash'
 
-const entries = (state = [], action) => {
+const entries = (state = {}, action) => {
 	switch (action.type) {
 		case 'RECEIVE_ENTRIES':
-			return action.response.entities
+			return {
+				likes: action.response.entities.likes,
+				comments: action.response.entities.comments,
+			}
 		default:
 			return state
 	}
