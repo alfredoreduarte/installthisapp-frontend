@@ -30,12 +30,12 @@ export const simulatePurchase = () => {
 		postToApi(
 			url, 
 			{
-				planId: 1,
+				plan_id: 1,
 				payolaPlanType: 'subscription_plan',
-				email: 'alfredoreduarte@gmail.com',
+				stripeEmail: 'alfredoreduarte@gmail.com',
 				number: '4242424242424242',
-				expMonth: 12,
-				expYear: 19,
+				exp_month: 12,
+				exp_year: 19,
 				cvc: 129,
 			}
 		).then(response => {
