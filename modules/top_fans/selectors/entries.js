@@ -1,34 +1,10 @@
 import _ from 'lodash'
 import { createSelector } from 'reselect'
+import merge from 'lib/mergeCollections'
 import { getCurrentApp } from 'selectors/apps'
 import { getAllPages } from 'selectors/pages'
 
 const getAllEntries = state => state.topFans.entries
-
-// 
-// Merges two collections based on a common key
-// 
-const merge = (a, b, key) => {
-
-    function x(a) {
-        a.forEach(function (b) {
-            if (!(b[key] in obj)) {
-                obj[b[key]] = obj[b[key]] || {};
-                array.push(obj[b[key]]);
-            }
-            Object.keys(b).forEach(function (k) {
-                obj[b[key]][k] = b[k];
-            });
-        });
-    }
-
-    var array = [],
-        obj = {};
-
-    x(a);
-    x(b);
-    return array;
-}
 
 export const getEntriesForPage = createSelector(
 	getAllEntries,
@@ -41,6 +17,7 @@ export const getEntriesForPage = createSelector(
 			if (entries[identifier]){
 				const selectedEntries = entries[identifier]
 				const arrResult = merge(selectedEntries.likes, selectedEntries.comments, 'senderId')
+				const arrResultOrdered = _.orderBy(arrResult, ['likes', 'comments'], 'desc')
 				return arrResult
 			}
 			else{
