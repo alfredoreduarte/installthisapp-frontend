@@ -106,6 +106,7 @@
 				return response.json()
 			})
 			.then(json => {
+				analytics.identify(json.data.id, { name: json.data.name,  email: json.data.email })
 				analytics.track('Account Created', () => {
 					top.location = location.protocol + '//' + window.location.host + '/d'
 				})
