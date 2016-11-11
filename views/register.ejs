@@ -68,7 +68,14 @@
 					return response.json()
 				})
 				.then(json => {
-					login(email, password)
+					if (json.status == "success") {
+						login(email, password)
+					}
+					else {
+						$('#signup-button').attr('disabled', false)
+						$('#signup-button').html('Create Account')
+						alert(json.errors.full_messages)
+					}
 				})
 				.catch(exception =>
 					console.log('parsing failed', exception)
@@ -81,12 +88,6 @@
 			}
 		}
 		var login = function(email, password){
-			if (!email) {
-				email = $('#email').val()
-			}
-			if (!password) {
-				password = $('#password').val()
-			}
 			fetch('<%= apiUrl %>/auth/sign_in.json', {
 				method: 'POST',
 				headers: {
@@ -99,6 +100,7 @@
 				})
 			})
 			.then(response => {
+				console.log('login res', response)
 				saveCookie('access-token', response.headers.get('access-token'))
 				saveCookie('token-type', response.headers.get('token-type'))
 				saveCookie('client', response.headers.get('client'))
@@ -106,6 +108,8 @@
 				return response.json()
 			})
 			.then(json => {
+				console.log('account created?', json)
+				analytics.identify(json.data.id, { name: json.data.name,  email: json.data.email })
 				analytics.track('Account Created', () => {
 					top.location = location.protocol + '//' + window.location.host + '/d'
 				})
@@ -116,8 +120,8 @@
 		}
 		$(document).ready(function(){
 			$('#signup-form').on('submit', function(e){
-				e.preventDefault();
-				ITAregister();
+				e.preventDefault()
+				ITAregister()
 			})
 		})
 	</script>
