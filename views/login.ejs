@@ -49,9 +49,7 @@
 		$(document).ready(function(){
 			console.log('document ready')
 			$('#login-form').submit(function(e){
-				e.preventDefault();
-				console.log('on submit')
-				console.log('login click')
+				e.preventDefault()
 				var email = $('#email').val()
 				var password = $('#password').val()
 				if (email && password) {
@@ -69,21 +67,30 @@
 						})
 					})
 					.then(response => {
-						saveCookie('access-token', response.headers.get('access-token'))
-						saveCookie('token-type', response.headers.get('token-type'))
-						saveCookie('client', response.headers.get('client'))
-						saveCookie('uid', response.headers.get('uid'))
+						if (response.ok) {
+							saveCookie('access-token', response.headers.get('access-token'))
+							saveCookie('token-type', response.headers.get('token-type'))
+							saveCookie('client', response.headers.get('client'))
+							saveCookie('uid', response.headers.get('uid'))
+						}
 						return response.json()
 					})
 					.then(json => {
-						top.location = location.protocol + '//' + window.location.host + '/d'
+						if (json.errors) {
+							$('#login-button').attr('disabled', false)
+							$('#login-button').html('Login')
+							alert(json.errors)
+						}
+						else{
+							top.location = location.protocol + '//' + window.location.host + '/d'
+						}
 					})
 					.catch(exception =>
 						console.log('parsing failed', exception)
 					)
 				}
-			});
-		});
+			})
+		})
 	</script>
 	<%- include('_segment') %>
 	<script type="text/javascript">
