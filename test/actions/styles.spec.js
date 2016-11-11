@@ -15,30 +15,8 @@ describe('Async Styles Actions', () => {
 	afterEach(() => {
 		nock.cleanAll()
 	})
-	it('Gets app stylesheet', () => {
-		nock('http://example.com/').get('/apps/styles/' + checksum).reply(200, cssString)
-		const store = mockStore()
-		return store.dispatch(actions.fetchStyles(checksum))
-			.then(() => {
-				const cssObject = css.parse(cssString)
-				const expectedActions = [
-					{
-						type: 'RECEIVE_STYLES',
-						payload: cssObject
-					}
-				]
-				const resultingActions = store.getActions()
-				console.log('loresu')
-				console.log(resultingActions)
-				expect(resultingActions[0].type).toEqual('RECEIVE_STYLES')
-				expect(resultingActions[0].payload).toBeAn(Object)
-			})
-	})
-	it("Should receive an event and dispatch actions to update MouseTrap coordinates and set the current selector", () => {
-		const platform = ''
-		const expectedAction = {}
-		expect(actions.handleHover(platform)).toEqual(expectedAction)
-	})
+	it('Gets app stylesheet')
+	it("Should receive an event and dispatch actions to update MouseTrap coordinates and set the current selector")
 })
 describe('Styles actions', () => {
 	it("should create an action to save the hovered element's css selector with dots included", () => {

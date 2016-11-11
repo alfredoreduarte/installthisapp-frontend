@@ -44,32 +44,9 @@ const props = {
 
 describe('selectors', () => {
 	describe('getUsersForCurrentApp', () => {
-		it('should get users for the currently visible app', () => {
-			const expectedResult = [
-				{
-					id: 3,
-					name: "Mikhail Herrero",
-					createdAt: "2016-02-01T20:46:22.000-04:00",
-				},
-				{
-					id: 1,
-					name: "Rodrigo Keen",
-					createdAt: "2016-05-01T20:46:22.000-04:00",
-				}
-			]
-			expect(getUsersForCurrentApp(state, props)).toEqual(expectedResult)
-		})
+		it('should get users for the currently visible app')
 	})
 	describe('getCurrentUsersByKeyword', () => {
-		it('should filter users array by name (case-insensitive)', () => {
-			const expectedResult = [
-				{
-					id: 3,
-					name: "Mikhail Herrero",
-					createdAt: "2016-02-01T20:46:22.000-04:00",
-				}
-			]
-			expect(getCurrentUsersByKeyword(state, props)).toEqual(expectedResult)
-		})
+		it('should filter users array by name (case-insensitive)')
 	})
 })

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist",
-    "test": "NODE_ENV=test NODE_PATH=$NODE_PATH:$PWD/ mocha --recursive --compilers js:babel-core/register",
+    "test": "NODE_ENV=test NODE_PATH=$NODE_PATH:$PWD/ mocha --recursive --compilers js:babel-core/register -r jsdom-global/register",
     "test:watch": "npm test -- --watch",
     "build:webpack": "NODE_ENV=production webpack -p --config webpack.config.prod.js",
     "build": "npm run clean && npm run build:webpack",
@@ -26,6 +26,7 @@
     "babel-eslint": "^6.0.4",
     "babel-loader": "^6.2.4",
     "babel-plugin-react-transform": "^2.0.2",
+    "babel-plugin-transform-class-properties": "^6.18.0",
     "babel-plugin-transform-es2015-destructuring": "^6.9.0",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-plugin-transform-react-display-name": "^6.8.0",
@@ -100,13 +101,15 @@
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
-    "enzyme": "^2.3.0",
+    "enzyme": "^2.6.0",
     "expect": "^1.20.2",
-    "mocha": "^2.5.3",
-    "nock": "^8.0.0",
-    "react-addons-test-utils": "^15.2.0",
-    "redux-mock-store": "^1.1.2",
-    "sinon": "^1.17.4",
+    "jsdom": "^9.8.3",
+    "jsdom-global": "^2.1.0",
+    "mocha": "^3.1.2",
+    "nock": "^9.0.2",
+    "react-addons-test-utils": "^15.3.2",
+    "redux-mock-store": "^1.2.1",
+    "sinon": "^1.17.6",
     "webpack-dashboard": "^0.1.8",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.12.2"
