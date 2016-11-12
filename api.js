@@ -4,12 +4,11 @@ import humps from 'humps'
 import { API_URL } from 'config'
 import simulateDelay from 'lib/networkDelay'
 
-
 // 
 // Gets the client user id for super-admin godview
 // 
 const spy = window.alias
-
+//
 const apiKey = Cookies.get('api_key')
 
 const processBody = body => body ? JSON.stringify(humps.decamelizeKeys(body)) : null

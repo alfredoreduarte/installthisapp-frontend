@@ -168,6 +168,7 @@ export const installFacebookTab = () => {
 		analytics.track('Feature Used', {
 			featureType: 'Facebook Tab',
 		})
+		analytics.track('Tab Installed')
 		return postToApi(`applications/${currentApp.checksum}/install_tab.json`, {
 			fbPageIdentifier: fbPageIdentifierForIntegration
 		}).then(response => {
