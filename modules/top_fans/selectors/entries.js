@@ -18,6 +18,7 @@ export const getEntriesForPage = createSelector(
 				const selectedEntries = entries[identifier]
 				const arrResult = merge(selectedEntries.likes, selectedEntries.comments, 'senderId')
 				const arrResultOrdered = _.orderBy(arrResult, ['likes', 'comments'], 'desc')
+				analytics.track('Scores Verified')
 				return arrResult
 			}
 			else{
