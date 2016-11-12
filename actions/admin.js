@@ -87,6 +87,7 @@ export const updateInfo = () => {
 
 export const fbConnect = fbResponse => {
 	return dispatch => {
+		analytics.track('Facebook Connected')
 		dispatch({
 			type: 'TOGGLE_ACTIVITY/CONNECTING_FACEBOOK'
 		})
