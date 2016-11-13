@@ -143,7 +143,7 @@ export const postNewApp = () => {
 				const normalized = normalize(response.app, schema.app)
 				console.log(normalized)
 				dispatch(receiveEntities(normalized.entities))
-				dispatch(push(`/d/apps/${response.app.applicationType}/${response.app.checksum}`))
+				dispatch(push(`/d/apps/${response.app.applicationType}/${response.app.checksum}/setup-guide`))
 				// Commented out because we actually have to wait for the js chunk to download 
 				// Moved to containers/AppDashboardContainer.js
 				// dispatch({
@@ -192,6 +192,9 @@ export const installFacebookTab = () => {
 
 export const uninstallFacebookTab = () => {
 	return (dispatch, getState) => {
+		dispatch({
+			type: 'TOGGLE_ACTIVITY/INSTALLING_TAB'
+		})
 		const state = getState()
 		const currentApp = getCurrentAppByState(state)
 		// postToApi(`applications/${currentApp.checksum}/uninstall_tab.json`, null, res => dispatch(updateApp(currentApp.checksum, res)))
@@ -201,6 +204,9 @@ export const uninstallFacebookTab = () => {
 				apps: response.applications,
 				pages: response.pages,
 			}
+			dispatch({
+				type: 'TOGGLE_ACTIVITY/INSTALLING_TAB'
+			})
 			const normalized = normalize(entities, schema.entities)
 			dispatch(receiveEntities(normalized.entities))
 			// Sanitize admin user

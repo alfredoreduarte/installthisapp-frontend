@@ -43,6 +43,7 @@ export default (store, dispatch) => ({
 	},
 	childRoutes: [
 		require('routes/Analytics'),
+		require('routes/SetupGuide').default(store, dispatch),
 		require('routes/Integrations'),
 		require('routes/Users'),
 		require('routes/Preferences'),

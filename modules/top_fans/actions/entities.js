@@ -30,6 +30,15 @@ export const fetchTopFansEntities = checksum => {
 		})
 }
 
+export const pollTopFansEntities = checksum => {
+	return dispatch => {
+		setInterval(() => {
+			dispatch(fetchTopFansEntities(checksum))
+			// console.log('pidiendo!')
+		}, 2000)
+	}
+}
+
 export const fetchTopFansSettings = checksum => {
 	return dispatch => 
 		getFromApi(`applications/${checksum}/settings.json`).then( response => {

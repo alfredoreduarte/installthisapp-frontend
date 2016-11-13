@@ -83,7 +83,7 @@ const AppTitleBar = ({
 						</ul>
 					</div>
 				</div>
-				<div className="col-md-6 text-right">
+				<div className="col-md-6 text-right hide">
 					<AppTitleBarButtons status={status} handleInstall={handleInstall} handleUninstall={handleUninstall} />
 				</div>
 			</div>
