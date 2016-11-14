@@ -96,6 +96,8 @@ export const updateAppSpecificSettings = () => {
 		if (setting.ignoredUserIdentifiers == "") {
 			setting.ignoredUserIdentifiers = []
 		}
+		console.log('ignored')
+		console.log(setting.ignoredUserIdentifiers)
 		postToApi(
 			`applications/${currentAppChecksum}/update_setting.json`, 
 			{
