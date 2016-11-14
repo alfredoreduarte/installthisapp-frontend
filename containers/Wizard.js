@@ -226,7 +226,7 @@ const mapStateToProps = (state, props) => {
 	const integrated = getEntriesForPage(state, props).length > 0
 	const steps = [
 		{
-			active: state.wizardStep == 0 && !integrated,
+			active: state.wizardStep == 0,
 			done: fbProfile ? true : false,
 			disabled: false,
 		},
