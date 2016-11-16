@@ -252,7 +252,7 @@ const Integrations = ({
 								{integrated ?
 								<Link to={scoreboardLink} className="btn btn-success">Go to Scoreboard</Link>
 								:
-								null
+								<button className="btn btn-success" disabled>Go to Scoreboard</button>
 								}
 							</div>
 						</div>
