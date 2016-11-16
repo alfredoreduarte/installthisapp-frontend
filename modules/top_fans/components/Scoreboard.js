@@ -3,7 +3,8 @@ import confirm from 'react-confirm2'
 import Select from 'react-select'
 import Modal from 'react-modal'
 import moment from 'moment'
-import { SingleDatePicker } from 'react-dates'
+// import { SingleDatePicker } from 'react-dates'
+import DatePicker from 'react-datepicker'
 import { ButtonToolbar, Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Checkbox } from 'react-icheck'
@@ -49,14 +50,16 @@ const Scoreboard = ({
 			<h1>Reset Scoreboard</h1>
 			<p>Track past activities starting at:</p>
 			<div className="col-md-6">
-				<SingleDatePicker 
+				<DatePicker 
 					id="lafecha"
-					date={moment(firstFetchFromDate)}
-					isOutsideRange={day => day.isAfter(moment().subtract(1, 'days'))}
+					selected={moment(firstFetchFromDate)}
+					// isOutsideRange={day => day.isAfter(moment().subtract(1, 'days'))}
+					maxDate={moment()}
+					minDate={moment().subtract(60, "days")}
 					numberOfMonths={1}
 					// disabled={!trackFromDate}
-					focused={true}
-					onDateChange={onDateChange}
+					autoFocus={true}
+					onChange={onDateChange}
 					// onFocusChange={onToggleDatePicker}
 				/>
 				<button style={{marginLeft: '20px'}} onClick={reset} className="btn btn-primary" disabled={firstFetchFromDate ? false : true}>Reset Scoreboard</button>

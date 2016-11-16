@@ -5,7 +5,8 @@ import { Link } from 'react-router'
 import { Accordion, AccordionItem } from 'react-sanfona'
 import FacebookLogin from 'react-facebook-login'
 import moment from 'moment'
-import { SingleDatePicker } from 'react-dates'
+// import { SingleDatePicker } from 'react-dates'
+import DatePicker from 'react-datepicker'
 import { postToApi } from 'api'
 import { getCurrentAppByState } from 'selectors/apps'
 import { installFacebookTab, uninstallFacebookTab, editAppSpecificSettings, updateAppSettings } from 'actions/apps'
@@ -169,16 +170,19 @@ const Integrations = ({
 												</label>
 											</div>
 											<div className="form-group">
-												<SingleDatePicker 
+												 <DatePicker 
 													id="lafecha"
-													date={firstFetchFromDate}
-													isOutsideRange={day => day.isAfter(moment().subtract(1, 'days'))}
-													numberOfMonths={1}
+													selected={firstFetchFromDate}
+													// isOutsideRange={day => day.isAfter(moment().subtract(1, 'days'))}
+													maxDate={moment()}
 													disabled={!trackFromDate}
-													focused={showDatePicker}
-													onDateChange={onDateChange}
-													onFocusChange={onToggleDatePicker}
-												 />
+													minDate={moment().subtract(60, "days")}
+													numberOfMonths={1}
+													// disabled={!trackFromDate}
+													autoFocus={false}
+													onChange={onDateChange}
+													// onFocusChange={onToggleDatePicker}
+												/>
 											</div>
 										</div>
 										<div className="col-md-12">
@@ -220,7 +224,7 @@ const Integrations = ({
 						</div>
 						<div className={`panel-collapse collapse ${steps[2].active ? 'in' : ''}`}>
 							<div className="panel-body">
-								<ul>
+								<ol>
 									{integrated ?
 										<li><s>Go to your <a href={`https://fb.com/${pageIdentifier}`} target="_blank">Facebook Page</a></s></li>
 									:
@@ -234,9 +238,9 @@ const Integrations = ({
 									{integrated ?
 									<li><b>Done!</b></li>
 									:
-									<li>Please wait...</li>
+									<li>Wait for the app to collect activity...</li>
 									}
-								</ul>
+								</ol>
 								{integrated ?
 								<p>Now go to the <Link to={scoreboardLink}>Scoreboard</Link> to track scores</p>
 								:
