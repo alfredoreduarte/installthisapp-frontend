@@ -172,6 +172,7 @@ const Integrations = ({
 											<div className="form-group">
 												 <DatePicker 
 													id="lafecha"
+													placeholderText="Select a date"
 													selected={firstFetchFromDate}
 													// isOutsideRange={day => day.isAfter(moment().subtract(1, 'days'))}
 													maxDate={moment()}

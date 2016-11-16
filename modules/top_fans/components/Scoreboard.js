@@ -52,6 +52,7 @@ const Scoreboard = ({
 			<div className="col-md-6">
 				<DatePicker 
 					id="lafecha"
+					placeholderText="Select a date"
 					selected={moment(firstFetchFromDate)}
 					// isOutsideRange={day => day.isAfter(moment().subtract(1, 'days'))}
 					maxDate={moment()}
@@ -89,7 +90,7 @@ const Scoreboard = ({
 					:
 					<ButtonToolbar>
 						<button className="btn btn-sm btn-danger pull-right" onClick={toggleResetModal}>
-							Reset starting at date 
+							Reset
 						</button>
 						<button className="btn btn-sm btn-danger pull-right hide" onClick={cleanup}>
 							Reset starting now
