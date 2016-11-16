@@ -8,7 +8,7 @@ import plans from 'reducers/plans'
 import alerts from 'reducers/alerts'
 import selectedItems from 'reducers/selectedItems'
 import filterText from 'reducers/filterText'
-import wizardStep from 'reducers/wizardStep'
+import wizard from 'reducers/wizard'
 import usersSorting from 'reducers/usersSorting'
 import appsSorting from 'reducers/appsSorting'
 import newApp from 'reducers/newApp'
@@ -26,7 +26,7 @@ const createReducer = asyncReducers => {
 	return combineReducers({
 		routing,
 		filterText,
-		wizardStep,
+		wizard,
 		usersSorting,
 		appsSorting,
 		selectedItems,

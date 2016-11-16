@@ -1,4 +1,4 @@
-import { fetchTopFansEntities } from 'modules/top_fans/actions/entities'
+import { fetchTopFansEntities, fetchTopFansSettings } from 'modules/top_fans/actions/entities'
 
 export default (store, dispatch) => ({
 	getChildRoutes(partialNextState, cb) {
@@ -8,10 +8,12 @@ export default (store, dispatch) => ({
 				analytics.page('Setup Guide')
 			},
 			onEnter: (nextState, replace, next) => {
-				dispatch(fetchTopFansEntities(nextState.params.checksum))
+				// dispatch(fetchTopFansSettings(nextState.params.checksum)).then(() => {
+					dispatch(fetchTopFansEntities(nextState.params.checksum))
 					.then(() => {
 						next()
 					})
+				// })
 			},
 			getComponent(nextState, cb) {
 				require.ensure([], (require) => {

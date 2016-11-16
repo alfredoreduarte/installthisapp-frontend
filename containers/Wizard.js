@@ -4,9 +4,11 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { Accordion, AccordionItem } from 'react-sanfona'
 import FacebookLogin from 'react-facebook-login'
+import moment from 'moment'
+import { SingleDatePicker } from 'react-dates'
 import { postToApi } from 'api'
 import { getCurrentAppByState } from 'selectors/apps'
-import { installFacebookTab, uninstallFacebookTab } from 'actions/apps'
+import { installFacebookTab, uninstallFacebookTab, editAppSpecificSettings, updateAppSettings } from 'actions/apps'
 import { fbConnect } from 'actions/admin'
 import { getAllPages } from 'selectors/pages'
 import { fetchFacebookPages } from 'actions/pages'
@@ -14,6 +16,13 @@ import { getEntriesForPage } from 'modules/top_fans/selectors/entries'
 import { pollTopFansEntities } from 'modules/top_fans/actions/entities'
 
 const Integrations = ({ 
+	trackFromDate,
+	onToggleTrackFromDate,
+	onToggleDatePicker,
+	onDateChange,
+	showDatePicker,
+	firstFetchFromDate,
+	// 
 	scoreboardLink,
 	integrated,
 	pageIdentifier,
@@ -86,7 +95,7 @@ const Integrations = ({
 								}
 							</div>
 							<div className="panel-footer text-right">
-								<button className="btn btn-primary btn-outline" onClick={() => advanceWizard(1)}  disabled={!fbProfile}>Continue</button>
+								<button className="btn btn-success" onClick={() => advanceWizard(1)}  disabled={!fbProfile}>Continue</button>
 							</div>
 						</div>
 					</div>
@@ -102,62 +111,100 @@ const Integrations = ({
 								{' '}<b>Select a Facebook Page</b>
 							</h4>
 						</div>
-						<div className={`panel-collapse collapse ${steps[1].active ? 'in' : ''}`}>
-							<div className="panel-body">
-								<p>{tabInstalledInPage ? `Tab installed in ${tabInstalledInPage}` :'Select a Facebook Page to run the Top Fans contest'}</p>
-								{tabInstalledInPage ?
-								<p>
-									<small><a 
-										href="javascript:void(0)" 
-										// className="btn btn-xs btn-danger"
-										className="text-danger"
-										disabled={installingFacebookTab}
-										onClick={() => uninstallTab()}>
-										{installingFacebookTab ? 'Please wait...' : 'Uninstall integration'}
-									</a>
-									</small>
-								</p>
-								:
-								null
-								}
-								<div className="col-md-6">
+						{steps[1].active ? 
+							<div className={`panel-collapse collapse in`}>
+								<div className="panel-body">
+									<p>{tabInstalledInPage ? `Tab installed in ${tabInstalledInPage}` :'Select a Facebook Page'}</p>
 									{tabInstalledInPage ?
-									null
+									<p>
+										<small><a 
+											href="javascript:void(0)" 
+											// className="btn btn-xs btn-danger"
+											className="text-danger"
+											disabled={installingFacebookTab}
+											onClick={() => uninstallTab()}>
+											{installingFacebookTab ? 'Please wait...' : 'Uninstall integration'}
+										</a>
+										</small>
+									</p>
 									:
-									<select 
-										className="form-control" 
-										value={fbPageIdentifierForIntegration} 
-										onChange={e => selectPage(e.target.value)}
-										disabled={fbPages.length == 0 || tabInstalledInPage}
-										>
-											<option value={''} disabled>-- Facebook Page --</option>
-											{fbPages.map(page => 
-												<option 
-												key={page.id} 
-												value={page.identifier}>
-													{page.name}
-												</option>
-											)}
-									</select>
+									null
 									}
+									<div className="row">
+										<div className="col-md-12">
+											{tabInstalledInPage ?
+											null
+											:
+											<select 
+												className="form-control" 
+												value={fbPageIdentifierForIntegration} 
+												onChange={e => selectPage(e.target.value)}
+												disabled={fbPages.length == 0 || tabInstalledInPage}
+												>
+													<option value={''} disabled>-- Facebook Page --</option>
+													{fbPages.map(page => 
+														<option 
+														key={page.id} 
+														value={page.identifier}>
+															{page.name}
+														</option>
+													)}
+											</select>
+											}
+										</div>
+										<div className="col-md-12">
+											<hr/>
+										</div>
+										<div className="col-md-6">
+											<div className="checkbox">
+												<label>
+													<input type="checkbox" name="trackFromDate" checked={!trackFromDate} onChange={() => onToggleTrackFromDate(false)} /> Track only new interactions happening from now on
+												</label>
+											</div>
+										</div>
+										<div className="col-md-6">
+											<div className="checkbox">
+												<label>
+													<input type="checkbox" name="trackFromDate" checked={trackFromDate} onChange={() => onToggleTrackFromDate(true)} /> Pre-count interactions from a past date and track all the new ones
+												</label>
+											</div>
+											<div className="form-group">
+												<SingleDatePicker 
+													id="lafecha"
+													date={firstFetchFromDate}
+													isOutsideRange={day => day.isAfter(moment().subtract(1, 'days'))}
+													numberOfMonths={1}
+													disabled={!trackFromDate}
+													focused={showDatePicker}
+													onDateChange={onDateChange}
+													onFocusChange={onToggleDatePicker}
+												 />
+											</div>
+										</div>
+										<div className="col-md-12">
+											<hr/>
+										</div>
+										<div className="col-md-12">
+											{tabInstalledInPage ?
+											null
+											:
+											<button 
+												className="btn btn-primary"
+												onClick={() => installTab()} 
+												disabled={fbPageIdentifierForIntegration == '' || installingFacebookTab}>
+												{installingFacebookTab ? 'Please wait...' : 'Install integration'} 
+											</button>
+											}
+										</div>
+									</div>
 								</div>
-								<div className="col-md-6">
-									{tabInstalledInPage ?
-									null
-									:
-									<button 
-										className="btn btn-primary"
-										onClick={() => installTab()} 
-										disabled={fbPageIdentifierForIntegration == '' || installingFacebookTab}>
-										{installingFacebookTab ? 'Please wait...' : 'Install integration'} 
-									</button>
-									}
+								<div className="panel-footer text-right">
+									<button className="btn btn-success" onClick={() => advanceWizard(2)} disabled={!tabInstalledInPage}>Continue</button>
 								</div>
 							</div>
-							<div className="panel-footer text-right">
-								<button className="btn btn-primary btn-outline" onClick={() => advanceWizard(2)} disabled={!tabInstalledInPage}>Continue</button>
-							</div>
-						</div>
+						:
+						null
+						}
 					</div>
 					<div 
 						className={`panel ${steps[2].done ? 'panel-success' : 'panel-default'} ${steps[2].disabled ? 'panel-disabled' : ''} panel-wizard`}>
@@ -198,7 +245,7 @@ const Integrations = ({
 							</div>
 							<div className="panel-footer text-right">
 								{integrated ?
-								<Link to={scoreboardLink} className="btn btn-success btn-outline">Go to Scoreboard</Link>
+								<Link to={scoreboardLink} className="btn btn-success">Go to Scoreboard</Link>
 								:
 								null
 								}
@@ -226,22 +273,26 @@ const mapStateToProps = (state, props) => {
 	const integrated = getEntriesForPage(state, props).length > 0
 	const steps = [
 		{
-			active: state.wizardStep == 0,
+			active: state.wizard.step == 0,
 			done: fbProfile ? true : false,
 			disabled: false,
 		},
 		{
-			active: state.wizardStep == 1,
+			active: state.wizard.step == 1,
 			done: tabInstalledInPage ? true : false,
 			disabled: fbProfile ? false : true,
 		},
 		{
-			active: state.wizardStep == 2 || integrated,
+			active: state.wizard.step == 2 || integrated,
 			done: integrated,
 			disabled: tabInstalledInPage ? false : true,
 		}
 	]
 	return {
+		trackFromDate: state.wizard.trackFromDate,
+		showDatePicker: state.wizard.showDatePicker,
+		firstFetchFromDate: getCurrentAppByState(state).setting.firstFetchFromDate ? moment(getCurrentAppByState(state).setting.firstFetchFromDate) : null,
+		// 
 		scoreboardLink: `/d/apps/top_fans/${props.params.checksum}/scoreboard`,
 		integrated,
 		pageIdentifier,
@@ -260,6 +311,25 @@ const mapStateToProps = (state, props) => {
 }
 
 const mapDispatchToProps = (dispatch, props) => ({
+	onToggleTrackFromDate: value => {
+		dispatch({
+			type: 'WIZARD_TOGGLE_TRACK_FROM_DATE',
+			value,
+		})
+		if (!value) {
+			dispatch(editAppSpecificSettings(null))
+		}
+	},
+	onToggleDatePicker: () => dispatch({
+		type: 'WIZARD_TOGGLE_DATE_PICKER',
+	}),
+	onDateChange: date => {
+		dispatch(editAppSpecificSettings(date.format()))
+		dispatch({
+			type: 'WIZARD_TOGGLE_DATE_PICKER'
+		})
+	},
+	// 
 	advanceWizard: step => dispatch({
 		type: 'UPDATE_WIZARD_STEP',
 		step,
@@ -272,8 +342,13 @@ const mapDispatchToProps = (dispatch, props) => ({
 			payload: fbPageIdentifier,
 		})
 	},
-	installTab: () => dispatch(installFacebookTab()).then(() => {
-		dispatch(pollTopFansEntities(props.params.checksum))
+	// installTab: () => dispatch(installFacebookTab()).then(() => {
+	// 	dispatch(pollTopFansEntities(props.params.checksum))
+	// }),
+	installTab: () => dispatch(updateAppSettings()).then(() => {
+		dispatch(installFacebookTab()).then(() => {
+			dispatch(pollTopFansEntities(props.params.checksum))
+		})
 	}),
 	uninstallTab: () => dispatch(uninstallFacebookTab())
 })
