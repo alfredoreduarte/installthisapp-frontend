@@ -105,16 +105,9 @@ export const updateAppSettings = () => {
 				setting: currentApp.setting
 			}
 		).then(response => {
-			// dispatch(updateApp(currentApp.checksum, response))
 			if (response.success) {
 				const normalized = normalize(response, schema.app)
 				dispatch(receiveEntities(normalized.entities))
-				// dispatch(push(`/d/apps/${response.app.applicationType}/${response.app.checksum}/setup-guide`))
-				// Commented out because we actually have to wait for the js chunk to download 
-				// Moved to containers/AppDashboardContainer.js
-				// dispatch({
-				// 	type: 'TOGGLE_ACTIVITY/CREATING_APP'
-				// })
 			}
 			else{
 				console.log(response.message)

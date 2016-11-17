@@ -18,8 +18,6 @@ import { editAppSpecificSettings, updateAppSettings } from 'actions/apps'
 import SearchForm from 'components/SearchForm'
 import User from 'components/User'
 
-const handleScore = score => score ? score : 0
-
 const Scoreboard = ({
 	toggleResetModal,
 	showResetModal,
@@ -198,7 +196,7 @@ const Scoreboard = ({
 							{entry.comments}
 						</td>
 						<td>
-							<b>{handleScore(entry.likes) * likeMultiplier + handleScore(entry.comments) * commentMultiplier}</b>
+							<b>{entry.score}</b>
 						</td>
 					</tr>
 					)}
@@ -208,15 +206,18 @@ const Scoreboard = ({
 	</div>
 )
 
+const handleScore = score => score ? score : 0
+
 const mapStateToProps = (state, props) => {
 	const currentApp = getCurrentAppByState(state)
+	// handleScore(entry.likes) * likeMultiplier + handleScore(entry.comments) * commentMultiplier
 	return { 
 		showResetModal: state.topFans.ui.showResetModal,
 		firstFetchFromDate: currentApp.setting.firstFetchFromDate,
 		// 
-		likeMultiplier: currentApp.setting.pointsPerLike,
-		commentMultiplier: currentApp.setting.pointsPerComment,
-		entries: getEntriesForPage(state, props),
+		// likeMultiplier: currentApp.setting.pointsPerLike,
+		// commentMultiplier: currentApp.setting.pointsPerComment,
+		entries: getEntriesForPage(state),
 		users: getCurrentUsersByKeyword(state, props),
 		selectedItems: state.selectedItems,
 		sortBy: state.usersSorting
