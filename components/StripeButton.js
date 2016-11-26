@@ -4,9 +4,9 @@ import { postToApi } from 'api'
 import StripeCheckout from 'react-stripe-checkout'
 import { purchase } from 'actions/billing'
 
-const TakeMoney = ({ email, planSlug, hasCustomer, onToken, children }) => (
+const TakeMoney = ({ email, planId, hasCustomer, onToken, children }) => (
 	<StripeCheckout
-		token={token => onToken(token, planSlug, hasCustomer)}
+		token={token => onToken(token, planId, hasCustomer)}
 		image="https://stripe.com/img/documentation/checkout/marketplace.png"
 		email={email}
 		locale="auto"
@@ -25,7 +25,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-	onToken: (token, plan, hasCustomer) => dispatch(purchase(token, plan, hasCustomer))
+	onToken: (token, planId, hasCustomer) => dispatch(purchase(token, planId, hasCustomer))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TakeMoney)

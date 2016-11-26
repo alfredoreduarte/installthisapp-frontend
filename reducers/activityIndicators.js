@@ -1,4 +1,5 @@
 const activityIndicators = (state = {
+	purchasing: false,
 	globalIndicator: false,
 	loadingPages: false,
 	savingDesign: false,
@@ -10,6 +11,10 @@ const activityIndicators = (state = {
 	installingFacebookTab: false,
 }, action) => {
 	switch (action.type) {
+		case 'TOGGLE_ACTIVITY/PURCHASING':
+			return Object.assign({}, state, {
+				purchasing: !state.purchasing
+			})
 		case 'TOGGLE_ACTIVITY/INSTALLING_TAB':
 			return Object.assign({}, state, {
 				installingFacebookTab: !state.installingFacebookTab

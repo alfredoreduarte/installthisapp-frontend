@@ -38,3 +38,7 @@ export const toggleActivitySavingDesign = () => ({
 export const toggleActivityLoadingPages = () => ({
 	type: 'TOGGLE_ACTIVITY/LOADING_PAGES'
 })
+
+export const toggleActivityPurchasing = () => ({
+	type: 'TOGGLE_ACTIVITY/PURCHASING'
+})

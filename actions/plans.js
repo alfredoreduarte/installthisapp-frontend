@@ -48,13 +48,10 @@ const plansDictionary = [
 
 export const receivePlans = plans => {
 	const processedPlans = plans.map(plan => {
-		console.log('el plan', plan)
 		const elPlan = _.find(plansDictionary, {'stripeId': plan.stripeId})
-		const amount = parseInt(plan.amount) / 100
 		return {
 			...plan,
-			copy: ['texto uno', 'texto dos'],
-			amount,
+			copy: elPlan.copy,
 		}
 	})
 	return {
