@@ -121,8 +121,15 @@ app.get('/pricing', function(req, res) {
 		token: req.query.token,
 	})
 })
+// 
+// Renders the dashboard view. I.e. the main app.
+// The 'alias' variable sets the id of the client to be impersonated,
+// which in turn gets passed form the admin users list with a GET param
+// defined as ALIAS_PARAM_KEY env variable.
+// 
 app.get('/d*', function(req, res){
 	res.render('dashboard', {
+		alias: req.query[process.env.ALIAS_PARAM_KEY],
 		cloudFrontUrl: cloudFrontUrl,
 		apiUrl: process.env.API_URL,
 		facebookAppId: process.env.FB_APP_ID,

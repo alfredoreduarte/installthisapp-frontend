@@ -4,6 +4,11 @@ import humps from 'humps'
 import { API_URL } from 'config'
 import simulateDelay from 'lib/networkDelay'
 
+// 
+// Gets the client user id for super-admin godview
+// 
+const spy = window.alias
+//
 const apiKey = Cookies.get('api_key')
 
 const processBody = body => body ? JSON.stringify(humps.decamelizeKeys(body)) : null
@@ -32,6 +37,7 @@ export const getFromApi = (endpoint, success = temporaryEmptyFunction) => {
 				method: 'GET',
 				headers: {
 					'Accept': 'application/json',
+					'spy-user': spy,
 					'Content-Type': 'application/json',
 					...authKeys,
 				}
@@ -66,6 +72,7 @@ export const patchToApi = (endpoint, body = null, success = temporaryEmptyFuncti
 				method: 'PATCH',
 				headers: {
 					'Accept': 'application/json',
+					'spy-user': spy,
 					'Content-Type': 'application/json',
 					...authKeys,
 				},
@@ -97,6 +104,7 @@ export const postFileToApi = (endpoint, body = null, success = temporaryEmptyFun
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'POST',
 				headers: {
+					'spy-user': spy,
 					...authKeys,
 				},
 				body: body,
@@ -128,6 +136,7 @@ export const postToApi = (endpoint, body = null, success = temporaryEmptyFunctio
 				method: 'POST',
 				headers: {
 					'Accept': 'application/json',
+					'spy-user': spy,
 					'Content-Type': 'application/json',
 					...authKeys,
 				},
@@ -163,6 +172,7 @@ export const deleteFromApi = (endpoint, body = null, success = temporaryEmptyFun
 				method: 'DELETE',
 				headers: {
 					'Accept': 'application/json',
+					'spy-user': spy,
 					'Content-Type': 'application/json',
 					...authKeys,
 				},

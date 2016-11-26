@@ -1,5 +1,6 @@
 import { normalize, arrayOf } from 'normalizr'
 import * as schema from 'schema'
+import _ from 'lodash'
 import { push } from 'react-router-redux'
 import { receiveEntities } from 'actions/entities'
 import { getCurrentAppByState } from 'selectors/apps'
@@ -84,6 +85,37 @@ export const update = () => {
 	}
 }
 
+export const editAppSpecificSettings = date => {
+	return (dispatch, getState) => {
+		const currentApp = getCurrentAppByState(getState())
+		dispatch(updateApp(currentApp.checksum, {
+			setting: {
+				...currentApp.setting,
+				firstFetchFromDate: date,
+			}
+		}))
+	}
+}
+export const updateAppSettings = () => {
+	return (dispatch, getState) => {
+		const currentApp = getCurrentAppByState(getState())
+		return postToApi(
+			`applications/${currentApp.checksum}/update_setting.json`, 
+			{
+				setting: currentApp.setting
+			}
+		).then(response => {
+			if (response.success) {
+				const normalized = normalize(response, schema.app)
+				dispatch(receiveEntities(normalized.entities))
+			}
+			else{
+				console.log(response.message)
+			}
+		})
+	}
+}
+
 export const updateAppSpecificSettings = () => {
 	return (dispatch, getState) => {
 		dispatch(toggleActivityUpdatingAppSettings())
@@ -91,7 +123,8 @@ export const updateAppSpecificSettings = () => {
 		// ignoredUserIdentifiers must ALWAYS be an array
 		const setting = getState().form.appSpecificSettings.values
 		if (setting.ignoredUserIdentifiers && setting.ignoredUserIdentifiers.length > 0) {
-			setting.ignoredUserIdentifiers = setting.ignoredUserIdentifiers.split(",").map(Number)
+			// setting.ignoredUserIdentifiers = setting.ignoredUserIdentifiers.split(",").map(Number)
+			setting.ignoredUserIdentifiers = _.split(setting.ignoredUserIdentifiers, ',').map(Number)
 		}
 		if (setting.ignoredUserIdentifiers == "") {
 			setting.ignoredUserIdentifiers = []
@@ -138,12 +171,9 @@ export const postNewApp = () => {
 			} 
 		}, response => {
 			if (response.success) {
-				console.log('el! response')
-				console.log(response)
 				const normalized = normalize(response.app, schema.app)
-				console.log(normalized)
 				dispatch(receiveEntities(normalized.entities))
-				dispatch(push(`/d/apps/${response.app.applicationType}/${response.app.checksum}`))
+				dispatch(push(`/d/apps/${response.app.applicationType}/${response.app.checksum}/setup-guide`))
 				// Commented out because we actually have to wait for the js chunk to download 
 				// Moved to containers/AppDashboardContainer.js
 				// dispatch({
@@ -168,6 +198,7 @@ export const installFacebookTab = () => {
 		analytics.track('Feature Used', {
 			featureType: 'Facebook Tab',
 		})
+		analytics.track('Tab Installed')
 		return postToApi(`applications/${currentApp.checksum}/install_tab.json`, {
 			fbPageIdentifier: fbPageIdentifierForIntegration
 		}).then(response => {
@@ -191,6 +222,9 @@ export const installFacebookTab = () => {
 
 export const uninstallFacebookTab = () => {
 	return (dispatch, getState) => {
+		dispatch({
+			type: 'TOGGLE_ACTIVITY/INSTALLING_TAB'
+		})
 		const state = getState()
 		const currentApp = getCurrentAppByState(state)
 		// postToApi(`applications/${currentApp.checksum}/uninstall_tab.json`, null, res => dispatch(updateApp(currentApp.checksum, res)))
@@ -200,6 +234,9 @@ export const uninstallFacebookTab = () => {
 				apps: response.applications,
 				pages: response.pages,
 			}
+			dispatch({
+				type: 'TOGGLE_ACTIVITY/INSTALLING_TAB'
+			})
 			const normalized = normalize(entities, schema.entities)
 			dispatch(receiveEntities(normalized.entities))
 			// Sanitize admin user

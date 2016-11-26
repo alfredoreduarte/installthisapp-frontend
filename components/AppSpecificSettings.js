@@ -4,9 +4,7 @@ import { push } from 'react-router-redux'
 import Select from 'react-select'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import { postToApi } from 'api'
 import { updateAppSpecificSettings } from 'actions/apps'
-import { getCurrentApp } from 'selectors/apps'
 
 let AppSpecificSettings = ({ handleSubmit, fetching, settings }) => (
 	<form onSubmit={handleSubmit}>

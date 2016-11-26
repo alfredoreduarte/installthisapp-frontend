@@ -4,7 +4,8 @@ import { Link, IndexLink } from 'react-router'
 const ExternalLinksMenu = ({ checksum, fbPageIdentifier, fbAppId, fbAppCanvasId }) => (
 	<div>
 		<ul className="list-unstyled">
-			<li className="hide">
+			{fbPageIdentifier && fbAppId ? 
+			<li>
 				<a 
 				href={`https://facebook.com/pages/${fbPageIdentifier}/${fbPageIdentifier}?sk=app_${fbAppId}`}
 				target="_blank"
@@ -12,6 +13,9 @@ const ExternalLinksMenu = ({ checksum, fbPageIdentifier, fbAppId, fbAppCanvasId 
 					View on Facebook <small><span className="glyphicon glyphicon-share"></span></small>
 				</a>
 			</li>
+			:
+			null
+			}
 			<li>
 				<a 
 				href={`/${fbAppCanvasId}/${checksum}`}
@@ -34,11 +38,10 @@ const Sidebar = ({ installed, checksum, type, children, menu, facebookPageIdenti
 			fbAppCanvasId={fbAppCanvasId} /> : null}
 		<ul className="list-unstyled">
 			<li><IndexLink to={`/d/apps/${type}/${checksum}`} activeClassName="active">Dashboard</IndexLink></li>
-			<li><Link to={`/d/apps/${type}/${checksum}/analytics`} activeClassName="active">Analytics</Link></li>
-			<li><Link to={`/d/apps/${type}/${checksum}/integrations`} activeClassName="active">Integrations</Link></li>
+			<li className="hide"><Link to={`/d/apps/${type}/${checksum}/analytics`} activeClassName="active">Analytics</Link></li>
+			<li className="hide"><Link to={`/d/apps/${type}/${checksum}/integrations`} activeClassName="active">Facebook Tab</Link></li>
 			<li><Link to={`/d/apps/${type}/${checksum}/design`} activeClassName="active">Design</Link></li>
-			<li className="hide"><Link to="" activeClassName="active">Design <small>(coming soon)</small></Link></li>
-			<li><Link to={`/d/apps/${type}/${checksum}/users`} activeClassName="active">Users</Link></li>
+			<li className="hide"><Link to={`/d/apps/${type}/${checksum}/users`} activeClassName="active">Users</Link></li>
 		</ul>
 		{children}
 		<ul className="list-unstyled">
@@ -51,6 +54,10 @@ const Sidebar = ({ installed, checksum, type, children, menu, facebookPageIdenti
 					<li className="hide"><Link to={`/d/apps/${type}/${checksum}/preferences/delete`}><span className="text-red">Delete App</span></Link></li>
 				</ul>
 			</li>
+		</ul>
+		<hr />
+		<ul className="list-unstyled">
+			<li><Link to={`/d/apps/${type}/${checksum}/setup-guide`} activeClassName="active">Setup Guide</Link></li>
 		</ul>
 	</div>
 )

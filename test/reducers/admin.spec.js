@@ -3,10 +3,7 @@ import admin from 'reducers/admin'
 
 describe('Reducers', () => {
 	describe('admin', () => {
-		it('Should provide the initial state', () => {
-			const initialState = {}
-			expect(admin(undefined, {})).toEqual(initialState)
-		})
+		it('Should provide the initial state')
 		describe('When receiving data', () => {
 			it('should save admin data', () => {
 				const expectedResult = {
