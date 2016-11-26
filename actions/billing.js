@@ -15,13 +15,14 @@ export const upgrade = plan => {
 }
 
 export const cancel = () => {
-	return dispatch => {
+	return (dispatch, getState) => {
 		dispatch(toggleActivityPurchasing())
-		deleteFromApi('subscriptions/delete.json')
+		const guid = getState().admin.subscription.guid
+		deleteFromApi(`payola/cancel_subscription/${guid}.json`)
 		.then(response => {
-			dispatch(setAlert('Done', 'plan canceled'))
+			dispatch(setAlert('Done.', 'Your plan has been canceled.'))
 			dispatch(toggleActivityPurchasing())
-			location.reload()
+			// location.reload()
 		})
 	}
 }

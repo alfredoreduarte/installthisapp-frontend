@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { cancel } from 'actions/billing'
 import { postToApi, deleteFromApi } from 'api'
 
-const Billing = ({ plan, cancel }) => (
+const Billing = ({ plan, cancel, busy }) => (
 	<div>
 		<div className="row">
 			<h3 className="ita-page-title">Billing</h3>
@@ -15,10 +15,10 @@ const Billing = ({ plan, cancel }) => (
 		<div className="row">
 			<div className="col-md-6">
 				<h6 className="text-muted text-uppercase">Your Plan</h6>
-				<h3>{plan.name} <br/><small>${plan.price} / mo.</small></h3>
+				<h3>{plan.name} <br/><small>${plan.amount} / mo.</small></h3>
 				<p>
 					<Link to="/d/upgrade" className="btn btn-success" style={{marginRight: '15px'}}>Upgrade Plan</Link>
-					{plan.id ? <a href="#" onClick={cancel}><small>Cancel Plan</small></a> : null}
+					{plan.id ? <a href="javascript:void(0)" onClick={cancel} disabled={busy}><small>{busy ? 'Please wait...' : 'Cancel Plan'}</small></a> : null}
 				</p>
 			</div>
 			<div className="col-md-6 hide">
@@ -52,11 +52,12 @@ const Billing = ({ plan, cancel }) => (
 const freePlan = {
 	id: null,
 	name: "Free",
-	price: 0.00
+	amount: 0.00
 }
 
 const mapStateToProps = state => ({
-	plan: state.admin.subscription ? _.find(state.plans, {'id': state.admin.subscription}) : freePlan
+	busy: state.activityIndicators.purchasing,
+	plan: state.admin.subscription ? _.find(state.plans, {'id': state.admin.subscription.planId}) : freePlan
 })
 
 const mapDispatchToProps = dispatch => ({
