@@ -7,3 +7,9 @@ export const setAlert = (title, content) => {
 		content
 	}
 }
+
+export const removeAlert = (title, content) => {
+	return {
+		type: 'REMOVE_ALERT',
+	}
+}

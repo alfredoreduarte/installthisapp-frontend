@@ -51,6 +51,7 @@ export const receivePlans = plans => {
 		const elPlan = _.find(plansDictionary, {'stripeId': plan.stripeId})
 		return {
 			...plan,
+			amount: plan.amount / 100,
 			copy: elPlan.copy,
 		}
 	})

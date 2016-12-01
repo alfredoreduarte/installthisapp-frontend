@@ -2,12 +2,13 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Alert } from 'react-bootstrap'
 import Loading from 'containers/Loading'
+import { removeAlert } from 'actions/alerts'
 
-const Application = ({ children, loaded, alertTitle, alertContent }) => (
+const Application = ({ children, loaded, alertTitle, alertContent, handleAlertDismiss }) => (
 	<div>
 		<Loading />
 		{alertTitle ? 
-		<Alert bsStyle="warning">
+		<Alert bsStyle="warning" onDismiss={handleAlertDismiss}>
 			<strong>{alertTitle}</strong> {alertContent}
 		</Alert>
 		: null }
@@ -25,4 +26,8 @@ const mapStateToProps = state => {
 	}
 }
 
-export default connect(mapStateToProps)(Application)
+const mapDispatchToProps = dispatch => ({
+	handleAlertDismiss: () => dispatch(removeAlert())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Application)

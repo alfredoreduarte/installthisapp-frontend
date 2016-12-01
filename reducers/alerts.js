@@ -9,6 +9,12 @@ const alerts = (state = {
 				title: action.title,
 				content: action.content,
 			}
+		case 'REMOVE_ALERT':
+			return { 
+				...state,
+				title: null,
+				content: null,
+			}
 		default:
 			return state
 	}

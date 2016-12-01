@@ -7,16 +7,7 @@ import TakeMoney from 'components/StripeButton'
 
 const ConditionalBuy = ({ busy, upgrade, currentPlan, planId, featured }) => (
 	<div>
-		{currentPlan.stripeId != 'free' ?
-			<button
-				onClick={() => upgrade(planId)}
-				style={{letterSpacing: '1px', fontSize: '12px', fontWeight: '400'}}
-				className={`btn text-uppercase ${featured ? 'btn-success' : 'btn-primary btn-outline'}`}
-				disabled={busy}
-			>
-				{busy ? 'Please wait...' : 'Choose Plan'}
-			</button>
-		:
+		{currentPlan.stripeId == 'free' ?
 			<TakeMoney planId={planId}>
 				<button
 					style={{letterSpacing: '1px', fontSize: '12px', fontWeight: '400'}}
@@ -26,6 +17,15 @@ const ConditionalBuy = ({ busy, upgrade, currentPlan, planId, featured }) => (
 					{busy ? 'Please wait...' : 'Choose Plan'}
 				</button>
 			</TakeMoney>
+		:
+			<button
+				onClick={() => upgrade(planId)}
+				style={{letterSpacing: '1px', fontSize: '12px', fontWeight: '400'}}
+				className={`btn text-uppercase ${featured ? 'btn-success' : 'btn-primary btn-outline'}`}
+				disabled={busy}
+			>
+				{busy ? 'Please wait...' : 'Choose Plan'}
+			</button>
 		}
 	</div>
 )
@@ -34,7 +34,6 @@ const Plans = ({
 	busy,
 	back,
 	currentPlan,
-	currentPlanName,
 	plans,
 	upgrade,
 }) => (
@@ -55,6 +54,7 @@ const Plans = ({
 			display: 'flex',
 			justifyContent: 'center'
 		}}>
+			{plans.length == 0 ? <h4>There are no subscription plans at this time.</h4> : null}
 			{plans.map(plan =>
 			<div style={{width: '200px', margin: '0px 32px'}} key={plan.stripeId}>
 				<div 
@@ -72,10 +72,13 @@ const Plans = ({
 						{currentPlan.stripeId == plan.stripeId ?
 							<button 
 								style={{letterSpacing: '1px', fontSize: '12px', fontWeight: '400'}}
-								className="btn btn-default text-uppercase">Current plan
+								disabled
+								className="btn btn-default text-uppercase"
+							>
+								Current Plan
 							</button>
 						:
-							<ConditionalBuy upgrade={upgrade} currentPlan={currentPlan} planId={plan.id} featured={plan.stripeId == 'agency_development'} />
+							<ConditionalBuy busy={busy} upgrade={upgrade} currentPlan={currentPlan} planId={plan.id} featured={plan.stripeId == 'agency_development'} />
 						}
 					</div>
 				</div>
@@ -87,11 +90,9 @@ const Plans = ({
 
 const mapStateToProps = state => {
 	const plans = state.plans
-	// const currentPlanName = state.admin.subscription ? _.find(plans, {'id': state.admin.subscription}).name : 'Free'
 	return {
 		busy: state.activityIndicators.purchasing,
 		currentPlan: state.admin.subscription ? _.find(state.plans, {'id': state.admin.subscription.planId}) : {name: 'Free', stripeId: 'free'},
-		// currentPlanName,
 		plans,
 	}
 }

@@ -130,8 +130,9 @@ export const postFileToApi = (endpoint, body = null, success = temporaryEmptyFun
 			)
 }
 
-export const postToApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
+export const postToApi = (endpoint, body = null, success = temporaryEmptyFunction, camelize = true) => {
 	const authKeys = getAuthKeys()
+	const elBody = camelize ? processBody(body) : JSON.stringify(body)
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'POST',
 				headers: {
@@ -140,8 +141,7 @@ export const postToApi = (endpoint, body = null, success = temporaryEmptyFunctio
 					'Content-Type': 'application/json',
 					...authKeys,
 				},
-				// body: processBody(body),
-				body: JSON.stringify(body),
+				body: elBody,
 			})
 			.then(response => {
 				console.log('response')
