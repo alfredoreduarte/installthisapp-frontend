@@ -3,8 +3,8 @@ import confirm from 'react-confirm2'
 import Select from 'react-select'
 import Modal from 'react-modal'
 import moment from 'moment'
-// import { SingleDatePicker } from 'react-dates'
-import DatePicker from 'react-datepicker'
+import { SingleDatePicker } from 'react-dates'
+// import DatePicker from 'react-datepicker'
 import { ButtonToolbar, Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Checkbox } from 'react-icheck'
@@ -48,17 +48,18 @@ const Scoreboard = ({
 			<h1>Reset Scoreboard</h1>
 			<p>Track past activities starting at:</p>
 			<div className="col-md-6">
-				<DatePicker 
+				<SingleDatePicker 
 					id="lafecha"
-					placeholderText="Select a date"
-					selected={moment(firstFetchFromDate)}
-					// isOutsideRange={day => day.isAfter(moment().subtract(1, 'days'))}
-					maxDate={moment()}
-					minDate={moment().subtract(60, "days")}
-					numberOfMonths={1}
+					// placeholderText="Select a date"
+					date={firstFetchFromDate}
+					isOutsideRange={day => day.isAfter(moment().subtract(1, 'days')) || day.isBefore(moment().subtract(120, 'days'))}
+					// maxDate={moment()}
 					// disabled={!trackFromDate}
-					autoFocus={true}
-					onChange={onDateChange}
+					// minDate={moment().subtract(120, "days")}
+					numberOfMonths={1}
+					// autoFocus={false}
+					focused={true}
+					onDateChange={onDateChange}
 					// onFocusChange={onToggleDatePicker}
 				/>
 				<button style={{marginLeft: '20px'}} onClick={reset} className="btn btn-primary" disabled={firstFetchFromDate ? false : true}>Reset Scoreboard</button>
@@ -214,6 +215,7 @@ const mapStateToProps = (state, props) => {
 	return { 
 		showResetModal: state.topFans.ui.showResetModal,
 		firstFetchFromDate: currentApp.setting.firstFetchFromDate,
+		firstFetchFromDate: currentApp.setting.firstFetchFromDate ? moment(currentApp.setting.firstFetchFromDate) : null,
 		// 
 		// likeMultiplier: currentApp.setting.pointsPerLike,
 		// commentMultiplier: currentApp.setting.pointsPerComment,

@@ -5,8 +5,8 @@ import { Link } from 'react-router'
 import { Accordion, AccordionItem } from 'react-sanfona'
 import FacebookLogin from 'react-facebook-login'
 import moment from 'moment'
-// import { SingleDatePicker } from 'react-dates'
-import DatePicker from 'react-datepicker'
+import { SingleDatePicker } from 'react-dates'
+// import DatePicker from 'react-datepicker'
 import { postToApi } from 'api'
 import { getCurrentAppByState } from 'selectors/apps'
 import { installFacebookTab, uninstallFacebookTab, editAppSpecificSettings, updateAppSettings } from 'actions/apps'
@@ -86,7 +86,7 @@ const Integrations = ({
 								<p>Sign in with Facebook</p>
 								<FacebookLogin
 									appId={process.env.FB_APP_ID}
-									autoLoad={false}
+									autoLoad={true}
 									scope={'manage_pages'}
 									textButton={connectingToFacebook ? 'Please wait...' : 'Connect to Facebook'}
 									fields="name,email,picture"
@@ -170,41 +170,35 @@ const Integrations = ({
 												</label>
 											</div>
 											<div className="form-group">
-												 <DatePicker 
+												<SingleDatePicker 
 													id="lafecha"
-													placeholderText="Select a date"
-													selected={firstFetchFromDate}
-													// isOutsideRange={day => day.isAfter(moment().subtract(1, 'days'))}
-													maxDate={moment()}
+													// placeholderText="Select a date"
+													date={firstFetchFromDate}
+													isOutsideRange={day => day.isAfter(moment().subtract(1, 'days')) || day.isBefore(moment().subtract(120, 'days'))}
+													// maxDate={moment()}
 													disabled={!trackFromDate}
-													minDate={moment().subtract(60, "days")}
+													// minDate={moment().subtract(120, "days")}
 													numberOfMonths={1}
-													// disabled={!trackFromDate}
-													autoFocus={false}
-													onChange={onDateChange}
-													// onFocusChange={onToggleDatePicker}
+													// autoFocus={false}
+													focused={showDatePicker}
+													onDateChange={onDateChange}
+													onFocusChange={onToggleDatePicker}
 												/>
 											</div>
-										</div>
-										<div className="col-md-12">
-											<hr/>
-										</div>
-										<div className="col-md-12">
-											{tabInstalledInPage ?
-											null
-											:
-											<button 
-												className="btn btn-primary"
-												onClick={() => installTab()} 
-												disabled={fbPageIdentifierForIntegration == '' || installingFacebookTab}>
-												{installingFacebookTab ? 'Please wait...' : 'Install integration'} 
-											</button>
-											}
 										</div>
 									</div>
 								</div>
 								<div className="panel-footer text-right">
+									{tabInstalledInPage ?
 									<button className="btn btn-success" onClick={() => advanceWizard(2)} disabled={!tabInstalledInPage}>Continue</button>
+									:
+									<button 
+										className="btn btn-primary"
+										onClick={() => installTab()} 
+										disabled={fbPageIdentifierForIntegration == '' || installingFacebookTab}>
+										{installingFacebookTab ? 'Please wait...' : 'Install integration'} 
+									</button>
+									}
 								</div>
 							</div>
 						:
