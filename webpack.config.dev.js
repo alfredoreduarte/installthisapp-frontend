@@ -1,11 +1,14 @@
 var path = require('path')
 var webpack = require('webpack')
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
 	devtool: 'inline-source-map',
 	entry: {
 		dashboard: ['webpack-hot-middleware/client', './index'],
 		landing: ['webpack-hot-middleware/client', './assets/landing/index'],
+		// landing_styles: './assets/newlanding/styles.sass',
+		// dashboard_styles: './assets/styles/styles.sass',
 		trivia: './canvas/trivia/index',
 		top_fans: './canvas/top_fans/index',
 		photo_contest: './canvas/photo_contest/index',
@@ -17,6 +20,8 @@ module.exports = {
 		publicPath: '/static/'
 	},
 	plugins: [
+		// new ExtractTextPlugin("assets/styles/styles.sass"),
+		// new ExtractTextPlugin("dashboard_styles.css"),
 		new webpack.optimize.CommonsChunkPlugin('common.js'),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoErrorsPlugin(),
@@ -57,12 +62,14 @@ module.exports = {
 				test: /\.(sass|scss)$/,
 				// include: path.join(__dirname, 'assets/styles'),
 				loaders: ['style', 'css', 'sass']
+				// loader: ExtractTextPlugin.extract("style", "css!sass")
 			},
 			// css
 			{
 				test: /\.(css)$/,
 				// include: path.join(__dirname, 'assets/styles'),
 				loaders: ['style', 'css']
+				// loader: ExtractTextPlugin.extract("style", "css")
 			},
 			// fonts
 			{

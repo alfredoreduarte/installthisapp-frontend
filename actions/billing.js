@@ -3,11 +3,11 @@ import { setAlert } from 'actions/alerts'
 import { toggleActivityPurchasing } from 'actions/activityIndicators'
 import { fetchAdmin } from 'actions/admin'
 
-export const purchase = (token, planId, hasCustomer) => {
+export const purchase = (token, planId, hasCustomer, onSuccess) => {
 	return dispatch => {
 		dispatch(toggleActivityPurchasing())
 		const url = `payola/subscribe/subscription_plan/${planId}.json`
-		postToApi(
+		return postToApi(
 			url, 
 			{
 				stripeToken: token.id,
@@ -20,7 +20,7 @@ export const purchase = (token, planId, hasCustomer) => {
 		).then(response => {
 			if (!response.error) {
 				dispatch(setAlert('Please wait.', 'Your purchase is being processed.'))
-				dispatch(pollSubscriptionUpdate(response.guid))
+				dispatch(pollSubscriptionUpdate(response.guid, onSuccess))
 			}
 			else{
 				dispatch(setAlert('Error.', response.error))
@@ -31,15 +31,18 @@ export const purchase = (token, planId, hasCustomer) => {
 	}
 }
 
-export const pollSubscriptionUpdate = guid => {
+export const pollSubscriptionUpdate = (guid, onSuccess) => {
 	return dispatch => {
 		const elInterval = setInterval(() => {
 			getFromApi(`payola/subscription_status/${guid}.json`).then(response => {
 				if (response.status == 'active') {
 					clearInterval(elInterval)
 					dispatch(fetchAdmin()).then(() => {
-						dispatch(setAlert('Yay!', 'Your Plan has been upgraded'))
+						dispatch(setAlert('Thanks!', 'Your Subscription has been upgraded'))
 						dispatch(toggleActivityPurchasing())
+						if (onSuccess) {
+							onSuccess()
+						}
 					})
 				}
 			})

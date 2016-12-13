@@ -1,5 +1,5 @@
 <script type="text/javascript">
-var ITAlogin = function(email, password){
+var ITAlogin = function(email, password, card){
 	fetch('<%= apiUrl %>/auth/sign_in.json', {
 		method: 'POST',
 		headers: {
@@ -21,7 +21,12 @@ var ITAlogin = function(email, password){
 	.then(json => {
 		analytics.identify(json.data.id, { name: json.data.name,  email: json.data.email })
 		analytics.track('Account Created', () => {
-			top.location = location.protocol + '//' + window.location.host + '/d'
+			if (card) {
+				top.location = location.protocol + '//' + window.location.host + '/d/card'
+			}
+			else{
+				top.location = location.protocol + '//' + window.location.host + '/d'
+			}
 		})
 	})
 	.catch(exception =>

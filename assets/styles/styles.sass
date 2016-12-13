@@ -92,3 +92,34 @@ body
 // sticky bootstrap menu
 .affix
 	top: 20px
+
++keyframes(bgimageanim)
+	0%
+		+transform(translateX(0%))
+	100%
+		+transform(translateX(-100%))
+
+.img-background
+	background:
+		image: url(/images/startup-office.jpg)
+		repeat: no-repeat
+		size: cover
+		position: 0
+	+animation-duration(300s)
+	// +animation-timing-function(ease)
+	+animation-iteration-count(infinite)
+	+animation-name(bgimageanim)
+	color: white
+	left: 0px
+	top: 0px
+	width: 200%
+	height: 100%
+	z-index: -1
+	position: absolute
+	&:before
+		display: block
+		position: absolute
+		width: 100%
+		height: 100%
+		background: linear-gradient(transparent, rgba(0,0,0,.8))
+		content: " "

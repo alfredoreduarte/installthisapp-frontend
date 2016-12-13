@@ -24,8 +24,8 @@ const mapStateToProps = state => ({
 	hasCustomer: state.admin.customer,
 })
 
-const mapDispatchToProps = dispatch => ({
-	onToken: (token, planId, hasCustomer) => dispatch(purchase(token, planId, hasCustomer))
+const mapDispatchToProps = (dispatch, props) => ({
+	onToken: (token, planId, hasCustomer) => dispatch(purchase(token, planId, hasCustomer, props.onSuccess))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TakeMoney)
