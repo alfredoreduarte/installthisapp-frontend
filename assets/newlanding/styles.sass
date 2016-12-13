@@ -1,0 +1,55 @@
+// Bourbon Sass Library
+// @import "bourbon"
+@import "~bourbon/app/assets/stylesheets/bourbon"
+@import "~slick-carousel/slick/slick"
+@import "~animate.css/animate"
+
+// Font Awesome
+// @import	libraries/font-awesome/variables
+// @import	font-awesome/scss/font-awesome
+
+// IonIcons
+// @import	libraries/Ionicons/variables
+// @import	Ionicons/scss/ionicons
+
+// pixeden-stroke-7-icon
+// @import	libraries/pixeden-stroke-7-icon/variables
+// @import	pixeden-stroke-7-icon/pe-icon-7-stroke/scss/pe-icon-7-stroke
+
+// Bootstrap
+@import	libraries/variables
+// @import	custom-variables
+// @import bootstrap-sass/assets/stylesheets/bootstrap
+@import "~bootstrap-sass/assets/stylesheets/bootstrap"
+
+// Bootstrap Class Extensions
+@import libraries/panels
+@import libraries/jumbotron
+@import libraries/buttons
+
+// Custom Components
+@import components/upsell
+@import components/flex
+@import components/app
+@import components/footer
+
+body
+	font-weight: $font-weight-global
+
+// Annoying outline on focused elements on Google Chrome
+*:focus
+	outline: none !important
+
+.navbar-default
+	margin: 0px
+	border: none
+	background: none
+
+.flex-list
+	display: flex
+	align-items: center
+	margin: 20px 0px 40px
+	&:nth-child(odd)
+		flex-direction: row-reverse
+	.flex-list-copy
+		padding: 0px 40px

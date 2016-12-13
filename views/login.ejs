@@ -1,53 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" media="all" href="//fonts.googleapis.com/css?family=Lato:400,300italic,300,400italic,700,700italic,100,100italic" />
-	<link rel="stylesheet" type="text/css" href="/landing/styles/styles.css" />
-	<link rel="icon" type="image/png" href="/images/favicon.png" />
-	<title>InstallThisApp</title>
-</head>
+<%- include('_head') %>
 <body>
-	<span id="our-clients" class="hide"></span>
-	<header class="jumbotron site-jumbotron white-text-area homepage-jumbotron home-header-2" id="large-header">
-		<div class="container">
-			<div class="homepage-jumbotron-conten">
-				<h1 class="text-center site-title">Sign in</h1>
-				<br/>
-				<!-- <h2 class="text-center site-subtitle h3">
-					Of course you do. That's why you're invited to the early preview of the new InstallThisApp.
-				</h2> -->
-				<div class="text-center hide">
-					<span href="#" class="btn btn-lg btn-primary site-cta cta-glow">Start now</span>
-					<button onclick="javascript:login()" class="btn btn-lg btn-primary site-cta absolute-horizontal-center" data-loading-text="Please wait...">Start now</button>
-				</div>
-			</div>
-			<form id="login-form" class="col-md-6 col-md-offset-3">
-				<div class="form-group">
-					<input type="email" id="email" class="form-control" placeholder="Email" required />
-				</div>
-				<div class="form-group">
-					<input type="password" id="password" class="form-control" placeholder="Password" required />
-				</div>
-				<p class="text-center"><button type="submit" class="btn btn-primary btn-lg" id="login-button">Login</button></p>
-				<br/>
-				<p style="font-size: 12px"><a href="/forgot"><small>Forgot your password?</small></a></p>
-				<p style="font-size: 12px"><a href="/signup"><small>Don't have an account?</small></a></p>
-			</form>
+	<div class="container-flex flex-space-around flex-vertical container-full-height flex-grow">
+		<div class="col-md-12">
+			<br/>
+			<a href="/" class="btn btn-default">← Back</a>
+			<br/>
 		</div>
-		<canvas id="demo-canvas" class="hidden-xs hidden-sm"></canvas>
-	</header>
-	<script type="text/javascript" src="<%= cloudFrontUrl %>/landing/landing.js"></script>
+		<div class="flex-grow flex flex-vertical flex-center">
+			<div class="col-md-12">
+				<h1 class="text-center h2">Login to your account</h1>
+			</div>
+			<div class="col-md-4 col-md-offset-4">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<form id="login-form">
+							<div class="form-group">
+								<input type="email" id="email" class="form-control input-lg" placeholder="Email" required />
+							</div>
+							<div class="form-group">
+								<input type="password" id="password" class="form-control input-lg" placeholder="Password" required />
+							</div>
+							<p><button type="submit" class="btn btn-primary btn-lg btn-block text-uppercase" id="login-button">Login</button></p>
+						</form>
+					</div>
+				</div>
+				<p><a href="/forgot"><small>Forgot your password?</small></a></p>
+				<p><a href="/signup"><small>Don't have an account?</small></a></p>
+				<br/>
+				<br/>
+				<br/>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="<%= cloudFrontUrl %>/node_modules/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="<%= cloudFrontUrl %>/node_modules/js-cookie/src/js.cookie.js"></script>
 	<script type="text/javascript" src="<%= cloudFrontUrl %>/node_modules/whatwg-fetch/fetch.js"></script>
 	<script>
-		var saveCookie = function(name, value){
-			Cookies.set(name, value)
-		}
 		$(document).ready(function(){
-			console.log('document ready')
 			$('#login-form').submit(function(e){
 				e.preventDefault()
 				var email = $('#email').val()
@@ -68,10 +59,10 @@
 					})
 					.then(response => {
 						if (response.ok) {
-							saveCookie('access-token', response.headers.get('access-token'))
-							saveCookie('token-type', response.headers.get('token-type'))
-							saveCookie('client', response.headers.get('client'))
-							saveCookie('uid', response.headers.get('uid'))
+							Cookies.set('access-token', response.headers.get('access-token'))
+							Cookies.set('token-type', response.headers.get('token-type'))
+							Cookies.set('client', response.headers.get('client'))
+							Cookies.set('uid', response.headers.get('uid'))
 						}
 						return response.json()
 					})

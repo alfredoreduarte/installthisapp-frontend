@@ -1,52 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" media="all" href="//fonts.googleapis.com/css?family=Lato:400,300italic,300,400italic,700,700italic,100,100italic" />
-	<link rel="stylesheet" type="text/css" href="/landing/styles/styles.css" />
-	<link rel="icon" type="image/png" href="/images/favicon.png" />
-	<title>InstallThisApp</title>
-</head>
+<%- include('_head') %>
 <body>
-	<span id="our-clients" class="hide"></span>
-	<header class="jumbotron site-jumbotron white-text-area homepage-jumbotron home-header-2" id="large-header">
-		<div class="container">
-			<div>
-				<h2>Check your email</h2>
-				<h4>We've sent you an email with instructions on how to change your password. Should arrive in a moment.</h4>
-				<p><a href="/">⃪ Back</a></p>
+	<div class="container-flex flex-space-around container-full-height flex-grow">
+		<div class="flex-grow flex flex-vertical flex-center">
+			<div class="col-md-12 text-center">
+				<h1 class="h2">Check your inbox</h1>
+				<h4 class="">We've sent you an email with instructions on how to change your password</h4>
+				<h4>It should arrive in a moment</h4>
+				<p><a href="/">⃪ Go back</a></p>
 			</div>
 		</div>
-	</header>
-	<script type="text/javascript" src="<%= cloudFrontUrl %>/landing/landing.js"></script>
-	<script type="text/javascript" src="<%= cloudFrontUrl %>/node_modules/whatwg-fetch/fetch.js"></script>
-	<script>
-		var forgot = function(){
-			var email = $('#email').val()
-			fetch('<%= apiUrl %>/auth/password.json', {
-				method: 'POST',
-				headers: {
-					'Accept': 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					email: $('#email').val(),
-					redirect_url: 'https://' + window.location.hostname + '/reset-password'
-				})
-			}).then(response => {
-				return response.json()
-			})
-			.then(json => {
-				console.log('forgot response')
-				console.log(json)
-			})
-			.catch(exception =>
-				console.log('parsing failed', exception)
-			)
-		}
-	</script>
+	</div>
 	<%- include('_segment') %>
 	<script type="text/javascript">
 		// analytics.page('Recovery email sent')

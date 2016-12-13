@@ -1,0 +1,42 @@
+<script type="text/javascript">
+var ITAregister = function(){
+	$('#signup-button').attr('disabled', true)
+	$('#signup-button').html('Please wait...')
+	var email = $('#email').val()
+	var password = $('#password').val()
+	if (email && password) {
+		fetch('<%= apiUrl %>/auth.json', {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				email: $('#email').val(),
+				password: $('#password').val(),
+				confirm_success_url: 'https://' + window.location.hostname + '/d/card'
+			})
+		}).then(response => {
+			return response.json()
+		})
+		.then(json => {
+			if (json.status == "success") {
+				ITAlogin(email, password)
+			}
+			else {
+				$('#signup-button').attr('disabled', false)
+				$('#signup-button').html('Create Account')
+				alert(json.errors.full_messages)
+			}
+		})
+		.catch(exception =>
+			console.log('parsing failed', exception)
+		)
+	}
+	else{
+		$('#signup-button').attr('disabled', false)
+		$('#signup-button').html('Create Account')
+		alert('Email and password are mandatory')
+	}
+}
+</script>

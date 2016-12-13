@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" media="all" href="//fonts.googleapis.com/css?family=Lato:400,300italic,300,400italic,700,700italic,100,100italic" />
-	<link rel="stylesheet" type="text/css" href="/landing/styles/styles.css" />
-	<link rel="icon" type="image/png" href="/images/favicon.png" />
-	<title>InstallThisApp</title>
-</head>
+<%- include('_head') %>
 <body>
-	<span id="our-clients" class="hide"></span>
-	<header class="jumbotron site-jumbotron white-text-area homepage-jumbotron home-header-2" id="large-header">
-		<div class="container">
-			<div>
-				<h2>Forgot your password?</h2>
-				<h4>Type in your email and we'll send you a recovery link</h4>
-				<div class="form-group">
-					<input type="email" id="email" name="email" class="form-control" placeholder="Email">
+	<div class="container-flex flex-space-around flex-vertical container-full-height flex-grow">
+		<div class="col-md-12">
+			<br/>
+			<a href="/" class="btn btn-default">← Back</a>
+			<br/>
+		</div>
+		<div class="flex-grow flex flex-vertical flex-center">
+			<div class="col-md-12">
+				<h1 class="text-center h2">Change your password</h1>
+			</div>
+			<div class="col-md-4 col-md-offset-4">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<form id="request-recovery">
+							<div class="form-group">
+								<input type="email" id="email" name="email" class="form-control input-lg" placeholder="Email">
+							</div>
+							<p>
+								<button id="signup-button" type="submit" class="btn btn-primary btn-lg btn-block">Send me the recovery link</button>
+							</p>
+						</form>
+					</div>
 				</div>
-				<button type="submit" class="btn btn-default" id="request-recovery">Send me the recovery link</button>
 			</div>
 		</div>
-	</header>
-	<script type="text/javascript" src="<%= cloudFrontUrl %>/landing/landing.js"></script>
-	<script type="text/javascript" src="<%= cloudFrontUrl %>/node_modules/whatwg-fetch/fetch.js"></script>
+	</div>
 	<script>
 		$(document).ready(function(){
-			$('#request-recovery').on('click', function(){
+			$('#request-recovery').on('submit', function(e){
+				e.preventDefault();
 				$('#request-recovery').attr('disabled', true)
 				$('#request-recovery').html('Sending...')
 				var email = $('#email').val()

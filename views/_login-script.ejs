@@ -1,0 +1,31 @@
+<script type="text/javascript">
+var ITAlogin = function(email, password){
+	fetch('<%= apiUrl %>/auth/sign_in.json', {
+		method: 'POST',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			email: email,
+			password: password
+		})
+	})
+	.then(response => {
+		Cookies.set('access-token', response.headers.get('access-token'))
+		Cookies.set('token-type', response.headers.get('token-type'))
+		Cookies.set('client', response.headers.get('client'))
+		Cookies.set('uid', response.headers.get('uid'))
+		return response.json()
+	})
+	.then(json => {
+		analytics.identify(json.data.id, { name: json.data.name,  email: json.data.email })
+		analytics.track('Account Created', () => {
+			top.location = location.protocol + '//' + window.location.host + '/d'
+		})
+	})
+	.catch(exception =>
+		console.log('parsing failed', exception)
+	)
+}
+</script>

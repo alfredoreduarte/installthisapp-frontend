@@ -119,10 +119,10 @@ const mapStateToProps = (state, ownProps) => {
 	const { first, score, maxScore } = ownProps
 	let width
 	if (document.body.clientWidth > 810) {
-		width = first ? '80%' : `${score * 100 / maxScore}%`
+		width = first ? '100%' : `${score * 100 / maxScore}%`
 	}
 	else {
-		width = first ? '80%' : `70%`
+		width = first ? '100%' : `90%`
 	}
 	return {
 		width

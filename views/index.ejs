@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('_head') %>
+<body>
+	<header class="jumbotron">
+		<%- include('_navbar', {alt: false}) %>
+		<div class="container-flex flex-center flex-vertical">
+			<span>
+				<h1 class="text-center">Try the new InstallThisApp</h1>
+				<h2 class="text-center">Run social contests and sweepstakes in seconds</h2>
+				<br/>
+				<br/>
+				<br/>
+			</span>
+			<p class="text-center">
+				<a href="/signup" class="btn btn-default btn-lg text-uppercase btn-extra-shadow btn-featured">Signup</a>
+			</p>
+		</div>
+		<p class="text-center">
+			<a href="javascript:void(0)" id="below-fold-anchor"><img src="/images/landing/chevron-down.png" class="animated fadeInDown" style="width: 50px"></a>
+		</p>
+	</header>
+	<div class="container-fluid" id="below-fold">
+		<div class="col-md-6 col-md-offset-3">
+			<br/>
+			<br/>
+			<h2 class="text-center">We've changed it all ‒ and it's awesome</h2>
+			<br/>
+			<br/>
+		</div>
+		<div class="col-md-9 col-md-offset-1">
+			<div class="coso">
+				<div class="thumbnail">
+					<img src="/images/landing/dashboard.gif" class="img-responsive">
+				</div>
+				<div class="thumbnail">
+					<img src="/images/landing/editor.jpg" class="img-responsive">
+				</div>
+				<div class="thumbnail">
+					<img src="/images/landing/screenfb.jpg" class="img-responsive">
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2">
+			<a href="javascript:void(0)" class="thumbnail slick-nav text-center" data-slick-index="1">
+				<img src="/images/landing/dashboard.gif" class="img-responsive" style="height: 70px" />
+				<div class="caption">
+					<span>Dashboard</span>
+				</div>
+			</a>
+			<a href="javascript:void(0)" class="thumbnail slick-nav text-center" data-slick-index="2">
+				<img src="/images/landing/editor.jpg" class="img-responsive" style="height: 70px" />
+				<div class="caption">
+					<span>Design editor</span>
+				</div>
+			</a>
+			<a href="javascript:void(0)" class="thumbnail slick-nav text-center" data-slick-index="3">
+				<img src="/images/landing/screenfb.jpg" class="img-responsive" style="height: 70px" />
+				<div class="caption">
+					<span>Facebook Tab</span>
+				</div>
+			</a>
+		</div>
+	</div>
+	<hr/>
+	<div class="container-fluid" id="our-apps">
+		<div class="col-md-6 col-md-offset-3">
+			<br/>
+			<br/>
+			<h2 class="text-center">Our apps</h2>
+			<br/>
+			<br/>
+		</div>
+		<div class="col-md-6 col-md-offset-3">
+			<br/>
+			<div class="media media-app">
+				<div class="media-left">
+					<a href="/top-fans-for-facebook-pages.html">
+						<img class="media-object" src="/images/module-icons/top_fans-big.png" alt="Top Fans ranking for Facebook Pages">
+					</a>
+				</div>
+				<div class="media-body">
+					<h3 class="media-heading"><b>Top Fans</b></h3>
+					<p>Rank your Facebook Page’s fans loyalty by likes and comments in real time. Customise the list design and show it in a Page Tab. Reset scores anytime you want.</p>
+					<p><a href="/top-fans-for-facebook-pages.html" class="btn btn-success text-uppercase btn-xs">Read More</a></p>
+				</div>
+			</div>
+			<div class="media media-app media-disabled">
+				<div class="media-left">
+					<div href="#" class="disabled" disabled>
+						<img class="media-object" src="/images/module-icons/photo_contest-big.png" alt="Top Fans ranking for Facebook Pages">
+					</div>
+				</div>
+				<div class="media-body">
+					<h3 class="media-heading"><b>Photo Contest</b></h3>
+					<p>Rank your Facebook Page’s fans loyalty by likes and comments in real time. Customise the list design and show it in a Page Tab. Reset scores anytime you want.</p>
+					<p><a href="#" class="btn btn-default text-uppercase btn-xs disabled">Coming soon</a></p>
+				</div>
+			</div>
+			<div class="media media-app media-disabled">
+				<div class="media-left">
+					<div href="#" class="disabled" disabled>
+						<img class="media-object" src="/images/module-icons/trivia-big.png" alt="Top Fans ranking for Facebook Pages">
+					</div>
+				</div>
+				<div class="media-body">
+					<h3 class="media-heading"><b>Trivia</b></h3>
+					<p>Rank your Facebook Page’s fans loyalty by likes and comments in real time. Customise the list design and show it in a Page Tab. Reset scores anytime you want.</p>
+					<p><a href="#" class="btn btn-default text-uppercase btn-xs disabled">Coming soon</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<%- include('_upsell') %>
+	<%- include('_footer') %>
+	<!-- // <script type="text/javascript" src="<%= cloudFrontUrl %>/landing/landing.js"></script> -->
+	<%- include('_segment') %>
+	<script type="text/javascript">
+		analytics.page('Home')
+	</script>
+</body>
+</html>

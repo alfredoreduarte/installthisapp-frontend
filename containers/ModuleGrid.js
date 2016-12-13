@@ -13,7 +13,7 @@ const ModuleGrid = ({ modules, futureModules, handleFutureModuleSelection, handl
 					<div className="media media-stacked text-center">
 						<div className="media-left media-middle">
 							<a
-								href="javascript:void()"
+								href="javascript:void(0)"
 								onClick={() => handleModuleSelection(module)}>
 								<img 
 									className="media-object img-rounded" 
@@ -22,7 +22,7 @@ const ModuleGrid = ({ modules, futureModules, handleFutureModuleSelection, handl
 						</div>
 						<div className="media-body media-middle">
 							<a
-								href="javascript:void()"
+								href="javascript:void(0)"
 								onClick={() => handleModuleSelection(module)}>
 								<h5 
 								className="

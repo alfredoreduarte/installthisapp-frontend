@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('_head') %>
+<body>
+	<div class="container">
+		<div class="col-md-12">
+			<a href="/" class="btn btn-default">Back</a>
+		</div>
+		<div class="col-md-6 col-md-offset-3">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<h1 class="text-center">Get a 50% discount</h1>
+					<h4 class="text-center">Pay 14.45 instead of 29$ for the first month</h4>
+					<h4 class="text-center">You'll only be charged *after* the 7-day trial period</h4>
+					<p>Your credit card information</p>
+					<form id="signup-form">
+						<div class="form-group">
+							<input type="text" class="form-control input-lg" placeholder="Card Number" required />
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control input-lg" placeholder="Month" required />
+						</div>
+
+						<div class="form-group">
+							<input type="text" class="form-control input-lg" placeholder="Year" required />
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control input-lg" placeholder="CCV" required />
+						</div>
+						<p>
+							* We won't charge you until after 7 days.<br/>
+							* No contracts. Cancel at anytime.
+						</p>
+						<p>
+							<button id="signup-button" type="submit" class="btn btn-primary btn-lg btn-block">Signup</button>
+						</p>
+					</form>
+				</div>
+			</div>
+			<p class="text-right"><a href="/d">Skip this step and lose the discount →</a></p>
+		</div>
+	</div>
+	<%- include('_segment') %>
+	<script type="text/javascript">
+		// analytics.page('Card')
+	</script>
+</body>
+</html>

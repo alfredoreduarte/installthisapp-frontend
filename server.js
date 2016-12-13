@@ -71,7 +71,21 @@ app.use(function(req, res, next) {
 		next()
 })
 app.get('/', function(req, res) {
-	res.render('landing', {
+	res.render('index', {
+		cloudFrontUrl: cloudFrontUrl,
+		apiUrl: process.env.API_URL,
+		facebookAppId: process.env.FB_APP_ID,
+	})
+})
+app.get('/top-fans-for-facebook-pages.html', function(req, res) {
+	res.render('app', {
+		cloudFrontUrl: cloudFrontUrl,
+		apiUrl: process.env.API_URL,
+		facebookAppId: process.env.FB_APP_ID,
+	})
+})
+app.get('/contact', function(req, res) {
+	res.render('contact', {
 		cloudFrontUrl: cloudFrontUrl,
 		apiUrl: process.env.API_URL,
 		facebookAppId: process.env.FB_APP_ID,
@@ -86,6 +100,13 @@ app.get('/signup', function(req, res) {
 })
 app.get('/login', function(req, res) {
 	res.render('login', {
+		cloudFrontUrl: cloudFrontUrl,
+		apiUrl: process.env.API_URL,
+		facebookAppId: process.env.FB_APP_ID,
+	})
+})
+app.get('/card', function(req, res) {
+	res.render('card', {
 		cloudFrontUrl: cloudFrontUrl,
 		apiUrl: process.env.API_URL,
 		facebookAppId: process.env.FB_APP_ID,

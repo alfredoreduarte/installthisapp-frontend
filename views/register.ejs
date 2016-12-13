@@ -1,123 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" media="all" href="//fonts.googleapis.com/css?family=Lato:400,300italic,300,400italic,700,700italic,100,100italic" />
-	<link rel="stylesheet" type="text/css" href="/landing/styles/styles.css" />
-	<link rel="icon" type="image/png" href="/images/favicon.png" />
-	<title>InstallThisApp</title>
-</head>
+<%- include('_head') %>
 <body>
-	<span id="our-clients" class="hide"></span>
-	<header class="jumbotron site-jumbotron white-text-area homepage-jumbotron home-header-2" id="large-header">
-		<div class="container">
-			<div class="homepage-jumbotron-conten">
-				<h1 class="text-center site-title">Create an account</h1>
-				<br/>
-				<br/>
-				<!-- <h2 class="text-center site-subtitle h3">
-					Of course you do. That's why you're invited to the early preview of the new InstallThisApp.
-				</h2> -->
-				<div class="text-center hide">
-					<span href="#" class="btn btn-lg btn-primary site-cta cta-glow">Start now</span>
-					<button onclick="javascript:login()" class="btn btn-lg btn-primary site-cta absolute-horizontal-center" data-loading-text="Please wait...">Start now</button>
-				</div>
-			</div>
-			<form id="signup-form" class="col-md-6 col-md-offset-3">
-				<div class="form-group">
-					<input type="email" id="email" class="form-control" placeholder="Email" required />
-				</div>
-				<div class="form-group">
-					<input type="password" id="password" class="form-control" placeholder="Password" required />
-				</div>
-				<p class="text-center"><button id="signup-button" type="submit" class="btn btn-primary btn-lg">Create Account</button></p>
-				<br/>
-				<br/>
-				<p class="text-right" style="font-size: 12px">Already have an account? <a href="/login">Login →</a></p>
-			</form>
+	<div class="container-flex flex-space-around flex-vertical container-full-height flex-grow">
+		<div class="col-md-12">
+			<br/>
+			<a href="/" class="btn btn-default">← Back</a>
+			<br/>
 		</div>
-		<canvas id="demo-canvas" class="hidden-xs hidden-sm"></canvas>
-	</header>
-	<script type="text/javascript" src="<%= cloudFrontUrl %>/landing/landing.js"></script>
+		<div class="flex-grow flex flex-vertical flex-center">
+			<div class="col-md-12">
+				<h1 class="text-center h2">Signup to InstallThisApp</h1>
+			</div>
+			<div class="col-md-4 col-md-offset-4">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<form id="signup-form">
+							<div class="form-group">
+								<input type="email" id="email" class="form-control input-lg" placeholder="Email" required />
+							</div>
+							<div class="form-group">
+								<input type="password" id="password" class="form-control input-lg" placeholder="Password" required />
+							</div>
+							<hr />
+							<div class="form-group">
+								<input type="text" id="coupon" class="form-control input-lg" placeholder="Coupon code *" />
+							</div>
+							<p><small>* Users with an active subscription at the <a href="https://installthisapp.com">legacy app</a> receive a coupon in order to use the new version for free. If you have a monhtly plan and haven’t received your coupon, please contact us.</small></p>
+							<p>
+								<button id="signup-button" type="submit" class="btn btn-primary btn-lg btn-block text-uppercase">Signup</button>
+							</p>
+						</form>
+					</div>
+				</div>
+				<p class="text-right">Already signed up? <a href="/login">Login →</a></p>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="<%= cloudFrontUrl %>/node_modules/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="<%= cloudFrontUrl %>/node_modules/js-cookie/src/js.cookie.js"></script>
 	<script type="text/javascript" src="<%= cloudFrontUrl %>/node_modules/whatwg-fetch/fetch.js"></script>
-	<script>
-		var saveCookie = function(name, value){
-			Cookies.set(name, value)
-		}
-		var ITAregister = function(){
-			$('#signup-button').attr('disabled', true)
-			$('#signup-button').html('Please wait...')
-			var email = $('#email').val()
-			var password = $('#password').val()
-			if (email && password) {
-				fetch('<%= apiUrl %>/auth.json', {
-					method: 'POST',
-					headers: {
-						'Accept': 'application/json',
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({
-						email: $('#email').val(),
-						password: $('#password').val(),
-						confirm_success_url: 'https://' + window.location.hostname + '/d?email_confirmed=true'
-					})
-				}).then(response => {
-					return response.json()
-				})
-				.then(json => {
-					if (json.status == "success") {
-						login(email, password)
-					}
-					else {
-						$('#signup-button').attr('disabled', false)
-						$('#signup-button').html('Create Account')
-						alert(json.errors.full_messages)
-					}
-				})
-				.catch(exception =>
-					console.log('parsing failed', exception)
-				)
-			}
-			else{
-				$('#signup-button').attr('disabled', false)
-				$('#signup-button').html('Create Account')
-				alert('Email and password are mandatory')
-			}
-		}
-		var login = function(email, password){
-			fetch('<%= apiUrl %>/auth/sign_in.json', {
-				method: 'POST',
-				headers: {
-					'Accept': 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					email: email,
-					password: password
-				})
-			})
-			.then(response => {
-				console.log('login res', response)
-				saveCookie('access-token', response.headers.get('access-token'))
-				saveCookie('token-type', response.headers.get('token-type'))
-				saveCookie('client', response.headers.get('client'))
-				saveCookie('uid', response.headers.get('uid'))
-				return response.json()
-			})
-			.then(json => {
-				console.log('account created?', json)
-				analytics.identify(json.data.id, { name: json.data.name,  email: json.data.email })
-				analytics.track('Account Created', () => {
-					top.location = location.protocol + '//' + window.location.host + '/d'
-				})
-			})
-			.catch(exception =>
-				console.log('parsing failed', exception)
-			)
-		}
+	<%- include('_login-script') %>
+	<%- include('_register-script') %>
+	<script>		
 		$(document).ready(function(){
 			$('#signup-form').on('submit', function(e){
 				e.preventDefault()

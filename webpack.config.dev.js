@@ -5,6 +5,7 @@ module.exports = {
 	devtool: 'inline-source-map',
 	entry: {
 		dashboard: ['webpack-hot-middleware/client', './index'],
+		landing: ['webpack-hot-middleware/client', './assets/landing/index'],
 		trivia: './canvas/trivia/index',
 		top_fans: './canvas/top_fans/index',
 		photo_contest: './canvas/photo_contest/index',
@@ -20,9 +21,9 @@ module.exports = {
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoErrorsPlugin(),
 		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-			'process.env.FB_APP_ID': JSON.stringify(process.env.FB_APP_ID || '1061199640593119'),
-			'process.env.API_URL': JSON.stringify(process.env.API_URL || 'https://local.installthisapp.com'),
+			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+			'process.env.FB_APP_ID': JSON.stringify(process.env.FB_APP_ID),
+			'process.env.API_URL': JSON.stringify(process.env.API_URL),
 		})
 	],
 	resolve: {

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('_head') %>
+<body>
+	<header class="jumbotron">
+		<%- include('_navbar', {alt: false}) %>
+		<div class="container-flex flex-space-around flex-vertical">
+			<div class="container-flex flex-center flex-vertical">
+				<br/>
+				<br/>
+				<h1 class="text-center">Top Fans ranking for Facebook Pages</h1>
+				<p class="text-center">Rank your Facebook Page’s fans loyalty by likes and comments in real time.<br/> Customise the ranking and show it in a Page Tab. Reset scores anytime you want.</p>
+				<p class="text-center">
+					<a href="/signup" class="btn btn-default btn-lg text-uppercase btn-extra-shadow btn-featured">Signup</a>
+				</p>
+			</div>
+			<div class="featured-image">
+				<img src="/images/landing/dashboard.gif" style="width: 800px" class="btn-extra-shadow animated fadeInUp" />
+				<!-- <img src="/images/landing/screenfb.gif" style="width: 800px" class="btn-extra-shadow animated fadeInUp" /> -->
+			</div>
+		</div>
+	</header>
+	<div class="container-fluid">
+		<div class="col-md-12 page-header hide">
+			<h4 class="text-center text-uppercase"><b>Features</b></h4>
+		</div>
+		<div class="">
+			<div class="row flex-list">
+				<img src="/images/module-landings/top-fans/4.jpg" style="width: 600px" />
+				<div class="flex-list-copy">
+					<h3>Reward brand loyalty. Boost engagement.</h3>
+					<p>The app scans your page's timeline and collects every interaction from your fans, giving them points for each action.</p>
+				</div>
+			</div>
+			<div class="row flex-list">
+				<img src="/images/landing/editor.jpg" style="width: 400px" />
+				<div class="flex-list-copy">
+					<h3>Customise at will.</h3>
+					<p>Use promotional images, change colors, sizes and text styles, and even the text inside buttons.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<%- include('_upsell') %>
+	<%- include('_footer') %>
+	<%- include('_segment') %>
+	<script type="text/javascript">
+		// analytics.page('Home')
+	</script>
+</body>
+</html>
