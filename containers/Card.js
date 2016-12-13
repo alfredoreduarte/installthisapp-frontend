@@ -89,7 +89,8 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => ({
 	onSuccess: () => {
-		top.location = 'https://localhost.ssl:5000/d'
+		// top.location = 'https://localhost.ssl:5000/d'
+		top.location = location.protocol + '//' + window.location.host + '/d'
 	}
 })
 
