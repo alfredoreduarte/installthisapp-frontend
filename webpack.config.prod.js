@@ -7,7 +7,7 @@ module.exports = {
 	entry: {
 		dashboard: 'index.js',
 		landing: './assets/landing/index',
-		landing_styles: './assets/newlanding/styles.sass',
+		// landing_styles: './assets/newlanding/styles.sass',
 		trivia: 'canvas/trivia/index.js',
 		top_fans: 'canvas/top_fans/index.js',
 		photo_contest: 'canvas/photo_contest/index.js',
@@ -19,7 +19,7 @@ module.exports = {
 		publicPath: '/static/'
 	},
 	plugins: [
-		new ExtractTextPlugin("landing_styles.css"),
+		// new ExtractTextPlugin("landing_styles.css"),
 		new webpack.optimize.CommonsChunkPlugin('common.js'),
 		new webpack.optimize.DedupePlugin(),
 		new webpack.optimize.AggressiveMergingPlugin(),
@@ -62,15 +62,15 @@ module.exports = {
 			{
 				test: /\.(sass|scss)$/,
 				// include: path.join(__dirname, 'assets/styles'),
-				// loaders: ['style', 'css', 'sass']
-				loader: ExtractTextPlugin.extract("style", "css?minimize!sass")
+				loaders: ['style', 'css', 'sass']
+				// loader: ExtractTextPlugin.extract("style", "css?minimize!sass")
 			},
 			// css
 			{
 				test: /\.(css)$/,
 				// include: path.join(__dirname, 'assets/styles'),
-				// loaders: ['style', 'css']
-				loader: ExtractTextPlugin.extract("style", "css?minimize!")
+				loaders: ['style', 'css']
+				// loader: ExtractTextPlugin.extract("style", "css?minimize!")
 			},
 			// fonts
 			{
