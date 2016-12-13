@@ -5,6 +5,7 @@ module.exports = {
 	devtool: 'source-map',
 	entry: {
 		dashboard: 'index.js',
+		landing: './assets/landing/index',
 		trivia: 'canvas/trivia/index.js',
 		top_fans: 'canvas/top_fans/index.js',
 		photo_contest: 'canvas/photo_contest/index.js',
