@@ -52,7 +52,7 @@ const Card = ({
 					<p><span className="h4">pay <b>$14.45 instead of 29$</b></span><br/>for the first month and get:</p>
 					<ul className="list-unstyled">
 						<li><span className="glyphicon glyphicon-ok text-success"></span> <b>5 apps</b></li>
-						<li><span className="glyphicon glyphicon-ok text-success"></span> <b>5 teammates</b></li>
+						<li className="hide"><span className="glyphicon glyphicon-ok text-success"></span> <b>5 teammates</b></li>
 						<li><span className="glyphicon glyphicon-ok text-success"></span> <b>in-app support via chat</b></li>
 					</ul>
 					<p>You'll only be charged after 7 days</p>
