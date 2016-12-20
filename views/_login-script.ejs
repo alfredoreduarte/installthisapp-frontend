@@ -22,7 +22,7 @@ var ITAlogin = function(email, password, card){
 		analytics.identify(json.data.id, { name: json.data.name,  email: json.data.email })
 		analytics.track('Account Created', () => {
 			if (card) {
-				top.location = location.protocol + '//' + window.location.host + '/d/card'
+				top.location = location.protocol + '//' + window.location.host + '/d?trial-offer=true'
 			}
 			else{
 				top.location = location.protocol + '//' + window.location.host + '/d'

@@ -12,9 +12,17 @@ const CardOverlay = ({
 	<div className="container-flex container-fullheight container-cancel ita-flex-justify-center" style={{
 		flexDirection: 'column',
 		alignItems: 'center',
+		position: 'fixed',
+		top: 0,
+		right: 0,
+		bottom: 0,
+		left: 0,
+		backgroundColor: 'rgba(255,255,255,.5)',
+		zIndex: 1,
 	}}>
 		<div style={{
-			border: '1px solid #ccc',
+			border: '1px solid #ddd',
+			boxShadow: '0px 12px 25px rgba(0,0,0,.1)',
 			padding: '40px 20px',
 			borderRadius: '3px',
 			display: 'flex',
@@ -22,6 +30,7 @@ const CardOverlay = ({
 			minWidth: '60vw',
 			minHeight: '80vh',
 			justifyContent: 'space-between',
+			backgroundColor: 'white',
 		}}>
 			<div style={{
 				marginBottom: '20px'

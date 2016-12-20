@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import AppGrid from 'containers/AppGrid'
+import CardOverlay from 'containers/CardOverlay'
 import AppNavBar from 'components/AppNavBar'
 import DashboardTitleBar from 'components/DashboardTitleBar'
 import SuccessfulPurchase from 'components/SuccessfulPurchase'
@@ -17,6 +18,7 @@ import { deleteApp, destroy } from 'actions/apps'
 const AdminDashboard = ({ 
 	apps,
 	successfulPurchase,
+	trialOffer,
 	filterText,
 	showCreateModal,
 	showDeleteModal,
@@ -29,6 +31,7 @@ const AdminDashboard = ({
 	<div>
 		<AppNavBar />
 		{successfulPurchase ? <SuccessfulPurchase /> : null }
+		{trialOffer ? <CardOverlay /> : null }
 		{apps.length > 0 || filterText ? 
 			<div>
 				<DashboardTitleBar />
@@ -50,6 +53,7 @@ const mapStateToProps = (state, props) => {
 	return {
 		apps: getAllAppsByText(state, props),
 		successfulPurchase: props.location.query["successful-purchase"],
+		trialOffer: props.location.query["trial-offer"],
 		filterText: state.filterText,
 		showCreateModal: props.location.pathname.indexOf('/d/apps/create') !== -1,
 		showDeleteModal: state.deleteApp.checksum ? true: false,

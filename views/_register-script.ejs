@@ -14,7 +14,7 @@ var ITAregister = function(){
 			body: JSON.stringify({
 				email: $('#email').val(),
 				password: $('#password').val(),
-				confirm_success_url: 'https://' + window.location.hostname + '/d/card-overlay'
+				confirm_success_url: 'https://' + window.location.hostname + '/d'
 			})
 		}).then(response => {
 			return response.json()
