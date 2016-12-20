@@ -45,7 +45,7 @@ const CardOverlay = ({
 			<div>
 			<div className="col-md-6">
 				<h4>What you'll get:</h4>
-				<ul className="list-unstyled">
+				<ul className="list-unstyled" style={{lineHeight: 1.8}}>
 					<li><span style={{marginRight: '5px'}} className="glyphicon glyphicon-ok text-success"></span>5 campaigns</li>
 					<li><span style={{marginRight: '5px'}} className="glyphicon glyphicon-ok text-success"></span>In-app support via chat</li>
 					<li><span style={{marginRight: '5px'}} className="glyphicon glyphicon-ok text-success"></span>All of our current and <a href="#" target="_blank">upcoming apps</a></li>
@@ -85,7 +85,7 @@ const CardOverlay = ({
 					</button>
 				</TakeMoney>
 				<div className="col-md-12 text-right" style={{marginTop: '20px'}}>
-					<a href="#" className="" style={{
+					<a href="/d" className="" style={{
 						fontSize: '11px'
 					}}>Skip this, I'll start later without the discount</a>
 				</div>
