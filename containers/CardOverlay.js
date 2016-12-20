@@ -28,7 +28,7 @@ const CardOverlay = ({
 			display: 'flex',
 			flexDirection: 'column',
 			minWidth: '60vw',
-			minHeight: '80vh',
+			minHeight: '85vh',
 			justifyContent: 'space-between',
 			backgroundColor: 'white',
 		}}>
@@ -84,6 +84,11 @@ const CardOverlay = ({
 						{busy ? 'Please wait...' : 'Start free trial'}
 					</button>
 				</TakeMoney>
+				<div className="col-md-12 text-right" style={{marginTop: '20px'}}>
+					<a href="#" className="" style={{
+						fontSize: '11px'
+					}}>Skip this, I'll start later without the discount</a>
+				</div>
 			</div>
 		</div>
 		<div className="col-md-12 text-right hide">
