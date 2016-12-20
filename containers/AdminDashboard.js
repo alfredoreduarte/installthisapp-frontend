@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import AppGrid from 'containers/AppGrid'
 import AppNavBar from 'components/AppNavBar'
 import DashboardTitleBar from 'components/DashboardTitleBar'
+import SuccessfulPurchase from 'components/SuccessfulPurchase'
 import DashboardToolBar from 'components/DashboardToolBar'
 import AdminDashboardEmpty from 'components/AdminDashboardEmpty'
 import NoAppsMatching from 'components/NoAppsMatching'
@@ -15,6 +16,7 @@ import { deleteApp, destroy } from 'actions/apps'
 
 const AdminDashboard = ({ 
 	apps,
+	successfulPurchase,
 	filterText,
 	showCreateModal,
 	showDeleteModal,
@@ -26,6 +28,7 @@ const AdminDashboard = ({
 }) => (
 	<div>
 		<AppNavBar />
+		{successfulPurchase ? <SuccessfulPurchase /> : null }
 		{apps.length > 0 || filterText ? 
 			<div>
 				<DashboardTitleBar />
@@ -46,6 +49,7 @@ const AdminDashboard = ({
 const mapStateToProps = (state, props) => {
 	return {
 		apps: getAllAppsByText(state, props),
+		successfulPurchase: props.location.query["successful-purchase"],
 		filterText: state.filterText,
 		showCreateModal: props.location.pathname.indexOf('/d/apps/create') !== -1,
 		showDeleteModal: state.deleteApp.checksum ? true: false,

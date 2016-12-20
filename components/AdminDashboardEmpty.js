@@ -5,7 +5,6 @@ const AdminDashboardEmpty = () => (
 	<div className="col-sm-12">
 		<div className="ita-empty text-center">
 			<br />
-			<br />
 			<h1 className="weight-thin animated fadeInDown">Let's get this started</h1>
 			<br />
 			<br />

@@ -20,6 +20,8 @@ export const createRoutes = (store, dispatch) => ({
 	},
 	onEnter: (nextState, replace, next) => {
 		analytics.page('Admin Dashboard')
+		console.log('nextState', nextState.params)
+		console.log('replace', replace)
 		dispatch(fetchAdmin()).then(() => {
 			next()
 		})
@@ -27,6 +29,7 @@ export const createRoutes = (store, dispatch) => ({
 	childRoutes: [
 		require('routes/Account'),
 		require('routes/Card').default(store, dispatch),
+		require('routes/CardOverlay').default(store, dispatch),
 		require('routes/Plans'),
 		{
 			path: '/d/apps/',
