@@ -18,6 +18,14 @@ const plansDictionary = [
 		],
 	},
 	{
+		stripeId: "basic",
+		copy: [
+			'For solo businesses owners',
+			'Up to 5 apps',
+			'1 Seat',
+		],
+	},
+	{
 		stripeId: "agency_development",
 		copy: [
 			'For a team of marketers and designers',
@@ -53,7 +61,6 @@ export const receivePlans = plans => {
 			...plan,
 			amount: plan.amount / 100,
 			copy: elPlan.copy,
-			// copy: '',
 		}
 	})
 	return {
