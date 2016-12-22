@@ -10,7 +10,8 @@ const TakeMoney = ({ email, planId, hasCustomer, onToken, children }) => (
 		image="https://stripe.com/img/documentation/checkout/marketplace.png"
 		email={email}
 		locale="auto"
-		stripeKey="pk_test_m1qT4u49pPqliYXWOCCXMd6k"
+		// stripeKey="pk_test_m1qT4u49pPqliYXWOCCXMd6k"
+		stripeKey={window.stripeKey}
 	>
 		<button className="btn btn-primary hide">
 			{null} - ${null} / month

@@ -52,7 +52,7 @@ const Scoreboard = ({
 					id="lafecha"
 					// placeholderText="Select a date"
 					date={firstFetchFromDate}
-					isOutsideRange={day => day.isAfter(moment().subtract(1, 'days')) || day.isBefore(moment().subtract(120, 'days'))}
+					isOutsideRange={day => day.isAfter(moment().subtract(1, 'days')) || day.isBefore(moment().subtract(240, 'days'))}
 					// maxDate={moment()}
 					// disabled={!trackFromDate}
 					// minDate={moment().subtract(120, "days")}

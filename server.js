@@ -154,6 +154,7 @@ app.get('/d*', function(req, res){
 		cloudFrontUrl: cloudFrontUrl,
 		apiUrl: process.env.API_URL,
 		facebookAppId: process.env.FB_APP_ID,
+		stripeKey: process.env.STRIPE_KEY,
 	})
 })
 
