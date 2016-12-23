@@ -50,6 +50,9 @@ const AdminDashboard = ({
 )
 
 const mapStateToProps = (state, props) => {
+	if (props.location.query["trial-offer"]) {
+		analytics.track('Trial Offer Viewed')
+	}
 	return {
 		apps: getAllAppsByText(state, props),
 		successfulPurchase: props.location.query["successful-purchase"],

@@ -107,7 +107,9 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = (dispatch, props) => ({
 	onSuccess: () => {
-		top.location = location.protocol + '//' + window.location.host + '/d?successful-purchase=true'
+		analytics.track('Trial Offer Purchased', () => {
+			top.location = location.protocol + '//' + window.location.host + '/d?successful-purchase=true'
+		})
 	}
 })
 
