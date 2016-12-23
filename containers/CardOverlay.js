@@ -47,7 +47,7 @@ const CardOverlay = ({
 				<ul className="list-unstyled" style={{lineHeight: 1.8}}>
 					<li><span style={{marginRight: '5px'}} className="glyphicon glyphicon-ok text-success"></span>5 campaigns</li>
 					<li><span style={{marginRight: '5px'}} className="glyphicon glyphicon-ok text-success"></span>In-app support via chat</li>
-					<li><span style={{marginRight: '5px'}} className="glyphicon glyphicon-ok text-success"></span>All of our current and <a href="#" target="_blank">upcoming apps</a></li>
+					<li><span style={{marginRight: '5px'}} className="glyphicon glyphicon-ok text-success"></span>All of our current and <a href="https://installthisapp.com/apps" target="_blank">upcoming apps</a></li>
 					<li><span style={{marginRight: '5px'}} className="glyphicon glyphicon-ok text-success"></span>Facebook Tab integration</li>
 					<li><span style={{marginRight: '5px'}} className="glyphicon glyphicon-ok text-success"></span>Standalone public webpage</li>
 					<li><span style={{marginRight: '5px'}} className="glyphicon glyphicon-ok text-success"></span>Mobile and desktop views</li>
