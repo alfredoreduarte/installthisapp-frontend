@@ -1,12 +1,11 @@
-import React, { Component, PropTypes } from 'react'
-import _ from 'lodash'
+import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
 import TakeMoney from 'components/StripeButton'
+import { getBasicPlanIfExists } from 'selectors/plans'
 
 const CardOverlay = ({ 
 	busy,
-	planId,
+	plan,
 	onSuccess,
 }) => (
 	<div className="container-flex container-fullheight container-cancel ita-flex-justify-center" style={{
@@ -75,7 +74,8 @@ const CardOverlay = ({
 			</div>
 			</div>
 			<div className="col-md-12 text-center">
-				<TakeMoney planId={planId} onSuccess={onSuccess}>
+				{plan ? 
+				<TakeMoney planId={plan.id} onSuccess={onSuccess} couponCode="trial-offer">
 					<button
 						style={{letterSpacing: '1px', fontWeight: '400'}}
 						className={`btn text-uppercase btn-success btn-lg`}
@@ -84,6 +84,9 @@ const CardOverlay = ({
 						{busy ? 'Please wait...' : 'Start free trial'}
 					</button>
 				</TakeMoney>
+				:
+					<button className="btn btn-primary btn-lg" disabled>No plans currently available</button>
+				}
 				<div className="col-md-12 text-right" style={{marginTop: '20px'}}>
 					<a href="/d" className="" style={{
 						fontSize: '11px'
@@ -97,20 +100,15 @@ const CardOverlay = ({
 	</div>
 )
 
-const mapStateToProps = (state, props) => {
-	return {
-		busy: state.activityIndicators.purchasing,
-		planId: state.plans[0].id,
-	}
-}
+const mapStateToProps = (state, props) => ({
+	busy: state.activityIndicators.purchasing,
+	plan: getBasicPlanIfExists(state),
+})
 
-const mapDispatchToProps = (dispatch, props) => {
-	
-	return {
-		onSuccess: () => {
-			top.location = location.protocol + '//' + window.location.host + '/d?successful-purchase=true'
-		}
+const mapDispatchToProps = (dispatch, props) => ({
+	onSuccess: () => {
+		top.location = location.protocol + '//' + window.location.host + '/d?successful-purchase=true'
 	}
-}
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(CardOverlay)

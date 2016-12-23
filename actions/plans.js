@@ -2,31 +2,19 @@ import _ from 'lodash'
 
 const plansDictionary = [
 	{
-		stripeId: "basic_development",
-		copy: [
-			'For solo businesses owners',
-			'Up to 5 apps',
-			'1 Seat',
-		],
-	},
-	{
-		stripeId: "basic_staging",
-		copy: [
-			'For solo businesses owners',
-			'Up to 5 apps',
-			'1 Seat',
-		],
-	},
-	{
 		stripeId: "basic",
 		copy: [
 			'For solo businesses owners',
 			'Up to 5 apps',
-			'1 Seat',
+			'In-app support via chat',
+			'Facebook Tab integration',
+			'Standalone public webpage for your contests',
+			'Mobile and desktop views',
+			'100% customizable styles, texts and images',
 		],
 	},
 	{
-		stripeId: "agency_development",
+		stripeId: "agency",
 		copy: [
 			'For a team of marketers and designers',
 			'Unlimited apps',
@@ -37,7 +25,7 @@ const plansDictionary = [
 		],
 	},
 	{
-		stripeId: "enterprise_development",
+		stripeId: "enterprise",
 		copy: [
 			'For big agencies and companies',
 			'Unlimited apps',

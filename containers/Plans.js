@@ -54,7 +54,7 @@ const Plans = ({
 			display: 'flex',
 			justifyContent: 'center'
 		}}>
-			{plans.length == 0 ? <h4>There are no subscription plans at this time.</h4> : null}
+			{plans.length == 0 ? <h4>There are no available plans at this time.</h4> : null}
 			{plans.map(plan =>
 			<div style={{width: '200px', margin: '0px 32px'}} key={plan.stripeId}>
 				<div 
@@ -64,8 +64,7 @@ const Plans = ({
 							className="text-uppercase" 
 							style={{marginBottom: '50px', letterSpacing: '1px'}}><b>{plan.name}</b></h5>
 						<div className="text-muted" style={{marginBottom: '50px'}}>
-							
-							
+							{plan.copy.map(copy => <p key={copy}>{copy}</p>)}
 						</div>
 						<p style={{marginBottom: '50px'}}>
 							<sup>$</sup><span className="h1"><b>{plan.amount}</b></span><sub>/mo</sub>

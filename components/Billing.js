@@ -18,7 +18,7 @@ const Billing = ({ plan, cancel, busy }) => (
 				<h3>{plan.name} <br/><small>${plan.amount} / mo.</small></h3>
 				<p>
 					<Link to="/d/upgrade" className="btn btn-success" style={{marginRight: '15px'}}>Upgrade Plan</Link>
-					{plan.id ? <a href="javascript:void(0)" onClick={cancel} disabled={busy}><small>{busy ? 'Please wait...' : 'Cancel Plan'}</small></a> : null}
+					{plan.id ? <a href="javascript:void(0)" onClick={cancel} disabled={busy}><small>{busy ? 'Please wait...' : 'Cancel subscription'}</small></a> : null}
 				</p>
 			</div>
 			<div className="col-md-6 hide">

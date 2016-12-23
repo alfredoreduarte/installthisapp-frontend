@@ -3,7 +3,7 @@ import { setAlert } from 'actions/alerts'
 import { toggleActivityPurchasing } from 'actions/activityIndicators'
 import { fetchAdmin } from 'actions/admin'
 
-export const purchase = (token, planId, hasCustomer, onSuccess) => {
+export const purchase = (token, planId, hasCustomer, onSuccess, couponCode) => {
 	return dispatch => {
 		dispatch(toggleActivityPurchasing())
 		const url = `payola/subscribe/subscription_plan/${planId}.json`
@@ -12,6 +12,7 @@ export const purchase = (token, planId, hasCustomer, onSuccess) => {
 			{
 				stripeToken: token.id,
 				stripeEmail: token.email,
+				coupon_code: couponCode,
 			},
 			// we passs an empty "response" function argument, and false as the last argument in order to avoid
 			// passing from camelCase to snake_case
