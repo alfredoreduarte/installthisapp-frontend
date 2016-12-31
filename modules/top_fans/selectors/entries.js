@@ -8,6 +8,8 @@ const getAllEntries = state => state.topFans.entries
 
 const handleScore = score => score ? score : 0
 
+
+let verifiedScoresEventSent = false
 export const getEntriesForPage = createSelector(
 	getAllEntries,
 	getCurrentAppByState,
@@ -30,7 +32,10 @@ export const getEntriesForPage = createSelector(
 					}
 				})
 				const arrResultOrdered = _.orderBy(arrWithScores, 'score', 'desc')
-				analytics.track('Scores Verified')
+				if (!verifiedScoresEventSent) {
+					analytics.track('Scores Verified')
+					verifiedScoresEventSent = !verifiedScoresEventSent
+				}
 				return arrResultOrdered
 			}
 			else{

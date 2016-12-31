@@ -341,9 +341,6 @@ const mapDispatchToProps = (dispatch, props) => ({
 			payload: fbPageIdentifier,
 		})
 	},
-	// installTab: () => dispatch(installFacebookTab()).then(() => {
-	// 	dispatch(pollTopFansEntities(props.params.checksum))
-	// }),
 	installTab: () => dispatch(updateAppSettings()).then(() => {
 		dispatch(installFacebookTab()).then(() => {
 			dispatch(pollTopFansEntities(props.params.checksum))
