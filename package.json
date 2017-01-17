@@ -23,6 +23,7 @@
   "license": "ISC",
   "dependencies": {
     "animate.css": "^3.5.1",
+    "aws-sdk": "^2.7.21",
     "babel-core": "^6.9.1",
     "babel-eslint": "^6.0.4",
     "babel-loader": "^6.2.4",
