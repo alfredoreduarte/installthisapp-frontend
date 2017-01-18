@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import FileInput from 'react-file-input'
+import { toggleActivitySavingDesign } from 'actions/activityIndicators'
 import { getSignedRequest } from 'actions/styles'
 import { API_URL } from 'config'
 
@@ -10,7 +11,7 @@ const ImageUploader = ({
 	value,
 	property,
 	onChange,
-	handleLocalChange,
+	handleChange,
 }) => (
 	<div className="ita-flex-box ita-flex-box-horizontal">
 		<div className="ita-flex-box ita-flex-items-center ita-flex-shrink">
@@ -26,7 +27,7 @@ const ImageUploader = ({
 				accept=".png,.gif,.jpg,.jpeg"
 				placeholder="Upload Image"
 				className="btn btn-sm btn-gray btn-outline"
-				onChange={handleLocalChange} />
+				onChange={handleChange} />
 		</div>
 	</div>
 )
@@ -44,27 +45,13 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch, props) => {
 	const imgOrBackground = props.imgOrBackground
 	return {
-		// handleLocalChange: (e, imgOrBackground) => {
-		// 	const input = e.target
-		// 	let formData = new FormData()
-		// 	formData.append(input.name, input.files[0])
-		// 	dispatch(saveImage(formData)).then(response => {
-		// 		if (imgOrBackground == 'img') {
-		// 			props.onChange(response.assetUrl)
-		// 		}
-		// 		else {
-		// 			props.onChange(`url(${response.assetUrl})`)
-		// 		}			
-		// 	})
-		// },
-		handleLocalChange: e => {
+		handleChange: e => {
+			dispatch(toggleActivitySavingDesign())
 			const input = e.target
 			const file = input.files[0]
-			if (file == null) {
-				return false
-			}
+			if (file == null) {return false}
 			dispatch(getSignedRequest(file)).then(response => {
-				console.log('done!!', response)
+				dispatch(toggleActivitySavingDesign())
 				if (imgOrBackground == 'img') {
 					props.onChange(response)
 				}

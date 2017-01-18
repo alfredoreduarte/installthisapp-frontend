@@ -172,7 +172,6 @@ app.get('/sign-s3', (req, res) => {
 		ContentType: fileType,
 		ACL: 'public-read'
 	}
-
 	s3.getSignedUrl('putObject', s3Params, (err, data) => {
 		if (err) {
 			console.log(err)

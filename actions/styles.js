@@ -4,6 +4,7 @@ import { updateCoords } from 'actions/design-helper/mouseTrap'
 import { toggleActivitySavingDesign } from 'actions/activityIndicators'
 import { getCurrentAppByState } from 'selectors/apps'
 import { getFromApi, postToApi, postFileToApi } from 'api'
+import { getCurrentAppChecksumByState } from 'selectors/apps'
 
 export const setCurrentScreen = screen => {
 	return {
@@ -75,25 +76,12 @@ const receiveMessages = messages => {
 	}
 }
 
-// images
-// Direct upload
-// export const saveImage = body => {
-// 	return (dispatch, getState) => {
-// 		dispatch(toggleActivitySavingDesign())
-// 		const checksum = getState().admin.currentApp
-// 		return postFileToApi(`applications/${checksum}/save_image_from_new_editor.json`, body)
-// 				.then(response => {
-// 					dispatch(toggleActivitySavingDesign())
-// 					return Promise.resolve(response)
-// 				})
-// 	}
-// }
-
+// Images
 const makeRequest = (method, url) => {
-	return new Promise(function (resolve, reject) {
+	return new Promise( (resolve, reject) => {
 		var xhr = new XMLHttpRequest()
 		xhr.open(method, url)
-		xhr.onload = function () {
+		xhr.onload = function() {
 			if (this.status >= 200 && this.status < 300) {
 				resolve(xhr.response)
 			} else {
@@ -103,7 +91,7 @@ const makeRequest = (method, url) => {
 				})
 			}
 		}
-		xhr.onerror = function () {
+		xhr.onerror = function() {
 			reject({
 				status: this.status,
 				statusText: xhr.statusText
@@ -113,137 +101,46 @@ const makeRequest = (method, url) => {
 	})
 }
 export const getSignedRequest = file => {
-	return dispatch => {
-		// return fetch(`/sign-s3?file-name=${file.name}&file-type=${file.type}`, {
-		// 		method: 'GET',
-		// 		// headers: {
-		// 		// 	'Content-Type': `${file.type}`,
-		// 		// }
-		// 	})
-		// 	.then(response => {
-		// 		switch(response.status){
-		// 			case 200:
-		// 				return response.json()
-		// 			default:
-		// 				console.log('Status: ' + response.status)
-		// 				return
-		// 		}
-		// 	})
-		// 	.then(json => {
-		// 		console.log('res 1', json)
-		// 		return dispatch(uploadFile(file, json.signedRequest, json.url))
-		// 		// return Promise.resolve(response)
-		// 	})
-		// 	.catch(exception =>
-		// 		console.log('parsing failed', exception)
-		// 	)
-		// 
-		// hola
-		// 
-		return makeRequest('GET', `/sign-s3?file-name=${file.name}&file-type=${file.type}`)
-		.then(function (datums) {
-			console.log('datums', datums)
-			return JSON.parse(datums)
+	return (dispatch, getState)  => {
+		const applicationChecksum = getCurrentAppChecksumByState(getState())
+		return makeRequest('GET', `/sign-s3?file-name=application-assets/${applicationChecksum}/images/${file.name}&file-type=${file.type}`)
+		.then( response => {
+			return JSON.parse(response)
 		})
-		.then(function (json) {
-			console.log('eljson', json)
+		.then( json => {
 			return dispatch(uploadFile(file, json.signedRequest, json.url))
-			// return datums.json()
 		})
-		.catch(function (err) {
-			console.error('Augh, there was an error!', err.statusText)
+		.catch( error => {
+			console.error('Augh, there was an error!', error.statusText)
 		})
-		// 
-		// hola
-		// 
-		// return new Promise( ( resolve, reject ) => {
-		// 	const xhr = new XMLHttpRequest()
-		// 	xhr.open('GET', `/sign-s3?file-name=${file.name}&file-type=${file.type}`)
-		// 	xhr.onreadystatechange = () => {
-		// 		if ( xhr.readyState === 4 ) {
-		// 			if ( xhr.status === 200 ) {
-		// 				const response = JSON.parse(xhr.responseText)
-		// 				console.log('about to upload file')
-		// 				return response
-		// 				// return dispatch(uploadFile(file, response.signedRequest, response.url))
-		// 			}
-		// 			else {
-		// 				reject({
-		// 					status: xhr.status,
-		// 					statusText: xhr.statusText
-		// 				})
-		// 				alert('Could not get signed URL.')
-		// 			}
-		// 		}
-		// 	}
-		// 	xhr.send()
-		// }).then(response => {
-		// 	return dispatch(uploadFile(file, response.signedRequest, response.url))
-		// })
 	}
 }
 const uploadFile = (file, signedRequest, url) => {
 	return dispatch => {
-		// return makeRequest('PUT', signedRequest)
-		// .then(function (datums) {
-		// 	console.log('datums 2', datums)
-		// 	return URL
-		// })
-		// .catch(function (err) {
-		// 	console.error('Augh, there was an error!', err.statusText)
-		// })
-		// return new Promise( ( resolve, reject ) => {
-		// 	const xhr = new XMLHttpRequest()
-		// 	xhr.open('PUT', signedRequest)
-		// 	xhr.onreadystatechange = () => {
-		// 		if ( xhr.readyState === 4 ) {
-		// 			if ( xhr.status === 200 ) {
-		// 				console.log('done uploading', url)
-		// 				resolve(url)
-		// 			}
-		// 			else {
-		// 				reject({
-		// 					status: xhr.status,
-		// 					statusText: xhr.statusText
-		// 				})
-		// 				alert('Could not upload file.')
-		// 			}
-		// 		}
-		// 	}
-		// 	xhr.send(file)
-		// })
-		// 
-		return fetch(signedRequest, {
-				method: 'PUT',
-				headers: {
-					'Content-Type': `${file.type}`,
+		return new Promise( ( resolve, reject ) => {
+			const xhr = new XMLHttpRequest()
+			xhr.open('PUT', signedRequest)
+			xhr.onreadystatechange = () => {
+				if ( xhr.readyState === 4 ) {
+					if ( xhr.status === 200 ) {
+						resolve(url)
+					}
+					else {
+						reject({
+							status: xhr.status,
+							statusText: xhr.statusText
+						})
+						alert('Could not upload file.')
+					}
 				}
-			})
-			.then(response => {
-				console.log('res 1/2', response)
-				if ( response.status == 200 ) {
-					return true
-				}
-				else{
-					console.log('Status: ' + response.status)
-				}
-			})
-			.then(uploaded => {
-				if (uploaded) {
-					return Promise.resolve(url)
-				}
-				else {
-					return false
-				}
-			})
-			.catch(exception =>
-				console.log('parsing failed', exception)
-			)
-		
+			}
+			xhr.send(file)
+		})		
 	}
 }
-// Direct upload
 
+// Deprecated:
+// 
 // export const saveImage = body => {
 // 	return (dispatch, getState) => {
 // 		dispatch(toggleActivitySavingDesign())
