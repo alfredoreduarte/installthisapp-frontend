@@ -103,7 +103,7 @@ const makeRequest = (method, url) => {
 export const getSignedRequest = file => {
 	return (dispatch, getState)  => {
 		const applicationChecksum = getCurrentAppChecksumByState(getState())
-		return makeRequest('GET', `/sign-s3?file-name=application-assets/${applicationChecksum}/images/${file.name}&file-type=${file.type}`)
+		return makeRequest('GET', `/sign-s3?file-name=application-assets/${applicationChecksum}/images/${Date.now()}-${file.name}&file-type=${file.type}`)
 		.then( response => {
 			return JSON.parse(response)
 		})
