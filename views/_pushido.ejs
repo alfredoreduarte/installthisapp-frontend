@@ -1,0 +1,64 @@
+<script src="/public/pushido_api_native_min.js"></script>
+<script>
+	ps_app_subdomain = "installthisapp";
+	ps_app_token = "396126945287ca44f48129d8fa42bd7920a9621d";
+
+
+	// SW Callbacks
+	function ps_cb_sw_registered() {
+
+	}
+
+
+	function ps_cb_incognito_detected() {
+
+	}
+
+
+
+	//Subscriptions
+
+	function ps_cb_default() {
+		ps_requestAndSubscribe();
+	}
+
+	function ps_cb_denied() {
+
+	}
+
+	function ps_cb_closed() {
+		// ps_requestAndSubscribe();
+	}
+
+	function ps_cb_subscribed() {
+
+	}
+
+	function ps_cb_unsubscribed() {
+	}
+
+	function ps_cb_granted() {
+
+	}		
+
+	function ps_cb_not_supported() {
+
+	}	
+
+	function ps_cb_connection_failed() {
+
+	}
+
+	function ps_cb_loading_start() {
+
+	}
+
+	function ps_cb_loading_end() {
+
+	}	
+
+
+	ps_swRegister();	
+
+
+</script>
