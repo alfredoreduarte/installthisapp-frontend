@@ -49,6 +49,8 @@ else{
 app.use('/images', express.static(__dirname + '/assets/images'))
 app.use('/styles', express.static(__dirname + '/assets/styles'))
 app.use('/landing', express.static(__dirname + '/assets/landing'))
+app.use('/public', express.static(__dirname + '/assets/newlanding'))
+app.use('/sw.js', express.static(__dirname + '/assets/newlanding/sw.js'))
 app.use('/canvas', express.static(__dirname + '/assets/canvas'))
 app.use('/node_modules', express.static(__dirname + '/node_modules'))
 

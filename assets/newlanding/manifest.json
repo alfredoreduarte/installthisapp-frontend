@@ -1,0 +1,7 @@
+{
+  "name": "installthisapp",
+  "display": "standalone",
+  "start_url": "/",
+  "gcm_user_visible_only": true,
+  "gcm_sender_id": "1017965890761"
+}
