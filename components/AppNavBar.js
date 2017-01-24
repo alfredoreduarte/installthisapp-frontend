@@ -12,7 +12,8 @@ const AppNavBar = ({ name, identifier, logout, subscription }) => (
 		<Navbar.Header>
 			<Navbar.Brand>
 				<IndexLink to="/d">
-					<b>Install</b>This<b>App</b> <span className="label label-sm label-default"><small>BETA</small></span></IndexLink>
+					<img src="/images/logo-blue.png" style={{height: "40px"}} />
+				</IndexLink>
 			</Navbar.Brand>
 		</Navbar.Header>
 		<div className="collapse navbar-collapse text-right">
