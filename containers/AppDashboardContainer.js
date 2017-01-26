@@ -13,6 +13,7 @@ const AppDashboardContainer = ({
 	currentApp, 
 	checksum, 
 	main, 
+	secondary,
 	sidebar, 
 	applicationType, 
 	// facebookPageIdentifier, 
@@ -42,6 +43,7 @@ const AppDashboardContainer = ({
 		</Sidebar>
 		<DashboardContentDecorator>
 			{children ? children : main}
+			{secondary ? secondary : null}
 		</DashboardContentDecorator>
 	</div>
 )

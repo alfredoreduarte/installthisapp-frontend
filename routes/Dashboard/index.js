@@ -31,13 +31,21 @@ export default (store, dispatch) => ({
 		})
 	},
 	indexRoute: {
+		onEnter: (nextState, replace, next) => {
+			const fetchTopFansEntities = require(`modules/${nextState.params.type}/actions/entities`).fetchTopFansEntities
+			dispatch(
+				fetchTopFansEntities(nextState.params.checksum)
+			).then(() => {
+				next()
+			})
+		},
 		getComponents(nextState, cb) {
 			require.ensure([], require => {
 				cb(null, {
 					main: require('containers/AppDashboard').default,
+					secondary: require('modules/' + nextState.params.type + '/secondaryDashboard').default,
 					sidebar: require('modules/' + nextState.params.type + '/sidebar').default,
 				})
-				// cb(null, require('containers/AppDashboard').default)
 			})
 		}
 	},

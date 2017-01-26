@@ -6,8 +6,9 @@ import { getCurrentApp } from 'selectors/apps'
 import Summary from 'components/Summary'
 import UserGrid from 'components/UserGrid'
 
+// Hiding summary and usergrid because top fans doesn't have that data yet
 const AppDashboard = ({ users, summary }) => (
-	<div>
+	<div className="hide">
 		<Summary data={summary} />
 		<UserGrid users={users} />
 	</div>
