@@ -3,6 +3,7 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { Accordion, AccordionItem } from 'react-sanfona'
+import { setAlert } from 'actions/alerts'
 import FacebookLogin from 'react-facebook-login'
 import moment from 'moment'
 import { SingleDatePicker } from 'react-dates'
@@ -309,44 +310,54 @@ const mapStateToProps = (state, props) => {
 	}
 }
 
-const mapDispatchToProps = (dispatch, props) => ({
-	onToggleTrackFromDate: value => {
-		dispatch({
-			type: 'WIZARD_TOGGLE_TRACK_FROM_DATE',
-			value,
-		})
-		if (!value) {
-			dispatch(editAppSpecificSettings(null))
+const mapDispatchToProps = (dispatch, props) => {
+	// fb verification: The fbLoaded var is created at dashboard.ejs
+	setTimeout(function() {
+		if (!fbLoaded) {
+			console.log('UNABLE TO LOAD FB SCRIPT')
+			dispatch(setAlert('Whoops!', "We're not being able to connect to Facebook. Please disable any ad-blocker and reload the page. We don't show any ads here anyway 😇"))
 		}
-	},
-	onToggleDatePicker: () => dispatch({
-		type: 'WIZARD_TOGGLE_DATE_PICKER',
-	}),
-	onDateChange: date => {
-		dispatch(editAppSpecificSettings(date.format()))
-		dispatch({
-			type: 'WIZARD_TOGGLE_DATE_PICKER'
-		})
-	},
-	// 
-	advanceWizard: step => dispatch({
-		type: 'UPDATE_WIZARD_STEP',
-		step,
-	}),
-	fbLoginCallback: response => dispatch(fbConnect(response)),
-	fetchPages: () => dispatch(fetchFacebookPages()),
-	selectPage: fbPageIdentifier => {
-		dispatch({
-			type: 'SET_FB_PAGE_IDENTIFIER_FOR_INTEGRATION',
-			payload: fbPageIdentifier,
-		})
-	},
-	installTab: () => dispatch(updateAppSettings()).then(() => {
-		dispatch(installFacebookTab()).then(() => {
-			dispatch(pollTopFansEntities(props.params.checksum))
-		})
-	}),
-	uninstallTab: () => dispatch(uninstallFacebookTab())
-})
+	}, 5 * 1000)
+	// ! fb verification
+	return {
+		onToggleTrackFromDate: value => {
+			dispatch({
+				type: 'WIZARD_TOGGLE_TRACK_FROM_DATE',
+				value,
+			})
+			if (!value) {
+				dispatch(editAppSpecificSettings(null))
+			}
+		},
+		onToggleDatePicker: () => dispatch({
+			type: 'WIZARD_TOGGLE_DATE_PICKER',
+		}),
+		onDateChange: date => {
+			dispatch(editAppSpecificSettings(date.format()))
+			dispatch({
+				type: 'WIZARD_TOGGLE_DATE_PICKER'
+			})
+		},
+		// 
+		advanceWizard: step => dispatch({
+			type: 'UPDATE_WIZARD_STEP',
+			step,
+		}),
+		fbLoginCallback: response => dispatch(fbConnect(response)),
+		fetchPages: () => dispatch(fetchFacebookPages()),
+		selectPage: fbPageIdentifier => {
+			dispatch({
+				type: 'SET_FB_PAGE_IDENTIFIER_FOR_INTEGRATION',
+				payload: fbPageIdentifier,
+			})
+		},
+		installTab: () => dispatch(updateAppSettings()).then(() => {
+			dispatch(installFacebookTab()).then(() => {
+				dispatch(pollTopFansEntities(props.params.checksum))
+			})
+		}),
+		uninstallTab: () => dispatch(uninstallFacebookTab())
+	}
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Integrations)
