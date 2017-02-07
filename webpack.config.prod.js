@@ -1,10 +1,15 @@
 var path = require('path')
 var webpack = require('webpack')
 var ExtractTextPlugin = require("extract-text-webpack-plugin")
+var AssetsPlugin = require('assets-webpack-plugin')
+var assetsPluginInstance = new AssetsPlugin({
+	prettyPrint: true,
+})
 
 module.exports = {
 	devtool: 'source-map',
 	entry: {
+		common: 'moment',
 		dashboard: 'index.js',
 		landing: './assets/landing/index',
 		trivia: 'canvas/trivia/index.js',
@@ -13,14 +18,13 @@ module.exports = {
 	},
 	output: {
 		path: path.join(__dirname, '/dist'),
-		filename: '[name].bundle.js',
+		filename: '[hash].[name].js',
 		chunkFilename: '[id].chunk.js',
 		publicPath: '/static/'
 	},
 	plugins: [
-		// new ExtractTextPlugin("landing_styles.css"),
-		new ExtractTextPlugin('[name].css'),
-		new webpack.optimize.CommonsChunkPlugin('common.js'),
+		assetsPluginInstance,
+		new ExtractTextPlugin('[hash].[name].css'),
 		new webpack.optimize.DedupePlugin(),
 		new webpack.optimize.AggressiveMergingPlugin(),
 		new webpack.optimize.OccurenceOrderPlugin(),
@@ -34,11 +38,14 @@ module.exports = {
 			compressor: {
 				warnings: false
 			}
+		}),
+		new webpack.optimize.CommonsChunkPlugin({
+			names: ['common', 'manifest']
 		})
 	],
 	resolve: {
-		root: [ __dirname + '/' ],
-		extensions: ['', '.js']
+		modules: [__dirname, "node_modules"],
+		extensions: ['.js', '.json', '.sass']
 	},
 	module: {
 		loaders: [
@@ -56,7 +63,7 @@ module.exports = {
 			{
 				test: /\.(png|jpg|jpeg|gif)$/,
 				// include: path.join(__dirname, 'assets/styles'),
-				loaders: ['file']
+				loaders: ['file-loader']
 			},
 			// sass
 			// {
@@ -67,19 +74,19 @@ module.exports = {
 			// },
 			{
                 test: /\.(sass|scss)$/,
-                loader: ExtractTextPlugin.extract('css?minimize!sass')
+                loader: ExtractTextPlugin.extract('css-loader?minimize!sass-loader')
             },
 			// css
 			{
 				test: /\.(css)$/,
 				// include: path.join(__dirname, 'assets/styles'),
-				loaders: ['style', 'css']
+				loaders: ['style-loader', 'css-loader']
 				// loader: ExtractTextPlugin.extract("style", "css?minimize!")
 			},
 			// fonts
 			{
 				test: /\.(ttf|woff|woff2|eot|svg)$/,
-				loader: 'file'
+				loader: 'file-loader'
 			}
 		]
 	}

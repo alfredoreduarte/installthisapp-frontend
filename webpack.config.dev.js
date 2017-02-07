@@ -18,16 +18,13 @@ module.exports = {
 	},
 	output: {
 		path: path.join(__dirname, '/dist'),
-		filename: '[hash].[name].js',
+		filename: '[name].js',
 		chunkFilename: '[id].chunk.js',
 		publicPath: '/static/'
 	},
 	plugins: [
 		assetsPluginInstance,
-		new ExtractTextPlugin('[hash].[name].css'),
-		// new ExtractTextPlugin("assets/styles/styles.sass"),
-		// new ExtractTextPlugin("dashboard_styles.css"),
-		// new webpack.optimize.CommonsChunkPlugin('common.js'),
+		new ExtractTextPlugin('[name].css'),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoEmitOnErrorsPlugin(),
 		new webpack.DefinePlugin({
@@ -36,8 +33,7 @@ module.exports = {
 			'process.env.API_URL': JSON.stringify(process.env.API_URL),
 		}),
 		new webpack.optimize.CommonsChunkPlugin({
-			// minChunks: Infinity,
-			names: ['common', 'manifest'] // Specify the common bundle's name.
+			names: ['common', 'manifest']
 		})
 	],
 	resolve: {
