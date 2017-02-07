@@ -1,4 +1,5 @@
 var express = require('express')
+var jsonfile = require('jsonfile')
 var apiUrl = process.env.API_URL || 'https://local.installthisapp.com'
 // #############
 // Canvas
@@ -23,6 +24,11 @@ topFansRouter.use(function(req, res, next) {
 })
 topFansRouter.use('/static', express.static(__dirname + '/dist'))
 topFansRouter.post(`/${topFansCanvasId}`, canvasParser, function(req, res) {
+	const manifestPath = `${process.cwd()}/webpack-assets.json`
+	const manifest = jsonfile.readFileSync(manifestPath)
+	const manifestBundle = manifest['manifest']['js']
+	const vendorBundle = manifest['common']['js']
+	const moduleBundle = manifest['top_fans']['js']
 	fetch(`${apiUrl}/canvasauth.json`, {
 		method: 'POST',
 		headers: {
@@ -45,6 +51,9 @@ topFansRouter.post(`/${topFansCanvasId}`, canvasParser, function(req, res) {
 			stylesheetUrl: json.stylesheet_url,
 			messagesUrl: json.messages_url,
 			imagesUrl: json.images_url,
+			manifestBundle,
+			vendorBundle,
+			moduleBundle,
 		})
 	})
 	.catch(exception =>
@@ -55,6 +64,11 @@ topFansRouter.post(`/${topFansCanvasId}`, canvasParser, function(req, res) {
 	)
 })
 topFansRouter.get(`/${topFansCanvasId}/:checksum*`, canvasParser, function(req, res) {
+	const manifestPath = `${process.cwd()}/webpack-assets.json`
+	const manifest = jsonfile.readFileSync(manifestPath)
+	const manifestBundle = manifest['manifest']['js']
+	const vendorBundle = manifest['common']['js']
+	const moduleBundle = manifest['top_fans']['js']
 	fetch(`${apiUrl}/standalone_auth.json`, {
 		method: 'POST',
 		headers: {
@@ -78,6 +92,9 @@ topFansRouter.get(`/${topFansCanvasId}/:checksum*`, canvasParser, function(req, 
 			stylesheetUrl: json.stylesheet_url,
 			messagesUrl: json.messages_url,
 			imagesUrl: json.images_url,
+			manifestBundle,
+			vendorBundle,
+			moduleBundle,
 		})
 	})
 	.catch(exception =>

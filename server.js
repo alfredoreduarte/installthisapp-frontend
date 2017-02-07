@@ -2,6 +2,7 @@ var path = require('path')
 var express = require('express')
 var helmet = require('helmet')
 var aws = require('aws-sdk')
+var jsonfile = require('jsonfile')
 
 const app = express()
 app.set('view engine', 'ejs')
@@ -11,6 +12,7 @@ app.enable('trust proxy');
 app.use(express_enforces_ssl());
 
 var cloudFrontUrl = process.env.CLOUDFRONT_URL
+
 
 // 
 // Force SSL
@@ -74,75 +76,175 @@ app.use(function(req, res, next) {
 		next()
 })
 app.get('/', function(req, res) {
+	const manifestPath = `${process.cwd()}/webpack-assets.json`
+	const manifest = jsonfile.readFileSync(manifestPath)
+	const manifestBundle = manifest['manifest']['js']
+	const jsBundle = manifest['landing']['js']
+	const cssBundle = manifest['landing']['css']
+	const vendorBundle = manifest['common']['js']
 	res.render('index', {
 		cloudFrontUrl: cloudFrontUrl,
 		apiUrl: process.env.API_URL,
 		facebookAppId: process.env.FB_APP_ID,
+		jsBundle,
+		cssBundle,
+		vendorBundle,
+		manifestBundle,
 	})
 })
 app.get('/top-fans-for-facebook-pages.html', function(req, res) {
+	const manifestPath = `${process.cwd()}/webpack-assets.json`
+	const manifest = jsonfile.readFileSync(manifestPath)
+	const manifestBundle = manifest['manifest']['js']
+	const jsBundle = manifest['landing']['js']
+	const cssBundle = manifest['landing']['css']
+	const vendorBundle = manifest['common']['js']
 	res.render('app', {
 		cloudFrontUrl: cloudFrontUrl,
 		apiUrl: process.env.API_URL,
 		facebookAppId: process.env.FB_APP_ID,
+		jsBundle,
+		cssBundle,
+		vendorBundle,
+		manifestBundle,
 	})
 })
 app.get('/contact', function(req, res) {
+	const manifestPath = `${process.cwd()}/webpack-assets.json`
+	const manifest = jsonfile.readFileSync(manifestPath)
+	const manifestBundle = manifest['manifest']['js']
+	const jsBundle = manifest['landing']['js']
+	const cssBundle = manifest['landing']['css']
+	const vendorBundle = manifest['common']['js']
 	res.render('contact', {
 		cloudFrontUrl: cloudFrontUrl,
 		apiUrl: process.env.API_URL,
 		facebookAppId: process.env.FB_APP_ID,
+		jsBundle,
+		cssBundle,
+		vendorBundle,
+		manifestBundle,
 	})
 })
 app.get('/signup', function(req, res) {
+	const manifestPath = `${process.cwd()}/webpack-assets.json`
+	const manifest = jsonfile.readFileSync(manifestPath)
+	const manifestBundle = manifest['manifest']['js']
+	const jsBundle = manifest['landing']['js']
+	const cssBundle = manifest['landing']['css']
+	const vendorBundle = manifest['common']['js']
 	res.render('register', {
 		cloudFrontUrl: cloudFrontUrl,
 		apiUrl: process.env.API_URL,
 		facebookAppId: process.env.FB_APP_ID,
+		jsBundle,
+		cssBundle,
+		vendorBundle,
+		manifestBundle,
 	})
 })
 app.get('/login', function(req, res) {
+	const manifestPath = `${process.cwd()}/webpack-assets.json`
+	const manifest = jsonfile.readFileSync(manifestPath)
+	const manifestBundle = manifest['manifest']['js']
+	const jsBundle = manifest['landing']['js']
+	const cssBundle = manifest['landing']['css']
+	const vendorBundle = manifest['common']['js']
 	res.render('login', {
 		cloudFrontUrl: cloudFrontUrl,
 		apiUrl: process.env.API_URL,
 		facebookAppId: process.env.FB_APP_ID,
+		jsBundle,
+		cssBundle,
+		vendorBundle,
+		manifestBundle,
 	})
 })
 app.get('/card', function(req, res) {
+	const manifestPath = `${process.cwd()}/webpack-assets.json`
+	const manifest = jsonfile.readFileSync(manifestPath)
+	const manifestBundle = manifest['manifest']['js']
+	const jsBundle = manifest['landing']['js']
+	const cssBundle = manifest['landing']['css']
+	const vendorBundle = manifest['common']['js']
 	res.render('card', {
 		cloudFrontUrl: cloudFrontUrl,
 		apiUrl: process.env.API_URL,
 		facebookAppId: process.env.FB_APP_ID,
+		jsBundle,
+		cssBundle,
+		vendorBundle,
+		manifestBundle,
 	})
 })
 app.get('/forgot', function(req, res) {
+	const manifestPath = `${process.cwd()}/webpack-assets.json`
+	const manifest = jsonfile.readFileSync(manifestPath)
+	const manifestBundle = manifest['manifest']['js']
+	const jsBundle = manifest['landing']['js']
+	const cssBundle = manifest['landing']['css']
+	const vendorBundle = manifest['common']['js']
 	res.render('request-recovery', {
 		cloudFrontUrl: cloudFrontUrl,
-		apiUrl: process.env.API_URL
+		apiUrl: process.env.API_URL,
+		jsBundle,
+		cssBundle,
+		vendorBundle,
+		manifestBundle,
 	})
 })
 app.get('/forgot/sent', function(req, res) {
+	const manifestPath = `${process.cwd()}/webpack-assets.json`
+	const manifest = jsonfile.readFileSync(manifestPath)
+	const manifestBundle = manifest['manifest']['js']
+	const jsBundle = manifest['landing']['js']
+	const cssBundle = manifest['landing']['css']
+	const vendorBundle = manifest['common']['js']
 	res.render('recovery-email-sent', {
 		cloudFrontUrl: cloudFrontUrl,
-		apiUrl: process.env.API_URL
+		apiUrl: process.env.API_URL,
+		jsBundle,
+		cssBundle,
+		vendorBundle,
+		manifestBundle,
 	})
 })
 app.get('/reset-password', function(req, res) {
+	const manifestPath = `${process.cwd()}/webpack-assets.json`
+	const manifest = jsonfile.readFileSync(manifestPath)
+	const manifestBundle = manifest['manifest']['js']
+	const jsBundle = manifest['landing']['js']
+	const cssBundle = manifest['landing']['css']
+	const vendorBundle = manifest['common']['js']
 	res.render('reset-password', {
 		cloudFrontUrl: cloudFrontUrl,
 		apiUrl: process.env.API_URL,
 		clientId: req.query.client_id,
 		uid: req.query.uid,
 		token: req.query.token,
+		jsBundle,
+		cssBundle,
+		vendorBundle,
+		manifestBundle,
 	})
 })
 app.get('/pricing', function(req, res) {
+	const manifestPath = `${process.cwd()}/webpack-assets.json`
+	const manifest = jsonfile.readFileSync(manifestPath)
+	const manifestBundle = manifest['manifest']['js']
+	const jsBundle = manifest['landing']['js']
+	const cssBundle = manifest['landing']['css']
+	const vendorBundle = manifest['common']['js']
 	res.render('pricing', {
 		cloudFrontUrl: cloudFrontUrl,
 		apiUrl: process.env.API_URL,
 		clientId: req.query.client_id,
 		uid: req.query.uid,
 		token: req.query.token,
+		jsBundle,
+		cssBundle,
+		vendorBundle,
+		manifestBundle,
 	})
 })
 // 
@@ -152,12 +254,22 @@ app.get('/pricing', function(req, res) {
 // defined as ALIAS_PARAM_KEY env variable.
 // 
 app.get('/d*', function(req, res){
+	const manifestPath = `${process.cwd()}/webpack-assets.json`
+	const manifest = jsonfile.readFileSync(manifestPath)
+	const manifestBundle = manifest['manifest']['js']
+	const jsBundle = manifest['dashboard']['js']
+	const cssBundle = manifest['dashboard']['css']
+	const vendorBundle = manifest['common']['js']
 	res.render('dashboard', {
 		alias: req.query[process.env.ALIAS_PARAM_KEY],
 		cloudFrontUrl: cloudFrontUrl,
 		apiUrl: process.env.API_URL,
 		facebookAppId: process.env.FB_APP_ID,
 		stripeKey: process.env.STRIPE_KEY,
+		jsBundle,
+		cssBundle,
+		vendorBundle,
+		manifestBundle,
 	})
 })
 

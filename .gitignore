@@ -44,3 +44,4 @@ dist
 .sublime-project
 .env
 Procfile.dev
+webpack-assets.json

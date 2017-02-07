@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/png" href="/images/favicon.png" />
 	<title>InstalThisApp</title>
-	<link rel="stylesheet" media="all" href="<%= cloudFrontUrl %>/static/dashboard.css" />
+	<link rel="stylesheet" media="all" href="<%= cloudFrontUrl %><%= cssBundle %>" />
 	<%- include('_segment') %>
 </head>
 <body>
@@ -17,8 +17,9 @@
 		window.facebookAppId = "<%= facebookAppId %>";
 		window.stripeKey = "<%= stripeKey %>";
 	</script>
-	<script src="<%= cloudFrontUrl %>/static/common.js"></script>
-	<script src="<%= cloudFrontUrl %>/static/dashboard.bundle.js"></script>
+	<script src="<%= cloudFrontUrl %><%= manifestBundle %>"></script>
+	<script src="<%= cloudFrontUrl %><%= vendorBundle %>"></script>
+	<script src="<%= cloudFrontUrl %><%= jsBundle %>"></script>
 	<script>
 		// The fbLoaded var is verified at the component Wizard.js, in order to alert when 
 		// ad-blockers are blocking facebook's SDK

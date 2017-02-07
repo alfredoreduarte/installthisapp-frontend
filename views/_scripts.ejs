@@ -1,2 +1,3 @@
-<script src="<%= cloudFrontUrl %>/static/common.js"></script>
-<script src="<%= cloudFrontUrl %>/static/landing.bundle.js"></script>
+<script src="<%= cloudFrontUrl %><%= manifestBundle %>"></script>
+<script src="<%= cloudFrontUrl %><%= vendorBundle %>"></script>
+<script src="<%= cloudFrontUrl %><%= jsBundle %>"></script>

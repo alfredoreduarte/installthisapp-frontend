@@ -23,6 +23,7 @@
   "license": "ISC",
   "dependencies": {
     "animate.css": "^3.5.1",
+    "assets-webpack-plugin": "^3.5.1",
     "aws-sdk": "^2.7.21",
     "babel-core": "^6.9.1",
     "babel-eslint": "^6.0.4",
@@ -51,7 +52,7 @@
     "express": "^4.14.0",
     "express-enforces-ssl": "^1.1.0",
     "express-subdomain": "^1.0.5",
-    "extract-text-webpack-plugin": "^1.0.1",
+    "extract-text-webpack-plugin": "^2.0.0-beta",
     "eyeglass": "^0.8.3",
     "file-loader": "^0.9.0",
     "fs": "0.0.2",
@@ -63,6 +64,7 @@
     "jquery": "^3.1.0",
     "jquery.scrollto": "^2.1.2",
     "js-cookie": "^2.1.2",
+    "jsonfile": "^2.4.0",
     "lodash": "^4.15.0",
     "moment": "^2.17.1",
     "node-sass": "^3.8.0",
@@ -107,7 +109,7 @@
     "sass-loader": "^4.0.0",
     "slick-carousel": "^1.6.0",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.2",
+    "webpack": "^2.2.1",
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
@@ -120,7 +122,7 @@
     "redux-mock-store": "^1.2.1",
     "sinon": "^1.17.6",
     "webpack-dashboard": "^0.1.8",
-    "webpack-dev-middleware": "^1.6.1",
-    "webpack-hot-middleware": "^2.12.2"
+    "webpack-dev-middleware": "^1.10.0",
+    "webpack-hot-middleware": "^2.16.1"
   }
 }

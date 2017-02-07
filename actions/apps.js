@@ -161,7 +161,7 @@ export const postNewApp = () => {
 		const params = digestDataBeforePostingNewApp(body)
 		const defaultMessages = JSON.stringify(require(`modules/${params.application.application_type}/messages`).default)
 		const defaultImages = JSON.stringify(require(`modules/${params.application.application_type}/images`).default)
-		const defaultStyles = require(`!css!sass!../assets/canvas/${params.application.application_type}.sass`).toString()
+		const defaultStyles = require(`!css-loader!sass-loader!../assets/canvas/${params.application.application_type}.sass`).toString()
 		postToApi('applications.json', {
 			...params, 
 			...{

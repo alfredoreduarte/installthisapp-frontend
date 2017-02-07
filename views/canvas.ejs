@@ -19,7 +19,10 @@
 		window.messagesUrl = "<%= messagesUrl %>";
 		window.imagesUrl = "<%= imagesUrl %>";
 	</script>
-	<script src="<%= cloudFrontUrl %>/static/common.js"></script>
-	<script src="<%= cloudFrontUrl %>/static/<%= module %>.bundle.js"></script>
+	<script src="<%= cloudFrontUrl %><%= manifestBundle %>"></script>
+	<script src="<%= cloudFrontUrl %><%= vendorBundle %>"></script>
+	<script src="<%= cloudFrontUrl %><%= moduleBundle %>"></script>
+	<!-- // <script src="<%= cloudFrontUrl %>/static/common.js"></script> -->
+	<!-- // <script src="<%= cloudFrontUrl %>/static/<%= module %>.bundle.js"></script> -->
 </body>
 </html>
