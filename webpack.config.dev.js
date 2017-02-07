@@ -7,8 +7,6 @@ module.exports = {
 	entry: {
 		dashboard: ['webpack-hot-middleware/client', './index'],
 		landing: ['webpack-hot-middleware/client', './assets/landing/index'],
-		// landing_styles: './assets/newlanding/styles.sass',
-		// dashboard_styles: './assets/styles/styles.sass',
 		trivia: './canvas/trivia/index',
 		top_fans: './canvas/top_fans/index',
 		photo_contest: './canvas/photo_contest/index',
@@ -20,6 +18,7 @@ module.exports = {
 		publicPath: '/static/'
 	},
 	plugins: [
+		new ExtractTextPlugin('[name].css'),
 		// new ExtractTextPlugin("assets/styles/styles.sass"),
 		// new ExtractTextPlugin("dashboard_styles.css"),
 		new webpack.optimize.CommonsChunkPlugin('common.js'),
@@ -58,12 +57,17 @@ module.exports = {
 				loaders: ['file']
 			},
 			// sass
+			// {
+			// 	test: /\.(sass|scss)$/,
+			// 	// include: path.join(__dirname, 'assets/styles'),
+			// 	loaders: ['style', 'css', 'sass']
+			// 	// loader: ExtractTextPlugin.extract("style", "css!sass")
+			// },
+			// newsass
 			{
-				test: /\.(sass|scss)$/,
-				// include: path.join(__dirname, 'assets/styles'),
-				loaders: ['style', 'css', 'sass']
-				// loader: ExtractTextPlugin.extract("style", "css!sass")
-			},
+                test: /\.(sass|scss)$/,
+                loader: ExtractTextPlugin.extract('css!sass')
+            },
 			// css
 			{
 				test: /\.(css)$/,

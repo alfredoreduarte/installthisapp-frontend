@@ -7,7 +7,6 @@ module.exports = {
 	entry: {
 		dashboard: 'index.js',
 		landing: './assets/landing/index',
-		// landing_styles: './assets/newlanding/styles.sass',
 		trivia: 'canvas/trivia/index.js',
 		top_fans: 'canvas/top_fans/index.js',
 		photo_contest: 'canvas/photo_contest/index.js',
@@ -20,6 +19,7 @@ module.exports = {
 	},
 	plugins: [
 		// new ExtractTextPlugin("landing_styles.css"),
+		new ExtractTextPlugin('[name].css'),
 		new webpack.optimize.CommonsChunkPlugin('common.js'),
 		new webpack.optimize.DedupePlugin(),
 		new webpack.optimize.AggressiveMergingPlugin(),
@@ -59,12 +59,16 @@ module.exports = {
 				loaders: ['file']
 			},
 			// sass
+			// {
+			// 	test: /\.(sass|scss)$/,
+			// 	// include: path.join(__dirname, 'assets/styles'),
+			// 	loaders: ['style', 'css', 'sass']
+			// 	// loader: ExtractTextPlugin.extract("style", "css?minimize!sass")
+			// },
 			{
-				test: /\.(sass|scss)$/,
-				// include: path.join(__dirname, 'assets/styles'),
-				loaders: ['style', 'css', 'sass']
-				// loader: ExtractTextPlugin.extract("style", "css?minimize!sass")
-			},
+                test: /\.(sass|scss)$/,
+                loader: ExtractTextPlugin.extract('css?minimize!sass')
+            },
 			// css
 			{
 				test: /\.(css)$/,

@@ -20,8 +20,8 @@ export const createRoutes = (store, dispatch) => ({
 	},
 	onEnter: (nextState, replace, next) => {
 		analytics.page('Admin Dashboard')
-		console.log('nextState', nextState.params)
-		console.log('replace', replace)
+		// console.log('nextState', nextState.params)
+		// console.log('replace', replace)
 		dispatch(fetchAdmin()).then(() => {
 			next()
 		})
