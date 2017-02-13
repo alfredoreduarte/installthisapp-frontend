@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import AppGrid from 'containers/AppGrid'
+import Card from 'containers/Card'
 import CardOverlay from 'containers/CardOverlay'
 import AppNavBar from 'components/AppNavBar'
 import DashboardTitleBar from 'components/DashboardTitleBar'
@@ -16,6 +17,7 @@ import { setAppToDelete } from 'actions/deleteApp'
 import { deleteApp, destroy } from 'actions/apps'
 
 const AdminDashboard = ({ 
+	adminId,
 	apps,
 	successfulPurchase,
 	trialOffer,
@@ -31,7 +33,13 @@ const AdminDashboard = ({
 	<div>
 		<AppNavBar />
 		{successfulPurchase ? <SuccessfulPurchase /> : null }
-		{trialOffer ? <CardOverlay /> : null }
+		{trialOffer ?
+			<div> 
+				{adminId % 2 == 0 ? <Card /> : <CardOverlay />}
+			</div>
+		:
+			null
+		}
 		{apps.length > 0 || filterText ? 
 			<div>
 				<DashboardTitleBar />
@@ -54,6 +62,7 @@ const mapStateToProps = (state, props) => {
 		analytics.track('Trial Offer Viewed')
 	}
 	return {
+		adminId: state.admin.id,
 		apps: getAllAppsByText(state, props),
 		successfulPurchase: props.location.query["successful-purchase"],
 		trialOffer: props.location.query["trial-offer"],

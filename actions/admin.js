@@ -14,6 +14,7 @@ export const receiveAdmin = payload => {
 }
 
 const identifyAdmin = payload => {
+	const experimentTrialOfferVariation = payload.id % 2 == 0 ? 'With photo' : 'Without photo'
 	analytics.identify(payload.id, {
 		name: payload.name,
 		email: payload.email,
@@ -23,6 +24,7 @@ const identifyAdmin = payload => {
 		applications: payload.applications,
 		published_applications: payload.publishedApplications,
 		plan: 'demo',
+		'Experiment: Trial Offer': experimentTrialOfferVariation,
 	})
 }
 
