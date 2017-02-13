@@ -9,7 +9,7 @@ const Application = ({ children, loaded, alertTitle, alertContent, handleAlertDi
 		<Loading />
 		{alertTitle ? 
 		<Alert bsStyle="warning" onDismiss={handleAlertDismiss}>
-			<strong>{alertTitle}</strong> {alertContent}
+			<strong dangerouslySetInnerHTML={{ __html: alertTitle }}></strong> <span dangerouslySetInnerHTML={{ __html: alertContent }}></span>
 		</Alert>
 		: null }
 		<div className="container-fluid">

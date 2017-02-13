@@ -1,6 +1,7 @@
 import { normalize, arrayOf } from 'normalizr'
 import * as schema from 'schema'
 import _ from 'lodash'
+import { setAlert } from 'actions/alerts'
 import { push } from 'react-router-redux'
 import { receiveEntities } from 'actions/entities'
 import { getCurrentAppByState } from 'selectors/apps'
@@ -180,7 +181,8 @@ export const postNewApp = () => {
 				// 	type: 'TOGGLE_ACTIVITY/CREATING_APP'
 				// })
 			}
-			else{
+			else {
+				dispatch(setAlert('<a href="/d/upgrade">Please upgrade your account</a>.', 'You have reached the app limit for free accounts.'))
 				console.log(response.message)
 			}
 		})
