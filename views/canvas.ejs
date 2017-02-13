@@ -4,8 +4,11 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="<%= stylesheetUrl %>" />
+	<!-- // <script src="http://lab.cubiq.org/addtohome/src/addtohomescreen.js"></script> -->
 	<link rel="icon" type="image/png" href="/images/favicon.png" />
 	<title><%= module %></title>
 </head>
@@ -22,5 +25,16 @@
 	<script src="<%= cloudFrontUrl %><%= manifestBundle %>"></script>
 	<script src="<%= cloudFrontUrl %><%= vendorBundle %>"></script>
 	<script src="<%= cloudFrontUrl %><%= moduleBundle %>"></script>
+	<script type="text/javascript">
+		console.log('add to home')
+		// addToHomescreen.removeSession()
+		addToHomescreen({
+			// startDelay: 5,
+			// lifespan: 0,
+			// mandatory: true,
+			// maxDisplayCount: 0,
+			// debug: true,
+		});
+	</script>
 </body>
 </html>
