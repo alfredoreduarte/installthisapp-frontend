@@ -81,9 +81,9 @@ const ModuleGrid = ({ modules, futureModules, handleFutureModuleSelection, handl
 )
 
 const mapStateToProps = state => ({ 
-	modules: ['top_fans'],
+	modules: ['top_fans', 'trivia'],
 	// futureModules: ['forms', 'puzzle', 'memory_match', 'photo_contest', 'trivia'],
-	futureModules: ['photo_contest', 'trivia'],
+	futureModules: ['photo_contest'],
 })
 
 const mapDispatchToProps = (dispatch, props) => ({

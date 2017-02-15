@@ -1,5 +1,7 @@
 import { injectAsyncReducer } from 'reducers'
 
+const sidebar = require('modules/trivia/sidebar').default
+
 export default (store) => ({
 	getChildRoutes(partialNextState, cb) {
 		require.ensure([], (require) => {
@@ -17,7 +19,7 @@ export default (store) => ({
 							// injectAsyncReducer(store, 'trivia', questionsReducer)
 							cb(null, {
 								main: require('modules/trivia/components/Questions').default,
-								sidebar: require('modules/trivia/sidebar').default,
+								sidebar: sidebar,
 							})
 						})
 					}
@@ -35,7 +37,7 @@ export default (store) => ({
 							// injectAsyncReducer(store, 'trivia', questionsReducer)
 							cb(null, {
 								main: require('modules/trivia/components/Questions').default,
-								sidebar: require('modules/trivia/sidebar').default,
+								sidebar: sidebar,
 							})
 						})
 					}
@@ -49,7 +51,7 @@ export default (store) => ({
 							// injectAsyncReducer(store, 'answers', answersReducer)
 							cb(null, {
 								main: require('modules/trivia/components/Answers').default,
-								sidebar: require('modules/trivia/sidebar').default,
+								sidebar: sidebar,
 							})
 						})
 					}				

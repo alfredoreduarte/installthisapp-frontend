@@ -11,11 +11,11 @@ const newApp = (state = {
 				case 'forms':
 				case 'puzzle':
 				case 'photo_contest':
-				case 'trivia':
 					return Object.assign({}, state, {
 						whoopsAlert: true,
 					})
 					break
+				case 'trivia':
 				case 'top_fans':
 					return Object.assign({}, state, {
 						whoopsAlert: false,

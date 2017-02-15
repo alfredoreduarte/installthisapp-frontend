@@ -174,7 +174,11 @@ export const postNewApp = () => {
 			if (response.success) {
 				const normalized = normalize(response.app, schema.app)
 				dispatch(receiveEntities(normalized.entities))
-				dispatch(push(`/d/apps/${response.app.applicationType}/${response.app.checksum}/setup-guide`))
+				if (body.module == 'top_fans') {
+					dispatch(push(`/d/apps/${response.app.applicationType}/${response.app.checksum}/setup-guide`))
+				} else {
+					dispatch(push(`/d/apps/${response.app.applicationType}/${response.app.checksum}`))
+				}
 				// Commented out because we actually have to wait for the js chunk to download 
 				// Moved to containers/AppDashboardContainer.js
 				// dispatch({
