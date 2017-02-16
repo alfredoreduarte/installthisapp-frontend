@@ -3,6 +3,9 @@ var express = require('express')
 var helmet = require('helmet')
 var aws = require('aws-sdk')
 var jsonfile = require('jsonfile')
+var cors = require('cors')
+
+app.use(cors())
 
 const app = express()
 app.set('view engine', 'ejs')
@@ -41,7 +44,7 @@ if (isDeveloping) {
 	}))
 	app.use(require('webpack-hot-middleware')(compiler))
 }
-else{
+else {
 	app.use('/static', express.static(__dirname + '/dist', {
 		maxAge: 600000,
 	}))
