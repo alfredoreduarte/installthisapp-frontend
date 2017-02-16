@@ -50,7 +50,7 @@ const Integrations = ({
 		<div className="col-md-12">
 			<div className="text-center">
 				<h1 style={{marginTop: '0px'}}>Welcome to your Top Fans App</h1>
-				<h4>Let's go through some steps to start tracking your Facebook Page</h4>
+				<h4>Just <b>three easy steps</b> and you're good to go.</h4>
 				<br />
 				<br />
 			</div>
