@@ -6,7 +6,6 @@ var jsonfile = require('jsonfile')
 var cors = require('cors')
 
 const app = express()
-app.use(cors())
 app.set('view engine', 'ejs')
 
 var express_enforces_ssl = require('express-enforces-ssl');
@@ -44,7 +43,7 @@ if (isDeveloping) {
 	app.use(require('webpack-hot-middleware')(compiler))
 }
 else {
-	app.use('/static', express.static(__dirname + '/dist', {
+	app.use('/static', cors(), express.static(__dirname + '/dist', {
 		maxAge: 600000,
 	}))
 }
