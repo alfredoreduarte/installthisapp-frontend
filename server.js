@@ -5,9 +5,8 @@ var aws = require('aws-sdk')
 var jsonfile = require('jsonfile')
 var cors = require('cors')
 
-app.use(cors())
-
 const app = express()
+app.use(cors())
 app.set('view engine', 'ejs')
 
 var express_enforces_ssl = require('express-enforces-ssl');
