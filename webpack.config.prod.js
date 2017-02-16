@@ -19,7 +19,7 @@ module.exports = {
 	output: {
 		path: path.join(__dirname, '/dist'),
 		filename: '[hash].[name].js',
-		chunkFilename: '[id].chunk.js',
+		chunkFilename: '[chunkhash].[id].chunk.js',
 		publicPath: '/static/'
 	},
 	plugins: [
