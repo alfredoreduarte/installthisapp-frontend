@@ -29,11 +29,12 @@ export const fetchTopFansEntities = checksum => {
 		})
 }
 
+export const beforeShowingDashboard = fetchTopFansEntities
+
 export const pollTopFansEntities = checksum => {
 	return dispatch => {
 		setInterval(() => {
 			dispatch(fetchTopFansEntities(checksum))
-			// console.log('pidiendo!')
 		}, 2000)
 	}
 }
@@ -46,14 +47,12 @@ export const fetchTopFansSettings = checksum => {
 }
 
 export const cleanupTopFansEntities = () => {
-	console.log('cleanup')
 	return (dispatch, getState) => {
 		const checksum = getCurrentAppByState(getState()).checksum
 		return getFromApi(`applications/${checksum}/reset_scores_for_page.json`).then( response => {
 			if (response.status) {
 				dispatch(receiveTopFansEntities(response.payload))
 				// dispatch(fetchTopFansSettings(checksum))
-				// console.log(response)
 			}
 			else{
 				console.log('error: ', response)
@@ -69,7 +68,6 @@ export const resetTopFansEntities = () => {
 			if (response.status) {
 				dispatch(receiveTopFansEntities(response.payload))
 				// dispatch(fetchTopFansSettings(checksum))
-				// console.log(response)
 			}
 			else{
 				console.log('error: ', response)

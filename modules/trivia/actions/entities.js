@@ -2,14 +2,14 @@ import { normalize, arrayOf } from 'normalizr'
 import * as schema from 'modules/trivia/schema'
 import { getFromApi, postToApi } from 'api'
 
-export const receiveTriviaEntities = (entities) => ({
+export const receiveTriviaEntities = entities => ({
 	type: 'TRIVIA/RECEIVE_ENTITIES',
 	response: {
 		entities
 	}
 })
 
-export const fetchTriviaEntities = (checksum) => {
+export const fetchTriviaEntities = checksum => {
 	return dispatch => {
 		return getFromApi(`applications/${checksum}/entities.json`)
 				.then(response =>{
@@ -21,3 +21,5 @@ export const fetchTriviaEntities = (checksum) => {
 				)
 	}
 }
+
+export const beforeShowingDashboard = fetchTriviaEntities

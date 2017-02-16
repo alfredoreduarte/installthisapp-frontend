@@ -10,7 +10,14 @@
 	<%- include('_segment') %>
 </head>
 <body>
-	<div id="root"></div>
+	<img src="/images/source-loading.svg" style="
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-left: -37px;
+	margin-top: -37px;
+	">
+	<div id="root" style="position: relative;background: white;"></div>
 	<script>
 		window.alias = "<%= alias %>";
 		window.apiUrl = "<%= apiUrl %>";

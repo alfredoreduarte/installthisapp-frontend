@@ -32,19 +32,17 @@ export default (store, dispatch) => ({
 	},
 	indexRoute: {
 		onEnter: (nextState, replace, next) => {
-			const fetchTopFansEntities = require(`modules/${nextState.params.type}/actions/entities`).fetchTopFansEntities
+			const beforeShowingDashboard = require(`modules/${nextState.params.type}/actions/entities`).beforeShowingDashboard
 			dispatch(
-				fetchTopFansEntities(nextState.params.checksum)
-			).then(() => {
-				next()
-			})
+				beforeShowingDashboard(nextState.params.checksum)
+			).then(next)
 		},
 		getComponents(nextState, cb) {
 			require.ensure([], require => {
 				cb(null, {
 					main: require('containers/AppDashboard').default,
-					secondary: require('modules/' + nextState.params.type + '/secondaryDashboard').default,
-					sidebar: require('modules/' + nextState.params.type + '/sidebar').default,
+					secondary: require('modules/' + nextState.params.type + '/components/SecondaryDashboard').default,
+					sidebar: require('modules/' + nextState.params.type + '/components/Sidebar').default,
 				})
 			})
 		}
@@ -57,6 +55,6 @@ export default (store, dispatch) => ({
 		require('routes/Preferences'),
 		require('modules/trivia/routes').default(store, dispatch),
 		require('modules/top_fans/routes').default(store, dispatch),
-		require('modules/photo_contest/routes').default(store, dispatch),
+		// require('modules/photo_contest/routes').default(store, dispatch),
 	]
 })

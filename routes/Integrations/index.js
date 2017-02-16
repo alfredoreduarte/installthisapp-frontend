@@ -10,7 +10,7 @@ module.exports = {
 		require.ensure([], (require) => {
 			cb(null, {
 				main: require('containers/Integrations').default,
-				sidebar: require('modules/' + nextState.params.type + '/sidebar').default,
+				sidebar: require('modules/' + nextState.params.type + '/components/Sidebar').default,
 			})
 		})
 	}

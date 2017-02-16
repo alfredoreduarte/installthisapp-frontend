@@ -186,7 +186,7 @@ export const postNewApp = () => {
 				// })
 			}
 			else {
-				dispatch(setAlert('<a href="/d/upgrade">Please upgrade your account</a>.', 'You have reached the app limit for free accounts.'))
+				dispatch(setAlert(`<a href="/d/upgrade">Please upgrade your account</a>.`, `You have reached the app limit for free accounts.`))
 				console.log(response.message)
 			}
 		})

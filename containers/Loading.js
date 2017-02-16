@@ -17,7 +17,13 @@ const Loading = React.createClass({
 						zIndex: 9999,
 					}}
 				>
-					<h4>Loading...</h4>
+					<img src="/images/source-loading.svg" style={{
+					position: 'fixed',
+					top: '50%',
+					left: '50%',
+					marginLeft: '-37px',
+					marginTop: '-37px',
+					}} />
 				</div>
 			)
 		} else {

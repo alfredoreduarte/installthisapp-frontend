@@ -1,6 +1,6 @@
 import { fetchTopFansEntities, fetchTopFansSettings } from 'modules/top_fans/actions/entities'
 
-const sidebar = require('modules/top_fans/sidebar').default
+import Sidebar from 'modules/top_fans/components/Sidebar'
 
 export default (store, dispatch) => ({
 	getChildRoutes(partialNextState, cb) {
@@ -21,7 +21,7 @@ export default (store, dispatch) => ({
 						require.ensure([], (require) => {
 							cb(null, {
 								main: require('modules/top_fans/components/Scoreboard').default,
-								sidebar: sidebar,
+								sidebar: Sidebar,
 							})
 						})
 					}				
@@ -32,7 +32,7 @@ export default (store, dispatch) => ({
 						require.ensure([], (require) => {
 							cb(null, {
 								main: require('modules/top_fans/components/Subscribe').default,
-								sidebar: sidebar,
+								sidebar: Sidebar,
 							})
 						})
 					}				
