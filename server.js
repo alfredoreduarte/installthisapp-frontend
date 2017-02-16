@@ -100,6 +100,7 @@ app.get('/top-fans-for-facebook-pages.html', function(req, res) {
 	const jsBundle = manifest['landing']['js']
 	const cssBundle = manifest['landing']['css']
 	const vendorBundle = manifest['common']['js']
+	const isOldUser = req.query.segment == 'old_users'
 	res.render('app', {
 		cloudFrontUrl: cloudFrontUrl,
 		apiUrl: process.env.API_URL,
@@ -108,6 +109,7 @@ app.get('/top-fans-for-facebook-pages.html', function(req, res) {
 		cssBundle,
 		vendorBundle,
 		manifestBundle,
+		isOldUser,
 	})
 })
 app.get('/contact', function(req, res) {
