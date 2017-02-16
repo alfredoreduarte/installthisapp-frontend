@@ -37,7 +37,6 @@ module.exports = {
 		})
 	],
 	resolve: {
-		// root: [ __dirname + '/' ],
 		modules: [__dirname, "node_modules"],
 		extensions: ['.js', '.json', '.sass']
 	},
@@ -60,17 +59,9 @@ module.exports = {
 			// images
 			{
 				test: /\.(png|jpg|jpeg|gif)$/,
-				// include: path.join(__dirname, 'assets/styles'),
 				loaders: ['file-loader']
 			},
 			// sass
-			// {
-			// 	test: /\.(sass|scss)$/,
-			// 	// include: path.join(__dirname, 'assets/styles'),
-			// 	loaders: ['style', 'css', 'sass']
-			// 	// loader: ExtractTextPlugin.extract("style", "css!sass")
-			// },
-			// newsass
 			{
                 test: /\.(sass|scss)$/,
                 loader: ExtractTextPlugin.extract('css-loader!sass-loader')
@@ -78,9 +69,7 @@ module.exports = {
 			// css
 			{
 				test: /\.(css)$/,
-				// include: path.join(__dirname, 'assets/styles'),
 				loaders: ['style-loader', 'css-loader']
-				// loader: ExtractTextPlugin.extract("style", "css")
 			},
 			// fonts
 			{

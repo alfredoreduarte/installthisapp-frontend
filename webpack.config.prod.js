@@ -27,9 +27,9 @@ module.exports = {
 		new ExtractTextPlugin('[hash].[name].css'),
 		new webpack.optimize.AggressiveMergingPlugin(),
 		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
-			'process.env.FB_APP_ID': JSON.stringify(process.env.FB_APP_ID || '1061199640593119'),
-			'process.env.API_URL': JSON.stringify(process.env.API_URL || 'https://local.installthisapp.com'),
+			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+			'process.env.FB_APP_ID': JSON.stringify(process.env.FB_APP_ID),
+			'process.env.API_URL': JSON.stringify(process.env.API_URL),
 		}),
 		new webpack.optimize.UglifyJsPlugin({
 			sourceMap: true,
@@ -61,16 +61,9 @@ module.exports = {
 			// images
 			{
 				test: /\.(png|jpg|jpeg|gif)$/,
-				// include: path.join(__dirname, 'assets/styles'),
 				loaders: ['file-loader']
 			},
 			// sass
-			// {
-			// 	test: /\.(sass|scss)$/,
-			// 	// include: path.join(__dirname, 'assets/styles'),
-			// 	loaders: ['style', 'css', 'sass']
-			// 	// loader: ExtractTextPlugin.extract("style", "css?minimize!sass")
-			// },
 			{
                 test: /\.(sass|scss)$/,
                 loader: ExtractTextPlugin.extract('css-loader?minimize!sass-loader')
@@ -78,9 +71,7 @@ module.exports = {
 			// css
 			{
 				test: /\.(css)$/,
-				// include: path.join(__dirname, 'assets/styles'),
 				loaders: ['style-loader', 'css-loader']
-				// loader: ExtractTextPlugin.extract("style", "css?minimize!")
 			},
 			// fonts
 			{
