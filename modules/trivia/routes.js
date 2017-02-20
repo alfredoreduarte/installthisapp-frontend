@@ -1,15 +1,16 @@
 // import { injectAsyncReducer } from 'reducers'
-import { Sidebar } from 'modules/trivia/components/Sidebar'
+import { fetchTriviaEntities } from 'modules/trivia/actions/entities'
+import Sidebar from 'modules/trivia/components/Sidebar'
 
-export default (store) => ({
+export default (store, dispatch) => ({
 	getChildRoutes(partialNextState, cb) {
 		require.ensure([], (require) => {
 			cb(null, [
 				{
 					path: 'questions(/create)',
 					modal: true,
-					onEnter: (nextState, replace) => {
-						
+					onEnter: (nextState, replace, next) => {
+						dispatch(fetchTriviaEntities(nextState.params.checksum)).then(() => next())
 					},
 					getComponents(nextState, cb) {
 						require.ensure([], (require) => {
@@ -25,8 +26,8 @@ export default (store) => ({
 				},
 				{
 					path: 'questions/edit/:questionId',
-					onEnter: (nextState, replace) => {
-						
+					onEnter: (nextState, replace, next) => {
+						dispatch(fetchTriviaEntities(nextState.params.checksum)).then(() => next())
 					},
 					modal: true,
 					getComponents(nextState, cb) {
@@ -43,6 +44,9 @@ export default (store) => ({
 				},
 				{
 					path: 'answers',
+					onEnter: (nextState, replace, next) => {
+						dispatch(fetchTriviaEntities(nextState.params.checksum)).then(() => next())
+					},
 					getComponents(nextState, cb) {
 						require.ensure([], (require) => {
 							// Uncomment these lines to load reducers asyncronously

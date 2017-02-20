@@ -10,12 +10,12 @@ const newApp = (state = {
 				case 'memory_match':
 				case 'forms':
 				case 'puzzle':
-				case 'trivia':
 				case 'photo_contest':
 					return Object.assign({}, state, {
 						whoopsAlert: true,
 					})
 					break
+				case 'trivia':
 				case 'top_fans':
 					return Object.assign({}, state, {
 						whoopsAlert: false,

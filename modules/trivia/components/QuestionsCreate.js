@@ -218,10 +218,8 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
 	return {
-		handleSubmit: obj => {
-			dispatch(postNewQuestion(props.checksum, obj))
-			browserHistory.push(props.closeUrl)
-		}
+		handleSubmit: obj => dispatch(postNewQuestion(props.checksum, obj)).then(() => browserHistory.push(props.closeUrl))
+		// handleSubmit: obj => dispatch(postNewQuestion(props.checksum, obj))
 	}
 }
 

@@ -11,9 +11,9 @@ let primeravez = false
 class Index extends Component {
 	componentWillReceiveProps(nextProps) {
 		const { runTime, loading, countDownRunning, time } = nextProps
-		console.log('lol', this.props.time, nextProps)
+		// console.log('lol', this.props.time, nextProps)
 		if (countDownRunning && !loading && this.props.time > nextProps.time) {
-			console.log('va a correr', nextProps)
+			// console.log('va a correr', nextProps)
 			if (!primeravez) {
 				primeravez = true
 			}

@@ -11,7 +11,6 @@ import { getAllOptions } from 'modules/trivia/selectors/options'
 import { selectItemOnTable, sortUsersBy } from 'actions/users'
 import SearchForm from 'components/SearchForm'
 import User from 'components/User'
-import { fetchTriviaEntities } from 'modules/trivia/actions/entities'
 import { postDeleteQuestions } from 'modules/trivia/actions/questions'
 import QuestionsCreate from 'modules/trivia/components/QuestionsCreate'
 
@@ -201,7 +200,6 @@ const mapStateToProps = (state, props) => {
 }
 
 const mapDispatchToProps = (dispatch, props) => {
-	dispatch(fetchTriviaEntities(props.params.checksum))
 	return {
 		handleSelect: id => {
 			dispatch(selectItemOnTable(id))

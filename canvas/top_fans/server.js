@@ -1,6 +1,6 @@
 var express = require('express')
 var jsonfile = require('jsonfile')
-var apiUrl = process.env.API_URL || 'https://local.installthisapp.com'
+var apiUrl = process.env.API_URL
 // #############
 // Canvas
 // #############
@@ -23,6 +23,9 @@ topFansRouter.use(function(req, res, next) {
 		next()
 })
 topFansRouter.use('/static', express.static(__dirname + '/dist'))
+// 
+// Auth from facebook page tab
+// 
 topFansRouter.post(`/${topFansCanvasId}`, canvasParser, function(req, res) {
 	const manifestPath = `${process.cwd()}/webpack-assets.json`
 	const manifest = jsonfile.readFileSync(manifestPath)
@@ -58,7 +61,7 @@ topFansRouter.post(`/${topFansCanvasId}`, canvasParser, function(req, res) {
 	})
 	.catch(exception =>
 		{
-			console.log('postNewApp: parsing failed', exception)
+			console.log('Parsing failed', exception)
 			res.json({'error': exception})
 		}
 	)
@@ -99,7 +102,7 @@ topFansRouter.get(`/${topFansCanvasId}/:checksum*`, canvasParser, function(req, 
 	})
 	.catch(exception =>
 		{
-			console.log('postNewApp: parsing failed', exception)
+			console.log('Parsing failed', exception)
 			res.json({'error': exception})
 		}
 	)

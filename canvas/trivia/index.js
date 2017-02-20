@@ -4,7 +4,7 @@ import { browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import Root from 'canvas/trivia/containers/Root'
 import configureStore from 'canvas/trivia/store/configureStore'
-// require('assets/canvas/trivia.sass')
+require('lib/addToHomeScreen.js')
 
 const store = configureStore({
 	applicationData: {

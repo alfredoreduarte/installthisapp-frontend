@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import AlreadyPlayedView from 'canvas/trivia/components/AlreadyPlayed'
 
-const AlreadyPlayed = ({ title, foot }) => <AlreadyPlayedView title={title} foot={foot} />
+const AlreadyPlayed = ({ title, foot }) => <p>hola</p>
 
 const mapStateToProps = state => ({
 	title: state.messages.alreadyPlayed,

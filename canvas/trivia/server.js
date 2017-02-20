@@ -1,6 +1,6 @@
 var express = require('express')
-// var apiUrl = process.env.API_URL || 'https://local.installthisapp.com'
-var apiUrl = process.env.API_URL || 'http://0.0.0.0:3000'
+var jsonfile = require('jsonfile')
+var apiUrl = process.env.API_URL
 // #############
 // Canvas
 // #############
@@ -27,6 +27,11 @@ triviaRouter.use('/static', express.static(__dirname + '/dist'))
 // Auth from facebook page tab
 // 
 triviaRouter.post(`/${triviaCanvasId}`, canvasParser, function(req, res) {
+	const manifestPath = `${process.cwd()}/webpack-assets.json`
+	const manifest = jsonfile.readFileSync(manifestPath)
+	const manifestBundle = manifest['manifest']['js']
+	const vendorBundle = manifest['common']['js']
+	const moduleBundle = manifest['trivia']['js']
 	fetch(`${apiUrl}/canvasauth.json`, {
 		method: 'POST',
 		headers: {
@@ -48,11 +53,15 @@ triviaRouter.post(`/${triviaCanvasId}`, canvasParser, function(req, res) {
 			facebookAppId: json.fb_application_id,
 			stylesheetUrl: json.stylesheet_url,
 			messagesUrl: json.messages_url,
+			imagesUrl: json.images_url,
+			manifestBundle,
+			vendorBundle,
+			moduleBundle,
 		})
 	})
 	.catch(exception =>
 		{
-			console.log('postNewApp: parsing failed', exception)
+			console.log('Parsing failed', exception)
 			res.json({'error': exception})
 		}
 	)
@@ -61,6 +70,11 @@ triviaRouter.post(`/${triviaCanvasId}`, canvasParser, function(req, res) {
 // Auth outside of facebook
 // 
 triviaRouter.get(`/${triviaCanvasId}/:checksum*`, canvasParser, function(req, res) {
+	const manifestPath = `${process.cwd()}/webpack-assets.json`
+	const manifest = jsonfile.readFileSync(manifestPath)
+	const manifestBundle = manifest['manifest']['js']
+	const vendorBundle = manifest['common']['js']
+	const moduleBundle = manifest['trivia']['js']
 	fetch(`${apiUrl}/standalone_auth.json`, {
 		method: 'POST',
 		headers: {
@@ -83,11 +97,15 @@ triviaRouter.get(`/${triviaCanvasId}/:checksum*`, canvasParser, function(req, re
 			facebookAppId: json.fb_application_id,
 			stylesheetUrl: json.stylesheet_url,
 			messagesUrl: json.messages_url,
+			imagesUrl: json.images_url,
+			manifestBundle,
+			vendorBundle,
+			moduleBundle,
 		})
 	})
 	.catch(exception =>
 		{
-			console.log('postNewApp: parsing failed', exception)
+			console.log('Parsing failed', exception)
 			res.json({'error': exception})
 		}
 	)

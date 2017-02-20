@@ -112,6 +112,7 @@ export const fetchEntities = () => {
 			const settings = json.settings
 			const isEmpty = _.isEmpty(payload.entities.questions)
 			if (!isEmpty) {
+				console.log('was not empty')
 				dispatch(receiveEntities(payload.entities))
 				dispatch(receiveGameSettings(settings))
 				dispatch(toggleActivityIndicator())
@@ -124,6 +125,7 @@ export const fetchEntities = () => {
 				}
 			}
 			else {
+				console.log('was empty')
 				dispatch(push(`/${canvasId}/${checksum}/already-played`))
 			}
 		})

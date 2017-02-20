@@ -7,6 +7,7 @@ import entities from 'canvas/trivia/reducers/entities'
 import answers from 'canvas/trivia/reducers/answers'
 import settings from 'canvas/trivia/reducers/settings'
 import messages from 'canvas/trivia/reducers/messages'
+import images from 'canvas/trivia/reducers/images'
 
 const createReducer = asyncReducers => {
 	return combineReducers({
@@ -17,6 +18,7 @@ const createReducer = asyncReducers => {
 		answers,
 		settings,
 		messages,
+		images,
 	})
 }
 

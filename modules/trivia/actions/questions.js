@@ -51,7 +51,7 @@ export const postNewQuestion = (checksum, newQuestion) => {
 	}
 	return (dispatch, getState) => {
 		return postToApi(url, newQuestionData)
-				.then(response =>{
+				.then(response => {
 					const normalized = normalize(response, schema.entities)
 					dispatch(receiveTriviaEntities(normalized.entities))
 				})

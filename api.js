@@ -56,8 +56,6 @@ export const getFromApi = (endpoint, success = temporaryEmptyFunction) => {
 			.then(json => simulateDelay(json))
 			.then(json => {
 				const response = processResponse(json)
-				console.log('res')
-				console.log(response)
 				success(response)
 				return Promise.resolve(response)
 			})
@@ -144,8 +142,6 @@ export const postToApi = (endpoint, body = null, success = temporaryEmptyFunctio
 				body: elBody,
 			})
 			.then(response => {
-				console.log('response')
-				console.log(response)
 				switch(response.status){
 					case 200:
 						return response.json()
