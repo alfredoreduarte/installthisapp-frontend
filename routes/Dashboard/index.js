@@ -24,8 +24,8 @@ export default (store, dispatch) => ({
 			appType: nextState.params.type
 		})
 		dispatch(setCurrentAppChecksum(nextState.params.checksum)).then(() => {
-			// dispatch(turnOffActivityCreatingApp())
-			// dispatch(turnOffActivityLoadingApp())
+			dispatch(turnOffActivityCreatingApp())
+			dispatch(turnOffActivityLoadingApp())
 			dispatch(getStatsSummary(nextState.params.checksum)).then(() => next())
 			// next()
 		})
