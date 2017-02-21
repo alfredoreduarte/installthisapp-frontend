@@ -50,7 +50,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch, props) => ({
-	processResponse: response => dispatch(digestFacebookResponse(response))
+	processResponse: res => dispatch(digestFacebookResponse(res))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

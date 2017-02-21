@@ -66,8 +66,8 @@ var topFansRouter = require('./canvas/top_fans/server.js')
 app.use(topFansRouter)
 
 // Photo Contest
-var photoContestRouter = require('./canvas/photo_contest/server.js')
-app.use(photoContestRouter)
+// var photoContestRouter = require('./canvas/photo_contest/server.js')
+// app.use(photoContestRouter)
 
 // Serving static HTML
 app.use(function(req, res, next) {

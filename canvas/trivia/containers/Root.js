@@ -1,24 +1,23 @@
 import React, { Component, PropTypes } from 'react'
 import { Provider, connect } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
-import Cookies from 'js-cookie'
-import { loginCallback } from 'canvas/trivia/actions/'
-import Login from 'canvas/trivia/components/Login'
+import { getStaticContent, startTimer } from 'canvas/trivia/actions'
+import { loginCallback } from 'canvas/trivia/actions/user'
+import { fetchImages } from 'canvas/trivia/actions/images'
+import { fetchMessages } from 'canvas/trivia/actions/messages'
+import { fetchSettings } from 'canvas/trivia/actions/settings'
+import { toggleCountDown } from 'canvas/trivia/actions/countDown'
 import Index from 'canvas/trivia/containers/Index'
-import Thanks from 'canvas/trivia/containers/Thanks'
-import AlreadyPlayed from 'canvas/trivia/containers/AlreadyPlayed'
+import Intro from 'canvas/trivia/containers/Intro'
+import Login from 'canvas/trivia/components/Login'
+import Cookies from 'js-cookie'
 
-const requireAuth = (nextState, replace, next, dispatch, fetchEntities = false) => {
+const getData = (nextState, replace, next, dispatch) => dispatch(loginCallback()).then(() => next())
+
+const requireAuth = (nextState, replace, next, dispatch) => {
 	if (Cookies.get('apiKey') || window.canvasApiKey) {
-		if (fetchEntities) {
-			console.log('hace fetch')
-			dispatch(loginCallback()).then(() => next())
-		}
-		else {
-			console.log('no hace fetch')
-			next()
-			console.log('ya hizo next')
-		}
+		// dispatch(loginCallback()).then(() => next())
+		next()
 	}
 	else{
 		replace({
@@ -37,18 +36,25 @@ class Root extends Component {
 					<Route 
 						path={`/${window.canvasId}(/:checksum)`} 
 						// onEnter={requireAuth}
-						onEnter={(nextState, replace, next) => requireAuth(nextState, replace, next, dispatch, true)}
+						// onEnter={(nextState, replace, next) => getData(nextState, replace, next, dispatch)}
+						onEnter={(nextState, replace, next) => getStaticContent(nextState, replace, next, dispatch)}
+						component={Intro} />
+					<Route 
+						path={`/${window.canvasId}(/:checksum)/questions`} 
+						onEnter={(nextState, replace, next) => startTimer(nextState, replace, next, dispatch)}
+						// onEnter={(nextState, replace, next) => requireAuth(nextState, replace, next, dispatch)}
+						// onEnter={(nextState, replace, next) => getData(nextState, replace, next, dispatch)}
 						component={Index} />
+
 					<Route 
-						path={`/${window.canvasId}/:checksum/thanks`}
-						// onEnter={requireAuth}
-						onEnter={(nextState, replace, next) => requireAuth(nextState, replace, next, dispatch, false)}
-						component={Thanks}/>
+						path={`/${window.canvasId}(/:checksum)/thanks`}
+						// onEnter={(nextState, replace, next) => getData(nextState, replace, next, dispatch)}
+						component={Index} />
+
 					<Route 
-						path={`/${window.canvasId}/:checksum/already-played`}
-						// onEnter={requireAuth}
-						onEnter={(nextState, replace, next) => requireAuth(nextState, replace, next, dispatch, false)}
-						component={AlreadyPlayed}/>
+						path={`/${window.canvasId}(/:checksum)/already-played`}
+						onEnter={(nextState, replace, next) => getData(nextState, replace, next, dispatch)}
+						component={Index} />
 					<Route 
 						path={`/${window.canvasId}/:checksum/login`} 
 						component={Login}/>

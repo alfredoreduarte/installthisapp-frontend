@@ -1,5 +1,10 @@
 import { push } from 'react-router-redux'
-import { loginCallback } from 'canvas/trivia/actions/'
+import { fetchMessages } from 'canvas/trivia/actions/messages'
+import { fetchSettings } from 'canvas/trivia/actions/settings'
+import { fetchImages } from 'canvas/trivia/actions/images'
+import { fetchEntities } from 'canvas/trivia/actions/entities'
+import { hasAnsweredAllQuestions } from 'canvas/trivia/selectors/questions'
+import { toggleActivityIndicator } from 'canvas/trivia/actions/activityIndicators'
 import { writeToApiWithoutAuth } from 'canvas/api'
 import Cookies from 'js-cookie'
 
@@ -19,4 +24,25 @@ export const digestFacebookResponse = response => {
 			dispatch(loginCallback())
 		})
 	}
+}
+
+export const loginCallback = () => {
+	return (dispatch, getState) => 	dispatch(fetchEntities())
+						.then(() => {
+							dispatch(toggleActivityIndicator())
+							const state = getState()
+							const { checksum, canvasId } = state.applicationData
+							if (!hasAnsweredAllQuestions(state)) {
+								console.log('hay preguntas disponibles')
+								dispatch(push(`/${canvasId}/${checksum}/questions`))
+							}
+							else{
+								console.log('NO hay preguntas disponibles')
+								dispatch(push(`/${canvasId}/${checksum}/already-played`))
+							}
+						})
+	// return dispatch => 	dispatch(fetchSettings())
+						// .then(() => dispatch(fetchMessages()))
+						// .then(() => dispatch(fetchImages()))
+						// .then(() => dispatch(fetchEntities()))
 }

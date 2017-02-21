@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { advanceCountDown } from 'canvas/trivia/actions/countDown'
-import { saveAnswer } from 'canvas/trivia/actions/answers'
+import { advanceCountDown, saveAnswer } from 'canvas/trivia/actions'
 import { getQuestionWithOptions, hasAnsweredAllQuestions } from 'canvas/trivia/selectors/questions'
 import Loading from 'canvas/trivia/components/Loading'
 import IndexView from 'canvas/trivia/components/Index'
@@ -11,25 +10,20 @@ let primeravez = false
 
 class Index extends Component {
 	componentWillReceiveProps(nextProps) {
-		console.log("WTFFF")
 		const { runTime, loading, countDownRunning, time } = nextProps
-		console.log('lol', this.props.time, nextProps)
+		// console.log('lol', this.props.time, nextProps)
 		if (countDownRunning && !loading && this.props.time > nextProps.time) {
-			console.log('va a correr', nextProps)
-			setTimeout(runTime, 1000)
+			// console.log('va a correr', nextProps)
+			if (!primeravez) {
+				primeravez = true
+			}
+			setTimeout(() => {
+				runTime()
+			}, 1000)
 		}
 		// CHANCHITO
 		if (!this.props.question) {
 			this.props.handleAnswer()
-		}
-	}
-	componentDidMount() {
-		const { runTime, loading, countDownRunning, time } = this.props
-		if (countDownRunning && !loading && time > 0) {
-			if (!primeravez) {
-				primeravez = true
-			}
-			setTimeout(runTime, 1000)
 		}
 	}
 	render(){

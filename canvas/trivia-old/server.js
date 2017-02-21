@@ -66,6 +66,9 @@ triviaRouter.post(`/${triviaCanvasId}`, canvasParser, function(req, res) {
 		}
 	)
 })
+// 
+// Auth outside of facebook
+// 
 triviaRouter.get(`/${triviaCanvasId}/:checksum*`, canvasParser, function(req, res) {
 	const manifestPath = `${process.cwd()}/webpack-assets.json`
 	const manifest = jsonfile.readFileSync(manifestPath)

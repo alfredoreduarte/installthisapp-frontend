@@ -20,7 +20,10 @@ const FbPhoto = ({ className, identifier, width, height, style }) => (
 
 FbPhoto.propTypes = {
 	className: PropTypes.string,
-	identifier: PropTypes.number.isRequired,
+	identifier: React.PropTypes.oneOfType([
+		React.PropTypes.string,
+		React.PropTypes.number,
+	]),
 	width: PropTypes.number,
 	height: PropTypes.number,
 }
