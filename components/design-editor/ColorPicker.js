@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import _ from 'lodash'
-import { SwatchesPicker } from 'react-color'
+import { SketchPicker } from 'react-color'
 
 const colorObjectToRgb = color => 
 	'rgba(' + color.rgb.r + ', ' + color.rgb.g + ', ' + color.rgb.b + ', ' + color.rgb.a + ')'
@@ -41,7 +41,7 @@ const ColorPicker = ({
 				className="glyphicon glyphicon-triangle-top" 
 				style={{position: 'absolute', top: '-10px', right: '17px'}}></span>
 			<div className="ita-color-picker-tool-override">
-				<SwatchesPicker color={value} onChange={val => onChange(processResult(val))} />
+				<SketchPicker color={value} onChange={val => onChange(processResult(val))} />
 			</div>
 		</div>
 	</div>

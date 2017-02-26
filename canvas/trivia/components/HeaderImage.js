@@ -9,8 +9,8 @@ const HeaderImage = ({ source }) => (
 const styles = {
 	img: {
 		// marginBottom: '38px',
-		width: '100%',
-		maxWidth: '810px',
+		width: 'auto',
+		maxWidth: '100%',
 	}
 }
 

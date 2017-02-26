@@ -30,7 +30,10 @@ module.exports = {
 			path: 'specific',
 			getComponents(nextState, cb) {
 				require.ensure([], require => {
-					cb(null, require('components/AppSpecificSettings').default)
+					// console.log('llega')
+					// console.log(nextState)
+					// cb(null, require('components/AppSpecificSettings').default)
+					cb(null, require('modules/' + nextState.params.type + '/components/Settings').default)
 				})
 			}
 		},

@@ -56,7 +56,7 @@ const Sidebar = ({ installed, checksum, type, children, menu, facebookPageIdenti
 			</li>
 		</ul>
 		<hr />
-		<ul className="list-unstyled">
+		<ul className={`list-unstyled ${type == 'top_fans' ? ' ' : 'hide'}`}>
 			<li><Link to={`/d/apps/${type}/${checksum}/setup-guide`} activeClassName="active">Setup Guide</Link></li>
 		</ul>
 	</div>

@@ -9,7 +9,7 @@ const Tabs = ({
 	<div className="ita-sidebar-tabs">
 		<div 
 			className={`ita-sidebar-tab ${componentsOrBody == 'components' ? 'active' : null}`} 
-			onClick={resetSidebar}>Components</div>
+			onClick={resetSidebar}>Style</div>
 		<div 
 			className={`ita-sidebar-tab ${componentsOrBody == 'content' ? 'active' : null}`} 
 			onClick={showContentEditor}>Content</div>

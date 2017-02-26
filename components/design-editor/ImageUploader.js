@@ -18,16 +18,18 @@ const ImageUploader = ({
 			<label>
 				{_.capitalize(_.replace(property, '-', ' '))}
 			</label>
-			<a style={{marginLeft: '10px'}} href="javascript:void(0)" onClick={() => clear()}><small>(clear)</small></a>
 		</div>
 		<div className="ita-flex-box ita-flex-items-center ita-flex-justify-end ita-flex-block text-right">
 			<FileInput 
 				name="asset[attachment]"
 				title={value}
 				accept=".png,.gif,.jpg,.jpeg"
-				placeholder="Upload Image"
+				placeholder="Upload"
 				className="btn btn-sm btn-gray btn-outline"
 				onChange={handleChange} />
+			<button className="btn btn-danger btn-sm btn-outline" style={{marginLeft: '10px'}} onClick={clear}>
+				<span className="glyphicon glyphicon-trash"></span>
+			</button>
 		</div>
 	</div>
 )

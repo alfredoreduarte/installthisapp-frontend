@@ -11,7 +11,7 @@ class Intro extends Component {
 
 const mapStateToProps = state => {
 	return {
-		...state.images,
+		intro: state.images.intro,
 	}
 }
 

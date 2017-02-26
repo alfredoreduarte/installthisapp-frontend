@@ -1,8 +1,12 @@
+import { push } from 'react-router-redux'
+import { postToApi } from 'canvas/api'
 import { 
 	hasAnsweredAllQuestions, 
 	allQuestions, 
 	allOptions,
 } from 'canvas/trivia/selectors/questions'
+
+import { toggleActivityIndicator } from 'canvas/trivia/actions/activityIndicators'
 
 const handleUnansweredQuestions = () => {
 	return (dispatch, getState) => {

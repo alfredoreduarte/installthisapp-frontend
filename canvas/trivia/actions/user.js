@@ -27,7 +27,8 @@ export const digestFacebookResponse = response => {
 }
 
 export const loginCallback = () => {
-	return (dispatch, getState) => 	dispatch(fetchEntities())
+	return (dispatch, getState) => 	
+						dispatch(fetchEntities())
 						.then(() => {
 							dispatch(toggleActivityIndicator())
 							const state = getState()

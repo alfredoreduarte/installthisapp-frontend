@@ -19,7 +19,7 @@ const Intro = ({ intro }) => (
 )
 
 Intro.propTypes = {
-	// intro: PropTypes.string.isRequired,
+	intro: PropTypes.string.isRequired,
 	// subtitle: PropTypes.string.isRequired,
 	// likesLabel: PropTypes.string.isRequired,
 	// commentsLabel: PropTypes.string.isRequired,

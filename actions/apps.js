@@ -86,17 +86,7 @@ export const update = () => {
 	}
 }
 
-export const editAppSpecificSettings = date => {
-	return (dispatch, getState) => {
-		const currentApp = getCurrentAppByState(getState())
-		dispatch(updateApp(currentApp.checksum, {
-			setting: {
-				...currentApp.setting,
-				firstFetchFromDate: date,
-			}
-		}))
-	}
-}
+
 export const updateAppSettings = () => {
 	return (dispatch, getState) => {
 		const currentApp = getCurrentAppByState(getState())
@@ -121,15 +111,20 @@ export const updateAppSpecificSettings = () => {
 	return (dispatch, getState) => {
 		dispatch(toggleActivityUpdatingAppSettings())
 		const currentAppChecksum = getState().admin.currentApp
+		// 
+		// TOP FANS ONLY
 		// ignoredUserIdentifiers must ALWAYS be an array
 		const setting = getState().form.appSpecificSettings.values
-		if (setting.ignoredUserIdentifiers && setting.ignoredUserIdentifiers.length > 0) {
-			// setting.ignoredUserIdentifiers = setting.ignoredUserIdentifiers.split(",").map(Number)
-			setting.ignoredUserIdentifiers = _.split(setting.ignoredUserIdentifiers, ',').map(Number)
+		if (setting.ignoredUserIdentifiers) {
+			if (setting.ignoredUserIdentifiers && setting.ignoredUserIdentifiers.length > 0) {
+				setting.ignoredUserIdentifiers = _.split(setting.ignoredUserIdentifiers, ',').map(Number)
+			}
+			if (setting.ignoredUserIdentifiers == "") {
+				setting.ignoredUserIdentifiers = []
+			}
 		}
-		if (setting.ignoredUserIdentifiers == "") {
-			setting.ignoredUserIdentifiers = []
-		}
+		// 
+		// 
 		postToApi(
 			`applications/${currentAppChecksum}/update_setting.json`, 
 			{
