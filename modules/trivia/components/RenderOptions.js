@@ -5,26 +5,25 @@ import Select from 'react-select'
 import { Field, FieldArray, reduxForm, formValueSelector } from 'redux-form'
 import { Modal, Button, FormGroup, ControlLabel, InputGroup, FormControl, Glyphicon } from 'react-bootstrap'
 
-const RareButton = (field) => (
+const ToggleButton = field => 
 	<Button 
 		onClick={() => field.input.onChange(!field.input.value)}
 		className={field.input.value ? 'btn-outline btn-success' : 'btn-outline btn-danger'}
 		>
 		{field.input.value ? 'Correct answer' : 'Wrong answer'}
 	</Button>
-)
 
-const RenderOptions = ({ fields, meta: { touched, error }, onOptionRemove }) => {
+const RenderOptions = ({ fields, meta: { touched, error }, onOptionRemove, optionValuesForConditionalRendering }) => {
 	return <ul className="list-unstyled">
 		{touched && error && <span>{error}</span>}
 		{fields.map((option, index) => {
-			return <li key={index} className={option.correct == false && console.log(option) ? 'hide' : 'none'}>
+			return <li key={index} className={optionValuesForConditionalRendering && optionValuesForConditionalRendering[index]._destroy ? 'hide' : 'none'}>
 				<FormGroup>
 					<InputGroup>
 						<InputGroup.Button>
 							<Field
 								name={`${option}.correct`}
-								component={RareButton}
+								component={ToggleButton}
 								/>
 						</InputGroup.Button>
 						<Field 
