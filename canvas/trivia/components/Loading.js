@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Loading = ({ time }) => (
+const Loading = () => (
 	<div>
-		<h1 className="ita-cali-countdown-text"><span>Loading...</span></h1>
+		<h1><span>Loading...</span></h1>
 	</div>
 )
 

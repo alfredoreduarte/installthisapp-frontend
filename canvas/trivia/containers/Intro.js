@@ -10,7 +10,10 @@ class Intro extends Component {
 }
 
 const mapStateToProps = state => {
+	console.log('tengo intro?')
+	console.log(state.images)
 	return {
+		loading: state.images.intro === undefined,
 		intro: state.images.intro,
 	}
 }

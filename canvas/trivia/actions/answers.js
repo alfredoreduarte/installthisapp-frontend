@@ -8,11 +8,14 @@ import {
 
 import { toggleActivityIndicator } from 'canvas/trivia/actions/activityIndicators'
 
-const handleUnansweredQuestions = () => {
+export const handleUnansweredQuestions = () => {
 	return (dispatch, getState) => {
 		const questions = allQuestions(getState())
 		const options = allOptions(getState())
 		const unansweredQuestionsArray = []
+		console.log('handling unanswered')
+		console.log(questions)
+		console.log(options)
 		questions.map(q => {
 			if (!q.answered) {
 				unansweredQuestionsArray.push(q.id)
@@ -20,8 +23,9 @@ const handleUnansweredQuestions = () => {
 		})
 		unansweredQuestionsArray.map(id => {
 			const singleQuestion = _.find(questions, {id})
-			const option = _.find(options, o => !o.correct && singleQuestion.options.indexOf(o.id) > -1 )
-			dispatch(saveAnswer(id, option.id, false))
+			// const option = _.find(options, o => !o.correct && singleQuestion.options.indexOf(o.id) > -1 )
+			// dispatch(saveAnswer(id, option.id, false))
+			dispatch(saveAnswer(id, null, false))
 		})
 	}
 }

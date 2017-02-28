@@ -45,3 +45,4 @@ dist
 .env
 Procfile.dev
 webpack-assets.json
+dump.rdb

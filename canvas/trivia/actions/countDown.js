@@ -4,6 +4,8 @@ import {
 	allOptions,
 } from 'canvas/trivia/selectors/questions'
 
+import { handleUnansweredQuestions } from 'canvas/trivia/actions/answers'
+
 export const toggleCountDown = () => ({
 	type: 'TOGGLE_COUNTDOWN'
 })

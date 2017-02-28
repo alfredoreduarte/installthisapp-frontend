@@ -3,6 +3,11 @@ import { fetchMessages } from 'canvas/trivia/actions/messages'
 import { fetchSettings } from 'canvas/trivia/actions/settings'
 import { toggleCountDown } from 'canvas/trivia/actions/countDown'
 
+export const getStaticContentWithIntroRedirect = (nextState, replace, next, dispatch) => 
+						dispatch(fetchSettings())
+						.then(() => dispatch(fetchMessages()))
+						.then(() => dispatch(fetchImages(`/login`)))
+						.then(next())
 export const getStaticContent = (nextState, replace, next, dispatch) => 
 						dispatch(fetchSettings())
 						.then(() => dispatch(fetchMessages()))

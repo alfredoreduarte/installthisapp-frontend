@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import TimeAgo from 'react-timeago'
 import moment from 'moment'
 import _ from 'lodash'
 import Select from 'react-select'
@@ -102,7 +103,7 @@ const Questions = ({
 						{q.text}
 					</td>
 					<td>
-						{q.createdAt}
+						<TimeAgo date={q.createdAt} />
 					</td>
 					<td className="text-right">
 						<ul className="list-inline list-no-margin">

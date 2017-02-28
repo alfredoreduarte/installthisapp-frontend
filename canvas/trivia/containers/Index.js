@@ -42,6 +42,7 @@ const mapStateToProps = state => {
 	const question = getQuestionWithOptions(state)
 	const { timeOut, countDownRunning, isFetching } = state.game
 	return {
+		...state.images,
 		time: countDownRunning && !isFetching ? timeOut - 1 : timeOut,
 		loading: isFetching,
 		question,

@@ -34,7 +34,8 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
 	return {
-		handleSubmit: () => dispatch(postNewQuestionWithReduxForm()).then(() => browserHistory.push(props.closeUrl))
+		close: () => browserHistory.push(props.closeUrl),
+		handleSubmit: () => dispatch(postNewQuestionWithReduxForm()).then(() => browserHistory.push(props.closeUrl)),
 	}
 }
 

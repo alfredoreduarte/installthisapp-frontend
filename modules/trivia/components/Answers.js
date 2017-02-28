@@ -4,7 +4,7 @@ import _ from 'lodash'
 import TimeAgo from 'react-timeago'
 import Select from 'react-select'
 import { Link } from 'react-router'
-import { Table, DropdownButton, MenuItem } from 'react-bootstrap'
+import { Table, DropdownButton, MenuItem, ButtonToolbar } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Checkbox } from 'react-icheck'
 import { getAnswersForCurrentApp } from 'modules/trivia/selectors/answers'
@@ -38,12 +38,15 @@ const Answers = ({
 				</div>
 			</div>
 			<div className="row">
-				<div className="col-md-4">
-					{false ? <SearchForm /> : null}
-					<button className="btn btn-default btn-sm" onClick={() => fetchAgain()}>
-						Refresh table
-					</button>
+				<div className="col-md-12 text-right">
+					<ButtonToolbar>
+						<button className="btn btn-sm btn-default pull-right" onClick={fetchAgain}>
+							Refresh table
+						</button>
+					</ButtonToolbar>
 				</div>
+			</div>
+			<div className="row">
 				<div className={answers.length > 0 ? "col-md-8 text-right" : "hide"}>
 					<ul className="ita-table-tools-selected list-inline list-no-margin">
 						<li className={selectedIds.length ? '' : 'hide'}>
