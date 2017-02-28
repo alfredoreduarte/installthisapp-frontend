@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import RenderOptions from 'modules/trivia/components/RenderOptions'
 import { postNewQuestionWithReduxForm } from 'modules/trivia/actions/questions'
 
-let QuestionCreator = ({ handleSubmit, fetching, onOptionRemove, change }) => (
+let QuestionCreator = ({ handleSubmit, fetching, change }) => (
 	<div>
 		<div className="form-group">
 			<label className="control-label">Question</label>
@@ -18,7 +18,7 @@ let QuestionCreator = ({ handleSubmit, fetching, onOptionRemove, change }) => (
 				className="form-control" 
 				component="input"
 			/>
-			<div className="form-group">
+			<div className="form-group" style={{marginTop: '20px'}}>
 				<label>Options</label>
 			</div>
 			<FieldArray name="options" onOptionRemove={(field, name) => change(field, name)} component={RenderOptions} />
@@ -57,11 +57,11 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
 	return { 
-		onOptionRemove: () => {
+		// onOptionRemove: () => {
 			// e.preventDefault()
 			// dispatch(postNewQuestionWithReduxForm())
 			// dispatch(updateAppSpecificSettings())
-		}
+		// }
 	}
 }
 
