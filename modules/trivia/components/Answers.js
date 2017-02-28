@@ -105,7 +105,7 @@ const Answers = ({
 								<div className="ita-progressbar-label-default">
 									{parseInt(a.qualification)} %</div>
 								<div className="ita-progressbar-label-hover">
-									{a.totalCorrectAnswers}</div>
+									{a.totalCorrectAnswers} correct</div>
 							</div>
 							<div 
 								className="progress-bar progress-bar-danger" 
@@ -114,7 +114,7 @@ const Answers = ({
 									{parseInt((a.totalAnswers - a.totalCorrectAnswers) * 100 / a.totalAnswers) } %
 								</div>
 								<div className="ita-progressbar-label-hover">
-									{a.totalAnswers - a.totalCorrectAnswers}
+									{a.totalAnswers - a.totalCorrectAnswers} incorrect
 								</div>
 							</div>
 						</div>

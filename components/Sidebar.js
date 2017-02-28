@@ -45,6 +45,7 @@ const Sidebar = ({ installed, checksum, type, children, menu, facebookPageIdenti
 		</ul>
 		{children}
 		<ul className="list-unstyled">
+			<li className={type == 'top_fans' ? 'hide' : ' '}><Link to={`/d/apps/${type}/${checksum}/integrations`} activeClassName="active">Integrations</Link></li>
 			<li>
 				<Link to={`/d/apps/${type}/${checksum}/preferences`} activeClassName="active">Preferences</Link>
 				<ul className="list-unstyled">

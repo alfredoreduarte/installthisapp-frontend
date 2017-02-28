@@ -60,3 +60,33 @@ export const postNewQuestion = (checksum, newQuestion) => {
 				)
 	}
 }
+
+export const postNewQuestionWithReduxForm = () => {
+	return (dispatch, getState) => {
+		const question = getState().form.triviaQuestionCreator.values
+		const checksum = getState().admin.currentApp
+		console.log('la question')
+		console.log(question)
+		let url
+		if (question.id) {
+			url = `applications/${checksum}/questions_update.json`
+		}
+		else{
+			url = `applications/${checksum}/questions_create.json`
+		}
+		return postToApi(url, { 
+			question: {
+				text: question.text,
+				id: question.id,
+				options_attributes: question.options,
+			}
+		})
+		.then(response => {
+			const normalized = normalize(response, schema.entities)
+			dispatch(receiveTriviaEntities(normalized.entities))
+		})
+		.catch(exception =>
+			console.log('postNewApp: parsing failed', exception)
+		)
+	}
+}

@@ -17,7 +17,10 @@ const trivia = (state = {
 				answers: answers(state.answers, action)
 			})
 		case 'TRIVIA/RECEIVE_ENTITIES':
-			return _.merge({}, state, action.response.entities)
+			return {
+				...state,
+				...action.response.entities
+			}
 		default:
 			return state
 	}

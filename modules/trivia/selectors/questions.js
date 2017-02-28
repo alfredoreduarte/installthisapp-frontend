@@ -13,6 +13,8 @@ export const getQuestionsForCurrentApp = createSelector(
 	filterTextSelector,
 	(questions, app, text) => {
 		const subList = _.filter(questions, q => q.applicationId == app.id)
-		return subList.filter(q => stringContains(q.text, text))
+		return subList.filter(q => {
+			return q.text ? stringContains(q.text, text) : true
+		})
 	}
 )
