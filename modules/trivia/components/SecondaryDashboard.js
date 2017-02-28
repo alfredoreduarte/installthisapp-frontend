@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link, IndexLink } from 'react-router'
 import { ButtonToolbar, Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import User from 'components/User'
-import { getEntries } from 'modules/trivia/selectors/answers'
+import { getAnswersForCurrentApp } from 'modules/trivia/selectors/answers'
 
 const SecondaryDashboard = ({ checksum, type, entries }) => (
 	<div>
@@ -20,22 +20,18 @@ const SecondaryDashboard = ({ checksum, type, entries }) => (
 				<Table className="ita-table">
 					<tbody>
 						{entries.map(entry => 
-						<tr key={entry.senderId}>
+						<tr key={entry.user.identifier}>
 							<td>
-								<User 
-									name={entry.senderName} 
-									identifier={entry.senderId} 
-									small
-									 />
+								<User name={entry.user.name} identifier={entry.user.identifier} small />
 							</td>
 							<td>
-								<b>{entry.score}</b>
+								<b>{entry.totalCorrectAnswers} correct answers</b>
 							</td>
 						</tr>
 						)}
 					</tbody>
 				</Table>
-				<p><Link to={`/d/apps/${type}/${checksum}/scoreboard`} className="btn btn-primary btn-sm" activeClassName="active">View full list</Link></p>
+				<p><Link to={`/d/apps/${type}/${checksum}/answers`} className="btn btn-primary btn-sm" activeClassName="active">View full list</Link></p>
 			</div>
 		}
 	</div>
@@ -45,8 +41,8 @@ const mapStateToProps = (state, props) => {
 	return {
 		checksum: props.params.checksum,
 		type: props.params.type,
-		entries: []
-		// entries: getEntries(state).slice(0,5),
+		// entries: []
+		entries: getAnswersForCurrentApp(state).slice(0,5),
 	}
 }
 
