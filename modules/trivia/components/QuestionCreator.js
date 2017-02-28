@@ -40,12 +40,18 @@ const mapStateToProps = (state, ownProps) => {
 	else {
 		initialValues = {
 			id: null,
-			text: 'Texto de la pregunta',
+			text: 'Question text',
 			options: [
 				{
 					id: null,
-					text: 'Opción 1',
+					text: 'First option',
 					correct: true,
+					_destroy: false,
+				},
+				{
+					id: null,
+					text: 'Second option',
+					correct: false,
 					_destroy: false,
 				}
 			]
