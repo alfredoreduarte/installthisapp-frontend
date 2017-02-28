@@ -112,6 +112,25 @@ app.get('/top-fans-for-facebook-pages.html', function(req, res) {
 		isOldUser,
 	})
 })
+app.get('/trivia-contest.html', function(req, res) {
+	const manifestPath = `${process.cwd()}/webpack-assets.json`
+	const manifest = jsonfile.readFileSync(manifestPath)
+	const manifestBundle = manifest['manifest']['js']
+	const jsBundle = manifest['landing']['js']
+	const cssBundle = manifest['landing']['css']
+	const vendorBundle = manifest['common']['js']
+	const isOldUser = req.query.segment == 'old_users'
+	res.render('trivia', {
+		cloudFrontUrl: cloudFrontUrl,
+		apiUrl: process.env.API_URL,
+		facebookAppId: process.env.FB_APP_ID,
+		jsBundle,
+		cssBundle,
+		vendorBundle,
+		manifestBundle,
+		isOldUser,
+	})
+})
 app.get('/contact', function(req, res) {
 	const manifestPath = `${process.cwd()}/webpack-assets.json`
 	const manifest = jsonfile.readFileSync(manifestPath)

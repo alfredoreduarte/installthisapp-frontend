@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('_head') %>
+<%- include('_head', {title: 'InstallThisApp'}) %>
 <body>
 	<header class="jumbotron">
 		<%- include('_navbar', {alt: false}) %>
@@ -157,6 +157,18 @@
 					<p><a href="/top-fans-for-facebook-pages.html" class="btn btn-success text-uppercase btn-xs">Read More</a></p>
 				</div>
 			</div>
+			<div class="media media-app">
+				<div class="media-left">
+					<a href="/trivia-contest.html" class="disabled">
+						<img class="media-object" src="/images/module-icons/trivia-big.jpg" alt="Trivia contest">
+					</a>
+				</div>
+				<div class="media-body">
+					<h3 class="media-heading"><b><a href="/trivia-contest.html">Trivia</a></b></h3>
+					<p>Create multiple-choice questions and let people try to answer them before the time runs out.</p>
+					<p><a href="/trivia-contest.html" class="btn btn-success text-uppercase btn-xs">Read More</a></p>
+				</div>
+			</div>
 			<div class="media media-app media-disabled">
 				<div class="media-left">
 					<div href="#" class="disabled" disabled>
@@ -165,18 +177,6 @@
 				</div>
 				<div class="media-body">
 					<h3 class="media-heading"><b>Photo Contest</b></h3>
-					<!-- <p>Rank your Facebook Page’s fans loyalty by likes and comments in real time. Customise the list design and show it in a Page Tab. Reset scores anytime you want.</p> -->
-					<p><a href="#" class="btn btn-default text-uppercase btn-xs disabled">Coming soon</a></p>
-				</div>
-			</div>
-			<div class="media media-app media-disabled">
-				<div class="media-left">
-					<div href="#" class="disabled" disabled>
-						<img class="media-object" src="/images/module-icons/trivia-big.jpg" alt="Top Fans ranking for Facebook Pages">
-					</div>
-				</div>
-				<div class="media-body">
-					<h3 class="media-heading"><b>Trivia</b></h3>
 					<!-- <p>Rank your Facebook Page’s fans loyalty by likes and comments in real time. Customise the list design and show it in a Page Tab. Reset scores anytime you want.</p> -->
 					<p><a href="#" class="btn btn-default text-uppercase btn-xs disabled">Coming soon</a></p>
 				</div>
