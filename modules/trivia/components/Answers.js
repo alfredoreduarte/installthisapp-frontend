@@ -47,7 +47,7 @@ const Answers = ({
 				</div>
 			</div>
 			<div className="row">
-				<div className={answers.length > 0 ? "col-md-8 text-right" : "hide"}>
+				<div className={answers.length > 0 ? "col-md-12 text-right" : "hide"}>
 					<ul className="ita-table-tools-selected list-inline list-no-margin">
 						<li className={selectedIds.length ? '' : 'hide'}>
 							<a
@@ -61,11 +61,6 @@ const Answers = ({
 							</a>
 						</li>
 					</ul>
-				</div>
-				<div className={answers.length > 0 ? "col-md-3 col-md-offset-9" : "hide"}>
-					<div className="ita-table-view-second-row text-right">
-						
-					</div>
 				</div>
 			</div>
 		</div>
