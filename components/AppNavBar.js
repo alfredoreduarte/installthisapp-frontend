@@ -12,7 +12,7 @@ const AppNavBar = ({ name, identifier, logout, subscription }) => (
 		<Navbar.Header>
 			<Navbar.Brand>
 				<IndexLink to="/d">
-					<img src="/images/logo-gray.png" style={{height: "40px"}} />
+					<img src="/images/logo-round.png" style={{height: "40px"}} />
 				</IndexLink>
 			</Navbar.Brand>
 		</Navbar.Header>

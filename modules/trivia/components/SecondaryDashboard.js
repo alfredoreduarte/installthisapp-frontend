@@ -4,11 +4,13 @@ import { Link, IndexLink } from 'react-router'
 import { ButtonToolbar, Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import User from 'components/User'
 import { getAnswersForCurrentApp } from 'modules/trivia/selectors/answers'
+import { getQuestionsForCurrentApp } from 'modules/trivia/selectors/questions'
 
-const SecondaryDashboard = ({ checksum, type, entries }) => (
+const SecondaryDashboard = ({ checksum, type, entries, hasQuestions }) => (
 	<div>
 		<p className="h1 page-header">Summary</p>
 		<p className="h6 text-uppercase"><b>Top 5 users</b></p>
+		<div className="col-md-6">
 		{entries.length == 0 ?
 			<div className="ita-empty text-cente">
 				<h5>
@@ -16,24 +18,35 @@ const SecondaryDashboard = ({ checksum, type, entries }) => (
 				</h5>
 			</div>
 		:
-			<div className="col-md-6">
-				<Table className="ita-table">
-					<tbody>
-						{entries.map(entry => 
-						<tr key={entry.user.identifier}>
-							<td>
-								<User name={entry.user.name} identifier={entry.user.identifier} small />
-							</td>
-							<td>
-								<b>{entry.totalCorrectAnswers} correct answers</b>
-							</td>
-						</tr>
-						)}
-					</tbody>
-				</Table>
-				<p><Link to={`/d/apps/${type}/${checksum}/answers`} className="btn btn-primary btn-sm" activeClassName="active">View full list</Link></p>
+			<div>
+			<Table className="ita-table">
+				<tbody>
+					{entries.map(entry => 
+					<tr key={entry.user.identifier}>
+						<td>
+							<User name={entry.user.name} identifier={entry.user.identifier} small />
+						</td>
+						<td>
+							<b>{entry.totalCorrectAnswers} correct answers</b>
+						</td>
+					</tr>
+					)}
+				</tbody>
+			</Table>
+			<p><Link to={`/d/apps/${type}/${checksum}/answers`} className="btn btn-primary btn-sm" activeClassName="active">View full list</Link></p>
 			</div>
 		}
+		</div>
+		<div className="col-md-6">
+			{!hasQuestions ? 
+			<div className="alert alert-warning" style={{position: 'relative'}}>
+				<span className="glyphicon glyphicon-info-sign"></span>{' '}
+				You should create some questions for the Trivia. <Link to={`/d/apps/${type}/${checksum}/questions`}>Start now</Link>.
+			</div>
+			:
+			null
+			}
+		</div>
 	</div>
 )
 
@@ -43,6 +56,7 @@ const mapStateToProps = (state, props) => {
 		type: props.params.type,
 		// entries: []
 		entries: getAnswersForCurrentApp(state).slice(0,5),
+		hasQuestions: getQuestionsForCurrentApp(state, props).length > 0,
 	}
 }
 
