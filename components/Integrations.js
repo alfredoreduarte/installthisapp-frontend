@@ -13,10 +13,32 @@ const Integrations = ({
 			</div>
 		</div>
 		<hr />
-		<div className="col-md-4">
-			<Link to={`/d/apps/${type}/${checksum}/integrations/facebook`} activeClassName="active">
-				<img src="/images/facebook-logo.png" className="img-responsive" />
-			</Link>
+		<div className="col-md-3 text-center">
+			<div className="thumbnail">
+				<Link to={`/d/apps/${type}/${checksum}/integrations/facebook`}><img src="/images/facebook-logo.png" style={{marginTop: '20px', height: '100px'}} /></Link>
+				<div className="caption">
+					<h4>Facebook Tab</h4>
+					<h6 className="text-uppercase text-success"><b>Available</b></h6>
+				</div>
+			</div>
+		</div>
+		<div className="col-md-3 text-center">
+			<div className="thumbnail">
+				<img src="/images/mailchimp-logo.png" className="img-grayscale" style={{marginTop: '20px', height: '100px'}} />
+				<div className="caption">
+					<h4>Mailchimp</h4>
+					<h6 className="text-uppercase"><b>Coming soon</b></h6>
+				</div>
+			</div>
+		</div>
+		<div className="col-md-3 text-center">
+			<div className="thumbnail">
+				<img src="/images/pushido-logo.png" className="img-grayscale" style={{marginTop: '20px', height: '100px'}} />
+				<div className="caption">
+					<h4>Pushido notifications</h4>
+					<h6 className="text-uppercase"><b>Coming soon</b></h6>
+				</div>
+			</div>
 		</div>
 	</div>
 )
