@@ -34,6 +34,9 @@ export const getEntriesForPage = createSelector(
 				const arrResultOrdered = _.orderBy(arrWithScores, 'score', 'desc')
 				if (!verifiedScoresEventSent) {
 					analytics.track('Scores Verified')
+					analytics.track('App Installed', {
+						appType: 'top_fans',
+					})
 					verifiedScoresEventSent = !verifiedScoresEventSent
 				}
 				return arrResultOrdered
