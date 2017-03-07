@@ -46,6 +46,10 @@ const SecondaryDashboard = ({ checksum, type, entries, hasQuestions }) => (
 			:
 			null
 			}
+			<div className="alert alert-info" style={{position: 'relative'}}>
+				<span className="glyphicon glyphicon-info-sign"></span>{' '}
+				Have questions? Maybe our <a href="http://help.installthisapp.com/trivia" target="_blank">help center</a> has the answers.
+			</div>
 		</div>
 	</div>
 )
@@ -54,7 +58,6 @@ const mapStateToProps = (state, props) => {
 	return {
 		checksum: props.params.checksum,
 		type: props.params.type,
-		// entries: []
 		entries: getAnswersForCurrentApp(state).slice(0,5),
 		hasQuestions: getQuestionsForCurrentApp(state, props).length > 0,
 	}
