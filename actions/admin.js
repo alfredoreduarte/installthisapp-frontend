@@ -26,6 +26,7 @@ const identifyAdmin = payload => {
 		plan: 'demo',
 		'Experiment: Trial Offer': experimentTrialOfferVariation,
 	})
+	profitwell('user_email', payload.email)
 }
 
 export const fetchAdmin = () => {

@@ -48,7 +48,7 @@ const SecondaryDashboard = ({ checksum, type, entries, hasQuestions }) => (
 			}
 			<div className="alert alert-info" style={{position: 'relative'}}>
 				<span className="glyphicon glyphicon-info-sign"></span>{' '}
-				Have questions? Maybe our <a href="http://help.installthisapp.com/trivia" target="_blank">help center</a> has the answers.
+				Have questions? Maybe our <a href="http://help.installthisapp.com/trivia" target="_blank"><u><b>help center</b></u></a> has the answers.
 			</div>
 		</div>
 	</div>
