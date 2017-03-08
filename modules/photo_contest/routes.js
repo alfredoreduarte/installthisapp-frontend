@@ -1,5 +1,6 @@
 import { injectAsyncReducer } from 'reducers'
 import { fetchPhotoContestEntities } from 'modules/photo_contest/actions/entities'
+import Sidebar from 'modules/photo_contest/components/Sidebar'
 
 export default (store, dispatch) => ({
 	getChildRoutes(partialNextState, cb) {
@@ -7,7 +8,7 @@ export default (store, dispatch) => ({
 			cb(null, [
 				{
 					path: 'photos',
-					modal: true,
+					// modal: true,
 					onEnter: (nextState, replace, next) => {
 						dispatch(fetchPhotoContestEntities(nextState.params.checksum)).then(() => {
 							next()
@@ -17,7 +18,7 @@ export default (store, dispatch) => ({
 						require.ensure([], (require) => {
 							cb(null, {
 								main: require('modules/photo_contest/components/Photos').default,
-								sidebar: require('modules/photo_contest/sidebar').default,
+								sidebar: Sidebar,
 							})
 						})
 					}
@@ -34,7 +35,7 @@ export default (store, dispatch) => ({
 						require.ensure([], (require) => {
 							cb(null, {
 								main: require('modules/photo_contest/components/Photos').default,
-								sidebar: require('modules/photo_contest/sidebar').default,
+								sidebar: Sidebar,
 							})
 						})
 					}

@@ -20,7 +20,7 @@ const Photo = ({ id, name, votes, voted, photoUrl, handleVote, singlePhotoUrl = 
 					disabled={voted}
 					onClick={() => !voted ? handleVote(id) : null}>
 					<span 
-						className={`glyphicon glyphicon-star${voted ? '' : '-empty'} ita-cali-vote-button${voted ? '--active' : ''}`}>
+						className={`glyphicon glyphicon-heart${voted ? '' : '-empty'} ita-cali-vote-button${voted ? '--active' : ''}`}>
 					</span>
 				</a>
 			</div>

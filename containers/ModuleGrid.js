@@ -3,7 +3,7 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { push } from 'react-router-redux'
-import { setNewAppModule } from 'actions/newApp'
+import { setNewAppModule, setAppNotAvailable } from 'actions/newApp'
 
 const ModuleGrid = ({ modules, futureModules, handleFutureModuleSelection, handleModuleSelection }) => (
 	<div className="container-flex">
@@ -81,17 +81,13 @@ const ModuleGrid = ({ modules, futureModules, handleFutureModuleSelection, handl
 )
 
 const mapStateToProps = state => ({ 
-	modules: ['top_fans', 'trivia'],
+	modules: ['top_fans', 'trivia', 'photo_contest'],
 	// futureModules: ['forms', 'puzzle', 'memory_match', 'photo_contest', 'trivia'],
-	futureModules: ['photo_contest'],
+	futureModules: [],
 })
 
 const mapDispatchToProps = (dispatch, props) => ({
-	handleFutureModuleSelection: type => {
-		dispatch(setNewAppModule(type))
-		// dispatch(push('/d/apps/create/2'))
-		// console.log('future module!')
-	},
+	handleFutureModuleSelection: type => dispatch(setAppNotAvailable(type)),
 	handleModuleSelection: type => {
 		dispatch(setNewAppModule(type))
 		dispatch(push('/d/apps/create/3'))

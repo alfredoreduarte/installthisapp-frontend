@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 
 // Screens
+import Intro from 'canvas/photo_contest/components/Intro'
 import Index from 'canvas/photo_contest/components/Index'
 import Upload from 'canvas/photo_contest/components/Upload'
 import Single from 'canvas/photo_contest/components/SingleView'
@@ -51,7 +52,16 @@ const singlePhoto = (id, url, name) => ({
 	},
 	votes: [
 		{
-			id: id,
+			id: id * 100,
+			photoId: id,
+			user: {
+				id: 1,
+				name: "Alfredo Re",
+				firstName: "Alfredo",
+				lastName: "Re",
+				identifier: "10210089963347759",
+				email: "alfredoreduarte@gmail.com",
+			}
 		}
 	],
 	caption: 'Ligula Justo Vehicula Cras',
@@ -62,12 +72,45 @@ const singlePhoto = (id, url, name) => ({
 	singlePhotoUrl: '',
 })
 
+const votes = [
+	{
+		id: 999,
+		photoId: 1,
+		user: {
+			id: 1,
+			name: "Alfredo Re",
+			firstName: "Alfredo",
+			lastName: "Re",
+			identifier: "10210089963347759",
+			email: "alfredoreduarte@gmail.com",
+		}
+	},
+	{
+		id: 1000,
+		photoId: 2,
+		user: {
+			id: 1,
+			name: "Alfredo Re",
+			firstName: "Alfredo",
+			lastName: "Re",
+			identifier: "10210089963347759",
+			email: "alfredoreduarte@gmail.com",
+		}
+	}
+]
+
 const sequencer = new photoSequencer()
 
-const Previews = ({ screen, messages }) => {
+const Previews = ({ screen, messages, images }) => {
 	switch (screen) {
+		case 'intro':
+			return <Intro
+				intro={images.intro}
+			 />
 		case 'index':
 			return <Index
+				headerImg={images.header}
+				footerImg={images.footer}
 				title={messages.title}
 				subtitle={messages.subtitle}
 				canUpload={true}
@@ -75,11 +118,8 @@ const Previews = ({ screen, messages }) => {
 				uploadButton={messages.uploadButton}
 				mostVoted={messages.mostVoted}
 				mostRecent={messages.mostRecent}
-				photos={[0,1,2,3,4,5,6].map(el => sequencer.getOne())}
-				votes={[{
-					userId: 1,
-					photoId: 1,
-				}]}
+				photos={[0,1,2,3,4,5,6].map(el => {const elOne = sequencer.getOne();console.log(elOne);return elOne;})}
+				votes={votes}
 				handleVote={() => console.log('vote')}
 				uploadUrl={' '}
 				singlePhotoUrl={''}
@@ -90,8 +130,12 @@ const Previews = ({ screen, messages }) => {
 			 />
 		case 'upload':
 			return <Upload
+				headerImg={images.header}
+				footerImg={images.footer}
 				title={messages.title}
 				subtitle={messages.subtitle}
+				userName="Alfredo Re"
+				userIdentifier="10210089963347759"
 				submitButton={messages.submitButton}
 				photoFormLabel={messages.photoFormLabel}
 				captionFormLabel={messages.captionFormLabel}
@@ -102,6 +146,8 @@ const Previews = ({ screen, messages }) => {
 			 />
 		case 'single':
 			return <Single
+				headerImg={images.header}
+				footerImg={images.footer}
 				title={messages.title}
 				subtitle={messages.subtitle}
 				uploadButton={messages.uploadButton}
@@ -109,6 +155,7 @@ const Previews = ({ screen, messages }) => {
 				mostRecent={messages.mostRecent}
 				photo={sequencer.getOne()}
 				voted={true}
+				back={messages.back}
 				handleVote={() => console.log('vote')}
 				uploadUrl={''}
 				backUrl={' '}
@@ -119,6 +166,7 @@ const Previews = ({ screen, messages }) => {
 }
 
 Previews.screens = [
+	{ value: 'intro', label: 'Intro'},
 	{ value: 'index', label: 'List'},
 	{ value: 'upload', label: 'Upload Photo'},
 	{ value: 'single', label: 'Individual Photo'},

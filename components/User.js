@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import TimeAgo from 'react-timeago'
 import StatusIndicator from 'components/StatusIndicator'
 import FbPhoto from 'components/FbPhoto'
@@ -23,5 +23,11 @@ const User = ({ name, small, identifier }) => (
 		</div>
 	</div>
 )
+
+User.propTypes = {
+	name: PropTypes.string.isRequired,
+	identifier: PropTypes.string.isRequired,
+	small: PropTypes.bool,
+}
 
 export default User

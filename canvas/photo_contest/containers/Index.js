@@ -19,9 +19,11 @@ const mapStateToProps = state => {
 	const ownPhoto = photosByUploaderId(state)
 	return {
 		...state.messages,
+		headerImg: state.images.header,
+		footerImg: state.images.footer,
 		canUpload: ownPhoto.length == 0,
 		loggedUser: state.loggedUser,
-		votes: _.values(state.entities.votes),
+		votes: state.entities.votes,
 		sort: state.sort,
 		searchQuery: state.search,
 		photos: photosBySearchQuery(state),

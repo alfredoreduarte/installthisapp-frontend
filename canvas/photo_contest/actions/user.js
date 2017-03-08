@@ -4,9 +4,9 @@ import { photosByUploaderId } from 'canvas/photo_contest/selectors/photos'
 import { writeToApiWithoutAuth } from 'canvas/api'
 import Cookies from 'js-cookie'
 
-export const logUserIn = id => ({
+export const logUserIn = payload => ({
 	type: 'LOG_USER_IN',
-	id
+	payload,
 })
 
 export const digestFacebookResponse = (response, redirectUri) => {
@@ -22,8 +22,10 @@ export const digestFacebookResponse = (response, redirectUri) => {
 			window.loggedUserId = response.id
 			Cookies.set('apiKey', response.apiKey, { expires: 7, path: `/${canvasId}/${checksum}` })
 			Cookies.set('loggedUserId', response.id, { expires: 7, path: `/${canvasId}/${checksum}` })
+			Cookies.set('loggedUserIdentifier', response.identifier, { expires: 7, path: `/${canvasId}/${checksum}` })
+			Cookies.set('loggedUserName', response.name, { expires: 7, path: `/${canvasId}/${checksum}` })
 			dispatch(loginCallback()).then(() => {
-				dispatch(logUserIn(response.id))
+				dispatch(logUserIn(response))
 				const canUpload = photosByUploaderId(getState()).length == 0
 				if (redirectUri && canUpload) {
 					dispatch(push(redirectUri))

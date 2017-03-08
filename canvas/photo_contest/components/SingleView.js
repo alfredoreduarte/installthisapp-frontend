@@ -1,9 +1,12 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
+import HeaderImage from 'canvas/photo_contest/components/HeaderImage'
 import Header from 'canvas/photo_contest/components/Header'
 import ToolBar from 'canvas/photo_contest/components/ToolBar'
 
 const SingleView = ({ 
+	headerImg,
+	footerImg,
 	canUpload,
 	// 
 	title, 
@@ -14,43 +17,53 @@ const SingleView = ({
 	photo, 
 	voted, 
 	handleVote, 
+	back, 
 	backUrl, 
 	uploadUrl
 }) => (
-	<div className="container">
-		<Header title={title} subtitle={subtitle} />
-		<ToolBar 
-			canUpload={canUpload} 
-			// 
-			backUrl={backUrl} 
-			uploadUrl={uploadUrl}
-			uploadButton={uploadButton}
-			mostRecent={mostRecent}
-			mostVoted={mostVoted}
-			 />
-		<div className="col-sm-12">
-			<div style={styles.photo}>
-				<img src={photo.assetUrl} className="img-responsive" />
-				<div style={styles.caption}>
-					<div style={styles.metadata}>
-						<div>
-							<p className="ita-cali-caption-full">{photo.caption}</p>
-							<p className="ita-cali-name-full">{photo.user.name}</p>
-							<span className="ita-cali-vote-count--full">{photo.votes.length}</span>
-							{' '}
-							<span className="ita-cali-vote-label--full">votes</span>
+	<div>
+		<div className="row">
+			<HeaderImage source={headerImg} />
+		</div>
+		<div className="container">
+			<Header title={title} subtitle={subtitle} />
+			<ToolBar 
+				canUpload={canUpload} 
+				// 
+				back={back}
+				backUrl={backUrl} 
+				uploadUrl={uploadUrl}
+				uploadButton={uploadButton}
+				mostRecent={mostRecent}
+				mostVoted={mostVoted}
+				 />
+			<div className="col-sm-12">
+				<div style={styles.photo}>
+					<img src={photo.assetUrl} style={styles.photo.img} className="img-responsive" />
+					<div style={styles.caption}>
+						<div style={styles.metadata}>
+							<div>
+								<p className="ita-cali-caption-full">{photo.caption}</p>
+								<p className="ita-cali-name-full">{photo.user.name}</p>
+								<span className="ita-cali-vote-count--full">{photo.votes.length}</span>
+								{' '}
+								<span className="ita-cali-vote-label--full">votes</span>
+							</div>
+							<a
+								style={{ ...styles.voteButton, cursor: voted ? 'not-allowed' : 'pointer' }}
+								disabled={voted}
+								onClick={() => !voted ? handleVote(photo.id) : null}>
+								<span 
+									className={`glyphicon glyphicon-heart${voted ? '' : '-empty'} ita-cali-vote-button-full${voted ? '--active' : ''}`}>
+								</span>
+							</a>
 						</div>
-						<a
-							style={styles.voteButton}
-							disabled={voted}
-							onClick={() => !voted ? handleVote(photo.id) : null}>
-							<span 
-								className={`glyphicon glyphicon-star${voted ? '' : '-empty'} ita-cali-vote-button-full${voted ? '--active' : ''}`}>
-							</span>
-						</a>
 					</div>
 				</div>
 			</div>
+		</div>
+		<div className="row">
+			<HeaderImage source={footerImg} />
 		</div>
 	</div>
 )
@@ -64,6 +77,9 @@ const styles = {
 	photo: {
 		marginBottom: '20px',
 		position: 'relative',
+		img: {
+			margin: 'auto',
+		}
 	},
 	voteButton: {
 		cursor: 'pointer',
@@ -75,9 +91,12 @@ const styles = {
 }
 
 SingleView.propTypes = {
+	headerImg: PropTypes.string, 
+	footerImg: PropTypes.string, 
 	photo: PropTypes.object.isRequired,
 	voted: PropTypes.bool.isRequired,
 	handleVote: PropTypes.func.isRequired,
+	back: PropTypes.string.isRequired,
 	backUrl: PropTypes.string.isRequired,
 	uploadUrl: PropTypes.string.isRequired,
 }

@@ -25,6 +25,8 @@ const logout = (nextState, replace, next) => {
 	Cookies.remove('apiKey', { path: `/${window.canvasId}/${window.checksum}` })
 	Cookies.remove('api_key', { path: `/${window.canvasId}/${window.checksum}` })
 	Cookies.remove('loggedUserId', { path: `/${window.canvasId}/${window.checksum}` })
+	Cookies.remove('loggedUserIdentifier', { path: `/${window.canvasId}/${window.checksum}` })
+	Cookies.remove('loggedUserName', { path: `/${window.canvasId}/${window.checksum}` })
 	replace({
 		pathname: `/${window.canvasId}/${window.checksum}`,
 	})

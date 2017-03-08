@@ -18,9 +18,11 @@ const mapStateToProps = (state, props) => {
 	const ownPhoto = photosByUploaderId(state)
 	return {
 		...state.messages,
+		headerImg: state.images.header,
+		footerImg: state.images.footer,
 		canUpload: ownPhoto.length == 0,
-		voted: _.filter(_.values(state.entities.votes), v => {
-			return v.userId == state.loggedUser.id && v.photoId == photo.id
+		voted: _.filter(state.entities.votes, v => {
+			return v.user.id == state.loggedUser.id && v.photoId == photo.id
 		}).length > 0,
 		photo,
 		uploadUrl: `/${window.canvasId}/${window.checksum}/upload`,

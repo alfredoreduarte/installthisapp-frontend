@@ -6,6 +6,7 @@ import activityIndicators from 'canvas/photo_contest/reducers/activityIndicators
 import entities from 'canvas/photo_contest/reducers/entities'
 import settings from 'canvas/photo_contest/reducers/settings'
 import messages from 'canvas/photo_contest/reducers/messages'
+import images from 'canvas/photo_contest/reducers/images'
 import sort from 'canvas/photo_contest/reducers/sort'
 import search from 'canvas/photo_contest/reducers/search'
 import loggedUser from 'canvas/photo_contest/reducers/loggedUser'
@@ -18,6 +19,7 @@ const createReducer = asyncReducers => {
 		entities,
 		settings,
 		messages,
+		images,
 		sort,
 		search,
 		loggedUser,

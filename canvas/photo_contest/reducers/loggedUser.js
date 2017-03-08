@@ -2,10 +2,15 @@ import Cookies from 'js-cookie'
 
 const loggedUser = (state = { 
 	id: Cookies.get('loggedUserId') || window.loggedUserId,
+	identifier: Cookies.get('loggedUserIdentifier') || window.loggedUserIdentifier,
+	name: Cookies.get('loggedUserName') || window.loggedUserName,
 }, action) => {
 	switch (action.type) {
 		case 'LOG_USER_IN':
-			return { id: action.id }
+			return {
+				...state,
+				...action.payload,
+			}
 		default:
 			return state
 	}

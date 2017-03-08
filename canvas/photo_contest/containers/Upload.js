@@ -15,6 +15,10 @@ class Upload extends Component {
 const mapStateToProps = state => {
 	return {
 		...state.messages,
+		headerImg: state.images.header,
+		footerImg: state.images.footer,
+		userName: state.loggedUser.name,
+		userIdentifier: state.loggedUser.identifier,
 		busy: state.activityIndicators.photoUpload,
 		loading: false,
 		backUrl: `/${window.canvasId}/${window.checksum}`,

@@ -9,9 +9,9 @@ var triviaRouter = express.Router()
 var triviaSubdomain = 'app1-localui'
 var triviaCanvasId = 'app1'
 // app.use(subdomain(triviaSubdomain, triviaRouter))
-var bodyParser = require('body-parser');
+var bodyParser = require('body-parser')
 var canvasParser = bodyParser.urlencoded({ extended: true })
-var fetch = require('isomorphic-fetch');
+var fetch = require('isomorphic-fetch')
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'
 triviaRouter.get('/app1/favicon.ico', function(req, res) {
 	res.sendStatus(200)

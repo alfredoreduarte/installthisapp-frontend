@@ -1,34 +1,45 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
+import HeaderImage from 'canvas/photo_contest/components/HeaderImage'
 import Header from 'canvas/photo_contest/components/Header'
 import ToolBar from 'canvas/photo_contest/components/ToolBar'
+import User from 'canvas/photo_contest/components/User'
 
-const Upload = ({ title, subtitle, uploadPhoto, submitButton, photoFormLabel, captionFormLabel, back, backUrl, busy }) => (
-	<div className="container">
-		<Header title={title} subtitle={subtitle} />
-		<ToolBar backUrl={backUrl} back={back} />
-		<div className="col-xs-12 col-sm-6">
-			<div className="form-group">
-				<label className="ita-cali-form-label" data-editable-message-key="photoFormLabel">{photoFormLabel}</label>
-				<input type="file" style={styles.input} className="form-control" name="photo[attachment]" />
+const Upload = ({ headerImg, footerImg, title, subtitle, uploadPhoto, submitButton, photoFormLabel, captionFormLabel, back, backUrl, busy, userName, userIdentifier }) => (
+	<div>
+		<div className="row">
+			<HeaderImage source={headerImg} />
+		</div>
+		<div className="container">
+			<Header title={title} subtitle={subtitle} />
+			<ToolBar backUrl={backUrl} back={back} />
+			<div className="col-xs-12 col-sm-6">
+				<div className="form-group">
+					<label className="ita-cali-form-label" data-editable-message-key="photoFormLabel">{photoFormLabel}</label>
+					<input type="file" style={styles.input} className="form-control" name="photo[attachment]" />
+				</div>
+			</div>
+			<div className="col-xs-12 col-sm-6">
+				<User name={userName} identifier={userIdentifier} />
+				<div className="form-group">
+					<label className="ita-cali-form-label" data-editable-message-key="captionFormLabel">{captionFormLabel}</label>
+					<textarea style={styles.input} className="form-control ita-cali-input" name="photo[caption]" rows={10} />
+				</div>
+				<div className="form-group text-right">
+					<button 
+						style={styles.button} 
+						className="ita-cali-button" 
+						onClick={uploadPhoto}
+						disabled={busy}
+						data-editable-message-key="submitButton"
+						>
+						{busy ? 'Uploading...' : submitButton}
+					</button>
+				</div>
 			</div>
 		</div>
-		<div className="col-xs-12 col-sm-6">
-			<div className="form-group">
-				<label className="ita-cali-form-label" data-editable-message-key="captionFormLabel">{captionFormLabel}</label>
-				<textarea style={styles.input} className="form-control ita-cali-input" name="photo[caption]" rows={10} />
-			</div>
-			<div className="form-group text-right">
-				<button 
-					style={styles.button} 
-					className="ita-cali-button" 
-					onClick={uploadPhoto}
-					disabled={busy}
-					data-editable-message-key="submitButton"
-					>
-					{busy ? 'Uploading...' : submitButton}
-				</button>
-			</div>
+		<div className="row">
+			<HeaderImage source={footerImg} />
 		</div>
 	</div>
 )
@@ -48,6 +59,11 @@ const styles = {
 }
 
 Upload.propTypes = {
+	headerImg: PropTypes.string, 
+	footerImg: PropTypes.string, 
+	userName: PropTypes.string.isRequired,
+	userIdentifier: PropTypes.string.isRequired,
+	//
 	uploadPhoto: PropTypes.func.isRequired,
 	backUrl: PropTypes.string.isRequired,
 	submitButton: PropTypes.string.isRequired,

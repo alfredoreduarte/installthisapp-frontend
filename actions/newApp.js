@@ -1,3 +1,15 @@
+export const setAppNotAvailable = module => {
+	analytics.track('Module Chosen', {
+		module: module,
+	})
+	return {
+		type: 'NEW_APP/NOT_AVAILABLE',
+		payload: {
+			module
+		}
+	}
+}
+
 export const setNewAppModule = module => {
 	analytics.track('Module Chosen', {
 		module: module,

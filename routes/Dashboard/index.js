@@ -33,9 +33,14 @@ export default (store, dispatch) => ({
 	indexRoute: {
 		onEnter: (nextState, replace, next) => {
 			const beforeShowingDashboard = require(`modules/${nextState.params.type}/actions/entities`).beforeShowingDashboard
-			dispatch(
-				beforeShowingDashboard(nextState.params.checksum)
-			).then(next)
+			if (beforeShowingDashboard) {
+				dispatch(
+					beforeShowingDashboard(nextState.params.checksum)
+				).then(next)
+			}
+			else {
+				next()	
+			}
 		},
 		getComponents(nextState, cb) {
 			require.ensure([], require => {
@@ -55,6 +60,6 @@ export default (store, dispatch) => ({
 		require('routes/Preferences'),
 		require('modules/trivia/routes').default(store, dispatch),
 		require('modules/top_fans/routes').default(store, dispatch),
-		// require('modules/photo_contest/routes').default(store, dispatch),
+		require('modules/photo_contest/routes').default(store, dispatch),
 	]
 })

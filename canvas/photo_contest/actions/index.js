@@ -2,6 +2,7 @@ import { normalize, arrayOf } from 'normalizr'
 import { push } from 'react-router-redux'
 import * as schema from 'canvas/photo_contest/schema'
 import { allPhotos } from 'canvas/photo_contest/selectors/photos'
+import { fetchImages } from 'canvas/photo_contest/actions/images'
 import { getFromApi, postToApi, getExternal } from 'canvas/api'
 
 export function toggleActivityIndicator(){
@@ -29,7 +30,7 @@ export const receiveGameSettings = settings => ({
 
 export const loginCallback = () => {
 	return dispatch => {
-		return dispatch(fetchEntities()).then(() => dispatch(fetchMessages()))
+		return dispatch(fetchEntities()).then(() => dispatch(fetchImages())).then(() => dispatch(fetchMessages()))
 		// return dispatch(fetchEntities()).then(() => dispatch(fetchMessages())).then(() => {
 		// 	return dispatch(push(`/${window.canvasId}/${window.checksum}`))
 		// })
