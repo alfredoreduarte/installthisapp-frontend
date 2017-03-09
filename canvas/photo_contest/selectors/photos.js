@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import { createSelector } from 'reselect'
+import { allowedMultipleUploads } from 'canvas/photo_contest/selectors/settings'
 
 export const loggedUser = state => state.loggedUser
 export const allPhotos = state => _.values(state.entities.photos)
@@ -36,8 +37,21 @@ export const photosBySearchQuery = createSelector(
 export const photosByUploaderId = createSelector(
 	allPhotos,
 	loggedUser,
-	(photos, user) => {
-		const elems = _.filter(photos, photo => photo.userId == user.id)
-		return elems
+	(photos, user) => _.filter(photos, photo => photo.user.id == user.id)
+)
+
+export const canUpload = createSelector(
+	photosByUploaderId,
+	allowedMultipleUploads,
+	(ownPhotos, canUploadMany) => {
+		console.log('ownPhotos')
+		console.log(ownPhotos)
+		console.log('canUploadMany')
+		console.log(canUploadMany)
+		console.log('ownPhotos.length == 0')
+		console.log(ownPhotos.length == 0)
+		const toReturn = ownPhotos.length == 0 || canUploadMany === true
+		console.log('canUp?', toReturn)
+		return toReturn
 	}
 )

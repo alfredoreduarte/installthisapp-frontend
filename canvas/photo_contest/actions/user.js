@@ -26,12 +26,19 @@ export const digestFacebookResponse = (response, redirectUri) => {
 			Cookies.set('loggedUserName', response.name, { expires: 7, path: `/${canvasId}/${checksum}` })
 			dispatch(loginCallback()).then(() => {
 				dispatch(logUserIn(response))
-				const canUpload = photosByUploaderId(getState()).length == 0
-				if (redirectUri && canUpload) {
+				const ownPhotos = photosByUploaderId(getState())
+				if (redirectUri && ownPhotos.length == 0) {
 					dispatch(push(redirectUri))
 				}
 				else {
-					dispatch(push(`/${canvasId}/${checksum}`))
+					// if (ownPhotos.length) {
+						// console.log(2)
+						// dispatch(push(`/${canvasId}/${checksum}/${ownPhotos[0].id}`))
+					// }
+					// else{
+						// console.log(3)
+						dispatch(push(`/${canvasId}/${checksum}/photos`))
+					// }
 				}
 			})
 		})

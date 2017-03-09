@@ -66,38 +66,45 @@ const singlePhoto = (id, url, name) => ({
 	],
 	caption: 'Ligula Justo Vehicula Cras',
 	voted: true,
-	thumbnailUrl: url,
-	assetUrl: url,
+	attachmentUrl: url,
 	handleVote: () => console.log('vote'),
 	singlePhotoUrl: '',
 })
 
-const votes = [
-	{
-		id: 999,
-		photoId: 1,
-		user: {
-			id: 1,
-			name: "Alfredo Re",
-			firstName: "Alfredo",
-			lastName: "Re",
-			identifier: "10210089963347759",
-			email: "alfredoreduarte@gmail.com",
-		}
-	},
-	{
-		id: 1000,
+const votes = {
+	'4': {
+		id: 4,
+		createdAt: '2017-03-08T01:51:45.343Z',
 		photoId: 2,
 		user: {
 			id: 1,
-			name: "Alfredo Re",
-			firstName: "Alfredo",
-			lastName: "Re",
-			identifier: "10210089963347759",
-			email: "alfredoreduarte@gmail.com",
+			name: 'Alfredo Re',
+			firstName: 'Alfredo',
+			lastName: 'Re',
+			identifier: '10210089963347759',
+			email: 'alfredoreduarte@gmail.com',
+			tokenForBusiness: 'AbzlzZ44-kPe8F7n',
+			createdAt: '2017-03-08T00:20:54.611Z',
+			updatedAt: '2017-03-08T00:20:54.923Z'
+		}
+	},
+	'5': {
+		id: 5,
+		createdAt: '2017-03-08T01:55:39.918Z',
+		photoId: 12,
+		user: {
+			id: 1,
+			name: 'Alfredo Re',
+			firstName: 'Alfredo',
+			lastName: 'Re',
+			identifier: '10210089963347759',
+			email: 'alfredoreduarte@gmail.com',
+			tokenForBusiness: 'AbzlzZ44-kPe8F7n',
+			createdAt: '2017-03-08T00:20:54.611Z',
+			updatedAt: '2017-03-08T00:20:54.923Z'
 		}
 	}
-]
+}
 
 const sequencer = new photoSequencer()
 
@@ -114,6 +121,7 @@ const Previews = ({ screen, messages, images }) => {
 				title={messages.title}
 				subtitle={messages.subtitle}
 				canUpload={true}
+				canVote={true}
 				loggedUser={{id: 1}}
 				uploadButton={messages.uploadButton}
 				mostVoted={messages.mostVoted}
@@ -155,6 +163,8 @@ const Previews = ({ screen, messages, images }) => {
 				mostRecent={messages.mostRecent}
 				photo={sequencer.getOne()}
 				voted={true}
+				canUpload={true}
+				canVote={true}
 				back={messages.back}
 				handleVote={() => console.log('vote')}
 				uploadUrl={''}

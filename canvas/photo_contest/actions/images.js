@@ -10,8 +10,13 @@ export const fetchImages = redirectIfNoIntro => {
 	return (dispatch, getState) => {
 		const { checksum, canvasId } = getState().applicationData
 		return getExternal(window.imagesUrl).then( json => {
-			if (!json.intro && redirectIfNoIntro) {
-				dispatch(push(`/${canvasId}/${checksum}${redirectIfNoIntro}`))
+			if (!json.intro || json.intro == "https://s3-us-west-2.amazonaws.com/installthisapp/intro.jpg") {
+				if (redirectIfNoIntro) {
+					dispatch(push(`/${canvasId}/${checksum}${redirectIfNoIntro}`))
+				}
+				else {
+					dispatch(push(`/${canvasId}/${checksum}/photos`))	
+				}
 			}
 			return dispatch(receiveImages(json))
 		})

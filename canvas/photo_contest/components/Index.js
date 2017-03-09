@@ -22,6 +22,7 @@ const Index = ({
 	search,
 	searchQuery,
 	// Photos
+	canVote,
 	votes,
 	loggedUser,
 	photos,
@@ -45,18 +46,35 @@ const Index = ({
 				search={search}
 				searchQuery={searchQuery}
 				 />
+			{photos.length == 0 ?
+				<div className="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+					<div style={{display: 'flex', height: '400px', justifyContent: 'center', alignItems: 'center'}}>
+						{canUpload ? 
+							<Link 
+								to={uploadUrl} 
+								style={{padding: '18px 34px', borderRadius: '3px'}} 
+								className="ita-cali-button"
+								data-editable-message-key="uploadButton"
+								>{uploadButton}</Link>
+						: null }
+					</div>
+				</div>
+			:
+				null
+			}
 			{photos.map( photo => 
 				<div className="col-sm-4" key={photo.id}>
 					<Photo 
 						id={photo.id} 
 						name={photo.user.name}
 						votes={photo.votes.length} 
+						canVote={canVote}
 						voted={_.filter(votes, v => {
 							return v.user.id == loggedUser.id && v.photoId == photo.id
 						}).length > 0}
 						singlePhotoUrl={singlePhotoUrl}
 						handleVote={() => handleVote(photo.id)}
-						photoUrl={photo.thumbnailUrl} />
+						photoUrl={photo.attachmentUrl} />
 				</div>
 			)}
 		</div>
@@ -70,7 +88,9 @@ Index.propTypes = {
 	headerImg: PropTypes.string, 
 	footerImg: PropTypes.string, 
 	loggedUser: PropTypes.object.isRequired, 
-	votes: PropTypes.array.isRequired, 
+	votes: PropTypes.object.isRequired, 
+	canVote: PropTypes.bool.isRequired,
+	canUpload: PropTypes.bool.isRequired,
 	photos: PropTypes.array.isRequired, 
 	sort: PropTypes.string.isRequired, 
 	search: PropTypes.func.isRequired, 

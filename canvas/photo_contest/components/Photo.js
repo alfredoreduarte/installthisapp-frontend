@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 // const Heart = require('./Heart.png')
 
-const Photo = ({ id, name, votes, voted, photoUrl, handleVote, singlePhotoUrl = '' }) => (
+const Photo = ({ id, name, canVote, votes, voted, photoUrl, handleVote, singlePhotoUrl = '' }) => (
 	<div style={styles.photo}>
 		<Link to={singlePhotoUrl ? `${singlePhotoUrl}/${id}` : ' '}>
 			<img src={photoUrl} className="img-responsive" />
@@ -16,9 +16,9 @@ const Photo = ({ id, name, votes, voted, photoUrl, handleVote, singlePhotoUrl = 
 					<div className="ita-cali-photo-name">{name}</div>
 				</div>
 				<a
-					style={{ ...styles.voteButton, cursor: voted ? 'not-allowed' : 'pointer' }}
-					disabled={voted}
-					onClick={() => !voted ? handleVote(id) : null}>
+					style={{ ...styles.voteButton, cursor: voted || !canVote ? 'not-allowed' : 'pointer' }}
+					disabled={voted || !canVote}
+					onClick={() => !voted && canVote ? handleVote(id) : null}>
 					<span 
 						className={`glyphicon glyphicon-heart${voted ? '' : '-empty'} ita-cali-vote-button${voted ? '--active' : ''}`}>
 					</span>
@@ -60,6 +60,7 @@ Photo.propTypes = {
 		React.PropTypes.bool,
 		React.PropTypes.func,
 	]),
+	canVote: PropTypes.bool.isRequired,
 	photoUrl: PropTypes.string.isRequired,
 	handleVote: PropTypes.func.isRequired,
 	singlePhotoUrl: PropTypes.string,

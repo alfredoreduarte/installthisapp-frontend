@@ -8,7 +8,7 @@ import { getVotesForPhoto } from 'modules/photo_contest/selectors/votes'
 import { postDeleteVotes } from 'modules/photo_contest/actions/votes'
 import User from 'components/User'
 
-const PhotoDetail = ({ show, user, thumbnailUrl, assetUrl, caption, votes, handleClose, handleVoteDelete }) => (
+const PhotoDetail = ({ show, user, attachmentUrl, caption, votes, handleClose, handleVoteDelete }) => (
 	<Modal show={show} onHide={handleClose}>
 		<Modal.Header closeButton>
 			<Modal.Title>{user.name}'s photo</Modal.Title>
@@ -16,9 +16,9 @@ const PhotoDetail = ({ show, user, thumbnailUrl, assetUrl, caption, votes, handl
 		<Modal.Body>
 			<div className="row">
 				<div className="col-md-6">
-					<a href={assetUrl} target="_blank">
+					<a href={attachmentUrl} target="_blank">
 						<img 
-						src={thumbnailUrl}
+						src={attachmentUrl}
 						className="img-responsive img-rounded" />
 					</a>
 				</div>
@@ -31,27 +31,32 @@ const PhotoDetail = ({ show, user, thumbnailUrl, assetUrl, caption, votes, handl
 			</div>
 			<hr/>
 			<h5><b>Voters</b></h5>
-			<ul className="list-group">
+			<table className="table">
+				<tbody>
 				{votes.map( vote => 
-					<li key={vote.id} className="list-group-item">
+					<tr key={vote.id}>
+						<td>
 						<User name={vote.user.name} identifier={vote.user.identifier} small />
+						</td>
+						<td>
 						<button className="btn btn-sm btn-danger btn-outline" onClick={() => handleVoteDelete(vote.id)}>
 							Delete
 						</button>
-					</li>
+						</td>
+					</tr>
 				)}
-			</ul>
+				</tbody>
+			</table>
 		</Modal.Body>
 	</Modal>
 )
 
 const mapStateToProps = (state, props) => {
-	const { user, thumbnailUrl, assetUrl, caption } = getPhotoById(state, props.photoId)
+	const { user, attachmentUrl, caption } = getPhotoById(state, props.photoId)
 	const votes = getVotesForPhoto(state, props.photoId)
 	return {
 		user,
-		thumbnailUrl,
-		assetUrl,
+		attachmentUrl,
 		caption,
 		votes,
 	}

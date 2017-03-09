@@ -8,6 +8,7 @@ const SingleView = ({
 	headerImg,
 	footerImg,
 	canUpload,
+	canVote,
 	// 
 	title, 
 	subtitle, 
@@ -39,7 +40,7 @@ const SingleView = ({
 				 />
 			<div className="col-sm-12">
 				<div style={styles.photo}>
-					<img src={photo.assetUrl} style={styles.photo.img} className="img-responsive" />
+					<img src={photo.attachmentUrl} style={styles.photo.img} className="img-responsive" />
 					<div style={styles.caption}>
 						<div style={styles.metadata}>
 							<div>
@@ -50,9 +51,9 @@ const SingleView = ({
 								<span className="ita-cali-vote-label--full">votes</span>
 							</div>
 							<a
-								style={{ ...styles.voteButton, cursor: voted ? 'not-allowed' : 'pointer' }}
-								disabled={voted}
-								onClick={() => !voted ? handleVote(photo.id) : null}>
+								style={{ ...styles.voteButton, cursor: voted || !canVote ? 'not-allowed' : 'pointer' }}
+								disabled={voted || !canVote}
+								onClick={() => !voted && canVote ? handleVote(photo.id) : null}>
 								<span 
 									className={`glyphicon glyphicon-heart${voted ? '' : '-empty'} ita-cali-vote-button-full${voted ? '--active' : ''}`}>
 								</span>
@@ -95,6 +96,8 @@ SingleView.propTypes = {
 	footerImg: PropTypes.string, 
 	photo: PropTypes.object.isRequired,
 	voted: PropTypes.bool.isRequired,
+	canVote: PropTypes.bool.isRequired,
+	canUpload: PropTypes.bool.isRequired,
 	handleVote: PropTypes.func.isRequired,
 	back: PropTypes.string.isRequired,
 	backUrl: PropTypes.string.isRequired,

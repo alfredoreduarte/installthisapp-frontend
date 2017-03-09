@@ -21,17 +21,21 @@ export const postVote = id => {
 			formData.append('vote[photo_id]', id)
 			return postFileToApi(`${checksum}/vote.json`, formData)
 					.then(response => {
+						console.log('vote response')
+						console.log(response)
 						const payload = normalize(response, schema.photo)
+						console.log('payload')
+						console.log(payload)
 						dispatch(receiveEntities(payload.entities))
 						return Promise.resolve(response)
 					})
 		}
 		else {
-			dispatch(push({
+			return dispatch(push({
 				pathname: `/${window.canvasId}/${window.checksum}/login`,
 				state: { nextPathname: `/${window.canvasId}/${window.checksum}/${id}` },
 			}))
-			return Promise.resolve({})
+			// return Promise.resolve({})
 		}
 	}
 }

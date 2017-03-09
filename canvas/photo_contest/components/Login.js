@@ -17,11 +17,16 @@ class Login extends Component {
 			logging: response.status != 'not_authorized'
 		})
 		if (response.status != 'not_authorized') {
+			console.log('locatt')
+			console.log(location)
 			if (location.state && location.state.nextPathname) {
+				console.log('location.state.nextPathname')
+				console.log(location.state.nextPathname)
 				this.props.processResponse(response, location.state.nextPathname)
 			}
 			else{
-				this.props.processResponse(response)
+				console.log('no tenia luego location.state.nextPathname')
+				this.props.processResponse(response, '')
 			}
 		}
 	}

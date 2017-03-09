@@ -1,4 +1,5 @@
 import { postToApi } from 'api'
+import { fetchPhotoContestEntities } from 'modules/photo_contest/actions/entities'
 
 const deleteVote = id => ({
 	type: 'PHOTO_CONTEST/DELETE_VOTE',
@@ -11,7 +12,12 @@ export const postDeleteVotes = ids => {
 		return postToApi(`applications/${checksum}/votes_destroy.json`, {
 			id: ids
 		}).then( json => {
-			ids.map( id => dispatch(deleteVote(id)) )
+			ids.map( id => {
+				dispatch(deleteVote(id))
+			})
+			return Promise.resolve(true)
+		}).then( () => {
+			dispatch(fetchPhotoContestEntities())
 		})
 	}
 }

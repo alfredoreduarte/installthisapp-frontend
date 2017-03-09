@@ -5,6 +5,17 @@ import { allPhotos } from 'canvas/photo_contest/selectors/photos'
 import { fetchImages } from 'canvas/photo_contest/actions/images'
 import { getFromApi, postToApi, getExternal } from 'canvas/api'
 
+export const getStaticContentWithIntroRedirect = (nextState, replace, next, dispatch) => 
+						dispatch(fetchMessages())
+						.then(() => dispatch(fetchImages(`/photos`)))
+						.then(next())
+export const getPhotosWithoutRedirects = (nextState, replace, next, dispatch) =>
+						dispatch(fetchMessages())
+						.then(() => {
+							return dispatch(fetchImages(`/${nextState.params.photoId}`))
+						})
+						.then(next())
+
 export function toggleActivityIndicator(){
 	return {
 		type: 'TOGGLE_ACTIVITY_INDICATOR'
@@ -23,9 +34,9 @@ export const receiveEntities = entities => ({
 	}
 })
 
-export const receiveGameSettings = settings => ({
+export const receiveGameSettings = payload => ({
 	type: 'RECEIVE_SETTINGS',
-	settings,
+	payload,
 })
 
 export const loginCallback = () => {
@@ -44,10 +55,7 @@ export const fetchEntities = () => {
 			const payload = normalize(json.payload, schema.payload)
 			const settings = json.settings
 			dispatch(receiveGameSettings(settings))
-			dispatch(receiveEntities(payload.entities))
-			// return setTimeout(() => Promise.resolve(), 2000)
-			return Promise.resolve()
-			// return 
+			return dispatch(receiveEntities(payload.entities))
 		})
 	}
 }

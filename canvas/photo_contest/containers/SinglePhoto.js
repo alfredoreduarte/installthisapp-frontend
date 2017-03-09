@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { postVote } from 'canvas/photo_contest/actions/votes'
-import { currentPhoto, photosByUploaderId } from 'canvas/photo_contest/selectors/photos'
+import { currentPhoto, canUpload } from 'canvas/photo_contest/selectors/photos'
+import { canVote } from 'canvas/photo_contest/selectors/votes'
 import Loading from 'canvas/photo_contest/components/Loading'
 import SingleView from 'canvas/photo_contest/components/SingleView'
 
@@ -15,18 +16,18 @@ class SinglePhoto extends Component {
 
 const mapStateToProps = (state, props) => {
 	const photo = currentPhoto(state, props)
-	const ownPhoto = photosByUploaderId(state)
 	return {
 		...state.messages,
 		headerImg: state.images.header,
 		footerImg: state.images.footer,
-		canUpload: ownPhoto.length == 0,
+		canVote: canVote(state),
+		canUpload: canUpload(state),
 		voted: _.filter(state.entities.votes, v => {
 			return v.user.id == state.loggedUser.id && v.photoId == photo.id
 		}).length > 0,
 		photo,
 		uploadUrl: `/${window.canvasId}/${window.checksum}/upload`,
-		backUrl: `/${window.canvasId}/${window.checksum}`,
+		backUrl: `/${window.canvasId}/${window.checksum}/photos`,
 		loading: false,
 	}
 }

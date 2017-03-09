@@ -2,8 +2,10 @@ import React, { Component, PropTypes } from 'react'
 import { Provider, connect } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
 import Cookies from 'js-cookie'
+import { getStaticContentWithIntroRedirect, getPhotosWithoutRedirects } from 'canvas/photo_contest/actions'
 import Login from 'canvas/photo_contest/components/Login'
 import Index from 'canvas/photo_contest/containers/Index'
+import Intro from 'canvas/photo_contest/containers/Intro'
 import Upload from 'canvas/photo_contest/containers/Upload'
 import SinglePhoto from 'canvas/photo_contest/containers/SinglePhoto'
 import { loginCallback } from 'canvas/photo_contest/actions'
@@ -43,6 +45,10 @@ class Root extends Component {
 				<Router history={history}>
 					<Route 
 						path={`/${window.canvasId}(/:checksum)`}
+						onEnter={(nextState, replace, next) => getStaticContentWithIntroRedirect(nextState, replace, next, dispatch)}
+						component={Intro} />
+					<Route 
+						path={`/${window.canvasId}(/:checksum)/photos`}
 						onEnter={(nextState, replace, next) => getPhotos(nextState, replace, next, dispatch)}
 						component={Index} />
 					<Route 
@@ -58,7 +64,7 @@ class Root extends Component {
 						component={() => (<div></div>)} />
 					<Route 
 						path={`/${window.canvasId}/:checksum/:photoId`}
-						onEnter={(nextState, replace, next) => getPhotos(nextState, replace, next, dispatch)}
+						onEnter={(nextState, replace, next) => getPhotosWithoutRedirects(nextState, replace, next, dispatch)}
 						component={SinglePhoto} />
 				</Router>
 			</Provider>

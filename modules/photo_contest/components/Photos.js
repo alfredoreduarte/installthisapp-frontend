@@ -4,7 +4,7 @@ import _ from 'lodash'
 import TimeAgo from 'react-timeago'
 import Select from 'react-select'
 import { Link } from 'react-router'
-import { Table, DropdownButton, MenuItem } from 'react-bootstrap'
+import { Table, DropdownButton, MenuItem, ButtonToolbar } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Checkbox } from 'react-icheck'
 import { selectItemOnTable } from 'actions/users'
@@ -47,12 +47,16 @@ const Photos = ({
 			</div>
 			<div className="row">
 				<div className="col-md-4">
-					<SearchForm />
-					<button className="btn btn-default btn-sm" onClick={() => fetchAgain()}>
-						Refresh table
-					</button>
+					<div className="hide">
+						<SearchForm />
+					</div>
 				</div>
 				<div className={photos.length > 0 ? "col-md-8 text-right" : "hide"}>
+					<ButtonToolbar>
+						<button className="btn btn-default btn-sm pull-right" onClick={fetchAgain}>
+							Refresh
+						</button>
+					</ButtonToolbar>
 					<ul className="ita-table-tools-selected list-inline list-no-margin">
 						<li className={selectedIds.length ? '' : 'hide'}>
 							<a
@@ -107,7 +111,7 @@ const Photos = ({
 					<td>
 						<Link to={`${detailUrl}/${p.id}`}>
 							<img 
-								src={p.thumbnailUrl} 
+								src={p.attachmentUrl} 
 								style={{width: '100px'}} 
 								className="img-responsive img-rounded" />
 						</Link>
@@ -159,7 +163,7 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
 	return {
-		fetchAgain: () => dispatch(fetchPhotoContestEntities(props.params.checksum)),
+		fetchAgain: () => dispatch(fetchPhotoContestEntities()),
 		handleSelect: id => {
 			dispatch(selectItemOnTable(id))
 		},
