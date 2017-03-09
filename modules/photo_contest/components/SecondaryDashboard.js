@@ -6,28 +6,28 @@ import User from 'components/User'
 // import { getAnswersForCurrentApp } from 'modules/trivia/selectors/answers'
 // import { getQuestionsForCurrentApp } from 'modules/trivia/selectors/questions'
 
-const SecondaryDashboard = ({ checksum, type, entries, hasQuestions }) => (
+const SecondaryDashboard = ({ checksum, type, photos }) => (
 	<div>
 		<p className="h1 page-header">Summary</p>
 		<p className="h6 text-uppercase"><b>Top 5 users</b></p>
 		<div className="col-md-6">
-		{entries.length == 0 ?
+		{photos.length == 0 ?
 			<div className="ita-empty text-cente">
 				<h5>
-					Nobody has answered any questions yet.
+					Nobody has posted photos yet.
 				</h5>
 			</div>
 		:
 			<div>
 			<Table className="ita-table">
 				<tbody>
-					{entries.map(entry => 
-					<tr key={entry.user.identifier}>
+					{photos.map(photo => 
+					<tr key={photo.user.identifier}>
 						<td>
-							<User name={entry.user.name} identifier={entry.user.identifier} small />
+							<User name={photo.user.name} identifier={photo.user.identifier} small />
 						</td>
 						<td>
-							<b>{entry.totalCorrectAnswers} correct answers</b>
+							<b>{photo.votes.length} correct answers</b>
 						</td>
 					</tr>
 					)}
@@ -38,18 +38,6 @@ const SecondaryDashboard = ({ checksum, type, entries, hasQuestions }) => (
 		}
 		</div>
 		<div className="col-md-6">
-			{!hasQuestions ? 
-			<div className="alert alert-warning" style={{position: 'relative'}}>
-				<span className="glyphicon glyphicon-info-sign"></span>{' '}
-				You should create some questions for the Trivia. <Link to={`/d/apps/${type}/${checksum}/questions`}>Start now</Link>.
-			</div>
-			:
-			null
-			}
-			<div className="alert alert-info" style={{position: 'relative'}}>
-				<span className="glyphicon glyphicon-info-sign"></span>{' '}
-				Have questions? Maybe our <a href="http://help.installthisapp.com/trivia" target="_blank"><u><b>help center</b></u></a> has the answers.
-			</div>
 		</div>
 	</div>
 )
@@ -58,8 +46,7 @@ const mapStateToProps = (state, props) => {
 	return {
 		checksum: props.params.checksum,
 		type: props.params.type,
-		entries: [],
-		hasQuestions: true,
+		photos: [],
 	}
 }
 
