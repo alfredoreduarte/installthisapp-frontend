@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('_head', {title: 'Trivia'}) %>
+<body>
+	<header class="jumbotron">
+		<%- include('_navbar', {alt: false}) %>
+		<div class="container-flex flex-space-around flex-vertical">
+			<div class="container-flex flex-center flex-vertical">
+				<br/>
+				<br/>
+				<h1 class="text-center">Trivia game for social campaigns</h1>
+				<br/>
+				<p class="text-center">
+					Test your audience's knowledge about any subject, and spice it up a bit with a countdown
+				</p>
+				<br/>
+				<p class="text-center">
+					<a href="/signup" class="btn btn-default btn-lg text-uppercase btn-extra-shadow btn-featured">Signup</a>
+				</p>
+				<p class="text-center" style="<%= isOldUser ? '' : 'display:none;' %>"><small>* If you already have an account at old app, you still need to <a style="color: white;" href="/signup"><u>sign up with a new account</u></a> here.</small></p>
+			</div>
+			<div class="featured-image">
+				<img src="/images/module-landings/trivia/hero.png" style="width: 800px" class="animated fadeInUp" />
+			</div>
+		</div>
+	</header>
+	<div class="container-fluid" id="below-fold">
+		<div class="col-md-8 col-md-offset-2">
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<!-- <h2 class="text-center">A leaner, renewed platform for all your contests</h2> -->
+			<h2 class="h1 text-center">Three simple steps and you're good to go</h2>
+			<!-- <h5 class="text-center">This is what a simpler, fast marketing tool should look like</h5> -->
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+		</div>
+	</div>
+	<div class="container-fluid" style="background: #d5d9e3;padding: 40px 0px">
+		<div class="col-md-12 flex flex-vertica flex-center">
+			<div class="col-xs-12 col-sm-12 col-md-12 flex flex-vertical flex-cente text-right">
+				<h2 class="h1"><b>Create</b></h2>
+				<p>Pick the <i>Trivia</i> app and write some questions.</p>
+				<!-- <p>Write a title.</p> -->
+				<!-- <p><b>Done</b>. Go to the next step.</p> -->
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-12">
+				<div class="thumbnail">
+					<!-- <img src="/images/landing/dashboard.gif" class="img-responsive" /> -->
+					<video autoplay loop style="
+					width: 100%;
+					height: auto;
+					">
+						<source src="/images/landing/create-trivia.mp4" type="video/mp4">
+						<!-- <source src="movie.ogg" type="video/ogg"> -->
+						Your browser does not support the video tag.
+					</video>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid" style="padding: 40px 0px">
+		<div class="col-md-12 flex flex-center">
+			<div class="col-md-6">
+				<div class="thumbnail">
+					<!-- <img src="/images/landing/editor.jpg" class="img-responsive" /> -->
+					<video autoplay loop style="
+					width: 100%;
+					height: auto;
+					">
+						<source src="/images/landing/customize-trivia.mp4" type="video/mp4">
+						<!-- <source src="movie.ogg" type="video/ogg"> -->
+						Your browser does not support the video tag.
+					</video>
+				</div>
+			</div>
+			<div class="col-md-6 flex flex-vertical flex-center text-righ">
+				<h2 class="h1"><b>Customize</b></h2>
+				<p style="margin: 15px 0px">
+					<img src="/images/landing/typography.png" style="height: 30px;margin-right: 10px;opacity: .5" />
+					<img src="/images/landing/picture.png" style="height: 30px;margin-right: 10px;opacity: .5" />
+					<img src="/images/landing/brush.png" style="height: 30px;margin-right: 10px;opacity: .5" />
+					<img src="/images/landing/globe.png" style="height: 30px;margin-right: 10px;opacity: .5" />
+				</p>
+				<ul>
+					<li>Texts</li>
+					<li>Colors</li>
+					<li>Fonts</li>
+					<li>Background images</li>
+					<li>Buttons</li>
+				</ul>
+				<!-- <p>Adapt every single image, text and style to your brand.</p> -->
+				<!-- <p>Every text is customizable, even inside buttons. That means you can translate the whole app to any language.</p> -->
+				<!-- <p>We even support left-to-right languages</p> -->
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid" style="background: #d5d9e3;padding: 40px 0px">
+		<div class="col-md-12 flex flex-vertica flex-center">
+			<div class="col-md-6 flex flex-vertical flex-center text-right">
+				<h2 class="h1"><b>Publish</b></h2>
+				<p style="margin: 15px 0px">
+					<img src="/images/landing/iphone.png" style="height: 30px;margin-right: 10px;opacity: .5" />
+					<img src="/images/landing/desktop.png" style="height: 30px;margin-right: 10px;opacity: .5" />
+					<img src="/images/landing/facebook.png" style="height: 30px;margin-right: 10px;opacity: .5" />
+				</p>
+				<!-- <p>Your contest will be available as a Facebook Page tab, mobile, and desktop website.</p> -->
+				<p>Share one link everywhere, <br/> everyone gets an optimized view.</p>
+			</div>
+			<div class="col-md-6">
+				<div class="thumbnail">
+					<!-- <img src="/images/landing/screenfb.jpg" class="img-responsive" /> -->
+					<video autoplay loop style="
+					width: 100%;
+					height: auto;
+					">
+						<source src="/images/landing/publish-trivia.mp4" type="video/mp4">
+						<!-- <source src="movie.ogg" type="video/ogg"> -->
+						Your browser does not support the video tag.
+					</video>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-flex flex-align-center upsell">
+		<div class="col-md-6">
+			<h3 class="text-right" style="margin: 0px"><b>Start now</b></h3>
+		</div>
+		<div class="col-md-6">
+			<a href="/signup" class="btn btn-primary btn-lg btn-extra-shadow text-uppercase">Start free trial</a>
+		</div>
+	</div>
+	<%//- include('_upsell') %>
+	<%- include('_scripts') %>
+	<%- include('_footer') %>
+	<%- include('_segment') %>
+	<script type="text/javascript">
+		analytics.page('Top Fans')
+	</script>
+</body>
+</html>
