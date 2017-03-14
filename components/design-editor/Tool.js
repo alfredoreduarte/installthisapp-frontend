@@ -35,6 +35,7 @@ const Tool = ({ property, value, handleChange }) => (
 				break
 			case 'border-width':
 			case 'font-size':
+			case 'letter-spacing':
 				return <Slider property={property} onChange={val => handleChange(property, val)} value={value} />
 				break
 			case 'background-size':
@@ -54,9 +55,6 @@ const Tool = ({ property, value, handleChange }) => (
 			case 'box-shadow':
 			case 'margin-bottom':
 			case 'line-height':
-			case 'letter-spacing':
-			case 'background-position':
-			case 'background-attachment':
 			case '-webkit-animation-duration':
 			case 'animation-duration':
 			case '-webkit-animation-fill-mode':
@@ -67,6 +65,8 @@ const Tool = ({ property, value, handleChange }) => (
 				break
 			case 'texts':
 				return <TextStyles onChange={(prop, val) => handleChange(prop, val)} value={value} />
+			case 'background-attachment':
+			case 'background-position':
 			default:
 				return <div>
 					<label>{property}</label>

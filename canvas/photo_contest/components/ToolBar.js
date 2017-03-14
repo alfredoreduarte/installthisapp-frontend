@@ -15,7 +15,7 @@ const ToolBar = ({
 	searchQuery,
 }) => (
 	<div style={styles.toolbar}>
-		<div style={styles.toolbarCell} className="hidden-xs">
+		<div style={styles.toolbarCell}>
 			<Link to={backUrl} style={styles.button} className="ita-cali-button--secondary" data-editable-message-key="back">{back}</Link>
 		</div>
 		<div style={ {...styles.toolbarCell, justifyContent: 'flex-end'} }>
@@ -35,6 +35,7 @@ const styles = {
 	button: {
 		padding: '12px 24px',
 		borderRadius: '3px',
+		textAlign: 'center',
 	},
 	toolbar: {
 		display: 'flex',

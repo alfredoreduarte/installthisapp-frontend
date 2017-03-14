@@ -4,8 +4,8 @@ import { Link } from 'react-router'
 
 const Photo = ({ id, name, canVote, votes, voted, photoUrl, handleVote, singlePhotoUrl = '' }) => (
 	<div style={styles.photo}>
-		<Link to={singlePhotoUrl ? `${singlePhotoUrl}/${id}` : ' '}>
-			<img src={photoUrl} className="img-responsive" />
+		<Link to={singlePhotoUrl ? `${singlePhotoUrl}/${id}` : ' '} style={{ ...styles.photoLink, height: styles.photo.height, backgroundImage: `url("${photoUrl}")` }}>
+			<img src={photoUrl} style={{ display: 'none' }} />
 		</Link>
 		<div style={styles.caption}>
 			<div style={styles.metadata}>
@@ -35,8 +35,15 @@ const styles = {
 		justifyContent: 'space-between',
 	},
 	photo: {
-		marginBottom: '20px',
+		marginBottom: '28px',
 		position: 'relative',
+		height: '260px',
+	},
+	photoLink: {
+		display: 'block',
+		backgroundSize: 'cover',
+		backgroundPosition: 'center',
+		backgroundRepeat: 'no-repeat',
 	},
 	voteButton: {
 		fontSize: '20px',

@@ -28,21 +28,23 @@ const ToolBar = ({
 					 />
 			</form>
 		</div>
-		<div style={{...styles.toolbarCell, ...{flex: 2, justifyContent: 'center'}}}>
-			<span 
-				data-editable-message-key="mostVoted"
-				style={styles.tabItem} 
-				onClick={() => sortPhotos('mostVoted')}
-				className={`ita-cali-sorter ${sort == 'mostVoted' ? 'ita-cali-sorter--active' : null}`}>
-					{mostVoted}
+		<div style={{ ...styles.toolbarCell, ...{ flex: 2, justifyContent: 'center' } }}>
+			<div className="hidden-xs">
+				<span 
+					data-editable-message-key="mostVoted"
+					style={styles.tabItem} 
+					onClick={() => sortPhotos('mostVoted')}
+					className={`ita-cali-sorter ${sort == 'mostVoted' ? 'ita-cali-sorter--active' : null}`}>
+						{mostVoted}
+					</span>
+				<span 
+					data-editable-message-key="mostRecent"
+					style={styles.tabItem} 
+					onClick={() => sortPhotos('mostRecent')}
+					className={`ita-cali-sorter ${sort == 'mostRecent' ? 'ita-cali-sorter--active' : null}`}>
+						{mostRecent}
 				</span>
-			<span 
-				data-editable-message-key="mostRecent"
-				style={styles.tabItem} 
-				onClick={() => sortPhotos('mostRecent')}
-				className={`ita-cali-sorter ${sort == 'mostRecent' ? 'ita-cali-sorter--active' : null}`}>
-					{mostRecent}
-				</span>
+			</div>
 		</div>
 		<div style={{...styles.toolbarCell, ...{justifyContent: 'flex-end'}}}>
 			{canUpload ? 
@@ -61,6 +63,7 @@ const styles = {
 	button: {
 		padding: '12px 24px',
 		borderRadius: '3px',
+		textAlign: 'center',
 	},
 	toolbar: {
 		display: 'flex',
