@@ -1,15 +1,13 @@
-import { fetchTopFansEntities } from 'modules/example/actions/entities'
-
-const sidebar = require('modules/example/components/Sidebar').default
+import { fetchEntities } from 'modules/example/actions/entities'
 
 export default (store, dispatch) => ({
 	getChildRoutes(partialNextState, cb) {
 		require.ensure([], (require) => {
 			cb(null, [
 				{
-					path: 'scoreboard',
+					path: 'entries',
 					onEnter: (nextState, replace, next) => {
-						dispatch(fetchTopFansEntities(nextState.params.checksum))
+						dispatch(fetchEntities(nextState.params.checksum))
 							.then(() => {
 								next()
 							})
@@ -17,23 +15,12 @@ export default (store, dispatch) => ({
 					getComponents(nextState, cb) {
 						require.ensure([], (require) => {
 							cb(null, {
-								main: require('modules/example/components/Scoreboard').default,
-								sidebar: sidebar,
+								main: require('modules/example/containers/Entries').default,
+								sidebar: require('modules/example/components/Sidebar').default,
 							})
 						})
 					}				
 				},
-				{
-					path: 'subscribe',
-					getComponents(nextState, cb) {
-						require.ensure([], (require) => {
-							cb(null, {
-								main: require('modules/example/components/Subscribe').default,
-								sidebar: sidebar,
-							})
-						})
-					}				
-				}
 			])
 		})
 	},

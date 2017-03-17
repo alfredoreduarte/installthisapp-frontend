@@ -14,7 +14,6 @@ export const fetchPhotoContestEntities = () => {
 	return (dispatch, getState) => {
 		const currentApp = getCurrentAppByState(getState())
 		return getFromApi(`applications/${currentApp.checksum}/photos.json`).then( json => {
-			console.log('photos', json)
 			if (json) {
 				const normalized = normalize(json, schema.entities)
 				console.log('normal', normalized)

@@ -1,13 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { Link, IndexLink } from 'react-router'
 import { ButtonToolbar, Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import User from 'components/User'
-import { getEntriesForPage } from 'modules/top_fans/selectors/entries'
-import { getCurrentAppByState } from 'selectors/apps'
-import { getAllPages } from 'selectors/pages'
 
-const SecondaryDashboard = ({ checksum, type, entries, tabInstalledInPage }) => (
+const Summary = ({ checksum, type, entries, tabInstalledInPage }) => (
 	<div>
 		<p className="h1 page-header">Summary</p>
 		<div className="col-md-6">
@@ -58,13 +54,4 @@ const SecondaryDashboard = ({ checksum, type, entries, tabInstalledInPage }) => 
 	</div>
 )
 
-const mapStateToProps = (state, props) => {
-	return {
-		tabInstalledInPage: getCurrentAppByState(state).page ? _.find(getAllPages(state), {'id': getCurrentAppByState(state).page}) : null,
-		checksum: props.params.checksum,
-		type: props.params.type,
-		entries: getEntriesForPage(state).slice(0,5),
-	}
-}
-
-export default connect(mapStateToProps)(SecondaryDashboard)
+export default Summary

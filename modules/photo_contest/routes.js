@@ -8,7 +8,6 @@ export default (store, dispatch) => ({
 			cb(null, [
 				{
 					path: 'photos',
-					// modal: true,
 					onEnter: (nextState, replace, next) => {
 						dispatch(fetchPhotoContestEntities(nextState.params.checksum)).then(() => {
 							next()

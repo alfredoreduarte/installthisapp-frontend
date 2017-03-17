@@ -1,17 +1,14 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { Link, IndexLink } from 'react-router'
 import { ButtonToolbar, Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import User from 'components/User'
-// import { getAnswersForCurrentApp } from 'modules/trivia/selectors/answers'
-// import { getQuestionsForCurrentApp } from 'modules/trivia/selectors/questions'
 
-const SecondaryDashboard = ({ checksum, type, photos }) => (
+const Summary = ({ checksum, type, entries }) => (
 	<div>
 		<p className="h1 page-header">Summary</p>
 		<p className="h6 text-uppercase"><b>Top 5 users</b></p>
 		<div className="col-md-6">
-		{photos.length == 0 ?
+		{entries.length == 0 ?
 			<div className="ita-empty text-cente">
 				<h5>
 					Nobody has posted photos yet.
@@ -21,7 +18,7 @@ const SecondaryDashboard = ({ checksum, type, photos }) => (
 			<div>
 			<Table className="ita-table">
 				<tbody>
-					{photos.map(photo => 
+					{entries.map(photo => 
 					<tr key={photo.user.identifier}>
 						<td>
 							<User name={photo.user.name} identifier={photo.user.identifier} small />
@@ -42,12 +39,4 @@ const SecondaryDashboard = ({ checksum, type, photos }) => (
 	</div>
 )
 
-const mapStateToProps = (state, props) => {
-	return {
-		checksum: props.params.checksum,
-		type: props.params.type,
-		photos: [],
-	}
-}
-
-export default connect(mapStateToProps)(SecondaryDashboard)
+export default Summary

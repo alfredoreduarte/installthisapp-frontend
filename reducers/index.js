@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 import { routerReducer as routing } from 'react-router-redux'
 
+import modules from 'reducers/modules'
 import entities from 'reducers/entities'
 import admin from 'reducers/admin'
 import plans from 'reducers/plans'
@@ -21,6 +22,7 @@ import activityIndicators from 'reducers/activityIndicators'
 import trivia from 'modules/trivia/reducers/'
 import topFans from 'modules/top_fans/reducers/'
 import photoContest from 'modules/photo_contest/reducers/'
+import memoryMatch from 'modules/memory_match/reducers/'
 
 const createReducer = asyncReducers => {
 	return combineReducers({
@@ -35,6 +37,7 @@ const createReducer = asyncReducers => {
 		alerts,
 		newApp,
 		deleteApp,
+		modules,
 		entities,
 		styles,
 		mouseTrap,
@@ -43,6 +46,7 @@ const createReducer = asyncReducers => {
 		trivia,
 		topFans,
 		photoContest,
+		memoryMatch,
 		// asyncReducers: asyncReducers
 	})
 }

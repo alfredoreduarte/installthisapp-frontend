@@ -1,12 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { Link, IndexLink } from 'react-router'
 import { ButtonToolbar, Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import User from 'components/User'
-import { getAnswersForCurrentApp } from 'modules/trivia/selectors/answers'
-import { getQuestionsForCurrentApp } from 'modules/trivia/selectors/questions'
 
-const SecondaryDashboard = ({ checksum, type, entries, hasQuestions }) => (
+const Summary = ({ checksum, type, entries, hasQuestions }) => (
 	<div>
 		<p className="h1 page-header">Summary</p>
 		<p className="h6 text-uppercase"><b>Top 5 users</b></p>
@@ -54,13 +51,4 @@ const SecondaryDashboard = ({ checksum, type, entries, hasQuestions }) => (
 	</div>
 )
 
-const mapStateToProps = (state, props) => {
-	return {
-		checksum: props.params.checksum,
-		type: props.params.type,
-		entries: getAnswersForCurrentApp(state).slice(0,5),
-		hasQuestions: getQuestionsForCurrentApp(state, props).length > 0,
-	}
-}
-
-export default connect(mapStateToProps)(SecondaryDashboard)
+export default Summary

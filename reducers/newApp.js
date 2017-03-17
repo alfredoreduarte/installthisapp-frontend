@@ -6,22 +6,26 @@ const newApp = (state = {
 }, action) => {
 	switch (action.type) {
 		case 'NEW_APP/NOT_AVAILABLE':
-			return Object.assign({}, state, {
+			return {
+				...state,
 				whoopsAlert: true,
-			})
+			}
 		case 'NEW_APP/SET_MODULE':
-			return Object.assign({}, state, {
+			return {
+				...state,
 				whoopsAlert: false,
 				module: action.payload.module
-			})
+			}
 		case 'NEW_APP/SET_PAGE':
-			return Object.assign({}, state, {
+			return {
+				...state,
 				pageId: action.payload.pageId
-			})
+			}
 		case 'NEW_APP/SET_TITLE':
-			return Object.assign({}, state, {
+			return {
+				...state,
 				title: action.payload.title
-			})
+			}
 		default:
 			return state
 	}
