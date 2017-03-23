@@ -5,6 +5,23 @@ export default (store, dispatch) => ({
 		require.ensure([], (require) => {
 			cb(null, [
 				{
+					path: 'cards',
+					onEnter: (nextState, replace, next) => {
+						dispatch(fetchEntities(nextState.params.checksum))
+							.then(() => {
+								next()
+							})
+					},
+					getComponents(nextState, cb) {
+						require.ensure([], (require) => {
+							cb(null, {
+								main: require('modules/memory_match/containers/Cards').default,
+								sidebar: require('modules/memory_match/components/Sidebar').default,
+							})
+						})
+					}
+				},
+				{
 					path: 'entries',
 					onEnter: (nextState, replace, next) => {
 						dispatch(fetchEntities(nextState.params.checksum))
@@ -19,7 +36,7 @@ export default (store, dispatch) => ({
 								sidebar: require('modules/memory_match/components/Sidebar').default,
 							})
 						})
-					}				
+					}
 				},
 			])
 		})

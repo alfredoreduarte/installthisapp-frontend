@@ -1,28 +1,28 @@
-import cards from 'modules/memory_match/reducers/cards'
-
-const entities = (state = {
-	cards: {},
-	entries: {},
-}, action) => {
+const cards = (state = {}, action) => {
 	switch (action.type) {
 		case 'MEMORY_MATCH/RECEIVE_ENTITIES':
 			return {
 				...state,
-				...action.entities,
+				...action.entities.cards,
 			}
 		case 'MEMORY_MATCH/REMOVE_CARD':
 			return {
 				...state,
-				cards: cards(state.cards, action)
+				[action.id]: {
+					...state[action.id],
+					status: 'deleted'
+				}
 			}
 		case 'MEMORY_MATCH/ADD_CARD':
 			return {
 				...state,
-				cards: cards(state.cards, action)
+				[action.card.id]: {
+					...action.card,
+				}
 			}
 		default:
 			return state
 	}
 }
 
-export default entities
+export default cards

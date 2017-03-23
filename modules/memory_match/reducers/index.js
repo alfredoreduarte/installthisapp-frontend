@@ -9,6 +9,16 @@ const memoryMatch = (state = {
 				...state,
 				entities: entities(state.entities, action)
 			}
+		case 'MEMORY_MATCH/REMOVE_CARD':
+			return {
+				...state,
+				entities: entities(state.entities, action)
+			}
+		case 'MEMORY_MATCH/ADD_CARD':
+			return {
+				...state,
+				entities: entities(state.entities, action)
+			}
 		default:
 			return state
 	}

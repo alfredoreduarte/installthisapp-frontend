@@ -82,6 +82,7 @@
     "react-confirm2": "^0.2.1",
     "react-dates": "^4.1.0",
     "react-dom": "^15.4.1",
+    "react-dropzone": "^3.12.1",
     "react-facebook-login": "^3.4.3",
     "react-file-input": "^0.2.5",
     "react-frame-component": "^0.6.6",
