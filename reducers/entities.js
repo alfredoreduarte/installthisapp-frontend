@@ -6,6 +6,7 @@ const entities = (state = { apps: {}, users: {}, pages: {} }, action) => {
 	switch (action.type) {
 		case 'INSTALLING_APP':
 		case 'UNINSTALLING_APP':
+		case 'CANCEL_INSTALLING_APP':
 		case 'UPDATE_APP':
 			return { 
 				...state, 
