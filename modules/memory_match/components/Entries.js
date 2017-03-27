@@ -13,7 +13,7 @@ const Entries = ({
 			<div className="row">
 				<div className="col-md-12">
 					<h3 className="ita-page-title">
-						Entries 
+						Scores 
 						<small className={selectedItems.length ? '' : 'hide'}>
 							{' '}/ {selectedItems.length} 
 							{' '}user{selectedItems.length > 1 ? 's' : ''} selected

@@ -3,8 +3,8 @@ var jsonfile = require('jsonfile')
 var apiUrl = process.env.API_URL
 var bodyParser = require('body-parser')
 var fetch = require('isomorphic-fetch')
-var moduleName = 'trivia'
-var canvasId = 'app1'
+var moduleName = 'memory_match'
+var canvasId = 'app4'
 // #############
 // Canvas
 // #############

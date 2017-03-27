@@ -69,6 +69,10 @@ app.use(topFansRouter)
 var photoContestRouter = require('./canvas/photo_contest/server.js')
 app.use(photoContestRouter)
 
+// Memory Match
+var memoryMatchRouter = require('./canvas/memory_match/server.js')
+app.use(memoryMatchRouter)
+
 // Serving static HTML
 app.use(function(req, res, next) {
 	if(req.url.substr(-1) == '/' && req.url.length > 1)

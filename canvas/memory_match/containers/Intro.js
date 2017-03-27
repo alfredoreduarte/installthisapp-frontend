@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as IntroView from 'canvas/example/components/Intro'
+import IntroView from 'canvas/memory_match/components/Intro'
 
 class Intro extends Component {
-	render(){ 
+	render(){
 		return !this.props.loading ? <IntroView { ...this.props } /> : <p>Loading...</p>
 	}
 }

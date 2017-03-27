@@ -1,7 +1,7 @@
 import React from 'react'
 import FacebookLogin from 'react-facebook-login'
 
-const Login = ({ logging, title, fbCallback }) => (
+const LoginView = ({ logging, title, fbCallback }) => (
 	<div className="text-center">
 		<div
 			style={{
@@ -23,4 +23,4 @@ const Login = ({ logging, title, fbCallback }) => (
 	</div>
 )
 
-export default Login
+export default LoginView

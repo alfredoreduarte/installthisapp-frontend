@@ -1,37 +1,38 @@
 var express = require('express')
 var jsonfile = require('jsonfile')
 var apiUrl = process.env.API_URL
+var bodyParser = require('body-parser')
+var fetch = require('isomorphic-fetch')
+var moduleName = 'photo_contest'
+var canvasId = 'app3'
 // #############
 // Canvas
 // #############
 var cloudFrontUrl = process.env.CLOUDFRONT_URL
-var photoContestRouter = express.Router()
-var triviaSubdomain = 'app3-localui'
-var photoContestCanvasId = 'app3'
-// app.use(subdomain(triviaSubdomain, triviaRouter))
-var bodyParser = require('body-parser')
+var canvasRouter = express.Router()
+// For canvas apps on subdomains
+// var canvasSubdomain = `${canvasId}-localui`
+// app.use(subdomain(canvasSubdomain, canvasRouter))
 var canvasParser = bodyParser.urlencoded({ extended: true })
-var fetch = require('isomorphic-fetch')
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'
-photoContestRouter.get('/app3/favicon.ico', function(req, res) {
+canvasRouter.get(`/${canvasId}/favicon.ico`, function(req, res) {
 	res.sendStatus(200)
 })
-photoContestRouter.use(function(req, res, next) {
+canvasRouter.use(function(req, res, next) {
 	if(req.url.substr(-1) == '/' && req.url.length > 1)
 		res.redirect(301, req.url.slice(0, -1))
 	else
 		next()
 })
-photoContestRouter.use('/static', express.static(__dirname + '/dist'))
+canvasRouter.use('/static', express.static(__dirname + '/dist'))
 // 
 // Auth from facebook page tab
 // 
-photoContestRouter.post(`/${photoContestCanvasId}`, canvasParser, function(req, res) {
+canvasRouter.post(`/${canvasId}`, canvasParser, function(req, res) {
 	const manifestPath = `${process.cwd()}/webpack-assets.json`
 	const manifest = jsonfile.readFileSync(manifestPath)
 	const manifestBundle = manifest['manifest']['js']
 	const vendorBundle = manifest['common']['js']
-	const moduleBundle = manifest['photo_contest']['js']
+	const moduleBundle = manifest[moduleName]['js']
 	fetch(`${apiUrl}/canvasauth.json`, {
 		method: 'POST',
 		headers: {
@@ -39,7 +40,7 @@ photoContestRouter.post(`/${photoContestCanvasId}`, canvasParser, function(req, 
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify(Object.assign({}, req.body, {
-			canvas_id: photoContestCanvasId
+			canvas_id: canvasId
 		}))
 	})
 	.then(response => response.json())
@@ -47,8 +48,8 @@ photoContestRouter.post(`/${photoContestCanvasId}`, canvasParser, function(req, 
 		res.render('canvas', {
 			cloudFrontUrl: cloudFrontUrl,
 			apiUrl,
-			module: 'photo_contest',
-			canvasId: photoContestCanvasId,
+			module: moduleName,
+			canvasId: canvasId,
 			checksum: json.checksum,
 			facebookAppId: json.fb_application_id,
 			stylesheetUrl: json.stylesheet_url,
@@ -66,12 +67,12 @@ photoContestRouter.post(`/${photoContestCanvasId}`, canvasParser, function(req, 
 		}
 	)
 })
-photoContestRouter.get(`/${photoContestCanvasId}/:checksum*`, canvasParser, function(req, res) {
+canvasRouter.get(`/${canvasId}/:checksum*`, canvasParser, function(req, res) {
 	const manifestPath = `${process.cwd()}/webpack-assets.json`
 	const manifest = jsonfile.readFileSync(manifestPath)
 	const manifestBundle = manifest['manifest']['js']
 	const vendorBundle = manifest['common']['js']
-	const moduleBundle = manifest['photo_contest']['js']
+	const moduleBundle = manifest[moduleName]['js']
 	fetch(`${apiUrl}/standalone_auth.json`, {
 		method: 'POST',
 		headers: {
@@ -79,7 +80,7 @@ photoContestRouter.get(`/${photoContestCanvasId}/:checksum*`, canvasParser, func
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({
-			canvas_id: photoContestCanvasId,
+			canvas_id: canvasId,
 			checksum: req.params.checksum,
 		})
 	})
@@ -88,8 +89,8 @@ photoContestRouter.get(`/${photoContestCanvasId}/:checksum*`, canvasParser, func
 		res.render('canvas', {
 			cloudFrontUrl: cloudFrontUrl,
 			apiUrl,
-			module: 'photo_contest',
-			canvasId: photoContestCanvasId,
+			module: moduleName,
+			canvasId: canvasId,
 			checksum: json.checksum,
 			facebookAppId: json.fb_application_id,
 			stylesheetUrl: json.stylesheet_url,
@@ -108,4 +109,4 @@ photoContestRouter.get(`/${photoContestCanvasId}/:checksum*`, canvasParser, func
 	)
 })
 
-module.exports = photoContestRouter
+module.exports = canvasRouter

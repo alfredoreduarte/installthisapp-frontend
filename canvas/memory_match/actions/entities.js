@@ -1,7 +1,7 @@
 import { normalize, arrayOf } from 'normalizr'
 import { getFromApi, getExternal } from 'canvas/api'
 import { push } from 'react-router-redux'
-import * as schema from 'canvas/example/schema'
+import * as schema from 'canvas/memory_match/schema'
 
 export const receiveEntities = entities => ({
 	type: 'RECEIVE_ENTITIES',
@@ -14,7 +14,6 @@ export const fetchEntities = () => {
 		return getFromApi(`${checksum}/entities.json`, response => {
 			if (response.success) {
 				const normalized = normalize(response, schema.entities)
-				console.log('normal', normalized)
 				return dispatch(receiveEntities(normalized.entities))
 			}
 		})

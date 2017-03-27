@@ -22,7 +22,7 @@ export default (store, dispatch) => ({
 					}
 				},
 				{
-					path: 'entries',
+					path: 'scores',
 					onEnter: (nextState, replace, next) => {
 						dispatch(fetchEntities(nextState.params.checksum))
 							.then(() => {

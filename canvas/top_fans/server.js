@@ -1,37 +1,38 @@
 var express = require('express')
 var jsonfile = require('jsonfile')
 var apiUrl = process.env.API_URL
+var bodyParser = require('body-parser')
+var fetch = require('isomorphic-fetch')
+var moduleName = 'top_fans'
+var canvasId = 'app2'
 // #############
 // Canvas
 // #############
 var cloudFrontUrl = process.env.CLOUDFRONT_URL
-var topFansRouter = express.Router()
-var topFansSubdomain = 'app2-localui'
-var topFansCanvasId = 'app2'
-// app.use(subdomain(topFansSubdomain, topFansRouter))
-var bodyParser = require('body-parser');
+var canvasRouter = express.Router()
+// For canvas apps on subdomains
+// var canvasSubdomain = `${canvasId}-localui`
+// app.use(subdomain(canvasSubdomain, canvasRouter))
 var canvasParser = bodyParser.urlencoded({ extended: true })
-var fetch = require('isomorphic-fetch');
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'
-topFansRouter.get('/app2/favicon.ico', function(req, res) {
+canvasRouter.get(`/${canvasId}/favicon.ico`, function(req, res) {
 	res.sendStatus(200)
 })
-topFansRouter.use(function(req, res, next) {
+canvasRouter.use(function(req, res, next) {
 	if(req.url.substr(-1) == '/' && req.url.length > 1)
 		res.redirect(301, req.url.slice(0, -1))
 	else
 		next()
 })
-topFansRouter.use('/static', express.static(__dirname + '/dist'))
+canvasRouter.use('/static', express.static(__dirname + '/dist'))
 // 
 // Auth from facebook page tab
 // 
-topFansRouter.post(`/${topFansCanvasId}`, canvasParser, function(req, res) {
+canvasRouter.post(`/${canvasId}`, canvasParser, function(req, res) {
 	const manifestPath = `${process.cwd()}/webpack-assets.json`
 	const manifest = jsonfile.readFileSync(manifestPath)
 	const manifestBundle = manifest['manifest']['js']
 	const vendorBundle = manifest['common']['js']
-	const moduleBundle = manifest['top_fans']['js']
+	const moduleBundle = manifest[moduleName]['js']
 	fetch(`${apiUrl}/canvasauth.json`, {
 		method: 'POST',
 		headers: {
@@ -39,7 +40,7 @@ topFansRouter.post(`/${topFansCanvasId}`, canvasParser, function(req, res) {
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify(Object.assign({}, req.body, {
-			canvas_id: topFansCanvasId
+			canvas_id: canvasId
 		}))
 	})
 	.then(response => response.json())
@@ -47,8 +48,8 @@ topFansRouter.post(`/${topFansCanvasId}`, canvasParser, function(req, res) {
 		res.render('canvas', {
 			cloudFrontUrl: cloudFrontUrl,
 			apiUrl,
-			module: 'top_fans',
-			canvasId: topFansCanvasId,
+			module: moduleName,
+			canvasId: canvasId,
 			checksum: json.checksum,
 			facebookAppId: json.fb_application_id,
 			stylesheetUrl: json.stylesheet_url,
@@ -66,12 +67,12 @@ topFansRouter.post(`/${topFansCanvasId}`, canvasParser, function(req, res) {
 		}
 	)
 })
-topFansRouter.get(`/${topFansCanvasId}/:checksum*`, canvasParser, function(req, res) {
+canvasRouter.get(`/${canvasId}/:checksum*`, canvasParser, function(req, res) {
 	const manifestPath = `${process.cwd()}/webpack-assets.json`
 	const manifest = jsonfile.readFileSync(manifestPath)
 	const manifestBundle = manifest['manifest']['js']
 	const vendorBundle = manifest['common']['js']
-	const moduleBundle = manifest['top_fans']['js']
+	const moduleBundle = manifest[moduleName]['js']
 	fetch(`${apiUrl}/standalone_auth.json`, {
 		method: 'POST',
 		headers: {
@@ -79,7 +80,7 @@ topFansRouter.get(`/${topFansCanvasId}/:checksum*`, canvasParser, function(req, 
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({
-			canvas_id: topFansCanvasId,
+			canvas_id: canvasId,
 			checksum: req.params.checksum,
 		})
 	})
@@ -88,8 +89,8 @@ topFansRouter.get(`/${topFansCanvasId}/:checksum*`, canvasParser, function(req, 
 		res.render('canvas', {
 			cloudFrontUrl: cloudFrontUrl,
 			apiUrl,
-			module: 'top_fans',
-			canvasId: topFansCanvasId,
+			module: moduleName,
+			canvasId: canvasId,
 			checksum: json.checksum,
 			facebookAppId: json.fb_application_id,
 			stylesheetUrl: json.stylesheet_url,
@@ -108,4 +109,4 @@ topFansRouter.get(`/${topFansCanvasId}/:checksum*`, canvasParser, function(req, 
 	)
 })
 
-module.exports = topFansRouter
+module.exports = canvasRouter

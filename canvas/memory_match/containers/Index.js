@@ -1,22 +1,22 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { getFilteredEntries } from 'canvas/example/selectors/entries'
-import Loading from 'canvas/example/components/Loading'
-import * as IndexView from 'canvas/example/components/Index'
+import { getFilteredCards } from 'canvas/memory_match/selectors/cards'
+import Loading from 'canvas/memory_match/components/Loading'
+import IndexView from 'canvas/memory_match/components/Index'
 
 const Index = ({ 
 	messages,
 	images,
-	entries,
+	cards,
 }) => (
-	<IndexView headerImage={images.header} footerImage={images.footer} entries={entries} />
+	<IndexView headerImage={images.header} footerImage={images.footer} cards={cards} />
 )
 
 const mapStateToProps = state => ({
 	messages: {...state.messages},
 	images: {...state.images},
-	entries: getFilteredEntries(state),
+	cards: getFilteredCards(state),
 })
 
 const mapDispatchToProps = dispatch => {
