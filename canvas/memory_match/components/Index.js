@@ -6,6 +6,7 @@ import Card from 'canvas/memory_match/components/Card'
 const IndexView = ({ 
 	headerImage,
 	footerImage,
+	cardBack,
 	cards
 }) => (
 	<div>
@@ -17,7 +18,7 @@ const IndexView = ({
 				justifyContent: 'space-around',
 				flexWrap: 'wrap',
 			}}>
-				{cards.map( card => <Card key={card.id} attachmentUrl={card.attachmentUrl} />)}
+				{cards.map( card => <Card key={card.id} cardBack={cardBack} attachmentUrl={card.attachmentUrl} />)}
 			</div>
 		</div>
 		{footerImage ? <Image source={footerImage} /> : null}
@@ -27,6 +28,7 @@ const IndexView = ({
 IndexView.propTypes = {
 	headerImage: PropTypes.string,
 	footerImage: PropTypes.string,
+	cardBack: PropTypes.string,
 	cards: PropTypes.array.isRequired,
 }
 

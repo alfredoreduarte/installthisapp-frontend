@@ -2,20 +2,32 @@ import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 
 const Card = ({ 
+	cardBack,
 	attachmentUrl,
 }) => (
 	<div style={{
-		width: '200px',
+		width: '20%',
 		height: '200px',
 		borderRadius: '5px',
-		margin: '20px',
-		backgroundImage: `url("${attachmentUrl}")`,
-		backgroundSize: 'cover',
-		backgroundRepeat: 'no-repeat',
-		backgroundPosition: 'center',
+		margin: '2.5% 20px',
 		cursor: 'pointer',
-	}}>
+		// 
+		perspective: 600,
 
+	}}>
+		<div style={{
+			backgroundImage: `url(${cardBack})`,
+			backgroundSize: 'cover',
+			backgroundRepeat: 'no-repeat',
+			backgroundPosition: 'center',
+			backfaceVisibility: 'hidden',
+		}}></div>
+		<div style={{
+			backgroundImage: `url(${attachmentUrl})`,
+			backgroundSize: 'cover',
+			backgroundRepeat: 'no-repeat',
+			backgroundPosition: 'center',
+		}}></div>
 	</div>
 )
 

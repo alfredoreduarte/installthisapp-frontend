@@ -10,7 +10,7 @@ const Index = ({
 	images,
 	cards,
 }) => (
-	<IndexView headerImage={images.header} footerImage={images.footer} cards={cards} />
+	<IndexView headerImage={images.header} footerImage={images.footer} cardBack={images.cardBack} cards={cards} />
 )
 
 const mapStateToProps = state => ({
