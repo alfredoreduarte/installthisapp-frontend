@@ -19,6 +19,11 @@ export const setCurrentAppChecksum = checksum => {
 	}
 }
 
+export const toggleAppCancelInstallation = checksum => ({
+	type: 'CANCEL_INSTALLING_APP',
+	checksum
+})
+
 export const toggleAppInstalling = checksum => ({
 	type: 'INSTALLING_APP',
 	checksum
@@ -42,10 +47,19 @@ export const destroy = checksum => {
 export const install = checksum => {
 	return (dispatch, getState) => {
 		const currentApp = getCurrentAppByState(getState())
-		analytics.track('App Installed', {
-			appType: currentApp.applicationType,
+		postToApi(`applications/${checksum}/install.json`, null, response => {
+			if (response.success) {
+				analytics.track('App Installed', {
+					appType: currentApp.applicationType,
+				})
+				return dispatch(updateApp(checksum, response))
+			}
+			else {
+				console.log(response.message)
+				dispatch(toggleAppCancelInstallation(checksum))
+				dispatch(setAlert(`<a href="/d/upgrade">Please upgrade your account</a>.`, `You have reached the app limit for free accounts.`))
+			}
 		})
-		return postToApi(`applications/${checksum}/install.json`, null, res => dispatch(updateApp(checksum, res)))
 	}
 }
 

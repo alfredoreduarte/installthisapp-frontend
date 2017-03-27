@@ -8,7 +8,7 @@ const Application = ({ children, loaded, alertTitle, alertContent, handleAlertDi
 	<div>
 		<Loading />
 		{alertTitle ? 
-		<Alert bsStyle="warning" onDismiss={handleAlertDismiss}>
+		<Alert bsStyle="warning" onDismiss={handleAlertDismiss} style={{textAlign: 'center'}}>
 			<strong dangerouslySetInnerHTML={{ __html: alertTitle }}></strong> <span dangerouslySetInnerHTML={{ __html: alertContent }}></span>
 		</Alert>
 		: null }
