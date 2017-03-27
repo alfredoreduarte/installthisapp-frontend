@@ -52,7 +52,7 @@ export const install = checksum => {
 				analytics.track('App Installed', {
 					appType: currentApp.applicationType,
 				})
-				return dispatch(updateApp(checksum, response))
+				return dispatch(updateApp(checksum, response.application))
 			}
 			else {
 				console.log(response.message)
