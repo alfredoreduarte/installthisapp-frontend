@@ -1,6 +1,10 @@
+import { postToApi } from 'canvas/api'
 import { fetchImages } from 'canvas/memory_match/actions/images'
 import { fetchMessages } from 'canvas/memory_match/actions/messages'
 import { fetchEntities } from 'canvas/memory_match/actions/entities'
+import { stopTimer } from 'canvas/memory_match/actions/game'
+import { getAllCards } from 'canvas/memory_match/selectors/cards'
+import { startingTimeInUnixSeconds, currentTimeInUnixSeconds } from 'canvas/memory_match/selectors/time'
 
 export const getStaticContent = (nextState, replace, next, dispatch) => dispatch(fetchMessages())
 																		.then(() => dispatch(fetchImages()))
@@ -18,4 +22,45 @@ export const loginCallback = () => {
 	return dispatch => dispatch( fetchEntities() )
 	.then( () => dispatch(fetchImages()) )
 	.then( () => dispatch(fetchMessages()) )
+}
+
+export const checkIfGameFinished = () => {
+	return (dispatch, getState) => {
+		const state = getState()
+		const matchedIdsLength = state.game.matchedIds.length
+		const cardsLength = getAllCards(state).length
+		if (matchedIdsLength == cardsLength) {
+			// Game finished
+			dispatch(stopTimer())
+			dispatch(postResults())
+			dispatch({
+				type: 'FINISH_GAME'
+			})
+		}
+	}
+}
+
+export const postResults = () => {
+	return (dispatch, getState) => {
+		const checksum = getState().applicationData.checksum
+		const clicks = getState().game.clickCount
+		const startingTime = startingTimeInUnixSeconds(getState())
+		const finishTime = currentTimeInUnixSeconds(getState())
+		return postToApi(`${checksum}/entries_create.json`, {
+			entry: {
+				clicks,
+				startingTime,
+				finishTime,
+			}
+		}).then(response => {
+			console.log('res')
+			console.log(response)
+			if (response.success) {
+
+			}
+			else{
+				console.log(response)
+			}
+		})
+	}
 }

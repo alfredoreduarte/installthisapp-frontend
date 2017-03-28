@@ -3,10 +3,9 @@ import v4 from 'node-uuid'
 import { createSelector } from 'reselect'
 import { getCurrentApp } from 'selectors/apps'
 
-const getAllCards = state => _.values(state.entities.cards)
+export const getAllCards = state => _.values(state.entities.cards)
 
 let shuffleOnce = []
-
 export const getFilteredCards = createSelector(
 	getAllCards,
 	cards => {

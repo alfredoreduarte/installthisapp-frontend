@@ -19,6 +19,11 @@ const memoryMatch = (state = {
 				...state,
 				entities: entities(state.entities, action)
 			}
+		case 'MEMORY_MATCH/REMOVE_ENTRY':
+			return {
+				...state,
+				entities: entities(state.entities, action)
+			}
 		default:
 			return state
 	}

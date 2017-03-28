@@ -1,12 +1,15 @@
 import _ from 'lodash'
 import { createSelector } from 'reselect'
-import { getCurrentApp } from 'selectors/apps'
+import { getCurrentAppByState } from 'selectors/apps'
 
 const getAllEntries = state => _.values(state.memoryMatch.entities.entries)
 
 export const getFilteredEntries = createSelector(
 	getAllEntries,
-	entries => {
-		return _.filter(entries, entry => entry.id > 0)
+	getCurrentAppByState,
+	(entries, app) => {
+		return _.filter(entries, entry => {
+			return entry.status != 'deleted' && entry.applicationId == app.id
+		})
 	}
 )

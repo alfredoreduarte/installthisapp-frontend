@@ -1,4 +1,5 @@
 import cards from 'modules/memory_match/reducers/cards'
+import entries from 'modules/memory_match/reducers/entries'
 
 const entities = (state = {
 	cards: {},
@@ -19,6 +20,11 @@ const entities = (state = {
 			return {
 				...state,
 				cards: cards(state.cards, action)
+			}
+		case 'MEMORY_MATCH/REMOVE_ENTRY':
+			return {
+				...state,
+				entries: entries(state.entries, action)
 			}
 		default:
 			return state

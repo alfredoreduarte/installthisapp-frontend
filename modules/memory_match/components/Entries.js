@@ -7,6 +7,7 @@ const Entries = ({
 	entries,
 	selectedItems,
 	fetchEntries,
+	handleDelete,
 }) => (
 	<div className="ita-table-view">
 		<div className="ita-table-toolbar">
@@ -23,7 +24,7 @@ const Entries = ({
 			</div>
 			<div className="row">
 				<div className="col-md-4">
-					<SearchForm />
+					
 				</div>
 				<div className="col-md-8 text-right">
 					{entries.length == 0 ?
@@ -67,8 +68,12 @@ const Entries = ({
 							<span>Name</span>
 						</th>
 						<th>
-							<span>Score</span>
+							<span>Clicks</span>
 						</th>
+						<th>
+							<span>Time</span>
+						</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -82,7 +87,23 @@ const Entries = ({
 								 />
 						</td>
 						<td>
-							{entry.score}
+							{entry.clicks}
+						</td>
+						<td>
+							{entry.time} seconds
+						</td>
+						<td className="text-right">
+							<ul className="list-inline list-no-margin">
+								<li>
+									<a
+										onClick={() => handleDelete(entry.id)}
+										className='
+											icon-tool-big 
+											btn 
+											btn-squared 
+											glyphicon glyphicon-trash'></a>
+								</li>
+							</ul>
 						</td>
 					</tr>
 					)}

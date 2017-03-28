@@ -13,10 +13,12 @@ const IndexView = ({
 	currentTime,
 	flippedCard,
 	matchedIds,
+	finished,
 }) => (
 	<div>
 		{headerImage ? <Image source={headerImage} /> : null}
 		<div className="container">
+			{finished ? <h1>Finished!</h1> : null}
 			<div className="col-md-6">
 				<h1>Clicks</h1>
 				<h3>{clickCount}</h3>

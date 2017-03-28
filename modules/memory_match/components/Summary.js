@@ -25,7 +25,10 @@ const Summary = ({ checksum, type, entries }) => (
 							<User name={entry.user.name} identifier={entry.user.identifier} small />
 						</td>
 						<td>
-							<b>{entry.score} points</b>
+							<b>{entry.time} seconds</b>
+						</td>
+						<td>
+							<b>{entry.clicks} clicks</b>
 						</td>
 					</tr>
 					)}
