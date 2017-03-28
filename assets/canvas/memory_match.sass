@@ -1,4 +1,5 @@
 @import "~animate.css/animate"
+@import "~bourbon/app/assets/stylesheets/bourbon"
 @import libraries/addtohome
 
 body
@@ -10,6 +11,52 @@ body
 	background-attachment: fixed
 	background-size: cover
 	color: #747474
+
+// Cards
+.Card
+	+perspective(600)
+	height: 20vw
+	width: 20vw
+	+transition(all 300ms linear)
+	cursor: pointer
+	border-radius: 3px
+	margin: 2.5vw 20px
+	img
+		min-width: 100%
+		min-height: 100%
+		width: inherit
+	.face
+		border-radius: 5px
+		width: 100%
+		height: 100%
+		position: absolute
+		+transition(all 300ms linear)
+		+backface-visibility(hidden)
+		&.front
+			background-color: black
+			z-index: 10
+			//box-shadow: 0px 0px 5px black
+			background-repeat: no-repeat
+			background-size: cover
+			background-position: center
+		&.back
+			background-repeat: no-repeat
+			background-size: cover
+			background-position: center
+			+transform(rotate3d(0,1,0,-180deg))
+	&:hover, &.card-flipped
+		.face
+			box-shadow: 0px 0px 5px black
+	&.card-flipped
+		.front
+			+transform(rotate3d(0,1,0,180deg))
+			z-index: 8
+		.back
+			+transform(rotate3d(0,1,0,0deg))
+			z-index: 10
+	&.card-removed
+		opacity: 0
+		display: none\9
 
 // Text
 .ita-cali-text

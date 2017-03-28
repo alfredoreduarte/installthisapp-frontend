@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getAllCards } from 'modules/memory_match/selectors/cards'
+import { getCardsForApp } from 'modules/memory_match/selectors/cards'
 import { fetchEntities } from 'modules/memory_match/actions/entities'
 import { createCard, deleteCard } from 'modules/memory_match/actions/cards'
 import CardsView from 'modules/memory_match/components/Cards'
@@ -22,7 +22,7 @@ const Cards = ({
 )
 
 const mapStateToProps = state => ({ 
-	cards: getAllCards(state),
+	cards: getCardsForApp(state),
 	selectedItems: state.selectedItems,
 })
 

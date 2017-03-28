@@ -4,35 +4,24 @@ import { Link } from 'react-router'
 const Card = ({ 
 	cardBack,
 	attachmentUrl,
+	onFlip,
+	flipped,
+	hidden,
 }) => (
-	<div style={{
-		width: '20%',
-		height: '200px',
-		borderRadius: '5px',
-		margin: '2.5% 20px',
-		cursor: 'pointer',
-		// 
-		perspective: 600,
-
-	}}>
-		<div style={{
+	<div className={`Card ${flipped ? 'card-flipped' : null}`} onClick={onFlip} style={{visibility: hidden ? 'hidden' : 'visible'}}>
+		<div className="face front" style={{
 			backgroundImage: `url(${cardBack})`,
-			backgroundSize: 'cover',
-			backgroundRepeat: 'no-repeat',
-			backgroundPosition: 'center',
-			backfaceVisibility: 'hidden',
 		}}></div>
-		<div style={{
+		<div className="face back" style={{
 			backgroundImage: `url(${attachmentUrl})`,
-			backgroundSize: 'cover',
-			backgroundRepeat: 'no-repeat',
-			backgroundPosition: 'center',
 		}}></div>
 	</div>
 )
 
 Card.propTypes = {
 	attachmentUrl: PropTypes.string,
+	onFlip: PropTypes.func.isRequired,
+	flipped: PropTypes.bool.isRequired,
 }
 
 export default Card

@@ -1,6 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var AssetsPlugin = require('assets-webpack-plugin')
 var assetsPluginInstance = new AssetsPlugin({
 	prettyPrint: true,
@@ -38,7 +38,7 @@ module.exports = {
 		})
 	],
 	resolve: {
-		modules: [__dirname, "node_modules"],
+		modules: [__dirname, 'node_modules'],
 		extensions: ['.js', '.json', '.sass']
 	},
 	module: {

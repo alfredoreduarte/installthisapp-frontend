@@ -1,14 +1,17 @@
 import v4 from 'node-uuid'
 import { postFileToApi, deleteFromApi } from 'api'
+import { getCurrentAppByState } from 'selectors/apps'
 
 // Manage cards
 export const createCard = files => {
 	return (dispatch, getState) => {
-		const checksum = getState().admin.currentApp
+		const currentApp = getCurrentAppByState(getState())
+		const checksum = currentApp.checksum
 		files.map(file => {
 			const thisUUID = v4()
 			dispatch(addCard({
 				id: thisUUID,
+				applicationId: currentApp.id,
 				attachmentUrl: file.preview,
 				status: 'uploading',
 			}))

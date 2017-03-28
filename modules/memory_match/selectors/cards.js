@@ -1,5 +1,15 @@
 import _ from 'lodash'
 import { createSelector } from 'reselect'
-import { getCurrentApp } from 'selectors/apps'
+import { getCurrentAppByState } from 'selectors/apps'
 
-export const getAllCards = state => _.values(_.filter(state.memoryMatch.entities.cards, card => card.status != 'deleted'))
+export const getAllCards = state => _.values(state.memoryMatch.entities.cards)
+
+export const getCardsForApp = createSelector(
+	getAllCards,
+	getCurrentAppByState,
+	(cards, app) => {
+		return _.filter(cards, card => {
+			return card.status != 'deleted' && card.applicationId == app.id
+		})
+	}
+)
