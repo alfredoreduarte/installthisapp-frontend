@@ -5,22 +5,90 @@
 body
 	direction: ltr
 	background-color: white
-	background-image: none
+	background-image: url("https://s3-us-west-2.amazonaws.com/installthisapp/memory-match-default-images/background.jpg")
 	background-repeat: no-repeat
 	background-position: center
 	background-attachment: fixed
 	background-size: cover
-	color: #747474
+	color: white
+// editables
+.ita-cali-indicator-text
+	line-height: 1.5
+	text-align: left
+	color: white
+	letter-spacing: 0px
+	font-size: 28px
+	font-family: 'Helvetica'
+	font-weight: bold
+	font-style: normal
+	text-decoration: none
+	text-transform: none
+	// 
+	z-index: 1
+	position: relative
+.ita-cali-message
+	line-height: 1.5
+	text-align: center
+	color: white
+	letter-spacing: 0px
+	font-size: 42px
+	font-family: 'Helvetica'
+	font-weight: normal
+	font-style: normal
+	text-decoration: none
+	text-transform: none
+.ita-cali-user-name
+	line-height: 1.5
+	text-align: center
+	color: white
+	letter-spacing: 0px
+	font-size: 20px
+	font-family: 'Helvetica'
+	font-weight: bold
+	font-style: normal
+	text-decoration: none
+	text-transform: none
+
+// Indicators bar
+.Indicators
+	width: 100%
+	margin-bottom: 20px
+	overflow: hidden
+	padding-bottom: 2px
+.Indicator-left, .Indicator-right
+	width: 40%
+	padding: 10px 30px
+	position: relative
+.Indicator-background
+	position: absolute
+	width: 100%
+	heigth: 100%
+	top: 0
+	bottom: 0
+	right: 0
+	left: 0
+	border: 1px solid rgba(0,0,0,.4)
+	background-color: rgba(0,0,0,.2)
+	transform: perspective(10px) rotateX(1deg)
+	z-index: 0
+.Indicator-left
+	float: left
+	text-align: right
+	left: -30px
+.Indicator-right
+	float: right
+	text-align: left
+	right: -30px
 
 // Cards
 .Card
 	+perspective(600)
-	height: 20vw
-	width: 20vw
+	height: 27vw
+	width: 27vw
 	+transition(all 300ms linear)
 	cursor: pointer
 	border-radius: 3px
-	margin: 2.5vw 20px
+	margin: 1.5vw 10px
 	img
 		min-width: 100%
 		min-height: 100%
@@ -30,7 +98,8 @@ body
 		width: 100%
 		height: 100%
 		position: absolute
-		+transition(all 300ms linear)
+		box-shadow: 0px 5px 10px rgba(0,0,0,.7)
+		+transition(all 200ms linear)
 		+backface-visibility(hidden)
 		&.front
 			background-color: black
@@ -46,7 +115,8 @@ body
 			+transform(rotate3d(0,1,0,-180deg))
 	&:hover, &.card-flipped
 		.face
-			box-shadow: 0px 0px 5px black
+			box-shadow: 0px 10px 30px rgba(0,0,0,.5)
+			// box-shadow: 0px 0px 5px black
 	&.card-flipped
 		.front
 			+transform(rotate3d(0,1,0,180deg))
@@ -57,16 +127,12 @@ body
 	&.card-removed
 		opacity: 0
 		display: none\9
-
-// Text
-.ita-cali-text
-	line-height: 1.5
-	text-align: center
-	color: #747474
-	letter-spacing: 0px
-	font-size: 36px
-	font-family: 'Georgia'
-	font-weight: normal
-	font-style: normal
-	text-decoration: none
-	text-transform: none
+@media (min-width: 992px)
+	.Card
+		height: 20vw
+		width: 20vw
+		
+// Thanks screen
+.user-photo
+	overflow: hidden
+	border-radius: 100px

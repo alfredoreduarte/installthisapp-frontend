@@ -16,7 +16,26 @@ export const flipCard = (flippedCardId, id) => {
 		if (!timer) {
 			dispatch(startTimer())
 		}
-		dispatch(actualFlipCard(flippedCardId, id)).then(dispatch(checkIfGameFinished()))
+		dispatch(actualFlipCard(flippedCardId, id)).then(() => {
+			setTimeout(() => {
+				dispatch(checkIfImageMatches())
+			}, 600)
+			setTimeout(() => {
+				dispatch(checkIfGameFinished())
+			}, 700)
+			// dispatch(checkIfGameFinished())
+		})
+	}
+}
+
+const checkIfImageMatches = () => {
+	return (dispatch, getState) => {
+		const flippedCards = getState().game.flippedCards
+		if (flippedCards.length == 2) {
+			dispatch({
+				type: 'RESET_CARDS'
+			})
+		}
 	}
 }
 

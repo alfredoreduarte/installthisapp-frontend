@@ -3,6 +3,8 @@ import { Provider, connect } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
 import { getStaticContent, getStaticContentAndEntities } from 'canvas/memory_match/actions'
 import Index from 'canvas/memory_match/containers/Index'
+import Thanks from 'canvas/memory_match/containers/Thanks'
+import AlreadyPlayed from 'canvas/memory_match/containers/AlreadyPlayed'
 import Intro from 'canvas/memory_match/containers/Intro'
 import Login from 'canvas/memory_match/containers/Login'
 import Cookies from 'js-cookie'
@@ -38,11 +40,18 @@ class Root extends Component {
 						component={Intro} />
 					<Route 
 						path={`/${window.canvasId}(/:checksum)/game`}
-						// 
-						// 
-						// 
 						onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
 						component={Index} />
+					<Route 
+						path={`/${window.canvasId}(/:checksum)/thanks`}
+						onEnter={(nextState, replace, next) => getStaticContent(nextState, replace, next, dispatch)}
+						// onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
+						component={Thanks} />
+					<Route 
+						path={`/${window.canvasId}(/:checksum)/already-played`}
+						onEnter={(nextState, replace, next) => getStaticContent(nextState, replace, next, dispatch)}
+						// onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
+						component={AlreadyPlayed} />
 					<Route 
 						path={`/${window.canvasId}/:checksum/login`} 
 						component={Login}/>

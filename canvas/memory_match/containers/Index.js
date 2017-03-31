@@ -14,7 +14,7 @@ const Index = ({
 	onCardFlip,
 	currentTime,
 	clickCount,
-	flippedCard,
+	flippedCards,
 	matchedIds,
 	finished,
 }) => (
@@ -27,7 +27,7 @@ const Index = ({
 		currentTime={currentTime}
 		matchedIds={matchedIds}
 		clickCount={clickCount}
-		flippedCard={flippedCard}
+		flippedCards={flippedCards}
 		finished={finished}
 	/>
 )
@@ -37,7 +37,7 @@ const mapStateToProps = state => ({
 	images: {...state.images},
 	cards: getFilteredCards(state),
 	currentTime: getElapsedTime(state),
-	flippedCard: state.game.flippedCard,
+	flippedCards: state.game.flippedCards,
 	clickCount: state.game.clickCount,
 	matchedIds: state.game.matchedIds,
 	finished: state.game.finished,

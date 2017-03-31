@@ -1,6 +1,6 @@
 export default {
-	"intro": "https://s3-us-west-2.amazonaws.com/installthisapp/intro.jpg",
-	"header": null,
+	"intro": "https://s3-us-west-2.amazonaws.com/installthisapp/memory-match-default-images/intro.png",
+	"header": "https://s3-us-west-2.amazonaws.com/installthisapp/memory-match-default-images/header.png",
 	"footer": null,
-	"cardBack": "https://s3-us-west-2.amazonaws.com/installthisapp/intro.jpg",
+	"cardBack": "https://s3-us-west-2.amazonaws.com/installthisapp/memory-match-default-images/cardback.jpg",
 }

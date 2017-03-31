@@ -8,7 +8,18 @@ export const getElapsedTime = createSelector(
 	getStartingTime,
 	getCurrentTime,
 	(startingTime, currentTime) => {
-		return startingTime && currentTime ? moment(currentTime).diff(startingTime, 'seconds') : 0
+		if (startingTime && currentTime) {
+			const seconds = moment(currentTime).diff(startingTime, 'seconds')
+			const date = new Date(null)
+			date.setSeconds(seconds) // specify value for SECONDS here
+			const result = date.toISOString().substr(11, 8)
+			const reduced = result.substring(3)
+			return reduced
+		}
+		else {
+			return "00:00"
+		}
+		// return startingTime && currentTime ? moment(currentTime).diff(startingTime, 'seconds') : 0
 	}
 )
 

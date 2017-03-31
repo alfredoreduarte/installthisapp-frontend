@@ -59,6 +59,7 @@ const Entries = ({
 		{entries.length == 0 ?
 			<div className="ita-empty text-center">
 				<h3>There are no entries yet</h3>
+				<p><button className="btn btn-sm btn-success" onClick={fetchEntries}>Refresh</button></p>
 			</div>
 		:
 			<Table className="ita-table">

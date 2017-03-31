@@ -11,32 +11,35 @@ const IndexView = ({
 	onCardFlip,
 	clickCount,
 	currentTime,
-	flippedCard,
+	flippedCards,
 	matchedIds,
 	finished,
 }) => (
 	<div>
 		{headerImage ? <Image source={headerImage} /> : null}
-		<div className="container">
-			{finished ? <h1>Finished!</h1> : null}
-			<div className="col-md-6">
-				<h1>Clicks</h1>
-				<h3>{clickCount}</h3>
+		<div className="Indicators">
+			<div className="Indicator-left animated slideInLeft">
+				<div className="Indicator-background"></div>
+				<span className="ita-indicator-text">{clickCount}</span>
 			</div>
-			<div className="col-md-6 text-right">
-				<h1>Time</h1>
-				<h3>{currentTime}</h3>
+			<div className="Indicator-right animated slideInRight">
+				<div className="Indicator-background"></div>
+				<span className="ita-indicator-text">{currentTime}</span>
 			</div>
 		</div>
 		<div className="container">
-			<div className="col-xs-12 col-sm-12 col-md-10 col-md-offset-1" style={{
+			{finished ? <h1>Finished!</h1> : null}
+		</div>
+		<div className="container">
+			<div className="" style={{
 				display: 'flex',
 				justifyContent: 'space-around',
 				flexWrap: 'wrap',
+				marginBottom: '30px',
 			}}>
 				{cards.map( card => <Card 
 					key={card.fakeUniqueId} 
-					flipped={flippedCard == card.fakeUniqueId} 
+					flipped={flippedCards.indexOf(card.fakeUniqueId) >= 0} 
 					onFlip={() => onCardFlip(card.fakeUniqueId, card.id)} 
 					cardBack={cardBack} 
 					attachmentUrl={card.attachmentUrl}
@@ -58,10 +61,8 @@ IndexView.propTypes = {
 	onCardFlip: PropTypes.func.isRequired,
 	clickCount: PropTypes.number.isRequired,
 	currentTime: PropTypes.number.isRequired,
-	flippedCard: PropTypes.oneOfType([
-		React.PropTypes.bool,
-		React.PropTypes.string,
-		React.PropTypes.number,
+	flippedCards: PropTypes.oneOfType([
+		React.PropTypes.array,
 	]),
 }
 

@@ -1,3 +1,4 @@
+import { push } from 'react-router-redux'
 import { postToApi } from 'canvas/api'
 import { fetchImages } from 'canvas/memory_match/actions/images'
 import { fetchMessages } from 'canvas/memory_match/actions/messages'
@@ -32,10 +33,10 @@ export const checkIfGameFinished = () => {
 		if (matchedIdsLength == cardsLength) {
 			// Game finished
 			dispatch(stopTimer())
-			dispatch(postResults())
 			dispatch({
 				type: 'FINISH_GAME'
 			})
+			return dispatch(postResults())
 		}
 	}
 }
@@ -53,10 +54,8 @@ export const postResults = () => {
 				finishTime,
 			}
 		}).then(response => {
-			console.log('res')
-			console.log(response)
 			if (response.success) {
-
+				return dispatch(push(`/${window.canvasId}/${window.checksum}/thanks`))
 			}
 			else{
 				console.log(response)
