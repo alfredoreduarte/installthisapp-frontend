@@ -26,14 +26,14 @@ const Thanks = ({
 const mapStateToProps = state => ({
 	messages: {...state.messages},
 	images: {...state.images},
-	// time: getElapsedTime(state),
-	time: "00:20",
-	// clicks: state.game.clickCount,
-	clicks: 23,
-	// userName: state.loggedUser.name,
-	userName: 'Alfredo Re',
-	// userIdentifier: state.loggedUser.identifier,
-	userIdentifier: "10208910337057839",
+	time: getElapsedTime(state),
+	// time: "00:20",
+	clicks: state.game.clickCount,
+	// clicks: 23,
+	userName: state.loggedUser.name,
+	// userName: 'Alfredo Re',
+	userIdentifier: state.loggedUser.identifier,
+	// userIdentifier: "10208910337057839",
 })
 
 const mapDispatchToProps = dispatch => {

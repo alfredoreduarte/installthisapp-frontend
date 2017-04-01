@@ -27,7 +27,7 @@ const IndexView = ({
 				<span className="ita-cali-indicator-text">{currentTime}</span>
 			</div>
 		</div>
-		<div className="container">
+		<div className="container hide">
 			{finished ? <h1>Finished!</h1> : null}
 		</div>
 		<div className="container">
