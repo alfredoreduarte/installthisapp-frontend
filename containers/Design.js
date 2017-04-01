@@ -35,12 +35,14 @@ import TextContent from 'components/design-editor/TextContent'
 import PreviewsTrivia from 'canvas/trivia/containers/Previews'
 import PreviewsPhotoContest from 'canvas/photo_contest/containers/Previews'
 import PreviewsTopFans from 'canvas/top_fans/containers/Previews'
+import PreviewsMemoryMatch from 'canvas/memory_match/containers/Previews'
 // Provisorio
 
 const screens = {
 	trivia: PreviewsTrivia.screens,
 	photo_contest: PreviewsPhotoContest.screens,
 	top_fans: PreviewsTopFans.screens,
+	memory_match: PreviewsMemoryMatch.screens,
 }
 
 const Design = ({

@@ -28,11 +28,11 @@ const ThanksView = ({
 		<div className="Indicators">
 			<div className="Indicator-left animated slideInLeft">
 				<div className="Indicator-background"></div>
-				<span className="ita-indicator-text">{clicks}</span>
+				<span className="ita-cali-indicator-text">{clicks}</span>
 			</div>
 			<div className="Indicator-right animated slideInRight">
 				<div className="Indicator-background"></div>
-				<span className="ita-indicator-text">{time}</span>
+				<span className="ita-cali-indicator-text">{time}</span>
 			</div>
 		</div>
 		{footerImage ? <Image source={footerImage} /> : null}

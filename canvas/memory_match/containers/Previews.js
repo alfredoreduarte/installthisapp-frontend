@@ -1,76 +1,62 @@
 import React, { PropTypes } from 'react'
 
 // Screens
-import Intro from 'canvas/memory_match/components/Intro'
-import Index from 'canvas/memory_match/components/Index'
+import IntroView from 'canvas/memory_match/components/Intro'
+import IndexView from 'canvas/memory_match/components/Index'
+import ThanksView from 'canvas/memory_match/components/Thanks'
+import AlreadyPlayedView from 'canvas/memory_match/components/AlreadyPlayed'
 
 /** Photo samples. */
-const demoPhotos = [
-	'https://instagram.fasu1-1.fna.fbcdn.net/t51.2885-15/e35/14359508_382034698587220_570290345_n.jpg?ig_cache_key=MTMzODgxOTAwMzA4NjQxNDUyMA%3D%3D.2',
+const cards = [
+	{
+		id: 1,
+		attachmentUrl: 'https://graph.facebook.com/10208910337057839/picture?width=100&height=100',
+	},
+	{
+		id: 2,
+		attachmentUrl: 'https://graph.facebook.com/10208910337057839/picture?width=100&height=100',
+	},
+	{
+		id: 3,
+		attachmentUrl: 'https://graph.facebook.com/10208910337057839/picture?width=100&height=100',
+	},
 ]
 
 const Previews = ({ screen, messages, images }) => {
 	switch (screen) {
 		case 'intro':
-			return <Intro
+			return <IntroView
 				image={images.intro}
 				linkUrl={'#'}
 			 />
 		case 'index':
-			return <Index
-				headerImg={images.header}
-				footerImg={images.footer}
-				title={messages.title}
-				subtitle={messages.subtitle}
-				canUpload={true}
-				canVote={true}
-				loggedUser={{id: 1}}
-				uploadButton={messages.uploadButton}
-				mostVoted={messages.mostVoted}
-				mostRecent={messages.mostRecent}
-				photos={[0,1,2,3,4,5,6].map(el => {const elOne = sequencer.getOne();console.log(elOne);return elOne;})}
-				votes={votes}
-				handleVote={() => console.log('vote')}
-				uploadUrl={' '}
-				singlePhotoUrl={''}
-				sortPhotos={() => console.log('sort')}
-				sort={'mostVoted'}
-				search={() => console.log('search')}
-				searchQuery={''}
+			return <IndexView
+				headerImage={images.header}
+				footerImage={images.footer}
+				cardBack={images.cardBack}
+				cards={cards}
+				currentTime={20}
+				matchedIds={[]}
+				clickCount={12}
+				flippedCards={[]}
+				finished={false}
+				onCardFlip={() => console.log(' ')}
 			 />
-		case 'upload':
-			return <Upload
-				headerImg={images.header}
-				footerImg={images.footer}
-				title={messages.title}
-				subtitle={messages.subtitle}
-				userName="Alfredo Re"
-				userIdentifier="10210089963347759"
-				submitButton={messages.submitButton}
-				photoFormLabel={messages.photoFormLabel}
-				captionFormLabel={messages.captionFormLabel}
-				back={messages.back}
-				uploadPhoto={() => console.log('vote')}
-				busy={false}
-				backUrl={' '}
+		case 'thanks':
+			return <ThanksView
+				headerImage={images.header}
+				footerImage={images.footer}
+				thanksMessage={messages.thanksMessage}
+				userName={'Alfredo Re'}
+				userIdentifier={10208910337057839}
+				clicks={12}
+				time={20}
 			 />
-		case 'single':
-			return <Single
-				headerImg={images.header}
-				footerImg={images.footer}
-				title={messages.title}
-				subtitle={messages.subtitle}
-				uploadButton={messages.uploadButton}
-				mostVoted={messages.mostVoted}
-				mostRecent={messages.mostRecent}
-				photo={sequencer.getOne()}
-				voted={true}
-				canUpload={true}
-				canVote={true}
-				back={messages.back}
-				handleVote={() => console.log('vote')}
-				uploadUrl={''}
-				backUrl={' '}
+		case 'already-played':
+			return <AlreadyPlayedView
+				headerImage={images.header}
+				footerImage={images.footer}
+				alreadyPlayedMessage={messages.alreadyPlayedMessage}
 			 />
 		default: 
 			return <div>empty</div>
@@ -79,9 +65,9 @@ const Previews = ({ screen, messages, images }) => {
 
 Previews.screens = [
 	{ value: 'intro', label: 'Introduction'},
-	{ value: 'index', label: 'Photos'},
-	{ value: 'upload', label: 'Upload Form'},
-	{ value: 'single', label: 'Individual Photo'},
+	{ value: 'index', label: 'Game'},
+	{ value: 'thanks', label: 'Thanks message'},
+	{ value: 'already-played', label: 'Already played'},
 ]
 
 Previews.propTypes = {

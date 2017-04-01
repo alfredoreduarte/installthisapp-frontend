@@ -20,11 +20,11 @@ const IndexView = ({
 		<div className="Indicators">
 			<div className="Indicator-left animated slideInLeft">
 				<div className="Indicator-background"></div>
-				<span className="ita-indicator-text">{clickCount}</span>
+				<span className="ita-cali-indicator-text">{clickCount}</span>
 			</div>
 			<div className="Indicator-right animated slideInRight">
 				<div className="Indicator-background"></div>
-				<span className="ita-indicator-text">{currentTime}</span>
+				<span className="ita-cali-indicator-text">{currentTime}</span>
 			</div>
 		</div>
 		<div className="container">
