@@ -45,7 +45,7 @@ else {
 
 // Images and other static asssets
 app.use('/images', express.static(__dirname + '/assets/images'))
-app.use('/fonts', express.static(__dirname + '/assets/fonts'))
+app.use('/fonts', cors(), express.static(__dirname + '/assets/fonts'))
 app.use('/styles', express.static(__dirname + '/assets/styles'))
 app.use('/landing', express.static(__dirname + '/assets/landing'))
 app.use('/public', express.static(__dirname + '/assets/newlanding'))
