@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../_head', {title: 'InstallThisApp'}) %>
+<body>
+	<%- include('_navbar') %>
+	
+	<header class="jumbotron site-jumbotron white-text-area features-jumbotron">
+		<div class="container">
+			<div class="header-magic-appearance">
+				<h1 class="text-center site-title">A handful of features to boost your facebook pages</h1>
+				<p class="text-center"><i>InstallThisApp is constantly improved, keeping in mind that gorgeous apps should also be adaptable to your style, or your brand’s</i></p>
+			</div>
+		</div>
+		<div class="features-graph-container">
+			<canvas id="features-chart" height="450"></canvas>
+		</div>
+	</header>
+
+	<div class="section-stats white-text-area text-center">
+		<div class="container">
+			<p style="margin-bottom: 30px">
+				<div class="sprite sprite-symbol-white-map" style="margin-right: 20px"></div>
+				<div class="sprite sprite-symbol-white-pie" style="margin-right: 20px"></div>
+				<div class="sprite sprite-symbol-white-bar"></div>
+			</p>
+			<h2 class="h1 feature-title">Track your progress</h2>
+			<p class="h4 section-stats-subtitle">We offer you charts with just the data you need, like visits, unique visits, new users, fans earned and shared links, during different periods of time</p>
+		</div>
+	</div>
+
+	<div class="section-timeline">
+		<div class="container">
+			<div class="col-md-12">
+				<table class="table borderless responsive-table">
+					<tr>
+						<td>
+							<h2 class="h1">Timeline contests</h2>
+							<p>Run sweepstakes among those who like or comment on your posts. Reward your most loyal fans</p>
+						</td>
+						<td>
+							<img src="images/landing-v2/timeline-contest.png" style="max-width: 100%">
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="section-tools white-text-area">
+		<div class="container">
+			<div class="col-md-12">
+				<h2 class="h1 text-center feature-title">Expertly organize your user base</h2>
+			</div>
+			<div class="col-md-12">
+				<table class="table borderless responsive-table">
+					<tr>
+						<td>
+							<h3 class="feature-subtitle">
+								<span class="feature-icon"><div class="sprite sprite-fdsa"></div></span>Detailed User profiles
+							</h3>
+						</td>
+						<td><p>fdsafdsafdas</p></td>
+					</tr>
+					<tr>
+						<td>
+							<h3 class="feature-subtitle">
+								<span class="feature-icon"><div class="sprite sprite-fdsa"></div></span>User labelling
+							</h3>
+						</td>
+						<td><p>fdsafdsafdas</p></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+	<div class="section-customiser">
+		<div class="container">
+			<div class="col-md-12">
+				<table class="table borderless responsive-table">
+					<tr>
+						<td>
+							<h2 class="h1">Customise your app in minutes</h2>
+							<p>Edit everything with just a few clicks</p>
+						</td>
+						<td>
+							<h3 style="margin-bottom: 50px"><span class="feature-icon"><div class="sprite sprite-symbol-gray-text-style"></div></span>Text styles</h3>
+							<h3 style="margin-bottom: 50px"><span class="feature-icon"><div class="sprite sprite-symbol-gray-image"></div></span>Template images</h3>
+							<h3 style="margin-bottom: 50px"><span class="feature-icon"><div class="sprite sprite-symbol-gray-color"></div></span>Interface colors</h3>
+							<h3 style="margin-bottom: 50px"><span class="feature-icon"><div class="sprite sprite-symbol-gray-globe"></div></span>Multi-language</h3>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="section-geography text-center white-text-area">
+		<div class="container">
+			<div class="col-md-12">
+				<div class="feature-title">
+					<h2 class="h1">Geographic targeting and independent timezones</h2>
+					<p>Allow access to your apps only to a list of countries you decide. <br>Set different timezones for each app if you run campaigns in different parts of the globe</p>
+				</div>
+			</div>
+		</div>
+		<div class="section-geography-map"></div>
+	</div>
+
+	<%- include('_section-extra-features') %>
+
+	<%- include('_cta-area') %>
+
+	<%- include('_footer') %>
+	<%- include('_scripts') %>
+</body>
+</html>

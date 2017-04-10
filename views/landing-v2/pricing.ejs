@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../_head', {title: 'InstallThisApp'}) %>
+<body>
+	<%- include('_navbar') %>
+	
+	<header class="jumbotron site-jumbotron white-text-area header-pricing-page">
+		<div class="container">
+			<div class="header-magic-appearance">
+				<h1 class="text-center site-title">Become one of our amazing clients today</h1>
+				<p class="text-center site-subtitle">These are our monthly plans, they allow you to install all the apps you want on all of your pages</p>
+			</div>
+		</div>
+	</header>
+	<section class="section">
+		<div class="container">
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane active" id="plans-normal">
+					<table class="table pricing white-text-area responsive-table">
+						<thead>
+							<tr>
+								<td class="featured-plan">
+									<div class="pricing-ribbon-container"><div class="pricing-ribbon" data-toggle="tooltip" data-placement="left" title="White label apps are bla bla">White label</div></div>
+									<p class="plan-name">Basic</p>
+									<h3 class="plan-price">
+										<sup>US$</sup>
+										<span>29</span>
+										<sub>/mo</sub>
+									</h3>
+									<div class="features">
+										<p>fdsa</p>
+										<p>fdsa</p>
+										<p>fdsa</p>
+										<p>white label</p>
+									</div>
+									<p>
+										<a 
+											href="/login"
+											class="btn btn-primary plan-cta">
+												Choose plan - 29$
+										</a>
+									</p>
+									<p>
+										<small>
+										<a 
+											href="/">
+											buy one year
+										</a>
+										</small>
+									</p>
+								</td>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
+	<%- include('_section-faq', {
+		items: [
+			{
+				question: "Is there any limit to the 7-day free trial?",	
+				answer: "You can only publish one contest during the 7-day free trial",	
+			},
+			{
+				question: "What happens to my contest at the end of the free trial period?",	
+				answer: "Your contest will not be accessible to users, but you'll still be able to use the dashboard",	
+			},
+		]
+	}) %>
+
+	<%- include('_cta-area') %>
+
+	<%- include('_footer') %>
+</body>
+</html>

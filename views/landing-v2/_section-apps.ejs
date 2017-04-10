@@ -1,0 +1,42 @@
+<section class="section-apps text-center">
+	<div class="container apps-preview">
+		<div class="col-md-8 col-md-offset-2 col-sm-12">
+			<%
+			var theApps = [
+				{
+					title: "Trivia",
+					excerpt: "Show a series of multiple choice questions, and add some difficulty with a countdown clock.",
+					url: "/trivia-contest.html",
+					image: "trivia",
+				},
+				{
+					title: "Top Fans",
+					excerpt: "Display your top fans in your Facebook page and reward them.",
+					url: "/top-fans-for-facebook-pages.html",
+					image: "top_fans",
+				},
+				{
+					title: "Photo Contest",
+					excerpt: "Users upload photos from their computers of mobile phones. Then, they share links to your app asking for votes. Extremely viral!",
+					url: "/photo-contest.html",
+					image: "photo_contest",
+				},
+				{
+					title: "Memory Match",
+					excerpt: "Users train up their memory with this matching game. They should use as few tries as possible in the shortest time possible.",
+					url: "#",
+					image: "memory_match",
+				},
+			]
+			theApps.map(app => { %>
+				<%- include('_app-list-item', app) %>
+			<% }) %>
+		</div>
+	</div>
+	<div class="container hide">
+		<div class="col-sm-12">
+			<h3>These are just some of our apps</h3>
+			<p><a href="/apps" class="btn btn-info">View all apps</a></p>
+		</div>
+	</div>
+</section>

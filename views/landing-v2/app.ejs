@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../_head', {title: pageTitle}) %>
+<body>
+	<%- include('_navbar') %>
+	
+	<header class="jumbotron site-jumbotron white-text-area no-bottom-padding-jumbotron" id="large-header">
+		<div class="container">
+			<div class="header-magic-appearance">
+				<h1 class="text-center site-title"><%= pageTitle %></h1>
+				<p class="text-center"><%= pageSubTitle %></p>
+				<p class="text-center" style="margin-top: 20px">
+					<a href="/signup" class="btn btn-lg btn-primary site-cta">Start Now</a>
+				</p>
+				<div class="text-center">
+					<div class="app-main-desktop-screenshot-frame" style="height: 500px;width: 900px">
+						<img src="/images/module-landings/<%= app %>/hero.png" style="width: 100%">
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<section class="section-about">
+		<div class="container text-center">
+			<h2 class="h1 col-md-12"><%= whatCanIDoQuestion %></h2>
+			<p><%= whatCanIDoAnswer %></p>
+		</div>
+	</section>
+
+	
+	<div class="section gradientlila white-text-area">
+		<div class="container">
+			<div class="col-md-5 vertical-align text-center-xs text-center-sm">
+				<h2 class="h1 app-step-title">Create</h2>
+				<p class="app-step-content"><%= createText %></p>
+			</div><!-- 
+			 --><div class="col-md-7 vertical-align">
+				<div class="thumbnail">
+					<video id="create"  loop style="
+					width: 100%;
+					height: auto;
+					">
+						<source src="/images/landing/create-<%= app %>.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="section">
+		<div class="container">
+			<div class="col-md-5 col-md-push-7 vertical-align text-center-xs text-center-sm">
+				<h2 class="h1 app-step-title">Customize</h2>
+				<p class="app-step-content" style="margin: 15px 0px">
+					<img src="/images/landing/typography.png" style="height: 30px;margin-right: 10px;opacity: .5" />
+					<img src="/images/landing/picture.png" style="height: 30px;margin-right: 10px;opacity: .5" />
+					<img src="/images/landing/brush.png" style="height: 30px;margin-right: 10px;opacity: .5" />
+					<img src="/images/landing/globe.png" style="height: 30px;margin-right: 10px;opacity: .5" />
+				</p>
+				<ul class="app-step-content">
+					<li>Texts</li>
+					<li>Colors</li>
+					<li>Fonts</li>
+					<li>Background images</li>
+					<li>Buttons</li>
+				</ul>
+			</div><!-- 
+			 --><div class="col-md-7 col-md-pull-5 vertical-align">
+				<div class="thumbnail">
+					<video id="customize" loop style="
+					width: 100%;
+					height: auto;
+					">
+						<source src="/images/landing/customize-<%= app %>.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="section gradientlila white-text-area">
+		<div class="container">
+			<div class="col-md-5 vertical-align text-center-xs text-center-sm">
+				<h2 class="h1 app-step-title">Publish</h2>
+				<ul class="app-step-content">
+					<li>Standalone Website</li>
+					<li>Mobile Website</li>
+					<li>Facebook Tab</li>
+					<li>Embed on any website</li>
+				</ul>
+			</div><!-- 
+			 --><div class="col-md-6 col-md-push-1 vertical-align">
+				<div class="thumbnail">
+					<video id="publish" loop style="
+					width: 100%;
+					height: auto;
+					">
+						<source src="/images/landing/publish-<%= app %>.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<%- include('_section-extra-features') %>
+
+	<%- include('_section-extra-apps', {exclude: app}) %>	
+
+	<%- include('_cta-area') %>
+
+	<%- include('_footer') %>
+
+	<%- include('_scripts') %>
+</body>
+</html>

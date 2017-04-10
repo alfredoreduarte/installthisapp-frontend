@@ -1,0 +1,12 @@
+<section class="section-faq">
+	<div class="container">
+		<div class="col-md-12">
+			<% items.map(item => { %>
+				<h4><b><%= item.question %></b></h4>
+				<blockquote>
+					<p><%= item.answer %></p>
+				</blockquote>
+			<% }) %>
+		</div>
+	</div>
+</section>

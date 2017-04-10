@@ -1,0 +1,56 @@
+<section class="section-apps section-about text-center">
+	<div class="container">
+		<div class="col-sm-12">
+			<h3 style="margin-bottom: 50px">This is just one of our apps</h3>
+		</div>
+	</div>
+	<div class="container apps-preview">
+		<div class="col-md-8 col-md-offset-2 col-sm-12">
+			<%
+			var theApps = [
+				{
+					title: "Trivia",
+					excerpt: "Show a series of multiple choice questions, and add some difficulty with a countdown clock.",
+					url: "/trivia-contest.html",
+					image: "trivia",
+				},
+				{
+					title: "Top Fans",
+					excerpt: "Display your top fans in your Facebook page and reward them.",
+					url: "/top-fans-for-facebook-pages.html",
+					image: "top_fans",
+				},
+				{
+					title: "Photo Contest",
+					excerpt: "Users upload photos from their computers of mobile phones. Then, they share links to your app asking for votes. Extremely viral!",
+					url: "/photo-contest.html",
+					image: "photo_contest",
+				},
+				{
+					title: "Memory Match",
+					excerpt: "Users train up their memory with this matching game. They should use as few tries as possible in the shortest time possible.",
+					url: "#",
+					image: "memory_match",
+				},
+			]
+			theApps.map(app => { %>
+			<div class="col-md-4 col-sm-6 col-xs-6 app-preview text-center <%= app.image == exclude ? 'hide' : ' ' %>">
+				<a href="<%= app.url %>">
+					<div class="app-icon sprite sprite-<%= app.image %>"></div>
+				</a>
+				<h3 class="app-preview-title">
+					<a href="<%= app.url %>">
+						<%= app.title %>
+					</a>
+				</h3>
+				<a href="/signup" class="app-preview-install-link hidden-xs">Create now</a>
+			</div>
+			<% }) %>
+		</div>
+	</div>
+	<div class="container">
+		<div class="col-sm-12">
+			<p><a href="/apps" class="btn btn-info">View all apps</a></p>
+		</div>
+	</div>
+</section>

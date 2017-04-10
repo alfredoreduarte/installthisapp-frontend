@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../_head', { title: 'Sweepstakes, Games, contests for Facebook pages' }) %>
+<body>
+	<%- include('_navbar') %>
+	<header class="jumbotron site-jumbotron white-text-area homepage-jumbotron home-header-2" id="large-header">
+		<div class="container">
+			<div class="homepage-jumbotron-content">
+				<h1 class="text-center site-title">Create Giveaways, Sweepstakes & Contests</h1>
+				<!-- <h2 class="text-center site-subtitle h3">Viral contests and promotions for mobile and desktop. Generate Leads → Increase revenue.</h2> -->
+				<h2 class="text-center site-subtitle h3">Publish on Desktop and Mobile, Collect entries, and generate leads.</h2>
+				<div class="text-center">
+					<a href="/signup" class="btn btn-lg btn-primary site-cta absolute-horizontal-center">Start Now</a>
+					<br />
+					<br />
+				</div>
+			</div>
+			<a class="fake-arrow" href="#our-clients">
+				<div class="arrow-a"></div>
+				<div class="arrow-b"></div>
+			</a>
+		</div>
+	</header>
+
+	<%- include('_section-clients') %>	
+
+	<%- include('_section-about') %>
+
+	<section class="section-multiplatform white-text-area text-center">
+		<div class="container">
+			<div class="col-md-12">
+				<h2 class="h1">Desktop and mobile without extra work</h2>
+				<h3 class="text-light"><i>85% of internet users are on mobile devices. Our apps reach them all at once.</i></h3>
+			</div>
+		</div>
+	</section>
+
+	<%- include('_section-apps') %>
+
+	<%- include('_section-faq', {
+		items: [
+			{
+				question: "Can I use these apps for free?",
+				answer: "You get a 7-day free trial to publish one app at a time",
+			},
+			{
+				question: "Is there any limit to the 7-day free trial?",
+				answer: "You can only have one published contest simultaneously during the 7-day free trial",
+			},
+			{
+				question: "What happens to my contest at the end of the free trial period?",	
+				answer: "Although your contest will not be public, you'll still be able to use the dashboard",
+			},
+		]
+	}) %>	
+
+	<%- include('_cta-area') %>
+	<%- include('_footer') %>
+	
+</body>
+</html>

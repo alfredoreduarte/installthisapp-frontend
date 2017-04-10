@@ -70,7 +70,8 @@ module.exports = {
 			// css
 			{
 				test: /\.(css)$/,
-				loaders: ['style-loader', 'css-loader']
+				loader: ExtractTextPlugin.extract('css-loader')
+				// loaders: ['style-loader', 'css-loader']
 			},
 			// fonts
 			{
