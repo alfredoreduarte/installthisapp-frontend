@@ -4889,13 +4889,13 @@ react-is-deprecated@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/react-is-deprecated/-/react-is-deprecated-0.1.2.tgz#301148f86ea428fe8e673eca7a372160b7579dbd"
 
-react-modal@^1.5.2:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-1.5.2.tgz#acd60f19ed93ebbc7b09ea51624c7566fc615245"
+react-modal@^1.7.3:
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-1.7.3.tgz#9745448f280c92290ab1ab05c3d34ae708ef9ab3"
   dependencies:
     element-class "^0.2.0"
     exenv "1.2.0"
-    lodash.assign "^3.2.0"
+    lodash.assign "^4.2.0"
 
 react-moment-proptypes@^1.2.0:
   version "1.2.0"

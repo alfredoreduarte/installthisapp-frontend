@@ -17,3 +17,10 @@ export const getPhotosForCurrentApp = createSelector(
 		return subList.filter(p => stringContains(p.caption, text))
 	}
 )
+
+export const getRandomWinner = createSelector(
+	getPhotosForCurrentApp,
+	photos => {
+		return _.sample(photos)
+	}
+)

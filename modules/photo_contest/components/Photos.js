@@ -2,15 +2,19 @@ import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
 import _ from 'lodash'
 import TimeAgo from 'react-timeago'
+import Modal from 'react-modal'
 import Select from 'react-select'
 import { Link } from 'react-router'
 import { Table, DropdownButton, MenuItem, ButtonToolbar } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Checkbox } from 'react-icheck'
 import { selectItemOnTable } from 'actions/users'
-import { getPhotosForCurrentApp } from 'modules/photo_contest/selectors/photos'
+import { getPhotosForCurrentApp, getRandomWinner } from 'modules/photo_contest/selectors/photos'
+import { isWinnerModalVisible } from 'modules/photo_contest/selectors/ui'
 import { fetchPhotoContestEntities } from 'modules/photo_contest/actions/entities'
 import { postDeletePhotos } from 'modules/photo_contest/actions/photos'
+import { hideWinnerModal, showWinnerModal } from 'modules/photo_contest/actions/ui'
+import FbPhoto from 'components/FbPhoto'
 import PhotoDetail from 'modules/photo_contest/components/PhotoDetail'
 import SearchForm from 'components/SearchForm'
 import User from 'components/User'
@@ -22,10 +26,14 @@ const Photos = ({
 	photos,
 	selectedIds,
 	fetchAgain,
+	getRandomWinner,
 	handleDelete,
 	handleDeleteBatch,
 	handleSelect,
 	handleSelectBatch,
+	randomWinner,
+	winnerModalVisible,
+	closeWinnerModal,
 }) => (
 	<div className="ita-table-view">
 		{viewPhoto ? <PhotoDetail 
@@ -33,6 +41,30 @@ const Photos = ({
 			photoId={viewPhoto}
 			backUrl={backUrl}
 			/> : null}
+		<Modal
+		isOpen={winnerModalVisible}
+		// onAfterOpen={afterOpenFn}
+		// onRequestClose={requestCloseFn}
+		// closeTimeoutMS={n}
+		style={{
+			overlay: {
+
+			},
+			content: {
+				top: '200px',
+				right: '200px',
+				left: '200px',
+				bottom: '200px',
+				textAlign: 'center',
+			}
+		}}
+		contentLabel="Modal"
+		>
+			<h1>The winner is...</h1>
+			<FbPhoto identifier={randomWinner.user.identifier} className="img-circle" />
+			<p>{randomWinner.user.name}</p>
+			<p><a onClick={closeWinnerModal}>close</a></p>
+		</Modal>
 		<div className="ita-table-toolbar">
 			<div className="row">
 				<div className="col-md-12">
@@ -55,6 +87,9 @@ const Photos = ({
 					<ButtonToolbar>
 						<button className="btn btn-default btn-sm pull-right" onClick={fetchAgain}>
 							Refresh
+						</button>
+						<button className="btn btn-default btn-sm pull-right" onClick={getRandomWinner}>
+							Get random winner
 						</button>
 					</ButtonToolbar>
 					<ul className="ita-table-tools-selected list-inline list-no-margin">
@@ -150,14 +185,15 @@ const Photos = ({
 )
 
 const mapStateToProps = (state, props) => {
-	const viewPhoto = props.params.photoId
-	console.log('location', props)
+	const viewPhoto = props ? props.params.photoId : false
 	return { 
 		backUrl: `/d/apps/${props.params.type}/${props.params.checksum}/photos`,
 		photos: getPhotosForCurrentApp(state, props),
 		selectedIds: state.selectedItems,
 		detailUrl: props.location.pathname,
 		viewPhoto,
+		winnerModalVisible: isWinnerModalVisible(state),
+		randomWinner: getRandomWinner(state, props),
 	}
 }
 
@@ -179,6 +215,15 @@ const mapDispatchToProps = (dispatch, props) => {
 			dispatch({
 				type: 'RESET_SELECTED_ITEMS'
 			})
+		},
+		getRandomWinner: () => {
+			console.log('winner')
+			dispatch(showWinnerModal())
+			// console.log(getRandomWinner(state))
+		},
+		closeWinnerModal: () => {
+			console.log('close winner')
+			dispatch(hideWinnerModal())
 		}
 	}
 }

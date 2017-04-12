@@ -28,6 +28,7 @@ canvasRouter.use('/static', express.static(__dirname + '/dist'))
 // Auth from facebook page tab
 // 
 canvasRouter.post(`/${canvasId}`, canvasParser, function(req, res) {
+	console.log('llega?')
 	const manifestPath = `${process.cwd()}/webpack-assets.json`
 	const manifest = jsonfile.readFileSync(manifestPath)
 	const manifestBundle = manifest['manifest']['js']
@@ -45,20 +46,33 @@ canvasRouter.post(`/${canvasId}`, canvasParser, function(req, res) {
 	})
 	.then(response => response.json())
 	.then(json =>{
-		res.render('canvas', {
-			cloudFrontUrl: cloudFrontUrl,
-			apiUrl,
-			module: moduleName,
-			canvasId: canvasId,
-			checksum: json.checksum,
-			facebookAppId: json.fb_application_id,
-			stylesheetUrl: json.stylesheet_url,
-			messagesUrl: json.messages_url,
-			imagesUrl: json.images_url,
-			manifestBundle,
-			vendorBundle,
-			moduleBundle,
-		})
+		if (json.error) {
+			res.render('canvas-error', {
+				cloudFrontUrl: cloudFrontUrl,
+				apiUrl,
+				module: moduleName,
+				message: json.error,
+				manifestBundle,
+				vendorBundle,
+				moduleBundle,
+			})
+		}
+		else {
+			res.render('canvas', {
+				cloudFrontUrl: cloudFrontUrl,
+				apiUrl,
+				module: moduleName,
+				canvasId: canvasId,
+				checksum: json.checksum,
+				facebookAppId: json.fb_application_id,
+				stylesheetUrl: json.stylesheet_url,
+				messagesUrl: json.messages_url,
+				imagesUrl: json.images_url,
+				manifestBundle,
+				vendorBundle,
+				moduleBundle,
+			})
+		}
 	})
 	.catch(exception =>
 		{

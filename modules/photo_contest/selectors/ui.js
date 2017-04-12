@@ -1,0 +1,1 @@
+export const isWinnerModalVisible = state => state.photoContest.ui.showWinnerModal
