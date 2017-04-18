@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('_head', { title: copyGroup['title'] }) %>
+<body>
+	<header class="header">
+		<div class="container">
+			<div class="col-md-12 text-center">
+				<h3><img src="/images/campaign/logo-white.png" style="width: 100px" /></h3>
+				<h1 class="title-main"><%- copyGroup['h1'] %></h1>
+				<h2 class="title-sub"><%= copyGroup['h2'] %></h2>
+			</div>
+		</div>
+		<section class="content container " style="display: flex;">
+			<div style="display: flex;width: 100%;">
+				<div class="col-md-12" style="
+					display: flex;
+					align-items: center;
+					justify-content: center;
+				">
+					<img src="/images/campaign/hero-1.png" class="img-responsive" />
+				</div>
+			</div>
+		</section>
+	</header>
+	<section class="cta-area">
+		<div class="col-md-12" style="
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
+			flex-direction: column;
+		">
+			<h3 class="title-footer text-center"><%= copyGroup['cta-title'] %></h3>
+			<br/>
+			<form class="form-inline">
+				<div class="input-group cta-input-group">
+					<input type="text" class="form-control input-lg cta-input" placeholder="<%= copyGroup['cta-input-placeholder'] %>">
+					<span class="input-group-btn">
+						<button class="btn btn-success btn-lg cta-button" type="button"><%= copyGroup['cta-button'] %></button>
+					</span>
+				</div>
+			</form>
+		</div>
+	</section>
+	<section class="block-list">
+		<div class="block-list-item">
+			<h2 class="block-list-item-title"><%= copyGroup['block-list-title-1'] %></h2>
+			<ul class="list-unstyled list-checks">
+				<% copyGroup['block-list-1'].map(function(listItem) { %>
+					<li><span class="glyphicon glyphicon-ok"></span><%= listItem %></li>
+				<% }) %>
+			</ul>
+		</div>
+		<div class="block-list-item white">
+			<img src="/images/campaign/hero-1.png" class="img-responsive" />
+		</div>
+	</section>
+	<section class="block-list">
+		<div class="block-list-item white">
+			<img src="/images/campaign/hero-1.png" class="img-responsive" />
+		</div>
+		<div class="block-list-item">
+			<h2 class="block-list-item-title"><%= copyGroup['block-list-title-2'] %></h2>
+			<ul class="list-unstyled list-checks">
+				<% copyGroup['block-list-2'].map(function(listItem) { %>
+					<li><span class="glyphicon glyphicon-ok"></span><%= listItem %></li>
+				<% }) %>
+			</ul>
+		</div>
+	</section>
+	<section class="cta-area">
+		<div class="col-md-12" style="
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
+			flex-direction: column;
+		">
+			<h3 class="title-footer text-center"><%= copyGroup['cta-title'] %></h3>
+			<br/>
+			<form class="form-inline">
+				<div class="input-group cta-input-group">
+					<input type="text" class="form-control input-lg cta-input" placeholder="<%= copyGroup['cta-input-placeholder'] %>">
+					<span class="input-group-btn">
+						<button class="btn btn-success btn-lg cta-button" type="button"><%= copyGroup['cta-button'] %></button>
+					</span>
+				</div>
+			</form>
+		</div>
+	</section>
+</body>
+</html>

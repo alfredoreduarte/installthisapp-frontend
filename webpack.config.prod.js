@@ -12,6 +12,11 @@ module.exports = {
 		common: 'moment',
 		dashboard: 'index.js',
 		landing: './assets/landing/index',
+		"campaign-one": './assets/campaign/one',
+		"campaign-two": './assets/campaign/two',
+		"campaign-three": './assets/campaign/three',
+		"campaign-four": './assets/campaign/four',
+		"campaign-five": './assets/campaign/five',
 		trivia: 'canvas/trivia/index.js',
 		top_fans: 'canvas/top_fans/index.js',
 		photo_contest: 'canvas/photo_contest/index.js',
@@ -72,7 +77,7 @@ module.exports = {
 			// css
 			{
 				test: /\.(css)$/,
-				loaders: ['style-loader', 'css-loader']
+				loader: ExtractTextPlugin.extract('css-loader')
 			},
 			// fonts
 			{

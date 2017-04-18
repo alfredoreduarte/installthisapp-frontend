@@ -12,6 +12,11 @@ module.exports = {
 		common: 'moment',
 		dashboard: ['webpack-hot-middleware/client', './index'],
 		landing: ['webpack-hot-middleware/client', './assets/landing/index'],
+		"campaign-one": ['webpack-hot-middleware/client', './assets/campaign/one'],
+		"campaign-two": ['webpack-hot-middleware/client', './assets/campaign/two'],
+		"campaign-three": ['webpack-hot-middleware/client', './assets/campaign/three'],
+		"campaign-four": ['webpack-hot-middleware/client', './assets/campaign/four'],
+		"campaign-five": ['webpack-hot-middleware/client', './assets/campaign/five'],
 		trivia: './canvas/trivia/index',
 		top_fans: './canvas/top_fans/index',
 		photo_contest: './canvas/photo_contest/index',
@@ -71,7 +76,6 @@ module.exports = {
 			{
 				test: /\.(css)$/,
 				loader: ExtractTextPlugin.extract('css-loader')
-				// loaders: ['style-loader', 'css-loader']
 			},
 			// fonts
 			{
