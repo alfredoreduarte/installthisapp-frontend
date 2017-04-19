@@ -1,0 +1,25 @@
+@include keyframes(slider-lg) {
+	0%{
+		background-image: url(/images/campaign/bg-2.jpg);
+		background-position: bottom right;
+	}
+	// 33%{
+	25%{
+		background-image: url(/images/campaign/bg-4.jpg);
+		background-position: bottom right;
+	}
+	// 66%{
+	50%{
+		background-image: url(/images/campaign/bg-3.jpg);
+		background-position: bottom right;
+	}
+	// 100%{
+	75%{
+		background-image: url(/images/campaign/bg-5.jpg);
+		background-position: bottom right;
+	}
+	100%{
+		background-image: url(/images/campaign/bg-2.jpg);
+		background-position: bottom right;
+	}
+}

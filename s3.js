@@ -7,7 +7,7 @@ const router = express.Router()
 // Direct uploads to S3 as instructed by
 // https://devcenter.heroku.com/articles/s3-upload-node
 // 
-router.get('/', (req, res) => {
+router.get('/sign-s3', (req, res) => {
 	const s3 = new aws.S3()
 	const fileName = req.query['file-name']
 	const fileType = req.query['file-type']

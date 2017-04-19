@@ -1,0 +1,53 @@
+body
+	position: relative
+.form-overlay
+	display: none
+	background: #444444
+	color: white
+	position: absolute
+	top: 0
+	right: 0
+	bottom: 0
+	left: 0
+	z-index: 3
+	width: 100%
+	height: 100%
+	justify-content: center
+	&.visible
+		display: flex
+.form-overlay-content
+	width: 500px
+
+.form-overlay-title
+	font:
+		size: 43px
+		weight: 400
+	margin: 100px 0px 50px
+.form-overlay-fields
+	.form-control
+		height: 62px
+		font-weight: 300
+		font-size: 18px
+		padding:
+			left: 30px
+			right: 30px
+	.btn
+		height: 62px
+		margin: 20px 0px 50px
+		letter-spacing: 1px
+		font:
+			size: 20px
+			weight: 300
+		padding:
+			left: 40px
+			right: 40px
+.btn-close
+	position: absolute
+	top: 20px
+	right: 20px
+	color: white
+	font:
+		weight: 200
+		size: 20px
+	&:hover
+		color: white

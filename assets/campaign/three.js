@@ -1,8 +1,23 @@
-// import { $, jQuery } from 'jquery'
-// global.jQuery = require('jquery')
-// window.$ = $
-// window.jQuery = jQuery
-import slick from 'slick-carousel'
+import $ from 'jquery'
+import visible from 'jquery-visible'
+require('assets/campaign/overlay')
 require('assets/campaign/stylesheets/3.sass')
 
-console.log('page 3')
+$(document).ready(() => {
+	$(window).on('scroll', () => {
+		if ($('#customize').visible()) {
+			if ($('#customize').get(0).paused) {
+				$('#customize').get(0).play()
+				$('#publish').get(0).pause()
+				$('#publish').get(0).currentTime = 0
+			}
+		}
+		if ($('#publish').visible()) {
+			if ($('#publish').get(0).paused) {
+				$('#publish').get(0).play()
+				$('#customize').get(0).pause()
+				$('#customize').get(0).currentTime = 0
+			}
+		}
+	})
+})

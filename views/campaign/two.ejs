@@ -5,7 +5,7 @@
 	<header class="header">
 		<div class="container">
 			<div class="col-md-12 text-center">
-				<h3><img src="/images/campaign/logo-white.png" style="width: 100px" /></h3>
+				<h3><img src="/images/campaign/logo-white.png" /></h3>
 				<h1 class="title-main"><%- copyGroup['h1'] %></h1>
 				<h2 class="title-sub"><%= copyGroup['h2'] %></h2>
 			</div>
@@ -43,16 +43,18 @@
 			">
 				<h3 class="title-footer text-center"><%= copyGroup['cta-title'] %></h3>
 				<br/>
-				<form class="form-inline">
+				<form class="form-inline lead-form">
 					<div class="input-group cta-input-group">
-						<input type="text" class="form-control input-lg cta-input" placeholder="<%= copyGroup['cta-input-placeholder'] %>">
+						<input type="email" name="email" class="form-control input-lg cta-input lead-email" required placeholder="<%= copyGroup['cta-input-placeholder'] %>" />
 						<span class="input-group-btn">
-							<button class="btn btn-success btn-lg cta-button" type="button"><%= copyGroup['cta-button'] %></button>
+							<button class="btn btn-success btn-lg cta-button" type="submit"><%= copyGroup['cta-button'] %></button>
 						</span>
 					</div>
 				</form>
 			</div>
 		</div>
 	</footer>
+	<%- include('_overlay') %>
+	<%- include('_scripts') %>
 </body>
 </html>

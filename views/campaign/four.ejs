@@ -5,7 +5,7 @@
 	<header class="header">
 		<div class="container">
 			<div class="col-md-12 text-center">
-				<h3><img src="/images/campaign/logo-white.png" style="width: 100px" /></h3>
+				<h3><img src="/images/campaign/logo-white.png" /></h3>
 				<h1 class="title-main"><%- copyGroup['h1'] %></h1>
 				<h2 class="title-sub"><%= copyGroup['h2'] %></h2>
 			</div>
@@ -22,7 +22,7 @@
 			</div>
 		</section>
 	</header>
-	<section class="cta-area">
+	<section class="cta-area" style="height: auto;">
 		<div class="col-md-12" style="
 			display: flex;
 			align-items: center;
@@ -31,11 +31,11 @@
 		">
 			<h3 class="title-footer text-center"><%= copyGroup['cta-title'] %></h3>
 			<br/>
-			<form class="form-inline">
+			<form class="form-inline lead-form">
 				<div class="input-group cta-input-group">
-					<input type="text" class="form-control input-lg cta-input" placeholder="<%= copyGroup['cta-input-placeholder'] %>">
+					<input type="email" name="email" class="form-control input-lg cta-input lead-email" required placeholder="<%= copyGroup['cta-input-placeholder'] %>" />
 					<span class="input-group-btn">
-						<button class="btn btn-success btn-lg cta-button" type="button"><%= copyGroup['cta-button'] %></button>
+						<button class="btn btn-success btn-lg cta-button" type="submit"><%= copyGroup['cta-button'] %></button>
 					</span>
 				</div>
 			</form>
@@ -44,6 +44,7 @@
 	<section class="block-list">
 		<div class="block-list-item">
 			<h2 class="block-list-item-title"><%= copyGroup['block-list-title-1'] %></h2>
+			<br/>
 			<ul class="list-unstyled list-checks">
 				<% copyGroup['block-list-1'].map(function(listItem) { %>
 					<li><span class="glyphicon glyphicon-ok"></span><%= listItem %></li>
@@ -51,15 +52,32 @@
 			</ul>
 		</div>
 		<div class="block-list-item white">
-			<img src="/images/campaign/hero-1.png" class="img-responsive" />
+			<div class="thumbnail">
+				<video id="customize" loop style="
+				width: 100%;
+				height: auto;
+				">
+					<source src="/images/landing/customize-trivia.mp4" type="video/mp4">
+					Your browser does not support the video tag.
+				</video>
+			</div>
 		</div>
 	</section>
 	<section class="block-list">
 		<div class="block-list-item white">
-			<img src="/images/campaign/hero-1.png" class="img-responsive" />
+			<div class="thumbnail">
+				<video id="publish" loop style="
+				width: 100%;
+				height: auto;
+				">
+					<source src="/images/landing/publish-trivia.mp4" type="video/mp4">
+					Your browser does not support the video tag.
+				</video>
+			</div>
 		</div>
 		<div class="block-list-item">
 			<h2 class="block-list-item-title"><%= copyGroup['block-list-title-2'] %></h2>
+			<br/>
 			<ul class="list-unstyled list-checks">
 				<% copyGroup['block-list-2'].map(function(listItem) { %>
 					<li><span class="glyphicon glyphicon-ok"></span><%= listItem %></li>
@@ -76,15 +94,17 @@
 		">
 			<h3 class="title-footer text-center"><%= copyGroup['cta-title'] %></h3>
 			<br/>
-			<form class="form-inline">
+			<form class="form-inline lead-form">
 				<div class="input-group cta-input-group">
-					<input type="text" class="form-control input-lg cta-input" placeholder="<%= copyGroup['cta-input-placeholder'] %>">
+					<input type="email" name="email" class="form-control input-lg cta-input lead-email" required placeholder="<%= copyGroup['cta-input-placeholder'] %>" />
 					<span class="input-group-btn">
-						<button class="btn btn-success btn-lg cta-button" type="button"><%= copyGroup['cta-button'] %></button>
+						<button class="btn btn-success btn-lg cta-button" type="submit"><%= copyGroup['cta-button'] %></button>
 					</span>
 				</div>
 			</form>
 		</div>
 	</section>
+	<%- include('_overlay') %>
+	<%- include('_scripts') %>
 </body>
 </html>

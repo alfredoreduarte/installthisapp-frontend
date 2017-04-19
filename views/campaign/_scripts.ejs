@@ -1,0 +1,7 @@
+<script>
+	window.apiUrl = "<%= apiUrl %>";
+</script>
+<script src="<%= cloudFrontUrl %><%= manifestBundle %>"></script>
+<script src="<%= cloudFrontUrl %><%= vendorBundle %>"></script>
+<script src="<%= cloudFrontUrl %><%= jsBundle %>"></script>
+<%- include('../_segment') %>

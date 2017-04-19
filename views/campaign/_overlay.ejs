@@ -1,0 +1,17 @@
+<div class="form-overlay" id="overlay">
+	<a href="javascript:void(0)" id="close-button" class="btn-close"><span class="glyphicon glyphicon-remove"></span></a>
+	<div class="form-overlay-content">
+		<h3 class="text-center"><img src="/images/campaign/logo-white.png" /></h3>
+		<p class="form-overlay-title text-center"><%- copyGroup['overlay-title'] %></p>
+		<form class="form-overlay-fields" id="actual-form">
+			<div class="form-group">
+				<input type="email" name="email" id="actual-email" class="form-control" placeholder="Your email address" required />
+			</div>
+			<div class="form-group">
+				<input type="password" id="actual-password" class="form-control" placeholder="password" required />
+			</div>
+			<p class="text-center"><button type="submit" id="actual-submit" class="btn btn-success"><%- copyGroup['overlay-cta-button'] %></button></p>
+		</form>
+
+	</div>
+</div>

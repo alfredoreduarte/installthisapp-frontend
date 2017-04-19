@@ -5,7 +5,7 @@
 	<div class="two-cols">
 		<header class="header" style="padding-left: 100px">
 			<div>
-				<h3><img src="/images/campaign/logo-white.png" style="width: 100px" /></h3>
+				<h3><img src="/images/campaign/logo-white.png" /></h3>
 				<h1 class="title-main"><%- copyGroup['h1'] %></h1>
 				<h2 class="title-sub"><%= copyGroup['h2'] %></h2>
 			</div>
@@ -22,17 +22,19 @@
 				flex: 1;
 				align-items: center;
 			">
-				<img src="/images/campaign/hero-1.png" class="img-responsive" />
+				<img src="/images/campaign/hero-1.png" class="img-responsive" style="opacity: 0" />
 			</div>
-			<form class="form-inline">
-				<div class="input-group cta-input-group" style="width: 450px">
-					<input type="text" class="form-control input-lg cta-input" placeholder="<%= copyGroup['cta-input-placeholder'] %>">
+			<form class="form-inline lead-form">
+				<div class="input-group cta-input-group">
+					<input type="email" name="email" class="form-control input-lg cta-input lead-email" required placeholder="<%= copyGroup['cta-input-placeholder'] %>" />
 					<span class="input-group-btn">
-						<button class="btn btn-success btn-lg cta-button" type="button"><%= copyGroup['cta-button'] %></button>
+						<button class="btn btn-success btn-lg cta-button" type="submit"><%= copyGroup['cta-button'] %></button>
 					</span>
 				</div>
 			</form>
 		</footer>
 	</div>
+	<%- include('_overlay') %>
+	<%- include('_scripts') %>
 </body>
 </html>
