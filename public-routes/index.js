@@ -44,6 +44,7 @@ router.get('/reset-password', function(req, res) { res.render('reset-password', 
 
 router.get('/top-fans-for-facebook-pages.html', function(req, res) { res.render('landing-v2/app', _.merge(commonParams, {
 	app: "top_fans",
+	appExampleLink: 'https://v3.installthisapp.com/app2/DUPFER',
 	pageTitle: "Top Fans Ranking for Facebook Pages",
 	pageSubTitle: "This app scans your Facebook Page's timeline to collect every single like and comment in real time. Scores are shown in a list, with your own style, and you can share it everywhere.",
 	whatCanIDoQuestion: "What can I do with the Top Fans app?",
@@ -52,6 +53,7 @@ router.get('/top-fans-for-facebook-pages.html', function(req, res) { res.render(
 })) })
 router.get('/photo-contest.html', function(req, res) { res.render('landing-v2/app', _.merge(commonParams, {
 	app: "photo_contest",
+	appExampleLink: 'https://v3.installthisapp.com/app3/7EHEU0',
 	pageTitle: "Photo Contest for social media campaigns",
 	pageSubTitle: "Create contests about people's best holiday, birthday, conert photos",
 	whatCanIDoQuestion: "What can I do with the Photo Contest app?",
@@ -60,6 +62,7 @@ router.get('/photo-contest.html', function(req, res) { res.render('landing-v2/ap
 })) })
 router.get('/trivia-contest.html', function(req, res) { res.render('landing-v2/app', _.merge(commonParams, {
 	app: "trivia",
+	appExampleLink: 'https://v3.installthisapp.com/app1/ZRRDDP',
 	pageTitle: "Trivia game for Social Campaigns",
 	pageSubTitle: "Test your audience's knowledge about any subject, and spice it up a bit with a countdown",
 	whatCanIDoQuestion: "What can I do with the Trivia app?",
