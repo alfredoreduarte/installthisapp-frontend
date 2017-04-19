@@ -12,6 +12,12 @@ const manifestBundle = manifest['manifest']['js']
 // const jsBundle = manifest['campaign']['js']
 // const cssBundle = manifest['campaign']['css']
 const vendorBundle = manifest['common']['js']
+const getCurrentUrl = function(req) {
+	return req.protocol + '://' + req.get('host') + req.originalUrl
+} 
+const getCurrentDomain = function(req) {
+	return req.protocol + '://' + req.get('host')
+} 
 
 const copyDictionaryPath = `https://s3-us-west-2.amazonaws.com/installthisapp/campaigns/copy-dictionary.json`
 var copyDictionary = null
@@ -46,6 +52,8 @@ router.get('/campaign/', function(req, res){
 	.then(function(json){
 		const copyGroup = req.param('copygroup') ? req.param('copygroup') : 1
 		res.render('campaign/one', Object.assign({}, commonParams, {
+			currentUrl: getCurrentUrl(req),
+			currentDomain: getCurrentDomain(req),
 			copyGroup: json[copyGroup],
 			jsBundle: manifest['campaign-one']['js'],
 			cssBundle: manifest['campaign-one']['css'],
@@ -62,6 +70,8 @@ router.get('/campaign/one', function(req, res){
 	.then(function(json){
 		const copyGroup = req.param('copygroup') ? req.param('copygroup') : 1
 		res.render('campaign/one', Object.assign({}, commonParams, {
+			currentUrl: getCurrentUrl(req),
+			currentDomain: getCurrentDomain(req),
 			copyGroup: json[copyGroup],
 			jsBundle: manifest['campaign-one']['js'],
 			cssBundle: manifest['campaign-one']['css'],
@@ -77,6 +87,8 @@ router.get('/campaign/two', function(req, res){
 	.then(function(json){
 		const copyGroup = req.param('copygroup') ? req.param('copygroup') : 1
 		res.render('campaign/two', Object.assign({}, commonParams, {
+			currentUrl: getCurrentUrl(req),
+			currentDomain: getCurrentDomain(req),
 			copyGroup: json[copyGroup],
 			jsBundle: manifest['campaign-two']['js'],
 			cssBundle: manifest['campaign-two']['css'],
@@ -92,6 +104,8 @@ router.get('/campaign/three', function(req, res){
 	.then(function(json){
 		const copyGroup = req.param('copygroup') ? req.param('copygroup') : 1
 		res.render('campaign/three', Object.assign({}, commonParams, {
+			currentUrl: getCurrentUrl(req),
+			currentDomain: getCurrentDomain(req),
 			copyGroup: json[copyGroup],
 			jsBundle: manifest['campaign-three']['js'],
 			cssBundle: manifest['campaign-three']['css'],
@@ -107,6 +121,8 @@ router.get('/campaign/four', function(req, res){
 	.then(function(json){
 		const copyGroup = req.param('copygroup') ? req.param('copygroup') : 1
 		res.render('campaign/four', Object.assign({}, commonParams, {
+			currentUrl: getCurrentUrl(req),
+			currentDomain: getCurrentDomain(req),
 			copyGroup: json[copyGroup],
 			jsBundle: manifest['campaign-four']['js'],
 			cssBundle: manifest['campaign-four']['css'],
@@ -122,6 +138,8 @@ router.get('/campaign/five', function(req, res){
 	.then(function(json){
 		const copyGroup = req.param('copygroup') ? req.param('copygroup') : 1
 		res.render('campaign/five', Object.assign({}, commonParams, {
+			currentUrl: getCurrentUrl(req),
+			currentDomain: getCurrentDomain(req),
 			copyGroup: json[copyGroup],
 			jsBundle: manifest['campaign-five']['js'],
 			cssBundle: manifest['campaign-five']['css'],
