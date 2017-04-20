@@ -19,7 +19,7 @@ const getCurrentDomain = function(req) {
 	return req.protocol + '://' + req.get('host')
 } 
 
-const copyDictionaryPath = `https://s3-us-west-2.amazonaws.com/installthisapp/campaigns/copy-dictionary.json`
+const copyDictionaryPath = `https://s3-us-west-2.amazonaws.com/${process.env.S3_BUCKET}/campaigns/copy-dictionary.json`
 var copyDictionary = null
 
 function getDictionary(){
