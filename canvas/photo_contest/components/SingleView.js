@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import HeaderImage from 'canvas/photo_contest/components/HeaderImage'
 import Header from 'canvas/photo_contest/components/Header'
 import ToolBar from 'canvas/photo_contest/components/ToolBar'
+import Credits from 'canvas/photo_contest/components/Credits'
 
 const SingleView = ({ 
 	headerImg,
@@ -66,6 +67,7 @@ const SingleView = ({
 		<div className="row">
 			<HeaderImage source={footerImg} />
 		</div>
+		<Credits />
 	</div>
 )
 

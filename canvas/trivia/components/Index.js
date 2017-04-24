@@ -3,6 +3,7 @@ import HeaderImage from 'canvas/top_fans/components/HeaderImage'
 import CountDown from 'canvas/trivia/components/CountDown'
 import Question from 'canvas/trivia/components/Question'
 import OptionList from 'canvas/trivia/components/OptionList'
+import Credits from 'canvas/trivia/components/Credits'
 
 const Index = ({ header, footer, question, time, handleAnswer }) => (
 	<div>
@@ -19,6 +20,7 @@ const Index = ({ header, footer, question, time, handleAnswer }) => (
 		<div className="row">
 			<HeaderImage source={footer} />
 		</div>
+		<Credits />
 	</div>
 )
 

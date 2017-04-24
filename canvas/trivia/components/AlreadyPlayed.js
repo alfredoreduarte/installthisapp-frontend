@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
-import HeaderImage from 'canvas/top_fans/components/HeaderImage'
+import HeaderImage from 'canvas/trivia/components/HeaderImage'
+import Credits from 'canvas/trivia/components/Credits'
 
 const AlreadyPlayed = ({ title, foot, header, footer }) => (
 	<div>
@@ -13,6 +14,7 @@ const AlreadyPlayed = ({ title, foot, header, footer }) => (
 		<div className="row">
 			<HeaderImage source={footer} />
 		</div>
+		<Credits />
 	</div>
 )
 

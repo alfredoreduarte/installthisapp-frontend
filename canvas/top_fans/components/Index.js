@@ -5,6 +5,7 @@ import { ListGroup, ListGroupItem } from 'react-bootstrap'
 import Header from 'canvas/top_fans/components/Header'
 import HeaderImage from 'canvas/top_fans/components/HeaderImage'
 import ListItem from 'canvas/top_fans/components/ListItem'
+import Credits from 'canvas/top_fans/components/Credits'
 
 const LaImage = HeaderImage
 
@@ -34,6 +35,7 @@ const Index = ({ header, footer, title, subtitle, entries, maxScore, likesLabel,
 		<div className="row">
 			<LaImage source={footer} />
 		</div>
+		<Credits />
 	</div>
 )
 
