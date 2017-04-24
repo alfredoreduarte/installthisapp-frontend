@@ -1,10 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { getCurrentApp } from 'selectors/apps'
+import Modal from 'react-modal'
+import CopyToClipboard from 'react-copy-to-clipboard'
 import AppNavBar from 'components/AppNavBar'
 import AppTitleBar from 'components/AppTitleBar'
 import Sidebar from 'components/Sidebar'
 import { install, uninstall, toggleAppInstalling, toggleAppUninstalling } from 'actions/apps'
+import { toggleCopyShareLink, toggleShareModal } from 'actions/applicationData'
 // import { turnOffActivityCreatingApp, turnOffActivityLoadingApp } from 'actions/activityIndicators'
 import DashboardContentDecorator from 'containers/DashboardContentDecorator'
 
@@ -21,11 +24,62 @@ const AppDashboardContainer = ({
 	fbAppCanvasId,
 	handleInstall,
 	handleUninstall,
+	// Sharing
+	shareLinkCopied,
+	shareModalShown,
+	closeShareModal,
+	onShareLinkCopy,
 }) => (
 	<div>
+		<Modal
+			isOpen={shareModalShown}
+			onAfterOpen={() => console.log('afteropen')}
+			onRequestClose={() => console.log('request close')}
+			contentLabel="Modal"
+			style={{
+				content: {
+					top: '100px',
+					right: '100px',
+					bottom: '100px',
+					left: '100px',
+				}
+			}}
+		>
+			<a href="javascript:void(0)" onClick={() => closeShareModal()}><small>← back</small></a>
+			<div className="page-header">
+				<h1 className="text-center">Sharing your app</h1>
+			</div>
+			<p className="text-center">Use this link to share your app everywhere</p>
+			<div className="col-md-6 col-md-offset-3">
+				<CopyToClipboard
+					className="form-control input-lg"
+					style={{
+						display: 'flex',
+						justifyContent: 'space-between',
+					}}
+					text={`https://${window.location.host}/${currentApp.fbApplication.canvasId}/${currentApp.checksum}`}
+					onCopy={() => onShareLinkCopy()}
+					>
+					<span>
+						{`https://${window.location.host}/${currentApp.fbApplication.canvasId}/${currentApp.checksum}`}
+						<span style={{
+							display: 'inline-block',
+							padding: '4px 10px 0px',
+							background: shareLinkCopied ? '#62B142' : 'gray',
+							color: 'white',
+							borderRadius: '3px',
+							fontSize: '11px',
+							textTransform: 'uppercase',
+							marginRight: '10px',
+						}}>{shareLinkCopied ? 'Copied!' : 'Click to copy'}</span>
+					</span>
+				</CopyToClipboard>
+			</div>
+		</Modal>
 		<AppNavBar />
 		<AppTitleBar 
 			// facebookPageIdentifier={facebookPageIdentifier}
+			handleShare={closeShareModal}
 			applicationType={applicationType}
 			title={currentApp.title} 
 			status={currentApp.status} 
@@ -36,7 +90,7 @@ const AppDashboardContainer = ({
 			checksum={checksum} 
 			type={applicationType} 
 			// facebookPageIdentifier={facebookPageIdentifier}
-			fbAppId={fbAppId} 
+			fbAppId={fbAppId}
 			fbAppCanvasId={fbAppCanvasId} 
 			installed={currentApp.status == 'installed'}>
 			{sidebar}
@@ -54,6 +108,8 @@ const mapStateToProps = (state, props) => {
 	const fbAppCanvasId = currentApp.fbApplication ? currentApp.fbApplication.canvasId : null
 	return { 
 		// facebookPageIdentifier: state.entities.pages[currentApp.fbPageId].identifier,
+		shareLinkCopied: state.applicationData.shareLinkCopied,
+		shareModalShown: state.applicationData.shareModalShown,
 		fbAppId,
 		fbAppCanvasId,
 		currentApp,
@@ -74,6 +130,12 @@ const mapDispatchToProps = (dispatch, props) => {
 		handleUninstall: () => {
 			dispatch(toggleAppUninstalling(props.params.checksum))
 			dispatch(uninstall(props.params.checksum))
+		},
+		closeShareModal: () => {
+			dispatch(toggleShareModal())
+		},
+		onShareLinkCopy: () => {
+			dispatch(toggleCopyShareLink())
 		},
 	}
 }

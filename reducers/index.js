@@ -17,6 +17,7 @@ import deleteApp from 'reducers/deleteApp'
 import styles from 'reducers/styles'
 import mouseTrap from 'reducers/design-helper/mouseTrap'
 import activityIndicators from 'reducers/activityIndicators'
+import applicationData from 'reducers/applicationData'
 
 // Modules
 import trivia from 'modules/trivia/reducers/'
@@ -42,6 +43,7 @@ const createReducer = asyncReducers => {
 		styles,
 		mouseTrap,
 		activityIndicators,
+		applicationData,
 		form: formReducer,
 		trivia,
 		topFans,

@@ -11,11 +11,12 @@ const AppTitleBarButtons = ({
 	scheduled = false,
 	handleInstall,
 	handleUninstall,
+	handleShare,
 }) => (
 	<div>
 		{status == 'installed' ?
 			<div>
-				<button className="btn btn-lg btn-primary btn-outline hide">Share</button>
+				<button className="btn btn-lg btn-primary btn-outline" style={{marginRight: '20px'}} onClick={handleShare}>Share</button>
 				<button onClick={() => handleUninstall()} className="btn btn-lg btn-gray btn-outline">Unpublish</button>
 			</div>
 		:	
@@ -36,7 +37,7 @@ const AppTitleBarButtons = ({
 
 		{status == 'uninstalling' ?
 			<div>
-				<button className="btn btn-lg btn-primary btn-outline hide" disabled>Share</button>
+				<button className="btn btn-lg btn-primary btn-outline" disabled>Share</button>
 				<button className="btn btn-lg btn-gray btn-outline" disabled>Unpublishing</button>
 			</div>
 		:
@@ -61,8 +62,9 @@ const AppTitleBar = ({
 	// facebookPageIdentifier, 
 	applicationType,
 	status, 
-	handleInstall, 
-	handleUninstall
+	handleInstall,
+	handleUninstall,
+	handleShare,
 }) => (
 	<div>
 		<div className="col-md-12 ita-main-app-toolbar">
@@ -84,7 +86,7 @@ const AppTitleBar = ({
 					</div>
 				</div>
 				<div className={`col-md-6 text-right ${applicationType == 'top_fans' ? 'hide' : ' '}`}>
-					<AppTitleBarButtons status={status} handleInstall={handleInstall} handleUninstall={handleUninstall} />
+					<AppTitleBarButtons status={status} handleInstall={handleInstall} handleUninstall={handleUninstall} handleShare={handleShare} />
 				</div>
 			</div>
 		</div>
