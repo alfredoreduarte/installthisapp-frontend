@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { getCurrentApp } from 'selectors/apps'
 import Modal from 'react-modal'
+import { ShareButtons } from 'react-share'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import AppNavBar from 'components/AppNavBar'
 import AppTitleBar from 'components/AppTitleBar'
@@ -10,6 +11,11 @@ import { install, uninstall, toggleAppInstalling, toggleAppUninstalling } from '
 import { toggleCopyShareLink, toggleShareModal } from 'actions/applicationData'
 // import { turnOffActivityCreatingApp, turnOffActivityLoadingApp } from 'actions/activityIndicators'
 import DashboardContentDecorator from 'containers/DashboardContentDecorator'
+
+const {
+  FacebookShareButton,
+  TwitterShareButton,
+} = ShareButtons;
 
 const AppDashboardContainer = ({ 
 	children, 
@@ -70,10 +76,15 @@ const AppDashboardContainer = ({
 							borderRadius: '3px',
 							fontSize: '11px',
 							textTransform: 'uppercase',
+							cursor: 'pointer',
 							marginRight: '10px',
 						}}>{shareLinkCopied ? 'Copied!' : 'Click to copy'}</span>
 					</span>
 				</CopyToClipboard>
+				<br/>
+				<FacebookShareButton className="btn btn-fb btn-block" url={`https://${window.location.host}/${currentApp.fbApplication.canvasId}/${currentApp.checksum}`}>Share on Facebook</FacebookShareButton>
+				<br/>
+				<TwitterShareButton className="btn btn-tw btn-block" url={`https://${window.location.host}/${currentApp.fbApplication.canvasId}/${currentApp.checksum}`}>Share on Twitter</TwitterShareButton>
 			</div>
 		</Modal>
 		<AppNavBar />
