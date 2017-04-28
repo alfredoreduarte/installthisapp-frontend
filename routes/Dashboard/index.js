@@ -62,5 +62,6 @@ export default (store, dispatch) => ({
 		require('modules/top_fans/routes').default(store, dispatch),
 		require('modules/photo_contest/routes').default(store, dispatch),
 		require('modules/memory_match/routes').default(store, dispatch),
+		require('modules/catalog/routes').default(store, dispatch),
 	]
 })

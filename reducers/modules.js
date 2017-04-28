@@ -3,7 +3,8 @@ const entities = (state = {
 		'top_fans',
 		'trivia',
 		'photo_contest',
-		'memory_match'
+		'memory_match',
+		'catalog',
 	],
 	inactive: [
 		

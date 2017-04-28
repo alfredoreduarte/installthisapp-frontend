@@ -24,6 +24,7 @@ import trivia from 'modules/trivia/reducers/'
 import topFans from 'modules/top_fans/reducers/'
 import photoContest from 'modules/photo_contest/reducers/'
 import memoryMatch from 'modules/memory_match/reducers/'
+import catalog from 'modules/catalog/reducers/'
 
 const createReducer = asyncReducers => {
 	return combineReducers({
@@ -49,6 +50,7 @@ const createReducer = asyncReducers => {
 		topFans,
 		photoContest,
 		memoryMatch,
+		catalog,
 		// asyncReducers: asyncReducers
 	})
 }
