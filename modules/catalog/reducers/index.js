@@ -19,6 +19,16 @@ const catalog = (state = {
 				...state,
 				entities: entities(state.entities, action)
 			}
+		case 'CATALOG/REMOVE_CATEGORY':
+			return {
+				...state,
+				entities: entities(state.entities, action)
+			}
+		case 'CATALOG/ADD_CATEGORY':
+			return {
+				...state,
+				entities: entities(state.entities, action)
+			}
 		default:
 			return state
 	}

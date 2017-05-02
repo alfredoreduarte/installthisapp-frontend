@@ -72,6 +72,57 @@ export default (store, dispatch) => ({
 						})
 					}				
 				},
+				{
+					path: 'categories(/create)',
+					onEnter: (nextState, replace, next) => {
+						dispatch(fetchEntities(nextState.params.checksum))
+							.then(() => {
+								next()
+							})
+					},
+					getComponents(nextState, cb) {
+						require.ensure([], require => {
+							cb(null, {
+								main: require('modules/catalog/containers/Categories').default,
+								sidebar: require('modules/catalog/components/Sidebar').default,
+							})
+						})
+					}				
+				},
+				{
+					path: 'categories/new',
+					onEnter: (nextState, replace, next) => {
+						dispatch(fetchEntities(nextState.params.checksum))
+							.then(() => {
+								next()
+							})
+					},
+					getComponents(nextState, cb) {
+						require.ensure([], require => {
+							cb(null, {
+								main: require('modules/catalog/containers/Categories').default,
+								sidebar: require('modules/catalog/components/Sidebar').default,
+							})
+						})
+					}				
+				},
+				{
+					path: 'categories/edit/:categoryId',
+					onEnter: (nextState, replace, next) => {
+						dispatch(fetchEntities(nextState.params.checksum))
+							.then(() => {
+								next()
+							})
+					},
+					getComponents(nextState, cb) {
+						require.ensure([], require => {
+							cb(null, {
+								main: require('modules/catalog/containers/Categories').default,
+								sidebar: require('modules/catalog/components/Sidebar').default,
+							})
+						})
+					}				
+				},
 			])
 		})
 	},

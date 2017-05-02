@@ -105,6 +105,9 @@ const Categories = ({
 						<th>
 							<span>Name</span>
 						</th>
+						<th>
+							<span>Slug</span>
+						</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -113,6 +116,9 @@ const Categories = ({
 					<tr key={category.id}>
 						<td>
 							{category.name}
+						</td>
+						<td>
+							{category.slug}
 						</td>
 						<td className="text-right">
 							<ul className="list-inline list-no-margin">
