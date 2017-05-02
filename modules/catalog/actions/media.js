@@ -3,7 +3,7 @@ import { postFileToApi, deleteFromApi } from 'api'
 import { getCurrentAppByState } from 'selectors/apps'
 
 // Manage media
-export const createMedia = files => {
+export const createMedium = files => {
 	return (dispatch, getState) => {
 		const currentApp = getCurrentAppByState(getState())
 		const checksum = currentApp.checksum
@@ -19,8 +19,7 @@ export const createMedia = files => {
 				let formData = new FormData()
 				formData.append('medium[attachment_url]', url)
 				return postFileToApi(`applications/${checksum}/media_create.json`, formData).then(response => {
-					console.log('resp')
-					console.log(response)
+					window.URL.revokeObjectURL(file.preview) // as per https://github.com/okonet/react-dropzone#word-of-caution-when-working-with-previews
 					dispatch(removeMedium(thisUUID))
 					return dispatch(addMedium(response))
 				})
@@ -33,9 +32,9 @@ export const deleteMedium = id => {
 	return (dispatch, getState) => {
 		const checksum = getState().admin.currentApp
 		return deleteFromApi(`applications/${checksum}/media_destroy.json`, { id }).then(response => {
-			if (response.status == 'ok') {
+			// if (response.status == 'ok') {
 				return dispatch(removeMedium(id))
-			}
+			// }
 		})
 	}
 }

@@ -4,7 +4,7 @@ import * as schema from 'modules/catalog/schema'
 import { getFromApi } from 'api'
 
 export const receiveEntities = entities => ({
-	type: 'EXAMPLE/RECEIVE_ENTITIES',
+	type: 'CATALOG/RECEIVE_ENTITIES',
 	entities,
 })
 

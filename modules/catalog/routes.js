@@ -55,6 +55,23 @@ export default (store, dispatch) => ({
 						})
 					}				
 				},
+				{
+					path: 'media',
+					onEnter: (nextState, replace, next) => {
+						dispatch(fetchEntities(nextState.params.checksum))
+							.then(() => {
+								next()
+							})
+					},
+					getComponents(nextState, cb) {
+						require.ensure([], require => {
+							cb(null, {
+								main: require('modules/catalog/containers/Media').default,
+								sidebar: require('modules/catalog/components/Sidebar').default,
+							})
+						})
+					}				
+				},
 			])
 		})
 	},

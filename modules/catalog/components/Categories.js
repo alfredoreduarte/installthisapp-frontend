@@ -3,29 +3,29 @@ import { ButtonToolbar, Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import { Link } from 'react-router'
 import { Checkbox } from 'react-icheck'
 import SearchForm from 'components/SearchForm'
-import ProductsCreate from 'modules/catalog/components/ProductsCreate'
+import CategoriesCreate from 'modules/catalog/components/CategoriesCreate'
 
-const Products = ({
-	products,
+const Categories = ({
+	categories,
 	handleDelete,
 	selectedItems,
-	fetchProducts,
-	productsCreatePath,
-	productsEditPath,
+	fetchCategories,
+	categoriesCreatePath,
+	categoriesEditPath,
 	showCreateModal,
-	productToEdit,
+	categoryToEdit,
 	closeUrl,
 }) => (
 	<div className="ita-table-view">
-		<ProductsCreate 
+		<CategoriesCreate 
 			show={showCreateModal} 
 			closeUrl={closeUrl} 
-			initialProduct={productToEdit} />
+			initialCategory={categoryToEdit} />
 		<div className="ita-table-toolbar">
 			<div className="row">
 				<div className="col-md-12">
 					<h3 className="ita-page-title">
-						Products 
+						Categories 
 						<small className={selectedItems.length ? '' : 'hide'}>
 							{' '}/ {selectedItems.length} 
 							{' '}user{selectedItems.length > 1 ? 's' : ''} selected
@@ -38,11 +38,11 @@ const Products = ({
 					<SearchForm />
 				</div>
 				<div className="col-md-8 text-right">
-					{products.length == 0 ?
+					{categories.length == 0 ?
 						null
 					:
 					<ButtonToolbar>
-						<button className="btn btn-sm btn-default pull-right" onClick={fetchProducts}>
+						<button className="btn btn-sm btn-default pull-right" onClick={fetchCategories}>
 							Refresh
 						</button>
 					</ButtonToolbar>
@@ -60,25 +60,25 @@ const Products = ({
 						</li>
 					</ul>
 				</div>
-				<div className={products.length > 0 ? "col-md-3 col-md-offset-9" : "hide"}>
+				<div className={categories.length > 0 ? "col-md-3 col-md-offset-9" : "hide"}>
 					<div className="ita-table-view-second-row text-right">
 						<Link 
-							to={productsCreatePath}
+							to={categoriesCreatePath}
 							className="btn btn-sm btn-success">
-							Create Product
+							Create Category
 						</Link>
 					</div>
 				</div>
 			</div>
 		</div>
-		{products.length == 0 ?
+		{categories.length == 0 ?
 			<div className="row">
 				<div className="col-sm-12">
 					<div className="ita-empty text-center">
 						<br />
 						<br />
 						<h4 className="weight-thin animated fadeInDown">
-							There are no products yet, create the first one
+							There are no categories yet, create the first one
 						</h4>
 						<br />
 						<br />
@@ -90,9 +90,9 @@ const Products = ({
 						<br />
 						<p>
 							<Link 
-								to={productsCreatePath}
+								to={categoriesCreatePath}
 								className="btn btn-success animated fadeInUp">
-								Create Product
+								Create Category
 							</Link>
 						</p>
 					</div>
@@ -105,32 +105,20 @@ const Products = ({
 						<th>
 							<span>Name</span>
 						</th>
-						<th>
-							<span>Price</span>
-						</th>
-						<th>
-							<span>Description</span>
-						</th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
-					{products.map(product => 
-					<tr key={product.id}>
+					{categories.map(category => 
+					<tr key={category.id}>
 						<td>
-							{product.name}
-						</td>
-						<td>
-							{product.price}
-						</td>
-						<td>
-							{product.description}
+							{category.name}
 						</td>
 						<td className="text-right">
 							<ul className="list-inline list-no-margin">
 								<li>
 									<Link
-										to={productsEditPath + `/${product.id}`}
+										to={categoriesEditPath + `/${category.id}`}
 										className='
 											icon-tool-big 
 											btn 
@@ -139,7 +127,7 @@ const Products = ({
 								</li>
 								<li>
 									<a
-										onClick={() => handleDelete(product.id)}
+										onClick={() => handleDelete(category.id)}
 										className='
 											icon-tool-big 
 											btn 
@@ -148,9 +136,8 @@ const Products = ({
 								</li>
 								<li className="hide">
 									<Checkbox 
-										checked={selectedItems.indexOf(product.id) !== -1 ? true : false}
+										checked={selectedItems.indexOf(category.id) !== -1 ? true : false}
 										checkboxClass="icheckbox-ita icon-tool-big pull-right"
-										// onChange={() => handleSelect(product.id)}
 									/>
 								</li>
 							</ul>
@@ -163,4 +150,4 @@ const Products = ({
 	</div>
 )
 
-export default Products
+export default Categories

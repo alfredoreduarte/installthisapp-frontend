@@ -1,12 +1,13 @@
 import _ from 'lodash'
 import { createSelector } from 'reselect'
-import { getCurrentApp } from 'selectors/apps'
+import { getCurrentAppByState } from 'selectors/apps'
 
 const getAllProducts = state => _.values(state.catalog.entities.products)
 
 export const getFilteredProducts = createSelector(
 	getAllProducts,
-	products => {
-		return _.filter(products, product => product.id > 0)
+	getCurrentAppByState,
+	(products, app) => {
+		return _.filter(products, product => product.id > 0  && product.applicationId == app.id)
 	}
 )
