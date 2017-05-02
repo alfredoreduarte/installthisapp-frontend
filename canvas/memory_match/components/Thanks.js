@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import FbPhoto from 'components/FbPhoto'
 import Image from 'canvas/memory_match/components/Image'
+import Credits from 'canvas/memory_match/components/Credits'
 
 const ThanksView = ({ 
 	headerImage,
@@ -36,6 +37,7 @@ const ThanksView = ({
 			</div>
 		</div>
 		{footerImage ? <Image source={footerImage} /> : null}
+		<Credits />
 	</div>
 )
 

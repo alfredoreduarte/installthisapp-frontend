@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import Image from 'canvas/memory_match/components/Image'
+import Credits from 'canvas/memory_match/components/Credits'
 
 const AlreadyPlayedView = ({ 
 	headerImage,
@@ -13,6 +14,7 @@ const AlreadyPlayedView = ({
 			{alreadyPlayedMessage ? <h1><span className="ita-cali-message">{alreadyPlayedMessage}</span></h1> : null}
 		</div>
 		{footerImage ? <Image source={footerImage} /> : null}
+		<Credits />
 	</div>
 )
 

@@ -63,11 +63,11 @@ const AppDashboardContainer = ({
 						display: 'flex',
 						justifyContent: 'space-between',
 					}}
-					text={`https://${window.location.host}/${currentApp.fbApplication.canvasId}/${currentApp.checksum}`}
+					text={`https://${window.location.host}/${fbAppCanvasId}/${currentApp.checksum}`}
 					onCopy={() => onShareLinkCopy()}
 					>
 					<span>
-						{`https://${window.location.host}/${currentApp.fbApplication.canvasId}/${currentApp.checksum}`}
+						{`https://${window.location.host}/${fbAppCanvasId}/${currentApp.checksum}`}
 						<span style={{
 							display: 'inline-block',
 							padding: '4px 10px 0px',
@@ -82,9 +82,9 @@ const AppDashboardContainer = ({
 					</span>
 				</CopyToClipboard>
 				<br/>
-				<FacebookShareButton className="btn btn-fb btn-block" url={`https://${window.location.host}/${currentApp.fbApplication.canvasId}/${currentApp.checksum}`}>Share on Facebook</FacebookShareButton>
+				<FacebookShareButton className="btn btn-fb btn-block" url={`https://${window.location.host}/${fbAppCanvasId}/${currentApp.checksum}`}>Share on Facebook</FacebookShareButton>
 				<br/>
-				<TwitterShareButton className="btn btn-tw btn-block" url={`https://${window.location.host}/${currentApp.fbApplication.canvasId}/${currentApp.checksum}`}>Share on Twitter</TwitterShareButton>
+				<TwitterShareButton className="btn btn-tw btn-block" url={`https://${window.location.host}/${fbAppCanvasId}/${currentApp.checksum}`}>Share on Twitter</TwitterShareButton>
 			</div>
 		</Modal>
 		<AppNavBar />

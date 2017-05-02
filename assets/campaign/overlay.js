@@ -1,5 +1,6 @@
 import $ from 'jquery'
 import Cookies from 'js-cookie'
+import * as EmailValidator from 'email-validator'
 import 'whatwg-fetch'
 
 let originalSubmitText = null
@@ -86,11 +87,12 @@ $(document).ready(() => {
 		console.log($(this))
 		console.log(form)
 		const email = form.find('.lead-email').val()
-		if (email) {
+		if (email && EmailValidator.validate(email)) {
 			showOverlay()
 			populateFields(email)
 		}
 		else {
+			$('.lead-form-alert').show()
 			console.log('no email', email)
 		}
 	})
@@ -103,10 +105,12 @@ $(document).ready(() => {
 		$('#actual-submit').attr('disabled', 'disabled').html('Please wait...')
 		const email = $('#actual-email').val()
 		const password = $('#actual-password').val()
-		if (email && password) {
+		if (email && password && EmailValidator.validate(email)) {
 			ITAregister(email, password)
 		}
 		else {
+			$('.actual-form-alert').show()
+			console.log('no email', email)
 			$('#actual-submit').removeAttr('disabled', 'disabled').html(originalSubmitText)
 		}
 	})

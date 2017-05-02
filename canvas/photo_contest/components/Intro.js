@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
 import HeaderImage from 'canvas/photo_contest/components/HeaderImage'
+import Credits from 'canvas/photo_contest/components/Credits'
 
 const Intro = ({ intro }) => (
 	<div className="col-sm-12">
@@ -15,6 +16,7 @@ const Intro = ({ intro }) => (
 				<HeaderImage source={intro} />
 			}
 		</div>
+		<Credits />
 	</div>
 )
 

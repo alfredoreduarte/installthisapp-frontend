@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import Image from 'canvas/memory_match/components/Image'
 import Card from 'canvas/memory_match/components/Card'
+import Credits from 'canvas/memory_match/components/Credits'
 
 const IndexView = ({ 
 	headerImage,
@@ -49,6 +50,7 @@ const IndexView = ({
 			</div>
 		</div>
 		{footerImage ? <Image source={footerImage} /> : null}
+		<Credits />
 	</div>
 )
 
