@@ -1,9 +1,11 @@
 import { Schema, arrayOf } from 'normalizr'
 
-export const entry = new Schema('entries', {
-	idAttribute: 'id'
-})
+export const product = new Schema('products')
+export const category = new Schema('categories')
+export const medium = new Schema('media')
 
 export const entities = {
-	entries: arrayOf(entry),
+	products: arrayOf(product),
+	categories: arrayOf(category),
+	media: arrayOf(medium),
 }

@@ -14,7 +14,6 @@ import SearchForm from 'components/SearchForm'
 import User from 'components/User'
 import { postDeleteQuestions } from 'modules/trivia/actions/questions'
 import QuestionsCreate from 'modules/trivia/components/QuestionsCreate'
-import QuestionCreator from 'modules/trivia/components/QuestionCreator'
 
 const Questions = ({
 	questions,

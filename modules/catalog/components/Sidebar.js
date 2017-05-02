@@ -4,7 +4,9 @@ import { Link } from 'react-router'
 
 const Sidebar = ({ checksum, type }) => (
 	<ul className="list-unstyled">
-		<li><Link to={`/d/apps/${type}/${checksum}/entries`} activeClassName="active">Entries</Link></li>
+		<li><Link to={`/d/apps/${type}/${checksum}/products`} activeClassName="active">Products</Link></li>
+		<li><Link to={`/d/apps/${type}/${checksum}/categories`} activeClassName="active">Categories</Link></li>
+		<li><Link to={`/d/apps/${type}/${checksum}/media`} activeClassName="active">Product Images</Link></li>
 	</ul>
 )
 

@@ -36,5 +36,11 @@
 	</div>
 	<%- include('_overlay') %>
 	<%- include('_scripts') %>
+	<script type="text/javascript">
+		analytics.page('Landing', {
+			variant: "<%= variant %>",
+			copyGroup: "<%= copyGroupName %>",
+		})
+	</script>
 </body>
 </html>

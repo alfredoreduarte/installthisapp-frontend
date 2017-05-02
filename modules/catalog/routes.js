@@ -5,7 +5,7 @@ export default (store, dispatch) => ({
 		require.ensure([], (require) => {
 			cb(null, [
 				{
-					path: 'entries',
+					path: 'products(/create)',
 					onEnter: (nextState, replace, next) => {
 						dispatch(fetchEntities(nextState.params.checksum))
 							.then(() => {
@@ -13,9 +13,43 @@ export default (store, dispatch) => ({
 							})
 					},
 					getComponents(nextState, cb) {
-						require.ensure([], (require) => {
+						require.ensure([], require => {
 							cb(null, {
-								main: require('modules/catalog/containers/Entries').default,
+								main: require('modules/catalog/containers/Products').default,
+								sidebar: require('modules/catalog/components/Sidebar').default,
+							})
+						})
+					}				
+				},
+				{
+					path: 'products/new',
+					onEnter: (nextState, replace, next) => {
+						dispatch(fetchEntities(nextState.params.checksum))
+							.then(() => {
+								next()
+							})
+					},
+					getComponents(nextState, cb) {
+						require.ensure([], require => {
+							cb(null, {
+								main: require('modules/catalog/containers/Products').default,
+								sidebar: require('modules/catalog/components/Sidebar').default,
+							})
+						})
+					}				
+				},
+				{
+					path: 'products/edit/:productId',
+					onEnter: (nextState, replace, next) => {
+						dispatch(fetchEntities(nextState.params.checksum))
+							.then(() => {
+								next()
+							})
+					},
+					getComponents(nextState, cb) {
+						require.ensure([], require => {
+							cb(null, {
+								main: require('modules/catalog/containers/Products').default,
 								sidebar: require('modules/catalog/components/Sidebar').default,
 							})
 						})
