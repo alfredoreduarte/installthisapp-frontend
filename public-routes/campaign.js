@@ -54,6 +54,8 @@ router.get('/campaign/', function(req, res){
 		res.render('campaign/one', Object.assign({}, commonParams, {
 			currentUrl: getCurrentUrl(req),
 			currentDomain: getCurrentDomain(req),
+			copyGroupName: copyGroup,
+			variant: 'one',
 			copyGroup: json[copyGroup],
 			jsBundle: manifest['campaign-one']['js'],
 			cssBundle: manifest['campaign-one']['css'],
@@ -61,7 +63,6 @@ router.get('/campaign/', function(req, res){
 	})
 })
 router.get('/campaign/one', function(req, res){
-	// res.render('campaign/one', commonParams)
 	//
 	fetch(copyDictionaryPath, {
 		method: 'GET',
@@ -72,6 +73,8 @@ router.get('/campaign/one', function(req, res){
 		res.render('campaign/one', Object.assign({}, commonParams, {
 			currentUrl: getCurrentUrl(req),
 			currentDomain: getCurrentDomain(req),
+			copyGroupName: copyGroup,
+			variant: 'one',
 			copyGroup: json[copyGroup],
 			jsBundle: manifest['campaign-one']['js'],
 			cssBundle: manifest['campaign-one']['css'],
@@ -89,6 +92,8 @@ router.get('/campaign/two', function(req, res){
 		res.render('campaign/two', Object.assign({}, commonParams, {
 			currentUrl: getCurrentUrl(req),
 			currentDomain: getCurrentDomain(req),
+			copyGroupName: copyGroup,
+			variant: 'two',
 			copyGroup: json[copyGroup],
 			jsBundle: manifest['campaign-two']['js'],
 			cssBundle: manifest['campaign-two']['css'],
@@ -106,6 +111,8 @@ router.get('/campaign/three', function(req, res){
 		res.render('campaign/three', Object.assign({}, commonParams, {
 			currentUrl: getCurrentUrl(req),
 			currentDomain: getCurrentDomain(req),
+			copyGroupName: copyGroup,
+			variant: 'three',
 			copyGroup: json[copyGroup],
 			jsBundle: manifest['campaign-three']['js'],
 			cssBundle: manifest['campaign-three']['css'],
@@ -123,6 +130,8 @@ router.get('/campaign/four', function(req, res){
 		res.render('campaign/four', Object.assign({}, commonParams, {
 			currentUrl: getCurrentUrl(req),
 			currentDomain: getCurrentDomain(req),
+			copyGroupName: copyGroup,
+			variant: 'four',
 			copyGroup: json[copyGroup],
 			jsBundle: manifest['campaign-four']['js'],
 			cssBundle: manifest['campaign-four']['css'],
@@ -140,6 +149,8 @@ router.get('/campaign/five', function(req, res){
 		res.render('campaign/five', Object.assign({}, commonParams, {
 			currentUrl: getCurrentUrl(req),
 			currentDomain: getCurrentDomain(req),
+			copyGroupName: copyGroup,
+			variant: 'five',
 			copyGroup: json[copyGroup],
 			jsBundle: manifest['campaign-five']['js'],
 			cssBundle: manifest['campaign-five']['css'],
