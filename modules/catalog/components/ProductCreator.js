@@ -4,10 +4,12 @@ import { push } from 'react-router-redux'
 import Select from 'react-select'
 import { Field, FieldArray, reduxForm, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
+import RenderCategories from 'modules/catalog/components/RenderCategories'
+import { getFilteredCategories } from 'modules/catalog/selectors/categories'
 
 const selector = formValueSelector('catalogProductCreator')
 
-let ProductCreator = ({ handleSubmit, fetching, change }) => (
+let ProductCreator = ({ fields, handleSubmit, fetching, change, allCategories }) => (
 	<div>
 		<div className="form-group">
 			<label className="control-label">Name</label>
@@ -49,9 +51,8 @@ let ProductCreator = ({ handleSubmit, fetching, change }) => (
 			<label className="control-label">Description</label>
 			<Field
 				name={'description'}
-				type="textarea" 
 				className="form-control" 
-				component="input"
+				component="textarea"
 			/>
 		</div>
 		<div className="form-group">
@@ -69,6 +70,14 @@ let ProductCreator = ({ handleSubmit, fetching, change }) => (
 				type="text" 
 				className="form-control" 
 				component="input"
+			/>
+		</div>
+		<div className="form-group">
+			<label className="control-label">Categories</label>
+			<FieldArray 
+				name="categoryIds"
+				component={RenderCategories}
+				categories={allCategories}
 			/>
 		</div>
 	</div>
@@ -93,6 +102,7 @@ const mapStateToProps = (state, ownProps) => {
 	return {
 		fetching: state.activityIndicators.updatingApp,
 		initialValues,
+		allCategories: getFilteredCategories(state),
 	}
 }
 

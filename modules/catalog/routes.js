@@ -23,12 +23,6 @@ export default (store, dispatch) => ({
 				},
 				{
 					path: 'products/new',
-					onEnter: (nextState, replace, next) => {
-						dispatch(fetchEntities(nextState.params.checksum))
-							.then(() => {
-								next()
-							})
-					},
 					getComponents(nextState, cb) {
 						require.ensure([], require => {
 							cb(null, {
@@ -91,12 +85,6 @@ export default (store, dispatch) => ({
 				},
 				{
 					path: 'categories/new',
-					onEnter: (nextState, replace, next) => {
-						dispatch(fetchEntities(nextState.params.checksum))
-							.then(() => {
-								next()
-							})
-					},
 					getComponents(nextState, cb) {
 						require.ensure([], require => {
 							cb(null, {
@@ -108,12 +96,6 @@ export default (store, dispatch) => ({
 				},
 				{
 					path: 'categories/edit/:categoryId',
-					onEnter: (nextState, replace, next) => {
-						dispatch(fetchEntities(nextState.params.checksum))
-							.then(() => {
-								next()
-							})
-					},
 					getComponents(nextState, cb) {
 						require.ensure([], require => {
 							cb(null, {

@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import _ from 'lodash'
 import { push } from 'react-router-redux'
-import Select from 'react-select'
-import { Field, FieldArray, reduxForm, formValueSelector } from 'redux-form'
+import { Field } from 'redux-form'
 import { Modal, Button, FormGroup, ControlLabel, InputGroup, FormControl, Glyphicon } from 'react-bootstrap'
 
 const ToggleButton = field => 

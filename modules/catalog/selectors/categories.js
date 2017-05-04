@@ -7,9 +7,5 @@ const getAllCategories = state => _.values(state.catalog.entities.categories)
 export const getFilteredCategories = createSelector(
 	getAllCategories,
 	getCurrentAppByState,
-	(categories, app) => {
-		return _.filter(categories, category => {
-			return category.status != 'deleted' && category.applicationId == app.id
-		})
-	}
+	(categories, app) => _.filter(categories, category => category.applicationId == app.id)
 )

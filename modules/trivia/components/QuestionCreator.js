@@ -4,7 +4,6 @@ import { push } from 'react-router-redux'
 import Select from 'react-select'
 import { Field, FieldArray, reduxForm, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
-// import { updateAppSpecificSettings } from 'actions/apps'
 import RenderOptions from 'modules/trivia/components/RenderOptions'
 import { postNewQuestionWithReduxForm } from 'modules/trivia/actions/questions'
 

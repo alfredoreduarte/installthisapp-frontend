@@ -100,7 +100,7 @@
     "react-router-redux": "^4.0.5",
     "react-sanfona": "0.0.15",
     "react-scroll": "^1.4.0",
-    "react-select": "^1.0.0-beta14",
+    "react-select": "^1.0.0-rc.3",
     "react-share": "^1.13.2",
     "react-social": "^1.9.0",
     "react-spinkit": "^1.1.11",
