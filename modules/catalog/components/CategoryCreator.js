@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 
 const selector = formValueSelector('catalogCategoryCreator')
 
-let CategoryCreator = ({ handleSubmit, fetching, change }) => (
+let CategoryCreator = ({ handleSubmit, fetching, change, categories }) => (
 	<div>
 		<div className="form-group">
 			<label className="control-label">Name</label>
@@ -26,6 +26,15 @@ let CategoryCreator = ({ handleSubmit, fetching, change }) => (
 				className="form-control" 
 				component="input"
 			/>
+		</div>
+		<div className="form-group">
+			<label className="control-label">Parent</label>
+			<Field name="parentId" component="select" className="form-control">
+				<option></option>
+				{categories.map(category => 
+					<option value={category.id}>{category.name}</option>
+				)}
+			</Field>
 		</div>
 	</div>
 )

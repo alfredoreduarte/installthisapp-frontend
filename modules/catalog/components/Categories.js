@@ -20,6 +20,7 @@ const Categories = ({
 		<CategoriesCreate 
 			show={showCreateModal} 
 			closeUrl={closeUrl} 
+			categories={categories}
 			initialCategory={categoryToEdit} />
 		<div className="ita-table-toolbar">
 			<div className="row">

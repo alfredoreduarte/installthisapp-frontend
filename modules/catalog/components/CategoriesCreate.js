@@ -8,13 +8,13 @@ import { Modal, Button } from 'react-bootstrap'
 import { postNewCategoryWithReduxForm } from 'modules/catalog/actions/categories'
 import CategoryCreator from 'modules/catalog/components/CategoryCreator'
 
-const CategoriesCreate = ({show, close, handleSubmit, initialCategory }) => (
+const CategoriesCreate = ({show, close, handleSubmit, categories, initialCategory }) => (
 	<Modal show={show} onHide={close}>
 		<Modal.Header closeButton>
 			<Modal.Title>New Category</Modal.Title>
 		</Modal.Header>
 		<Modal.Body>
-			<CategoryCreator initialCategory={initialCategory} />
+			<CategoryCreator categories={categories} initialCategory={initialCategory} />
 		</Modal.Body>
 		<Modal.Footer>
 			<Button 
