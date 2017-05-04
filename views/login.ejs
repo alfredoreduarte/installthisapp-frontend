@@ -77,9 +77,12 @@
 							top.location = location.protocol + '//' + window.location.host + '/d'
 						}
 					})
-					.catch(exception =>
+					.catch(exception => {
+						$('#login-button').attr('disabled', false)
+						$('#login-button').html('Login')
+						alert('Connection error. Please try again.')
 						console.log('parsing failed', exception)
-					)
+					})
 				}
 			})
 		})
