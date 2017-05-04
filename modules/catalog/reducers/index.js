@@ -1,6 +1,8 @@
+import ui from 'modules/catalog/reducers/ui'
 import entities from 'modules/catalog/reducers/entities'
 
 const catalog = (state = {
+	ui: {},
 	entities: {},
 }, action) => {
 	switch (action.type) {
@@ -28,6 +30,16 @@ const catalog = (state = {
 			return {
 				...state,
 				entities: entities(state.entities, action)
+			}
+		case 'CATALOG/SHOW_IMAGE_PICKER':
+			return {
+				...state, 
+				ui: ui(state.ui, action)
+			}
+		case 'CATALOG/HIDE_IMAGE_PICKER':
+			return {
+				...state, 
+				ui: ui(state.ui, action)
 			}
 		default:
 			return state

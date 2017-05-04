@@ -7,7 +7,7 @@ export const createMedium = files => {
 	return (dispatch, getState) => {
 		const currentApp = getCurrentAppByState(getState())
 		const checksum = currentApp.checksum
-		files.map(file => {
+		return files.map(file => {
 			const thisUUID = v4()
 			dispatch(addMedium({
 				id: thisUUID,
@@ -15,13 +15,15 @@ export const createMedium = files => {
 				attachmentUrl: file.preview,
 				status: 'uploading',
 			}))
-			dispatch(getSignedRequest(file, checksum)).then( url => {
+			return dispatch(getSignedRequest(file, checksum)).then( url => {
 				let formData = new FormData()
 				formData.append('medium[attachment_url]', url)
 				return postFileToApi(`applications/${checksum}/media_create.json`, formData).then(response => {
 					window.URL.revokeObjectURL(file.preview) // as per https://github.com/okonet/react-dropzone#word-of-caution-when-working-with-previews
 					dispatch(removeMedium(thisUUID))
-					return dispatch(addMedium(response))
+					dispatch(addMedium(response))
+					// return response
+					// return Promise.resolve(response.id)
 				})
 			})
 		})

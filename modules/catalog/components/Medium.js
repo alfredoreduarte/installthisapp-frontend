@@ -6,9 +6,10 @@ const Medium = ({
 	attachmentUrl,
 	handleDelete,
 	status,
+	onClick = () => console.log('media click'),
 }) => (
 	<div className="thumbnail" style={{height: '240px'}}>
-		<img src={attachmentUrl} style={{
+		<img src={attachmentUrl} onClick={onClick} style={{
 			maxHeight: '200px'
 		}} />
 		<div className="caption text-right">

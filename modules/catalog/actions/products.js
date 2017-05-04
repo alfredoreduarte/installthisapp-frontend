@@ -5,7 +5,7 @@ import { getCurrentAppByState } from 'selectors/apps'
 
 export const postNewProductWithReduxForm = () => {
 	return (dispatch, getState) => {
-		const product = getState().form.catalogProductCreator.values
+		const product = getState().form.catalogProduct.values
 		const checksum = getState().admin.currentApp
 		// logic Product
 		const thisUUID = v4()

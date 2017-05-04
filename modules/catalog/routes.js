@@ -5,7 +5,7 @@ export default (store, dispatch) => ({
 		require.ensure([], (require) => {
 			cb(null, [
 				{
-					path: 'products(/create)',
+					path: 'products',
 					onEnter: (nextState, replace, next) => {
 						dispatch(fetchEntities(nextState.params.checksum))
 							.then(() => {
@@ -22,11 +22,17 @@ export default (store, dispatch) => ({
 					}				
 				},
 				{
-					path: 'products/new',
+					path: 'products/create',
+					onEnter: (nextState, replace, next) => {
+						dispatch(fetchEntities(nextState.params.checksum))
+							.then(() => {
+								next()
+							})
+					},
 					getComponents(nextState, cb) {
 						require.ensure([], require => {
 							cb(null, {
-								main: require('modules/catalog/containers/Products').default,
+								main: require('modules/catalog/containers/ProductCreate').default,
 								sidebar: require('modules/catalog/components/Sidebar').default,
 							})
 						})
@@ -43,7 +49,7 @@ export default (store, dispatch) => ({
 					getComponents(nextState, cb) {
 						require.ensure([], require => {
 							cb(null, {
-								main: require('modules/catalog/containers/Products').default,
+								main: require('modules/catalog/containers/ProductEdit').default,
 								sidebar: require('modules/catalog/components/Sidebar').default,
 							})
 						})

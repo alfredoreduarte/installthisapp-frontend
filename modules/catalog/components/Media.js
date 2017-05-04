@@ -17,7 +17,7 @@ const Media = ({
 					<h3 className="ita-page-title">
 						Media <br/>
 						<small>
-							To add images to the catalog's media library, drop them here.
+							
 						</small>
 					</h3>
 				</div>
