@@ -4,6 +4,7 @@ import * as EmailValidator from 'email-validator'
 import 'whatwg-fetch'
 
 let originalSubmitText = null
+let actualSubmitButton = null
 
 const showOverlay = () => {
 	window.scrollTo(0, 0)
@@ -45,9 +46,11 @@ const ITAregister = (email, password) => {
 			alert(json.errors.full_messages)
 		}
 	})
-	.catch(exception =>
+	.catch(exception => {
+		resetActualSubmitButton()
+		alert('Connection error. Please try again.')
 		console.log('parsing failed', exception)
-	)
+	})
 }
 
 const ITAlogin = (email, password) => {
@@ -74,18 +77,23 @@ const ITAlogin = (email, password) => {
 			top.location = location.protocol + '//' + window.location.host + '/d/apps/create'
 		})
 	})
-	.catch(exception =>
+	.catch(exception => {
+		resetActualSubmitButton()
+		alert('Connection error. Please try again.')
 		console.log('parsing failed', exception)
-	)
+	})
+}
+
+const resetActualSubmitButton = () => {
+	actualSubmitButton.removeAttr('disabled', 'disabled').html(originalSubmitText)
 }
 
 $(document).ready(() => {
+	actualSubmitButton = $('#actual-submit')
+	originalSubmitText = actualSubmitButton.html()
 	$('.lead-form').on('submit', e => {
 		e.preventDefault()
 		const form = $(e.target)
-		console.log('hola')
-		console.log($(this))
-		console.log(form)
 		const email = form.find('.lead-email').val()
 		if (email && EmailValidator.validate(email)) {
 			showOverlay()
@@ -101,8 +109,7 @@ $(document).ready(() => {
 	})
 	$('#actual-form').on('submit', e => {
 		e.preventDefault()
-		originalSubmitText = $('#actual-submit').html()
-		$('#actual-submit').attr('disabled', 'disabled').html('Please wait...')
+		actualSubmitButton.attr('disabled', 'disabled').html('Please wait...')
 		const email = $('#actual-email').val()
 		const password = $('#actual-password').val()
 		if (email && password && EmailValidator.validate(email)) {
@@ -111,7 +118,7 @@ $(document).ready(() => {
 		else {
 			$('.actual-form-alert').show()
 			console.log('no email', email)
-			$('#actual-submit').removeAttr('disabled', 'disabled').html(originalSubmitText)
+			resetActualSubmitButton()
 		}
 	})
 })

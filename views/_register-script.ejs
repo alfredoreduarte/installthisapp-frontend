@@ -29,9 +29,12 @@ var ITAregister = function(){
 				alert(json.errors.full_messages)
 			}
 		})
-		.catch(exception =>
+		.catch(exception => {
 			console.log('parsing failed', exception)
-		)
+			alert('Connection error. Please try again.')
+			$('#signup-button').attr('disabled', false)
+			$('#signup-button').html('Create Account')
+		})
 	}
 	else{
 		$('#signup-button').attr('disabled', false)
