@@ -106,7 +106,7 @@ const Products = ({
 							<span>Name</span>
 						</th>
 						<th>
-							<span>Price</span>
+							<span>Status</span>
 						</th>
 						<th>
 							<span>Categories</span>
@@ -120,8 +120,8 @@ const Products = ({
 						<td>
 							<b>{product.name}</b>
 						</td>
-						<td>
-							{product.price}
+						<td className={product.status == 'published' ? 'text-success' : ''}>
+							{product.status}
 						</td>
 						<td>
 							{product.categories.map((category, index) => <span key={category.slug}>{category.name}{index + 1 == product.categories.length ? '' : ', '}</span>)}

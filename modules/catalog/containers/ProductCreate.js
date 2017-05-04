@@ -22,7 +22,8 @@ const ProductCreate = ({
 
 const mapStateToProps = (state, props) => {
 	return {
-		media: getFilteredMedia(state),
+		// media: getFilteredMedia(state),
+		media: [],
 		fetching: state.activityIndicators.updatingApp,
 		allCategories: getFilteredCategories(state),
 	}
