@@ -1,4 +1,5 @@
 const ui = (state = {
+	showFeaturedImagePicker: false,
 	showImagePicker: false,
 }, action) => {
 	switch (action.type) {
@@ -11,6 +12,16 @@ const ui = (state = {
 			return {
 				...state, 
 				showImagePicker: false,
+			}
+		case 'CATALOG/SHOW_FEATURED_IMAGE_PICKER':
+			return {
+				...state, 
+				showFeaturedImagePicker: true,
+			}
+		case 'CATALOG/HIDE_FEATURED_IMAGE_PICKER':
+			return {
+				...state, 
+				showFeaturedImagePicker: false,
 			}
 		default:
 			return state

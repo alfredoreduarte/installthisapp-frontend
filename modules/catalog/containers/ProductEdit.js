@@ -6,7 +6,7 @@ import { postNewProductWithReduxForm } from 'modules/catalog/actions/products'
 import { getFilteredCategories } from 'modules/catalog/selectors/categories'
 import { getProductMedia, getFilteredMedia } from 'modules/catalog/selectors/media'
 import { createMedium, deleteMedium } from 'modules/catalog/actions/media'
-import { hideImagePicker, showImagePicker } from 'modules/catalog/actions/ui'
+import { hideImagePicker, showImagePicker, showFeaturedImagePicker, hideFeaturedImagePicker } from 'modules/catalog/actions/ui'
 import ProductForm from 'modules/catalog/components/ProductForm'
 
 const ProductEdit = ({
@@ -15,11 +15,17 @@ const ProductEdit = ({
 	handleSubmit,
 	allCategories,
 	product,
-	featuredImage,
+	// 
+	allMedia,
 	media,
+	// 
 	showImagePicker,
 	handleImagePickerHide,
 	handleImagePickerShow,
+	// 
+	showFeaturedImagePicker,
+	handleFeaturedImagePickerShow,
+	handleFeaturedImagePickerHide,
 }) => (
 	<ProductForm
 		createMedium={createMedium}
@@ -27,11 +33,17 @@ const ProductEdit = ({
 		handleSubmit={handleSubmit}
 		allCategories={allCategories}
 		product={product}
-		featuredImage={featuredImage}
+		// 
+		allMedia={allMedia}
 		media={media}
+		// 
 		showImagePicker={showImagePicker}
 		handleImagePickerHide={handleImagePickerHide}
 		handleImagePickerShow={handleImagePickerShow}
+		// 
+		showFeaturedImagePicker={showFeaturedImagePicker}
+		handleFeaturedImagePickerShow={handleFeaturedImagePickerShow}
+		handleFeaturedImagePickerHide={handleFeaturedImagePickerHide}
 	/>
 )
 
@@ -43,8 +55,10 @@ const mapStateToProps = (state, props) => {
 	} 
 	return {
 		product,
+		showFeaturedImagePicker: state.catalog.ui.showFeaturedImagePicker,
 		showImagePicker: state.catalog.ui.showImagePicker,
-		featuredImage: _.filter(getFilteredMedia(state), {'id': product.featuredImageId}),
+		// featuredImage: _.find(getFilteredMedia(state), {'id': product.featuredImageId}),
+		allMedia: getFilteredMedia(state, props),
 		media: getProductMedia(state, props),
 		fetching: state.activityIndicators.updatingApp,
 		allCategories: getFilteredCategories(state),
@@ -55,11 +69,14 @@ const mapDispatchToProps = (dispatch, props) => {
 	const editString = '/edit/' + props.params.productId
 	return {
 		handleClose: () => browserHistory.push(props.location.pathname.substring(0, props.location.pathname.length - editString.length)),
-		handleSubmit: () => dispatch(postNewProductWithReduxForm()).then(() => browserHistory.push(props.location.pathname.substring(0, props.location.pathname.length - editString.length))),
+		handleSubmit: () => dispatch(postNewProductWithReduxForm()),
 		// media
 		createMedium: (acceptedFiles, rejectedFiles) => dispatch(createMedium(acceptedFiles)),
 		handleImagePickerHide: () => dispatch(hideImagePicker()),
 		handleImagePickerShow: () => dispatch(showImagePicker()),
+		// featured image
+		handleFeaturedImagePickerShow: () => dispatch(showFeaturedImagePicker()),
+		handleFeaturedImagePickerHide: () => dispatch(hideFeaturedImagePicker()),
 	}
 }
 

@@ -6,21 +6,24 @@ const Medium = ({
 	attachmentUrl,
 	handleDelete,
 	status,
-	onClick = () => console.log('media click'),
+	handleClick,
 }) => (
-	<div className="thumbnail" style={{height: '240px'}}>
-		<img src={attachmentUrl} onClick={onClick} style={{
+	<div className="thumbnail">
+		<img src={attachmentUrl} onClick={handleClick} style={{
 			maxHeight: '200px'
 		}} />
-		<div className="caption text-right">
-			{status == 'uploading' ?
-			<span>Uploading...</span>
-			:
-			<a href="javascript:void(0);" className="text-danger" onClick={handleDelete}>
-				<span className="glyphicon glyphicon-trash"></span>
-			</a>
-			}
-		</div>
+		
+		{status == 'uploading' ?
+			<div className="caption text-right"><span>Uploading...</span></div>
+		: null}
+
+		{handleDelete ?
+			<div className="caption text-right">
+				<a href="javascript:void(0);" className="text-danger" onClick={handleDelete}>
+					<span className="glyphicon glyphicon-trash"></span>
+				</a>
+			</div>
+		: null}
 	</div>
 )
 

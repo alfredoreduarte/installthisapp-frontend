@@ -3,15 +3,32 @@ import _ from 'lodash'
 import { ButtonToolbar, Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import { push } from 'react-router-redux'
 import Select from 'react-select'
-import { Field, FieldArray, reduxForm, formValueSelector } from 'redux-form'
+import { Field, FieldArray, reduxForm, formValueSelector, getFormValues } from 'redux-form'
 import { connect } from 'react-redux'
 import RenderCategories from 'modules/catalog/components/RenderCategories'
+import Medium from 'modules/catalog/components/Medium'
 import MediaList from 'modules/catalog/components/MediaList'
 import ImagePicker from 'modules/catalog/components/ImagePicker'
+import SimpleImagePicker from 'modules/catalog/components/SimpleImagePicker'
+import SimpleModal from 'modules/catalog/components/SimpleModal'
 
-const selector = formValueSelector('catalogProduct')
-
-let ProductForm = ({ fields, handleSubmit, handleClose, fetching, allCategories, featuredImage, media, createMedium, showImagePicker, handleImagePickerHide, handleImagePickerShow }) => (
+let ProductForm = ({ 
+	fields,
+	handleSubmit,
+	handleClose,
+	fetching,
+	allCategories,
+	featuredImage,
+	allMedia,
+	media,
+	createMedium,
+	showImagePicker,
+	handleImagePickerHide,
+	handleImagePickerShow,
+	showFeaturedImagePicker,
+	handleFeaturedImagePickerHide,
+	handleFeaturedImagePickerShow,
+}) => (
 	<div className="ita-table-view">
 		<div className="ita-table-toolbar">
 			<div className="row">
@@ -110,6 +127,35 @@ let ProductForm = ({ fields, handleSubmit, handleClose, fetching, allCategories,
 			<hr />
 			<div className="form-group">
 				<label className="control-label">Featured Image</label>
+				{featuredImage ?
+					<div>
+						<Field
+							name={'featuredImageId'}
+							media={allMedia}
+							component={({ input: { value, onChange } }) => 
+								<p className="text-right"><small><a href="javascript:void(0)" onClick={() => onChange(null)}>Remove Image</a></small></p>
+							}
+						/>
+						<Medium
+							attachmentUrl={featuredImage.attachmentUrl}
+						/>
+					</div>
+				: 
+					<div>
+						<button className="btn btn-sm btn-primary btn-outline" onClick={() => handleFeaturedImagePickerShow()}>Add Image</button>
+					</div>
+				}
+				<SimpleModal
+					title={'Featured Image'}
+					show={showFeaturedImagePicker}
+					handleClose={handleFeaturedImagePickerHide}
+				>
+					<Field
+						name={'featuredImageId'}
+						media={allMedia}
+						component={SimpleImagePicker}
+					/>
+				</SimpleModal>
 			</div>
 			<hr />
 			<div className="form-group">
@@ -132,12 +178,17 @@ let ProductForm = ({ fields, handleSubmit, handleClose, fetching, allCategories,
 	</div>
 )
 
+const reduxFormName = 'catalogProduct'
+
 ProductForm = reduxForm({
-	form: 'catalogProduct',
+	form: reduxFormName,
 })(ProductForm)
+
+const selector = formValueSelector(reduxFormName)
 
 const mapStateToProps = (state, ownProps) => {
 	return {
+		featuredImage: selector(state, 'featuredImageId') ? _.find(ownProps.allMedia, {'id': selector(state, 'featuredImageId')}) : null,
 		initialValues: ownProps.product,
 	}
 }

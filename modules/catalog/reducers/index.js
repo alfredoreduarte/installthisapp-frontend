@@ -41,6 +41,16 @@ const catalog = (state = {
 				...state, 
 				ui: ui(state.ui, action)
 			}
+		case 'CATALOG/SHOW_FEATURED_IMAGE_PICKER':
+			return {
+				...state, 
+				ui: ui(state.ui, action)
+			}
+		case 'CATALOG/HIDE_FEATURED_IMAGE_PICKER':
+			return {
+				...state, 
+				ui: ui(state.ui, action)
+			}
 		default:
 			return state
 	}
