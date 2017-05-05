@@ -19,6 +19,7 @@ let ProductForm = ({
 	fetching,
 	allCategories,
 	featuredImage,
+	galleryMedia,
 	allMedia,
 	media,
 	createMedium,
@@ -160,19 +161,28 @@ let ProductForm = ({
 			<hr />
 			<div className="form-group">
 				<label className="control-label">Image Gallery</label>
-				<button className="btn btn-sm btn-primary btn-outline" onClick={() => handleImagePickerShow()}>Add image</button>
-				<FieldArray 
-					name="galleryMediaIds"
-					component={ImagePicker}
-					close={handleImagePickerHide}
+				<div>
+					<button className="btn btn-sm btn-primary btn-outline" onClick={() => handleImagePickerShow()}>Add image</button>
+				</div>
+				<SimpleModal
+					title={'Product image gallery'}
 					show={showImagePicker}
-					createMedium={createMedium}
-				/>
-				<MediaList 
-					media={media}
-					handleDelete={() => console.log('delete')}
-					onImageSelect={id => console.log(id)}
-				 />
+					handleClose={handleImagePickerHide}
+				>
+					<FieldArray
+						name={'galleryMediaIds'}
+						media={allMedia}
+						component={ImagePicker}
+					/>
+				</SimpleModal>
+
+				{galleryMedia.map(({ id, attachmentUrl, status }) => 
+					<div key={id} className="col-md-6">
+						<Medium
+							attachmentUrl={attachmentUrl}
+						/>
+					</div>
+				)}
 			</div>
 		</div>
 	</div>
@@ -182,13 +192,16 @@ const reduxFormName = 'catalogProduct'
 
 ProductForm = reduxForm({
 	form: reduxFormName,
+	enableReinitialize: true,
 })(ProductForm)
 
 const selector = formValueSelector(reduxFormName)
 
 const mapStateToProps = (state, ownProps) => {
+	const galleryMediaIds = selector(state, 'galleryMediaIds') ? selector(state, 'galleryMediaIds').map(mediaId => parseInt(mediaId)) : []
 	return {
-		featuredImage: selector(state, 'featuredImageId') ? _.find(ownProps.allMedia, {'id': selector(state, 'featuredImageId')}) : null,
+		featuredImage: _.find(ownProps.allMedia, {'id': selector(state, 'featuredImageId')}),
+		galleryMedia: _.filter(ownProps.allMedia, medium => galleryMediaIds.indexOf(medium.id) >= 0),
 		initialValues: ownProps.product,
 	}
 }
