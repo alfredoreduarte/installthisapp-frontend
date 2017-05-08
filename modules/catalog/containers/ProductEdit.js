@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import { getFilteredProducts } from 'modules/catalog/selectors/products'
 import { postNewProductWithReduxForm } from 'modules/catalog/actions/products'
+import { postNewCategoryWithReduxForm, deleteCategory } from 'modules/catalog/actions/categories'
 import { getFilteredCategories } from 'modules/catalog/selectors/categories'
 import { getProductMedia, getFilteredMedia } from 'modules/catalog/selectors/media'
 import { createMedium, deleteMedium } from 'modules/catalog/actions/media'
@@ -13,10 +14,8 @@ const ProductEdit = ({
 	createMedium,
 	handleClose,
 	handleSubmit,
-	allCategories,
 	product,
 	// 
-	allMedia,
 	media,
 	// 
 	showImagePicker,
@@ -26,15 +25,17 @@ const ProductEdit = ({
 	showFeaturedImagePicker,
 	handleFeaturedImagePickerShow,
 	handleFeaturedImagePickerHide,
+	// categories
+	categories,
+	createCategory,
+	handleCategoryDelete,
 }) => (
 	<ProductForm
 		createMedium={createMedium}
 		handleClose={handleClose}
 		handleSubmit={handleSubmit}
-		allCategories={allCategories}
 		product={product}
 		// 
-		allMedia={allMedia}
 		media={media}
 		// 
 		showImagePicker={showImagePicker}
@@ -44,6 +45,10 @@ const ProductEdit = ({
 		showFeaturedImagePicker={showFeaturedImagePicker}
 		handleFeaturedImagePickerShow={handleFeaturedImagePickerShow}
 		handleFeaturedImagePickerHide={handleFeaturedImagePickerHide}
+		// categories
+		categories={categories}
+		createCategory={createCategory}
+		handleCategoryDelete={handleCategoryDelete}
 	/>
 )
 
@@ -57,11 +62,10 @@ const mapStateToProps = (state, props) => {
 		product,
 		showFeaturedImagePicker: state.catalog.ui.showFeaturedImagePicker,
 		showImagePicker: state.catalog.ui.showImagePicker,
-		// featuredImage: _.find(getFilteredMedia(state), {'id': product.featuredImageId}),
-		allMedia: getFilteredMedia(state, props),
-		media: getProductMedia(state, props),
+		media: getFilteredMedia(state, props),
 		fetching: state.activityIndicators.updatingApp,
-		allCategories: getFilteredCategories(state),
+		// categories
+		categories: getFilteredCategories(state)
 	}
 }
 
@@ -77,6 +81,9 @@ const mapDispatchToProps = (dispatch, props) => {
 		// featured image
 		handleFeaturedImagePickerShow: () => dispatch(showFeaturedImagePicker()),
 		handleFeaturedImagePickerHide: () => dispatch(hideFeaturedImagePicker()),
+		// categories
+		createCategory: () => dispatch(postNewCategoryWithReduxForm()),
+		handleCategoryDelete: id => dispatch(deleteCategory(id)),
 	}
 }
 

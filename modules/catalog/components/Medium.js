@@ -8,13 +8,15 @@ const Medium = ({
 	status,
 	handleClick,
 }) => (
-	<div className="thumbnail">
-		<img src={attachmentUrl} onClick={handleClick} style={{
+	<div className="thumbnail" style={{
+		cursor: status == 'uploading' ? 'not-allowed' : 'default',
+	}}>
+		<img src={attachmentUrl} onClick={() => {status == 'uploading' ? null : handleClick()}} style={{
 			maxHeight: '200px'
 		}} />
 		
 		{status == 'uploading' ?
-			<div className="caption text-right"><span>Uploading...</span></div>
+			<div className="caption text-center"><span>Uploading...</span></div>
 		: null}
 
 		{handleDelete ?

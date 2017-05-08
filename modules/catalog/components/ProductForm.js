@@ -11,16 +11,15 @@ import MediaList from 'modules/catalog/components/MediaList'
 import ImagePicker from 'modules/catalog/components/ImagePicker'
 import SimpleImagePicker from 'modules/catalog/components/SimpleImagePicker'
 import SimpleModal from 'modules/catalog/components/SimpleModal'
+import MediaUploader from 'modules/catalog/components/MediaUploader'
 
 let ProductForm = ({ 
 	fields,
 	handleSubmit,
 	handleClose,
 	fetching,
-	allCategories,
 	featuredImage,
 	galleryMedia,
-	allMedia,
 	media,
 	createMedium,
 	showImagePicker,
@@ -29,6 +28,11 @@ let ProductForm = ({
 	showFeaturedImagePicker,
 	handleFeaturedImagePickerHide,
 	handleFeaturedImagePickerShow,
+	// categories
+	categories,
+	categoryIds,
+	createCategory,
+	handleCategoryDelete,
 }) => (
 	<div className="ita-table-view">
 		<div className="ita-table-toolbar">
@@ -100,7 +104,6 @@ let ProductForm = ({
 			<div className="form-group">
 				<label className="control-label">Status</label>
 				<Field name="status" component="select" className="form-control">
-					<option></option>
 					<option value="draft">Draft</option>
 					<option value="published">Published</option>
 					<option value="deleted">Deleted</option>
@@ -122,7 +125,8 @@ let ProductForm = ({
 				<FieldArray 
 					name="categoryIds"
 					component={RenderCategories}
-					categories={allCategories}
+					categories={categories}
+					categoryIds={categoryIds}
 				/>
 			</div>
 			<hr />
@@ -132,7 +136,7 @@ let ProductForm = ({
 					<div>
 						<Field
 							name={'featuredImageId'}
-							media={allMedia}
+							media={media}
 							component={({ input: { value, onChange } }) => 
 								<p className="text-right"><small><a href="javascript:void(0)" onClick={() => onChange(null)}>Remove Image</a></small></p>
 							}
@@ -151,9 +155,10 @@ let ProductForm = ({
 					show={showFeaturedImagePicker}
 					handleClose={handleFeaturedImagePickerHide}
 				>
+					<MediaUploader />
 					<Field
 						name={'featuredImageId'}
-						media={allMedia}
+						media={media}
 						component={SimpleImagePicker}
 					/>
 				</SimpleModal>
@@ -169,9 +174,10 @@ let ProductForm = ({
 					show={showImagePicker}
 					handleClose={handleImagePickerHide}
 				>
+					<MediaUploader />
 					<FieldArray
 						name={'galleryMediaIds'}
-						media={allMedia}
+						media={media}
 						component={ImagePicker}
 					/>
 				</SimpleModal>
@@ -183,6 +189,14 @@ let ProductForm = ({
 						/>
 					</div>
 				)}
+
+				<Field
+					name={'galleryMediaIds'}
+					media={media}
+					component={({ fields }) => 
+						<p className="text-right"><small><a href="javascript:void(0)" onClick={() => onChange(null)}>Remove Image</a></small></p>
+					}
+				/>
 			</div>
 		</div>
 	</div>
@@ -199,9 +213,11 @@ const selector = formValueSelector(reduxFormName)
 
 const mapStateToProps = (state, ownProps) => {
 	const galleryMediaIds = selector(state, 'galleryMediaIds') ? selector(state, 'galleryMediaIds').map(mediaId => parseInt(mediaId)) : []
+	const categoryIds = selector(state, 'categoryIds') ? selector(state, 'categoryIds').map(categoryId => parseInt(categoryId)) : []
 	return {
-		featuredImage: _.find(ownProps.allMedia, {'id': selector(state, 'featuredImageId')}),
-		galleryMedia: _.filter(ownProps.allMedia, medium => galleryMediaIds.indexOf(medium.id) >= 0),
+		featuredImage: _.find(ownProps.media, {'id': selector(state, 'featuredImageId')}),
+		galleryMedia: _.filter(ownProps.media, medium => galleryMediaIds.indexOf(medium.id) >= 0),
+		categoryIds: selector(state, 'categoryIds') ? selector(state, 'categoryIds').map(categoryId => parseInt(categoryId)) : [],
 		initialValues: ownProps.product,
 	}
 }

@@ -5,18 +5,19 @@ import Select from 'react-select'
 import { Field } from 'redux-form'
 import { Modal, Button, FormGroup, ControlLabel, InputGroup, FormControl, Glyphicon } from 'react-bootstrap'
 
-const RenderCategories = ({ fields, meta: { touched, error }, categories }) => (
+const RenderCategories = ({ categories, categoryIds, fields, meta: { touched, error } }) => (
 	<div>
 		{categories.map(category => 
 			<div className="checkbox" key={category.id}>
 				<label>
 					<input 
-						checked={() => {
-							var coso = fields.map(field => field)
-							return coso.includes(category.id)
-						}}
+						checked={categoryIds.indexOf(category.id) !== -1}
 						onChange={e => {
-							fields.push(category.id)
+							if(e.target.checked) {
+								fields.push(category.id)
+							} else {
+								fields.remove(categoryIds.indexOf(category.id))
+							}
 						}}
 						type="checkbox" /> {category.name}
 				</label>
