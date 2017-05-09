@@ -20,6 +20,7 @@ let ProductForm = ({
 	handleClose,
 	featuredImage,
 	galleryMedia,
+	galleryMediaIds,
 	media,
 	createMedium,
 	showImagePicker,
@@ -182,19 +183,21 @@ let ProductForm = ({
 					/>
 				</SimpleModal>
 
-				{galleryMedia.map(({ id, attachmentUrl, status }) => 
-					<div key={id} className="col-md-6">
-						<Medium
-							attachmentUrl={attachmentUrl}
-						/>
-					</div>
-				)}
-
-				<Field
+				<FieldArray
 					name={'galleryMediaIds'}
-					media={media}
-					component={({ fields }) => 
-						<p className="text-right"><small><a href="javascript:void(0)" onClick={() => onChange(null)}>Remove Image</a></small></p>
+					galleryMedia={galleryMedia}
+					galleryMediaIds={galleryMediaIds}
+					component={({ galleryMediaIds, galleryMedia, fields }) => 
+						<div>
+						{galleryMedia.map(({ id, attachmentUrl, status }) => 
+							<div key={id} className="col-md-6">
+								<Medium
+									attachmentUrl={attachmentUrl}
+									handleDelete={() => fields.remove(galleryMediaIds.indexOf(id))}
+								/>
+							</div>
+						)}
+						</div>
 					}
 				/>
 			</div>
@@ -217,6 +220,7 @@ const mapStateToProps = (state, ownProps) => {
 	return {
 		featuredImage: _.find(ownProps.media, {'id': selector(state, 'featuredImageId')}),
 		galleryMedia: _.filter(ownProps.media, medium => galleryMediaIds.indexOf(medium.id) >= 0),
+		galleryMediaIds: selector(state, 'galleryMediaIds') ? selector(state, 'galleryMediaIds').map(galleryMediaId => parseInt(galleryMediaId)) : [],
 		categoryIds: selector(state, 'categoryIds') ? selector(state, 'categoryIds').map(categoryId => parseInt(categoryId)) : [],
 		initialValues: ownProps.product,
 	}
