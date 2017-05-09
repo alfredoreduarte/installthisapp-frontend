@@ -28,12 +28,24 @@ let Settings = ({ handleSubmit, fetching, settings }) => (
 						<div className="form-horizontal">
 							<div className="form-group">
 								<div className="col-md-6">
-									<label className="control-label">Allow playing multiple times</label>
+									<label className="control-label">Currency</label>
 								</div>
 								<div className="col-md-6">
 									<Field
 										name={'currency'}
-										type="checkbox"
+										type="text"
+										className="form-control" 
+										component="input" />
+								</div>
+							</div>
+							<div className="form-group">
+								<div className="col-md-6">
+									<label className="control-label">Email recipients for product consultations</label>
+								</div>
+								<div className="col-md-6">
+									<Field
+										name={'messageRecipients'}
+										type="text"
 										className="form-control" 
 										component="input" />
 								</div>
