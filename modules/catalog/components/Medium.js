@@ -6,7 +6,7 @@ const Medium = ({
 	attachmentUrl,
 	handleDelete,
 	status,
-	handleClick,
+	handleClick = () => {},
 }) => (
 	<div className="thumbnail" style={{
 		cursor: status == 'uploading' ? 'not-allowed' : 'default',

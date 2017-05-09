@@ -14,6 +14,7 @@ const ProductEdit = ({
 	fetching,
 	// 
 	createMedium,
+	deleteMedium,
 	handleClose,
 	handleSubmit,
 	product,
@@ -36,6 +37,7 @@ const ProductEdit = ({
 		fetching={fetching}
 		// 
 		createMedium={createMedium}
+		deleteMedium={deleteMedium}
 		handleClose={handleClose}
 		handleSubmit={handleSubmit}
 		product={product}
@@ -80,6 +82,7 @@ const mapDispatchToProps = (dispatch, props) => {
 		handleSubmit: () => dispatch(postNewProductWithReduxForm()),
 		// media
 		createMedium: (acceptedFiles, rejectedFiles) => dispatch(createMedium(acceptedFiles)),
+		deleteMedium: id => dispatch(deleteMedium(id)),
 		handleImagePickerHide: () => dispatch(hideImagePicker()),
 		handleImagePickerShow: () => dispatch(showImagePicker()),
 		// featured image

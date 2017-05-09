@@ -22,7 +22,7 @@ let ProductForm = ({
 	galleryMedia,
 	galleryMediaIds,
 	media,
-	createMedium,
+	deleteMedium,
 	showImagePicker,
 	handleImagePickerHide,
 	handleImagePickerShow,
@@ -160,6 +160,7 @@ let ProductForm = ({
 					<Field
 						name={'featuredImageId'}
 						media={media}
+						onDelete={deleteMedium}
 						component={SimpleImagePicker}
 					/>
 				</SimpleModal>
@@ -179,6 +180,8 @@ let ProductForm = ({
 					<FieldArray
 						name={'galleryMediaIds'}
 						media={media}
+						onDelete={deleteMedium}
+						galleryMediaIds={galleryMediaIds}
 						component={ImagePicker}
 					/>
 				</SimpleModal>

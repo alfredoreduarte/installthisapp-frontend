@@ -7,7 +7,7 @@ const SimpleImagePicker = ({ media, onDelete, input: { value, onChange } }) => (
 			<div key={id} className="col-md-6">
 				<Medium
 					attachmentUrl={attachmentUrl}
-					// handleDelete={() => onDelete(id)}
+					handleDelete={() => onDelete(id)}
 					status={status}
 					handleClick={() => onChange(id)}
 				/>
