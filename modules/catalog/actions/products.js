@@ -1,10 +1,12 @@
 import v4 from 'node-uuid'
 import { postToApi, deleteFromApi } from 'api'
 import { receiveEntities } from 'modules/catalog/actions/entities'
+import { toggleActivityUpdatingApp } from 'actions/activityIndicators'
 import { getCurrentAppByState } from 'selectors/apps'
 
 export const postNewProductWithReduxForm = () => {
 	return (dispatch, getState) => {
+		dispatch(toggleActivityUpdatingApp())
 		const product = getState().form.catalogProduct.values
 		const checksum = getState().admin.currentApp
 		// logic Product
@@ -28,6 +30,7 @@ export const postNewProductWithReduxForm = () => {
 			product: _.omit(product, ['id'])
 		})
 		.then(response => {
+			dispatch(toggleActivityUpdatingApp())
 			dispatch(removeProduct(thisUUID))
 			// const normalized = normalize(response, schema.entities)
 			// dispatch(receiveEntities(normalized.entities))

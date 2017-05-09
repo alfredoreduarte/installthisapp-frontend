@@ -14,10 +14,10 @@ import SimpleModal from 'modules/catalog/components/SimpleModal'
 import MediaUploader from 'modules/catalog/components/MediaUploader'
 
 let ProductForm = ({ 
+	fetching,
 	fields,
 	handleSubmit,
 	handleClose,
-	fetching,
 	featuredImage,
 	galleryMedia,
 	media,
@@ -46,8 +46,8 @@ let ProductForm = ({
 			<div className="row">
 				<div className="col-md-12 text-right">
 					<ButtonToolbar>
-						<button className="btn btn-sm btn-outline btn-success pull-right" onClick={handleSubmit}>
-							Save Product
+						<button className="btn btn-sm btn-outline btn-success pull-right" disabled={fetching} onClick={handleSubmit}>
+							{fetching ? 'Saving...' : 'Save Product'}
 						</button>
 					</ButtonToolbar>
 				</div>

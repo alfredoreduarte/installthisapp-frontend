@@ -35,7 +35,7 @@ const activityIndicators = (state = {
 			return Object.assign({}, state, {
 				savingDesign: !state.savingDesign
 			})
-		case 'TOGGLE_ACTIVITY/UPDATING_APP_SETTINGS':
+		case 'TOGGLE_ACTIVITY/UPDATING_APP':
 			return Object.assign({}, state, {
 				updatingApp: !state.updatingApp
 			})

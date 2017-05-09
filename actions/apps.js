@@ -5,7 +5,7 @@ import { setAlert } from 'actions/alerts'
 import { push } from 'react-router-redux'
 import { receiveEntities } from 'actions/entities'
 import { getCurrentAppByState } from 'selectors/apps'
-import { toggleActivityUpdatingAppSettings } from 'actions/activityIndicators'
+import { toggleActivityUpdatingApp } from 'actions/activityIndicators'
 import { receiveAdmin } from 'actions/admin'
 import { getFromApi, postToApi, deleteFromApi, patchToApi } from 'api'
 
@@ -86,7 +86,7 @@ export const updateApp = (checksum, payload) => {
 
 export const update = () => {
 	return (dispatch, getState) => {
-		dispatch(toggleActivityUpdatingAppSettings())
+		dispatch(toggleActivityUpdatingApp())
 		const currentAppChecksum = getState().admin.currentApp
 		patchToApi(
 			`applications/${currentAppChecksum}.json`, 
@@ -95,7 +95,7 @@ export const update = () => {
 			}
 		).then(response => {
 			dispatch(updateApp(currentAppChecksum, response))
-			dispatch(toggleActivityUpdatingAppSettings())
+			dispatch(toggleActivityUpdatingApp())
 		})
 	}
 }
@@ -123,7 +123,7 @@ export const updateAppSettings = () => {
 
 export const updateAppSpecificSettings = () => {
 	return (dispatch, getState) => {
-		dispatch(toggleActivityUpdatingAppSettings())
+		dispatch(toggleActivityUpdatingApp())
 		const currentAppChecksum = getState().admin.currentApp
 		// 
 		// TOP FANS ONLY
@@ -146,7 +146,7 @@ export const updateAppSpecificSettings = () => {
 			}
 		).then(response => {
 			dispatch(updateApp(currentAppChecksum, response))
-			dispatch(toggleActivityUpdatingAppSettings())
+			dispatch(toggleActivityUpdatingApp())
 		})
 	}
 }

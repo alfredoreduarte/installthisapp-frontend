@@ -11,6 +11,8 @@ import { hideImagePicker, showImagePicker, showFeaturedImagePicker, hideFeatured
 import ProductForm from 'modules/catalog/components/ProductForm'
 
 const ProductEdit = ({
+	fetching,
+	// 
 	createMedium,
 	handleClose,
 	handleSubmit,
@@ -31,6 +33,8 @@ const ProductEdit = ({
 	handleCategoryDelete,
 }) => (
 	<ProductForm
+		fetching={fetching}
+		// 
 		createMedium={createMedium}
 		handleClose={handleClose}
 		handleSubmit={handleSubmit}
