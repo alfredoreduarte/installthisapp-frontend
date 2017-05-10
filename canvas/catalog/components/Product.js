@@ -19,8 +19,8 @@ const Product = ({
 Product.propTypes = {
 	slug: PropTypes.string.isRequired,
 	title: PropTypes.string.isRequired,
-	description: PropTypes.string.isRequired,
-	price: PropTypes.string.isRequired,
+	description: PropTypes.string,
+	price: PropTypes.string,
 }
 
 

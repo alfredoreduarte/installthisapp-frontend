@@ -34,7 +34,14 @@ const mapStateToProps = (state, props) => {
 		images: {...state.images},
 		galleryImages: [],
 		productCategories: product.categories,
-		productMedia: product.gallery,
+		productMedia: product.gallery.map(image => {
+			const result = {
+				...image, 
+				original: image.attachmentUrl, 
+				thumbnail: image.attachmentUrl
+			}
+			return result
+		}),
 		title: product.name,
 		description: product.description,
 		price: product.price,

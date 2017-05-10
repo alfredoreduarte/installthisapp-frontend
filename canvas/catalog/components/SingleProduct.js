@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
+import ImageGallery from 'react-image-gallery'
 import Image from 'canvas/catalog/components/Image'
 
 const SingleProduct = ({ headerImage, footerImage, galleryImages, productCategories, productMedia, title, description, price, categories }) => (
@@ -15,9 +16,12 @@ const SingleProduct = ({ headerImage, footerImage, galleryImages, productCategor
 				</ol>
 			</div>
 			<div className="col-xs-12 col-sm-4 col-md-6 col-lg-6">
-				{productMedia.map(({ id, attachmentUrl }) => 
-					<img key={id} src={attachmentUrl} className="img-responsive" />
-				)}
+				<ImageGallery
+				items={productMedia}
+				slideInterval={2000}
+				lazyLoad={true}
+				showPlayButton={false}
+				onImageLoad={() => console.log('load')}/>
 			</div>
 			<div className="col-xs-12 col-sm-8 col-md-6 col-lg-6">
 				<h1>{title}</h1>

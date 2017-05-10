@@ -92,6 +92,7 @@
     "react-file-input": "^0.2.5",
     "react-frame-component": "^0.6.6",
     "react-icheck": "^0.3.4",
+    "react-image-gallery": "^0.7.16",
     "react-modal": "^1.7.3",
     "react-rangeslider": "^1.0.3",
     "react-redux": "^4.4.5",

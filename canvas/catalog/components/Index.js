@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
+import CategoriesList from 'canvas/catalog/components/CategoriesList'
 import Image from 'canvas/catalog/components/Image'
 import Product from 'canvas/catalog/components/Product'
 
@@ -18,10 +19,7 @@ const Index = ({
 		</div>
 		<div className="container">
 			<div className="col-md-2">
-				<h3>Categories</h3>
-				<ul>
-					{categories.map( ({ name }) => <li>{name}</li>)}
-				</ul>
+				<CategoriesList categories={categories} />
 			</div>
 			<div className="col-md-10">
 				<div className="row">
