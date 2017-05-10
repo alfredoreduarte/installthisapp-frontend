@@ -10,6 +10,11 @@ const ui = (state = {
 				...state,
 				showContactModal: !state.showContactModal,
 			}
+		case 'TOGGLE_DISPLAY_MODE':
+			return {
+				...state,
+				productListDisplayMode: state.productListDisplayMode == 'grid' ? 'list' : 'grid',
+			}
 		default:
 			return state
 	}

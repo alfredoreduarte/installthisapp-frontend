@@ -9,10 +9,11 @@ const Categories = ({
 	currency,
 	products,
 	categories,
+	homeUrl,
 }) => (
 	<div>
 		<div className="container">
-			<Header logoImage={'https://localhost.ssl:5000/images/logo-round.png'} />
+			<Header homeUrl={homeUrl} logoImage={'https://localhost.ssl:5000/images/logo-round.png'} />
 		</div>
 		<div className="container">
 			<div className="col-md-12">
@@ -35,6 +36,7 @@ Categories.propTypes = {
 	headerImage: PropTypes.string,
 	footerImage: PropTypes.string,
 	categories: PropTypes.array.isRequired,
+	homeUrl: PropTypes.string.isRequired,
 }
 
 export default Categories

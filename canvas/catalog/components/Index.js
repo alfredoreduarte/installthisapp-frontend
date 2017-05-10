@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
+import { ButtonGroup, Button } from 'react-bootstrap'
 import CategoriesList from 'canvas/catalog/components/CategoriesList'
 import Image from 'canvas/catalog/components/Image'
 import Product from 'canvas/catalog/components/Product'
@@ -10,11 +11,14 @@ const Index = ({
 	footerImage,
 	currency,
 	products,
+	homeUrl,
+	productListDisplayMode,
 	categories,
+	toggleListGrid,
 }) => (
 	<div>
 		<div className="container">
-			<Header logoImage={'https://localhost.ssl:5000/images/logo-round.png'} />
+			<Header homeUrl={homeUrl} logoImage={'https://localhost.ssl:5000/images/logo-round.png'} />
 		</div>
 		<div className="container">
 			<div className="col-md-2">
@@ -22,9 +26,20 @@ const Index = ({
 			</div>
 			<div className="col-md-10">
 				<div className="row">
+					<div className="col-md-12">
+						<ButtonGroup>
+							<Button disabled={productListDisplayMode == 'grid'} onClick={toggleListGrid}>
+								Grid
+							</Button>
+							<Button disabled={productListDisplayMode == 'list'} onClick={toggleListGrid}>
+								List
+							</Button>
+						</ButtonGroup>
+					</div>
 					{products.map( ({ id, permalink, name, price, shortDescription, featuredImage }) => 
 						<Product 
 							key={id} 
+							displayMode={productListDisplayMode} 
 							permalink={permalink} 
 							title={name} 
 							price={`${currency} ${price}`} 
@@ -44,6 +59,7 @@ Index.propTypes = {
 	footerImage: PropTypes.string,
 	products: PropTypes.array.isRequired,
 	categories: PropTypes.array.isRequired,
+	homeUrl: PropTypes.string.isRequired,
 }
 
 export default Index

@@ -16,6 +16,7 @@ const SingleProduct = ({
 	description,
 	price,
 	categories,
+	homeUrl,
 	// 
 	showContactModal,
 	handleToggleContact,
@@ -31,6 +32,7 @@ const SingleProduct = ({
 		description={description}
 		price={price}
 		categories={categories}
+		homeUrl={homeUrl}
 		// 
 		showContactModal={showContactModal}
 		handleToggleContact={handleToggleContact}
@@ -57,6 +59,7 @@ const mapStateToProps = (state, props) => {
 		description: product.description,
 		price: `${state.settings.currency} ${product.price}`,
 		categories: getAllCategories(state),
+		homeUrl: `/${state.applicationData.canvasId}/${state.applicationData.checksum}`,
 		// linkUrl: `/${window.canvasId}/${window.checksum}/login`
 		showContactModal: state.ui.showContactModal,
 	}

@@ -4,15 +4,16 @@ import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap'
 
 const Header = ({ 
 	logoImage,
+	homeUrl,
 }) => (
 	<Navbar>
 		<Navbar.Header>
 			<Navbar.Brand>
-				<a href="#">
+				<Link to={homeUrl}>
 					<img src={logoImage} style={{
 						height: '20px',
 					}} />
-				</a>
+				</Link>
 			</Navbar.Brand>
 		</Navbar.Header>
 		<Nav>
@@ -28,6 +29,7 @@ const Header = ({
 
 Header.propTypes = {
 	logoImage: PropTypes.string,
+	homeUrl: PropTypes.string.isRequired,
 }
 
 export default Header

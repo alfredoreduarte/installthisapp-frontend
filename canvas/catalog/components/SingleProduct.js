@@ -26,6 +26,7 @@ const SingleProduct = ({
 	description,
 	price,
 	categories,
+	homeUrl,
 	// 
 	showContactModal,
 	handleToggleContact,
@@ -41,12 +42,12 @@ const SingleProduct = ({
 			<ContactForm />
 		</SimpleModal>
 		<div className="container">
-			<Header logoImage={'https://localhost.ssl:5000/images/logo-round.png'} />
+			<Header homeUrl={homeUrl} logoImage={'https://localhost.ssl:5000/images/logo-round.png'} />
 		</div>
 		<div className="container">
 			<div className="col-md-12">
 				<ol className="breadcrumb">
-					<li><a href="#">Homepage</a></li>
+					<li><Link to={homeUrl}>Homepage</Link></li>
 					<li><Link to={productCategories[0].permalink}>{productCategories[0].name}</Link></li>
 				</ol>
 			</div>
@@ -64,7 +65,7 @@ const SingleProduct = ({
 					<li>
 						<FacebookShareButton 
 							className="btn btn-primary" 
-							url={permalink}
+							url={`${location.protocol}//${window.location.host}${permalink}`}
 						>
 							Share on Facebook
 						</FacebookShareButton>
@@ -72,7 +73,7 @@ const SingleProduct = ({
 					<li>
 						<TwitterShareButton 
 							className="btn btn-primary" 
-							url={permalink}
+							url={`${location.protocol}//${window.location.host}${permalink}`}
 						>
 							Share on Twitter
 						</TwitterShareButton>
@@ -80,7 +81,7 @@ const SingleProduct = ({
 					<li>
 						<WhatsappShareButton 
 							className="btn btn-primary" 
-							url={permalink}
+							url={`${location.protocol}//${window.location.host}${permalink}`}
 						>
 							Share on Whatsapp
 						</WhatsappShareButton>
@@ -98,6 +99,8 @@ const SingleProduct = ({
 )
 
 SingleProduct.propTypes = {
+	homeUrl: PropTypes.string.isRequired,
+	permalink: PropTypes.string.isRequired,
 	// image: PropTypes.string.isRequired,
 	// linkUrl: PropTypes.string.isRequired,
 }

@@ -8,13 +8,15 @@ const Categories = ({
 	messages,
 	images,
 	categories,
+	homeUrl,
 }) => (
-	<CategoriesView headerImage={images.header} footerImage={images.footer} categories={categories} />
+	<CategoriesView headerImage={images.header} footerImage={images.footer} categories={categories} homeUrl={homeUrl} />
 )
 
 const mapStateToProps = (state, props) => ({
 	messages: {...state.messages},
 	images: {...state.images},
+	homeUrl: `/${state.applicationData.canvasId}/${state.applicationData.checksum}`,
 	categories: getAllCategories(state),
 })
 

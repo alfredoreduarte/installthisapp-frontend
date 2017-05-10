@@ -9,16 +9,32 @@ const Product = ({
 	title,
 	subtitle,
 	price,
+	displayMode,
 }) => (
-	<div className="col-xs-12 col-sm-6 col-md-3">
-		<Link to={permalink} className="thumbnail">
-			<img src={thumbnail} alt={title} />
-			<div className="caption">
-				<h3>{title}</h3>
-				<p>{subtitle}</p>
-				<p>{price}</p>
+	<div className={displayMode == 'grid' ? "col-xs-12 col-sm-6 col-md-3" : "col-xs-12 col-sm-12 col-md-12"}>
+		{displayMode == 'grid' ? 
+			<Link to={permalink} className="thumbnail">
+				<img src={thumbnail} alt={title} />
+				<div className="caption">
+					<h3>{title}</h3>
+					<p>{subtitle}</p>
+					<p>{price}</p>
+				</div>
+			</Link>
+		:
+			<div className="media">
+				<div className="media-left media-middle">
+					<Link to={permalink}>
+						<img className="media-object" src={thumbnail} alt={title} style={{height: '50px'}} />
+					</Link>
+				</div>
+				<div className="media-body media-middle">
+					<Link to={permalink}><h4 className="media-heading">{title}</h4></Link>
+					<p>{subtitle}</p>
+					<p>{price}</p>
+				</div>
 			</div>
-		</Link>
+		}
 	</div>
 )
 
