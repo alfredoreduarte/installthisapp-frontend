@@ -1,18 +1,34 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import Image from 'canvas/catalog/components/Image'
+import Product from 'canvas/catalog/components/Product'
 
 const Index = ({ 
 	headerImage,
 	footerImage,
-	entries
+	products,
+	categories,
 }) => (
 	<div>
 		<Image source={headerImage} />
-		<h1>Entries</h1>
-		<ul>
-			{entries.map( entry => <li>{entry}</li>)}
-		</ul>
+		<div className="container">
+			<div className="col-md-12">
+				<h1>Products</h1>
+			</div>
+		</div>
+		<div className="container">
+			<div className="col-md-2">
+				<h3>Categories</h3>
+				<ul>
+					{categories.map( ({ name }) => <li>{name}</li>)}
+				</ul>
+			</div>
+			<div className="col-md-10">
+				<div className="row">
+					{products.map( ({ id, slug, name, price, shortDescription }) => <Product key={id} slug={slug} title={name} price={price} shortDescription={shortDescription} />)}
+				</div>
+			</div>
+		</div>
 		<Image source={footerImage} />
 	</div>
 )
@@ -20,7 +36,8 @@ const Index = ({
 Index.propTypes = {
 	headerImage: PropTypes.string,
 	footerImage: PropTypes.string,
-	entries: PropTypes.array.isRequired,
+	products: PropTypes.array.isRequired,
+	categories: PropTypes.array.isRequired,
 }
 
 export default Index

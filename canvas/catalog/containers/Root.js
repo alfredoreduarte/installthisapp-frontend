@@ -3,7 +3,7 @@ import { Provider, connect } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
 import { getStaticContent, getStaticContentAndEntities } from 'canvas/catalog/actions'
 import Index from 'canvas/catalog/containers/Index'
-import Intro from 'canvas/catalog/containers/Intro'
+import SingleProduct from 'canvas/catalog/containers/SingleProduct'
 import Login from 'canvas/catalog/containers/Login'
 import Cookies from 'js-cookie'
 
@@ -35,14 +35,14 @@ class Root extends Component {
 						// Some apps may also download the dynamic content (e.g. photos from a photo contest) 
 						// 
 						onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
-						component={Intro} />
+						component={Index} />
 					<Route 
-						path={`/${window.canvasId}(/:checksum)/entries`}
+						path={`/${window.canvasId}(/:checksum)/:productSlug`}
 						// 
 						// 
 						// 
 						onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
-						component={Index} />
+						component={SingleProduct} />
 					<Route 
 						path={`/${window.canvasId}/:checksum/login`} 
 						component={Login}/>

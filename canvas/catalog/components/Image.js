@@ -17,7 +17,7 @@ const styles = {
 }
 
 Image.propTypes = {
-	source: PropTypes.string.isRequired,
+	source: PropTypes.string,
 }
 
 export default Image
