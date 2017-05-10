@@ -3,7 +3,7 @@ import createLogger from 'redux-logger'
 import { routerMiddleware } from 'react-router-redux'
 import { combineReducers, createStore, compose, applyMiddleware } from 'redux'
 import { browserHistory } from 'react-router'
-import createReducer from 'canvas/example/reducers'
+import createReducer from 'canvas/catalog/reducers'
 
 const reactRouterMiddleware = routerMiddleware(browserHistory)
 

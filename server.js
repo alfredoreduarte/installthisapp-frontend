@@ -68,6 +68,9 @@ app.use(photoContestRouter)
 // Memory Match
 var memoryMatchRouter = require('./canvas/memory_match/server.js')
 app.use(memoryMatchRouter)
+// Catalog
+var catalogRouter = require('./canvas/catalog/server.js')
+app.use(catalogRouter)
 
 // Serving static HTML
 app.use(function(req, res, next) {

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
-import Image from 'canvas/example/components/Image'
+import Image from 'canvas/catalog/components/Image'
 
 const Index = ({ 
 	headerImage,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as IntroView from 'canvas/example/components/Intro'
+import IntroView from 'canvas/example/components/Intro'
 
 class Intro extends Component {
 	render(){ 

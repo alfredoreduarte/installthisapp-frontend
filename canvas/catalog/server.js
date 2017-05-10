@@ -1,20 +1,18 @@
 var express = require('express')
 var jsonfile = require('jsonfile')
+var apiUrl = process.env.API_URL
 var bodyParser = require('body-parser')
 var fetch = require('isomorphic-fetch')
-var apiUrl = process.env.API_URL
-var module = 'example'
-if (process.env.NODE_ENV == 'development') {
-	process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'
-}
+var moduleName = 'catalog'
+var canvasId = 'app5'
 // #############
 // Canvas
 // #############
 var cloudFrontUrl = process.env.CLOUDFRONT_URL
 var canvasRouter = express.Router()
-var canvasId = 'app2'
 // For canvas apps on subdomains
-// app.use(subdomain(canvasId, canvasRouter))
+// var canvasSubdomain = `${canvasId}-localui`
+// app.use(subdomain(canvasSubdomain, canvasRouter))
 var canvasParser = bodyParser.urlencoded({ extended: true })
 canvasRouter.get(`/${canvasId}/favicon.ico`, function(req, res) {
 	res.sendStatus(200)
@@ -34,7 +32,7 @@ canvasRouter.post(`/${canvasId}`, canvasParser, function(req, res) {
 	const manifest = jsonfile.readFileSync(manifestPath)
 	const manifestBundle = manifest['manifest']['js']
 	const vendorBundle = manifest['common']['js']
-	const moduleBundle = manifest[module]['js']
+	const moduleBundle = manifest[moduleName]['js']
 	fetch(`${apiUrl}/canvasauth.json`, {
 		method: 'POST',
 		headers: {
@@ -48,18 +46,18 @@ canvasRouter.post(`/${canvasId}`, canvasParser, function(req, res) {
 	.then(response => response.json())
 	.then(json =>{
 		res.render('canvas', {
-			apiUrl,
-			module,
-			manifestBundle,
-			vendorBundle,
-			moduleBundle,
 			cloudFrontUrl: cloudFrontUrl,
+			apiUrl,
+			module: moduleName,
 			canvasId: canvasId,
 			checksum: json.checksum,
 			facebookAppId: json.fb_application_id,
 			stylesheetUrl: json.stylesheet_url,
 			messagesUrl: json.messages_url,
 			imagesUrl: json.images_url,
+			manifestBundle,
+			vendorBundle,
+			moduleBundle,
 		})
 	})
 	.catch(exception =>
@@ -69,15 +67,12 @@ canvasRouter.post(`/${canvasId}`, canvasParser, function(req, res) {
 		}
 	)
 })
-// 
-// Auth from standalone app page
-// 
 canvasRouter.get(`/${canvasId}/:checksum*`, canvasParser, function(req, res) {
 	const manifestPath = `${process.cwd()}/webpack-assets.json`
 	const manifest = jsonfile.readFileSync(manifestPath)
 	const manifestBundle = manifest['manifest']['js']
 	const vendorBundle = manifest['common']['js']
-	const moduleBundle = manifest[module]['js']
+	const moduleBundle = manifest[moduleName]['js']
 	fetch(`${apiUrl}/standalone_auth.json`, {
 		method: 'POST',
 		headers: {
@@ -92,18 +87,18 @@ canvasRouter.get(`/${canvasId}/:checksum*`, canvasParser, function(req, res) {
 	.then(response => response.json())
 	.then(json =>{
 		res.render('canvas', {
-			apiUrl,
-			module,
-			manifestBundle,
-			vendorBundle,
-			moduleBundle,
 			cloudFrontUrl: cloudFrontUrl,
+			apiUrl,
+			module: moduleName,
 			canvasId: canvasId,
 			checksum: json.checksum,
 			facebookAppId: json.fb_application_id,
 			stylesheetUrl: json.stylesheet_url,
 			messagesUrl: json.messages_url,
 			imagesUrl: json.images_url,
+			manifestBundle,
+			vendorBundle,
+			moduleBundle,
 		})
 	})
 	.catch(exception =>

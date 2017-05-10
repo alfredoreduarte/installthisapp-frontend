@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { Provider, connect } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
-import { getStaticContent, getStaticContentAndEntities } from 'canvas/example/actions'
-import Index from 'canvas/example/containers/Index'
-import Intro from 'canvas/example/containers/Intro'
-import Login from 'canvas/example/containers/Login'
+import { getStaticContent, getStaticContentAndEntities } from 'canvas/catalog/actions'
+import Index from 'canvas/catalog/containers/Index'
+import Intro from 'canvas/catalog/containers/Intro'
+import Login from 'canvas/catalog/containers/Login'
 import Cookies from 'js-cookie'
 
 const getData = (nextState, replace, next, dispatch) => dispatch(loginCallback()).then(() => next())
@@ -34,7 +34,7 @@ class Root extends Component {
 						// regardless of the visitor being identified or not.
 						// Some apps may also download the dynamic content (e.g. photos from a photo contest) 
 						// 
-						onEnter={(nextState, replace, next) => getStaticContent(nextState, replace, next, dispatch)}
+						onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
 						component={Intro} />
 					<Route 
 						path={`/${window.canvasId}(/:checksum)/entries`}

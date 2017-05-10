@@ -1,5 +1,5 @@
 import { push } from 'react-router-redux'
-import { loginCallback } from 'canvas/example/actions/'
+import { loginCallback } from 'canvas/catalog/actions/'
 import { writeToApiWithoutAuth } from 'canvas/api'
 import Cookies from 'js-cookie'
 

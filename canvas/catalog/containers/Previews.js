@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react'
 
 // Screens
-import Intro from 'canvas/example/components/Intro'
-import Index from 'canvas/example/components/Index'
+import Intro from 'canvas/catalog/components/Intro'
+import Index from 'canvas/catalog/components/Index'
 
 /** Photo samples. */
 const demoPhotos = [

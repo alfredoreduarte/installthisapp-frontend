@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { getFilteredEntries } from 'canvas/example/selectors/entries'
 import Loading from 'canvas/example/components/Loading'
-import * as IndexView from 'canvas/example/components/Index'
+import IndexView from 'canvas/example/components/Index'
 
 const Index = ({ 
 	messages,

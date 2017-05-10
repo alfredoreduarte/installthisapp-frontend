@@ -21,6 +21,7 @@ module.exports = {
 		top_fans: 'canvas/top_fans/index.js',
 		photo_contest: 'canvas/photo_contest/index.js',
 		memory_match: 'canvas/memory_match/index',
+		catalog: 'canvas/catalog/index',
 	},
 	output: {
 		path: path.join(__dirname, '/dist'),

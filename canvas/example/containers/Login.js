@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { digestFacebookResponse } from 'canvas/example/actions/user'
 import { toggleLogin } from 'canvas/example/actions/activityIndicators'
-import LoginView from 'canvas/example/components/LoginView'
+import LoginView from 'canvas/example/components/Login'
 
 const Login = ({ logging, title, fbCallback }) => (
 	<LoginView title={title} fbCallback={fbCallback} logging={logging} />
