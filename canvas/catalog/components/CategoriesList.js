@@ -7,7 +7,7 @@ const CategoriesList = ({
 	<div>
 		<h3>Categories</h3>
 		<ul>
-			{categories.map( ({ id, name, slug }) => <li key={id}><Link to={slug}>{name}</Link></li>)}
+			{categories.map( ({ id, name, permalink }) => <li key={id}><Link to={permalink}>{name}</Link></li>)}
 		</ul>
 	</div>
 )
