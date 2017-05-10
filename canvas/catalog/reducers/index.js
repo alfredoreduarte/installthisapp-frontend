@@ -8,6 +8,7 @@ import settings from 'canvas/catalog/reducers/settings'
 import messages from 'canvas/catalog/reducers/messages'
 import images from 'canvas/catalog/reducers/images'
 import loggedUser from 'canvas/catalog/reducers/loggedUser'
+import ui from 'canvas/catalog/reducers/ui'
 
 const createReducer = asyncReducers => {
 	return combineReducers({
@@ -19,6 +20,7 @@ const createReducer = asyncReducers => {
 		messages,
 		images,
 		loggedUser,
+		ui,
 	})
 }
 

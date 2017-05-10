@@ -6,10 +6,11 @@ import v4 from 'node-uuid'
 import { connect } from 'react-redux'
 import { Modal, Button } from 'react-bootstrap'
 
-const SimpleModal = ({ children, show, handleClose, title }) => (
+const SimpleModal = ({ children, show, handleClose, title, subtitle, thumbnail }) => (
 	<Modal show={show} onHide={handleClose}>
 		<Modal.Header closeButton>
 			<Modal.Title>{title}</Modal.Title>
+			<p><small>{subtitle.substring(0,50)}</small></p>
 		</Modal.Header>
 		<Modal.Body>
 			{children}

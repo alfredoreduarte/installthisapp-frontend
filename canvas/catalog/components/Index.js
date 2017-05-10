@@ -3,19 +3,18 @@ import { Link } from 'react-router'
 import CategoriesList from 'canvas/catalog/components/CategoriesList'
 import Image from 'canvas/catalog/components/Image'
 import Product from 'canvas/catalog/components/Product'
+import Header from 'canvas/catalog/components/Header'
 
 const Index = ({ 
 	headerImage,
 	footerImage,
+	currency,
 	products,
 	categories,
 }) => (
 	<div>
-		<Image source={headerImage} />
 		<div className="container">
-			<div className="col-md-12">
-				<h1>Products</h1>
-			</div>
+			<Header logoImage={'https://localhost.ssl:5000/images/logo-round.png'} />
 		</div>
 		<div className="container">
 			<div className="col-md-2">
@@ -23,7 +22,16 @@ const Index = ({
 			</div>
 			<div className="col-md-10">
 				<div className="row">
-					{products.map( ({ id, slug, name, price, shortDescription }) => <Product key={id} slug={slug} title={name} price={price} shortDescription={shortDescription} />)}
+					{products.map( ({ id, permalink, name, price, shortDescription, featuredImage }) => 
+						<Product 
+							key={id} 
+							permalink={permalink} 
+							title={name} 
+							price={`${currency} ${price}`} 
+							thumbnail={featuredImage.attachmentUrl} 
+							subtitle={shortDescription}
+						/>
+					)}
 				</div>
 			</div>
 		</div>

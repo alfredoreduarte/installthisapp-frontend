@@ -4,22 +4,28 @@ import { Link } from 'react-router'
 import Image from 'canvas/catalog/components/Image'
 
 const Product = ({ 
-	slug,
+	thumbnail,
+	permalink,
 	title,
-	description,
+	subtitle,
 	price,
 }) => (
 	<div className="col-xs-12 col-sm-6 col-md-3">
-		<h1><Link to={'SDBCA7/' + slug}>{title}</Link></h1>
-		<p>{description}</p>
-		<p>{price}</p>
+		<Link to={permalink} className="thumbnail">
+			<img src={thumbnail} alt={title} />
+			<div className="caption">
+				<h3>{title}</h3>
+				<p>{subtitle}</p>
+				<p>{price}</p>
+			</div>
+		</Link>
 	</div>
 )
 
 Product.propTypes = {
-	slug: PropTypes.string.isRequired,
+	permalink: PropTypes.string.isRequired,
 	title: PropTypes.string.isRequired,
-	description: PropTypes.string,
+	subtitle: PropTypes.string,
 	price: PropTypes.string,
 }
 

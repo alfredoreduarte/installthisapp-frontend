@@ -9,15 +9,17 @@ import IndexView from 'canvas/catalog/components/Index'
 const Index = ({ 
 	messages,
 	images,
+	currency,
 	products,
 	categories,
 }) => (
-	<IndexView headerImage={images.header} footerImage={images.footer} products={products} categories={categories} />
+	<IndexView headerImage={images.header} footerImage={images.footer} currency={currency} products={products} categories={categories} />
 )
 
 const mapStateToProps = state => ({
 	messages: {...state.messages},
 	images: {...state.images},
+	currency: state.settings.currency,
 	products: getAllProducts(state),
 	categories: getAllCategories(state),
 })

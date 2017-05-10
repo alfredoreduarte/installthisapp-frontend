@@ -9,13 +9,12 @@ import AppTitleBar from 'components/AppTitleBar'
 import Sidebar from 'components/Sidebar'
 import { install, uninstall, toggleAppInstalling, toggleAppUninstalling } from 'actions/apps'
 import { toggleCopyShareLink, toggleShareModal } from 'actions/applicationData'
-// import { turnOffActivityCreatingApp, turnOffActivityLoadingApp } from 'actions/activityIndicators'
 import DashboardContentDecorator from 'containers/DashboardContentDecorator'
 
 const {
-  FacebookShareButton,
-  TwitterShareButton,
-} = ShareButtons;
+	FacebookShareButton,
+	TwitterShareButton,
+} = ShareButtons
 
 const AppDashboardContainer = ({ 
 	children, 

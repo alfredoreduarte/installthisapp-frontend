@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getProductByUrlSlug } from 'canvas/catalog/selectors/products'
 import { getAllCategories } from 'canvas/catalog/selectors/categories'
+import { toggleContactModal } from 'canvas/catalog/actions/ui'
 import SingleProductView from 'canvas/catalog/components/SingleProduct'
 
 const SingleProduct = ({ 
@@ -10,10 +11,14 @@ const SingleProduct = ({
 	galleryImages,
 	productCategories,
 	productMedia,
+	permalink,
 	title,
 	description,
 	price,
 	categories,
+	// 
+	showContactModal,
+	handleToggleContact,
 }) => (
 	<SingleProductView 
 		headerImage={images.header} 
@@ -21,10 +26,14 @@ const SingleProduct = ({
 		galleryImages={galleryImages}
 		productCategories={productCategories}
 		productMedia={productMedia}
+		permalink={permalink}
 		title={title}
 		description={description}
 		price={price}
 		categories={categories}
+		// 
+		showContactModal={showContactModal}
+		handleToggleContact={handleToggleContact}
 	/>
 )
 
@@ -32,6 +41,7 @@ const mapStateToProps = (state, props) => {
 	const product = getProductByUrlSlug(state, props)
 	return {
 		images: {...state.images},
+		currency: state.settings.currency,
 		galleryImages: [],
 		productCategories: product.categories,
 		productMedia: product.gallery.map(image => {
@@ -42,17 +52,19 @@ const mapStateToProps = (state, props) => {
 			}
 			return result
 		}),
+		permalink: product.permalink,
 		title: product.name,
 		description: product.description,
-		price: product.price,
+		price: `${state.settings.currency} ${product.price}`,
 		categories: getAllCategories(state),
 		// linkUrl: `/${window.canvasId}/${window.checksum}/login`
+		showContactModal: state.ui.showContactModal,
 	}
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
-		
+		handleToggleContact: () => dispatch(toggleContactModal()),
 	}
 }
 
