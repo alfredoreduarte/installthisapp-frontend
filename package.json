@@ -10,7 +10,7 @@
     "test:watch": "npm test -- --watch",
     "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "build": "npm run clean && npm run build:webpack",
-    "postinstall": "npm run build",
+    "heroku-postbuild": "npm run build",
     "dashboard": "NODE_ENV=development webpack-dashboard -c magenta -- nodemon server.js",
     "start": "nodemon server.js"
   },
@@ -76,6 +76,7 @@
     "node-uuid": "^1.4.7",
     "nodemon": "^1.9.2",
     "normalizr": "^2.2.1",
+    "promise-polyfill": "^6.0.2",
     "react": "^15.4.1",
     "react-addons-css-transition-group": "^15.4.0",
     "react-addons-shallow-compare": "^15.4.1",
