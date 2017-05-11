@@ -3,6 +3,13 @@ import Cookies from 'js-cookie'
 import * as EmailValidator from 'email-validator'
 import 'whatwg-fetch'
 
+// Promise polyfill
+import Promise from 'promise-polyfill'
+// To add to window
+if (!window.Promise) {
+	window.Promise = Promise
+}
+
 let originalSubmitText = null
 let actualSubmitButton = null
 
