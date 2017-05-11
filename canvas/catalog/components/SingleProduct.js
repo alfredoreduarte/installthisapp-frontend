@@ -18,7 +18,6 @@ const {
 const SingleProduct = ({ 
 	headerImage, 
 	footerImage, 
-	galleryImages, 
 	productCategories, 
 	productMedia, 
 	permalink,

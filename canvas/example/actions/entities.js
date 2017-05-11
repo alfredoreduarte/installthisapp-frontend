@@ -11,12 +11,18 @@ export const receiveEntities = entities => ({
 export const fetchEntities = () => {
 	return (dispatch, getState) => {
 		const { checksum } = getState().applicationData
-		return getFromApi(`${checksum}/entities.json`, response => {
-			if (response.success) {
-				const normalized = normalize(response, schema.entities)
-				console.log('normal', normalized)
-				return dispatch(receiveEntities(normalized.entities))
-			}
-		})
+		const { fetched } = getState().entities
+		if (fetched) {
+			return Promise.resolve(true)
+		}
+		else {
+			return getFromApi(`${checksum}/entities.json`, response => {
+				if (response.success) {
+					const normalized = normalize(response, schema.entities)
+					console.log('normal', normalized)
+					return dispatch(receiveEntities(normalized.entities))
+				}
+			})
+		}
 	}
 }

@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getProductByUrlSlug } from 'canvas/catalog/selectors/products'
-import { getAllCategories } from 'canvas/catalog/selectors/categories'
+import { getAllCategories, getProductCategories } from 'canvas/catalog/selectors/categories'
+import { getProductMedia } from 'canvas/catalog/selectors/media'
 import { toggleContactModal } from 'canvas/catalog/actions/ui'
 import SingleProductView from 'canvas/catalog/components/SingleProduct'
 
 const SingleProduct = ({ 
 	messages,
 	images,
-	galleryImages,
 	productCategories,
 	productMedia,
 	permalink,
@@ -24,7 +24,6 @@ const SingleProduct = ({
 	<SingleProductView 
 		headerImage={images.header} 
 		footerImage={images.footer} 
-		galleryImages={galleryImages}
 		productCategories={productCategories}
 		productMedia={productMedia}
 		permalink={permalink}
@@ -40,27 +39,19 @@ const SingleProduct = ({
 )
 
 const mapStateToProps = (state, props) => {
-	const product = getProductByUrlSlug(state, props)
+	const { price, permalink, name, description } = getProductByUrlSlug(state, props)
+	const { currency } = state.settings
 	return {
 		images: {...state.images},
-		currency: state.settings.currency,
-		galleryImages: [],
-		productCategories: product.categories,
-		productMedia: product.gallery.map(image => {
-			const result = {
-				...image, 
-				original: image.attachmentUrl, 
-				thumbnail: image.attachmentUrl
-			}
-			return result
-		}),
-		permalink: product.permalink,
-		title: product.name,
-		description: product.description,
-		price: `${state.settings.currency} ${product.price}`,
+		productCategories: getProductCategories(state, props),
+		productMedia: getProductMedia(state, props),
+		currency: currency,
+		permalink: permalink,
+		title: name,
+		description: description,
+		price: `${currency} ${price}`,
 		categories: getAllCategories(state),
 		homeUrl: `/${state.applicationData.canvasId}/${state.applicationData.checksum}`,
-		// linkUrl: `/${window.canvasId}/${window.checksum}/login`
 		showContactModal: state.ui.showContactModal,
 	}
 }

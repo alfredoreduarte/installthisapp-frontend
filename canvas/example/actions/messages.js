@@ -7,6 +7,12 @@ export const receiveMessages = payload => ({
 
 export const fetchMessages = () => {
 	return (dispatch, getState) => {
-		return getExternal(window.messagesUrl).then( json => dispatch(receiveMessages(json)))
+		const { fetched } = getState().messages
+		if (fetched) {
+			return Promise.resolve(true)
+		}
+		else {
+			return getExternal(window.messagesUrl).then( json => dispatch(receiveMessages(json)))
+		}
 	}
 }
