@@ -4,6 +4,7 @@ import PreviewsTrivia from 'canvas/trivia/containers/Previews'
 import PreviewsPhotoContest from 'canvas/photo_contest/containers/Previews'
 import PreviewsTopFans from 'canvas/top_fans/containers/Previews'
 import PreviewsMemoryMatch from 'canvas/memory_match/containers/Previews'
+import PreviewsCatalog from 'canvas/catalog/containers/Previews'
 
 const GameSample = ({ screen, previews, messages, images, coso }) => (
 	<div>
@@ -11,6 +12,7 @@ const GameSample = ({ screen, previews, messages, images, coso }) => (
 		{previews == 'trivia' ? <PreviewsTrivia screen={screen} messages={messages} images={images} /> : null}
 		{previews == 'top_fans' ? <PreviewsTopFans screen={screen} messages={messages} images={images} /> : null}
 		{previews == 'memory_match' ? <PreviewsMemoryMatch screen={screen} messages={messages} images={images} /> : null}
+		{previews == 'catalog' ? <PreviewsCatalog screen={screen} messages={messages} images={images} /> : null}
 	</div>
 )
 
