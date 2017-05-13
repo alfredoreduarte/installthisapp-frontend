@@ -12,7 +12,9 @@
     "build": "npm run clean && npm run build:webpack",
     "heroku-postbuild": "npm run build",
     "dashboard": "NODE_ENV=development webpack-dashboard -c magenta -- nodemon server.js",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "engines": {
     "node": "5.11.0",
@@ -134,6 +136,7 @@
     "sinon": "^1.17.6",
     "webpack-dashboard": "^0.1.8",
     "webpack-dev-middleware": "^1.10.0",
-    "webpack-hot-middleware": "^2.16.1"
+    "webpack-hot-middleware": "^2.16.1",
+    "@kadira/storybook": "^2.21.0"
   }
 }

@@ -5,6 +5,7 @@ import CategoriesList from 'canvas/catalog/components/CategoriesList'
 import Image from 'canvas/catalog/components/Image'
 import Product from 'canvas/catalog/components/Product'
 import Header from 'canvas/catalog/components/Header'
+import TopBar from 'canvas/catalog/components/mobile/TopBar'
 
 const Index = ({ 
 	headerImage,
@@ -17,8 +18,8 @@ const Index = ({
 	toggleListGrid,
 }) => (
 	<div>
-		<div className="container">
-			<Header homeUrl={homeUrl} logoImage={'https://localhost.ssl:5000/images/logo-round.png'} />
+		<div className="--container">
+			<TopBar homeUrl={homeUrl} logoImage={'https://localhost.ssl:5000/images/logo-round.png'} />
 		</div>
 		<div className="container">
 			<div className="col-md-2">
