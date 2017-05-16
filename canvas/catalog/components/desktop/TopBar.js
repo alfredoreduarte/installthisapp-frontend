@@ -3,14 +3,9 @@ import { Link } from 'react-router'
 import _ from 'lodash'
 
 const Header = ({ 
-	logoImage,
-	homeUrl,
+	copy,
 }) => (
-	<div style={styles.container}>
-		<Link to={homeUrl}>
-			<img src={logoImage} style={styles.logo} />
-		</Link>
-	</div>
+	<div style={styles.container}><span style={styles.copy}>{copy}</span></div>
 )
 
 const layout = {
@@ -19,8 +14,10 @@ const layout = {
 		display: 'flex',
 		height: '50px',
 		padding: '15px',
+		alignItems: 'center',
+		justifyContent: 'flex-end',
 	},
-	logo: {
+	copy: {
 		height: '20px',
 	}
 }
@@ -29,16 +26,24 @@ const variableStyles = {
 	container: {
 		background: '#6A588B',
 	},
-	logo: {
-		
+	copy: {
+		lineHeight: 1.5,
+		textAlign: 'center',
+		color: '#ffffff',
+		letterSpacing: '0px',
+		fontSize: '14px',
+		fontFamily: 'Montserrat',
+		fontWeight: 'normal',
+		fontStyle: 'normal',
+		textDecoration: 'none',
+		textTransform: 'none',
 	}
 }
 
 const styles = _.merge(layout, variableStyles)
 
 Header.propTypes = {
-	logoImage: PropTypes.string,
-	homeUrl: PropTypes.string.isRequired,
+	copy: PropTypes.string,
 }
 
 export default Header

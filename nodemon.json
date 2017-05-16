@@ -13,6 +13,7 @@
 		"schema/*",
 		"routes.js",
 		"routes/*",
+		"stories/*",
 		"index.&",
 		"index.html",
 		"webpack-assets.json"
