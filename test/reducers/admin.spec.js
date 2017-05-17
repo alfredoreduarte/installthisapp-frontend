@@ -1,5 +1,6 @@
 import expect from 'expect'
 import admin from 'reducers/admin'
+import * as actions from 'actions/admin'
 
 describe('Reducers', () => {
 	describe('admin', () => {
@@ -13,11 +14,7 @@ describe('Reducers', () => {
 					lastName: 'Re',
 					email: 'alfredoreduarte@gmail.com'
 				}
-				const action = {
-					type: 'RECEIVE_ADMIN',
-					payload: expectedResult
-				}
-				expect(admin({}, action)).toEqual(expectedResult)
+				expect(admin({}, actions.receiveAdmin(expectedResult))).toEqual(expectedResult)
 			})
 		})
 	})

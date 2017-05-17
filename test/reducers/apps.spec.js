@@ -1,5 +1,6 @@
 import expect from 'expect'
 import apps from 'reducers/apps'
+import * as actions from 'actions/apps'
 
 describe('Reducers', () => {
 	describe('apps', () => {
@@ -34,12 +35,23 @@ describe('Reducers', () => {
 					users: []
 				}
 			}
-			const checksum = '9KW8J'
-			const action = {
-				type: 'DELETE_APP',
-				checksum
-			}
-			expect(apps(initialState, action)).toEqual(expectedResult)
+			// const checksum = '9KW8J'
+			// const action = {
+			// 	type: 'DELETE_APP',
+			// 	checksum
+			// }
+			// expect(apps(initialState, action)).toEqual(expectedResult)
+			expect(apps(initialState, actions.updateApp("9KW8J", {
+				id: 231312,
+				checksum: "9KW8J",
+				title: "App para borrar",
+				type: "trivia",
+				status: "deleted",
+				scheduled: false,
+				page: 411,
+				summary: [],
+				users: []
+			}))).toEqual(expectedResult)
 		})
 	})
 })

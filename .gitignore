@@ -39,6 +39,7 @@ Thumbs.db
 # Project
 ssl
 ssl-dev
+coverage
 node_modules
 dist
 .sublime-project
