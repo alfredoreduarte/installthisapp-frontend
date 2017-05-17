@@ -1,3 +1,4 @@
+// @flow
 import React, { Component, PropTypes } from 'react'
 import { Provider, connect } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
@@ -7,8 +8,6 @@ import SingleProduct from 'canvas/catalog/containers/SingleProduct'
 import Categories from 'canvas/catalog/containers/Categories'
 import Login from 'canvas/catalog/containers/Login'
 import Cookies from 'js-cookie'
-
-const getData = (nextState, replace, next, dispatch) => dispatch(loginCallback()).then(() => next())
 
 const requireAuth = (nextState, replace, next, dispatch) => {
 	if (Cookies.get('apiKey') || window.canvasApiKey) {

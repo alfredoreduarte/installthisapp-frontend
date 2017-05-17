@@ -1,4 +1,6 @@
-const activityIndicators = (state = {
+// @flow
+import type { GeneralActivityIndicators, Action } from 'types'
+const activityIndicators = (state: GeneralActivityIndicators = {
 	purchasing: false,
 	globalIndicator: false,
 	loadingPages: false,
@@ -9,7 +11,7 @@ const activityIndicators = (state = {
 	appChecksumDashboardLoading: null,
 	connectingToFacebook: false,
 	installingFacebookTab: false,
-}, action) => {
+}, action: Action) => {
 	switch (action.type) {
 		case 'TOGGLE_ACTIVITY/PURCHASING':
 			return Object.assign({}, state, {

@@ -1,3 +1,4 @@
+// @flow
 export const turnOnGlobalIndicator = () => ({
 	type: 'TOGGLE_ACTIVITY_ON/GLOBAL'
 })
@@ -14,7 +15,7 @@ export const turnOffActivityCreatingApp = () => ({
 	type: 'TOGGLE_ACTIVITY_OFF/CREATING_APP'
 })
 
-export const turnOnActivityLoadingApp = checksum => ({
+export const turnOnActivityLoadingApp = (checksum: string) => ({
 	type: 'TOGGLE_ACTIVITY_ON/LOADING_APP',
 	checksum
 })

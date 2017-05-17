@@ -3,7 +3,7 @@ import { getFromApi, getExternal } from 'canvas/api'
 import { push } from 'react-router-redux'
 import * as schema from 'canvas/catalog/schema'
 
-export const receiveEntities = entities => ({
+export const receiveEntities = (entities) => ({
 	type: 'RECEIVE_ENTITIES',
 	entities,
 })

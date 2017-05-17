@@ -1,3 +1,6 @@
+/**
+ * @flow
+ */
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import { ButtonGroup, Button } from 'react-bootstrap'
@@ -19,6 +22,24 @@ const Index = ({
 	productListDisplayMode,
 	categories,
 	toggleListGrid,
+}: {
+	headerImage: string,
+	footerImage: string,
+	currency: string,
+	products: Array<{
+		id: number,
+		permalink: string,
+		name: string,
+		price: string,
+		shortDescription: string,
+		featuredImage: {
+			attachmentUrl: string,
+		},
+	}>,
+	homeUrl: string,
+	productListDisplayMode: string,
+	categories: string,
+	toggleListGrid: string
 }) => (
 	<div>
 		<MediaQuery maxWidth={bsBreakpoints.sm - 1}>

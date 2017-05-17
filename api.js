@@ -1,3 +1,6 @@
+/**
+ * @flow
+ */
 import 'isomorphic-fetch'
 import Cookies from 'js-cookie'
 import humps from 'humps'
@@ -31,7 +34,7 @@ const getAuthKeys = () => {
 	}
 }
 
-export const getFromApi = (endpoint, success = temporaryEmptyFunction) => {
+export const getFromApi = (endpoint: string, success: () => mixed = temporaryEmptyFunction) => {
 	const authKeys = getAuthKeys()
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'GET',
@@ -64,7 +67,7 @@ export const getFromApi = (endpoint, success = temporaryEmptyFunction) => {
 			)
 }
 
-export const patchToApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
+export const patchToApi = (endpoint: string, body: ?{}, success: () => mixed = temporaryEmptyFunction) => {
 	const authKeys = getAuthKeys()
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'PATCH',
@@ -97,7 +100,7 @@ export const patchToApi = (endpoint, body = null, success = temporaryEmptyFuncti
 			)
 }
 
-export const postFileToApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
+export const postFileToApi = (endpoint: string, body: string, success: () => mixed = temporaryEmptyFunction) => {
 	const authKeys = getAuthKeys()
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'POST',
@@ -128,7 +131,7 @@ export const postFileToApi = (endpoint, body = null, success = temporaryEmptyFun
 			)
 }
 
-export const postToApi = (endpoint, body = null, success = temporaryEmptyFunction, camelize = true) => {
+export const postToApi = (endpoint: string, body: ?{}, success: () => mixed = temporaryEmptyFunction, camelize: boolean = true) => {
 	const authKeys = getAuthKeys()
 	const elBody = camelize ? processBody(body) : JSON.stringify(body)
 	return 	fetch(API_URL + '/' + endpoint, {
@@ -162,7 +165,7 @@ export const postToApi = (endpoint, body = null, success = temporaryEmptyFunctio
 			)
 }
 
-export const deleteFromApi = (endpoint, body = null, success = temporaryEmptyFunction) => {
+export const deleteFromApi = (endpoint: string, body: ?{}, success: () => mixed = temporaryEmptyFunction) => {
 	const authKeys = getAuthKeys()
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'DELETE',

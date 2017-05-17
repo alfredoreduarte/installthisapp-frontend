@@ -1,3 +1,4 @@
+// @flow
 import { Schema, arrayOf } from 'normalizr'
 
 export const app = new Schema('apps', {

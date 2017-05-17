@@ -1,0 +1,15 @@
+[ignore]
+.*/node_modules/draft-js/.*
+.*/node_modules/fbjs/.*
+.*/node_modules/react-facebook-login/.*
+.*/node_modules/react-timeago/.*
+.*/*.sass
+[include]
+
+[libs]
+
+[options]
+module.name_mapper='.*\(.css\)' -> 'empty/object'
+module.name_mapper='.*\(.sass\)' -> 'empty/object'
+module.name_mapper='^\(.*\)'->'<PROJECT_ROOT>/\1'
+module.name_mapper='^\(.*\)'->'<PROJECT_ROOT>/node_modules/\1'
