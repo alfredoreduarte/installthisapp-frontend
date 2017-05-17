@@ -132,7 +132,7 @@
     "expect": "^1.20.2",
     "jsdom": "^9.8.3",
     "jsdom-global": "^2.1.0",
-    "mocha": "^3.1.2",
+    "mocha": "^3.4.1",
     "nock": "^9.0.2",
     "redux-mock-store": "^1.2.1",
     "sinon": "^1.17.6",
