@@ -96,7 +96,6 @@ const mapStateToProps = (state, ownProps) => {
 		initialValues = {
 			id: null,
 			name: 'Product name',
-			slug: 'product-name',
 		}
 	}
 	return {

@@ -9,9 +9,9 @@ export const getFilteredMedia = createSelector(
 	getAllMedia,
 	getCurrentAppByState,
 	(media, app) => {
-		return _.filter(media, medium => {
+		return _.orderBy(_.filter(media, medium => {
 			return medium.status != 'deleted' && medium.applicationId == app.id
-		})
+		}), ['createdAt'], ['desc'])
 	}
 )
 

@@ -11,22 +11,50 @@ const Product = ({
 	subtitle,
 	price,
 	displayMode,
-}) =>
-	<div style={{
-		...styles.container, 
-		width: '45%'
-	}}>
-		{featured ? <div className="ita-cali-product-grid-badge" style={styles.badge}>Featured</div> : null}
-		<Link to={permalink}><img src={thumbnail} alt={title} style={{...styles.thumbnail, width: '100px', height: '100px'}} /></Link>
-		<div style={styles.caption}>
-			<h3 className="ita-cali-product-grid-title" style={styles.title}>
-				<Link to={permalink} style={{color: 'inherit', textDecoration: 'none'}}>{title}</Link>
-			</h3>
-			<p className="ita-cali-product-grid-subtitle" style={styles.subtitle}>
-				<Link to={permalink} style={{color: 'inherit', textDecoration: 'none'}}>{price}</Link>
-			</p>
+}) => 
+	{return displayMode == 'grid' ? 
+		<div style={{...styles.container, width: '23%'}}>
+			{featured ? <div className="ita-cali-product-grid-badge" style={styles.badge}>Featured</div> : null}
+			<Link to={permalink}><img src={thumbnail} alt={title} style={{...styles.thumbnail, width: '100px', height: '100px'}} /></Link>
+			<div style={styles.caption}>
+				<h3 className="ita-cali-product-grid-title" style={styles.title}><Link to={permalink} style={{color: 'inherit'}}>{title}</Link></h3>
+				<p className="ita-cali-product-grid-subtitle" style={styles.subtitle}><Link to={permalink} style={{color: 'inherit'}}>{price}</Link></p>
+			</div>
 		</div>
-	</div>
+	:
+		<Media style={{...styles.container, 
+			flexDirection: 'inherit',
+			alignItems: 'inherit',
+			width: 'auto',
+		}}>
+			<Media.Left align="middle" style={{
+				marginRight: '1em',
+				flex: 1,
+				display: 'flex',
+				justifyContent: 'center',
+			}}>
+				<Link to={permalink}>
+					<img className="media-object" src={thumbnail} alt={title} style={{width: '218px', height: '218px'}} />
+				</Link>
+			</Media.Left>
+			<Media.Body align="middle" style={{
+				flex: 3,
+				display: 'flex',
+				flexDirection: 'column',
+				flexWrap: 'wrap',
+				alignItems: 'flex-start',
+			}}>
+				<Link to={permalink}><h4 className="ita-cali-product-grid-title" style={{...styles.title, 
+					fontWeight: '300',
+					fontSize: '24px',
+				}}>{title}</h4></Link>
+				<p className="ita-cali-product-grid-subtitle" style={{...styles.subtitle, 
+					fontSize: '12px'
+				}}>{price}</p>
+				<p className="ita-cali-product-grid-description" style={styles.description}>{subtitle}</p>
+			</Media.Body>
+		</Media>
+	}
 
 
 const layout = {
@@ -40,7 +68,6 @@ const layout = {
 		justifyContent: 'space-around',
 		position: 'relative',
 		marginTop: '1em',
-		marginBottom: '.5em',
 		background: 'white',
 	},
 	thumbnail: {

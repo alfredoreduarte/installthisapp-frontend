@@ -32,7 +32,7 @@ let CategoryCreator = ({ handleSubmit, fetching, change, categories }) => (
 			<Field name="parentId" component="select" className="form-control">
 				<option></option>
 				{categories.map(category => 
-					<option value={category.id}>{category.name}</option>
+					<option key={category.id} value={category.id}>{category.name}</option>
 				)}
 			</Field>
 		</div>
@@ -52,7 +52,6 @@ const mapStateToProps = (state, ownProps) => {
 		initialValues = {
 			id: null,
 			name: 'Category name',
-			slug: 'category-name',
 		}
 	}
 	return {

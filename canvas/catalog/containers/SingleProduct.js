@@ -49,7 +49,7 @@ const mapStateToProps = (state, props) => {
 		permalink: permalink,
 		title: name,
 		description: description,
-		price: `${currency} ${price}`,
+		price: price ? `${currency} ${price}` : null,
 		categories: getAllCategories(state),
 		homeUrl: `/${state.applicationData.canvasId}/${state.applicationData.checksum}`,
 		showContactModal: state.ui.showContactModal,

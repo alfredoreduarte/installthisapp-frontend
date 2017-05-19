@@ -3,10 +3,12 @@
  */
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
+import { browserHistory } from 'react-router'
 import { ButtonGroup, Button } from 'react-bootstrap'
 import bsBreakpoints from 'lib/bsBreakpoints'
 import MediaQuery from 'react-responsive'
 import CategoriesList from 'canvas/catalog/components/CategoriesList'
+import MdArrowBack from 'react-icons/lib/md/arrow-back'
 import Image from 'canvas/catalog/components/Image'
 import Product from 'canvas/catalog/components/Product'
 import Header from 'canvas/catalog/components/desktop/TopBar'
@@ -20,6 +22,7 @@ const Index = ({
 	products,
 	homeUrl,
 	productListDisplayMode,
+	category,
 	categories,
 	toggleListGrid,
 }: {
@@ -44,14 +47,67 @@ const Index = ({
 	<div>
 		<MediaQuery maxWidth={bsBreakpoints.sm - 1}>
 			<TopBar homeUrl={homeUrl} logoImage={'https://localhost.ssl:5000/images/logo-round.png'} />
+			<div style={{
+				display: 'flex',
+				flexWrap: 'nowrap',
+				marginBottom: '.5em',
+				// design
+				backgroundColor: '#F3F3F3',
+			}}>
+				{category ? 
+				<div style={{
+					flex: '0 0 auto',
+					padding: '13px 16px 12px',
+				}}>
+					<MdArrowBack size={20} color={'#5A6471'} onClick={browserHistory.goBack} />
+				</div>
+				: null }
+				<div style={{
+					display: 'flex',
+					flexWrap: 'nowrap',
+					overflow: 'auto',
+					'-webkit-overflow-scrolling': 'touch',
+					'-ms-overflow-style': '-ms-autohiding-scrollbar',
+				}}>
+					{categories.map(cat => <Link to={cat.permalink} style={{
+						flex: '0 0 auto',
+						padding: '13px 16px 12px',
+						// design
+						lineHeight: 1.5,
+						textAlign: 'left',
+						color: '#6A588B',
+						letterSpacing: '0px',
+						fontSize: '12px',
+						fontFamily: 'Montserrat',
+						fontWeight: '300',
+						fontStyle: 'normal',
+						// textDecoration: 'none',
+						textTransform: 'none',
+					}}>{cat.name}</Link>)}
+				</div>
+			</div>
+			{category ? <div className="col-md-12"><h1 style={{
+				// design
+				lineHeight: 1.5,
+				textAlign: 'left',
+				color: '#5A6471',
+				letterSpacing: '0px',
+				fontSize: '18px',
+				fontFamily: 'Montserrat',
+				fontWeight: '300',
+				fontStyle: 'normal',
+				textDecoration: 'none',
+				textTransform: 'none',
+			}}>{category.name}</h1></div> : null}
 			<div style={{display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap'}}>
-				{products.map( ({ id, permalink, name, price, shortDescription, featuredImage }) => 
+				{products.map( ({ id, permalink, name, price, shortDescription, featured, featuredImage }) => 
 					<Product 
 						key={id} 
 						displayMode={productListDisplayMode} 
 						permalink={permalink} 
 						title={name} 
-						price={`${currency} ${price}`} 
+						featured={featured} 
+						price={price ? `${currency} ${price}` : null} 
 						thumbnail={featuredImage.attachmentUrl} 
 						subtitle={shortDescription}
 					/>

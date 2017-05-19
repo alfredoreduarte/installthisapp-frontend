@@ -15,7 +15,6 @@ const Header = ({
 
 const layout = {
 	container: {
-		boxSizing: 'border-box',
 		display: 'flex',
 		height: '50px',
 		padding: '15px',

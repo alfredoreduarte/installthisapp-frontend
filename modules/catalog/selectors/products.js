@@ -9,7 +9,7 @@ export const getFilteredProducts = createSelector(
 	getAllProducts,
 	getCurrentAppByState,
 	(products, app) => {
-		return _.filter(products, product => product.id > 0  && product.applicationId == app.id)
+		return _.orderBy(_.filter(products, product => product.id > 0  && product.applicationId == app.id), ['createdAt'], ['desc'])
 	}
 )
 

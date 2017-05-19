@@ -10,9 +10,8 @@ import ProductForm from 'modules/catalog/components/ProductForm'
 const ProductCreate = ({
 	handleClose,
 	handleSubmit,
-	allCategories,
+	categories,
 	// 
-	allMedia,
 	media,
 	// 
 	showImagePicker,
@@ -26,9 +25,8 @@ const ProductCreate = ({
 	<ProductForm
 		handleClose={handleClose}
 		handleSubmit={handleSubmit}
-		allCategories={allCategories}
+		categories={categories}
 		// 
-		allMedia={allMedia}
 		media={media}
 		// 
 		showImagePicker={showImagePicker}
@@ -43,10 +41,9 @@ const ProductCreate = ({
 
 const mapStateToProps = (state, props) => {
 	return {
-		allMedia: getFilteredMedia(state, props),
-		media: [],
+		media: getFilteredMedia(state, props),
 		fetching: state.activityIndicators.updatingApp,
-		allCategories: getFilteredCategories(state),
+		categories: getFilteredCategories(state),
 		//
 		showFeaturedImagePicker: state.catalog.ui.showFeaturedImagePicker,
 		showImagePicker: state.catalog.ui.showImagePicker,

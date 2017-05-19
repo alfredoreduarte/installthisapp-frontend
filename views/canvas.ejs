@@ -15,7 +15,20 @@
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="icon-72x72.png"-->
 	<link rel="apple-touch-icon-precomposed" href="/images/module-icons/<%= module %>-big.jpg" />
 	<meta name="mobile-web-app-capable" content="yes">
-	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<% if (canvasId !== '-app5') { %>
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<% }
+	else { %>
+		<link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/7.0.0/normalize.css" />
+		<style>
+			html {
+				box-sizing: border-box;
+			}
+			*, *:before, *:after {
+				box-sizing: inherit;
+			}
+		</style>
+	<% } %>
 	<link rel="stylesheet" type="text/css" href="<%= stylesheetUrl %>" />
 	<link rel="icon" type="image/png" href="/images/favicon.png" />
 	<title><%= module %></title>
