@@ -37,7 +37,7 @@ router.get('/signup', function(req, res) { res.render('signup', commonParams) })
 router.get('/login', function(req, res) { res.render('login', commonParams) })
 router.get('/card', function(req, res) { res.render('card', commonParams) })
 router.get('/forgot', function(req, res) { res.render('forgot', commonParams) })
-router.get('/forgot/sent', function(req, res) { res.render('forgot/sent', commonParams) })
+router.get('/forgot/sent', function(req, res) { res.render('forgot-sent', commonParams) })
 router.get('/reset-password', function(req, res) { res.render('reset-password', commonParams) })
 
 // Module landings
