@@ -17,12 +17,13 @@
 					<div class="panel-body">
 						<form id="request-recovery">
 							<div class="form-group">
-								<input type="email" id="email" name="email" class="form-control input-lg" placeholder="Email">
+								<input type="email" id="reset-password-email" name="email" class="form-control input-lg" placeholder="Email">
 							</div>
 							<p>
 								<button id="signup-button" type="submit" class="btn btn-primary btn-lg btn-block">Send me the recovery link</button>
 							</p>
 						</form>
+						<p class="hide request-sent">Sending...</p>
 					</div>
 				</div>
 			</div>
@@ -34,8 +35,9 @@
 			$('#request-recovery').on('submit', function(e){
 				e.preventDefault();
 				$('#request-recovery').attr('disabled', true)
-				$('#request-recovery').html('Sending...')
-				var email = $('#email').val()
+				$('#request-recovery').hide()
+				$('.request-sent').removeClass('hide')
+				var email = $('#reset-password-email').val()
 				fetch('<%= apiUrl %>/auth/password.json', {
 					method: 'POST',
 					headers: {
@@ -43,15 +45,13 @@
 						'Content-Type': 'application/json',
 					},
 					body: JSON.stringify({
-						email: $('#email').val(),
+						email: email,
 						redirect_url: 'https://' + window.location.hostname + '/reset-password'
 					})
 				}).then(response => {
 					return response.json()
 				})
 				.then(json => {
-					console.log('forgot response')
-					console.log(json)
 					top.location = location.protocol + '//' + window.location.host + '/forgot/sent'
 				})
 				.catch(exception =>
