@@ -11,9 +11,12 @@ import CategoriesList from 'canvas/catalog/components/CategoriesList'
 import MdArrowBack from 'react-icons/lib/md/arrow-back'
 import Image from 'canvas/catalog/components/Image'
 import Product from 'canvas/catalog/components/Product'
-import Header from 'canvas/catalog/components/desktop/TopBar'
-import Footer from 'canvas/catalog/components/desktop/Footer'
 import TopBar from 'canvas/catalog/components/mobile/TopBar'
+
+
+import Header from 'canvas/catalog/components/desktop/TopBar'
+import LogoBar from 'canvas/catalog/components/desktop/LogoBar'
+import Footer from 'canvas/catalog/components/desktop/Footer'
 
 const Index = ({ 
 	headerImage,
@@ -46,7 +49,7 @@ const Index = ({
 }) => (
 	<div>
 		<MediaQuery maxWidth={bsBreakpoints.sm - 1}>
-			<TopBar homeUrl={homeUrl} logoImage={'https://localhost.ssl:5000/images/logo-round.png'} />
+			<TopBar homeUrl={homeUrl} logoImage={'https://s3-us-west-2.amazonaws.com/installthisapp/catalog-default-logo-mobile.png'} />
 			<div style={{
 				display: 'flex',
 				flexWrap: 'nowrap',
@@ -69,7 +72,7 @@ const Index = ({
 					'-webkit-overflow-scrolling': 'touch',
 					'-ms-overflow-style': '-ms-autohiding-scrollbar',
 				}}>
-					{categories.map(cat => <Link to={cat.permalink} style={{
+					{categories.map(cat => <Link key={cat.slug} to={cat.permalink} style={{
 						flex: '0 0 auto',
 						padding: '13px 16px 12px',
 						// design
@@ -118,6 +121,11 @@ const Index = ({
 			<Header copy={"Phone: 021 123 456"} />
 			<div className="container">
 				<div className="col-md-12">
+					<LogoBar homeUrl={homeUrl} logoImage={'https://localhost.ssl:5000/images/logo-round.png'} />
+				</div>
+			</div>
+			<div className="container">
+				<div className="col-md-12 hide">
 					<ButtonGroup>
 						<Button disabled={productListDisplayMode == 'grid'} onClick={toggleListGrid}>
 							Grid
@@ -127,17 +135,25 @@ const Index = ({
 						</Button>
 					</ButtonGroup>
 				</div>
+
+				<div className="col-md-12 hide">
+					<ol className="breadcrumb">
+						<li><Link to={homeUrl}>Home page</Link></li>
+						<li><Link to={'#'}>Products</Link></li>
+					</ol>
+				</div>
 				<div className="col-md-2">
-					<CategoriesList categories={categories} />
+					<CategoriesList title="Categories" categories={categories} />
 				</div>
 				<div className="col-xs-12 col-sm-12 col-md-10" style={{display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap'}}>
-					{products.map( ({ id, permalink, name, price, shortDescription, featuredImage }) => 
+					{products.map( ({ id, permalink, name, price, shortDescription, featured, featuredImage }) => 
 						<Product 
 							key={id} 
 							displayMode={productListDisplayMode} 
 							permalink={permalink} 
 							title={name} 
-							price={`${currency} ${price}`} 
+							featured={featured} 
+							price={price ? `${currency} ${price}` : null} 
 							thumbnail={featuredImage.attachmentUrl} 
 							subtitle={shortDescription}
 						/>
