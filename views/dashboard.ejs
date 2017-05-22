@@ -10,6 +10,7 @@
 	<%- include('_segment') %>
 </head>
 <body>
+	<div class="alert alert-warning hide" id="impersonation-alert" style="margin: 0px;font-weight: bold;padding: 8px 15px;">WARNING: You're impersonating user with ID <span id="impersonation-id-holder"></span></div>
 	<img src="/images/source-loading.svg" style="
 	position: fixed;
 	top: 50%;
@@ -28,6 +29,11 @@
 	<script src="<%= cloudFrontUrl %><%= vendorBundle %>"></script>
 	<script src="<%= cloudFrontUrl %><%= jsBundle %>"></script>
 	<script>
+		// Show impersonation alert when required
+		if (window.alias) {
+			document.getElementById('impersonation-alert').classList.remove('hide')
+			document.getElementById('impersonation-id-holder').innerHTML = window.alias
+		}
 		// The fbLoaded var is verified at the component Wizard.js, in order to alert when 
 		// ad-blockers are blocking facebook's SDK
 		window.fbLoaded = false
