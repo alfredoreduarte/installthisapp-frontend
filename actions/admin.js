@@ -73,13 +73,14 @@ export const updateInfo = () => {
 	return (dispatch, getState) => {
 		dispatch(toggleActivityUpdatingAdmin())
 		const formData = getState().form.adminUserProfile.values
-		// const body = 
 		patchToApi(
-			'auth.json', 
+			`auth.json`, 
 			{
-				admin: {
-					name: formData.name,
-				}
+				name: formData.name,
+				email: formData.email,
+				currentPassword: formData.currentPassword,
+				password: formData.password,
+				passwordConfirmation: formData.passwordConfirmation,
 			}
 		).then( response => {
 			dispatch(receiveAdmin(response))
