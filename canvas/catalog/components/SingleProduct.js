@@ -27,6 +27,8 @@ const SingleProduct = ({
 	productCategories, 
 	productMedia, 
 	permalink,
+	productId,
+	messageSent,
 	title,
 	description,
 	price,
@@ -48,7 +50,7 @@ const SingleProduct = ({
 				thumbnail={productMedia[0].thumbnail}
 				handleClose={handleToggleContact}
 			>
-				<ContactForm />
+				<ContactForm sent={messageSent} productId={productId} />
 			</SimpleModal>
 			<TopBar homeUrl={homeUrl} logoImage={'https://localhost.ssl:5000/images/logo-round.png'} />
 			<div style={{

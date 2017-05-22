@@ -12,6 +12,8 @@ const SingleProduct = ({
 	productCategories,
 	productMedia,
 	permalink,
+	productId,
+	messageSent,
 	title,
 	description,
 	price,
@@ -27,6 +29,8 @@ const SingleProduct = ({
 		productCategories={productCategories}
 		productMedia={productMedia}
 		permalink={permalink}
+		productId={productId}
+		messageSent={messageSent}
 		title={title}
 		description={description}
 		price={price}
@@ -39,7 +43,7 @@ const SingleProduct = ({
 )
 
 const mapStateToProps = (state, props) => {
-	const { price, permalink, name, description } = getProductByUrlSlug(state, props)
+	const { id, price, permalink, name, description } = getProductByUrlSlug(state, props)
 	const { currency } = state.settings
 	return {
 		images: {...state.images},
@@ -47,6 +51,8 @@ const mapStateToProps = (state, props) => {
 		productMedia: getProductMedia(state, props),
 		currency: currency,
 		permalink: permalink,
+		productId: id,
+		messageSent: state.ui.productRequestSent,
 		title: name,
 		description: description,
 		price: price ? `${currency} ${price}` : null,

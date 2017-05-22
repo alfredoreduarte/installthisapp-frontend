@@ -40,14 +40,14 @@ let Settings = ({ handleSubmit, fetching, settings }) => (
 							</div>
 							<div className="form-group">
 								<div className="col-md-6">
-									<label className="control-label">Email recipients for product consultations</label>
+									<label className="control-label">Comma-separated Email recipients for product consultations</label>
 								</div>
 								<div className="col-md-6">
 									<Field
 										name={'messageRecipients'}
-										type="text"
 										className="form-control" 
-										component="input" />
+										rows={3}
+										component="textarea" />
 								</div>
 							</div>
 						</div>

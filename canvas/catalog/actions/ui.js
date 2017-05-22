@@ -4,3 +4,6 @@ export const toggleContactModal = () => ({
 export const toggleProductListDisplayMode = () => ({
 	type: 'TOGGLE_DISPLAY_MODE',
 })
+export const toggleProductRequestSent = () => ({
+	type: 'TOGGLE_REQUEST_SENT',
+})

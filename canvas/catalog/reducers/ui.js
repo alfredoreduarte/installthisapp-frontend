@@ -3,6 +3,7 @@ import _ from 'lodash'
 const ui = (state = {
 	showContactModal: false,
 	productListDisplayMode: 'grid',
+	productRequestSent: false,
 }, action) => {
 	switch (action.type) {
 		case 'TOGGLE_MODAL/CONTACT':
@@ -14,6 +15,11 @@ const ui = (state = {
 			return {
 				...state,
 				productListDisplayMode: state.productListDisplayMode == 'grid' ? 'list' : 'grid',
+			}
+		case 'TOGGLE_REQUEST_SENT':
+			return {
+				...state,
+				productRequestSent: !state.productRequestSent,
 			}
 		default:
 			return state

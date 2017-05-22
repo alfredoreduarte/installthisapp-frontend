@@ -19,3 +19,4 @@ export const loginCallback = () => {
 	.then( () => dispatch(fetchImages()) )
 	.then( () => dispatch(fetchMessages()) )
 }
+
