@@ -1,13 +1,13 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import { updateInfo } from 'actions/admin'
 
-let AccountPreferences = ({ handleSubmit, fetching }) => (
+let Password = ({ handleSubmit, fetching }) => (
 	<form onSubmit={handleSubmit}>
 		<div className="row">
 			<div className="col-md-4">
-				<h3 className="ita-page-title">Preferences</h3>
+				<h3 className="ita-page-title">Update your password</h3>
 			</div>
 			<div className="col-md-8 text-right">
 				<button 
@@ -25,24 +25,39 @@ let AccountPreferences = ({ handleSubmit, fetching }) => (
 						<div className="form-horizontal">
 							<div className="form-group">
 								<div className="col-md-4">
-									<label className="control-label">Full Name</label>
+									<label className="control-label">Current Password</label>
 								</div>
 								<div className="col-md-8">
 									<Field
-										name="name"
-										type="text" 
+										name="currentPassword"
+										required={true}
+										type="password" 
 										className="form-control" 
 										component="input" />
 								</div>
 							</div>
 							<div className="form-group">
 								<div className="col-md-4">
-									<label className="control-label">Email</label>
+									<label className="control-label">Password</label>
 								</div>
 								<div className="col-md-8">
 									<Field
-										name="email"
-										type="email" 
+										name="password"
+										required={true}
+										type="password" 
+										className="form-control" 
+										component="input" />
+								</div>
+							</div>
+							<div className="form-group">
+								<div className="col-md-4">
+									<label className="control-label">Confirm Password</label>
+								</div>
+								<div className="col-md-8">
+									<Field
+										name="passwordConfirmation"
+										required={true}
+										type="password" 
 										className="form-control" 
 										component="input" />
 								</div>
@@ -55,9 +70,9 @@ let AccountPreferences = ({ handleSubmit, fetching }) => (
 	</form>
 )
 
-AccountPreferences = reduxForm({
+Password = reduxForm({
 	form: 'adminUserProfile',
-})(AccountPreferences)
+})(Password)
 
 const mapStateToProps = state => ({
 	fetching: state.activityIndicators.updatingAdmin,
@@ -73,4 +88,4 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccountPreferences)
+export default connect(mapStateToProps, mapDispatchToProps)(Password)

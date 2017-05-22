@@ -13,6 +13,17 @@ module.exports = {
 	},
 	childRoutes: [
 		{
+			path: 'password',
+			onEnter: (nextState, replace) => {
+				analytics.page('Account Password')
+			},
+			getComponents(nextState, cb) {
+				require.ensure([], require => {
+					cb(null, require('components/Password').default)
+				})
+			}
+		},
+		{
 			path: 'billing',
 			onEnter: (nextState, replace) => {
 				analytics.page('Account Billing')
