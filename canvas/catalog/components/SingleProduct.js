@@ -52,7 +52,7 @@ const SingleProduct = ({
 			>
 				<ContactForm sent={messageSent} productId={productId} />
 			</SimpleModal>
-			<TopBar homeUrl={homeUrl} logoImage={'https://localhost.ssl:5000/images/logo-round.png'} />
+			<TopBar homeUrl={homeUrl} logoImage={'https://s3-us-west-2.amazonaws.com/installthisapp/catalog-default-logo-mobile.png'} />
 			<div style={{
 				boxShadow: '0px 0px 8px rgba(0, 0, 0, .15)',
 				borderRadius: '.25em',
