@@ -4,6 +4,7 @@ import { Media } from 'react-bootstrap'
 import _ from 'lodash'
 
 const Product = ({ 
+	size,
 	featured,
 	thumbnail,
 	permalink,
@@ -14,7 +15,7 @@ const Product = ({
 }) =>
 	<div style={{
 		...styles.container, 
-		width: '45%'
+		width: size == 50 ? '45%' : '30%',
 	}}>
 		{featured ? <div className="ita-cali-product-grid-badge" style={styles.badge}>Featured</div> : null}
 		<Link to={permalink}><img src={thumbnail} alt={title} style={{...styles.thumbnail, width: '100px', height: '100px'}} /></Link>

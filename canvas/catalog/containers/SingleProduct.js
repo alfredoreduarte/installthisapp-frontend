@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getProductByUrlSlug } from 'canvas/catalog/selectors/products'
+import { getAllProducts } from 'canvas/catalog/selectors/products'
 import { getAllCategories, getProductCategories } from 'canvas/catalog/selectors/categories'
 import { getProductMedia } from 'canvas/catalog/selectors/media'
 import { toggleContactModal } from 'canvas/catalog/actions/ui'
@@ -22,6 +23,9 @@ const SingleProduct = ({
 	// 
 	showContactModal,
 	handleToggleContact,
+	// 
+	currency,
+	relatedProducts,
 }) => (
 	<SingleProductView 
 		headerImage={images.header} 
@@ -39,6 +43,9 @@ const SingleProduct = ({
 		// 
 		showContactModal={showContactModal}
 		handleToggleContact={handleToggleContact}
+		// 
+		currency={currency}
+		relatedProducts={relatedProducts}
 	/>
 )
 
@@ -59,6 +66,8 @@ const mapStateToProps = (state, props) => {
 		categories: getAllCategories(state),
 		homeUrl: `/${state.applicationData.canvasId}/${state.applicationData.checksum}`,
 		showContactModal: state.ui.showContactModal,
+		// related
+		relatedProducts: _.take(getAllProducts(state), 3),
 	}
 }
 

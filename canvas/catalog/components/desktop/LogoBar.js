@@ -16,8 +16,8 @@ const LogoBar = ({
 const layout = {
 	container: {
 		display: 'flex',
-		height: '50px',
-		padding: '25px 0px',
+		// height: '50px',
+		padding: '35px 0px',
 	},
 	logo: {
 		height: '20px',

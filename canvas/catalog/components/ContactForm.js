@@ -43,6 +43,8 @@ let ContactForm = ({
 					component="textarea"
 				/>
 			</div>
+		</div>
+		<div className="col-md-12">
 			<button type="submit" className="btn btn-primary btn-lg btn-block">Send</button>
 		</div>
 	</div>

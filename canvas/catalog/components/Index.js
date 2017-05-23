@@ -9,10 +9,13 @@ import bsBreakpoints from 'lib/bsBreakpoints'
 import MediaQuery from 'react-responsive'
 import CategoriesList from 'canvas/catalog/components/CategoriesList'
 import MdArrowBack from 'react-icons/lib/md/arrow-back'
+import MdFormatListBulleted from 'react-icons/lib/md/format-list-bulleted'
+import MdGridOn from 'react-icons/lib/md/grid-on'
 import Image from 'canvas/catalog/components/Image'
 import Product from 'canvas/catalog/components/Product'
-import TopBar from 'canvas/catalog/components/mobile/TopBar'
+import ProductListView from 'canvas/catalog/components/ProductListView'
 
+import TopBar from 'canvas/catalog/components/mobile/TopBar'
 
 import Header from 'canvas/catalog/components/desktop/TopBar'
 import LogoBar from 'canvas/catalog/components/desktop/LogoBar'
@@ -106,6 +109,7 @@ const Index = ({
 				{products.map( ({ id, permalink, name, price, shortDescription, featured, featuredImage }) => 
 					<Product 
 						key={id} 
+						size={50}
 						displayMode={productListDisplayMode} 
 						permalink={permalink} 
 						title={name} 
@@ -121,34 +125,86 @@ const Index = ({
 			<Header copy={"Phone: 021 123 456"} />
 			<div className="container">
 				<div className="col-md-12">
-					<LogoBar homeUrl={homeUrl} logoImage={'https://localhost.ssl:5000/images/logo-round.png'} />
+					<LogoBar homeUrl={homeUrl} logoImage={'https://s3-us-west-2.amazonaws.com/installthisapp/catalog-default-logo-desktop.png'} />
 				</div>
 			</div>
 			<div className="container">
-				<div className="col-md-12 hide">
-					<ButtonGroup>
-						<Button disabled={productListDisplayMode == 'grid'} onClick={toggleListGrid}>
-							Grid
-						</Button>
-						<Button disabled={productListDisplayMode == 'list'} onClick={toggleListGrid}>
-							List
-						</Button>
-					</ButtonGroup>
-				</div>
-
-				<div className="col-md-12 hide">
-					<ol className="breadcrumb">
-						<li><Link to={homeUrl}>Home page</Link></li>
-						<li><Link to={'#'}>Products</Link></li>
+				<div>
+					<ol className="breadcrumb" style={{
+						backgroundColor: 'transparent',
+						borderWidth: '1px',
+						borderStyle: 'solid',
+						borderLeftWidth: '0px',
+						borderRightWidth: '0px',
+						borderRadius: '0px',
+						padding: '15px',
+						// design
+						borderColor: '#DBDBDB',
+					}}>
+						<li><Link to={homeUrl} style={{
+							// design
+							lineHeight: 1.5,
+							textAlign: 'left',
+							color: '#5A6471',
+							letterSpacing: '0px',
+							fontSize: '12px',
+							fontFamily: 'Montserrat',
+							fontWeight: 'normal',
+							fontStyle: 'normal',
+							textDecoration: 'none',
+							textTransform: 'none',
+						}}>Home page</Link></li>
+						{category ? <li><Link to={category.permalink} style={{
+							// design
+							lineHeight: 1.5,
+							textAlign: 'left',
+							color: '#5A6471',
+							letterSpacing: '0px',
+							fontSize: '12px',
+							fontFamily: 'Montserrat',
+							fontWeight: 'normal',
+							fontStyle: 'normal',
+							textDecoration: 'none',
+							textTransform: 'none',
+						}}>{category.name}</Link></li> : null}
 					</ol>
+					<div style={{
+						display: 'flex',
+						justifyContent: 'flex-end',
+					}}>
+						<ButtonGroup>
+							<Button disabled={productListDisplayMode == 'grid'} onClick={toggleListGrid}>
+								<MdGridOn size={20} color={'#5A6471'} />
+							</Button>
+							<Button disabled={productListDisplayMode == 'list'} onClick={toggleListGrid}>
+								<MdFormatListBulleted size={20} color={'#5A6471'} />
+							</Button>
+						</ButtonGroup>
+					</div>
 				</div>
 				<div className="col-md-2">
 					<CategoriesList title="Categories" categories={categories} />
 				</div>
-				<div className="col-xs-12 col-sm-12 col-md-10" style={{display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap'}}>
+				{productListDisplayMode == 'grid' ? <div className="col-xs-12 col-sm-12 col-md-9 col-md-offset-1" style={{display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap'}}>
 					{products.map( ({ id, permalink, name, price, shortDescription, featured, featuredImage }) => 
 						<Product 
 							key={id} 
+							size={33}
+							displayMode={productListDisplayMode} 
+							permalink={permalink} 
+							title={name} 
+							featured={featured} 
+							price={price ? `${currency} ${price}` : null} 
+							thumbnail={featuredImage.attachmentUrl} 
+							subtitle={shortDescription}
+						/>
+					)}
+				</div> : 
+				<div className="col-xs-12 col-sm-12 col-md-9 col-md-offset-1" style={{display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap'}}>
+					{products.map( ({ id, permalink, name, price, shortDescription, featured, featuredImage }) => 
+						<ProductListView 
+							key={id} 
+							size={33}
 							displayMode={productListDisplayMode} 
 							permalink={permalink} 
 							title={name} 
@@ -159,8 +215,9 @@ const Index = ({
 						/>
 					)}
 				</div>
+				}
 			</div>
-			<Footer copy={'fdsa'} />
+			<Footer copy={'© 2017 - My Store - All rights reserved'} />
 		</MediaQuery>
 	</div>
 )

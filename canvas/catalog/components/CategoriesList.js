@@ -7,6 +7,7 @@ const CategoriesList = ({
 }) => (
 	<div>
 		<h3 style={{
+			marginBottom: '2em',
 			// design
 			lineHeight: 1.5,
 			textAlign: 'left',
@@ -24,13 +25,13 @@ const CategoriesList = ({
 		}}>
 			{categories.map( ({ id, name, permalink }) => <li key={id}><Link to={permalink} style={{
 				// design
-				lineHeight: 2,
+				lineHeight: 2.5,
 				textAlign: 'left',
 				color: '#5A6471',
 				letterSpacing: '0px',
 				fontSize: '12px',
 				fontFamily: 'Montserrat',
-				fontWeight: 'normal',
+				fontWeight: '300',
 				fontStyle: 'normal',
 				textDecoration: 'none',
 				textTransform: 'none',

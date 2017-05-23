@@ -163,7 +163,8 @@ let ContactForm = ({
 					/>
 				</div>
 			</div>
-			<div style={{
+			<div className="col-md-12" style={{
+				padding: '0px',
 				display: 'flex',
 				flexDirection: 'column',
 			}}>

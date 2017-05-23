@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import { Media } from 'react-bootstrap'
 import _ from 'lodash'
 
-const Product = ({ 
+const ProductListView = ({ 
 	featured,
 	thumbnail,
 	permalink,
@@ -11,57 +11,49 @@ const Product = ({
 	subtitle,
 	price,
 	displayMode,
-}) => 
-	{return displayMode == 'grid' ? 
-		<div style={{...styles.container, width: '23%'}}>
-			{featured ? <div className="ita-cali-product-grid-badge" style={styles.badge}>Featured</div> : null}
-			<Link to={permalink}><img src={thumbnail} alt={title} style={{...styles.thumbnail, width: '100px', height: '100px'}} /></Link>
-			<div style={styles.caption}>
-				<h3 className="ita-cali-product-grid-title" style={styles.title}><Link to={permalink} style={{color: 'inherit'}}>{title}</Link></h3>
-				<p className="ita-cali-product-grid-subtitle" style={styles.subtitle}><Link to={permalink} style={{color: 'inherit'}}>{price}</Link></p>
-			</div>
-		</div>
-	:
-		<Media style={{...styles.container, 
-			flexDirection: 'inherit',
-			alignItems: 'inherit',
-			width: 'auto',
+}) => <Media style={{...styles.container, 
+	flexDirection: 'inherit',
+	alignItems: 'inherit',
+	width: 'auto',
+}}>
+	<Media.Left style={{
+		marginRight: '1em',
+		flex: 1,
+		display: 'flex',
+		justifyContent: 'center',
+	}}>
+		<Link to={permalink}>
+			<img className="media-object" src={thumbnail} alt={title} style={{width: '218px', height: '218px'}} />
+		</Link>
+	</Media.Left>
+	<Media.Body style={{
+		flex: 3,
+		display: 'flex',
+		flexDirection: 'column',
+		flexWrap: 'wrap',
+		alignItems: 'flex-start',
+	}}>
+		<Link to={permalink}><h4 className="ita-cali-product-grid-title" style={{...styles.title, 
+			fontWeight: '300',
+			fontSize: '24px',
+			textDecoration: 'none'
 		}}>
-			<Media.Left align="middle" style={{
-				marginRight: '1em',
-				flex: 1,
-				display: 'flex',
-				justifyContent: 'center',
-			}}>
-				<Link to={permalink}>
-					<img className="media-object" src={thumbnail} alt={title} style={{width: '218px', height: '218px'}} />
-				</Link>
-			</Media.Left>
-			<Media.Body align="middle" style={{
-				flex: 3,
-				display: 'flex',
-				flexDirection: 'column',
-				flexWrap: 'wrap',
-				alignItems: 'flex-start',
-			}}>
-				<Link to={permalink}><h4 className="ita-cali-product-grid-title" style={{...styles.title, 
-					fontWeight: '300',
-					fontSize: '24px',
-				}}>{title}</h4></Link>
-				<p className="ita-cali-product-grid-subtitle" style={{...styles.subtitle, 
-					fontSize: '12px'
-				}}>{price}</p>
-				<p className="ita-cali-product-grid-description" style={styles.description}>{subtitle}</p>
-			</Media.Body>
-		</Media>
-	}
+			{featured ? <span className="ita-cali-product-grid-badge" style={styles.badge}>Featured</span> : null}
+			{title}
+		</h4></Link>
+		<p className="ita-cali-product-grid-subtitle" style={{...styles.subtitle, 
+			fontSize: '12px'
+		}}>{price}</p>
+		<p className="ita-cali-product-grid-description" style={styles.description}>{subtitle}</p>
+	</Media.Body>
+</Media>
 
 
 const layout = {
 	container: {
 		boxShadow: '0px 0px 8px rgba(0, 0, 0, .15)',
 		borderRadius: '.25em',
-		padding: '1em',
+		padding: '2em',
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
@@ -84,16 +76,19 @@ const layout = {
 	},
 	title: {
 		margin: '0px',
+		marginBottom: '.5em',
 	},
 	subtitle: {
 		margin: '0px',
+		marginBottom: '1em',
 	},
 	badge: {
-		position: 'absolute',
+		// position: 'absolute',
 		alignSelf: 'flex-start',
-		top: '-10px',
-		left: '10px',
+		// top: '-10px',
+		// left: '10px',
 		padding: '3px 10px',
+		marginRight: '.5em',
 		borderRadius: '.25em',
 	}
 }
@@ -163,7 +158,7 @@ const variableStyles = {
 
 const styles = _.merge(layout, variableStyles)
 
-Product.propTypes = {
+ProductListView.propTypes = {
 	permalink: PropTypes.string.isRequired,
 	title: PropTypes.string.isRequired,
 	subtitle: PropTypes.string,
@@ -171,4 +166,4 @@ Product.propTypes = {
 }
 
 
-export default Product
+export default ProductListView
