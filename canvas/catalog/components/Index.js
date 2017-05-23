@@ -37,6 +37,7 @@ const Index = ({
 	currency: string,
 	products: Array<{
 		id: number,
+		featured: boolean,
 		permalink: string,
 		name: string,
 		price: string,
@@ -47,7 +48,15 @@ const Index = ({
 	}>,
 	homeUrl: string,
 	productListDisplayMode: string,
-	categories: string,
+	category: {
+		name: string,
+		permalink: string,
+	},
+	categories: Array<{
+		slug: string,
+		permalink: string,
+		name: string,
+	}>,
 	toggleListGrid: string
 }) => (
 	<div>
