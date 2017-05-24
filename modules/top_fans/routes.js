@@ -1,4 +1,5 @@
 import { fetchTopFansEntities, fetchTopFansSettings } from 'modules/top_fans/actions/entities'
+import { turnOnGlobalIndicator, turnOffGlobalIndicator } from 'actions/activityIndicators'
 
 import Sidebar from 'modules/top_fans/components/Sidebar'
 
