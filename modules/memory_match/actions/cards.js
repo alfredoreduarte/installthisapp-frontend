@@ -19,8 +19,6 @@ export const createCard = files => {
 				let formData = new FormData()
 				formData.append('card[attachment_url]', url)
 				return postFileToApi(`applications/${checksum}/cards_create.json`, formData).then(response => {
-					console.log('resp')
-					console.log(response)
 					dispatch(removeCard(thisUUID))
 					return dispatch(addCard(response))
 				})
