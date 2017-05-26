@@ -18,6 +18,7 @@ router.get('/d*', function(req, res){
 	const cssBundle = manifest['dashboard']['css']
 	const vendorBundle = manifest['common']['js']
 	res.render('dashboard', {
+		disableSegment: req.query[process.env.ALIAS_PARAM_KEY] || process.env.NODE_ENV == 'development',
 		alias: req.query[process.env.ALIAS_PARAM_KEY],
 		cloudFrontUrl: cloudFrontUrl,
 		apiUrl: process.env.API_URL,

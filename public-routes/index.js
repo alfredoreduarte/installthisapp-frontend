@@ -14,31 +14,35 @@ const vendorBundle = manifest['common']['js']
 // const isOldUser = req.query.segment == 'old_users'
 const isOldUser = false
 
-const commonParams = {
-	cloudFrontUrl: cloudFrontUrl,
-	apiUrl: process.env.API_URL,
-	facebookAppId: process.env.FB_APP_ID,
-	jsBundle,
-	cssBundle,
-	vendorBundle,
-	manifestBundle,
-	isOldUser,
+const commonParams = req => {
+	return {
+		disableSegment: req.query[process.env.ALIAS_PARAM_KEY] || process.env.NODE_ENV == 'development',
+		cloudFrontUrl: cloudFrontUrl,
+		apiUrl: process.env.API_URL,
+		facebookAppId: process.env.FB_APP_ID,
+		jsBundle,
+		cssBundle,
+		vendorBundle,
+		manifestBundle,
+		isOldUser,
+	}
 }
 
 /* GET home page. */
-router.get('/', function(req, res) { res.render('landing-v2/index', commonParams) })
-router.get('/apps', function(req, res) { res.render('landing-v2/apps', commonParams) })
-router.get('/privacy-policy', function(req, res) { res.render('landing-v2/privacy-policy', commonParams) })
-router.get('/terms-conditions', function(req, res) { res.render('landing-v2/terms-conditions', commonParams) })
-router.get('/refund-policy', function(req, res) { res.render('landing-v2/refund-policy', commonParams) })
-router.get('/pricing', function(req, res) { res.render('landing-v2/pricing', commonParams) })
-router.get('/contact', function(req, res) { res.render('landing-v2/contact', commonParams) })
-router.get('/signup', function(req, res) { res.render('signup', commonParams) })
-router.get('/login', function(req, res) { res.render('login', commonParams) })
-router.get('/card', function(req, res) { res.render('card', commonParams) })
-router.get('/forgot', function(req, res) { res.render('forgot', commonParams) })
-router.get('/forgot/sent', function(req, res) { res.render('forgot-sent', commonParams) })
-router.get('/reset-password', function(req, res) { res.render('reset-password', Object.assign({}, commonParams, {
+router.get('/', function(req, res) { res.render('landing-v2/index', commonParams(req)) })
+router.get('/apps', function(req, res) { res.render('landing-v2/apps', commonParams(req)) })
+router.get('/privacy-policy', function(req, res) { res.render('landing-v2/privacy-policy', commonParams(req)) })
+router.get('/terms-conditions', function(req, res) { res.render('landing-v2/terms-conditions', commonParams(req)) })
+router.get('/refund-policy', function(req, res) { res.render('landing-v2/refund-policy', commonParams(req)) })
+router.get('/pricing', function(req, res) { res.render('landing-v2/pricing', commonParams(req)) })
+router.get('/contact', function(req, res) { res.render('landing-v2/contact', commonParams(req)) })
+router.get('/white-label-contests', function(req, res) { res.render('landing-v2/white-label', commonParams(req)) })
+router.get('/signup', function(req, res) { res.render('signup', commonParams(req)) })
+router.get('/login', function(req, res) { res.render('login', commonParams(req)) })
+router.get('/card', function(req, res) { res.render('card', commonParams(req)) })
+router.get('/forgot', function(req, res) { res.render('forgot', commonParams(req)) })
+router.get('/forgot/sent', function(req, res) { res.render('forgot-sent', commonParams(req)) })
+router.get('/reset-password', function(req, res) { res.render('reset-password', Object.assign({}, commonParams(req), {
 	clientId: req.query.client_id,
 	uid: req.query.uid,
 	token: req.query.token,
@@ -52,7 +56,7 @@ router.get('/reset-password', function(req, res) { res.render('reset-password', 
 
 // Module landings
 
-router.get('/top-fans-for-facebook-pages.html', function(req, res) { res.render('landing-v2/app', _.merge(commonParams, {
+router.get('/top-fans-for-facebook-pages.html', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
 	app: "top_fans",
 	appExampleLink: 'https://v3.installthisapp.com/app2/DUPFER',
 	pageTitle: "Top Fans Ranking for Facebook Pages",
@@ -61,7 +65,7 @@ router.get('/top-fans-for-facebook-pages.html', function(req, res) { res.render(
 	whatCanIDoAnswer: "Save hundreds of $ by incentivizing people to like and comment on your content instead of paying for promoted posts",
 	createText: "Create a Top Fans app",
 })) })
-router.get('/photo-contest.html', function(req, res) { res.render('landing-v2/app', _.merge(commonParams, {
+router.get('/photo-contest.html', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
 	app: "photo_contest",
 	appExampleLink: 'https://v3.installthisapp.com/app3/7EHEU0',
 	pageTitle: "Photo Contest for social media campaigns",
@@ -70,7 +74,7 @@ router.get('/photo-contest.html', function(req, res) { res.render('landing-v2/ap
 	whatCanIDoAnswer: "Imagine launching a competition where people share their favorite christmas photos and ask all of their friends for votes.",
 	createText: "Create a Top Fans app",
 })) })
-router.get('/trivia-contest.html', function(req, res) { res.render('landing-v2/app', _.merge(commonParams, {
+router.get('/trivia-contest.html', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
 	app: "trivia",
 	appExampleLink: 'https://v3.installthisapp.com/app1/ZRRDDP',
 	pageTitle: "Trivia game for Social Campaigns",

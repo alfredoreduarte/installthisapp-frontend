@@ -7,25 +7,29 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { push } from 'react-router-redux'
 import { logOut } from 'actions/admin'
 import FbPhoto from 'components/FbPhoto'
+import StatusIndicator from 'components/StatusIndicator'
 
-const AppNavBar = ({ name, identifier, logout, subscription, remainingTrialDays }) => (
+const AppNavBar = ({ adminId, name, identifier, logout, subscription, remainingTrialDays }) => (
 	<Navbar fluid={true}>
 		<Navbar.Header>
 			<Navbar.Brand>
 				<IndexLink to="/d">
-					<img src="/images/logo-round.png" style={{height: "40px"}} />
+					<img src="/images/logo-v3.png" style={{height: "28px"}} />
 				</IndexLink>
 			</Navbar.Brand>
 		</Navbar.Header>
 		<div className="collapse navbar-collapse text-right">
-			<ul className="nav navbar-nav navbar-right">
+			<ul className="nav navbar-nav navbar-right" style={{
+				display: 'flex',
+				alignItems: 'center',
+			}}>
 				{subscription ? 
 					null
 				:
 				<li>
-					<Link to='/d/upgrade' className="link-no-underline text-success">
+					<a href='?trial-offer=true' className="link-no-underline text-success">
 						<small>{remainingTrialDays} | UPGRADE</small>
-					</Link>
+					</a>
 				</li>
 				}
 				<li className="hide">
@@ -38,16 +42,24 @@ const AppNavBar = ({ name, identifier, logout, subscription, remainingTrialDays 
 				<NavDropdown 
 					eventKey={3} 
 					title={
-						<FbPhoto 
-						identifier={parseInt(identifier)} 
-						width={26} 
-						height={26} 
-						className="img-circle" />
+						identifier ? <FbPhoto 
+							identifier={parseInt(identifier)} 
+							width={42} 
+							height={42} 
+							className="img-circle"
+						/>
+						: <img
+							src={`/images/user-placeholders/${adminId % 8}.png`}
+							width="42px"
+							height="42px"
+						/>
 					} 
 					id="account-dropdown">
 					<LinkContainer className="" to={{ pathname: '/d/account' }}>
 						<MenuItem eventKey={3.3}>
-							My Account
+							<span>My Account
+							{name ? <span></span> : <span style={{marginLeft: '5px'}}><StatusIndicator active={true} status={'red'} /></span>}
+							</span>
 						</MenuItem>
 					</LinkContainer>
 					<MenuItem eventKey={3.2} href="javascript:void(0)" onClick={logout}>Logout</MenuItem>
@@ -62,6 +74,7 @@ const mapStateToProps = (state) => {
 	const remainingTrialDays = timeDifference > 0 ? <b>{timeDifference} days remaining</b> : <b>Free trial expired</b>
 	return { 
 		name: state.admin.name,
+		adminId: state.admin.id,
 		subscription: state.admin.subscription,
 		identifier: state.admin.fbProfile ? state.admin.fbProfile.identifier : null,
 		remainingTrialDays,

@@ -186,7 +186,7 @@
 	<%- include('_upsell') %>
 	<%- include('_footer') %>
 	<%- include('_scripts') %>
-	<%- include('_segment') %>
+	<%- disableSegment  ? include('_disable-segment') : include('_segment') %>
 	<script type="text/javascript">
 		analytics.page('Home')
 	</script>

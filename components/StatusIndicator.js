@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
-const StatusIndicator = ({ active }) => (
-	<i className={`ita-status-indicator ${active == true ? 'ita-status-indicator--on' : '' }`}></i>
+const StatusIndicator = ({ active, status = 'green' }) => (
+	<i className={`ita-status-indicator ${active == true ? 'ita-status-indicator--on' : '' } ${status == 'red' ? 'ita-status-indicator--red' : '' }`}></i>
 )
 
 export default StatusIndicator
