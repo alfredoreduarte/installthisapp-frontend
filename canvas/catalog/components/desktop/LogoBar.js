@@ -13,27 +13,15 @@ const LogoBar = ({
 	</div>
 )
 
-const layout = {
+const styles = {
 	container: {
 		display: 'flex',
-		// height: '50px',
 		padding: '35px 0px',
 	},
 	logo: {
 		height: '20px',
 	}
 }
-
-const variableStyles = {
-	container: {
-		
-	},
-	logo: {
-		
-	}
-}
-
-const styles = _.merge(layout, variableStyles)
 
 LogoBar.propTypes = {
 	logoImage: PropTypes.string,

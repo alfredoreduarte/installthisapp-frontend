@@ -3,12 +3,13 @@ import { Link } from 'react-router'
 
 const Footer = ({ 
 	copy,
-	homeUrl,
 }) => (
-	<div style={styles.container}><span style={styles.copy}>{copy}</span></div>
+	<div style={styles.container} className="ita-cali-desktop-footer">
+		<span style={styles.copy} className="ita-cali-desktop-footer-text">{copy}</span>
+	</div>
 )
 
-const layout = {
+const styles = {
 	container: {
 		boxSizing: 'border-box',
 		display: 'flex',
@@ -21,26 +22,6 @@ const layout = {
 		height: '20px',
 	}
 }
-
-const variableStyles = {
-	container: {
-		background: '#6A588B',
-	},
-	copy: {
-		lineHeight: 1.5,
-		textAlign: 'center',
-		color: '#ffffff',
-		letterSpacing: '0px',
-		fontSize: '14px',
-		fontFamily: 'Montserrat',
-		fontWeight: 'normal',
-		fontStyle: 'normal',
-		textDecoration: 'none',
-		textTransform: 'none',
-	}
-}
-
-const styles = _.merge(layout, variableStyles)
 
 Footer.propTypes = {
 	copy: PropTypes.string,

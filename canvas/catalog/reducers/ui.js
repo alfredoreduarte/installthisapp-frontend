@@ -9,6 +9,7 @@ const ui = (state = {
 		case 'TOGGLE_MODAL/CONTACT':
 			return {
 				...state,
+				productRequestSent: false,
 				showContactModal: !state.showContactModal,
 			}
 		case 'TOGGLE_DISPLAY_MODE':
