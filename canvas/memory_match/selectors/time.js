@@ -19,7 +19,6 @@ export const getElapsedTime = createSelector(
 		else {
 			return "00:00"
 		}
-		// return startingTime && currentTime ? moment(currentTime).diff(startingTime, 'seconds') : 0
 	}
 )
 
