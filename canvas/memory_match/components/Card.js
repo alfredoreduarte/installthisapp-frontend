@@ -8,20 +8,22 @@ const Card = ({
 	flipped,
 	hidden,
 }) => (
-	<div className={`Card ${flipped ? 'card-flipped' : null}`} onClick={onFlip} style={{visibility: hidden ? 'hidden' : 'visible'}}>
+	<div className={`Card ${flipped ? 'card-flipped' : ''}`} onClick={() => flipped ? void(0) : onFlip()} style={{visibility: hidden ? 'hidden' : 'visible'}}>
 		<div className="face front" style={{
 			backgroundImage: `url(${cardBack})`,
 		}}></div>
 		<div className="face back" style={{
-			backgroundImage: `url(${attachmentUrl})`,
+			backgroundImage: `url("${attachmentUrl}")`,
 		}}></div>
 	</div>
 )
 
 Card.propTypes = {
-	attachmentUrl: PropTypes.string,
+	cardBack: PropTypes.string.isRequired,
+	attachmentUrl: PropTypes.string.isRequired,
 	onFlip: PropTypes.func.isRequired,
 	flipped: PropTypes.bool.isRequired,
+	hidden: PropTypes.bool.isRequired,
 }
 
 export default Card

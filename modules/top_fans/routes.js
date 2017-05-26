@@ -1,4 +1,5 @@
 import { fetchTopFansEntities, fetchTopFansSettings } from 'modules/top_fans/actions/entities'
+import { turnOnGlobalIndicator, turnOffGlobalIndicator } from 'actions/activityIndicators'
 
 import Sidebar from 'modules/top_fans/components/Sidebar'
 
@@ -9,6 +10,7 @@ export default (store, dispatch) => ({
 				{
 					path: 'scoreboard',
 					onEnter: (nextState, replace, next) => {
+						dispatch(turnOnGlobalIndicator())
 						// dispatch(fetchTopFansSettings(nextState.params.checksum))
 						// .then(() => {
 							dispatch(fetchTopFansEntities(nextState.params.checksum))
@@ -19,6 +21,7 @@ export default (store, dispatch) => ({
 					},
 					getComponents(nextState, cb) {
 						require.ensure([], (require) => {
+							dispatch(turnOffGlobalIndicator())
 							cb(null, {
 								main: require('modules/top_fans/components/Scoreboard').default,
 								sidebar: Sidebar,
@@ -30,6 +33,7 @@ export default (store, dispatch) => ({
 					path: 'subscribe',
 					getComponents(nextState, cb) {
 						require.ensure([], (require) => {
+							dispatch(turnOffGlobalIndicator())
 							cb(null, {
 								main: require('modules/top_fans/components/Subscribe').default,
 								sidebar: Sidebar,

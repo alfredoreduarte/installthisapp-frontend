@@ -62,7 +62,7 @@ IndexView.propTypes = {
 	matchedIds: PropTypes.array.isRequired,
 	onCardFlip: PropTypes.func.isRequired,
 	clickCount: PropTypes.number.isRequired,
-	currentTime: PropTypes.number.isRequired,
+	currentTime: PropTypes.string.isRequired,
 	flippedCards: PropTypes.oneOfType([
 		React.PropTypes.array,
 	]),

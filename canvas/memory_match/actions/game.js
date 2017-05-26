@@ -23,7 +23,6 @@ export const flipCard = (flippedCardId, id) => {
 			setTimeout(() => {
 				dispatch(checkIfGameFinished())
 			}, 700)
-			// dispatch(checkIfGameFinished())
 		})
 	}
 }

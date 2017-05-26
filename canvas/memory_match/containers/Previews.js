@@ -20,6 +20,10 @@ const cards = [
 		id: 3,
 		attachmentUrl: 'https://graph.facebook.com/10208910337057839/picture?width=100&height=100',
 	},
+	{
+		id: 4,
+		attachmentUrl: 'https://graph.facebook.com/10208910337057839/picture?width=100&height=100',
+	},
 ]
 
 const Previews = ({ screen, messages, images }) => {

@@ -8,7 +8,6 @@ import { fetchStyles, fetchJsonTest, fetchMessages, fetchImages } from 'actions/
 export default (store, dispatch) => ({
 	path: '/d/apps/:type/:checksum/design',
 	getComponent(nextState, cb) {
-		dispatch(turnOnGlobalIndicator())
 		require.ensure([], require => {
 			dispatch(turnOffGlobalIndicator())
 			cb(null, require('containers/Design').default)
@@ -19,6 +18,7 @@ export default (store, dispatch) => ({
 		})
 	},
 	onEnter: (nextState, replace, next) => {
+		dispatch(turnOnGlobalIndicator())
 		analytics.page('App Design')
 		analytics.track('Feature Used', {
 			featureType: 'App Design',

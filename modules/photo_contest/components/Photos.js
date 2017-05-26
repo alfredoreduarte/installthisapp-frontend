@@ -41,6 +41,7 @@ const Photos = ({
 			photoId={viewPhoto}
 			backUrl={backUrl}
 			/> : null}
+		{winnerModalVisible ? 
 		<Modal
 		isOpen={winnerModalVisible}
 		// onAfterOpen={afterOpenFn}
@@ -65,6 +66,7 @@ const Photos = ({
 			<p>{randomWinner.user.name}</p>
 			<p><a onClick={closeWinnerModal}>close</a></p>
 		</Modal>
+		: null }
 		<div className="ita-table-toolbar">
 			<div className="row">
 				<div className="col-md-12">

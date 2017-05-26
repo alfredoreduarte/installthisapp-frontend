@@ -8,17 +8,33 @@
 	<title>InstalThisApp</title>
 	<link rel="stylesheet" media="all" href="<%= cloudFrontUrl %><%= cssBundle %>" />
 	<%- include('_segment') %>
+	<style>
+		#impersonation-alert{
+			margin: 0px;
+			font-weight: bold;
+			padding: 8px 15px;
+		}
+		#blank-loading{
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			margin-left: -37px;
+			margin-top: -37px;
+		}
+		#root{
+			position: relative;
+			background: white;
+			min-height: 100vh;
+		}
+		#root:empty{
+			background: transparent;
+		}
+	</style>
 </head>
 <body>
-	<div class="alert alert-warning hide" id="impersonation-alert" style="margin: 0px;font-weight: bold;padding: 8px 15px;">WARNING: You're impersonating user with ID <span id="impersonation-id-holder"></span></div>
-	<img src="/images/source-loading.svg" style="
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	margin-left: -37px;
-	margin-top: -37px;
-	">
-	<div id="root" style="position: relative;background: white;min-height: 100vh;"></div>
+	<div class="alert alert-warning hide" id="impersonation-alert">WARNING: You're impersonating user with ID <span id="impersonation-id-holder"></span></div>
+	<img id="blank-loading" src="/images/source-loading.svg" />
+	<div id="root"></div>
 	<script>
 		window.alias = "<%= alias %>";
 		window.apiUrl = "<%= apiUrl %>";

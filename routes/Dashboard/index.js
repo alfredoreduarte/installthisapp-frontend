@@ -9,9 +9,9 @@ import {
 export default (store, dispatch) => ({
 	path: '/d/apps/:type/:checksum',
 	getComponents(nextState, cb) {
-		dispatch(turnOnGlobalIndicator())
 		require.ensure([], require => {
-			dispatch(turnOffGlobalIndicator())
+			// console.log('esto solo estaba en dashbaord')
+			// dispatch(turnOffGlobalIndicator())
 			cb(null, require('containers/AppDashboardContainer').default)
 			// cb(null, {
 				// main: require('containers/AppDashboardContainer').default,
@@ -20,6 +20,7 @@ export default (store, dispatch) => ({
 		})
 	},
 	onEnter: (nextState, replace, next) => {
+		dispatch(turnOnGlobalIndicator())
 		analytics.page('App Dashboard', {
 			appType: nextState.params.type
 		})
@@ -27,7 +28,6 @@ export default (store, dispatch) => ({
 			dispatch(turnOffActivityCreatingApp())
 			dispatch(turnOffActivityLoadingApp())
 			dispatch(getStatsSummary(nextState.params.checksum)).then(() => next())
-			// next()
 		})
 	},
 	indexRoute: {
@@ -44,6 +44,7 @@ export default (store, dispatch) => ({
 		},
 		getComponents(nextState, cb) {
 			require.ensure([], require => {
+				dispatch(turnOffGlobalIndicator())
 				cb(null, {
 					main: require('containers/AppDashboard').default,
 					secondary: require('modules/' + nextState.params.type + '/containers/Dashboard').default,
