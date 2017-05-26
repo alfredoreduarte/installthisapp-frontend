@@ -56,6 +56,9 @@
 
 	<%- include('_cta-area') %>
 	<%- include('_footer') %>
-	
+	<%- disableSegment ? include('../_disable-segment') : include('../_segment') %>
+	<script type="text/javascript">
+		analytics.page('Home')
+	</script>
 </body>
 </html>

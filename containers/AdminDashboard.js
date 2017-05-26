@@ -17,10 +17,8 @@ import { setAppToDelete } from 'actions/deleteApp'
 import { deleteApp, destroy } from 'actions/apps'
 
 const AdminDashboard = ({ 
-	adminId,
 	apps,
 	successfulPurchase,
-	trialOffer,
 	filterText,
 	showCreateModal,
 	showDeleteModal,
@@ -33,13 +31,6 @@ const AdminDashboard = ({
 	<div>
 		<AppNavBar />
 		{successfulPurchase ? <SuccessfulPurchase /> : null }
-		{trialOffer ?
-			<div> 
-				{adminId % 2 == 0 ? <Card /> : <CardOverlay />}
-			</div>
-		:
-			null
-		}
 		{apps.length > 0 || filterText ? 
 			<div>
 				<DashboardTitleBar />
@@ -58,14 +49,9 @@ const AdminDashboard = ({
 )
 
 const mapStateToProps = (state, props) => {
-	if (props.location.query["trial-offer"]) {
-		analytics.track('Trial Offer Viewed')
-	}
 	return {
-		adminId: state.admin.id,
 		apps: getAllAppsByText(state, props),
 		successfulPurchase: props.location.query["successful-purchase"],
-		trialOffer: props.location.query["trial-offer"],
 		filterText: state.filterText,
 		showCreateModal: props.location.pathname.indexOf('/d/apps/create') !== -1,
 		showDeleteModal: state.deleteApp.checksum ? true: false,

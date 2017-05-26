@@ -66,7 +66,7 @@ const Card = ({
 					<div className="col-md-6 col-md-offset-3">
 					<p>What you'll get:</p>
 					<ul className="list-unstyled text-left" style={{lineHeight: 1.8}}>
-						<li><span style={{marginRight: '5px'}} className="glyphicon glyphicon-ok text-success"></span>5 campaigns</li>
+						<li><span style={{marginRight: '5px'}} className="glyphicon glyphicon-ok text-success"></span>5 contests</li>
 						<li><span style={{marginRight: '5px'}} className="glyphicon glyphicon-ok text-success"></span>In-app support via chat</li>
 						<li><span style={{marginRight: '5px'}} className="glyphicon glyphicon-ok text-success"></span>All of our current and <a href="https://installthisapp.com/apps" target="_blank">upcoming apps</a></li>
 						<li><span style={{marginRight: '5px'}} className="glyphicon glyphicon-ok text-success"></span>Facebook Tab integration</li>
@@ -76,7 +76,8 @@ const Card = ({
 						<li><span style={{marginRight: '5px'}} className="glyphicon glyphicon-ok text-success"></span>100% customizable styles and images</li>
 					</ul>
 					</div>
-					<p><b>You'll only be charged after 7 days</b></p>
+					<p className="hide"><b>You'll only be charged after 7 days</b></p>
+					<p><b>Start now. Pay in 7 days. Cancel at anytime.</b></p>
 					{plan ? 
 						<div>
 							<p>

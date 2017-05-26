@@ -11,7 +11,7 @@
 		<div class="flex-grow flex flex-vertical flex-center">
 			<div class="col-md-12">
 				<h1 class="text-center h2">Signup to InstallThisApp V3</h1>
-				<p class="text-center h4">Tip: If you were already using the old version, you still need to register again here.</p>
+				<p class="text-center h4 hide">Tip: If you were already using the old version, you still need to register again here.</p>
 			</div>
 			<div class="col-md-4 col-md-offset-4">
 				<div class="panel panel-default">
@@ -52,7 +52,7 @@
 		})
 	</script>
 	<%- include('_scripts') %>
-	<%- include('_segment') %>
+	<%- disableSegment  ? include('_disable-segment') : include('_segment') %>
 	<script type="text/javascript">
 		analytics.page('Signup')
 	</script>
