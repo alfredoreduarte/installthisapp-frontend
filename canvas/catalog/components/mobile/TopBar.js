@@ -6,14 +6,14 @@ const Header = ({
 	logoImage,
 	homeUrl,
 }) => (
-	<div style={styles.container}>
+	<div style={styles.container} className="ita-cali-mobile-topbar">
 		<Link to={homeUrl}>
 			<img src={logoImage} style={styles.logo} />
 		</Link>
 	</div>
 )
 
-const layout = {
+const styles = {
 	container: {
 		display: 'flex',
 		height: '50px',
@@ -23,17 +23,6 @@ const layout = {
 		height: '20px',
 	}
 }
-
-const variableStyles = {
-	container: {
-		background: '#6A588B',
-	},
-	logo: {
-		
-	}
-}
-
-const styles = _.merge(layout, variableStyles)
 
 Header.propTypes = {
 	logoImage: PropTypes.string,

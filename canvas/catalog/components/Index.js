@@ -191,10 +191,10 @@ const Index = ({
 						</ButtonGroup>
 					</div>
 				</div>
-				<div className="col-md-2">
+				<div className="col-xs-2">
 					<CategoriesList title="Categories" categories={categories} />
 				</div>
-				{productListDisplayMode == 'grid' ? <div className="col-xs-12 col-sm-12 col-md-9 col-md-offset-1" style={{display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap'}}>
+				{productListDisplayMode == 'grid' ? <div className="col-md-9 col-md-offset-1 col-sm-10 col-xs-10" style={{display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap'}}>
 					{products.map( ({ id, permalink, name, price, shortDescription, featured, featuredImage }) => 
 						<Product 
 							key={id} 
@@ -209,7 +209,7 @@ const Index = ({
 						/>
 					)}
 				</div> : 
-				<div className="col-xs-12 col-sm-12 col-md-9 col-md-offset-1" style={{display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap'}}>
+				<div className="col-md-9 col-md-offset-1 col-sm-10 col-xs-10" style={{display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap'}}>
 					{products.map( ({ id, permalink, name, price, shortDescription, featured, featuredImage }) => 
 						<ProductListView 
 							key={id} 

@@ -2,7 +2,10 @@ import _ from 'lodash'
 import { createSelector } from 'reselect'
 import { getAllProducts, getProductByUrlSlug, coso } from 'canvas/catalog/selectors/products'
 
-export const getAllCategories = state => _.values(state.entities.categories)
+export const getAllCategories = state => {
+	console.log(JSON.stringify(_.values(state.entities.categories)))
+	return _.values(state.entities.categories)
+}
 
 export const getCategorySlugByUrl = (state, props) => props.params.categorySlug
 

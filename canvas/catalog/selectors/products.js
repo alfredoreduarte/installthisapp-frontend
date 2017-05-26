@@ -1,7 +1,10 @@
 import _ from 'lodash'
 import { createSelector } from 'reselect'
 
-export const getAllProducts = state => _.values(state.entities.products)
+export const getAllProducts = state => {
+	// console.log(JSON.stringify(_.values(state.entities.products)))
+	return _.values(state.entities.products)
+}
 const getProductSlugByUrl = (state, props) => props.params.productSlug
 
 export const getProductByUrlSlug = createSelector(
