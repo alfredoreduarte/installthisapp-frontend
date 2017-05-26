@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import moment from 'moment'
 import { Navbar, NavDropdown, MenuItem } from 'react-bootstrap'
 import { Link, IndexLink } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
@@ -7,7 +8,7 @@ import { push } from 'react-router-redux'
 import { logOut } from 'actions/admin'
 import FbPhoto from 'components/FbPhoto'
 
-const AppNavBar = ({ name, identifier, logout, subscription }) => (
+const AppNavBar = ({ name, identifier, logout, subscription, remainingTrialDays }) => (
 	<Navbar fluid={true}>
 		<Navbar.Header>
 			<Navbar.Brand>
@@ -23,7 +24,7 @@ const AppNavBar = ({ name, identifier, logout, subscription }) => (
 				:
 				<li>
 					<Link to='/d/upgrade' className="link-no-underline text-success">
-						<small>UPGRADE</small>
+						<small>{remainingTrialDays} | UPGRADE</small>
 					</Link>
 				</li>
 				}
@@ -57,10 +58,13 @@ const AppNavBar = ({ name, identifier, logout, subscription }) => (
 )
 
 const mapStateToProps = (state) => {
+	const timeDifference = 7 - moment().diff(moment(state.admin.createdAt), 'days')
+	const remainingTrialDays = timeDifference > 0 ? <b>{timeDifference} days remaining</b> : <b>Free trial expired</b>
 	return { 
 		name: state.admin.name,
 		subscription: state.admin.subscription,
 		identifier: state.admin.fbProfile ? state.admin.fbProfile.identifier : null,
+		remainingTrialDays,
 	}
 }
 
