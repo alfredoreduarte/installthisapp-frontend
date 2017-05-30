@@ -3,7 +3,7 @@ import {
 	turnOnGlobalIndicator, 
 	turnOffGlobalIndicator,
 } from 'actions/activityIndicators'
-import { fetchStyles, fetchJsonTest, fetchMessages, fetchImages } from 'actions/styles'
+import { fetchStyles, fetchJsonTest, fetchMessages, fetchImages, fetchSettings } from 'actions/styles'
 
 export default (store, dispatch) => ({
 	path: '/d/apps/:type/:checksum/design',
@@ -28,7 +28,9 @@ export default (store, dispatch) => ({
 				// dispatch(fetchJsonTest()).then(() => next())
 				// dispatch(fetchMessages()).then(() => next())
 				dispatch(fetchMessages()).then(() => {
-					dispatch(fetchImages()).then(() => next())
+					dispatch(fetchSettings()).then(() => {
+						dispatch(fetchImages()).then(() => next())
+					})
 				})
 				// next()
 			})

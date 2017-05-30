@@ -19,15 +19,25 @@ const Index = ({
 	toggleListGrid,
 }) => (
 	<IndexView 
+		// 
 		headerImage={images.header} 
 		footerImage={images.footer} 
-		currency={currency} 
-		products={products} 
-		productListDisplayMode={productListDisplayMode} 
-		category={category} 
+		logoDesktop={images.logoDesktop} 
+		logoMobile={images.logoMobile} 
+		// 
+		footerCopy={messages.footerCopy}
+		topBarCopy={messages.topBarCopy}
+		homePageLabel={messages.homePage}
+		categoriesListTitle={messages.categories}
+		// 
 		categories={categories} 
 		homeUrl={homeUrl} 
+		currency={currency} 
+		// screen-specific
+		productListDisplayMode={productListDisplayMode} 
 		toggleListGrid={toggleListGrid}
+		products={products} 
+		category={category} 
 	/>
 )
 

@@ -32,25 +32,24 @@ import Tool from 'components/design-editor/Tool'
 import TextContent from 'components/design-editor/TextContent'
 
 // Provisorio
-import PreviewsTrivia from 'canvas/trivia/containers/Previews'
-import PreviewsPhotoContest from 'canvas/photo_contest/containers/Previews'
-import PreviewsTopFans from 'canvas/top_fans/containers/Previews'
-import PreviewsMemoryMatch from 'canvas/memory_match/containers/Previews'
-import PreviewsCatalog from 'canvas/catalog/containers/Previews'
+const PreviewsTrivia = require('canvas/trivia/containers/Previews').default.screens
+const PreviewsPhotoContest = require('canvas/photo_contest/containers/Previews').default.screens
+const PreviewsTopFans = require('canvas/top_fans/containers/Previews').default.screens
+const PreviewsMemoryMatch = require('canvas/memory_match/containers/Previews').default.screens
+const PreviewsCatalog = require('canvas/catalog/containers/Previews').default.screens
 // Provisorio
 
 const screens = {
-	trivia: PreviewsTrivia.screens,
-	photo_contest: PreviewsPhotoContest.screens,
-	top_fans: PreviewsTopFans.screens,
-	memory_match: PreviewsMemoryMatch.screens,
-	catalog: PreviewsCatalog.screens,
+	trivia: PreviewsTrivia,
+	photo_contest: PreviewsPhotoContest,
+	top_fans: PreviewsTopFans,
+	memory_match: PreviewsMemoryMatch,
+	catalog: PreviewsCatalog,
 }
 
 const Design = ({
 	saving,
 	platform,
-	setEditingMessage,
 
 	// Sidebar
 	messagesDictionary,
@@ -86,7 +85,6 @@ const Design = ({
 	<div>
 		<Canvas 
 			previews={previews} 
-			setEditingMessage={setEditingMessage} 
 			platform={platform} />
 		<Sidebar>
 			<Header
@@ -189,7 +187,6 @@ const mapStateToProps = (state, props) => {
 }
 
 const mapDispatchToProps = (dispatch, props) => ({
-	setEditingMessage: key => dispatch(setCurrentMessage(key)),
 	handleMessageChange: (key, value) => dispatch(editMessage(key, value)),
 	handleImageChange: (key, value) => {
 		dispatch(editImage(key, value))

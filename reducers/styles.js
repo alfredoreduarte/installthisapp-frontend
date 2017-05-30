@@ -41,6 +41,8 @@ const styles = (state = initialState, action) => {
 			})
 		case 'RECEIVE_IMAGES':
 			return { ...state, images: action.payload }
+		case 'RECEIVE_SETTINGS':
+			return { ...state, settings: action.payload }
 		case 'RECEIVE_STYLES':
 			return Object.assign({}, state, {
 				ruleset: action.payload

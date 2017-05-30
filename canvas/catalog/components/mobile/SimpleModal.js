@@ -1,16 +1,26 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { Modal } from 'react-bootstrap'
 
-const SimpleModal = ({ children, show, handleClose, title, subtitle, thumbnail }) => (
+const SimpleModal = ({ 
+	children, 
+	show, 
+	handleClose, 
+	title, 
+	subtitle, 
+	thumbnail,
+	// 
+	requestFormTitle,
+	requestFormHint,
+}) => (
 	<Modal show={show} onHide={handleClose}>
 		<Modal.Header closeButton>
-			<Modal.Title className="ita-cali-modal-title" style={styles.title}>Request this product</Modal.Title>
+			<Modal.Title className="ita-cali-modal-title" style={styles.title}>{requestFormTitle}</Modal.Title>
 			<p style={styles.product}>
 				<span className="ita-cali-modal-product-name">{title}</span>
 				{' '}
 				<span className="ita-cali-modal-product-price">{subtitle}</span>
 			</p>
-			<p className="ita-cali-modal-hint">Please send use your contact data so we can get back to you. We’ll reply to your message as soon as possible.</p>
+			<p className="ita-cali-modal-hint">{requestFormHint}</p>
 		</Modal.Header>
 		<Modal.Body>
 			{children}
@@ -25,6 +35,11 @@ const styles = {
 	product: {
 		marginLeft: '20px',
 	},
+}
+
+SimpleModal.propTypes = {
+	requestFormTitle: PropTypes.string.isRequired,
+	requestFormHint: PropTypes.string.isRequired,
 }
 
 export default SimpleModal

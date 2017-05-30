@@ -29,8 +29,7 @@ const Product = ({
 		</div>
 	</div>
 
-
-const layout = {
+const styles = {
 	container: {
 		boxShadow: '0px 0px 8px rgba(0, 0, 0, .15)',
 		borderRadius: '.25em',
@@ -71,71 +70,6 @@ const layout = {
 		borderRadius: '.25em',
 	}
 }
-
-const variableStyles = {
-	container: {
-		// flexBasis: '160px',
-		// width: '160px',
-		// height: '200px',
-	},
-	thumbnail: {
-		
-	},
-	caption: {
-
-	},
-	title: {
-		lineHeight: 1.5,
-		textAlign: 'center',
-		color: '#5A6471',
-		letterSpacing: '0px',
-		fontSize: '14px',
-		fontFamily: 'Montserrat',
-		fontWeight: 'normal',
-		fontStyle: 'normal',
-		textDecoration: 'none',
-		textTransform: 'none',
-	},
-	subtitle: {
-		lineHeight: 1.5,
-		textAlign: 'center',
-		color: '#5A6471',
-		letterSpacing: '0px',
-		fontSize: '11px',
-		fontFamily: 'Montserrat',
-		fontWeight: 'bold',
-		fontStyle: 'normal',
-		textDecoration: 'none',
-		textTransform: 'none',
-	},
-	description: {
-		lineHeight: 1.5,
-		textAlign: 'left',
-		color: '#5A6471',
-		letterSpacing: '0px',
-		fontSize: '14px',
-		fontFamily: 'Montserrat',
-		fontWeight: '300',
-		fontStyle: 'normal',
-		textDecoration: 'none',
-		textTransform: 'none',
-	},
-	badge: {
-		background: '#FF4344',
-		lineHeight: 1.5,
-		textAlign: 'center',
-		color: '#ffffff',
-		letterSpacing: '0px',
-		fontSize: '11px',
-		fontFamily: 'Montserrat',
-		fontWeight: 'normal',
-		fontStyle: 'normal',
-		textDecoration: 'none',
-		textTransform: 'none',
-	}
-}
-
-const styles = _.merge(layout, variableStyles)
 
 Product.propTypes = {
 	permalink: PropTypes.string.isRequired,

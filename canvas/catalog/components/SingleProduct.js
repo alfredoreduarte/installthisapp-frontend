@@ -19,6 +19,7 @@ import ContactForm from 'canvas/catalog/components/mobile/ContactForm'
 import TopBar from 'canvas/catalog/components/mobile/TopBar'
 
 import Header from 'canvas/catalog/components/desktop/TopBar'
+import Breadcrumbs from 'canvas/catalog/components/desktop/Breadcrumbs'
 import LogoBar from 'canvas/catalog/components/desktop/LogoBar'
 import Footer from 'canvas/catalog/components/desktop/Footer'
 
@@ -29,8 +30,16 @@ const {
 } = ShareButtons
 
 const SingleProduct = ({ 
-	headerImage, 
-	footerImage, 
+	headerImage,
+	footerImage,
+	logoDesktop,
+	logoMobile,
+	// 
+	footerCopy,
+	topBarCopy,
+	homePageLabel,
+	categoriesListTitle,
+	// 
 	productCategories, 
 	productMedia, 
 	permalink,
@@ -47,6 +56,17 @@ const SingleProduct = ({
 	// 
 	currency,
 	relatedProducts,
+	orderButton,
+	relatedProductsTitle,
+	// 
+	requestFormTitle,
+	requestFormHint,
+	requestFormSentTitle,
+	requestFormSentHint,
+	requestFormEmail,
+	requestFormPhone,
+	requestFormMessage,
+	requestFormSubmit,
 }) => (
 	<div>
 		<MediaQuery maxWidth={bsBreakpoints.sm - 1} style={{
@@ -59,10 +79,21 @@ const SingleProduct = ({
 				subtitle={price}
 				thumbnail={productMedia[0].thumbnail}
 				handleClose={handleToggleContact}
+				requestFormTitle={requestFormTitle}
+				requestFormHint={requestFormHint}
 			>
-				<ContactForm sent={messageSent} productId={productId} />
+				<ContactForm 
+					sent={messageSent} 
+					productId={productId}
+					requestFormSentTitle={requestFormSentTitle}
+					requestFormSentHint={requestFormSentHint}
+					requestFormEmail={requestFormEmail}
+					requestFormPhone={requestFormPhone}
+					requestFormMessage={requestFormMessage}
+					requestFormSubmit={requestFormSubmit}
+				/>
 			</SimpleModal>
-			<TopBar homeUrl={homeUrl} logoImage={'https://s3-us-west-2.amazonaws.com/installthisapp/catalog-default-logo-mobile.png'} />
+			<TopBar homeUrl={homeUrl} logoImage={logoMobile} />
 			<div style={{
 				boxShadow: '0px 0px 8px rgba(0, 0, 0, .15)',
 				borderRadius: '.25em',
@@ -70,8 +101,7 @@ const SingleProduct = ({
 				display: 'flex',
 				flexDirection: 'column',
 				margin: '.5em 1em',
-				background: 'white',
-				// design
+				background: 'white'
 			}}>
 				<MdClose onClick={browserHistory.goBack} size={20} color={'#DBDBDB'} style={{
 					alignSelf: 'flex-end',
@@ -86,67 +116,22 @@ const SingleProduct = ({
 					showThumbnails={false}
 					showPlayButton={false}
 					onImageLoad={() => console.log('load')}/>
-				<h1 style={{
+				<h1 className="ita-cali-mobile-single-product-title" style={{
 					margin: '.5em 0em .1em',
-					// design
-					lineHeight: 1.5,
-					textAlign: 'left',
-					color: '#5A6471',
-					letterSpacing: '0px',
-					fontSize: '19px',
-					fontFamily: 'Montserrat',
-					fontWeight: 'normal',
-					fontStyle: 'normal',
-					textDecoration: 'none',
-					textTransform: 'none',
 				}}>{title}</h1>
-				<h3 style={{
+				<h3 className="ita-cali-mobile-single-product-price" style={{
 					margin: '0em 0em .5em',
-					// design
-					lineHeight: 1.5,
-					textAlign: 'left',
-					color: '#5A6471',
-					letterSpacing: '0px',
-					fontSize: '11px',
-					fontFamily: 'Montserrat',
-					fontWeight: 'bold',
-					fontStyle: 'normal',
-					textDecoration: 'none',
-					textTransform: 'none',
 				}}>{price}</h3>
-				<p style={{
+				<p className="ita-cali-mobile-single-product-description" style={{
 					margin: '.5em 0em',
-					// design
-					lineHeight: 2,
-					textAlign: 'left',
-					color: '#5A6471',
-					letterSpacing: '0px',
-					fontSize: '12px',
-					fontFamily: 'Montserrat',
-					fontWeight: '300',
-					fontStyle: 'normal',
-					textDecoration: 'none',
-					textTransform: 'none',
 				}}>{description}</p>
 			</div>
-			<button onClick={handleToggleContact} className="btn" style={{
+			<button onClick={handleToggleContact} className="btn ita-cali-mobile-single-product-order-button" style={{
 				padding: '1em',
 				margin: '.5em 1em',
 				border: 'none',
 				borderRadius: '.25em',
-				// design
-				lineHeight: 1.5,
-				textAlign: 'center',
-				color: '#ffffff',
-				backgroundColor: '#6A588B',
-				letterSpacing: '0px',
-				fontSize: '18px',
-				fontFamily: 'Montserrat',
-				fontWeight: 'normal',
-				fontStyle: 'normal',
-				textDecoration: 'none',
-				textTransform: 'uppercase',
-			}}>Order</button>
+			}}>{orderButton}</button>
 		</MediaQuery>
 
 		<MediaQuery minWidth={bsBreakpoints.sm}>
@@ -156,72 +141,41 @@ const SingleProduct = ({
 				subtitle={price}
 				thumbnail={productMedia[0].thumbnail}
 				handleClose={handleToggleContact}
+				requestFormTitle={requestFormTitle}
+				requestFormHint={requestFormHint}
 			>
-				<ContactForm sent={messageSent} productId={productId} />
+				<ContactForm 
+					sent={messageSent} 
+					productId={productId}
+					requestFormSentTitle={requestFormSentTitle}
+					requestFormSentHint={requestFormSentHint}
+					requestFormEmail={requestFormEmail}
+					requestFormPhone={requestFormPhone}
+					requestFormMessage={requestFormMessage}
+					requestFormSubmit={requestFormSubmit}
+				/>
 			</SimpleModal>
-			<Header copy={"Phone: 021 123 456"} />
+			<Header copy={topBarCopy} />
 			<div className="container">
 				<div className="col-md-12">
-					<LogoBar 
-						homeUrl={homeUrl} 
-						logoImage={'https://s3-us-west-2.amazonaws.com/installthisapp/catalog-default-logo-desktop.png'}
-					/>
+					<LogoBar homeUrl={homeUrl} logoImage={logoDesktop} />
 				</div>
 			</div>
 			<div className="container">
 				<div>
-					<ol className="breadcrumb" style={{
-						backgroundColor: 'transparent',
-						borderWidth: '1px',
-						borderStyle: 'solid',
-						borderLeftWidth: '0px',
-						borderRightWidth: '0px',
-						borderRadius: '0px',
-						padding: '15px',
-						// design
-						borderColor: '#DBDBDB',
-					}}>
-						<li><Link to={homeUrl} style={{
-							// design
-							lineHeight: 1.5,
-							textAlign: 'left',
-							color: '#5A6471',
-							letterSpacing: '0px',
-							fontSize: '12px',
-							fontFamily: 'Montserrat',
-							fontWeight: 'normal',
-							fontStyle: 'normal',
-							textDecoration: 'none',
-							textTransform: 'none',
-						}}>Home page</Link></li>
-						<li><Link to={productCategories[productCategories.length - 1].permalink} style={{
-							// design
-							lineHeight: 1.5,
-							textAlign: 'left',
-							color: '#5A6471',
-							letterSpacing: '0px',
-							fontSize: '12px',
-							fontFamily: 'Montserrat',
-							fontWeight: 'normal',
-							fontStyle: 'normal',
-							textDecoration: 'none',
-							textTransform: 'none',
-						}}>{productCategories[productCategories.length - 1].name}</Link></li>
-					</ol>
+					<Breadcrumbs
+						homeLabel={homePageLabel}
+						homeUrl={homeUrl}
+						childLabel={productCategories[productCategories.length - 1].name}
+						childUrl={productCategories[productCategories.length - 1].permalink}
+					 />
 				</div>
 				<div className="col-xs-12 col-sm-4 col-md-6 col-lg-6" style={{
 					marginTop: '30px',
 				}}>
 					<ImageGallery
-						// items={productMedia}
-						// slideInterval={2000}
-						// lazyLoad={true}
 						showBullets={true}
 						showNav={false}
-						// showFullscreenButton={false}
-						// showThumbnails={false}
-						// showPlayButton={false}
-						// 
 						items={productMedia}
 						slideInterval={2000}
 						lazyLoad={true}
@@ -229,85 +183,33 @@ const SingleProduct = ({
 						onImageLoad={() => console.log('load')}/>
 				</div>
 				<div className="col-xs-12 col-sm-8 col-md-6 col-lg-6">
-					<h1 style={{
+					<h1 className="ita-cali-desktop-single-product-title" style={{
 						marginBottom: '0px',
-						// design
-						lineHeight: 1.5,
-						textAlign: 'left',
-						color: '#5A6471',
-						letterSpacing: '0px',
-						fontSize: '32px',
-						fontFamily: 'Montserrat',
-						fontWeight: 'normal',
-						fontStyle: 'normal',
-						textDecoration: 'none',
-						textTransform: 'none',
 					}}>{title}</h1>
 					<p style={{
 						marginBottom: '2em',
 					}}>
-						<Link to={productCategories[productCategories.length - 1].permalink} style={{
-							// design
-							lineHeight: 1.5,
-							textAlign: 'left',
-							color: '#6A588B',
-							letterSpacing: '0px',
-							fontSize: '12px',
-							fontFamily: 'Montserrat',
-							fontWeight: '300',
-							fontStyle: 'normal',
-							textDecoration: 'none',
-							textTransform: 'none',
-						}}>{productCategories[productCategories.length - 1].name}</Link>
+						<Link 
+							to={productCategories[productCategories.length - 1].permalink} 
+							className="ita-cali-desktop-single-product-category"
+						>
+							{productCategories[productCategories.length - 1].name}
+						</Link>
 					</p>
-					<div style={{
+					<div className="ita-cali-desktop-single-product-description" style={{
 						marginBottom: '2em',
-						// design
-						lineHeight: 2,
-						textAlign: 'left',
-						color: '#5A6471',
-						letterSpacing: '0px',
-						fontSize: '14px',
-						fontFamily: 'Montserrat',
-						fontWeight: '300',
-						fontStyle: 'normal',
-						textDecoration: 'none',
-						textTransform: 'none',
 					}}>
 						{description}
 					</div>
-					<p style={{
+					<p className="ita-cali-desktop-single-product-price" style={{
 						marginBottom: '2em',
-						// design
-						lineHeight: 1.5,
-						textAlign: 'left',
-						color: '#5A6471',
-						letterSpacing: '0px',
-						fontSize: '18px',
-						fontFamily: 'Montserrat',
-						fontWeight: 'normal',
-						fontStyle: 'normal',
-						textDecoration: 'none',
-						textTransform: 'none',
 					}}>{price}</p>
-					<p><button onClick={handleToggleContact} className="btn" style={{
+					<p><button onClick={handleToggleContact} className="btn ita-cali-desktop-single-product-order-button" style={{
 						padding: '1em 2em',
 						marginBottom: '2em',
 						border: 'none',
 						borderRadius: '.25em',
-						// design
-						lineHeight: 1.5,
-						textAlign: 'center',
-						color: '#ffffff',
-						backgroundColor: '#6A588B',
-						letterSpacing: '0px',
-						fontSize: '18px',
-						fontFamily: 'Montserrat',
-						fontWeight: 'normal',
-						fontStyle: 'normal',
-						textDecoration: 'none',
-						textTransform: 'uppercase',
-					}}>Order</button></p>
+					}}>{orderButton}</button></p>
 					<div style={{
 						marginBottom: '2em',
 					}}>
@@ -359,19 +261,7 @@ const SingleProduct = ({
 			<div className="container">
 				<div className="col-md-12">
 					<hr />
-					<h3 style={{
-						// design
-						lineHeight: 1.5,
-						textAlign: 'center',
-						color: '#3D0843',
-						letterSpacing: '0px',
-						fontSize: '18px',
-						fontFamily: 'Montserrat',
-						fontWeight: 'normal',
-						fontStyle: 'normal',
-						textDecoration: 'none',
-						textTransform: 'uppercase',
-					}}>Related Products</h3>
+					<h3 className="ita-cali-desktop-single-product-related-title">{relatedProductsTitle}</h3>
 				</div>
 				<div style={{
 					display: 'flex', 
@@ -396,17 +286,49 @@ const SingleProduct = ({
 					)}
 				</div>
 			</div>
-			<Footer copy={'© 2017 - My Store - All rights reserved'} />
+			<Footer copy={footerCopy} />
 		</MediaQuery>
 	</div>
 )
 
 SingleProduct.propTypes = {
+	// 
+	headerImage: PropTypes.string,
+	footerImage: PropTypes.string,
+	logoDesktop: PropTypes.string,
+	logoMobile: PropTypes.string,
+	// 
+	footerCopy: PropTypes.string,
+	topBarCopy: PropTypes.string,
+	homePageLabel: PropTypes.string,
+	categoriesListTitle: PropTypes.string,
+	// 
+	categories: PropTypes.array.isRequired,
 	homeUrl: PropTypes.string.isRequired,
+	currency: PropTypes.string.isRequired,
+	// screen-specific
+	productCategories: PropTypes.array.isRequired,
+	productMedia: PropTypes.array.isRequired,
 	permalink: PropTypes.string.isRequired,
-	price: PropTypes.string,
-	// image: PropTypes.string.isRequired,
-	// linkUrl: PropTypes.string.isRequired,
+	productId: PropTypes.number.isRequired,
+	title: PropTypes.string.isRequired,
+	description: PropTypes.string.isRequired,
+	price: PropTypes.string.isRequired,
+	relatedProducts: PropTypes.array,
+	messageSent: PropTypes.bool.isRequired,
+	showContactModal: PropTypes.bool.isRequired,
+	handleToggleContact: PropTypes.func.isRequired,
+	orderButton: PropTypes.string.isRequired,
+	relatedProductsTitle: PropTypes.string.isRequired,
+	// 
+	requestFormTitle: PropTypes.string.isRequired,
+	requestFormHint: PropTypes.string.isRequired,
+	requestFormSentTitle: PropTypes.string.isRequired,
+	requestFormSentHint: PropTypes.string.isRequired,
+	requestFormEmail: PropTypes.string.isRequired,
+	requestFormPhone: PropTypes.string.isRequired,
+	requestFormMessage: PropTypes.string.isRequired,
+	requestFormSubmit: PropTypes.string.isRequired,
 }
 
 export default SingleProduct

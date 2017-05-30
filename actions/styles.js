@@ -76,6 +76,26 @@ const receiveMessages = messages => {
 	}
 }
 
+// Settings
+
+export const fetchSettings = () => {
+	return (dispatch, getState) => {
+		const checksum = getState().admin.currentApp
+		return getFromApi(`applications/${checksum}/settings.json`, response => {
+			return dispatch(receiveSettings(response))
+		})
+	}
+}
+
+const receiveSettings = settings => {
+	return {
+		type: 'RECEIVE_SETTINGS',
+		payload: settings
+	}
+}
+
+// !Settings
+
 // Images
 const makeRequest = (method, url) => {
 	return new Promise( (resolve, reject) => {

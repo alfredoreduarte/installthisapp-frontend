@@ -1,13 +1,8 @@
-/**
- * @flow
- */
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
-import { browserHistory } from 'react-router'
 import { ButtonGroup, Button } from 'react-bootstrap'
 import bsBreakpoints from 'lib/bsBreakpoints'
 import MediaQuery from 'react-responsive'
-import CategoriesList from 'canvas/catalog/components/CategoriesList'
 import MdArrowBack from 'react-icons/lib/md/arrow-back'
 import MdFormatListBulleted from 'react-icons/lib/md/format-list-bulleted'
 import MdGridOn from 'react-icons/lib/md/grid-on'
@@ -16,14 +11,26 @@ import Product from 'canvas/catalog/components/Product'
 import ProductListView from 'canvas/catalog/components/ProductListView'
 
 import TopBar from 'canvas/catalog/components/mobile/TopBar'
+import CategoriesListMobile from 'canvas/catalog/components/mobile/CategoriesList'
+import CategoryTitle from 'canvas/catalog/components/mobile/CategoryTitle'
 
+import Breadcrumbs from 'canvas/catalog/components/desktop/Breadcrumbs'
 import Header from 'canvas/catalog/components/desktop/TopBar'
 import LogoBar from 'canvas/catalog/components/desktop/LogoBar'
 import Footer from 'canvas/catalog/components/desktop/Footer'
+import CategoriesList from 'canvas/catalog/components/desktop/CategoriesList'
 
 const Index = ({ 
 	headerImage,
 	footerImage,
+	logoDesktop,
+	logoMobile,
+	// 
+	footerCopy,
+	topBarCopy,
+	homePageLabel,
+	categoriesListTitle,
+	// 
 	currency,
 	products,
 	homeUrl,
@@ -31,89 +38,12 @@ const Index = ({
 	category,
 	categories,
 	toggleListGrid,
-}: {
-	headerImage: string,
-	footerImage: string,
-	currency: string,
-	products: Array<{
-		id: number,
-		featured: boolean,
-		permalink: string,
-		name: string,
-		price: string,
-		shortDescription: string,
-		featuredImage: {
-			attachmentUrl: string,
-		},
-	}>,
-	homeUrl: string,
-	productListDisplayMode: string,
-	category: {
-		name: string,
-		permalink: string,
-	},
-	categories: Array<{
-		slug: string,
-		permalink: string,
-		name: string,
-	}>,
-	toggleListGrid: string
 }) => (
 	<div>
 		<MediaQuery maxWidth={bsBreakpoints.sm - 1}>
-			<TopBar homeUrl={homeUrl} logoImage={'https://s3-us-west-2.amazonaws.com/installthisapp/catalog-default-logo-mobile.png'} />
-			<div style={{
-				display: 'flex',
-				flexWrap: 'nowrap',
-				marginBottom: '.5em',
-				// design
-				backgroundColor: '#F3F3F3',
-			}}>
-				{category ? 
-				<div style={{
-					flex: '0 0 auto',
-					padding: '13px 16px 12px',
-				}}>
-					<MdArrowBack size={20} color={'#5A6471'} onClick={browserHistory.goBack} />
-				</div>
-				: null }
-				<div style={{
-					display: 'flex',
-					flexWrap: 'nowrap',
-					overflow: 'auto',
-					'-webkit-overflow-scrolling': 'touch',
-					'-ms-overflow-style': '-ms-autohiding-scrollbar',
-				}}>
-					{categories.map(cat => <Link key={cat.slug} to={cat.permalink} style={{
-						flex: '0 0 auto',
-						padding: '13px 16px 12px',
-						// design
-						lineHeight: 1.5,
-						textAlign: 'left',
-						color: '#6A588B',
-						letterSpacing: '0px',
-						fontSize: '12px',
-						fontFamily: 'Montserrat',
-						fontWeight: '300',
-						fontStyle: 'normal',
-						// textDecoration: 'none',
-						textTransform: 'none',
-					}}>{cat.name}</Link>)}
-				</div>
-			</div>
-			{category ? <div className="col-md-12"><h1 style={{
-				// design
-				lineHeight: 1.5,
-				textAlign: 'left',
-				color: '#5A6471',
-				letterSpacing: '0px',
-				fontSize: '18px',
-				fontFamily: 'Montserrat',
-				fontWeight: '300',
-				fontStyle: 'normal',
-				textDecoration: 'none',
-				textTransform: 'none',
-			}}>{category.name}</h1></div> : null}
+			<TopBar homeUrl={homeUrl} logoImage={logoMobile} />
+			<CategoriesListMobile showBack={category ? true : false} categories={categories} />
+			{category ? <CategoryTitle text={category.name} /> : null}
 			<div style={{display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap'}}>
 				{products.map( ({ id, permalink, name, price, shortDescription, featured, featuredImage }) => 
 					<Product 
@@ -131,52 +61,20 @@ const Index = ({
 			</div>
 		</MediaQuery>
 		<MediaQuery minWidth={bsBreakpoints.sm}>
-			<Header copy={"Phone: 021 123 456"} />
+			<Header copy={topBarCopy} />
 			<div className="container">
 				<div className="col-md-12">
-					<LogoBar homeUrl={homeUrl} logoImage={'https://s3-us-west-2.amazonaws.com/installthisapp/catalog-default-logo-desktop.png'} />
+					<LogoBar homeUrl={homeUrl} logoImage={logoDesktop} />
 				</div>
 			</div>
 			<div className="container">
 				<div>
-					<ol className="breadcrumb" style={{
-						backgroundColor: 'transparent',
-						borderWidth: '1px',
-						borderStyle: 'solid',
-						borderLeftWidth: '0px',
-						borderRightWidth: '0px',
-						borderRadius: '0px',
-						padding: '15px',
-						// design
-						borderColor: '#DBDBDB',
-					}}>
-						<li><Link to={homeUrl} style={{
-							// design
-							lineHeight: 1.5,
-							textAlign: 'left',
-							color: '#5A6471',
-							letterSpacing: '0px',
-							fontSize: '12px',
-							fontFamily: 'Montserrat',
-							fontWeight: 'normal',
-							fontStyle: 'normal',
-							textDecoration: 'none',
-							textTransform: 'none',
-						}}>Home page</Link></li>
-						{category ? <li><Link to={category.permalink} style={{
-							// design
-							lineHeight: 1.5,
-							textAlign: 'left',
-							color: '#5A6471',
-							letterSpacing: '0px',
-							fontSize: '12px',
-							fontFamily: 'Montserrat',
-							fontWeight: 'normal',
-							fontStyle: 'normal',
-							textDecoration: 'none',
-							textTransform: 'none',
-						}}>{category.name}</Link></li> : null}
-					</ol>
+					<Breadcrumbs
+						homeLabel={homePageLabel}
+						homeUrl={homeUrl}
+						childLabel={category ? category.name : null}
+						childUrl={category ? category.permalink : null}
+					 />
 					<div style={{
 						display: 'flex',
 						justifyContent: 'flex-end',
@@ -192,7 +90,7 @@ const Index = ({
 					</div>
 				</div>
 				<div className="col-xs-2">
-					<CategoriesList title="Categories" categories={categories} />
+					<CategoriesList title={categoriesListTitle} categories={categories} />
 				</div>
 				{productListDisplayMode == 'grid' ? <div className="col-md-9 col-md-offset-1 col-sm-10 col-xs-10" style={{display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap'}}>
 					{products.map( ({ id, permalink, name, price, shortDescription, featured, featuredImage }) => 
@@ -226,17 +124,31 @@ const Index = ({
 				</div>
 				}
 			</div>
-			<Footer copy={'© 2017 - My Store - All rights reserved'} />
+			<Footer copy={footerCopy} />
 		</MediaQuery>
 	</div>
 )
 
 Index.propTypes = {
+	// 
 	headerImage: PropTypes.string,
 	footerImage: PropTypes.string,
-	products: PropTypes.array.isRequired,
+	logoDesktop: PropTypes.string,
+	logoMobile: PropTypes.string,
+	// 
+	footerCopy: PropTypes.string,
+	topBarCopy: PropTypes.string,
+	homePageLabel: PropTypes.string,
+	categoriesListTitle: PropTypes.string,
+	// 
 	categories: PropTypes.array.isRequired,
 	homeUrl: PropTypes.string.isRequired,
+	currency: PropTypes.string.isRequired,
+	// screen-specific
+	products: PropTypes.array.isRequired,
+	productListDisplayMode: PropTypes.string.isRequired,
+	category: PropTypes.object,
+	toggleListGrid: PropTypes.func.isRequired,
 }
 
 export default Index

@@ -4,7 +4,7 @@ import Frame from 'react-frame-component'
 import DesignHelper from 'containers/design-helper/DesignHelper'
 import { getStringifiedRuleset } from 'selectors/styles'
 
-const Canvas = ({ previews, platform, styles, setEditingMessage }) => (
+const Canvas = ({ previews, platform, styles }) => (
 	<div className="row">
 		<div className={`ita-canvas ${platform}`}>
 			<Frame 
@@ -22,6 +22,8 @@ const Canvas = ({ previews, platform, styles, setEditingMessage }) => (
 
 Canvas.propTypes = {
 	platform: PropTypes.string.isRequired,
+	previews: PropTypes.string.isRequired,
+	styles: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = (state, props) => ({

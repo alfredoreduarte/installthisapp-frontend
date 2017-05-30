@@ -28,24 +28,43 @@ const SingleProduct = ({
 	relatedProducts,
 }) => (
 	<SingleProductView 
+		// 
 		headerImage={images.header} 
 		footerImage={images.footer} 
+		logoDesktop={images.logoDesktop} 
+		logoMobile={images.logoMobile} 
+		// 
+		footerCopy={messages.footerCopy}
+		topBarCopy={messages.topBarCopy}
+		homePageLabel={messages.homePage}
+		categoriesListTitle={messages.categories}
+		// 
+		categories={categories} 
+		homeUrl={homeUrl} 
+		currency={currency} 
+		// screen-specific
 		productCategories={productCategories}
 		productMedia={productMedia}
 		permalink={permalink}
 		productId={productId}
-		messageSent={messageSent}
 		title={title}
 		description={description}
 		price={price}
-		categories={categories}
-		homeUrl={homeUrl}
-		// 
+		relatedProducts={relatedProducts}
+		messageSent={messageSent}
 		showContactModal={showContactModal}
 		handleToggleContact={handleToggleContact}
+		orderButton={messages.orderButton}
+		relatedProductsTitle={messages.relatedProductsTitle}
 		// 
-		currency={currency}
-		relatedProducts={relatedProducts}
+		requestFormTitle={messages.requestFormTitle}
+		requestFormHint={messages.requestFormHint}
+		requestFormSentTitle={messages.requestFormSentTitle}
+		requestFormSentHint={messages.requestFormSentHint}
+		requestFormEmail={messages.requestFormEmail}
+		requestFormPhone={messages.requestFormPhone}
+		requestFormMessage={messages.requestFormMessage}
+		requestFormSubmit={messages.requestFormSubmit}
 	/>
 )
 
@@ -53,6 +72,7 @@ const mapStateToProps = (state, props) => {
 	const { id, price, permalink, name, description } = getProductByUrlSlug(state, props)
 	const { currency } = state.settings
 	return {
+		messages: {...state.messages},
 		images: {...state.images},
 		productCategories: getProductCategories(state, props),
 		productMedia: getProductMedia(state, props),

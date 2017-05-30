@@ -10,16 +10,22 @@ let ContactForm = ({
 	sent,
 	fields,
 	handleSubmit,
+	requestFormSentTitle,
+	requestFormSentHint,
+	requestFormEmail,
+	requestFormPhone,
+	requestFormMessage,
+	requestFormSubmit,
 }) => (
 	<form className="row" onSubmit={handleSubmit}>
 		<div className={sent ? null : 'hide'}>
-			<h1 className="ita-cali-form-sent-title">Message sent</h1>
-			<p className="ita-cali-form-sent-hint">Thanks! We'll review your message and reply as soon as possible.</p>
+			<h1 className="ita-cali-form-sent-title">{requestFormSentTitle}</h1>
+			<p className="ita-cali-form-sent-hint">{requestFormSentHint}</p>
 		</div>
 		<div className={sent ? 'hide' : null}>
 			<div className="col-md-6">
 				<div className="form-group">
-					<label className="control-label ita-cali-form-label">* {'Email'}</label>
+					<label className="control-label ita-cali-form-label">* {requestFormEmail}</label>
 					<Field
 						name={'email'}
 						type="email"
@@ -35,7 +41,7 @@ let ContactForm = ({
 			</div>
 			<div className="col-md-6">
 				<div className="form-group">
-					<label className="control-label ita-cali-form-label">{'Phone'}</label>
+					<label className="control-label ita-cali-form-label">{requestFormPhone}</label>
 					<Field
 						name={'phone'}
 						type="text" 
@@ -50,7 +56,7 @@ let ContactForm = ({
 			</div>
 			<div className="col-md-12">
 				<div className="form-group">
-					<label className="control-label ita-cali-form-label">* {'Message'}</label>
+					<label className="control-label ita-cali-form-label">* {requestFormMessage}</label>
 					<Field
 						name={'content'}
 						className="form-control ita-cali-form-input"
@@ -74,7 +80,7 @@ let ContactForm = ({
 					margin: '.5em 1em',
 					border: 'none',
 					borderRadius: '.25em',
-				}}>Send Request</button>
+				}}>{requestFormSubmit}</button>
 			</div>
 		</div>
 	</form>
