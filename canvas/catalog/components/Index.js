@@ -3,7 +3,6 @@ import { Link } from 'react-router'
 import { ButtonGroup, Button } from 'react-bootstrap'
 import bsBreakpoints from 'lib/bsBreakpoints'
 import MediaQuery from 'react-responsive'
-import MdArrowBack from 'react-icons/lib/md/arrow-back'
 import MdFormatListBulleted from 'react-icons/lib/md/format-list-bulleted'
 import MdGridOn from 'react-icons/lib/md/grid-on'
 import Image from 'canvas/catalog/components/Image'
@@ -40,7 +39,7 @@ const Index = ({
 	toggleListGrid,
 }) => (
 	<div>
-		<MediaQuery maxWidth={bsBreakpoints.sm - 1}>
+		<div className="visible-xs hidden-sm hidden-md hidden-lg">
 			<TopBar homeUrl={homeUrl} logoImage={logoMobile} />
 			<CategoriesListMobile showBack={category ? true : false} categories={categories} />
 			{category ? <CategoryTitle text={category.name} /> : null}
@@ -59,8 +58,8 @@ const Index = ({
 					/>
 				)}
 			</div>
-		</MediaQuery>
-		<MediaQuery minWidth={bsBreakpoints.sm}>
+		</div>
+		<div className="hidden-xs visible-sm visible-md visible-lg">
 			<Header copy={topBarCopy} />
 			<div className="container">
 				<div className="col-md-12">
@@ -89,10 +88,10 @@ const Index = ({
 						</ButtonGroup>
 					</div>
 				</div>
-				<div className="col-xs-2">
+				<div className="col-xs-3 col-sm-3 col-md-2">
 					<CategoriesList title={categoriesListTitle} categories={categories} />
 				</div>
-				{productListDisplayMode == 'grid' ? <div className="col-md-9 col-md-offset-1 col-sm-10 col-xs-10" style={{display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap'}}>
+				{productListDisplayMode == 'grid' ? <div className="col-xs-9 col-sm-9 col-md-9 col-md-offset-1" style={{display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap'}}>
 					{products.map( ({ id, permalink, name, price, shortDescription, featured, featuredImage }) => 
 						<Product 
 							key={id} 
@@ -107,7 +106,7 @@ const Index = ({
 						/>
 					)}
 				</div> : 
-				<div className="col-md-9 col-md-offset-1 col-sm-10 col-xs-10" style={{display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap'}}>
+				<div className="col-xs-9 col-sm-9 col-md-9 col-md-offset-1" style={{display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap'}}>
 					{products.map( ({ id, permalink, name, price, shortDescription, featured, featuredImage }) => 
 						<ProductListView 
 							key={id} 
@@ -125,7 +124,7 @@ const Index = ({
 				}
 			</div>
 			<Footer copy={footerCopy} />
-		</MediaQuery>
+		</div>
 	</div>
 )
 

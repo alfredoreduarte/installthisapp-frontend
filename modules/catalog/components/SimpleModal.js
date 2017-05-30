@@ -1,14 +1,8 @@
-import React, { Component } from 'react'
-import { Link, browserHistory } from 'react-router'
-import _ from 'lodash'
-import update from 'react-addons-update'
-import v4 from 'node-uuid'
-import { connect } from 'react-redux'
-import { Modal, Button } from 'react-bootstrap'
-import { postNewQuestion, postNewProductWithReduxForm } from 'modules/catalog/actions/products'
+import React from 'react'
+import { Modal } from 'react-bootstrap'
 
-const SimpleModal = ({ children, show, handleClose, title }) => (
-	<Modal show={show} onHide={handleClose}>
+const SimpleModal = ({ children, show, handleClose, title, bsSize }) => 
+	<Modal show={show} onHide={handleClose} bsSize={bsSize}>
 		<Modal.Header closeButton>
 			<Modal.Title>{title}</Modal.Title>
 		</Modal.Header>
@@ -16,19 +10,5 @@ const SimpleModal = ({ children, show, handleClose, title }) => (
 			{children}
 		</Modal.Body>
 	</Modal>
-)
 
-const mapStateToProps = (state, props) => {
-	return {
-		
-	}
-}
-
-const mapDispatchToProps = (dispatch, props) => {
-	return {
-		// close: () => browserHistory.push(props.closeUrl),
-		// handleSubmit: () => dispatch(postNewProductWithReduxForm()).then(() => browserHistory.push(props.closeUrl)),
-	}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SimpleModal)
+export default SimpleModal

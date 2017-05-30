@@ -118,7 +118,7 @@ ListItem.propTypes = {
 const mapStateToProps = (state, ownProps) => {
 	const { first, score, maxScore } = ownProps
 	let width
-	if (document.body.clientWidth > 810) {
+	if (document.body.clientWidth > process.env.FB_TAB_WIDTH) {
 		width = first ? '100%' : `${score * 100 / maxScore}%`
 	}
 	else {

@@ -1,4 +1,5 @@
 import { fetchEntities } from 'modules/catalog/actions/entities'
+import { turnOnGlobalIndicator, turnOffGlobalIndicator } from 'actions/activityIndicators'
 
 export default (store, dispatch) => ({
 	getChildRoutes(partialNextState, cb) {
@@ -7,6 +8,7 @@ export default (store, dispatch) => ({
 				{
 					path: 'products',
 					onEnter: (nextState, replace, next) => {
+						dispatch(turnOnGlobalIndicator())
 						dispatch(fetchEntities(nextState.params.checksum))
 							.then(() => {
 								next()
@@ -14,6 +16,7 @@ export default (store, dispatch) => ({
 					},
 					getComponents(nextState, cb) {
 						require.ensure([], require => {
+							dispatch(turnOffGlobalIndicator())
 							cb(null, {
 								main: require('modules/catalog/containers/Products').default,
 								sidebar: require('modules/catalog/components/Sidebar').default,
@@ -24,6 +27,7 @@ export default (store, dispatch) => ({
 				{
 					path: 'products/create',
 					onEnter: (nextState, replace, next) => {
+						dispatch(turnOnGlobalIndicator())
 						dispatch(fetchEntities(nextState.params.checksum))
 							.then(() => {
 								next()
@@ -31,6 +35,7 @@ export default (store, dispatch) => ({
 					},
 					getComponents(nextState, cb) {
 						require.ensure([], require => {
+							dispatch(turnOffGlobalIndicator())
 							cb(null, {
 								main: require('modules/catalog/containers/ProductCreate').default,
 								sidebar: require('modules/catalog/components/Sidebar').default,
@@ -41,6 +46,7 @@ export default (store, dispatch) => ({
 				{
 					path: 'products/edit/:productId',
 					onEnter: (nextState, replace, next) => {
+						dispatch(turnOnGlobalIndicator())
 						dispatch(fetchEntities(nextState.params.checksum))
 							.then(() => {
 								next()
@@ -48,6 +54,7 @@ export default (store, dispatch) => ({
 					},
 					getComponents(nextState, cb) {
 						require.ensure([], require => {
+							dispatch(turnOffGlobalIndicator())
 							cb(null, {
 								main: require('modules/catalog/containers/ProductEdit').default,
 								sidebar: require('modules/catalog/components/Sidebar').default,
@@ -58,6 +65,7 @@ export default (store, dispatch) => ({
 				{
 					path: 'media',
 					onEnter: (nextState, replace, next) => {
+						dispatch(turnOnGlobalIndicator())
 						dispatch(fetchEntities(nextState.params.checksum))
 							.then(() => {
 								next()
@@ -65,6 +73,7 @@ export default (store, dispatch) => ({
 					},
 					getComponents(nextState, cb) {
 						require.ensure([], require => {
+							dispatch(turnOffGlobalIndicator())
 							cb(null, {
 								main: require('modules/catalog/containers/Media').default,
 								sidebar: require('modules/catalog/components/Sidebar').default,
@@ -75,6 +84,7 @@ export default (store, dispatch) => ({
 				{
 					path: 'categories(/create)',
 					onEnter: (nextState, replace, next) => {
+						dispatch(turnOnGlobalIndicator())
 						dispatch(fetchEntities(nextState.params.checksum))
 							.then(() => {
 								next()
@@ -82,6 +92,7 @@ export default (store, dispatch) => ({
 					},
 					getComponents(nextState, cb) {
 						require.ensure([], require => {
+							dispatch(turnOffGlobalIndicator())
 							cb(null, {
 								main: require('modules/catalog/containers/Categories').default,
 								sidebar: require('modules/catalog/components/Sidebar').default,

@@ -1,9 +1,9 @@
 import _ from 'lodash'
 
 const initialState = {
-	platform: 'facebook',
+	platform: 'desktop',
 	screen: 'intro',
-	componentsOrBody: 'components',
+	componentsOrBody: 'content',
 	hoveredSelector: [],
 	activeSelector: [],
 	ruleset: {},

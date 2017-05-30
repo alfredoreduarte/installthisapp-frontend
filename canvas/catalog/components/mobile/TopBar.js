@@ -16,11 +16,10 @@ const Header = ({
 const styles = {
 	container: {
 		display: 'flex',
-		height: '50px',
 		padding: '15px',
 	},
 	logo: {
-		height: '20px',
+		maxHeight: '26px',
 	}
 }
 

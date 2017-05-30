@@ -11,6 +11,11 @@ const catalog = (state = {
 				...state,
 				entities: entities(state.entities, action)
 			}
+		case 'CATALOG/REMOVE_PRODUCT':
+			return {
+				...state,
+				entities: entities(state.entities, action)
+			}
 		case 'CATALOG/REMOVE_MEDIUM':
 			return {
 				...state,

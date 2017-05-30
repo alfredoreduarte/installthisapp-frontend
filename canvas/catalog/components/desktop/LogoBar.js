@@ -19,7 +19,7 @@ const styles = {
 		padding: '35px 0px',
 	},
 	logo: {
-		height: '20px',
+		maxHeight: '50px',
 	}
 }
 

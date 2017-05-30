@@ -36,7 +36,7 @@ const Summary = ({ checksum, type, entries, hasQuestions }) => (
 		</div>
 		<div className="col-md-6">
 			{!hasQuestions ? 
-			<div className="alert alert-warning" style={{position: 'relative'}}>
+			<div className="alert alert-danger" style={{position: 'relative'}}>
 				<span className="glyphicon glyphicon-info-sign"></span>{' '}
 				You should create some questions for the Trivia. <Link to={`/d/apps/${type}/${checksum}/questions`}>Start now</Link>.
 			</div>

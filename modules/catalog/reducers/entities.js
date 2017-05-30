@@ -1,5 +1,6 @@
 import media from 'modules/catalog/reducers/media'
 import categories from 'modules/catalog/reducers/categories'
+import products from 'modules/catalog/reducers/products'
 
 const entities = (state = {
 	products: {},
@@ -16,6 +17,11 @@ const entities = (state = {
 			return {
 				...state,
 				media: media(state.media, action)
+			}
+		case 'CATALOG/REMOVE_PRODUCT':
+			return {
+				...state,
+				products: products(state.products, action)
 			}
 		case 'CATALOG/ADD_MEDIUM':
 			return {

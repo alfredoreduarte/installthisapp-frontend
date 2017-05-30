@@ -45,7 +45,7 @@ const Summary = ({ checksum, type, entries, tabInstalledInPage }) => (
 				The app is currently installed, and collecting timeline activities from <a href={`https://fb.com/${tabInstalledInPage.identifier}`}>{tabInstalledInPage.name}</a>
 			</div>
 			:
-			<div className="alert alert-warning" style={{position: 'relative'}}>
+			<div className="alert alert-danger" style={{position: 'relative'}}>
 				<span className="glyphicon glyphicon-info-sign"></span>{' '}
 				The app is currently not linked to any Facebook Page. Go to the <Link to={`/d/apps/${type}/${checksum}/setup-guide`}>Setup Guide</Link> and follow the instructions.
 			</div>

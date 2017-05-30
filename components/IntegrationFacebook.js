@@ -170,7 +170,7 @@ const IntegrationFacebook = ({
 		</div>
 		:
 		<div className="col-md-12">
-			<div class="page-header">
+			<div className="page-header">
 				<h1 className="text-center" style={{marginTop: '0px'}}>Display your app in a Facebook Page tab</h1>
 			</div>
 			<br/>

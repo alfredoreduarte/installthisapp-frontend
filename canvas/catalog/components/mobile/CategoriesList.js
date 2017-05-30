@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import { browserHistory } from 'react-router'
+import MdArrowBack from 'react-icons/lib/md/arrow-back'
 
 const CategoriesList = ({ 
 	showBack,

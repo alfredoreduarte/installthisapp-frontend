@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getFilteredProducts } from 'modules/catalog/selectors/products'
+import { getCurrentProductsByKeyword } from 'modules/catalog/selectors/products'
 import { fetchEntities } from 'modules/catalog/actions/entities'
 import { deleteProduct } from 'modules/catalog/actions/products'
 import ProductsView from 'modules/catalog/components/Products'
@@ -30,7 +30,7 @@ const Products = ({
 )
 
 const mapStateToProps = (state, props) => { 
-	const products = getFilteredProducts(state, props)
+	const products = getCurrentProductsByKeyword(state, props)
 	let productToEdit = null
 	if (props.params.productId && products.length > 0) {
 		productToEdit = _.find(products, {'id': parseInt(props.params.productId)})
@@ -40,7 +40,7 @@ const mapStateToProps = (state, props) => {
 	const pathname = props.location.pathname
 	const showModal = pathname.indexOf('/products/create') !== -1 || pathname.indexOf('/products/edit') !== -1
 	return {
-		products: getFilteredProducts(state),
+		products,
 		selectedItems: state.selectedItems,
 		// 
 		productsCreatePath: props.location.pathname + createString,

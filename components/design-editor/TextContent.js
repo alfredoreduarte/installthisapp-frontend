@@ -9,7 +9,7 @@ const TextContent = ({
 	onChange,
 }) => (
 	<div className="form-group">
-		<label>{_.capitalize(_.replace(humps.decamelize(keyString), '_', ' '))}</label>
+		<label>{_.capitalize(humps.decamelize(keyString).split("_").join(" "))}</label>
 		<input 
 			type="text" 
 			className="form-control"

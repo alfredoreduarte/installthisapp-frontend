@@ -4,5 +4,4 @@ export default {
 	// "footer": "https://s3-us-west-2.amazonaws.com/installthisapp/footer.jpg",
 	"header": null,
 	"footer": null,
-	"white-label-signature": null,
 }

@@ -148,42 +148,68 @@ let ProductForm = ({
 					</div>
 				: 
 					<div>
-						<button className="btn btn-sm btn-primary btn-outline" onClick={() => handleFeaturedImagePickerShow()}>Add Image</button>
+						<p className="text-right"><small><a href="javascript:void(0)" onClick={handleFeaturedImagePickerShow}>Add image</a></small></p>
 					</div>
 				}
 				<SimpleModal
 					title={'Featured Image'}
 					show={showFeaturedImagePicker}
 					handleClose={handleFeaturedImagePickerHide}
+					bsSize="large"
 				>
-					<MediaUploader />
-					<Field
-						name={'featuredImageId'}
-						media={media}
-						onDelete={deleteMedium}
-						component={SimpleImagePicker}
-					/>
+					<div style={{marginBottom: '20px'}}><MediaUploader /></div>
+					<div style={{
+						width: '100%',
+						height: '400px',
+						height: '50vh',
+						overflowY: 'auto',
+						marginBottom: '20px',
+					}}>
+						<Field
+							name={'featuredImageId'}
+							media={media}
+							onDelete={deleteMedium}
+							component={SimpleImagePicker}
+						/>
+					</div>
+					<div className="text-center">
+						<button className="btn btn-success btn-lg" onClick={handleFeaturedImagePickerHide}>Done</button>
+					</div>
 				</SimpleModal>
 			</div>
 			<hr />
 			<div className="form-group">
 				<label className="control-label">Image Gallery</label>
-				<div>
-					<button className="btn btn-sm btn-primary btn-outline" onClick={() => handleImagePickerShow()}>Add image</button>
-				</div>
+				<p className="text-right">
+					<small>
+						<a href="javascript:void(0)" onClick={() => handleImagePickerShow()}>Add/remove images</a>
+					</small>
+				</p>
 				<SimpleModal
 					title={'Product image gallery'}
 					show={showImagePicker}
 					handleClose={handleImagePickerHide}
+					bsSize="large"
 				>
-					<MediaUploader />
-					<FieldArray
-						name={'galleryMediaIds'}
-						media={media}
-						onDelete={deleteMedium}
-						galleryMediaIds={galleryMediaIds}
-						component={ImagePicker}
-					/>
+					<div style={{marginBottom: '20px'}}><MediaUploader /></div>
+					<div style={{
+						width: '100%',
+						height: '400px',
+						height: '50vh',
+						overflowY: 'auto',
+						marginBottom: '20px',
+					}}>
+						<FieldArray
+							name={'galleryMediaIds'}
+							media={media}
+							onDelete={deleteMedium}
+							galleryMediaIds={galleryMediaIds}
+							component={ImagePicker}
+						/>
+					</div>
+					<div className="text-center">
+						<button className="btn btn-success btn-lg" onClick={handleImagePickerHide}>Done</button>
+					</div>
 				</SimpleModal>
 
 				<FieldArray

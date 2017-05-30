@@ -40,7 +40,7 @@ const Summary = ({ checksum, type, entries, hasCards }) => (
 		</div>
 		<div className="col-md-6">
 			{!hasCards ? 
-			<div className="alert alert-warning" style={{position: 'relative'}}>
+			<div className="alert alert-danger" style={{position: 'relative'}}>
 				<span className="glyphicon glyphicon-info-sign"></span>{' '}
 				You should add some cards for the game. <Link to={`/d/apps/${type}/${checksum}/cards`}>Start now</Link>.
 			</div>

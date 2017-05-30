@@ -69,10 +69,7 @@ const SingleProduct = ({
 	requestFormSubmit,
 }) => (
 	<div>
-		<MediaQuery maxWidth={bsBreakpoints.sm - 1} style={{
-			display: 'flex',
-			flexDirection: 'column',
-		}}>
+		<div className="visible-xs hidden-sm hidden-md hidden-lg">
 			<SimpleModal
 				show={showContactModal}
 				title={title}
@@ -132,9 +129,9 @@ const SingleProduct = ({
 				border: 'none',
 				borderRadius: '.25em',
 			}}>{orderButton}</button>
-		</MediaQuery>
+		</div>
 
-		<MediaQuery minWidth={bsBreakpoints.sm}>
+		<div className="hidden-xs visible-sm visible-md visible-lg">
 			<SimpleModal
 				show={showContactModal}
 				title={title}
@@ -166,8 +163,8 @@ const SingleProduct = ({
 					<Breadcrumbs
 						homeLabel={homePageLabel}
 						homeUrl={homeUrl}
-						childLabel={productCategories[productCategories.length - 1].name}
-						childUrl={productCategories[productCategories.length - 1].permalink}
+						childLabel={productCategories.length ? productCategories[productCategories.length - 1].name : null}
+						childUrl={productCategories.length ? productCategories[productCategories.length - 1].permalink : null}
 					 />
 				</div>
 				<div className="col-xs-12 col-sm-4 col-md-6 col-lg-6" style={{
@@ -186,16 +183,18 @@ const SingleProduct = ({
 					<h1 className="ita-cali-desktop-single-product-title" style={{
 						marginBottom: '0px',
 					}}>{title}</h1>
-					<p style={{
-						marginBottom: '2em',
-					}}>
-						<Link 
-							to={productCategories[productCategories.length - 1].permalink} 
-							className="ita-cali-desktop-single-product-category"
-						>
-							{productCategories[productCategories.length - 1].name}
-						</Link>
-					</p>
+					{productCategories.length ? 
+						<p style={{
+							marginBottom: '2em',
+						}}>
+							<Link 
+								to={productCategories[productCategories.length - 1].permalink} 
+								className="ita-cali-desktop-single-product-category"
+							>
+								{productCategories[productCategories.length - 1].name}
+							</Link>
+						</p>
+					: null }
 					<div className="ita-cali-desktop-single-product-description" style={{
 						marginBottom: '2em',
 					}}>
@@ -287,7 +286,7 @@ const SingleProduct = ({
 				</div>
 			</div>
 			<Footer copy={footerCopy} />
-		</MediaQuery>
+		</div>
 	</div>
 )
 

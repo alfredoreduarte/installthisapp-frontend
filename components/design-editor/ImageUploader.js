@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import humps from 'humps'
 import FileInput from 'react-file-input'
 import { toggleActivitySavingDesign } from 'actions/activityIndicators'
 import { getSignedRequest } from 'actions/styles'
@@ -15,9 +16,7 @@ const ImageUploader = ({
 }) => (
 	<div className="ita-flex-box ita-flex-box-horizontal">
 		<div className="ita-flex-box ita-flex-items-center ita-flex-shrink">
-			<label>
-				{_.capitalize(_.replace(property, '-', ' '))}
-			</label>
+			<label>{_.capitalize(humps.decamelize(property).split("_").join(" "))}</label>
 		</div>
 		<div className="ita-flex-box ita-flex-items-center ita-flex-justify-end ita-flex-block text-right">
 			<FileInput 

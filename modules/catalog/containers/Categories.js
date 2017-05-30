@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getFilteredCategories } from 'modules/catalog/selectors/categories'
+import { getCurrentCategoriesByKeyword } from 'modules/catalog/selectors/categories'
 import { fetchEntities } from 'modules/catalog/actions/entities'
 import { deleteCategory } from 'modules/catalog/actions/categories'
 import CategoriesView from 'modules/catalog/components/Categories'
@@ -30,7 +30,7 @@ const Categories = ({
 )
 
 const mapStateToProps = (state, props) => { 
-	const categories = getFilteredCategories(state, props)
+	const categories = getCurrentCategoriesByKeyword(state, props)
 	let categoryToEdit = null
 	if (props.params.categoryId && categories.length > 0) {
 		categoryToEdit = _.find(categories, {'id': parseInt(props.params.categoryId)})
@@ -40,7 +40,7 @@ const mapStateToProps = (state, props) => {
 	const pathname = props.location.pathname
 	const showModal = pathname.indexOf('/categories/create') !== -1 || pathname.indexOf('/categories/edit') !== -1
 	return {
-		categories: getFilteredCategories(state),
+		categories,
 		selectedItems: state.selectedItems,
 		// 
 		categoriesCreatePath: props.location.pathname + createString,

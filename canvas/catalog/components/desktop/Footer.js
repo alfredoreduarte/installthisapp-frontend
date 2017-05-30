@@ -11,6 +11,7 @@ const Footer = ({
 
 const styles = {
 	container: {
+		marginTop: '26px',
 		boxSizing: 'border-box',
 		display: 'flex',
 		height: '50px',

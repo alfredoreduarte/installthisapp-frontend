@@ -7,10 +7,17 @@ const PlatformSelector = ({
 	<div className="btn-group ita-btn-group-editor" role="group" data-toggle="buttons">
 		<button 
 			type="button" 
+			className={`btn btn-sm btn-default ${platform == 'desktop' ? 'active' : ''}`} 
+			onClick={() => handlePlatformChange('desktop')}>
+			<span className="glyphicon glyphicon-king hide"></span>
+			DESKTOP
+		</button>
+		<button 
+			type="button" 
 			className={`btn btn-sm btn-default ${platform == 'facebook' ? 'active' : ''}`} 
 			onClick={() => handlePlatformChange('facebook')}>
 			<span className="glyphicon glyphicon-king hide"></span>
-			DESKTOP
+			FB PAGE
 		</button>
 		<button 
 			type="button" 

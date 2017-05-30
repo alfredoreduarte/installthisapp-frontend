@@ -2,8 +2,20 @@
 	// This empty object emulates segment.com's js library
 	// to disable every tracking function when impersonating a user
 	window.analytics = {
-		page: () => {},
-		identify: () => {},
-		track: () => {},
+		page: (string, callback) => {
+			if (typeof callback === "function") {
+				callback()
+			}
+		},
+		identify: (string, callback) => {
+			if (typeof callback === "function") {
+				callback()
+			}
+		},
+		track: (string, callback) => {
+			if (typeof callback === "function") {
+				callback()
+			}
+		},
 	}
 </script>

@@ -109,7 +109,7 @@ const Products = ({
 							<span>Status</span>
 						</th>
 						<th>
-							<span>Categories</span>
+							<span>Messages</span>
 						</th>
 						<th></th>
 					</tr>
@@ -124,7 +124,7 @@ const Products = ({
 							{product.status}
 						</td>
 						<td>
-							{product.categories.map((category, index) => <span key={category.slug}>{category.name}{index + 1 == product.categories.length ? '' : ', '}</span>)}
+							{product.messagesCount}
 						</td>
 						<td className="text-right">
 							<ul className="list-inline list-no-margin">
