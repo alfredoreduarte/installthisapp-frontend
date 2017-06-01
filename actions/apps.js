@@ -209,40 +209,33 @@ export const installFacebookTab = () => {
 		})
 		const state = getState()
 		const currentApp = getCurrentAppByState(state)
-		// const fbPageIdentifierForIntegration = state.admin.fbPageIdentifierForIntegration
-		const fbPageIdentifierForIntegration = null
-		// if (fbPageIdentifierForIntegration) {
-			return postToApi(`applications/${currentApp.checksum}/install_tab.json`, {
-				fbPageIdentifier: fbPageIdentifierForIntegration
-			}).then(response => {
-				analytics.track('Feature Used', {
-					featureType: 'Facebook Tab',
-				})
-				analytics.track('Tab Installed')
-				dispatch({
-					type: 'TOGGLE_ACTIVITY/INSTALLING_TAB'
-				})
-				const entities = {
-					apps: response.applications,
-					pages: response.pages,
-				}
-				const normalized = normalize(entities, schema.entities)
-				dispatch(receiveEntities(normalized.entities))
-				// Sanitize admin user
-				const admin = { ...response }
-				delete admin.applications
-				delete admin.pages
-				return dispatch(receiveAdmin(admin))
+		const fbPageIdentifierForIntegration = state.admin.fbPageIdentifierForIntegration
+		return postToApi(`applications/${currentApp.checksum}/install_tab.json`, {
+			fbPageIdentifier: fbPageIdentifierForIntegration
+		}).then(response => {
+			analytics.track('Feature Used', {
+				featureType: 'Facebook Tab',
 			})
-			.catch(exception => {
-				console.log('apps actions parsing failed!', exception)
-				dispatch(setAlert(`Error`, `Unexpected error. Please contact support.`))
+			analytics.track('Tab Installed')
+			dispatch({
+				type: 'TOGGLE_ACTIVITY/INSTALLING_TAB'
 			})
-		// }
-		// else {
-		// 	// console.error('Error: fbPageIdentifierForIntegration cannot be null or undefined')
-		// 	return Promise.reject(new Error('fbPageIdentifierForIntegration cannot be null or undefined'))
-		// }
+			const entities = {
+				apps: response.applications,
+				pages: response.pages,
+			}
+			const normalized = normalize(entities, schema.entities)
+			dispatch(receiveEntities(normalized.entities))
+			// Sanitize admin user
+			const admin = { ...response }
+			delete admin.applications
+			delete admin.pages
+			return dispatch(receiveAdmin(admin))
+		})
+		.catch(exception => {
+			console.log('parsing failed', exception)
+			dispatch(setAlert(`Error`, `Unexpected error. Please contact support.`))
+		})
 	}
 }
 

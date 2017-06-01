@@ -35,10 +35,15 @@ const getAuthKeys = () => {
 }
 
 const handleErrors = response => {
-	if (!response.ok) {
-		throw Error(response.statusText)
+	// if (!response.ok) {
+		// return Error(response.statusText)
+	// }
+	// return response
+	if (response.ok) {
+		return response
+	} else {
+		throw new Error(response.statusText)
 	}
-	return response
 }
 
 export const getFromApi = (endpoint: string, success: () => mixed = temporaryEmptyFunction) => {
@@ -151,18 +156,22 @@ export const postToApi = (endpoint: string, body: ?{}, success: () => mixed = te
 				},
 				body: elBody,
 			})
-			.then(handleErrors)
-			.then(response => response.json())
+			// .then(handleErrors)
 			// .then(response => {
-			// 	switch(response.status){
-			// 		case 200:
-			// 			return response.json()
-			// 		case 401: processUnauthorized()
-			// 		default:
-			// 			console.log('Status: ' + response.status)
-			// 			return
-			// 	}
+			// 	console.log('aca ya no deberia llegar')
+			// 	console.log('entonces probar return Error en vez de throw Error en handleErrors')
+			// 	return response.json()
 			// })
+			.then(response => {
+				switch(response.status){
+					case 200:
+						return response.json()
+					case 401: processUnauthorized()
+					default:
+						console.log('Status: ' + response.status)
+						return
+				}
+			})
 			.then(json => simulateDelay(json))
 			.then(json => {
 				const response = processResponse(json)
