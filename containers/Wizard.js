@@ -197,7 +197,7 @@ const Integrations = ({
 									<button 
 										className="btn btn-primary"
 										onClick={() => installTab()} 
-										disabled={fbPageIdentifierForIntegration == '' || installingFacebookTab}>
+										disabled={!fbPageIdentifierForIntegration || installingFacebookTab}>
 										{installingFacebookTab ? 'Please wait...' : 'Install integration'} 
 									</button>
 									}

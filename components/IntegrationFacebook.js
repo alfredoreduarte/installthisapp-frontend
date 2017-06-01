@@ -131,7 +131,7 @@ const IntegrationFacebook = ({
 											:
 											<select 
 												className="form-control" 
-												value={fbPageIdentifierForIntegration} 
+												value={fbPageIdentifierForIntegration || ''} 
 												onChange={e => selectPage(e.target.value)}
 												disabled={fbPages.length == 0 || tabInstalledInPage}
 												>
@@ -155,7 +155,7 @@ const IntegrationFacebook = ({
 									<button 
 										className="btn btn-primary"
 										onClick={() => installTab()} 
-										disabled={fbPageIdentifierForIntegration == '' || installingFacebookTab}>
+										disabled={!fbPageIdentifierForIntegration || installingFacebookTab}>
 										{installingFacebookTab ? 'Please wait...' : 'Install tab'} 
 									</button>
 									}
@@ -237,9 +237,12 @@ const mapDispatchToProps = (dispatch, props) => {
 				payload: fbPageIdentifier,
 			})
 		},
-		installTab: () => dispatch(installFacebookTab()).then(() => {
-			console.log('tab instalado!')
-		}),
+		installTab: () => dispatch(installFacebookTab()),
+		// installTab: () => dispatch(installFacebookTab()).then(() => {
+		// 	console.log('tab instalado!')
+		// }).catch(exception =>
+		// 	console.log('fb tab install failed', exception)
+		// ),
 		uninstallTab: () => dispatch(uninstallFacebookTab())
 	}
 }

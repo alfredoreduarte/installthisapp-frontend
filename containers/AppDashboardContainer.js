@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { getCurrentApp } from 'selectors/apps'
+import { getCurrentAppByState } from 'selectors/apps'
 import Modal from 'react-modal'
 import { ShareButtons } from 'react-share'
 import CopyToClipboard from 'react-copy-to-clipboard'
@@ -113,7 +113,7 @@ const AppDashboardContainer = ({
 )
 
 const mapStateToProps = (state, props) => {
-	const currentApp = getCurrentApp(state, props)
+	const currentApp = getCurrentAppByState(state)
 	const fbAppId = currentApp.fbApplication ? currentApp.fbApplication.appId : null
 	const fbAppCanvasId = currentApp.fbApplication ? currentApp.fbApplication.canvasId : null
 	return { 

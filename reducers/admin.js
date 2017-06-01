@@ -1,5 +1,5 @@
 const admin = (state = {
-	fbPageIdentifierForIntegration: '',
+	fbPageIdentifierForIntegration: null,
 	currentApp: null
 }, action) => {
 	switch (action.type) {

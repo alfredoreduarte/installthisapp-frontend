@@ -3,16 +3,19 @@
 	// to disable every tracking function when impersonating a user
 	window.analytics = {
 		page: (string, callback) => {
+			console.log('segment: page("' + string +'") called')
 			if (typeof callback === "function") {
 				callback()
 			}
 		},
 		identify: (string, callback) => {
+			console.log('segment: identify("' + string +'") called')
 			if (typeof callback === "function") {
 				callback()
 			}
 		},
 		track: (string, callback) => {
+			console.log('segment: track("' + string +'") called')
 			if (typeof callback === "function") {
 				callback()
 			}
