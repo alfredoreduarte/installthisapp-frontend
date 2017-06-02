@@ -57,7 +57,7 @@ export const install = checksum => {
 			else {
 				console.log(response.message)
 				dispatch(toggleAppCancelInstallation(checksum))
-				dispatch(setAlert(`<a href="?trial-offer=true">Upgrade now to install more apps</a>.`, `You have reached the limit for free accounts.`))
+				dispatch(setAlert(`<a href="?offer=app-limit-reached">Upgrade now to install more apps</a>.`, `You have reached the limit for free accounts.`))
 			}
 		})
 	}

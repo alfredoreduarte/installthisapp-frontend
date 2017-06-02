@@ -27,7 +27,7 @@ const AppNavBar = ({ adminId, name, identifier, logout, subscription, remainingT
 					null
 				:
 				<li>
-					<a href='?trial-offer=true' className="link-no-underline text-success">
+					<a href='?offer=trial-ended' className="link-no-underline text-success">
 						<small>{remainingTrialDays} | UPGRADE</small>
 					</a>
 				</li>

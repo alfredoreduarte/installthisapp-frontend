@@ -21,7 +21,7 @@ var ITAregister = function(){
 		})
 		.then(json => {
 			if (json.status == "success") {
-				ITAlogin(email, password, false)
+				ITAlogin(email, password, true)
 			}
 			else {
 				$('#signup-button').attr('disabled', false)

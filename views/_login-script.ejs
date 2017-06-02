@@ -1,5 +1,9 @@
 <script type="text/javascript">
-var ITAlogin = function(email, password, card){
+var ITAlogin = function(
+	email, 
+	password, 
+	card // wether to offer a free trial right after logging in
+){
 	fetch('<%= apiUrl %>/auth/sign_in.json', {
 		method: 'POST',
 		headers: {
@@ -19,10 +23,9 @@ var ITAlogin = function(email, password, card){
 		return response.json()
 	})
 	.then(json => {
-		// analytics.identify(json.data.id, { name: json.data.name,  email: json.data.email })
 		analytics.track('Account Created', () => {
 			if (card) {
-				top.location = location.protocol + '//' + window.location.host + '/d?trial-offer=true'
+				top.location = location.protocol + '//' + window.location.host + '/d?offer=starter'
 			}
 			else{
 				top.location = location.protocol + '//' + window.location.host + '/d'

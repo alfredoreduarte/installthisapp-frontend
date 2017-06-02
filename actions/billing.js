@@ -21,7 +21,7 @@ export const purchase = (token, planId, hasCustomer, onSuccess, couponCode) => {
 		).then(response => {
 			if (!response.error) {
 				dispatch(setAlert('Please wait.', 'Your purchase is being processed.'))
-				dispatch(pollSubscriptionUpdate(response.guid, onSuccess))
+				dispatch(pollSubscriptionUpdate(response.guid, planId, onSuccess))
 			}
 			else{
 				dispatch(setAlert('Error.', response.error))
@@ -32,18 +32,20 @@ export const purchase = (token, planId, hasCustomer, onSuccess, couponCode) => {
 	}
 }
 
-export const pollSubscriptionUpdate = (guid, onSuccess) => {
+export const pollSubscriptionUpdate = (guid, planId, onSuccess) => {
 	return dispatch => {
 		const elInterval = setInterval(() => {
 			getFromApi(`payola/subscription_status/${guid}.json`).then(response => {
 				if (response.status == 'active') {
 					clearInterval(elInterval)
-					dispatch(fetchAdmin()).then(() => {
-						dispatch(setAlert('Thanks!', 'Your Subscription has been upgraded'))
-						dispatch(toggleActivityPurchasing())
-						if (onSuccess) {
-							onSuccess()
-						}
+					analytics.track('Subscription Started', {
+						plan: planId,
+					}, () => {
+						dispatch(fetchAdmin()).then(() => {
+							dispatch(setAlert('Thanks!', 'Your Subscription has been upgraded'))
+							dispatch(toggleActivityPurchasing())
+						})
+						if (onSuccess) { onSuccess() }
 					})
 				}
 			})

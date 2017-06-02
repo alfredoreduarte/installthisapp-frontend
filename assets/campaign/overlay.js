@@ -46,7 +46,7 @@ const ITAregister = (email, password) => {
 	})
 	.then(json => {
 		if (json.status == "success") {
-			ITAlogin(email, password, false)
+			ITAlogin(email, password)
 		}
 		else {
 			$('#actual-submit').removeAttr('disabled', 'disabled').html(originalSubmitText)

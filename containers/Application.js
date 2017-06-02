@@ -3,19 +3,13 @@ import { connect } from 'react-redux'
 import { Alert } from 'react-bootstrap'
 import Loading from 'containers/Loading'
 import { removeAlert } from 'actions/alerts'
+import { possibleOffers } from 'lib/offers'
 
-import Card from 'containers/Card'
-import CardOverlay from 'containers/CardOverlay'
+import Offer from 'containers/Offer'
 
-const Application = ({ adminId, trialOffer, children, global, loaded, alertTitle, alertContent, handleAlertDismiss }) => (
+const Application = ({ adminId, offer, children, global, loaded, alertTitle, alertContent, handleAlertDismiss }) => (
 	<div>
-		{trialOffer ?
-			<div> 
-				{adminId % 2 == 0 ? <Card /> : <CardOverlay />}
-			</div>
-		:
-			null
-		}
+		{offer ? <Offer type={offer} /> : null}
 		<Loading active={global} />
 		{alertTitle ? 
 		<Alert bsStyle="warning" onDismiss={handleAlertDismiss} style={{textAlign: 'center'}}>
@@ -28,17 +22,17 @@ const Application = ({ adminId, trialOffer, children, global, loaded, alertTitle
 	</div>
 )
 
+const shouldShowOffer = param => possibleOffers.indexOf(param) >= 0 ? param : false
+
 const mapStateToProps = (state, props) => {
-	if (props.location.query["trial-offer"]) {
-		analytics.track('Trial Offer Viewed')
-	}
+	const showingOffer = shouldShowOffer(props.location.query["offer"])
 	return { 
 		global: state.activityIndicators.globalIndicator,
 		loaded: state.admin.email ? true : false,
 		alertTitle: state.alerts.title,
 		alertContent: state.alerts.content,
 		adminId: state.admin.id,
-		trialOffer: props.location.query["trial-offer"],
+		offer: showingOffer,
 	}
 }
 

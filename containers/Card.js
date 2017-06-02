@@ -1,3 +1,10 @@
+// 
+// @Card
+// 
+// Pantalla fullscreen con foto de soporte
+// plan: basic
+// coupon: trial-offer
+// 
 import React from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
@@ -81,7 +88,7 @@ const Card = ({
 					{plan ? 
 						<div>
 							<p>
-								<TakeMoney planId={plan.id} onSuccess={onSuccess}>
+								<TakeMoney planId={plan.id} onSuccess={onSuccess} couponCode="trial-offer">
 									<button
 										style={{letterSpacing: '1px', fontWeight: '400'}}
 										className={`btn text-uppercase btn-primary btn-lg btn-block`}

@@ -1,6 +1,17 @@
 import React from 'react'
 import { Route, IndexRoute } from 'react-router'
 import { fetchAdmin } from 'actions/admin'
+import { possibleOffers } from 'lib/offers'
+
+const shouldTrackOffer = param => {
+	if ( possibleOffers.indexOf(param) >= 0 ) {
+		analytics.track('Offer Viewed', {
+			type: param
+		})
+		return param
+	}
+	return false
+}
 
 export const createRoutes = (store, dispatch) => ({
 	path: '/d',
@@ -20,6 +31,7 @@ export const createRoutes = (store, dispatch) => ({
 	},
 	onEnter: (nextState, replace, next) => {
 		analytics.page('Admin Dashboard')
+		shouldTrackOffer(nextState.location.query["offer"])
 		dispatch(fetchAdmin()).then(() => {
 			next()
 		})

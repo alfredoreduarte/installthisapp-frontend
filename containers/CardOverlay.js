@@ -1,7 +1,12 @@
+// 
+// @CardOverlay
+// 
+// Ventana modal sin fotos
+// plan: basic
+// coupon: trial-offer
+// 
 import React from 'react'
-import { connect } from 'react-redux'
 import TakeMoney from 'components/StripeButton'
-import { getBasicPlanIfExists } from 'selectors/plans'
 
 const CardOverlay = ({ 
 	busy,
@@ -16,14 +21,14 @@ const CardOverlay = ({
 		right: 0,
 		bottom: 0,
 		left: 0,
-		backgroundColor: 'rgba(255,255,255,.5)',
+		backgroundColor: 'rgba(0,0,0,.2)',
 		zIndex: 1,
 	}}>
-		<div style={{
+		<div className="animated fadeInDown" style={{
 			border: '1px solid #ddd',
-			boxShadow: '0px 12px 25px rgba(0,0,0,.1)',
+			boxShadow: '0px 12px 25px rgba(0,0,0,.2)',
 			padding: '40px 20px',
-			borderRadius: '3px',
+			borderRadius: '16px',
 			display: 'flex',
 			flexDirection: 'column',
 			minWidth: '60vw',
@@ -36,23 +41,23 @@ const CardOverlay = ({
 			}}>
 				<h1 style={{
 					textAlign: 'center',
-				}}>Try the basic plan for 7 days</h1>
+				}}>Try the starter pack for 7 days</h1>
 				<p style={{
 					textAlign: 'center',
-				}}>Pay the first month after 7 days. Cancel whenever you want.</p>
+				}}>Start now, pay later. Cancel whenever you want.</p>
 			</div>
 			<div>
 			<div className="col-md-6">
-				<h4>What you'll get:</h4>
-				<ul className="list-unstyled" style={{lineHeight: 1.8}}>
-					<li><span style={{marginRight: '5px'}} className="glyphicon glyphicon-ok text-success"></span>5 contests</li>
-					<li><span style={{marginRight: '5px'}} className="glyphicon glyphicon-ok text-success"></span>In-app support via chat</li>
-					<li><span style={{marginRight: '5px'}} className="glyphicon glyphicon-ok text-success"></span>All of our current and <a href="https://installthisapp.com/apps" target="_blank">upcoming apps</a></li>
-					<li><span style={{marginRight: '5px'}} className="glyphicon glyphicon-ok text-success"></span>Facebook Tab integration</li>
-					<li><span style={{marginRight: '5px'}} className="glyphicon glyphicon-ok text-success"></span>Standalone public webpage</li>
-					<li><span style={{marginRight: '5px'}} className="glyphicon glyphicon-ok text-success"></span>Mobile and desktop views</li>
-					<li><span style={{marginRight: '5px'}} className="glyphicon glyphicon-ok text-success"></span>Interface texts 100% customizable</li>
-					<li><span style={{marginRight: '5px'}} className="glyphicon glyphicon-ok text-success"></span>100% customizable styles and images</li>
+				<h4><b>What you'll get:</b></h4>
+				<ul className="list-unstyled" style={{lineHeight: 1.8, fontSize: '16px', marginLeft: '10px'}}>
+					<li><span style={{marginRight: '10px'}} className="glyphicon glyphicon-ok text-success"></span><b>5</b> simultaneous contests</li>
+					<li><span style={{marginRight: '10px'}} className="glyphicon glyphicon-ok text-success"></span>In-app support via chat</li>
+					<li><span style={{marginRight: '10px'}} className="glyphicon glyphicon-ok text-success"></span>All of our current and <a href="https://installthisapp.com/apps" target="_blank">upcoming apps</a></li>
+					<li><span style={{marginRight: '10px'}} className="glyphicon glyphicon-ok text-success"></span>Facebook Tab integration</li>
+					<li><span style={{marginRight: '10px'}} className="glyphicon glyphicon-ok text-success"></span>Standalone public webpage</li>
+					<li><span style={{marginRight: '10px'}} className="glyphicon glyphicon-ok text-success"></span>Mobile and desktop views</li>
+					<li><span style={{marginRight: '10px'}} className="glyphicon glyphicon-ok text-success"></span>Customize or translate <b>all</b> of the contest's texts</li>
+					<li><span style={{marginRight: '10px'}} className="glyphicon glyphicon-ok text-success"></span>100% customizable styles and images</li>
 				</ul>
 			</div>
 			<div className="col-md-6 text-center">
@@ -64,7 +69,9 @@ const CardOverlay = ({
 				<h2 style={{
 					margin: '0px',
 				}}><b>50% OFF</b></h2>
-				<h4>for the first month by signing up<br/> for the free trial now</h4>
+				<h4 style={{
+					marginBottom: '40px'
+				}}>for the first month if you<br/>start now</h4>
 				<h4 style={{
 					marginBottom: '0px'
 				}}><s>$29/mo</s></h4>
@@ -77,7 +84,7 @@ const CardOverlay = ({
 				{plan ? 
 				<TakeMoney planId={plan.id} onSuccess={onSuccess} couponCode="trial-offer">
 					<button
-						style={{letterSpacing: '1px', fontWeight: '400'}}
+						style={{letterSpacing: '1px', fontWeight: '400', fontSize: '20px'}}
 						className={`btn text-uppercase btn-success btn-lg`}
 						disabled={busy}
 					>
@@ -89,7 +96,8 @@ const CardOverlay = ({
 				}
 				<div className="col-md-12 text-right" style={{marginTop: '20px'}}>
 					<a href="/d" className="" style={{
-						fontSize: '11px'
+						fontWeight: 'normal',
+						fontSize: '12px'
 					}}>Skip this, I'll start later without the discount</a>
 				</div>
 			</div>
@@ -100,17 +108,4 @@ const CardOverlay = ({
 	</div>
 )
 
-const mapStateToProps = (state, props) => ({
-	busy: state.activityIndicators.purchasing,
-	plan: getBasicPlanIfExists(state),
-})
-
-const mapDispatchToProps = (dispatch, props) => ({
-	onSuccess: () => {
-		analytics.track('Trial Offer Purchased', () => {
-			top.location = location.protocol + '//' + window.location.host + '/d?successful-purchase=true'
-		})
-	}
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(CardOverlay)
+export default CardOverlay
