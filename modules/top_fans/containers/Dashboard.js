@@ -11,7 +11,7 @@ const Dashboard = ({ checksum, type, entries }) => (
 
 const mapStateToProps = (state, props) => {
 	return {
-		tabInstalledInPage: getCurrentAppByState(state).page ? _.find(getAllPages(state), {'id': getCurrentAppByState(state).page}) : null,
+		tabInstalledInPage: getCurrentAppByState(state).page ? _.find(getAllPages(state), {'id': getCurrentAppByState(state).page.id}) : null,
 		checksum: props.params.checksum,
 		type: props.params.type,
 		entries: getEntriesForPage(state).slice(0,5),
