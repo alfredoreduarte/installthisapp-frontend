@@ -41,7 +41,8 @@ else {
 			createReducer(),
 			preloadedState,
 			compose(
-				applyMiddleware(thunkMiddleware, reactRouterMiddleware)
+				applyMiddleware(thunkMiddleware, reactRouterMiddleware),
+				window.devToolsExtension && window.alias ? window.devToolsExtension() : (f) => f
 			)
 		)
 		return store
