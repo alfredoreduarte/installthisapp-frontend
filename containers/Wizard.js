@@ -140,7 +140,7 @@ const Integrations = ({
 											:
 											<select 
 												className="form-control" 
-												value={fbPageIdentifierForIntegration} 
+												value={fbPageIdentifierForIntegration ? fbPageIdentifierForIntegration : ''} 
 												onChange={e => selectPage(e.target.value)}
 												disabled={fbPages.length == 0 || tabInstalledInPage}
 												>

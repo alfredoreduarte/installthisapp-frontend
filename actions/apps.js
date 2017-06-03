@@ -145,7 +145,8 @@ export const updateAppSpecificSettings = () => {
 				setting
 			}
 		).then(response => {
-			dispatch(updateApp(currentAppChecksum, response))
+			const normalized = normalize(response, schema.app)
+			dispatch(updateApp(currentAppChecksum, normalized.entities))
 			dispatch(toggleActivityUpdatingApp())
 		})
 	}
