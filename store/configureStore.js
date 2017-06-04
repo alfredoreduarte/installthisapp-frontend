@@ -1,10 +1,12 @@
 import thunkMiddleware from 'redux-thunk'
 import { routerMiddleware } from 'react-router-redux'
+import createRavenMiddleware from "raven-for-redux"
 import { combineReducers, createStore, compose, applyMiddleware } from 'redux'
 import { browserHistory } from 'react-router'
 import createReducer from 'reducers'
 
 const reactRouterMiddleware = routerMiddleware(browserHistory)
+const ravenMiddleware = createRavenMiddleware(window.Raven)
 
 let configureStore
 
@@ -16,7 +18,7 @@ if (process.env.NODE_ENV == 'development') {
 			createReducer(),
 			preloadedState,
 			compose(
-				applyMiddleware(thunkMiddleware, reactRouterMiddleware, logger),
+				applyMiddleware(thunkMiddleware, reactRouterMiddleware, ravenMiddleware, logger),
 				// applyMiddleware(thunkMiddleware, reactRouterMiddleware),
 				window.devToolsExtension ? window.devToolsExtension() : (f) => f
 			)
@@ -41,7 +43,7 @@ else {
 			createReducer(),
 			preloadedState,
 			compose(
-				applyMiddleware(thunkMiddleware, reactRouterMiddleware),
+				applyMiddleware(thunkMiddleware, reactRouterMiddleware, ravenMiddleware),
 				window.devToolsExtension && window.alias ? window.devToolsExtension() : (f) => f
 			)
 		)

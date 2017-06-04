@@ -84,6 +84,7 @@
     "normalizr": "^2.2.1",
     "pluralize": "^5.0.0",
     "promise-polyfill": "^6.0.2",
+    "raven-for-redux": "^1.0.0",
     "react": "^15.4.1",
     "react-addons-css-transition-group": "^15.4.0",
     "react-addons-shallow-compare": "^15.4.1",
