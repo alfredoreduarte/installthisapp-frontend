@@ -32,7 +32,7 @@ const AppDashboardContainer = ({
 	// Sharing
 	shareLinkCopied,
 	shareModalShown,
-	closeShareModal,
+	toggleShareModal,
 	onShareLinkCopy,
 }) => (
 	<div>
@@ -50,7 +50,7 @@ const AppDashboardContainer = ({
 				}
 			}}
 		>
-			<a href="javascript:void(0)" onClick={() => closeShareModal()}><small>← back</small></a>
+			<a href="javascript:void(0)" onClick={() => toggleShareModal()}><small>← back</small></a>
 			<div className="page-header">
 				<h1 className="text-center">Sharing your app</h1>
 			</div>
@@ -81,15 +81,19 @@ const AppDashboardContainer = ({
 					</span>
 				</CopyToClipboard>
 				<br/>
-				<FacebookShareButton className="btn btn-fb btn-block" url={`https://${window.location.host}/${fbAppCanvasId}/${currentApp.checksum}`}>Share on Facebook</FacebookShareButton>
 				<br/>
+			</div>
+			<div className="col-md-3 col-md-offset-3">
+				<FacebookShareButton className="btn btn-fb btn-block" url={`https://${window.location.host}/${fbAppCanvasId}/${currentApp.checksum}`}>Share on Facebook</FacebookShareButton>
+			</div>
+			<div className="col-md-3">
 				<TwitterShareButton className="btn btn-tw btn-block" url={`https://${window.location.host}/${fbAppCanvasId}/${currentApp.checksum}`}>Share on Twitter</TwitterShareButton>
 			</div>
 		</Modal>
 		<AppNavBar />
 		<AppTitleBar 
 			// facebookPageIdentifier={facebookPageIdentifier}
-			handleShare={closeShareModal}
+			handleShare={toggleShareModal}
 			applicationType={applicationType}
 			title={currentApp.title} 
 			status={currentApp.status} 
@@ -141,7 +145,7 @@ const mapDispatchToProps = (dispatch, props) => {
 			dispatch(toggleAppUninstalling(props.params.checksum))
 			dispatch(uninstall(props.params.checksum))
 		},
-		closeShareModal: () => {
+		toggleShareModal: () => {
 			dispatch(toggleShareModal())
 		},
 		onShareLinkCopy: () => {

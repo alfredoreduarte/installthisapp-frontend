@@ -1,18 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-import _ from 'lodash'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { Accordion, AccordionItem } from 'react-sanfona'
-import { setAlert } from 'actions/alerts'
 import FacebookLogin from 'react-facebook-login'
-import { postToApi } from 'api'
-import { getCurrentAppByState } from 'selectors/apps'
-import { installFacebookTab, uninstallFacebookTab, updateAppSettings } from 'actions/apps'
-import { fbConnect } from 'actions/admin'
-import { getAllPages } from 'selectors/pages'
-import { fetchFacebookPages } from 'actions/pages'
 
-const IntegrationFacebook = ({ 
+const Facebook = ({ 
 	pageIdentifier,
 	advanceWizard,
 	steps,
@@ -32,7 +24,7 @@ const IntegrationFacebook = ({
 	fbPageIdentifierForIntegration, 
 	fbLoginCallback, 
 	uninstallTab,
-}) => (
+}) => 
 	<div>
 		{published ? 
 		<div className="col-md-12">
@@ -179,72 +171,5 @@ const IntegrationFacebook = ({
 		</div>
 		}
 	</div>
-)
 
-const mapStateToProps = (state, props) => {
-	const fbProfile = state.admin.fbProfile
-	const published = getCurrentAppByState(state).status == 'installed'
-	const tabInstalledInPage = getCurrentAppByState(state).page ? _.find(getAllPages(state), {'id': getCurrentAppByState(state).page}).name : null
-	const pageIdentifier = tabInstalledInPage ? _.find(getAllPages(state), {'id': getCurrentAppByState(state).page}).identifier : null
-	const steps = [
-		{
-			active: state.wizard.step == 0 && !tabInstalledInPage,
-			done: fbProfile ? true : false,
-			disabled: false,
-		},
-		{
-			active: state.wizard.step == 1 || tabInstalledInPage,
-			done: tabInstalledInPage ? true : false,
-			disabled: fbProfile ? false : true,
-		},
-	]
-	return {
-		pageIdentifier,
-		steps,
-		// activity indicators
-		installingFacebookTab: state.activityIndicators.installingFacebookTab,
-		loadingPages: state.activityIndicators.loadingPages,
-		connectingToFacebook: state.activityIndicators.connectingToFacebook,
-		// 
-		fbAppId: tabInstalledInPage ? getCurrentAppByState(state).fbApplication.appId : null,
-		published,
-		tabInstalledInPage,
-		fbProfile,
-		fbPages: getAllPages(state),
-		fbPageIdentifierForIntegration: state.admin.fbPageIdentifierForIntegration,
-	}
-}
-
-const mapDispatchToProps = (dispatch, props) => {
-	// fb verification: The fbLoaded var is created at dashboard.ejs
-	setTimeout(function() {
-		if (!fbLoaded) {
-			console.log('UNABLE TO LOAD FB SCRIPT')
-			dispatch(setAlert('Whoops!', "We're not being able to connect to Facebook. Please disable any ad-blocker and reload the page. We don't show any ads here anyway 😇"))
-		}
-	}, 5 * 1000)
-	// ! fb verification
-	return {
-		advanceWizard: step => dispatch({
-			type: 'UPDATE_WIZARD_STEP',
-			step,
-		}),
-		fbLoginCallback: response => dispatch(fbConnect(response)),
-		fetchPages: () => dispatch(fetchFacebookPages()),
-		selectPage: fbPageIdentifier => {
-			dispatch({
-				type: 'SET_FB_PAGE_IDENTIFIER_FOR_INTEGRATION',
-				payload: fbPageIdentifier,
-			})
-		},
-		installTab: () => dispatch(installFacebookTab()),
-		// installTab: () => dispatch(installFacebookTab()).then(() => {
-		// 	console.log('tab instalado!')
-		// }).catch(exception =>
-		// 	console.log('fb tab install failed', exception)
-		// ),
-		uninstallTab: () => dispatch(uninstallFacebookTab())
-	}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(IntegrationFacebook)
+export default Facebook

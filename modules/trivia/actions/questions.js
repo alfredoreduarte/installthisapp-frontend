@@ -1,6 +1,6 @@
 import { normalize, arrayOf } from 'normalizr'
 import * as schema from 'modules/trivia/schema'
-import { receiveTriviaEntities } from 'modules/trivia/actions/entities'
+import { receiveEntities } from 'modules/trivia/actions/entities'
 import { getFromApi, postToApi, deleteFromApi } from 'api'
 
 export const deleteQuestion = id => ({
@@ -53,7 +53,7 @@ export const postNewQuestion = (checksum, newQuestion) => {
 		return postToApi(url, newQuestionData)
 				.then(response => {
 					const normalized = normalize(response, schema.entities)
-					dispatch(receiveTriviaEntities(normalized.entities))
+					dispatch(receiveEntities(normalized.entities))
 				})
 				.catch(exception =>
 					console.log('postNewApp: parsing failed', exception)
@@ -83,7 +83,7 @@ export const postNewQuestionWithReduxForm = () => {
 		})
 		.then(response => {
 			const normalized = normalize(response, schema.entities)
-			dispatch(receiveTriviaEntities(normalized.entities))
+			dispatch(receiveEntities(normalized.entities))
 		})
 		.catch(exception =>
 			console.log('postNewApp: parsing failed', exception)

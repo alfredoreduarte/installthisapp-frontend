@@ -190,12 +190,12 @@ const mapStateToProps = (state, props) => {
 	const viewPhoto = props ? props.params.photoId : false
 	return { 
 		backUrl: `/d/apps/${props.params.type}/${props.params.checksum}/photos`,
-		photos: getPhotosForCurrentApp(state, props),
+		photos: getPhotosForCurrentApp(state),
 		selectedIds: state.selectedItems,
 		detailUrl: props.location.pathname,
 		viewPhoto,
 		winnerModalVisible: isWinnerModalVisible(state),
-		randomWinner: getRandomWinner(state, props),
+		randomWinner: getRandomWinner(state),
 	}
 }
 

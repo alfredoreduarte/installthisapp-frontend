@@ -3,6 +3,7 @@ import photos from 'modules/photo_contest/reducers/photos'
 import votes from 'modules/photo_contest/reducers/votes'
 
 const photoContest = (state = {
+	log: {},
 	ui: {},
 	photos: {},
 	votes: {},
@@ -31,7 +32,8 @@ const photoContest = (state = {
 		case 'PHOTO_CONTEST/RECEIVE_ENTITIES':
 			return {
 				...state, 
-				...action.response.entities
+				...action.response.entities,
+				log: { ...state.log, ...action.response.applicationLog },
 			}
 		default:
 			return state

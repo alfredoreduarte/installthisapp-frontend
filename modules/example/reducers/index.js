@@ -1,6 +1,7 @@
 import entities from 'modules/example/reducers/entities'
 
 const example = (state = {
+	log: {},
 	entities: {},
 }, action) => {
 	switch (action.type) {
@@ -8,6 +9,7 @@ const example = (state = {
 			return {
 				...state,
 				entities: entities(state.entities, action)
+				log: { ...state.log, ...action.applicationLog },
 			}
 		default:
 			return state

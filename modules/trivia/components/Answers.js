@@ -10,7 +10,7 @@ import { Checkbox } from 'react-icheck'
 import { getAnswersForCurrentApp } from 'modules/trivia/selectors/answers'
 import { selectItemOnTable } from 'actions/users'
 import SearchForm from 'components/SearchForm'
-import { fetchTriviaEntities } from 'modules/trivia/actions/entities'
+import { fetchEntities } from 'modules/trivia/actions/entities'
 import { postDeleteAnswers } from 'modules/trivia/actions/answers'
 import User from 'components/User'
 
@@ -174,9 +174,9 @@ const mapStateToProps = (state, props) => {
 }
 
 const mapDispatchToProps = (dispatch, props) => {
-	dispatch(fetchTriviaEntities(props.params.checksum))
+	dispatch(fetchEntities(props.params.checksum))
 	return {
-		fetchAgain: () => dispatch(fetchTriviaEntities(props.params.checksum)),
+		fetchAgain: () => dispatch(fetchEntities(props.params.checksum)),
 		handleSelect: id => {
 			dispatch(selectItemOnTable(id))
 		},

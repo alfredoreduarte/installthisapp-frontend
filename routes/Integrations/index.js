@@ -30,7 +30,7 @@ export default (store, dispatch) => ({
 					// Uncomment these lines to load reducers asyncronously
 					// let questionsReducer = require('modules/trivia/reducers').default
 					// injectAsyncReducer(store, 'trivia', questionsReducer)
-					cb(null, require('components/IntegrationFacebook').default)
+					cb(null, require('containers/integrations/Facebook').default)
 				})
 			}
 		}

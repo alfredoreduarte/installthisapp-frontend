@@ -1,6 +1,6 @@
 import { normalize, arrayOf } from 'normalizr'
 import * as schema from 'modules/trivia/schema'
-import { receiveTriviaEntities } from 'modules/trivia/actions/entities'
+import { receiveEntities } from 'modules/trivia/actions/entities'
 
 export const deleteOption = id => ({
 	type: 'TRIVIA/DELETE_OPTION',

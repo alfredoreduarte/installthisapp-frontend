@@ -3,6 +3,7 @@ import questions from 'modules/trivia/reducers/questions'
 import answers from 'modules/trivia/reducers/answers'
 
 const trivia = (state = {
+	log: {},
 	questions: {},
 	answers: {},
 	options: {},
@@ -19,7 +20,8 @@ const trivia = (state = {
 		case 'TRIVIA/RECEIVE_ENTITIES':
 			return {
 				...state,
-				...action.response.entities
+				...action.entities,
+				log: { ...state.log, ...action.applicationLog },
 			}
 		default:
 			return state

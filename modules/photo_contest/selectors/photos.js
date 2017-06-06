@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import { createSelector } from 'reselect'
 import { stringContains } from 'lib/stringmatch'
-import { getCurrentApp } from 'selectors/apps'
+import { getCurrentAppByState } from 'selectors/apps'
 
 const filterTextSelector = state => state.filterText
 
@@ -10,7 +10,7 @@ export const getPhotoById = (state, id) => _.find(_.values(state.photoContest.ph
 
 export const getPhotosForCurrentApp = createSelector(
 	getAllPhotos,
-	getCurrentApp,
+	getCurrentAppByState,
 	filterTextSelector,
 	(photos, app, text) => {
 		const subList = _.filter(photos, p => p.applicationId == app.id)

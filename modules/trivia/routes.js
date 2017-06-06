@@ -1,6 +1,6 @@
 // import { injectAsyncReducer } from 'reducers'
 import { turnOnGlobalIndicator, turnOffGlobalIndicator } from 'actions/activityIndicators'
-import { fetchTriviaEntities } from 'modules/trivia/actions/entities'
+import { fetchEntities } from 'modules/trivia/actions/entities'
 import Sidebar from 'modules/trivia/components/Sidebar'
 
 export default (store, dispatch) => ({
@@ -12,7 +12,7 @@ export default (store, dispatch) => ({
 					modal: true,
 					onEnter: (nextState, replace, next) => {
 						dispatch(turnOnGlobalIndicator())
-						dispatch(fetchTriviaEntities(nextState.params.checksum)).then(() => next())
+						dispatch(fetchEntities(nextState.params.checksum)).then(() => next())
 					},
 					getComponents(nextState, cb) {
 						require.ensure([], (require) => {
@@ -31,7 +31,7 @@ export default (store, dispatch) => ({
 					path: 'questions/edit/:questionId',
 					onEnter: (nextState, replace, next) => {
 						dispatch(turnOnGlobalIndicator())
-						dispatch(fetchTriviaEntities(nextState.params.checksum)).then(() => next())
+						dispatch(fetchEntities(nextState.params.checksum)).then(() => next())
 					},
 					modal: true,
 					getComponents(nextState, cb) {
@@ -51,7 +51,7 @@ export default (store, dispatch) => ({
 					path: 'answers',
 					onEnter: (nextState, replace, next) => {
 						dispatch(turnOnGlobalIndicator())
-						dispatch(fetchTriviaEntities(nextState.params.checksum)).then(() => next())
+						dispatch(fetchEntities(nextState.params.checksum)).then(() => next())
 					},
 					getComponents(nextState, cb) {
 						require.ensure([], (require) => {
