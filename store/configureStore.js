@@ -6,7 +6,8 @@ import { browserHistory } from 'react-router'
 import createReducer from 'reducers'
 
 const reactRouterMiddleware = routerMiddleware(browserHistory)
-const ravenMiddleware = window.Raven ? createRavenMiddleware(window.Raven) : () => void(0)
+// const ravenMiddleware = window.Raven ? createRavenMiddleware(window.Raven) : () => void(0)
+// const ravenMiddleware = createRavenMiddleware(Raven)
 
 let configureStore
 
@@ -43,7 +44,7 @@ else {
 			createReducer(),
 			preloadedState,
 			compose(
-				applyMiddleware(thunkMiddleware, reactRouterMiddleware, ravenMiddleware),
+				applyMiddleware(thunkMiddleware, reactRouterMiddleware),
 				window.devToolsExtension && window.alias ? window.devToolsExtension() : (f) => f
 			)
 		)
