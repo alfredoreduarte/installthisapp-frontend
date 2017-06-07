@@ -14,7 +14,7 @@ export const receivePhotoContestEntities = (entities, applicationLog) => ({
 export const fetchPhotoContestEntities = () => {
 	return (dispatch, getState) => {
 		const currentApp = getCurrentAppByState(getState())
-		return getFromApi(`applications/${currentApp.checksum}/photos.json`).then( response => {
+		return getFromApi(`applications/${currentApp.checksum}/entities.json`).then( response => {
 			if (response) {
 				const normalized = normalize(response, schema.entities)
 				dispatch(receivePhotoContestEntities(normalized.entities, response.applicationLog))
@@ -22,3 +22,5 @@ export const fetchPhotoContestEntities = () => {
 		})
 	}
 }
+
+export const beforeShowingDashboard = fetchPhotoContestEntities

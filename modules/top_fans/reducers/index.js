@@ -4,6 +4,7 @@ import ui from 'modules/top_fans/reducers/ui'
 
 const topFans = (state = {
 	// settings: {},
+	log: {},
 	ui: {},
 	entries: {},
 }, action) => {
@@ -16,7 +17,7 @@ const topFans = (state = {
 				ui: ui(state.ui, action)
 			}
 		case 'TOP_FANS/RECEIVE_ENTITIES':
-			return { ...state, entries: action.response.entities }
+			return { ...state, entries: action.response.entities, log: action.response.applicationLog }
 		default:
 			return state
 	}

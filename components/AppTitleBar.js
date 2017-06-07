@@ -37,7 +37,6 @@ const AppTitleBarButtons = ({
 
 		{status == 'uninstalling' ?
 			<div>
-				<button className="btn btn-lg btn-primary btn-outline" disabled>Share</button>
 				<button className="btn btn-lg btn-gray btn-outline" disabled>Unpublishing</button>
 			</div>
 		:

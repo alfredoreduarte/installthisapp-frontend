@@ -8,8 +8,7 @@ const getAllEntries = state => state.topFans.entries
 
 const handleScore = score => score ? score : 0
 
-
-let verifiedScoresEventSent = false
+let verifiedScoresEventSent = false // this avoids sending duplicate events to segment (which costs money)
 export const getEntriesForPage = createSelector(
 	getAllEntries,
 	getCurrentAppByState,

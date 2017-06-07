@@ -1,21 +1,33 @@
 import React from 'react'
+import _ from 'lodash'
 import { connect } from 'react-redux'
-import { getEntriesForPage } from 'modules/top_fans/selectors/entries'
+import { install } from 'actions/apps'
+import { toggleShareModal } from 'actions/applicationData'
 import { getCurrentAppByState } from 'selectors/apps'
-import { getAllPages } from 'selectors/pages'
+import { getEntriesForPage } from 'modules/top_fans/selectors/entries'
 import Summary from 'modules/top_fans/components/Summary'
 
-const Dashboard = ({ checksum, type, entries }) => (
-	<Summary checksum={checksum} type={type} entries={entries} />
+const Dashboard = ({ checksum, type, entries, completed, steps, share }) => (
+	<Summary checksum={checksum} type={type} entries={entries} completed={completed} steps={steps} share={share} />
 )
 
 const mapStateToProps = (state, props) => {
+	const steps = [
+		state.topFans.log.designEdited ? true : false,
+		state.topFans.log.fbTabInstalled ? true : false, // FB Tab is not mandatory
+	]
+	const completed = _.without(steps, false).length
 	return {
-		tabInstalledInPage: getCurrentAppByState(state).page ? _.find(getAllPages(state), {'id': getCurrentAppByState(state).page.id}) : null,
 		checksum: props.params.checksum,
 		type: props.params.type,
-		entries: getEntriesForPage(state).slice(0,5),
+		entries: getEntriesForPage(state),
+		steps,
+		completed,
 	}
 }
 
-export default connect(mapStateToProps)(Dashboard)
+const mapDispatchToProps = (dispatch, props) => ({
+	share: () => dispatch(toggleShareModal()),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)

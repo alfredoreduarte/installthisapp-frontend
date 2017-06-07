@@ -13,7 +13,6 @@ const Dashboard = ({ checksum, type, entries, completed, steps, install, share, 
 
 const mapStateToProps = (state, props) => {
 	const steps = [
-		getPhotosForCurrentApp(state).length > 0,
 		state.photoContest.log.designEdited ? true : false,
 		getCurrentAppByState(state).status == 'installed',
 		// state.photoContest.log.fbTabInstalled ? true : false, // FB Tab is not mandatory
@@ -23,7 +22,6 @@ const mapStateToProps = (state, props) => {
 		checksum: props.params.checksum,
 		type: props.params.type,
 		entries: getPhotosForCurrentApp(state),
-		// hasCards: getCardsForApp(state).length > 0,
 		steps,
 		completed,
 		tabInstalled: state.photoContest.log.fbTabInstalled ? true : false,

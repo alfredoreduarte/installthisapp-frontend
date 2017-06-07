@@ -3,11 +3,12 @@ import * as schema from 'modules/top_fans/schema'
 import { getFromApi } from 'api'
 import { getCurrentAppByState } from 'selectors/apps'
 
-export const receiveTopFansEntities = entities => {
+export const receiveTopFansEntities = (entities, applicationLog) => {
 	return {
 		type: 'TOP_FANS/RECEIVE_ENTITIES',
 		response: {
-			entities
+			entities,
+			applicationLog,
 		}
 	}
 }
@@ -21,9 +22,10 @@ export const fetchTopFansEntities = checksum => {
 	return dispatch => 
 		getFromApi(`applications/${checksum}/entries.json`).then( response => {
 			if (response.status) {
-				dispatch(receiveTopFansEntities(response.payload))
+				dispatch(receiveTopFansEntities(response.payload, response.applicationLog))
 			}
-			else{
+			else {
+				dispatch(receiveTopFansEntities(null, response.applicationLog))
 				console.log('app is not subscribed to any page')
 			}
 		})

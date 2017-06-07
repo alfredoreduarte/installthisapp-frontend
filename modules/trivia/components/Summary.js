@@ -16,7 +16,7 @@ const Summary = ({ checksum, type, entries, steps, completed, install, share, ta
 		}
 		<div className="col-md-6">
 			{completed == steps.length ? 
-				<img src="/images/rocket.gif" className="img-responsive" />
+				<img src="/images/rocket.gif" className="img-responsive animated fadeInUp" />
 			: 
 				<img src="/images/rocket.jpg" className="img-responsive shake-little shake-constant" />
 			}
@@ -73,7 +73,7 @@ const Summary = ({ checksum, type, entries, steps, completed, install, share, ta
 				</tbody>
 			</table>
 			<p className="text-right" style={{marginTop: '16px'}}>
-				<small>Need help? Maybe our <a href="https://help.installthisapp.com/trivia" target="_blank">knowledge center</a> has some answers.</small>
+				<small>Need help? Maybe our <a href="http://help.installthisapp.com/trivia" target="_blank">knowledge center</a> has some answers.</small>
 			</p>
 		</div>
 		{false ? 
