@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
+import { createMedium, deleteMedium } from 'modules/catalog/actions/media'
 import { postNewProductWithReduxForm } from 'modules/catalog/actions/products'
 import { getFilteredCategories } from 'modules/catalog/selectors/categories'
 import { getFilteredMedia } from 'modules/catalog/selectors/media'
@@ -12,6 +13,8 @@ const ProductCreate = ({
 	handleSubmit,
 	categories,
 	// 
+	createMedium, 
+	deleteMedium,
 	media,
 	// 
 	showImagePicker,
@@ -27,6 +30,8 @@ const ProductCreate = ({
 		handleSubmit={handleSubmit}
 		categories={categories}
 		// 
+		createMedium={createMedium}
+		deleteMedium={deleteMedium}
 		media={media}
 		// 
 		showImagePicker={showImagePicker}
@@ -58,6 +63,7 @@ const mapDispatchToProps = (dispatch, props) => {
 		handleSubmit: () => dispatch(postNewProductWithReduxForm()).then(() => browserHistory.push(pathname.substring(0, pathname.length - createString.length))),
 		// media
 		createMedium: (acceptedFiles, rejectedFiles) => dispatch(createMedium(acceptedFiles)),
+		deleteMedium: id => dispatch(deleteMedium(id)),
 		handleImagePickerHide: () => dispatch(hideImagePicker()),
 		handleImagePickerShow: () => dispatch(showImagePicker()),
 		// featured image
