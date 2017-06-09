@@ -54,7 +54,7 @@ const Summary = ({ checksum, type, entries, steps, completed, install, share, ta
 						{!steps[2] ? <FaCircle size={50} color={'#D1D1D1'} /> : <FaCheckCircle size={50} color={'#6DBA4B'} />}
 					</td>
 					<td style={styles.td}>
-						{!steps[2] ? <span><b>Publish</b> the app</span> : <s><b>Publish</b> the app</s>}
+						{!steps[2] ? <span><b>Publish</b> the contest</span> : <s><b>Publish</b> the contest</s>}
 					</td>
 					<td style={styles.td}>
 						{steps[2] ? 
@@ -66,8 +66,8 @@ const Summary = ({ checksum, type, entries, steps, completed, install, share, ta
 				</tr>
 				<tr>
 					<td style={styles.td} colSpan={3}>
-						{tabInstalled ? <s><b>Optional:</b> Show your app in a <Link to={`/d/apps/${type}/${checksum}/integrations`}>Facebook Page Tab</Link></s>
-						: <span><b>Optional:</b> Show your app in a <Link to={`/d/apps/${type}/${checksum}/integrations`}>Facebook Page Tab</Link></span>}
+						{tabInstalled ? <s><b>Optional:</b> Display the contest inside a <Link to={`/d/apps/${type}/${checksum}/integrations`}>Facebook Page Tab</Link></s>
+						: <span><b>Optional:</b> Display the contest inside a <Link to={`/d/apps/${type}/${checksum}/integrations`}>Facebook Page Tab</Link></span>}
 					</td>
 				</tr>
 				</tbody>

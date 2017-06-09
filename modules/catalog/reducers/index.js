@@ -2,6 +2,7 @@ import ui from 'modules/catalog/reducers/ui'
 import entities from 'modules/catalog/reducers/entities'
 
 const catalog = (state = {
+	log: {},
 	ui: {},
 	entities: {},
 }, action) => {
@@ -9,7 +10,8 @@ const catalog = (state = {
 		case 'CATALOG/RECEIVE_ENTITIES':
 			return {
 				...state,
-				entities: entities(state.entities, action)
+				log: { ...state.log, ...action.applicationLog },
+				entities: entities(state.entities, action),
 			}
 		case 'CATALOG/REMOVE_PRODUCT':
 			return {

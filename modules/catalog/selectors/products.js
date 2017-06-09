@@ -15,6 +15,8 @@ export const getFilteredProducts = createSelector(
 	}
 )
 
+export const hasProducts = state => _.values(state.catalog.entities.products).length > 0
+
 export const getCurrentProductByProps = createSelector(
 	getAllProducts,
 	getCurrentProductIdByProps,
