@@ -9,7 +9,7 @@ const memoryMatch = (state = {
 			return {
 				...state,
 				entities: entities(state.entities, action),
-				log: { ...state.log, ...action.applicationLog },
+				log: action.applicationLog,
 			}
 		case 'MEMORY_MATCH/REMOVE_CARD':
 			return {

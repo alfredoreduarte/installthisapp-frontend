@@ -10,7 +10,7 @@ const catalog = (state = {
 		case 'CATALOG/RECEIVE_ENTITIES':
 			return {
 				...state,
-				log: { ...state.log, ...action.applicationLog },
+				log: action.applicationLog,
 				entities: entities(state.entities, action),
 			}
 		case 'CATALOG/REMOVE_PRODUCT':

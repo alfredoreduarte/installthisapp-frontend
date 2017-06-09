@@ -33,7 +33,7 @@ const photoContest = (state = {
 			return {
 				...state, 
 				...action.response.entities,
-				log: { ...state.log, ...action.response.applicationLog },
+				log: action.response.applicationLog,
 			}
 		default:
 			return state

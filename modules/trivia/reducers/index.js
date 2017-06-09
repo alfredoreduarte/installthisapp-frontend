@@ -21,7 +21,7 @@ const trivia = (state = {
 			return {
 				...state,
 				...action.entities,
-				log: { ...state.log, ...action.applicationLog },
+				log: action.applicationLog,
 			}
 		default:
 			return state

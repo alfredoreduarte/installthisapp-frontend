@@ -9,7 +9,7 @@ const example = (state = {
 			return {
 				...state,
 				entities: entities(state.entities, action)
-				log: { ...state.log, ...action.applicationLog },
+				log: action.applicationLog,
 			}
 		default:
 			return state

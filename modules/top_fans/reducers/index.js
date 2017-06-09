@@ -17,7 +17,11 @@ const topFans = (state = {
 				ui: ui(state.ui, action)
 			}
 		case 'TOP_FANS/RECEIVE_ENTITIES':
-			return { ...state, entries: action.response.entities, log: action.response.applicationLog }
+			return { 
+				...state, 
+				entries: action.response.entities, 
+				log: action.response.applicationLog
+			}
 		default:
 			return state
 	}
