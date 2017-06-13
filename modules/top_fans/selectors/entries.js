@@ -19,26 +19,34 @@ export const getEntriesForPage = createSelector(
 			const identifier = parseInt(page.identifier)
 			const likeMultiplier = app.setting.pointsPerLike
 			const commentMultiplier = app.setting.pointsPerComment
-			if (entries[identifier]){
-				const selectedEntries = entries[identifier]
-				const arrResult = merge(selectedEntries.likes, selectedEntries.comments, 'senderId')
-				const arrWithScores = arrResult.map(result => {
-					return {
-						...result,
-						likes: handleScore(result.likes),
-						comments: handleScore(result.comments),
-						score: handleScore(result.likes) * likeMultiplier + handleScore(result.comments) * commentMultiplier,
-					}
-				})
-				const arrResultOrdered = _.orderBy(arrWithScores, 'score', 'desc')
-				if (!verifiedScoresEventSent) {
-					analytics.track('Scores Verified')
-					analytics.track('App Installed', {
-						appType: 'top_fans',
+			console.log(page)
+			console.log(identifier)
+			console.log(entries)
+			if (entries) {
+				if (entries[identifier]){
+					const selectedEntries = entries[identifier]
+					const arrResult = merge(selectedEntries.likes, selectedEntries.comments, 'senderId')
+					const arrWithScores = arrResult.map(result => {
+						return {
+							...result,
+							likes: handleScore(result.likes),
+							comments: handleScore(result.comments),
+							score: handleScore(result.likes) * likeMultiplier + handleScore(result.comments) * commentMultiplier,
+						}
 					})
-					verifiedScoresEventSent = !verifiedScoresEventSent
+					const arrResultOrdered = _.orderBy(arrWithScores, 'score', 'desc')
+					if (!verifiedScoresEventSent) {
+						analytics.track('Scores Verified')
+						analytics.track('App Installed', {
+							appType: 'top_fans',
+						})
+						verifiedScoresEventSent = !verifiedScoresEventSent
+					}
+					return arrResultOrdered
 				}
-				return arrResultOrdered
+				else{
+					return []
+				}
 			}
 			else{
 				return []
