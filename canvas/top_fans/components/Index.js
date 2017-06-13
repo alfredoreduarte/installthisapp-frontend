@@ -70,7 +70,7 @@ const Index = ({
 							<p className="ita-cali-please-log-in">{anonUserLoginPrompt}</p>
 							<Link to={`/${window.canvasId}/${window.checksum}/login`} className="btn btn-default ita-cali-login-button">{signInLabel}</Link>
 						</div>
-						<div className="hidden-xs visible-sm visible-md visible-lg">
+						<div className="hidden-xs hidden-sm visible-md visible-lg">
 							<p className="ita-cali-please-log-in">{anonUserLoginPrompt}</p>
 							<Link to={`/${window.canvasId}/${window.checksum}/login`} className="btn btn-default ita-cali-login-button">{signInLabel}</Link>
 						</div>
