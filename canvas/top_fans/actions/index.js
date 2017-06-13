@@ -1,6 +1,7 @@
 import { normalize, arrayOf } from 'normalizr'
 import { push } from 'react-router-redux'
 import { getFromApi, getExternal } from 'canvas/api'
+import { getSingleUserScores } from 'canvas/top_fans/actions/user'
 
 export const loginCallback = () => {
 	return dispatch => 
@@ -8,6 +9,7 @@ export const loginCallback = () => {
 			// dispatch(fetchMessages()).then(() => dispatch(fetchEntities()))
 			dispatch(fetchMessages()).then(() => {
 				dispatch(fetchImages()).then(() => {
+					dispatch(getSingleUserScores())
 					dispatch(fetchEntities())
 				})
 			})
@@ -56,7 +58,9 @@ export const fetchMessages = () => {
 	return (dispatch, getState) => {
 		const { checksum, canvasId } = getState().applicationData
 		return getExternal(window.messagesUrl).then( json => {
-			dispatch(receiveMessages(json))
+			const defaultMessages = require('modules/top_fans/messages').default
+			const messages = { ...defaultMessages, ...json}
+			dispatch(receiveMessages(messages))
 			return Promise.resolve()
 		})
 	}

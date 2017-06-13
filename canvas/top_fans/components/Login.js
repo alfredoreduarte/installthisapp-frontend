@@ -12,13 +12,22 @@ class Login extends Component {
 		this.fbCallback = this.fbCallback.bind(this)
 	}
 	fbCallback(response) {
-		console.log('response')
-		console.log(response)
+		const { location } = this.props
 		this.setState({
 			logging: response.status != 'not_authorized'
 		})
 		if (response.status != 'not_authorized') {
-			this.props.processResponse(response)
+			console.log('locatt')
+			console.log(location)
+			if (location.state && location.state.nextPathname) {
+				console.log('location.state.nextPathname')
+				console.log(location.state.nextPathname)
+				this.props.processResponse(response, location.state.nextPathname)
+			}
+			else{
+				console.log('no tenia luego location.state.nextPathname')
+				this.props.processResponse(response, '')
+			}
 		}
 	}
 	render(){
@@ -48,11 +57,11 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-	title: 'App Title'
+	title: state.settings.applicationTitle
 })
 
 const mapDispatchToProps = (dispatch, props) => ({
-	processResponse: res => dispatch(digestFacebookResponse(res))
+	processResponse: (res, redirectUri) => dispatch(digestFacebookResponse(res, redirectUri))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

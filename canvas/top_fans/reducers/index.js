@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import { routerReducer as routing } from 'react-router-redux'
 
 import applicationData from 'canvas/top_fans/reducers/applicationData'
+import currentUserData from 'canvas/top_fans/reducers/currentUserData'
 import entries from 'canvas/top_fans/reducers/entries'
 import settings from 'canvas/top_fans/reducers/settings'
 import messages from 'canvas/top_fans/reducers/messages'
@@ -15,6 +16,7 @@ const createReducer = asyncReducers => {
 	return combineReducers({
 		routing,
 		applicationData,
+		currentUserData,
 		entries,
 		settings,
 		messages,

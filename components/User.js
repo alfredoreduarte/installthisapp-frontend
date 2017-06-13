@@ -26,7 +26,10 @@ const User = ({ name, small, identifier }) => (
 
 User.propTypes = {
 	name: PropTypes.string.isRequired,
-	identifier: PropTypes.string.isRequired,
+	identifier: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.number,
+	]),
 	small: PropTypes.bool,
 }
 

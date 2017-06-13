@@ -25,6 +25,25 @@ const Previews = ({ screen, messages, images }) => {
 				entries={entries}
 				maxScore={entries[0].score}
 			 />
+		case 'logged':
+			return <Index
+				header={images.header}
+				footer={images.footer}
+				title={messages.title}
+				subtitle={messages.subtitle}
+				likesLabel={messages.likesLabel}
+				commentsLabel={messages.commentsLabel}
+				pointsLabel={messages.pointsLabel}
+				entries={entries}
+				maxScore={entries[0].score}
+				currentUserScore={261}
+				currentUserName={`Rick Sanchez`}
+				getSingleUserScores={() => {}}
+				signInLabel={messages.signInLabel}
+				anonUserLoginPrompt={messages.anonUserLoginPrompt}
+				loggedUserScoreLabel={messages.loggedUserScoreLabel}
+				updateLabel={messages.updateLabel}
+			 />
 		default: 
 			return <div>empty</div>
 	}
@@ -33,6 +52,7 @@ const Previews = ({ screen, messages, images }) => {
 Previews.screens = [
 	{ value: 'intro', label: 'Intro'},
 	{ value: 'index', label: 'List'},
+	{ value: 'logged', label: "Logged User's score"},
 ]
 
 Previews.propTypes = {
