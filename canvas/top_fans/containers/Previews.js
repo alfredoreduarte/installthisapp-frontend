@@ -24,6 +24,14 @@ const Previews = ({ screen, messages, images }) => {
 				pointsLabel={messages.pointsLabel}
 				entries={entries}
 				maxScore={entries[0].score}
+				currentUserScore={null}
+				currentUserName={null}
+				currentUserIdentifier={null}
+				getSingleUserScores={() => {}}
+				signInLabel={messages.signInLabel}
+				anonUserLoginPrompt={messages.anonUserLoginPrompt}
+				loggedUserScoreLabel={messages.loggedUserScoreLabel}
+				updateLabel={messages.updateLabel}
 			 />
 		case 'logged':
 			return <Index
@@ -38,6 +46,7 @@ const Previews = ({ screen, messages, images }) => {
 				maxScore={entries[0].score}
 				currentUserScore={261}
 				currentUserName={`Rick Sanchez`}
+				currentUserIdentifier={"Rick.Sanchez.of.Earth.Dimension.C137"}
 				getSingleUserScores={() => {}}
 				signInLabel={messages.signInLabel}
 				anonUserLoginPrompt={messages.anonUserLoginPrompt}
