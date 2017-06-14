@@ -5,6 +5,7 @@ import { Link } from 'react-router'
 const Sidebar = ({ checksum, type }) => (
 	<ul className="list-unstyled">
 		<li><Link to={`/d/apps/${type}/${checksum}/scoreboard`} activeClassName="active">Scoreboard</Link></li>
+		<li><Link to={`/d/apps/${type}/${checksum}/users`} activeClassName="active">Users</Link></li>
 	</ul>
 )
 

@@ -17,8 +17,6 @@ class Login extends Component {
 			logging: response.status != 'not_authorized'
 		})
 		if (response.status != 'not_authorized') {
-			console.log('locatt')
-			console.log(location)
 			if (location.state && location.state.nextPathname) {
 				console.log('location.state.nextPathname')
 				console.log(location.state.nextPathname)
