@@ -39,7 +39,7 @@ export const getEntriesForPage = createSelector(
 						})
 						verifiedScoresEventSent = !verifiedScoresEventSent
 					}
-					return arrResultOrdered
+					return _.take(arrResultOrdered, 100)
 				}
 				else{
 					return []
