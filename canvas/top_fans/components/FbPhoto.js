@@ -4,7 +4,7 @@ const FbPhoto = ({ className, identifier, width, height, style }) => (
 	<a 
 		href={`https://fb.com/${identifier}`} 
 		target="_blank" 
-		style={{...style, width: width, height: height}}
+		style={{...style, display: 'inline-block', width: width, height: height}}
 		>
 		<img 
 			className={className} 
