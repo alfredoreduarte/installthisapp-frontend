@@ -57,7 +57,7 @@ export default (store, dispatch) => ({
 		require('routes/Analytics'),
 		require('routes/SetupGuide').default(store, dispatch),
 		require('routes/Integrations').default(store, dispatch),
-		require('routes/Users'),
+		require('routes/Users').default(store, dispatch),
 		require('routes/Preferences'),
 		require('modules/trivia/routes').default(store, dispatch),
 		require('modules/top_fans/routes').default(store, dispatch),

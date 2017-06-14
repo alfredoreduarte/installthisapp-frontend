@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
+import TimeAgo from 'react-timeago'
 import Select from 'react-select'
 import { Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import { connect } from 'react-redux'
@@ -78,7 +79,7 @@ const Users = ({
 					<th className="text-right">
 						<Checkbox 
 							checked={selectedItems.length == users.length}
-							checkboxClass="icheckbox-ita icon-tool-big pull-right"
+							checkboxClass="icheckbox-ita icon-tool-big pull-right hide"
 							onChange={() => handleUserSelectBatch(users)}
 						 />
 					</th>
@@ -91,10 +92,10 @@ const Users = ({
 						<User name={user.name} identifier={user.identifier} small />
 					</td>
 					<td>
-						{user.createdAt}
+						<TimeAgo date={user.createdAt} />
 					</td>
 					<td className="text-right">
-						<ul className="list-inline list-no-margin">
+						<ul className="list-inline list-no-margin hide">
 							<li>
 								<Checkbox 
 									checked={selectedItems.indexOf(user.id) !== -1 ? true : false}
