@@ -61,7 +61,7 @@ const Users = ({
 								{ value: 'name', label: 'Alphabetically' },
 								{ value: 'createdAt', label: 'Most Recent' }
 							]}
-							onChange={val => handleSort(val)}
+							onChange={val => handleSort(val.value)}
 						/>
 					</div>
 				</div>
@@ -74,7 +74,7 @@ const Users = ({
 						<span>Name</span>
 					</th>
 					<th>
-						<span>First seen</span>
+						<span>Email</span>
 					</th>
 					<th className="text-right">
 						<Checkbox 
@@ -89,10 +89,10 @@ const Users = ({
 				{users.map(user => 
 				<tr key={user.id}>
 					<td>
-						<User name={user.name} identifier={user.identifier} small />
+						<User name={user.name} identifier={user.identifier} time={user.createdAt} small />
 					</td>
 					<td>
-						<TimeAgo date={user.createdAt} />
+						{user.email}
 					</td>
 					<td className="text-right">
 						<ul className="list-inline list-no-margin hide">
