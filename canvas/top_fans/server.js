@@ -28,7 +28,6 @@ canvasRouter.use('/static', express.static(__dirname + '/dist'))
 // Auth from facebook page tab
 // 
 canvasRouter.post(`/${canvasId}`, canvasParser, function(req, res) {
-	console.log('llega?')
 	const manifestPath = `${process.cwd()}/webpack-assets.json`
 	const manifest = jsonfile.readFileSync(manifestPath)
 	const manifestBundle = manifest['manifest']['js']

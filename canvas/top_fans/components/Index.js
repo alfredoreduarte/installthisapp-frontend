@@ -49,7 +49,7 @@ const Index = ({
 							<button onClick={() => getSingleUserScores()} className="btn btn-default ita-cali-update-button">{updateLabel}</button>
 						</div>
 						<div className="hidden-xs hidden-sm visible-md visible-lg">
-							<div className="col-md-2">
+							<div className="pull-left" style={{marginRight: '20px'}}>
 								<FbPhoto 
 									identifier={currentUserIdentifier} 
 									width={100}
@@ -57,7 +57,7 @@ const Index = ({
 									className="img-circle"
 									/>
 							</div>
-							<div className="col-md-10">
+							<div className="pull-left">
 								<p className="ita-cali-logged-user-label">{loggedUserScoreLabel}</p>
 								<p className="ita-cali-logged-user-score">{currentUserScore}</p>
 								<button onClick={() => getSingleUserScores()} className="btn btn-default ita-cali-update-button">{updateLabel}</button>

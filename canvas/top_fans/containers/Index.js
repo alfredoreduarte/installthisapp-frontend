@@ -15,27 +15,12 @@ class Index extends Component {
 	}
 }
 
-const handleScore = score => score ? score : 0
-
 const mapStateToProps = state => {
-	const likeMultiplier = state.settings.pointsPerLike
-	const commentMultiplier = state.settings.pointsPerComment
-	const unsortedEntries = getEntries(state).map(entry => {
-		const score = handleScore(entry.likes) * likeMultiplier + handleScore(entry.comments) * commentMultiplier
-		return {
-			...entry,
-			likes: handleScore(entry.likes),
-			comments: handleScore(entry.comments),
-			score,
-		}
-	})
-	const entries = _.orderBy(unsortedEntries, 'score', 'desc')
+	const entries = getEntries(state)
 	return {
 		...state.messages,
 		...state.images,
 		entries,
-		likeMultiplier,
-		commentMultiplier,
 		maxScore: entries.length > 0 ? entries[0].score : 0,
 		currentUserScore: getScoreForUser(state),
 		currentUserName: state.currentUserData.name,

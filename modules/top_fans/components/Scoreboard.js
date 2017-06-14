@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import { Checkbox } from 'react-icheck'
 import { fetchTopFansEntities, fetchTopFansSettings, cleanupTopFansEntities, resetTopFansEntities } from 'modules/top_fans/actions/entities'
 import { getCurrentUsersByKeyword } from 'selectors/users'
+import { getAllPages } from 'selectors/pages'
 import { getCurrentAppByState } from 'selectors/apps'
 import { getEntriesForPage } from 'modules/top_fans/selectors/entries'
 import { pollTopFansEntities } from 'modules/top_fans/actions/entities'
@@ -27,6 +28,7 @@ const Scoreboard = ({
 	// 
 	likeMultiplier,
 	commentMultiplier,
+	tabIntegrated,
 	entries,
 	users, 
 	fetch,
@@ -161,7 +163,7 @@ const Scoreboard = ({
 						Check again
 					</button>
 				</p>
-				<p><a href="javascript:void(0)" onClick={toggleResetModal}><small>Reset scores</small></a></p>
+				{tabIntegrated ? <p><a href="javascript:void(0)" onClick={toggleResetModal}><small>Reset scores</small></a></p> : null}
 			</div>
 		:
 			<Table className="ita-table">
@@ -212,6 +214,7 @@ const handleScore = score => score ? score : 0
 
 const mapStateToProps = (state, props) => {
 	const currentApp = getCurrentAppByState(state)
+	const tabInstalledInPage = getCurrentAppByState(state).page ? _.find(getAllPages(state), {'id': getCurrentAppByState(state).page}).name : null
 	// handleScore(entry.likes) * likeMultiplier + handleScore(entry.comments) * commentMultiplier
 	return { 
 		showResetModal: state.topFans.ui.showResetModal,
@@ -220,6 +223,7 @@ const mapStateToProps = (state, props) => {
 		// 
 		// likeMultiplier: currentApp.setting.pointsPerLike,
 		// commentMultiplier: currentApp.setting.pointsPerComment,
+		tabIntegrated: tabInstalledInPage,
 		entries: getEntriesForPage(state),
 		users: getCurrentUsersByKeyword(state, props),
 		selectedItems: state.selectedItems,

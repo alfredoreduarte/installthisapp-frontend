@@ -19,9 +19,6 @@ export const getEntriesForPage = createSelector(
 			const identifier = parseInt(page.identifier)
 			const likeMultiplier = app.setting.pointsPerLike
 			const commentMultiplier = app.setting.pointsPerComment
-			console.log(page)
-			console.log(identifier)
-			console.log(entries)
 			if (entries) {
 				if (entries[identifier]){
 					const selectedEntries = entries[identifier]
