@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { getCurrentApp } from 'selectors/apps'
+import { getCurrentAppByState } from 'selectors/apps'
 
 class Preferences extends Component {
 	render(){
@@ -9,7 +9,7 @@ class Preferences extends Component {
 			currentApp,
 			updateApp,
 		} = this.props
-		if (currentApp.title) {
+		if (currentApp) {
 			return (
 				<div className="">
 					{React.cloneElement(children, { currentApp })}
@@ -23,7 +23,7 @@ class Preferences extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-	const currentApp = getCurrentApp(state, props) || {}
+	const currentApp = getCurrentAppByState(state)
 	return {
 		currentApp,
 	}

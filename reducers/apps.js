@@ -1,5 +1,13 @@
 const apps = (state = {}, action) => {
 	switch (action.type) {
+		case 'UPDATE_APP_SETTING':
+			return {
+				...state,
+				[action.checksum]: {
+					...state[action.checksum],
+					setting: action.payload,
+				},
+			}
 		case 'UPDATE_APP':
 			return {
 				...state,

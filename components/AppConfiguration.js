@@ -39,14 +39,14 @@ let AppConfiguration = ({ handleSubmit, fetching }) => (
 		</div>
 		<hr />
 		<div className="row">
-			<div className="col-md-6">
+			<div className="col-md-8">
 				<div className="panel panel-default">
 					<div className="panel-body">
 						<div className="form-horizontal">
 							<div className="form-group">
 								<div className="col-md-4">
 									<label className="control-label">Title</label>
-									<span className="help-block">Will show un on the Page Tab</span>
+									<span className="help-block hide">The title will...</span>
 								</div>
 								<div className="col-md-8">
 									<Field
@@ -54,12 +54,6 @@ let AppConfiguration = ({ handleSubmit, fetching }) => (
 										type="text" 
 										className="form-control" 
 										component="input" />
-								</div>
-							</div>
-							<div className="form-group hide">
-								<label className="col-md-4 control-label">Facebook Page</label>
-								<div className="col-md-8">
-									<Field name="facebookPageId" component={FacebookPageField}/>
 								</div>
 							</div>
 						</div>

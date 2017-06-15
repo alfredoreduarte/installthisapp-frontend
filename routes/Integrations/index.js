@@ -3,14 +3,14 @@ import { turnOnGlobalIndicator, turnOffGlobalIndicator } from 'actions/activityI
 export default (store, dispatch) => ({
 	path: 'integrations',
 	onEnter: (nextState, replace) => {
+		dispatch(turnOnGlobalIndicator())
 		analytics.page('App Integrations')
 		analytics.track('Feature Used', {
 			featureType: 'App Integrations',
 		})
-		dispatch(turnOnGlobalIndicator())
 	},
 	getComponent(nextState, cb) {
-		require.ensure([], (require) => {
+		require.ensure([], require => {
 			dispatch(turnOffGlobalIndicator())
 			cb(null, {
 				main: require('containers/Integrations').default,

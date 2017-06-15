@@ -23,7 +23,7 @@ export default (store, dispatch) => ({
 						require.ensure([], (require) => {
 							dispatch(turnOffGlobalIndicator())
 							cb(null, {
-								main: require('modules/top_fans/components/Scoreboard').default,
+								main: require('modules/top_fans/containers/Scoreboard').default,
 								sidebar: Sidebar,
 							})
 						})

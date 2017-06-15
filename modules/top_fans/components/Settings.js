@@ -52,7 +52,7 @@ let AppSpecificSettings = ({ handleSubmit, fetching, settings }) => (
 							</div>
 							<div className="form-group">
 								<div className="col-md-6">
-									<label className="control-label">Ignored user IDs</label>
+									<label className="control-label">Comma-separated user IDs to ignore</label>
 									<p className="help-block">Get the user's Facebook profile url from the scores list,<br/> and use the numeric part as in: fb.com/1234.<br/> Insert one comma between each value.</p>
 								</div>
 								<div className="col-md-6">

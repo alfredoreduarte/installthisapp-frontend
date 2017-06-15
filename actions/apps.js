@@ -88,13 +88,12 @@ export const update = () => {
 	return (dispatch, getState) => {
 		dispatch(toggleActivityUpdatingApp())
 		const currentAppChecksum = getState().admin.currentApp
-		patchToApi(
-			`applications/${currentAppChecksum}.json`, 
-			{
-				application: getState().form.appPreferences.values
-			}
-		).then(response => {
+		return patchToApi(`applications/${currentAppChecksum}.json`, {
+			application: getState().form.appPreferences.values
+		}).then(response => {
 			dispatch(updateApp(currentAppChecksum, response))
+			// const normalized = normalize(response, schema.app)
+			// dispatch(receiveEntities(normalized.entities))
 			dispatch(toggleActivityUpdatingApp())
 		})
 	}
@@ -111,8 +110,13 @@ export const updateAppSettings = () => {
 			}
 		).then(response => {
 			if (response.success) {
-				const normalized = normalize(response, schema.app)
-				dispatch(receiveEntities(normalized.entities))
+				// const normalized = normalize(response, schema.app)
+				// dispatch(receiveEntities(normalized.entities))
+				dispatch({
+					type: 'UPDATE_APP_SETTING',
+					checksum: currentApp.checksum,
+					payload: response.app.setting,
+				})
 			}
 			else{
 				console.log(response.message)
@@ -121,32 +125,40 @@ export const updateAppSettings = () => {
 	}
 }
 
+const handleTopFansEdgeCase = setting => {
+	// 
+	// TOP FANS ONLY
+	// ignoredUserIdentifiers must ALWAYS be an array
+	if (setting.ignoredUserIdentifiers) {
+		if (setting.ignoredUserIdentifiers && setting.ignoredUserIdentifiers.length > 0) {
+			setting.ignoredUserIdentifiers = _.split(setting.ignoredUserIdentifiers, ',').map(Number)
+		}
+		if (setting.ignoredUserIdentifiers == "") {
+			setting.ignoredUserIdentifiers = []
+		}
+	}
+	return setting
+}
+
 export const updateAppSpecificSettings = () => {
 	return (dispatch, getState) => {
 		dispatch(toggleActivityUpdatingApp())
 		const currentAppChecksum = getState().admin.currentApp
-		// 
-		// TOP FANS ONLY
-		// ignoredUserIdentifiers must ALWAYS be an array
-		const setting = getState().form.appSpecificSettings.values
-		if (setting.ignoredUserIdentifiers) {
-			if (setting.ignoredUserIdentifiers && setting.ignoredUserIdentifiers.length > 0) {
-				setting.ignoredUserIdentifiers = _.split(setting.ignoredUserIdentifiers, ',').map(Number)
-			}
-			if (setting.ignoredUserIdentifiers == "") {
-				setting.ignoredUserIdentifiers = []
-			}
-		}
-		// 
-		// 
+		const rawSettings = getState().form.appSpecificSettings.values
+		const setting = handleTopFansEdgeCase(rawSettings)
 		postToApi(
 			`applications/${currentAppChecksum}/update_setting.json`, 
 			{
 				setting
 			}
 		).then(response => {
-			const normalized = normalize(response, schema.app)
-			dispatch(updateApp(currentAppChecksum, normalized.entities))
+			if (response.success) {
+				dispatch({
+					type: 'UPDATE_APP_SETTING',
+					checksum: currentAppChecksum,
+					payload: response.app.setting,
+				})
+			}
 			dispatch(toggleActivityUpdatingApp())
 		})
 	}

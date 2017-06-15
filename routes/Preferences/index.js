@@ -1,13 +1,17 @@
-module.exports = {
+import { turnOnGlobalIndicator, turnOffGlobalIndicator } from 'actions/activityIndicators'
+
+export default (store, dispatch) => ({
 	path: 'preferences',
 	onEnter: (nextState, replace) => {
+		dispatch(turnOnGlobalIndicator())
 		analytics.page('App Preferences')
 		analytics.track('Feature Used', {
 			featureType: 'App Preferences',
 		})
 	},
 	getComponent(nextState, cb) {
-		require.ensure([], (require) => {
+		require.ensure([], require => {
+			dispatch(turnOffGlobalIndicator())
 			cb(null, {
 				main: require('containers/Preferences').default,
 				sidebar: require('modules/' + nextState.params.type + '/components/Sidebar').default,
@@ -22,9 +26,7 @@ module.exports = {
 			path: 'specific',
 			getComponents(nextState, cb) {
 				require.ensure([], require => {
-					// console.log('llega')
-					// console.log(nextState)
-					// cb(null, require('components/AppSpecificSettings').default)
+					dispatch(turnOffGlobalIndicator())
 					cb(null, require('modules/' + nextState.params.type + '/components/Settings').default)
 				})
 			}
@@ -33,9 +35,10 @@ module.exports = {
 			path: 'delete',
 			getComponents(nextState, cb) {
 				require.ensure([], require => {
+					dispatch(turnOffGlobalIndicator())
 					cb(null, require('components/AppDelete').default)
 				})
 			}
 		}
 	]
-}
+})

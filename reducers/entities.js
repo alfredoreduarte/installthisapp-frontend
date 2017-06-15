@@ -8,6 +8,7 @@ const entities = (state = { apps: {}, users: {}, pages: {} }, action) => {
 		case 'UNINSTALLING_APP':
 		case 'CANCEL_INSTALLING_APP':
 		case 'UPDATE_APP':
+		case 'UPDATE_APP_SETTING':
 			return { 
 				...state, 
 				apps: apps(state.apps, action)

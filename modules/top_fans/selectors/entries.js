@@ -19,9 +19,17 @@ export const getEntriesForPage = createSelector(
 			const identifier = parseInt(page.identifier)
 			const likeMultiplier = app.setting.pointsPerLike
 			const commentMultiplier = app.setting.pointsPerComment
+			const ignoredUserIdentifiers = app.setting.ignoredUserIdentifiers
 			if (entries) {
 				if (entries[identifier]){
-					const selectedEntries = entries[identifier]
+					const allPageEntries = entries[identifier]
+					console.log('selected?')
+					console.log(allPageEntries)
+					// hide ignored users 
+					const selectedEntries = {
+						likes: _.filter(allPageEntries.likes, entry => ignoredUserIdentifiers.indexOf(parseInt(entry.senderId)) === -1),
+						comments: _.filter(allPageEntries.comments, entry => ignoredUserIdentifiers.indexOf(parseInt(entry.senderId)) === -1),
+					}
 					const arrResult = merge(selectedEntries.likes, selectedEntries.comments, 'senderId')
 					const arrWithScores = arrResult.map(result => {
 						return {

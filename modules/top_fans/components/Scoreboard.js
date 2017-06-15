@@ -4,7 +4,7 @@ import Select from 'react-select'
 import Modal from 'react-modal'
 import moment from 'moment'
 import { SingleDatePicker } from 'react-dates'
-// import DatePicker from 'react-datepicker'
+import FaEyeSlash from 'react-icons/lib/fa/eye-slash'
 import { ButtonToolbar, Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Checkbox } from 'react-icheck'
@@ -38,7 +38,8 @@ const Scoreboard = ({
 	sortBy,
 	handleUserSelect, 
 	handleUserSelectBatch,
-	handleSort
+	handleSort,
+	addIgnoredUserIdentifier,
 }) => (
 	<div className="ita-table-view">
 		<Modal
@@ -53,17 +54,11 @@ const Scoreboard = ({
 			<div className="col-md-6">
 				<SingleDatePicker 
 					id="lafecha"
-					// placeholderText="Select a date"
 					date={firstFetchFromDate}
 					isOutsideRange={day => day.isAfter(moment().subtract(1, 'days')) || day.isBefore(moment().subtract(240, 'days'))}
-					// maxDate={moment()}
-					// disabled={!trackFromDate}
-					// minDate={moment().subtract(120, "days")}
 					numberOfMonths={1}
-					// autoFocus={false}
 					focused={true}
 					onDateChange={onDateChange}
-					// onFocusChange={onToggleDatePicker}
 				/>
 				<button style={{marginLeft: '20px'}} onClick={reset} className="btn btn-primary" disabled={firstFetchFromDate ? false : true}>Reset Scoreboard</button>
 			</div>
@@ -181,6 +176,9 @@ const Scoreboard = ({
 						<th>
 							<span>Score</span>
 						</th>
+						<th>
+							<span>Remove</span>
+						</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -202,6 +200,13 @@ const Scoreboard = ({
 						<td>
 							<b>{entry.score}</b>
 						</td>
+						<td className="text-right">
+							<ul className="list-inline list-no-margin">
+								<li>
+									<FaEyeSlash size={20} color={'black'} style={{cursor: 'pointer'}} title="Hide this user from the scoreboard" onClick={() => addIgnoredUserIdentifier(entry.senderId)} />
+								</li>
+							</ul>
+						</td>
 					</tr>
 					)}
 				</tbody>
@@ -210,64 +215,4 @@ const Scoreboard = ({
 	</div>
 )
 
-const handleScore = score => score ? score : 0
-
-const mapStateToProps = (state, props) => {
-	const currentApp = getCurrentAppByState(state)
-	const tabInstalledInPage = getCurrentAppByState(state).page ? _.find(getAllPages(state), {'id': getCurrentAppByState(state).page}).name : null
-	// handleScore(entry.likes) * likeMultiplier + handleScore(entry.comments) * commentMultiplier
-	return { 
-		showResetModal: state.topFans.ui.showResetModal,
-		firstFetchFromDate: currentApp.setting.firstFetchFromDate,
-		firstFetchFromDate: currentApp.setting.firstFetchFromDate ? moment(currentApp.setting.firstFetchFromDate) : null,
-		// 
-		// likeMultiplier: currentApp.setting.pointsPerLike,
-		// commentMultiplier: currentApp.setting.pointsPerComment,
-		tabIntegrated: tabInstalledInPage,
-		entries: getEntriesForPage(state),
-		users: getCurrentUsersByKeyword(state, props),
-		selectedItems: state.selectedItems,
-		sortBy: state.usersSorting
-	}
-}
-
-const mapDispatchToProps = (dispatch, props) => {
-	return {
-		toggleResetModal: () => dispatch({
-			type: 'TOP_FANS/TOGGLE_RESET_MODAL',
-		}),
-		onDateChange: date => {
-			dispatch(editAppSpecificSettings(date.format()))
-		},
-		// 
-		handleUserSelect: id => {
-			dispatch(selectItemOnTable(id))
-		},
-		handleUserSelectBatch: users => {
-			users.map(user => dispatch(selectItemOnTable(user.id)))
-		},
-		handleSort: sorter => dispatch(sortUsersBy(sorter)),
-		fetch: () => dispatch(fetchTopFansEntities(props.params.checksum)),
-		cleanup: () => {
-			confirm('Sure? This will delete ALL current scores', {
-				done: () => dispatch(cleanupTopFansEntities()),
-				confirmLabel: 'Delete all scores',
-				abortLabel: 'Cancel',
-				// unmount: () => console.log('unmounted'),
-				// close: () => console.log('close!'),
-			})
-		},
-		reset: () => {
-			dispatch(updateAppSettings()).then(() => {
-				dispatch(resetTopFansEntities()).then(() => {
-					dispatch({
-						type: 'TOP_FANS/TOGGLE_RESET_MODAL',
-					})
-					dispatch(pollTopFansEntities(props.params.checksum))
-				})
-			})
-		}
-	}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Scoreboard)
+export default Scoreboard
