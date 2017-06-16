@@ -32,7 +32,7 @@
 	</style>
 </head>
 <body>
-	<div class="alert alert-warning hide" id="impersonation-alert">WARNING: You're impersonating user with ID <span id="impersonation-id-holder"></span></div>
+	<div class="alert alert-warning hide" id="impersonation-alert"><span id="impersonation-alert-text"></span> <span id="impersonation-id-holder"></span></div>
 	<img id="blank-loading" src="/images/source-loading.svg" />
 	<div id="root"></div>
 	<script>
@@ -46,9 +46,11 @@
 	<script src="<%= cloudFrontUrl %><%= jsBundle %>"></script>
 	<script>
 		// Show impersonation alert when required
+		// Insert text programmatically so that poeople don't see it before the CSS is loaded
 		if (window.alias) {
 			document.getElementById('impersonation-alert').classList.remove('hide')
 			document.getElementById('impersonation-id-holder').innerHTML = window.alias
+			document.getElementById('impersonation-alert-text').innerHTML = "WARNING: You're impersonating user with ID"
 		}
 		// The fbLoaded var is verified at the component Wizard.js, in order to alert when 
 		// ad-blockers are blocking facebook's SDK
