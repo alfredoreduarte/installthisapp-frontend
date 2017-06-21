@@ -3,10 +3,25 @@ import { push } from 'react-router-redux'
 import * as schema from 'canvas/photo_contest/schema'
 import { allPhotos } from 'canvas/photo_contest/selectors/photos'
 import { fetchImages } from 'canvas/photo_contest/actions/images'
+import { handleFbRedirectResponse, digestFacebookResponse } from 'canvas/photo_contest/actions/user'
 import { getFromApi, postToApi, getExternal } from 'canvas/api'
 
 export const getStaticContentWithIntroRedirect = (nextState, replace, next, dispatch) => 
 						dispatch(fetchMessages())
+						// .then() manage login here with the ?code parameter 
+						// https://developers.facebook.com/docs/facebook-login/manually-build-a-login-flow#confirm
+						// .then(() => dispatch(handleFbRedirectResponse()))
+						// .then(() => {
+						// 	if (nextState.location.query.state == 'facebookdirect' && nextState.location.query.code) {
+						// 		return dispatch(digestFacebookResponse({
+						// 			signedRequest: nextState.location.query.code,
+						// 			checksum: nextState.params.checksum,
+						// 		}))
+						// 	}
+						// 	else {
+						// 		return true
+						// 	}
+						// })
 						.then(() => dispatch(fetchImages(`/photos`)))
 						.then(next())
 export const getPhotosWithoutRedirects = (nextState, replace, next, dispatch) =>

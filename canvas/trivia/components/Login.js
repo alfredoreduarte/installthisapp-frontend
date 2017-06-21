@@ -38,6 +38,7 @@ class Login extends Component {
 					cssClass={`btn btn-primary btn-lg ${this.state.logging ? 'disabled' : null}`}
 					autoLoad={true}
 					textButton={this.state.logging ? "Please wait..." : "Sign In"}
+					disableMobileRedirect={true}
 					callback={response => this.fbCallback(response)} />
 				</div>
 			</div>

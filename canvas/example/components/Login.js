@@ -18,6 +18,7 @@ const Login = ({ logging, title, fbCallback }) => (
 			cssClass={`btn btn-primary btn-lg ${logging ? 'disabled' : null}`}
 			autoLoad={true}
 			textButton={logging ? "Please wait..." : "Sign In"}
+			disableMobileRedirect={true}
 			callback={fbCallback} />
 		</div>
 	</div>

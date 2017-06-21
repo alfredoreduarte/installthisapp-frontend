@@ -31,16 +31,13 @@ export const digestFacebookResponse = (response, redirectUri) => {
 					dispatch(push(redirectUri))
 				}
 				else {
-					// if (ownPhotos.length) {
-						// console.log(2)
-						// dispatch(push(`/${canvasId}/${checksum}/${ownPhotos[0].id}`))
-					// }
-					// else{
-						// console.log(3)
-						dispatch(push(`/${canvasId}/${checksum}/photos`))
-					// }
+					dispatch(push(`/${canvasId}/${checksum}/photos`))
 				}
 			})
 		})
 	}
+}
+
+export const handleFbRedirectResponse = () => {
+
 }
