@@ -9,6 +9,7 @@
 		"selectors/*",
 		"actions/*",
 		"test/*",
+		"lib/*",
 		"modules/*",
 		"schema/*",
 		"routes.js",
