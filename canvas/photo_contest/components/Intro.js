@@ -9,7 +9,7 @@ const Intro = ({ intro }) => (
 	<div className="col-sm-12">
 		<div className="row">
 			{window.canvasId ?
-				<Link to={`/${window.canvasId}/${window.checksum}/login`}>
+				<Link to={`/${window.canvasId}/${window.checksum}/photos`}>
 					<HeaderImage source={intro} />
 				</Link>
 			:
