@@ -34,7 +34,7 @@ const Summary = ({ checksum, type, entries, steps, completed, share }) => (
 						{!steps[0] ? <span>Edit the <b>template design</b></span> : <s>Edit the <b>template design</b></s>}
 					</td>
 					<td style={styles.td}>
-						<Link className={`btn btn-block ${!steps[0] ? 'btn-primary' : 'btn-default'}`}  to={`/d/apps/${type}/${checksum}/design`}>Open design editor</Link>
+						<Link className={`btn btn-block ${!steps[0] ? 'btn-primary' : 'btn-default'}`}  to={`/d/apps/${type}/${checksum}/design`}>Launch the Design Editor</Link>
 					</td>
 				</tr>
 				<tr>
