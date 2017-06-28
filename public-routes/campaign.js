@@ -67,103 +67,23 @@ router.get('/campaign/', function(req, res){
 		}))
 	})
 })
-router.get('/campaign/one', function(req, res){
-	//
+router.get('/campaign/:variant', function(req, res){
+	const variant = req.param('variant')
 	fetch(copyDictionaryPath, {
 		method: 'GET',
 	})
 	.then(function(response){ return response.json() })
 	.then(function(json){
 		const copyGroup = req.param('copygroup') ? req.param('copygroup') : 1
-		res.render('campaign/one', Object.assign({}, commonParams, {
+		res.render('campaign/' + variant, Object.assign({}, commonParams, {
 			req: req,
 			currentUrl: getCurrentUrl(req),
 			currentDomain: getCurrentDomain(req),
 			copyGroupName: copyGroup,
-			variant: 'one',
+			variant: variant,
 			copyGroup: json[copyGroup],
-			jsBundle: manifest['campaign-one']['js'],
-			cssBundle: manifest['campaign-one']['css'],
-		}))
-	})
-})
-router.get('/campaign/two', function(req, res){
-	//
-	fetch(copyDictionaryPath, {
-		method: 'GET',
-	})
-	.then(function(response){ return response.json() })
-	.then(function(json){
-		const copyGroup = req.param('copygroup') ? req.param('copygroup') : 1
-		res.render('campaign/two', Object.assign({}, commonParams, {
-			req: req,
-			currentUrl: getCurrentUrl(req),
-			currentDomain: getCurrentDomain(req),
-			copyGroupName: copyGroup,
-			variant: 'two',
-			copyGroup: json[copyGroup],
-			jsBundle: manifest['campaign-two']['js'],
-			cssBundle: manifest['campaign-two']['css'],
-		}))
-	})
-})
-router.get('/campaign/three', function(req, res){
-	//
-	fetch(copyDictionaryPath, {
-		method: 'GET',
-	})
-	.then(function(response){ return response.json() })
-	.then(function(json){
-		const copyGroup = req.param('copygroup') ? req.param('copygroup') : 1
-		res.render('campaign/three', Object.assign({}, commonParams, {
-			req: req,
-			currentUrl: getCurrentUrl(req),
-			currentDomain: getCurrentDomain(req),
-			copyGroupName: copyGroup,
-			variant: 'three',
-			copyGroup: json[copyGroup],
-			jsBundle: manifest['campaign-three']['js'],
-			cssBundle: manifest['campaign-three']['css'],
-		}))
-	})
-})
-router.get('/campaign/four', function(req, res){
-	//
-	fetch(copyDictionaryPath, {
-		method: 'GET',
-	})
-	.then(function(response){ return response.json() })
-	.then(function(json){
-		const copyGroup = req.param('copygroup') ? req.param('copygroup') : 1
-		res.render('campaign/four', Object.assign({}, commonParams, {
-			req: req,
-			currentUrl: getCurrentUrl(req),
-			currentDomain: getCurrentDomain(req),
-			copyGroupName: copyGroup,
-			variant: 'four',
-			copyGroup: json[copyGroup],
-			jsBundle: manifest['campaign-four']['js'],
-			cssBundle: manifest['campaign-four']['css'],
-		}))
-	})
-})
-router.get('/campaign/five', function(req, res){
-	//
-	fetch(copyDictionaryPath, {
-		method: 'GET',
-	})
-	.then(function(response){ return response.json() })
-	.then(function(json){
-		const copyGroup = req.param('copygroup') ? req.param('copygroup') : 1
-		res.render('campaign/five', Object.assign({}, commonParams, {
-			req: req,
-			currentUrl: getCurrentUrl(req),
-			currentDomain: getCurrentDomain(req),
-			copyGroupName: copyGroup,
-			variant: 'five',
-			copyGroup: json[copyGroup],
-			jsBundle: manifest['campaign-five']['js'],
-			cssBundle: manifest['campaign-five']['css'],
+			jsBundle: manifest[ 'campaign-' + variant ]['js'],
+			cssBundle: manifest[ 'campaign-' + variant ]['css'],
 		}))
 	})
 })
