@@ -42,6 +42,9 @@ const commonParams = {
 	manifestBundle,
 }
 
+// 
+// Not specifying the langing variation returns a random variation
+// 
 router.get('/campaign/', function(req, res){
 	//
 	fetch(copyDictionaryPath, {
@@ -50,15 +53,17 @@ router.get('/campaign/', function(req, res){
 	.then(function(response){ return response.json() })
 	.then(function(json){
 		const copyGroup = req.param('copygroup') ? req.param('copygroup') : 1
-		res.render('campaign/one', Object.assign({}, commonParams, {
+		const variants = [ 'one', 'two', 'three', 'four', 'five' ]
+		const randomVariant = variants[Math.floor(Math.random() * variants.length)]
+		res.render('campaign/' + randomVariant, Object.assign({}, commonParams, {
 			req: req,
 			currentUrl: getCurrentUrl(req),
 			currentDomain: getCurrentDomain(req),
 			copyGroupName: copyGroup,
-			variant: 'one',
+			variant: randomVariant,
 			copyGroup: json[copyGroup],
-			jsBundle: manifest['campaign-one']['js'],
-			cssBundle: manifest['campaign-one']['css'],
+			jsBundle: manifest[ 'campaign-' + randomVariant ][ 'js' ],
+			cssBundle: manifest[ 'campaign-' + randomVariant ][ 'css' ],
 		}))
 	})
 })

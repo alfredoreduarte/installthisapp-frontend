@@ -82,6 +82,7 @@ const ITAlogin = (email, password) => {
 	.then(json => {
 		analytics.track('Account Created', {
 			utm_source: window.utm_source_cache_for_tracking,
+			landing_variant: window.variant_cache_for_tracking,
 		}, () => {
 			top.location = location.protocol + '//' + window.location.host + '/d/apps/create'
 		})
