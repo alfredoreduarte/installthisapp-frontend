@@ -5,7 +5,6 @@ const jsonfile = require('jsonfile')
 const cloudFrontUrl = process.env.CLOUDFRONT_URL
 const router = express.Router()
 
-
 const manifestPath = `${process.cwd()}/webpack-assets.json`
 const manifest = jsonfile.readFileSync(manifestPath)
 const manifestBundle = manifest['manifest']['js']
@@ -50,7 +49,7 @@ router.get('/campaign/', function(req, res){
 	})
 	.then(function(response){ return response.json() })
 	.then(function(json){
-		const copyGroup = req.params.copygroup ? req.params.copygroup : 1
+		const copyGroup = req.param('copygroup') ? req.param('copygroup') : 1
 		res.render('campaign/one', Object.assign({}, commonParams, {
 			currentUrl: getCurrentUrl(req),
 			currentDomain: getCurrentDomain(req),
@@ -69,7 +68,7 @@ router.get('/campaign/one', function(req, res){
 	})
 	.then(function(response){ return response.json() })
 	.then(function(json){
-		const copyGroup = req.params.copygroup ? req.params.copygroup : 1
+		const copyGroup = req.param('copygroup') ? req.param('copygroup') : 1
 		res.render('campaign/one', Object.assign({}, commonParams, {
 			currentUrl: getCurrentUrl(req),
 			currentDomain: getCurrentDomain(req),
@@ -88,7 +87,7 @@ router.get('/campaign/two', function(req, res){
 	})
 	.then(function(response){ return response.json() })
 	.then(function(json){
-		const copyGroup = req.params.copygroup ? req.params.copygroup : 1
+		const copyGroup = req.param('copygroup') ? req.param('copygroup') : 1
 		res.render('campaign/two', Object.assign({}, commonParams, {
 			currentUrl: getCurrentUrl(req),
 			currentDomain: getCurrentDomain(req),
@@ -107,7 +106,7 @@ router.get('/campaign/three', function(req, res){
 	})
 	.then(function(response){ return response.json() })
 	.then(function(json){
-		const copyGroup = req.params.copygroup ? req.params.copygroup : 1
+		const copyGroup = req.param('copygroup') ? req.param('copygroup') : 1
 		res.render('campaign/three', Object.assign({}, commonParams, {
 			currentUrl: getCurrentUrl(req),
 			currentDomain: getCurrentDomain(req),
@@ -126,7 +125,7 @@ router.get('/campaign/four', function(req, res){
 	})
 	.then(function(response){ return response.json() })
 	.then(function(json){
-		const copyGroup = req.params.copygroup ? req.params.copygroup : 1
+		const copyGroup = req.param('copygroup') ? req.param('copygroup') : 1
 		res.render('campaign/four', Object.assign({}, commonParams, {
 			currentUrl: getCurrentUrl(req),
 			currentDomain: getCurrentDomain(req),
@@ -145,7 +144,7 @@ router.get('/campaign/five', function(req, res){
 	})
 	.then(function(response){ return response.json() })
 	.then(function(json){
-		const copyGroup = req.params.copygroup ? req.params.copygroup : 1
+		const copyGroup = req.param('copygroup') ? req.param('copygroup') : 1
 		res.render('campaign/five', Object.assign({}, commonParams, {
 			currentUrl: getCurrentUrl(req),
 			currentDomain: getCurrentDomain(req),
