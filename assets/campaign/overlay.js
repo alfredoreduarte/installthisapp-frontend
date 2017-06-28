@@ -80,7 +80,9 @@ const ITAlogin = (email, password) => {
 		return response.json()
 	})
 	.then(json => {
-		analytics.track('Account Created', () => {
+		analytics.track('Account Created', {
+			utm_source: window.utm_source_cache_for_tracking,
+		}, () => {
 			top.location = location.protocol + '//' + window.location.host + '/d/apps/create'
 		})
 	})

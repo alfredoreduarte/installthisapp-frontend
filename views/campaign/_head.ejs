@@ -22,4 +22,7 @@
 	<meta property="og:image" content="<%= cloudFrontUrl %>/images/campaign/og.jpg"/>
 	<meta property="og:site_name" content="InstallThisApp"/>
 	<meta property="og:description" content="<%= copyGroup['h1'] %>"/>
+	<script>
+		window.utm_source_cache_for_tracking = '<%= req.query.utm_source %>'
+	</script>
 </head>

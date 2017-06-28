@@ -51,6 +51,7 @@ router.get('/campaign/', function(req, res){
 	.then(function(json){
 		const copyGroup = req.param('copygroup') ? req.param('copygroup') : 1
 		res.render('campaign/one', Object.assign({}, commonParams, {
+			req: req,
 			currentUrl: getCurrentUrl(req),
 			currentDomain: getCurrentDomain(req),
 			copyGroupName: copyGroup,
@@ -70,6 +71,7 @@ router.get('/campaign/one', function(req, res){
 	.then(function(json){
 		const copyGroup = req.param('copygroup') ? req.param('copygroup') : 1
 		res.render('campaign/one', Object.assign({}, commonParams, {
+			req: req,
 			currentUrl: getCurrentUrl(req),
 			currentDomain: getCurrentDomain(req),
 			copyGroupName: copyGroup,
@@ -89,6 +91,7 @@ router.get('/campaign/two', function(req, res){
 	.then(function(json){
 		const copyGroup = req.param('copygroup') ? req.param('copygroup') : 1
 		res.render('campaign/two', Object.assign({}, commonParams, {
+			req: req,
 			currentUrl: getCurrentUrl(req),
 			currentDomain: getCurrentDomain(req),
 			copyGroupName: copyGroup,
@@ -108,6 +111,7 @@ router.get('/campaign/three', function(req, res){
 	.then(function(json){
 		const copyGroup = req.param('copygroup') ? req.param('copygroup') : 1
 		res.render('campaign/three', Object.assign({}, commonParams, {
+			req: req,
 			currentUrl: getCurrentUrl(req),
 			currentDomain: getCurrentDomain(req),
 			copyGroupName: copyGroup,
@@ -127,6 +131,7 @@ router.get('/campaign/four', function(req, res){
 	.then(function(json){
 		const copyGroup = req.param('copygroup') ? req.param('copygroup') : 1
 		res.render('campaign/four', Object.assign({}, commonParams, {
+			req: req,
 			currentUrl: getCurrentUrl(req),
 			currentDomain: getCurrentDomain(req),
 			copyGroupName: copyGroup,
@@ -146,6 +151,7 @@ router.get('/campaign/five', function(req, res){
 	.then(function(json){
 		const copyGroup = req.param('copygroup') ? req.param('copygroup') : 1
 		res.render('campaign/five', Object.assign({}, commonParams, {
+			req: req,
 			currentUrl: getCurrentUrl(req),
 			currentDomain: getCurrentDomain(req),
 			copyGroupName: copyGroup,

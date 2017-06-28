@@ -16,6 +16,7 @@ const isOldUser = false
 
 const commonParams = req => {
 	return {
+		req: req,
 		disableSegment: req.query[process.env.ALIAS_PARAM_KEY] || process.env.NODE_ENV == 'development',
 		cloudFrontUrl: cloudFrontUrl,
 		apiUrl: process.env.API_URL,

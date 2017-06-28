@@ -23,7 +23,9 @@ var ITAlogin = function(
 		return response.json()
 	})
 	.then(json => {
-		analytics.track('Account Created', () => {
+		analytics.track('Account Created', {
+			utm_source: '<%= req.query.utm_source %>',
+		}, () => {
 			if (card) {
 				top.location = location.protocol + '//' + window.location.host + '/d?offer=starter'
 			}
