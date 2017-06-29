@@ -37,6 +37,7 @@ export const createRoutes = (store, dispatch) => ({
 		})
 	},
 	childRoutes: [
+		require('routes/Console'),
 		require('routes/Account'),
 		require('routes/Card').default(store, dispatch),
 		require('routes/CardOverlay').default(store, dispatch),

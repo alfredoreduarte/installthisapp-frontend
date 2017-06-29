@@ -87,4 +87,4 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppNavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(AppNavBar)
