@@ -15,7 +15,21 @@
 					<li><span class="glyphicon glyphicon-ok"></span><%= listItem %></li>
 				<% }) %>
 			</ul>
-			<h2 class="text-right"><%= copyGroup['cta-title'] %></h2>
+			<div>
+				<h2><%= copyGroup['cta-title'] %></h2>
+				<br/>
+				<form class="form-inline lead-form">
+					<div class="input-group cta-input-group" style="width: 100%">
+						<input type="email" name="email" class="form-control input-lg cta-input lead-email" required placeholder="<%= copyGroup['cta-input-placeholder'] %>" />
+						<span class="input-group-btn">
+							<button class="btn btn-success btn-lg cta-button" type="submit"><%= copyGroup['cta-button'] %></button>
+						</span>
+					</div>
+					<div class="alert alert-danger lead-form-alert" style="display: none">
+						Please use a valid email address
+					<div>
+				</form>
+			</div>
 		</header>
 		<footer class="footer">
 			<div style="
@@ -25,17 +39,6 @@
 			">
 				<img src="/images/campaign/hero-1.png" class="img-responsive" style="opacity: 0" />
 			</div>
-			<form class="form-inline lead-form">
-				<div class="input-group cta-input-group" style="width: 100%">
-					<input type="email" name="email" class="form-control input-lg cta-input lead-email" required placeholder="<%= copyGroup['cta-input-placeholder'] %>" />
-					<span class="input-group-btn">
-						<button class="btn btn-success btn-lg cta-button" type="submit"><%= copyGroup['cta-button'] %></button>
-					</span>
-				</div>
-				<div class="alert alert-danger lead-form-alert" style="display: none">
-					Please use a valid email address
-				<div>
-			</form>
 		</footer>
 	</div>
 	<%- include('_overlay') %>
