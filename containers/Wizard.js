@@ -316,7 +316,7 @@ const mapDispatchToProps = (dispatch, props) => {
 	setTimeout(function() {
 		if (!fbLoaded) {
 			console.log('UNABLE TO LOAD FB SCRIPT')
-			dispatch(setAlert('Whoops!', "We're not being able to connect to Facebook. Please disable any ad-blocker and reload the page. We don't show any ads here anyway 😇"))
+			dispatch(setAlert('Whoops!', "We're not being able to connect to Facebook. Please disable any ad-blocker or whitelist v3.installthisapp.com, then reload the page. We don't show any ads here anyway 😇"))
 		}
 	}, 5 * 1000)
 	// ! fb verification

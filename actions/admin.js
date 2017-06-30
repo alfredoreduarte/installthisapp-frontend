@@ -1,5 +1,6 @@
 import { toggleActivityUpdatingAdmin } from 'actions/activityIndicators'
 import { postToApi, getFromApi, patchToApi, deleteFromApi } from 'api'
+import { setAlert } from 'actions/alerts'
 import { normalize } from 'normalizr'
 import * as schema from 'schema'
 import { receiveEntities } from 'actions/entities'
@@ -91,29 +92,49 @@ export const updateInfo = () => {
 
 export const fbConnect = fbResponse => {
 	return dispatch => {
-		analytics.track('Facebook Connected')
-		dispatch({
-			type: 'TOGGLE_ACTIVITY/CONNECTING_FACEBOOK'
-		})
-		return postToApi('fb_profiles.json', {
-			identifier: fbResponse.id,
-			signedRequest: fbResponse.signedRequest,
-		}).then( response => {
+		const errorMsg = `We can't install Facebook Page tabs or get the stats if you don't log in and grant the required permissions.`
+		if (fbResponse.id ) {
 			dispatch({
 				type: 'TOGGLE_ACTIVITY/CONNECTING_FACEBOOK'
 			})
-			// Prepare entities for normalization
-			const entities = {
-				apps: response.applications,
-				pages: response.pages,
-			}
-			const normalized = normalize(entities, schema.entities)
-			dispatch(receiveEntities(normalized.entities))
-			// Sanitize admin user
-			const admin = { ...response }
-			delete admin.applications
-			delete admin.pages
-			return dispatch(receiveAdmin(admin))
-		})
+			let declined = []
+			FB.api('/me/permissions', permissionsResponse => {
+				permissionsResponse.data.map( perm => {
+					if (perm.status === 'declined') { declined.push(perm.permission) } 
+				})
+				if (declined.length) {
+					dispatch({
+						type: 'TOGGLE_ACTIVITY/CONNECTING_FACEBOOK'
+					})
+					dispatch(setAlert(`<b>Error</b>.`, errorMsg))
+				}
+				else {
+					return postToApi('fb_profiles.json', {
+						identifier: fbResponse.id,
+						signedRequest: fbResponse.signedRequest,
+					}).then( response => {
+						analytics.track('Facebook Connected')
+						dispatch({
+							type: 'TOGGLE_ACTIVITY/CONNECTING_FACEBOOK'
+						})
+						// Prepare entities for normalization
+						const entities = {
+							apps: response.applications,
+							pages: response.pages,
+						}
+						const normalized = normalize(entities, schema.entities)
+						dispatch(receiveEntities(normalized.entities))
+						// Sanitize admin user
+						const admin = { ...response }
+						delete admin.applications
+						delete admin.pages
+						return dispatch(receiveAdmin(admin))
+					})
+				}
+			})
+		}
+		else {
+			dispatch(setAlert(`<b>Error</b>.`, errorMsg))
+		}
 	}
 }
