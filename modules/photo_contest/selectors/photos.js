@@ -14,7 +14,8 @@ export const getPhotosForCurrentApp = createSelector(
 	filterTextSelector,
 	(photos, app, text) => {
 		const subList = _.filter(photos, p => p.applicationId == app.id)
-		return subList.filter(p => stringContains(p.caption, text))
+		const filtered = subList.filter(p => stringContains(p.caption, text))
+		return _.orderBy(filtered, p => p.votes.length, 'desc')
 	}
 )
 

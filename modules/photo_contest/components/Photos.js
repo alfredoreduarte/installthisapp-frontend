@@ -76,6 +76,10 @@ const Photos = ({
 							{' '}/ {selectedIds.length} 
 							{' '}photo{selectedIds.length > 1 ? 's' : ''} selected
 						</small>
+						<small className={selectedIds.length ? 'hide' : ''}>
+							{' '}/ {photos.length} 
+							{' '}photo{photos.length > 1 ? 's' : ''} in total
+						</small>
 					</h3>
 				</div>
 			</div>
