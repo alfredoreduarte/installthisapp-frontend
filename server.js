@@ -54,6 +54,12 @@ app.use('/sw.js', express.static(__dirname + '/assets/newlanding/sw.js'))
 app.use('/canvas', express.static(__dirname + '/assets/canvas'))
 app.use('/node_modules', express.static(__dirname + '/node_modules'))
 
+// Robots.txt
+app.get('/robots.txt', function (req, res) {
+	res.type('text/plain')
+	res.send("Sitemap: https://v3.installthisapp.com/sitemap.xml\nUser-agent: *\nDisallow: /d")
+})
+
 // 
 // === Canvas ===
 // 
