@@ -66,6 +66,15 @@ router.get('/top-fans-for-facebook-pages.html', function(req, res) { res.render(
 	whatCanIDoAnswer: "Save hundreds of $ by incentivizing people to like and comment on your content instead of paying for promoted posts",
 	createText: "Create a Top Fans app",
 })) })
+router.get('/top-fans/', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
+	app: "top_fans",
+	appExampleLink: 'https://v3.installthisapp.com/app2/DUPFER',
+	pageTitle: "Top Fans Ranking for Facebook Pages",
+	pageSubTitle: "This app scans your Facebook Page's timeline to collect every single like and comment in real time. Scores are shown in a list, with your own style, and you can share it everywhere.",
+	whatCanIDoQuestion: "What can I do with the Top Fans app?",
+	whatCanIDoAnswer: "Save hundreds of $ by incentivizing people to like and comment on your content instead of paying for promoted posts",
+	createText: "Create a Top Fans app",
+})) })
 router.get('/photo-contest.html', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
 	app: "photo_contest",
 	appExampleLink: 'https://v3.installthisapp.com/app3/7EHEU0',
@@ -75,7 +84,25 @@ router.get('/photo-contest.html', function(req, res) { res.render('landing-v2/ap
 	whatCanIDoAnswer: "Imagine launching a competition where people share their favorite christmas photos and ask all of their friends for votes.",
 	createText: "Create a Top Fans app",
 })) })
+router.get('/photo-contest/', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
+	app: "photo_contest",
+	appExampleLink: 'https://v3.installthisapp.com/app3/7EHEU0',
+	pageTitle: "Photo Contest for social media campaigns",
+	pageSubTitle: "Create contests about people's best holiday, birthday, conert photos",
+	whatCanIDoQuestion: "What can I do with the Photo Contest app?",
+	whatCanIDoAnswer: "Imagine launching a competition where people share their favorite christmas photos and ask all of their friends for votes.",
+	createText: "Create a Top Fans app",
+})) })
 router.get('/trivia-contest.html', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
+	app: "trivia",
+	appExampleLink: 'https://v3.installthisapp.com/app1/ZRRDDP',
+	pageTitle: "Trivia game for Social Campaigns",
+	pageSubTitle: "Test your audience's knowledge about any subject, and spice it up a bit with a countdown",
+	whatCanIDoQuestion: "What can I do with the Trivia app?",
+	whatCanIDoAnswer: "Test your audience's knowledge about any subject, and spice it up a bit with a countdown",
+	createText: "Create a Trivia app and write some questions",
+})) })
+router.get('/trivia/', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
 	app: "trivia",
 	appExampleLink: 'https://v3.installthisapp.com/app1/ZRRDDP',
 	pageTitle: "Trivia game for Social Campaigns",
