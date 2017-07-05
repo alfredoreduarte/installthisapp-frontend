@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 
 const Credits = () => (
 	<div style={{textAlign: 'center', margin: '15px 0px'}}>
-		Powered by InstallThisApp.com | <a href="https://v3.installthisapp.com/photo-contest.html" target="_blank" title="Photo Contest for Facebook Pages">Run a Photo Contest in your Facebook Page</a>
+		Powered by InstallThisApp.com | <a href="https://v3.installthisapp.com/photo-contest.html" target="_blank" title="Photo Contest for Facebook Pages"><b>Run a Photo Contest in your Facebook Page</b></a>
 	</div>
 )
 
