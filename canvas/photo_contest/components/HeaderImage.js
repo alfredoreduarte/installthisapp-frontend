@@ -9,8 +9,8 @@ const HeaderImage = ({ source }) => (
 const styles = {
 	img: {
 		// marginBottom: '38px',
-		width: 'auto',
-		maxWidth: '100%',
+		// maxWidth: '100%',
+		width: process.env.FB_TAB_WIDTH + 'px',
 	}
 }
 

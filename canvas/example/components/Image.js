@@ -11,8 +11,7 @@ const styles = {
 		textAlign: 'center',
 	},
 	img: {
-		width: 'auto',
-		maxWidth: '100%',
+		width: process.env.FB_TAB_WIDTH + 'px',
 	},
 }
 
