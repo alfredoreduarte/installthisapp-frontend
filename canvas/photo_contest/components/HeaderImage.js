@@ -10,7 +10,7 @@ const styles = {
 	img: {
 		// marginBottom: '38px',
 		// maxWidth: '100%',
-		width: process.env.FB_TAB_WIDTH + 'px',
+		width: '820px',
 	}
 }
 

@@ -9,7 +9,7 @@ const HeaderImage = ({ source }) => (
 const styles = {
 	img: {
 		// marginBottom: '38px',
-		width: process.env.FB_TAB_WIDTH + 'px',
+		width: '820px',
 	}
 }
 
