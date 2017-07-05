@@ -10,6 +10,7 @@ const styles = {
 	img: {
 		// marginBottom: '38px',
 		width: '820px',
+		maxWidth: '100%',
 	}
 }
 

@@ -12,6 +12,7 @@ const styles = {
 	},
 	img: {
 		width: '820px',
+		maxWidth: '100%',
 	},
 }
 
