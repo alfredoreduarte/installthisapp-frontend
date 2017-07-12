@@ -2,7 +2,7 @@
 var ITAlogin = function(
 	email, 
 	password, 
-	card // wether to offer a free trial right after logging in
+	card // wether or not to offer a free trial right after logging in
 ){
 	fetch('<%= apiUrl %>/auth/sign_in.json', {
 		method: 'POST',
