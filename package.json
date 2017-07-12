@@ -60,6 +60,7 @@
     "eslint-plugin-react": "^5.1.1",
     "express": "^4.15.2",
     "express-enforces-ssl": "^1.1.0",
+    "express-sitemap": "^1.8.0",
     "express-subdomain": "^1.0.5",
     "extract-text-webpack-plugin": "^2.0.0-beta",
     "eyeglass": "^0.8.3",

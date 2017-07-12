@@ -1,5 +1,6 @@
 var path = require('path')
 var express = require('express')
+var map = require('express-sitemap')
 var helmet = require('helmet')
 var cors = require('cors')
 
@@ -53,12 +54,6 @@ app.use('/googleaf3715fff09887cb.html', express.static(__dirname + '/public/goog
 app.use('/sw.js', express.static(__dirname + '/assets/newlanding/sw.js'))
 app.use('/canvas', express.static(__dirname + '/assets/canvas'))
 app.use('/node_modules', express.static(__dirname + '/node_modules'))
-
-// Robots.txt
-app.get('/robots.txt', function (req, res) {
-	res.type('text/plain')
-	res.send("Sitemap: https://v3.installthisapp.com/sitemap.xml\nUser-agent: *\nDisallow: /d")
-})
 
 // 
 // === Canvas ===
@@ -120,6 +115,66 @@ app.get('/sign-s3', s3)
 // 	res.status(err.status || 500)
 // 	res.render('error')
 // })
+
+// 
+// === Sitemap & robots.txt ===
+// 
+var rightNow = new Date()
+var dateForSitemap = rightNow.toISOString().slice(0,10).replace(/-/g,"-")
+const sitemap = map({
+	http: 'https',
+	url: 'v3.installthisapp.com',
+	sitemap: 'sitemap.xml',
+	robots: 'robots.txt',
+	sitemapSubmission: '/sitemap.xml',
+	route: {
+		// 'ALL': {
+		// 	lastmod: dateForSitemap,
+		// 	changefreq: 'weekly',
+		// 	// priority: 1.0,
+		// },
+		'/': {
+			lastmod: dateForSitemap,
+			changefreq: 'weekly',
+			priority: 1.0,
+		},
+		'/top-fans': {
+			lastmod: dateForSitemap,
+			changefreq: 'weekly',
+			priority: 1.0,
+		},
+		'/trivia': {
+			lastmod: dateForSitemap,
+			changefreq: 'weekly',
+			priority: 1.0,
+		},
+		'/photo-contest': {
+			lastmod: dateForSitemap,
+			changefreq: 'weekly',
+			priority: 1.0,
+		},
+		'/sign-s3': {
+			disallow: true,
+		},
+		'/forgot/sent': {
+			disallow: true,
+		},
+		'/card': {
+			disallow: true,
+		},
+		'/d': {
+			disallow: true,
+		},
+	},
+})
+sitemap.generate4(index)
+
+// Robots.txt
+app.get('/sitemap.xml', function(req, res) {
+	sitemap.XMLtoWeb(res)
+}).get('/robots.txt', function(req, res) {
+	sitemap.TXTtoWeb(res)
+})
 
 // Running the server
 if (process.env.NODE_ENV == 'development') {

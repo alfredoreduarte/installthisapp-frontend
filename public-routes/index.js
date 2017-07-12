@@ -16,6 +16,7 @@ const isOldUser = false
 
 const commonParams = req => {
 	return {
+		canonical: false,
 		req: req,
 		disableSegment: req.query[process.env.ALIAS_PARAM_KEY] || process.env.NODE_ENV == 'development',
 		cloudFrontUrl: cloudFrontUrl,
@@ -58,6 +59,7 @@ router.get('/reset-password', function(req, res) { res.render('reset-password', 
 // Module landings
 
 router.get('/top-fans-for-facebook-pages.html', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
+	canonical: '/top-fans',
 	app: "top_fans",
 	appExampleLink: 'https://v3.installthisapp.com/app2/DUPFER',
 	pageTitle: "Top Fans Ranking for Facebook Pages",
@@ -67,6 +69,7 @@ router.get('/top-fans-for-facebook-pages.html', function(req, res) { res.render(
 	createText: "Create a Top Fans app",
 })) })
 router.get('/top-fans/', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
+	canonical: '/top-fans',
 	app: "top_fans",
 	appExampleLink: 'https://v3.installthisapp.com/app2/DUPFER',
 	pageTitle: "Top Fans Ranking for Facebook Pages",
@@ -76,6 +79,7 @@ router.get('/top-fans/', function(req, res) { res.render('landing-v2/app', _.mer
 	createText: "Create a Top Fans app",
 })) })
 router.get('/photo-contest.html', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
+	canonical: '/photo-contest',
 	app: "photo_contest",
 	appExampleLink: 'https://v3.installthisapp.com/app3/7EHEU0',
 	pageTitle: "Photo Contest for social media campaigns",
@@ -84,7 +88,8 @@ router.get('/photo-contest.html', function(req, res) { res.render('landing-v2/ap
 	whatCanIDoAnswer: "Imagine launching a competition where people share their favorite christmas photos and ask all of their friends for votes.",
 	createText: "Create a Top Fans app",
 })) })
-router.get('/photo-contest/', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
+router.get('/photo-contest', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
+	canonical: '/photo-contest',
 	app: "photo_contest",
 	appExampleLink: 'https://v3.installthisapp.com/app3/7EHEU0',
 	pageTitle: "Photo Contest for social media campaigns",
@@ -94,6 +99,7 @@ router.get('/photo-contest/', function(req, res) { res.render('landing-v2/app', 
 	createText: "Create a Top Fans app",
 })) })
 router.get('/trivia-contest.html', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
+	canonical: '/trivia',
 	app: "trivia",
 	appExampleLink: 'https://v3.installthisapp.com/app1/ZRRDDP',
 	pageTitle: "Trivia game for Social Campaigns",
@@ -102,7 +108,8 @@ router.get('/trivia-contest.html', function(req, res) { res.render('landing-v2/a
 	whatCanIDoAnswer: "Test your audience's knowledge about any subject, and spice it up a bit with a countdown",
 	createText: "Create a Trivia app and write some questions",
 })) })
-router.get('/trivia/', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
+router.get('/trivia', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
+	canonical: '/trivia',
 	app: "trivia",
 	appExampleLink: 'https://v3.installthisapp.com/app1/ZRRDDP',
 	pageTitle: "Trivia game for Social Campaigns",
