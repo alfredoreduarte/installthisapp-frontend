@@ -16,6 +16,9 @@ export const receiveAdmin = payload => {
 
 const identifyAdmin = payload => {
 	// const experimentTrialOfferVariation = payload.id % 2 == 0 ? 'With photo' : 'Without photo'
+	// 
+	// Segment
+	// 
 	analytics.identify(payload.id, {
 		name: payload.name,
 		email: payload.email,
@@ -27,7 +30,26 @@ const identifyAdmin = payload => {
 		// plan: 'demo',
 		// 'Experiment: Trial Offer': experimentTrialOfferVariation,
 	})
+	// 
+	// Profitwell
+	// 
 	profitwell('user_email', payload.email)
+	// 
+	// Samestate
+	// 
+	window.Samestate({
+		// Required fields. At least one of user_id or email is required.
+		token: '2bc168b9dcd4|15d5cb784da', // Your Samestate token
+		email: payload.email,
+
+		// Optional properties
+		// name: ...,
+		// censor: ['.ignore .this', '#and.this'], // Censor fields matching css selectors
+		intercom: { // Add this to load user data from Intercom
+			user_id: payload.id,
+			email: payload.email,
+		}
+	})
 }
 
 export const fetchAdmin = () => {
