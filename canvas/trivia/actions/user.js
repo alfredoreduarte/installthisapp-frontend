@@ -16,34 +16,34 @@ export const digestFacebookResponse = response => {
 			signedRequest,
 			checksum,
 		}
-		writeToApiWithoutAuth(`users.json`, body, response => {
+		writeToApiWithoutAuth(`users.json`, body).then( response => {
 			window.canvasApiKey = response.apiKey
 			window.loggedUserId = response.id
 			Cookies.set('apiKey', response.apiKey, { expires: 7, path: `/${canvasId}/${checksum}` })
 			Cookies.set('loggedUserId', response.id, { expires: 7, path: `/${canvasId}/${checksum}` })
-			dispatch(loginCallback())
+			return dispatch(loginCallback())
 		})
 	}
 }
 
 export const loginCallback = () => {
 	return (dispatch, getState) => 	
-						dispatch(fetchEntities())
-						.then(() => {
-							dispatch(toggleActivityIndicator())
-							const state = getState()
-							const { checksum, canvasId } = state.applicationData
-							if (!hasAnsweredAllQuestions(state)) {
-								console.log('hay preguntas disponibles')
-								dispatch(push(`/${canvasId}/${checksum}/questions`))
-							}
-							else{
-								console.log('NO hay preguntas disponibles')
-								dispatch(push(`/${canvasId}/${checksum}/already-played`))
-							}
-						})
-	// return dispatch => 	dispatch(fetchSettings())
-						// .then(() => dispatch(fetchMessages()))
-						// .then(() => dispatch(fetchImages()))
-						// .then(() => dispatch(fetchEntities()))
+		dispatch(fetchEntities())
+		.then(() => {
+			dispatch(toggleActivityIndicator())
+			const state = getState()
+			const { checksum, canvasId } = state.applicationData
+			if (!hasAnsweredAllQuestions(state)) {
+				console.log('hay preguntas disponibles')
+				dispatch(push(`/${canvasId}/${checksum}/questions`))
+			}
+			else{
+				console.log('NO hay preguntas disponibles')
+				dispatch(push(`/${canvasId}/${checksum}/already-played`))
+			}
+		})
+// return dispatch => 	dispatch(fetchSettings())
+		// .then(() => dispatch(fetchMessages()))
+		// .then(() => dispatch(fetchImages()))
+		// .then(() => dispatch(fetchEntities()))
 }

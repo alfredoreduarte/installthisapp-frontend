@@ -15,7 +15,7 @@ export const receiveEntities = entities => ({
 export const fetchEntities = () => {
 	return (dispatch, getState) => {
 		const { checksum, canvasId } = getState().applicationData
-		return getFromApi(`${checksum}/entities.json`).then( json => {
+		return getFromApi(`${checksum}/entities_authenticated.json`).then( json => {
 			const payload = normalize(json, schema.payload)
 			// const isEmpty = _.isEmpty(payload.entities.questions)
 			// if (!isEmpty) {

@@ -11,7 +11,7 @@ export const receiveEntities = entities => ({
 export const fetchEntities = () => {
 	return (dispatch, getState) => {
 		const { checksum, canvasId } = getState().applicationData
-		return getFromApi(`${checksum}/entities.json`, response => {
+		return getFromApi(`${checksum}/entities_authenticated.json`, response => {
 			if (response.success) {
 				const normalized = normalize(response, schema.entities)
 				return dispatch(receiveEntities(normalized.entities))

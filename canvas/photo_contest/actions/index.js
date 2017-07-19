@@ -66,7 +66,7 @@ export const loginCallback = () => {
 export const fetchEntities = () => {
 	return (dispatch, getState) => {
 		const { checksum, canvasId } = getState().applicationData
-		return getFromApi(`${checksum}/viewmodel.json`).then( json => {
+		return getFromApi(`${checksum}/entities.json`).then( json => {
 			const payload = normalize(json.payload, schema.payload)
 			const settings = json.settings
 			dispatch(receiveGameSettings(settings))
