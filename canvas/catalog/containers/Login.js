@@ -15,7 +15,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, props) => ({
 	fbCallback: response => {
-		if (response.status != 'not_authorized') {
+		if (response.id) {
 			dispatch(toggleLogin())
 			if (props.location.state && props.location.state.nextPathname) {
 				return dispatch(digestFacebookResponse(response, props.location.state.nextPathname))

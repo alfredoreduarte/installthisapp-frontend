@@ -13,9 +13,9 @@ class Login extends Component {
 	}
 	fbCallback(response) {
 		this.setState({
-			logging: response.status != 'not_authorized'
+			logging: response.id
 		})
-		if (response.status != 'not_authorized') {
+		if (response.id) {
 			this.props.processResponse(response)
 		}
 	}

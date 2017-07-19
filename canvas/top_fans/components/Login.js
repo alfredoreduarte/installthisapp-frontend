@@ -14,9 +14,9 @@ class Login extends Component {
 	fbCallback(response) {
 		const { location } = this.props
 		this.setState({
-			logging: response.status != 'not_authorized'
+			logging: response.id
 		})
-		if (response.status != 'not_authorized') {
+		if (response.id) {
 			if (location.state && location.state.nextPathname) {
 				console.log('location.state.nextPathname')
 				console.log(location.state.nextPathname)
