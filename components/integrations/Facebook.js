@@ -56,7 +56,7 @@ const Facebook = ({
 								<FacebookLogin
 									appId={process.env.FB_APP_ID}
 									autoLoad={false}
-									scope={'manage_pages, moderate_content'}
+									scope={'manage_pages'}
 									fields="name,email,picture"
 									cssClass="btn btn-default btn-xs"
 									textButton="Refresh permissions"
@@ -68,7 +68,7 @@ const Facebook = ({
 								<FacebookLogin
 									appId={process.env.FB_APP_ID}
 									autoLoad={true}
-									scope={'manage_pages, moderate_content'}
+									scope={'manage_pages'}
 									textButton={connectingToFacebook ? 'Please wait...' : 'Connect to Facebook'}
 									fields="name,email,picture"
 									cssClass="btn btn-primary btn-sm"
