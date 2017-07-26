@@ -381,6 +381,9 @@ const mapDispatchToProps = (dispatch, props) => {
 		installTab: () => dispatch(updateAppSettings()).then(() => {
 			dispatch(installFacebookTab()).then(success => {
 				if (success) {
+					analytics.track('App Installed', {
+						appType: 'top_fans',
+					})
 					dispatch(pollTopFansEntities(props.params.checksum))
 				}
 			})

@@ -28,26 +28,28 @@ export const getEntriesForPage = createSelector(
 						likes: _.filter(allPageEntries.likes, entry => ignoredUserIdentifiers.indexOf(parseInt(entry.senderId)) === -1),
 						comments: _.filter(allPageEntries.comments, entry => ignoredUserIdentifiers.indexOf(parseInt(entry.senderId)) === -1),
 					}
-					const arrResult = merge(selectedEntries.likes, selectedEntries.comments, 'senderId')
-					const arrWithScores = arrResult.map(result => {
-						return {
-							...result,
-							likes: handleScore(result.likes),
-							comments: handleScore(result.comments),
-							score: handleScore(result.likes) * likeMultiplier + handleScore(result.comments) * commentMultiplier,
-						}
-					})
-					const arrResultOrdered = _.orderBy(arrWithScores, 'score', 'desc')
-					if (!verifiedScoresEventSent) {
-						// TODO: Reubicar esto porque acá se dispara innecesariamente.
-						// Traer los puntajes no significa que la app se haya acabado de instalar
-						analytics.track('Scores Verified')
-						analytics.track('App Installed', {
-							appType: 'top_fans',
+					if (selectedEntries.likes.length > 0 || selectedEntries.comments.length > 0) {
+						const arrResult = merge(selectedEntries.likes, selectedEntries.comments, 'senderId')
+						const arrWithScores = arrResult.map(result => {
+							return {
+								...result,
+								likes: handleScore(result.likes),
+								comments: handleScore(result.comments),
+								score: handleScore(result.likes) * likeMultiplier + handleScore(result.comments) * commentMultiplier,
+							}
 						})
-						verifiedScoresEventSent = !verifiedScoresEventSent
+						const arrResultOrdered = _.orderBy(arrWithScores, 'score', 'desc')
+						if (!verifiedScoresEventSent) {
+							// TODO: Reubicar esto porque acá se dispara innecesariamente.
+							// Traer los puntajes no significa que la app se haya acabado de instalar
+							analytics.track('Scores Verified')
+							verifiedScoresEventSent = !verifiedScoresEventSent
+						}
+						return _.take(arrResultOrdered, 100)
 					}
-					return _.take(arrResultOrdered, 100)
+					else{
+						return []
+					}
 				}
 				else{
 					return []
