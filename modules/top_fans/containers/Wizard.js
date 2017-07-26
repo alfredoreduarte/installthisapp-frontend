@@ -242,8 +242,8 @@ const Integrations = ({
 										<b className="text-success">Verified! 🚀</b>
 									:
 										<span className="animated flash" style={{
-											'-webkit-animation-iteration-count': 'infinite',
-											'animation-iteration-count': 'infinite',
+											WebkitAnimationIterationCount: 'infinite',
+											animationIterationCount: 'infinite',
 										}}>Nothing detected yet...</span>
 									}
 								</p>
@@ -379,8 +379,10 @@ const mapDispatchToProps = (dispatch, props) => {
 			})
 		},
 		installTab: () => dispatch(updateAppSettings()).then(() => {
-			dispatch(installFacebookTab()).then(() => {
-				dispatch(pollTopFansEntities(props.params.checksum))
+			dispatch(installFacebookTab()).then(success => {
+				if (success) {
+					dispatch(pollTopFansEntities(props.params.checksum))
+				}
 			})
 		}),
 		uninstallTab: () => dispatch(uninstallFacebookTab())

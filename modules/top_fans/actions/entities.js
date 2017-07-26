@@ -37,7 +37,7 @@ export const pollTopFansEntities = checksum => {
 	return dispatch => {
 		setInterval(() => {
 			dispatch(fetchTopFansEntities(checksum))
-		}, 2000)
+		}, 3500)
 	}
 }
 
