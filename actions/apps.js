@@ -234,9 +234,6 @@ export const installFacebookTab = () => {
 				return false
 			}
 			else {
-				analytics.track('Feature Used', {
-					featureType: 'Facebook Tab',
-				})
 				analytics.track('Tab Installed')
 				dispatch({
 					type: 'TOGGLE_ACTIVITY/INSTALLING_TAB'
