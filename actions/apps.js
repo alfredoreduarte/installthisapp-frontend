@@ -195,6 +195,9 @@ export const postNewApp = () => {
 			if (response.success) {
 				const normalized = normalize(response.app, schema.app)
 				dispatch(receiveEntities(normalized.entities))
+				// 
+				// Wizard (setup-guide) solamente para top fans
+				// 
 				if (body.module == 'top_fans') {
 					dispatch(push(`/d/apps/${response.app.applicationType}/${response.app.checksum}/setup-guide`))
 				} else {

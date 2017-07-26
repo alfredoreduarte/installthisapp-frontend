@@ -23,8 +23,6 @@ export const getEntriesForPage = createSelector(
 			if (entries) {
 				if (entries[identifier]){
 					const allPageEntries = entries[identifier]
-					console.log('selected?')
-					console.log(allPageEntries)
 					// hide ignored users 
 					const selectedEntries = {
 						likes: _.filter(allPageEntries.likes, entry => ignoredUserIdentifiers.indexOf(parseInt(entry.senderId)) === -1),
@@ -41,6 +39,8 @@ export const getEntriesForPage = createSelector(
 					})
 					const arrResultOrdered = _.orderBy(arrWithScores, 'score', 'desc')
 					if (!verifiedScoresEventSent) {
+						// TODO: Reubicar esto porque acá se dispara innecesariamente.
+						// Traer los puntajes no significa que la app se haya acabado de instalar
 						analytics.track('Scores Verified')
 						analytics.track('App Installed', {
 							appType: 'top_fans',

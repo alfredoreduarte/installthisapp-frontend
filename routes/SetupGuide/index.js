@@ -16,7 +16,7 @@ export default (store, dispatch) => ({
 				require.ensure([], (require) => {
 					dispatch(turnOffGlobalIndicator())
 					cb(null, {
-						main: require('containers/Wizard').default,
+						main: require('modules/' + nextState.params.type + '/containers/Wizard').default,
 						sidebar: require('modules/' + nextState.params.type + '/components/Sidebar').default,
 					})
 				})
