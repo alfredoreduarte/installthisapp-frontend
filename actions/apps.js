@@ -195,6 +195,9 @@ export const postNewApp = () => {
 			if (response.success) {
 				const normalized = normalize(response.app, schema.app)
 				dispatch(receiveEntities(normalized.entities))
+				// 
+				// Wizard (setup-guide) solamente para top fans
+				// 
 				if (body.module == 'top_fans') {
 					dispatch(push(`/d/apps/${response.app.applicationType}/${response.app.checksum}/setup-guide`))
 				} else {
@@ -225,24 +228,31 @@ export const installFacebookTab = () => {
 		return postToApi(`applications/${currentApp.checksum}/install_tab.json`, {
 			fbPageIdentifier: fbPageIdentifierForIntegration
 		}).then(response => {
-			analytics.track('Feature Used', {
-				featureType: 'Facebook Tab',
-			})
-			analytics.track('Tab Installed')
-			dispatch({
-				type: 'TOGGLE_ACTIVITY/INSTALLING_TAB'
-			})
-			const entities = {
-				apps: response.applications,
-				pages: response.pages,
+			if (response.success == false) {
+				window.scroll(0, 0)
+				dispatch(setAlert(`<a href="?offer=app-limit-reached">Upgrade now to publish apps</a>.`, `You have reached the limit for free accounts.`))
+				return false
 			}
-			const normalized = normalize(entities, schema.entities)
-			dispatch(receiveEntities(normalized.entities))
-			// Sanitize admin user
-			const admin = { ...response }
-			delete admin.applications
-			delete admin.pages
-			return dispatch(receiveAdmin(admin))
+			else {
+				analytics.track('Feature Used', {
+					featureType: 'Facebook Tab',
+				})
+				analytics.track('Tab Installed')
+				dispatch({
+					type: 'TOGGLE_ACTIVITY/INSTALLING_TAB'
+				})
+				const entities = {
+					apps: response.applications,
+					pages: response.pages,
+				}
+				const normalized = normalize(entities, schema.entities)
+				dispatch(receiveEntities(normalized.entities))
+				// Sanitize admin user
+				const admin = { ...response }
+				delete admin.applications
+				delete admin.pages
+				return dispatch(receiveAdmin(admin))
+			}
 		})
 		.catch(exception => {
 			console.log('parsing failed', exception)
