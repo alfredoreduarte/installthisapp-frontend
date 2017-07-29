@@ -5,9 +5,6 @@ export default (store, dispatch) => ({
 	onEnter: (nextState, replace) => {
 		dispatch(turnOnGlobalIndicator())
 		analytics.page('App Preferences')
-		analytics.track('Feature Used', {
-			featureType: 'App Preferences',
-		})
 	},
 	getComponent(nextState, cb) {
 		require.ensure([], require => {

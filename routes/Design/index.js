@@ -20,9 +20,6 @@ export default (store, dispatch) => ({
 	onEnter: (nextState, replace, next) => {
 		dispatch(turnOnGlobalIndicator())
 		analytics.page('App Design')
-		analytics.track('Feature Used', {
-			featureType: 'App Design',
-		})
 		dispatch(setCurrentAppChecksum(nextState.params.checksum)).then(() => {
 			dispatch(fetchStyles()).then(() => {
 				// dispatch(fetchJsonTest()).then(() => next())

@@ -7,9 +7,7 @@ export default (store, dispatch) => ({
 			onEnter: (nextState, replace, next) => {
 				dispatch(turnOnGlobalIndicator())
 				analytics.page('Users List')
-				analytics.track('Feature Used', {
-					featureType: 'Users List',
-				}, () => next())
+				next()
 			},
 			getComponent(nextState, cb) {
 				require.ensure([], (require) => {
