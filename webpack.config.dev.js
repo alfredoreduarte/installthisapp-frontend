@@ -5,8 +5,8 @@ var AssetsPlugin = require('assets-webpack-plugin')
 var assetsPluginInstance = new AssetsPlugin({
 	prettyPrint: true,
 })
-var HappyPack = require('happypack')
-var happyThreadPool = HappyPack.ThreadPool({ size: 5 })
+// var HappyPack = require('happypack')
+// var happyThreadPool = HappyPack.ThreadPool({ size: 5 })
 
 module.exports = {
 	devtool: 'inline-source-map',
@@ -32,11 +32,11 @@ module.exports = {
 		publicPath: '/static/'
 	},
 	plugins: [
-		new HappyPack({
+		// new HappyPack({
 			// loaders is the only required parameter:
-			loaders: [ 'babel-loader?presets[]=es2015' ],
-			threadPool: happyThreadPool,
-		}),
+			// loaders: [ 'babel-loader?presets[]=es2015' ],
+			// threadPool: happyThreadPool,
+		// }),
 		assetsPluginInstance,
 		new ExtractTextPlugin('[name].css'),
 		new webpack.HotModuleReplacementPlugin(),
@@ -70,8 +70,8 @@ module.exports = {
 			// js
 			{
 				test: /\.js$/,
-				// loaders: [ 'babel-loader' ],
-				loaders: [ 'happypack/loader' ],
+				loaders: [ 'babel-loader' ],
+				// loaders: [ 'happypack/loader' ],
 				exclude: /node_modules/,
 				include: __dirname
 			},
