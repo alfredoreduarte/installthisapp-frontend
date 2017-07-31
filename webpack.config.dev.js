@@ -5,25 +5,26 @@ var AssetsPlugin = require('assets-webpack-plugin')
 var assetsPluginInstance = new AssetsPlugin({
 	prettyPrint: true,
 })
-var HappyPack = require('happypack')
-var happyThreadPool = HappyPack.ThreadPool({ size: 5 })
+// var HappyPack = require('happypack')
+// var happyThreadPool = HappyPack.ThreadPool({ size: 2 })
 
 module.exports = {
 	devtool: 'inline-source-map',
 	entry: {
 		common: 'moment',
 		dashboard: ['webpack-hot-middleware/client', './index'],
+		leadgen: ['webpack-hot-middleware/client', './leadgen/index'],
 		landing: ['webpack-hot-middleware/client', './assets/landing/index'],
-		"campaign-one": ['webpack-hot-middleware/client', './assets/campaign/one'],
-		"campaign-two": ['webpack-hot-middleware/client', './assets/campaign/two'],
-		"campaign-three": ['webpack-hot-middleware/client', './assets/campaign/three'],
-		"campaign-four": ['webpack-hot-middleware/client', './assets/campaign/four'],
-		"campaign-five": ['webpack-hot-middleware/client', './assets/campaign/five'],
-		trivia: './canvas/trivia/index',
-		top_fans: './canvas/top_fans/index',
-		photo_contest: './canvas/photo_contest/index',
-		memory_match: './canvas/memory_match/index',
-		catalog: './canvas/catalog/index',
+		// "campaign-one": ['webpack-hot-middleware/client', './assets/campaign/one'],
+		// "campaign-two": ['webpack-hot-middleware/client', './assets/campaign/two'],
+		// "campaign-three": ['webpack-hot-middleware/client', './assets/campaign/three'],
+		// "campaign-four": ['webpack-hot-middleware/client', './assets/campaign/four'],
+		// "campaign-five": ['webpack-hot-middleware/client', './assets/campaign/five'],
+		// trivia: './canvas/trivia/index',
+		// top_fans: './canvas/top_fans/index',
+		// photo_contest: './canvas/photo_contest/index',
+		// memory_match: './canvas/memory_match/index',
+		// catalog: './canvas/catalog/index',
 	},
 	output: {
 		path: path.join(__dirname, '/dist'),
@@ -32,11 +33,11 @@ module.exports = {
 		publicPath: '/static/'
 	},
 	plugins: [
-		new HappyPack({
-			// loaders is the only required parameter:
-			loaders: [ 'babel-loader?presets[]=es2015' ],
-			threadPool: happyThreadPool,
-		}),
+		// new HappyPack({
+		// 	// loaders is the only required parameter:
+		// 	loaders: [ 'babel-loader?presets[]=es2015' ],
+		// 	threadPool: happyThreadPool,
+		// }),
 		assetsPluginInstance,
 		new ExtractTextPlugin('[name].css'),
 		new webpack.HotModuleReplacementPlugin(),
@@ -70,8 +71,8 @@ module.exports = {
 			// js
 			{
 				test: /\.js$/,
-				// loaders: [ 'babel-loader' ],
-				loaders: [ 'happypack/loader' ],
+				loaders: [ 'babel-loader' ],
+				// loaders: [ 'happypack/loader' ],
 				exclude: /node_modules/,
 				include: __dirname
 			},
