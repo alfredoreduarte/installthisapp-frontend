@@ -14,6 +14,18 @@ const plansDictionary = [
 		],
 	},
 	{
+		stripeId: "demo",
+		copy: [
+			'For InstallThisApp V2 users',
+			'Up to 5 apps',
+			'In-app support via chat',
+			'Facebook Tab integration',
+			'Standalone public webpage for your contests',
+			'Mobile and desktop views',
+			'100% customizable styles, texts and images',
+		],
+	},
+	{
 		stripeId: "agency",
 		copy: [
 			'For a team of marketers and designers',
