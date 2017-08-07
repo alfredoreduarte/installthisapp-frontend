@@ -2,6 +2,7 @@ import _ from 'lodash'
 import { createSelector } from 'reselect'
 import merge from 'lib/mergeCollections'
 import { getAllPages } from 'selectors/pages'
+import { getCurrentAppFbPageFeedWebhookIntegration } from 'selectors/appIntegrations'
 import { getCurrentAppByState } from 'selectors/apps'
 
 const getAllEntries = state => state.topFans.entries
@@ -12,10 +13,16 @@ let verifiedScoresEventSent = false // this avoids sending duplicate events to s
 export const getEntriesForPage = createSelector(
 	getAllEntries,
 	getCurrentAppByState,
+	getCurrentAppFbPageFeedWebhookIntegration,
 	getAllPages,
-	(entries, app, allPages) => {
-		if (app && app.page) {
-			const page = _.find(allPages, {'id': app.page})
+	(entries, app, fbPageFeedWebhookIntegration, allPages) => {
+		// if (app && app.page) {
+		if (app && fbPageFeedWebhookIntegration) {
+			// ! basarse en el app_integration y no en el app.page
+			// const page = _.find(allPages, {'id': app.page})
+			const page = _.find(allPages, {'identifier': fbPageFeedWebhookIntegration.settings.fbPageIdentifier})
+			console.log('el page?')
+			console.log(page)
 			const identifier = parseInt(page.identifier)
 			const likeMultiplier = app.setting.pointsPerLike
 			const commentMultiplier = app.setting.pointsPerComment

@@ -7,16 +7,16 @@ import { setAlert } from 'actions/alerts'
 import FacebookLogin from 'react-facebook-login'
 import moment from 'moment'
 import { SingleDatePicker } from 'react-dates'
-// import DatePicker from 'react-datepicker'
 import { postToApi } from 'api'
 import FaFacebookSquare from 'react-icons/lib/fa/facebook-square'
 import FaArrowCircleRight from 'react-icons/lib/fa/arrow-circle-right'
 import { getCurrentAppByState } from 'selectors/apps'
 import { installFacebookTab, uninstallFacebookTab, updateAppSettings } from 'actions/apps'
+import { getCurrentAppFbPageFeedWebhookIntegration } from 'selectors/appIntegrations'
 import { fbConnect } from 'actions/admin'
 import { getAllPages } from 'selectors/pages'
 import { fetchFacebookPages } from 'actions/pages'
-import { editAppSpecificSettings } from 'modules/top_fans/actions'
+import { editAppSpecificSettings, subscribeToWebhook, unsubscribeFromWebhook } from 'modules/top_fans/actions'
 import { getEntriesForPage } from 'modules/top_fans/selectors/entries'
 import { pollTopFansEntities } from 'modules/top_fans/actions/entities'
 
@@ -232,9 +232,9 @@ const Integrations = ({
 								}}>
 								<p>
 									{integrated ?
-										<s>Like or Comment on <b>your <a href={`https://fb.com/${pageIdentifier}`} target="_blank">latest post</a></b></s>
+										<s>Like or Comment on <b>your <a href={`https://fb.com/${pageIdentifier}/posts`} target="_blank">latest post</a></b></s>
 									:
-										<span>Like or Comment on <b>your <a href={`https://fb.com/${pageIdentifier}`} target="_blank">latest post</a></b></span>
+										<span>Like or Comment on <b>your <a href={`https://fb.com/${pageIdentifier}/posts`} target="_blank">latest post</a></b></span>
 									}
 								</p>
 								<p>
@@ -271,11 +271,23 @@ const Integrations = ({
 )
 
 const mapStateToProps = (state, props) => {
+	// OLD
+	// const fbProfile = state.admin.fbProfile
+	// const published = getCurrentAppByState(state).status == 'installed'
+	// const tabInstalledInPage = getCurrentAppByState(state).page ? _.find(getAllPages(state), {'id': getCurrentAppByState(state).page}).name : null
+	// const pageIdentifier = tabInstalledInPage ? _.find(getAllPages(state), {'id': getCurrentAppByState(state).page}).identifier : null
+	// const integrated = getEntriesForPage(state, props).length > 0
+	// 
+	// Does the user have a linked FB profile?
 	const fbProfile = state.admin.fbProfile
+	// Is the app currently published?
 	const published = getCurrentAppByState(state).status == 'installed'
-	const tabInstalledInPage = getCurrentAppByState(state).page ? _.find(getAllPages(state), {'id': getCurrentAppByState(state).page}).name : null
-	const pageIdentifier = tabInstalledInPage ? _.find(getAllPages(state), {'id': getCurrentAppByState(state).page}).identifier : null
-	const integrated = getEntriesForPage(state, props).length > 0
+	// Does it have a tab integration?
+	const tabIntegration = getCurrentAppFbPageFeedWebhookIntegration(state)
+	const tabIntegrationPageIdentifier = tabIntegration ? tabIntegration.settings.fbPageIdentifier : null
+	// Which page is the app integrated with?
+	const integratedPage = tabIntegration ? _.find(getAllPages(state), page => parseInt(page.identifier) == tabIntegrationPageIdentifier) : null
+	console.log('integratedPage', integratedPage)
 	const steps = [
 		{
 			active: state.topFans.wizard.step == 0,
@@ -284,18 +296,18 @@ const mapStateToProps = (state, props) => {
 		},
 		{
 			active: state.topFans.wizard.step == 1,
-			done: state.admin.fbPageIdentifierForIntegration || tabInstalledInPage,
+			done: state.admin.fbPageIdentifierForIntegration || integratedPage,
 			disabled: fbProfile ? false : true,
 		},
 		{
 			active: state.topFans.wizard.step == 2,
-			done: tabInstalledInPage ? true : false,
+			done: integratedPage ? true : false,
 			disabled: state.admin.fbPageIdentifierForIntegration ? false : true,
 		},
 		{
-			active: state.topFans.wizard.step == 3 || integrated,
-			done: integrated,
-			disabled: tabInstalledInPage ? false : true,
+			active: state.topFans.wizard.step == 3 || integratedPage,
+			done: integratedPage,
+			disabled: integratedPage ? false : true,
 		}
 	]
 	let progressBarWidth
@@ -321,8 +333,8 @@ const mapStateToProps = (state, props) => {
 		firstFetchFromDate: getCurrentAppByState(state).setting.firstFetchFromDate ? moment(getCurrentAppByState(state).setting.firstFetchFromDate) : null,
 		// 
 		scoreboardLink: `/d/apps/top_fans/${props.params.checksum}/scoreboard`,
-		integrated,
-		pageIdentifier,
+		integrated: integratedPage ? true : false,
+		pageIdentifier: integratedPage ? integratedPage.identifier : null,
 		steps,
 		// activity indicators
 		installingFacebookTab: state.activityIndicators.installingFacebookTab,
@@ -330,7 +342,7 @@ const mapStateToProps = (state, props) => {
 		connectingToFacebook: state.activityIndicators.connectingToFacebook,
 		// 
 		published,
-		tabInstalledInPage,
+		tabInstalledInPage: integratedPage ? integratedPage.name : null,
 		fbProfile,
 		fbPages: getAllPages(state),
 		fbPageIdentifierForIntegration: state.admin.fbPageIdentifierForIntegration,
@@ -379,7 +391,8 @@ const mapDispatchToProps = (dispatch, props) => {
 			})
 		},
 		installTab: () => dispatch(updateAppSettings()).then(() => {
-			dispatch(installFacebookTab()).then(success => {
+			// dispatch(installFacebookTab()).then(success => {
+			dispatch(subscribeToWebhook()).then(success => {
 				if (success) {
 					analytics.track('App Installed', {
 						appType: 'top_fans',
@@ -388,7 +401,8 @@ const mapDispatchToProps = (dispatch, props) => {
 				}
 			})
 		}),
-		uninstallTab: () => dispatch(uninstallFacebookTab())
+		// uninstallTab: () => dispatch(uninstallFacebookTab())
+		uninstallTab: () => dispatch(unsubscribeFromWebhook())
 	}
 }
 
