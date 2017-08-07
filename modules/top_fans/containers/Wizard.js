@@ -276,7 +276,6 @@ const mapStateToProps = (state, props) => {
 	// const published = getCurrentAppByState(state).status == 'installed'
 	// const tabInstalledInPage = getCurrentAppByState(state).page ? _.find(getAllPages(state), {'id': getCurrentAppByState(state).page}).name : null
 	// const pageIdentifier = tabInstalledInPage ? _.find(getAllPages(state), {'id': getCurrentAppByState(state).page}).identifier : null
-	// const integrated = getEntriesForPage(state, props).length > 0
 	// 
 	// Does the user have a linked FB profile?
 	const fbProfile = state.admin.fbProfile
@@ -287,7 +286,8 @@ const mapStateToProps = (state, props) => {
 	const tabIntegrationPageIdentifier = tabIntegration ? tabIntegration.settings.fbPageIdentifier : null
 	// Which page is the app integrated with?
 	const integratedPage = tabIntegration ? _.find(getAllPages(state), page => parseInt(page.identifier) == tabIntegrationPageIdentifier) : null
-	console.log('integratedPage', integratedPage)
+	// Did we get at least one activity recorded?
+	const receivedData = getEntriesForPage(state, props).length > 0
 	const steps = [
 		{
 			active: state.topFans.wizard.step == 0,
@@ -306,7 +306,7 @@ const mapStateToProps = (state, props) => {
 		},
 		{
 			active: state.topFans.wizard.step == 3 || integratedPage,
-			done: integratedPage,
+			done: receivedData,
 			disabled: integratedPage ? false : true,
 		}
 	]
