@@ -333,7 +333,8 @@ const mapStateToProps = (state, props) => {
 		firstFetchFromDate: getCurrentAppByState(state).setting.firstFetchFromDate ? moment(getCurrentAppByState(state).setting.firstFetchFromDate) : null,
 		// 
 		scoreboardLink: `/d/apps/top_fans/${props.params.checksum}/scoreboard`,
-		integrated: integratedPage ? true : false,
+		// integrated: integratedPage ? true : false,
+		integrated: receivedData,
 		pageIdentifier: integratedPage ? integratedPage.identifier : null,
 		steps,
 		// activity indicators
