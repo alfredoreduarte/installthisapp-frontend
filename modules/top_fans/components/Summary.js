@@ -3,8 +3,7 @@ import { Link, IndexLink } from 'react-router'
 import { ButtonToolbar, Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import User from 'components/User'
 import PlaceholderList from 'components/PlaceholderList'
-import FaCircle from 'react-icons/lib/fa/circle'
-import FaCheckCircle from 'react-icons/lib/fa/check-circle'
+import SummaryNumber from 'components/SummaryNumber'
 
 const Summary = ({ checksum, type, entries, steps, completed, share }) => (
 	<div>
@@ -28,7 +27,7 @@ const Summary = ({ checksum, type, entries, steps, completed, share }) => (
 				<tbody>
 				<tr>
 					<td style={styles.td}>
-						{!steps[0] ? <FaCircle size={50} color={'#D1D1D1'} /> : <FaCheckCircle size={50} color={'#6DBA4B'} />}
+						{!steps[0] ? <SummaryNumber num={1} /> : <SummaryNumber num={1} active={true} />}
 					</td>
 					<td style={styles.td}>
 						{!steps[0] ? <span>Edit the <b>template design</b></span> : <s>Edit the <b>template design</b></s>}
@@ -39,7 +38,7 @@ const Summary = ({ checksum, type, entries, steps, completed, share }) => (
 				</tr>
 				<tr>
 					<td style={styles.td}>
-						{!steps[1] ? <FaCircle size={50} color={'#D1D1D1'} /> : <FaCheckCircle size={50} color={'#6DBA4B'} />}
+						{!steps[1] ? <SummaryNumber num={2} /> : <SummaryNumber num={2} active={true} />}
 					</td>
 					<td style={styles.td}>
 						{!steps[1] ? <span>Link and Track <b>Facebook page</b></span> : <s>Link a <b>Facebook page</b></s>}

@@ -1,9 +1,13 @@
 import { normalize } from 'normalizr'
+import * as globalSchema from 'schema'
 import * as schema from 'modules/top_fans/schema'
 import { getCurrentAppByState } from 'selectors/apps'
+import { receiveEntities } from 'actions/entities'
+import { setAlert } from 'actions/alerts'
+import { receiveAdmin } from 'actions/admin'
 import { toggleActivityUpdatingApp } from 'actions/activityIndicators'
 import { updateApp } from 'actions/apps'
-import { postToApi } from 'api'
+import { postToApi, getFromApi } from 'api'
 
 export const editAppSpecificSettings = date => {
 	return (dispatch, getState) => {
@@ -38,6 +42,58 @@ export const addIgnoredUserIdentifier = id => {
 				}
 			}))
 			dispatch(toggleActivityUpdatingApp())
+		})
+	}
+}
+
+export const subscribeToWebhook = checksum => {
+	return ( dispatch, getState ) => {
+		const state = getState()
+		const currentApp = getCurrentAppByState(state)
+		const fbPageIdentifierForIntegration = state.admin.fbPageIdentifierForIntegration
+		const checksum = currentApp.checksum
+		return postToApi(`applications/${checksum}/subscribe_to_webhook.json`, {
+			fbPageIdentifier: fbPageIdentifierForIntegration,
+		}).then( response => {
+			if (response.success == false) {
+				window.scroll(0, 0)
+				dispatch(setAlert(`<a href="?offer=app-limit-reached">Upgrade now to publish apps</a>.`, `You have reached the limit for free accounts.`))
+				return false
+			}
+			else {
+				const entities = {
+					apps: response.applications,
+					pages: response.pages,
+				}
+				const normalized = normalize(entities, globalSchema.entities)
+				dispatch(receiveEntities(normalized.entities))
+				// Sanitize admin user
+				const admin = { ...response }
+				delete admin.applications
+				delete admin.pages
+				return dispatch(receiveAdmin(admin))
+			}
+		})
+	}
+}
+
+export const unsubscribeFromWebhook = checksum => {
+	return ( dispatch, getState ) => {
+		const state = getState()
+		const currentApp = getCurrentAppByState(state)
+		const checksum = currentApp.checksum
+		return postToApi(`applications/${checksum}/unsubscribe_from_webhook.json`, null).then(response => {
+			const entities = {
+				apps: response.applications,
+				pages: response.pages,
+			}
+			const normalized = normalize(entities, globalSchema.entities)
+			dispatch(receiveEntities(normalized.entities))
+			// Sanitize admin user
+			const admin = { ...response }
+			delete admin.applications
+			delete admin.pages
+			return dispatch(receiveAdmin(admin))
 		})
 	}
 }

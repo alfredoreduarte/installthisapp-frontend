@@ -34,9 +34,9 @@ module.exports = {
 	},
 	plugins: [
 		// new HappyPack({
-		// 	// loaders is the only required parameter:
-		// 	loaders: [ 'babel-loader?presets[]=es2015' ],
-		// 	threadPool: happyThreadPool,
+			// loaders is the only required parameter:
+			// loaders: [ 'babel-loader?presets[]=es2015' ],
+			// threadPool: happyThreadPool,
 		// }),
 		assetsPluginInstance,
 		new ExtractTextPlugin('[name].css'),

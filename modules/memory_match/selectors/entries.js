@@ -8,8 +8,10 @@ export const getFilteredEntries = createSelector(
 	getAllEntries,
 	getCurrentAppByState,
 	(entries, app) => {
-		return _.filter(entries, entry => {
+		// return _.filter(entries, entry => {
+		const unorderedEntries = _.filter(entries, entry => {
 			return entry.status != 'deleted' && entry.applicationId == app.id
 		})
+		return _.orderBy(unorderedEntries, 'time', 'asc')
 	}
 )
