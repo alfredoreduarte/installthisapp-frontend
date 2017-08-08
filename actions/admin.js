@@ -1,5 +1,6 @@
 import { toggleActivityUpdatingAdmin } from 'actions/activityIndicators'
 import { postToApi, getFromApi, patchToApi, deleteFromApi } from 'api'
+import { push } from 'react-router-redux'
 import { setAlert } from 'actions/alerts'
 import { normalize } from 'normalizr'
 import * as schema from 'schema'
@@ -74,6 +75,12 @@ export const fetchAdmin = () => {
 				publishedApplications: _.filter(response.applications, {'status': 'installed'}).length,
 			})
 			delete admin.plans
+			// 
+			// Mandatory "complete your profile" for profiles with no names
+			// 
+			if (!admin.name) {
+				dispatch(push('/d/complete-profile'))
+			}
 			return dispatch(receiveAdmin(admin))
 		})
 	}
@@ -92,11 +99,23 @@ export const logOut = () => {
 	}
 }
 
+export const resendEmailConfirmation = () => {
+	return (dispatch, getState) => {
+		dispatch(toggleActivityUpdatingAdmin())
+		return postToApi(
+			`admins/resend_email_confirmation.json`
+		).then( response => {
+			dispatch(receiveAdmin(response))
+			dispatch(toggleActivityUpdatingAdmin())
+		})
+	}
+}
+
 export const updateInfo = () => {
 	return (dispatch, getState) => {
 		dispatch(toggleActivityUpdatingAdmin())
 		const formData = getState().form.adminUserProfile.values
-		patchToApi(
+		return patchToApi(
 			`auth.json`, 
 			{
 				name: formData.name,

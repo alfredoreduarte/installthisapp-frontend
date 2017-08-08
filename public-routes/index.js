@@ -41,6 +41,9 @@ router.get('/contact', function(req, res) { res.render('landing-v2/contact', com
 router.get('/white-label-contests', function(req, res) { res.render('landing-v2/white-label', commonParams(req)) })
 router.get('/signup', function(req, res) { res.render('signup', commonParams(req)) })
 router.get('/login', function(req, res) { res.render('login', commonParams(req)) })
+router.get('/please-confirm', function(req, res) { res.render('please-confirm', Object.assign({}, commonParams(req), {
+	emailAddress: req.query.email,
+})) })
 router.get('/card', function(req, res) { res.render('card', commonParams(req)) })
 router.get('/forgot', function(req, res) { res.render('forgot', commonParams(req)) })
 router.get('/forgot/sent', function(req, res) { res.render('forgot-sent', commonParams(req)) })

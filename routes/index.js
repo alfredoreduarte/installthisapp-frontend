@@ -13,6 +13,14 @@ const shouldTrackOffer = param => {
 	return false
 }
 
+const shouldTrackAccountConfirmation = param => {
+	if ( param == 'true' ) {
+		analytics.track('Account Verified')
+		return param
+	}
+	return false
+}
+
 export const createRoutes = (store, dispatch) => ({
 	path: '/d',
 	component: require('containers/Application').default,
@@ -32,12 +40,14 @@ export const createRoutes = (store, dispatch) => ({
 	onEnter: (nextState, replace, next) => {
 		analytics.page('Admin Dashboard')
 		shouldTrackOffer(nextState.location.query["offer"])
+		shouldTrackAccountConfirmation(nextState.location.query["account_confirmation_success"])
 		dispatch(fetchAdmin()).then(() => {
 			next()
 		})
 	},
 	childRoutes: [
 		require('routes/Console'),
+		require('routes/AccountComplete'),
 		require('routes/Account'),
 		require('routes/Card').default(store, dispatch),
 		require('routes/CardOverlay').default(store, dispatch),

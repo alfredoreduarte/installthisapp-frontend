@@ -2,7 +2,8 @@
 var ITAlogin = function(
 	email, 
 	password, 
-	card // wether or not to offer a free trial right after logging in
+	card, // wether or not to offer a free trial right after logging in
+	redirectString
 ){
 	fetch('<%= apiUrl %>/auth/sign_in.json', {
 		method: 'POST',
@@ -16,10 +17,15 @@ var ITAlogin = function(
 		})
 	})
 	.then(response => {
-		Cookies.set('access-token', response.headers.get('access-token'))
-		Cookies.set('token-type', response.headers.get('token-type'))
-		Cookies.set('client', response.headers.get('client'))
-		Cookies.set('uid', response.headers.get('uid'))
+		// 
+		// Save credentials for direct dashboard access
+		// 
+		// if (response.headers.get('access-token')) {
+			Cookies.set('access-token', response.headers.get('access-token'))
+			Cookies.set('token-type', response.headers.get('token-type'))
+			Cookies.set('client', response.headers.get('client'))
+			Cookies.set('uid', response.headers.get('uid'))
+		// }
 		return response.json()
 	})
 	.then(json => {
@@ -27,11 +33,17 @@ var ITAlogin = function(
 			utm_source: '<%= req.query.utm_source %>',
 			landing_variant: 'main',
 		}, () => {
-			if (card) {
-				top.location = location.protocol + '//' + window.location.host + '/d?offer=starter'
+			if (redirectString) {
+				// console.log('venia con redirect', redirectString)
+				top.location = redirectString
 			}
-			else{
-				top.location = location.protocol + '//' + window.location.host + '/d'
+			else {
+				if (card) {
+					top.location = location.protocol + '//' + window.location.host + '/d?offer=starter'
+				}
+				else{
+					top.location = location.protocol + '//' + window.location.host + '/d'
+				}
 			}
 		})
 	})

@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
-import { updateInfo } from 'actions/admin'
+import { updateInfo, resendEmailConfirmation } from 'actions/admin'
 
-let AccountPreferences = ({ handleSubmit, fetching }) => (
+let AccountPreferences = ({ handleSubmit, fetching, emailConfirmed, resendConfirmation }) => (
 	<form onSubmit={handleSubmit}>
 		<div className="row">
 			<div className="col-md-4">
@@ -51,6 +51,20 @@ let AccountPreferences = ({ handleSubmit, fetching }) => (
 					</div>
 				</div>
 			</div>
+			{!emailConfirmed ? 
+				<div className="col-md-6">
+					<div className="panel panel-danger">
+						<div className="panel-heading text-center">
+							<h3 className="panel-title">Your account has not been verified</h3>
+						</div>
+						<div className="panel-body text-center">
+							<p>{fetching ? <span>Please wait...</span> : <button type="button" className="btn btn-danger" onClick={resendConfirmation}>Resend confirmation email</button>}</p>
+						</div>
+					</div>
+				</div>
+			:
+			null
+			}
 		</div>
 	</form>
 )
@@ -60,6 +74,7 @@ AccountPreferences = reduxForm({
 })(AccountPreferences)
 
 const mapStateToProps = state => ({
+	emailConfirmed: state.admin.confirmedAt,
 	fetching: state.activityIndicators.updatingAdmin,
 	initialValues: state.admin,
 })
@@ -69,6 +84,9 @@ const mapDispatchToProps = dispatch => {
 		handleSubmit: e => {
 			e.preventDefault()
 			dispatch(updateInfo())
+		},
+		resendConfirmation: e => {
+			dispatch(resendEmailConfirmation())
 		}
 	}
 }

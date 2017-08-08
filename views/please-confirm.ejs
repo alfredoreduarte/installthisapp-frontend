@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('_head', {title: 'Login to InstallThisApp'}) %>
+<body>
+	<div class="container-flex flex-space-around flex-vertical container-full-height flex-grow">
+		<div class="col-md-12 hide">
+			<br/>
+			<a href="/" class="btn btn-default">← Back</a>
+			<br/>
+		</div>
+		<div class="flex-grow flex flex-vertical flex-center">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<p class="text-center h1"><b><span class="glyphicon glyphicon-envelope"></span></b></p>
+						<h1 class="text-center h3"><b>Awesome!</b></h1>
+						<br />
+						<p class="text-center h4">We just sent you a confirmation email at <b><%= emailAddress %></b>. <br/>Click the verify link in the email and we'll have you all set up.</p>
+						<br />
+						<p class="text-center">Be sure to check spam, on the off-chance it's been filtered. You can also directly email hello@installthisapp.com for direct assistance.</p>
+					</div>
+				</div>
+				<!-- <p class="text-center"><a href="#" class="btn btn-primary btn-lg">Resend email</a></p> -->
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="<%= cloudFrontUrl %>/node_modules/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="<%= cloudFrontUrl %>/node_modules/js-cookie/src/js.cookie.js"></script>
+	<script type="text/javascript" src="<%= cloudFrontUrl %>/node_modules/whatwg-fetch/fetch.js"></script>
+	<%- include('_scripts') %>
+	<%- disableSegment  ? include('_disable-segment') : include('_segment') %>
+	<script type="text/javascript">
+		analytics.page('Please confirm')
+	</script>
+</body>
+</html>
