@@ -14,14 +14,26 @@ var ITAregister = function(){
 			body: JSON.stringify({
 				email: $('#email').val(),
 				password: $('#password').val(),
-				confirm_success_url: 'https://' + window.location.hostname + '/d'
+				confirm_success_url: 'https://' + window.location.hostname + '/d/complete-profile'
 			})
 		}).then(response => {
+			// 
+			// Save credentials for direct dashboard access
+			// 
+			// if (response.headers.get('access-token')) {
+				Cookies.set('access-token', response.headers.get('access-token'))
+				Cookies.set('token-type', response.headers.get('token-type'))
+				Cookies.set('client', response.headers.get('client'))
+				Cookies.set('uid', response.headers.get('uid'))
+			// }
 			return response.json()
 		})
 		.then(json => {
 			if (json.status == "success") {
-				ITAlogin(email, password, false)
+				// ITAlogin(email, password, false)
+				const redirectString = location.protocol + '//' + window.location.host + '/please-confirm?email=' + email
+				ITAlogin(email, password, false, redirectString)
+				// top.location = location.protocol + '//' + window.location.host + '/please-confirm?email=' + email
 			}
 			else {
 				$('#signup-button').attr('disabled', false)

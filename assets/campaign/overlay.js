@@ -39,14 +39,26 @@ const ITAregister = (email, password) => {
 		body: JSON.stringify({
 			email,
 			password,
-			confirm_success_url: 'https://' + window.location.hostname + '/d'
+			confirm_success_url: 'https://' + window.location.hostname + '/d/complete-profile'
 		})
 	}).then(response => {
+		// 
+		// Save credentials for direct dashboard access
+		// 
+		if (response.headers.get('access-token')) {
+			Cookies.set('access-token', response.headers.get('access-token'))
+			Cookies.set('token-type', response.headers.get('token-type'))
+			Cookies.set('client', response.headers.get('client'))
+			Cookies.set('uid', response.headers.get('uid'))
+		}
 		return response.json()
 	})
 	.then(json => {
 		if (json.status == "success") {
-			ITAlogin(email, password)
+			// ITAlogin(email, password)
+			const redirectString = location.protocol + '//' + window.location.host + '/please-confirm?email=' + email
+			ITAlogin(email, password, false, redirectString)
+			// top.location = location.protocol + '//' + window.location.host + '/please-confirm?email=' + email
 		}
 		else {
 			$('#actual-submit').removeAttr('disabled', 'disabled').html(originalSubmitText)
@@ -60,7 +72,12 @@ const ITAregister = (email, password) => {
 	})
 }
 
-const ITAlogin = (email, password) => {
+const ITAlogin = (
+	email, 
+	password, 
+	card, // wether or not to offer a free trial right after logging in
+	redirectString
+) => {
 	fetch(window.apiUrl + '/auth/sign_in.json', {
 		method: 'POST',
 		headers: {
@@ -73,10 +90,15 @@ const ITAlogin = (email, password) => {
 		})
 	})
 	.then(response => {
-		Cookies.set('access-token', response.headers.get('access-token'))
-		Cookies.set('token-type', response.headers.get('token-type'))
-		Cookies.set('client', response.headers.get('client'))
-		Cookies.set('uid', response.headers.get('uid'))
+		// 
+		// Save credentials for direct dashboard access
+		// 
+		if (response.headers.get('access-token')) {
+			Cookies.set('access-token', response.headers.get('access-token'))
+			Cookies.set('token-type', response.headers.get('token-type'))
+			Cookies.set('client', response.headers.get('client'))
+			Cookies.set('uid', response.headers.get('uid'))
+		}
 		return response.json()
 	})
 	.then(json => {
@@ -84,7 +106,20 @@ const ITAlogin = (email, password) => {
 			utm_source: window.utm_source_cache_for_tracking,
 			landing_variant: window.variant_cache_for_tracking,
 		}, () => {
-			top.location = location.protocol + '//' + window.location.host + '/d/apps/create'
+			if (redirectString) {
+				top.location = redirectString
+			}
+			// else{
+				// top.location = location.protocol + '//' + window.location.host + '/d/apps/create'
+			// }
+			else {
+				if (card) {
+					top.location = location.protocol + '//' + window.location.host + '/d?offer=starter'
+				}
+				else{
+					top.location = location.protocol + '//' + window.location.host + '/d/apps/create'
+				}
+			}
 		})
 	})
 	.catch(exception => {
