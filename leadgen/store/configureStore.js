@@ -2,7 +2,8 @@ import thunkMiddleware from 'redux-thunk'
 import { routerMiddleware } from 'react-router-redux'
 import { combineReducers, createStore, compose, applyMiddleware } from 'redux'
 import { browserHistory } from 'react-router'
-import createReducer from 'reducers'
+// import createReducer from 'reducers'
+import createReducer from 'leadgen/reducers'
 
 const reactRouterMiddleware = routerMiddleware(browserHistory)
 

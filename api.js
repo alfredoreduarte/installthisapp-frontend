@@ -165,6 +165,7 @@ export const postToApi = (endpoint: string, body: ?{}, success: () => mixed = te
 			.then(response => {
 				switch(response.status){
 					case 200:
+					case 201:
 						return response.json()
 					case 401: processUnauthorized()
 					default:

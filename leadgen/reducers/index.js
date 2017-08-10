@@ -8,6 +8,7 @@ import alerts from 'reducers/alerts'
 import activityIndicators from 'reducers/activityIndicators'
 
 import fbLeadforms from 'leadgen/reducers/fbLeadforms'
+import fbLeadgenForms from 'leadgen/reducers/fbLeadgenForms'
 
 const createReducer = asyncReducers => {
 	return combineReducers({
@@ -15,8 +16,10 @@ const createReducer = asyncReducers => {
 		admin,
 		alerts,
 		activityIndicators,
+		entities,
 		// 
 		fbLeadforms,
+		fbLeadgenForms,
 		// 
 		form: formReducer,
 	})

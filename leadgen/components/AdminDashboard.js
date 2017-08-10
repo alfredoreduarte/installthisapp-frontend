@@ -11,14 +11,18 @@ import AppNavBar from 'components/AppNavBar'
 const AdminDashboard = ({ 
 	pristine,
 	submitting,
+	reset,
+	change,
 	handleSubmit,
 	handleDeleteFbLeadform,
+	handlePageChange,
 	// 
 	fbProfile,
 	connectingToFacebook,
 	fbLoginCallback,
 	fbLeadforms,
 	fbPages,
+	fbLeadgenForms,
 	// successfulPurchase,
 	step,
 }) => (
@@ -73,23 +77,33 @@ const AdminDashboard = ({
 										<li 
 											key={fbLeadform.fbFormId} 
 											className="list-group-item">
-												<b>{fbLeadform.fbPageName}</b>: form {fbLeadform.fbFormId}
-												<FaClose size="20" className="text-danger" style={{cursor: 'pointer'}} 
+												<FaClose 
+													size="16" 
+													className="text-danger pull-right" 
+													style={{cursor: 'pointer'}} 
 													onClick={() => {
 														if (confirm('Are you sure?')){
 															handleDeleteFbLeadform(fbLeadform.id)
 														}
 													}} 
 												/>
+												<b>{fbLeadform.fbPageName}</b>: <br/><small>Form ID {fbLeadform.fbFormId}</small>
 										</li>
 									)}
 								</ul><hr/></div>
 							: null }	
-							<form onSubmit={handleSubmit}>
+							<form onSubmit={e => {
+								return handleSubmit(e).then(() => reset())
+							}}>
 								<h4><b>Add Form</b></h4>
 								<div className="form-group">
 									<label className="control-label">Facebook Page</label>
-									<Field name="fbPageIdentifier" component="select" className="form-control">
+									<Field name="fbPageIdentifier" component="select" className="form-control"
+										onChange={e => {
+											handlePageChange(e.target.value)
+											change('fbPageIdentifier', e.target.value)
+										}}
+									>
 										<option value={''} disabled>-- Facebook Page --</option>
 										{fbPages.map(page => 
 											<option key={page.id} value={page.identifier}>{page.name}</option>
@@ -97,12 +111,19 @@ const AdminDashboard = ({
 									</Field>
 								</div>
 								<div className="form-group">
-									<label className="control-label">Form ID</label>
-									<Field
-										name="fbFormId"
-										type="text" 
-										className="form-control" 
-										component="input" />
+									<label className="control-label">Form</label>
+									<Field name="fbFormId" component="select" className="form-control">
+										<option value={''} disabled>-- Form Page --</option>
+										{fbLeadgenForms.map(leadgenForm => 
+											<option 
+												key={leadgenForm.id} 
+												value={leadgenForm.id} 
+												// disabled={leadgenForm.status == "ARCHIVED"}
+											>
+												{leadgenForm.name} | {leadgenForm.locale}
+											</option>
+										)}
+									</Field>
 								</div>
 								<button 
 									type="submit" 
