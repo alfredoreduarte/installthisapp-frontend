@@ -1,51 +1,64 @@
 import React, { Component, PropTypes } from 'react'
 import { push } from 'react-router-redux'
+import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import AppGrid from 'containers/AppGrid'
-import Card from 'containers/Card'
-import CardOverlay from 'containers/CardOverlay'
-import AppNavBar from 'components/AppNavBar'
-import DashboardTitleBar from 'components/DashboardTitleBar'
-import SuccessfulPurchase from 'components/SuccessfulPurchase'
-import DashboardToolBar from 'components/DashboardToolBar'
-import AdminDashboardEmpty from 'components/AdminDashboardEmpty'
-import NoAppsMatching from 'components/NoAppsMatching'
-import AppCreateModal from 'containers/AppCreateModal'
-import AppDeleteModal from 'components/AppDeleteModal'
+import FacebookLogin from 'react-facebook-login'
+import AdminDashboardView from 'leadgen/components/AdminDashboard'
+import { getAllPages } from 'selectors/pages'
 import { getAppToBeDeleted, getAllAppsByText } from 'selectors/apps'
+import { getLeadformsWithPages } from 'leadgen/selectors/fbLeadforms'
+import { newFbLeadform, destroyFbLeadform } from 'leadgen/actions/fbLeadforms'
 import { setAppToDelete } from 'actions/deleteApp'
+import { fbConnect } from 'actions/admin'
 import { deleteApp, destroy } from 'actions/apps'
 
-const AdminDashboard = ({ 
-	apps,
-	successfulPurchase,
-	filterText,
-	showCreateModal,
-	showDeleteModal,
-	appToBeDeleted,
-	cancelAppDeletion,
-	proceedWithAppDeletion,
-	appCreateModalHandleClose,
-	step
+let AdminDashboard = ({ 
+	pristine,
+	submitting,
+	handleSubmit,
+	handleDeleteFbLeadform,
+	fbProfile,
+	connectingToFacebook,
+	fbLoginCallback,
+	fbLeadforms,
+	fbPages,
+	// successfulPurchase,
 }) => (
-	<div>
-		<AppNavBar />
-		<ol>
-			<li>Connect with Facebook</li>
-			<li>Add a destination</li>
-			<li>Select a Source: Page, ad, destination</li>
-		</ol>
-	</div>
+	<AdminDashboardView
+		pristine={pristine}
+		submitting={submitting}
+		handleSubmit={handleSubmit}
+		handleDeleteFbLeadform={handleDeleteFbLeadform}
+		fbProfile={fbProfile}
+		connectingToFacebook={connectingToFacebook}
+		fbLoginCallback={fbLoginCallback}
+		fbLeadforms={fbLeadforms}
+		fbPages={fbPages}
+		// successfulPurchase={successfulPurchase}
+	/>
 )
+
+AdminDashboard = reduxForm({
+	form: 'fbLeadFormCreate',
+})(AdminDashboard)
 
 const mapStateToProps = (state, props) => {
 	return {
-		successfulPurchase: props.location.query["successful-purchase"],
+		fbProfile: state.admin.fbProfile,
+		fbLeadforms: getLeadformsWithPages(state),
+		fbPages: getAllPages(state),
+		// successfulPurchase: props.location.query["successful-purchase"],
+		connectingToFacebook: state.activityIndicators.connectingToFacebook,
 	}
 }
 const mapDispatchToProps = (dispatch, props) => {
 	return {
-
+		fbLoginCallback: response => dispatch(fbConnect(response)),
+		handleSubmit: e => {
+			e.preventDefault()
+			dispatch(newFbLeadform())
+		},
+		handleDeleteFbLeadform: id => dispatch(destroyFbLeadform(id))
 	}
 }
 

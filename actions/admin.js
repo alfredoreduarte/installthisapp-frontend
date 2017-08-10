@@ -54,7 +54,7 @@ const identifyAdmin = payload => {
 }
 
 export const fetchAdmin = () => {
-	return dispatch => {
+	return (dispatch, getState) => {
 		return getFromApi('admins/entities.json').then( response => {
 			// Prepare entities for normalization
 			const entities = {
@@ -79,7 +79,12 @@ export const fetchAdmin = () => {
 			// Mandatory "complete your profile" for profiles with no names
 			// 
 			if (!admin.name) {
-				dispatch(push('/d/complete-profile'))
+				if (getState().routing.locationBeforeTransitions.pathname != '/d/complete-profile') {
+					setTimeout(() => {
+						top.location.href = '/d/complete-profile'
+					}, 300)
+				}
+				// dispatch(push('/d/complete-profile'))
 			}
 			return dispatch(receiveAdmin(admin))
 		})

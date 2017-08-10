@@ -33,11 +33,11 @@ const AppNavBar = ({ adminId, name, identifier, logout, subscription, remainingT
 				</li>
 				}
 				<li>
-					<button className="btn btn-success btn-sm btn-outline navbar-btn">
-						<Link to='/leadgen' className="link-no-underline text-success">
+					
+						<a href='/leadgen' className="btn btn-success btn-sm btn-outline navbar-btn">
 							Lead ads Sync Tool
-						</Link>
-					</button>
+						</a>
+					
 				</li>
 				<li className="hide">
 					<button className="btn btn-success btn-sm btn-outline navbar-btn">

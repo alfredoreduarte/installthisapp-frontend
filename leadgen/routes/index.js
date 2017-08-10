@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, IndexRoute } from 'react-router'
 import { fetchAdmin } from 'actions/admin'
+import { fetchFbLeadforms } from 'leadgen/actions/fbLeadforms'
 import { possibleOffers } from 'lib/offers'
 
 const shouldTrackOffer = param => {
@@ -33,10 +34,11 @@ export const createRoutes = (store, dispatch) => ({
 		analytics.page('Leads Dashboard')
 		shouldTrackOffer(nextState.location.query["offer"])
 		dispatch(fetchAdmin()).then(() => {
+			// dispatch(fetchFbLeadforms()).then(() => next())
 			next()
 		})
 	},
 	childRoutes: [
-		// require('routes/Console'),
+		require('leadgen/routes/fbLeadDestination'),
 	]
 })

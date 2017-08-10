@@ -7,12 +7,17 @@ import admin from 'reducers/admin'
 import alerts from 'reducers/alerts'
 import activityIndicators from 'reducers/activityIndicators'
 
+import fbLeadforms from 'leadgen/reducers/fbLeadforms'
+
 const createReducer = asyncReducers => {
 	return combineReducers({
 		routing,
 		admin,
 		alerts,
 		activityIndicators,
+		// 
+		fbLeadforms,
+		// 
 		form: formReducer,
 	})
 }
