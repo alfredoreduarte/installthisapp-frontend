@@ -25,6 +25,28 @@ const admin = (state = {
 				...state,
 				fbLeadforms: removed,
 			}
+		case 'FB_LEAD_DESTINATIONS/ADD':
+			const destUpdated = [ ...state.fbLeadDestinations, action.payload]
+			return {
+				...state,
+				fbLeadDestinations: destUpdated,
+			}
+		case 'FB_LEAD_DESTINATIONS/REMOVE':
+			const destRemoved = state.fbLeadDestinations.map(fbLeadDestination => {
+				if (fbLeadDestination.id == action.id) {
+					return {
+						...fbLeadDestination,
+						deleted: true,
+					}
+				}
+				else {
+					return fbLeadDestination
+				}
+			})
+			return {
+				...state,
+				fbLeadDestinations: destRemoved,
+			}
 		case 'SET_CURRENT_APP':
 			return { 
 				...state,

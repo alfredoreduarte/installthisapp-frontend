@@ -2,9 +2,12 @@
 // import { turnOnGlobalIndicator, turnOffGlobalIndicator } from 'actions/activityIndicators'
 
 export default (store, dispatch) => ({
+	// indexRoute: {
+		// component: require('components/AccountPreferences').default
+	// },
 	getChildRoutes(partialNextState, cb) {
 		cb(null, {
-			path: 'setup-guide',
+			path: 'destinations',
 			onEnter: (nextState, replace, next) => {
 				// dispatch(turnOnGlobalIndicator())
 				// dispatch(fetchTopFansEntities(nextState.params.checksum))
