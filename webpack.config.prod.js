@@ -11,6 +11,7 @@ module.exports = {
 	entry: {
 		common: 'moment',
 		dashboard: 'index.js',
+		leadgen: ['webpack-hot-middleware/client', './leadgen/index'],
 		landing: './assets/landing/index',
 		"campaign-one": './assets/campaign/one',
 		"campaign-two": './assets/campaign/two',
