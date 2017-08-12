@@ -2,12 +2,15 @@ import React, { Component, PropTypes } from 'react'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
+import FlipCard from 'components/FlipCard'
 import { Link } from 'react-router'
 import FacebookLogin from 'react-facebook-login'
 import FaClose from 'react-icons/lib/fa/close'
 import FbPhoto from 'components/FbPhoto'
 import AppNavBar from 'components/AppNavBar'
 import DestinationCreator from 'leadgen/containers/DestinationCreator'
+import Destination from 'leadgen/components/Destination'
+import Source from 'leadgen/components/Source'
 // import SuccessfulPurchase from 'components/SuccessfulPurchase'
 
 const AdminDashboard = ({ 
@@ -28,7 +31,13 @@ const AdminDashboard = ({
 	fbPages,
 	fbLeadgenForms,
 	// successfulPurchase,
-	step,
+	hideSourcesForm,
+	showSourcesForm,
+	hideDestinationsForm,
+	showDestinationsForm,
+	// 
+	sourcesFormVisible,
+	destinationsFormVisible,
 }) => (
 	<div>
 		<AppNavBar />
@@ -72,114 +81,135 @@ const AdminDashboard = ({
 						tag="a" />
 					</small></p>
 				</div>
-				<div className={ fbLeadforms.length ? "col-md-4 col-md-offset-2" : "col-md-4 col-md-offset-4"}>
-					<h3 className="text-center">Sources</h3>
-					<div className="panel panel-default">
-						<div className="panel-body">
-							{fbLeadforms.length > 0 ? 
-								<div><ul className="list-group">
-									{fbLeadforms.map(fbLeadform =>
-										<li 
-											key={fbLeadform.fbFormId} 
-											className="list-group-item">
-												<FaClose 
-													size="16" 
-													className="text-danger pull-right" 
-													style={{cursor: 'pointer'}} 
-													onClick={() => {
-														if (confirm('Are you sure?')){
-															handleDeleteFbLeadform(fbLeadform.id)
-														}
-													}} 
-												/>
-												<b>{fbLeadform.fbPageName}</b><br/><small>Form ID {fbLeadform.fbFormId}</small>
-										</li>
-									)}
-								</ul><hr/></div>
-							: null }	
-							<form onSubmit={e => {
-								return handleSubmit(e).then(() => reset())
-							}}>
-								<h4><b>Add Source</b></h4>
-								<div className="form-group">
-									<label className="control-label">Facebook Page</label>
-									<Field name="fbPageIdentifier" component="select" className="form-control"
-										onChange={e => {
-											handlePageChange(e.target.value)
-											change('fbPageIdentifier', e.target.value)
-										}}
-									>
-										<option value={''} disabled>-- Facebook Page --</option>
-										{fbPages.map(page => 
-											<option key={page.id} value={page.identifier}>{page.name}</option>
-										)}
-									</Field>
+				<div className="col-md-12" style={{display: 'flex', justifyContent: 'space-around'}} >
+					<div className="Leadgen-column">
+						<FlipCard disabled={true} flipped={sourcesFormVisible} style={{width: '100%'}}>
+							<div>
+								<div style={{
+									display: 'flex',
+									alignItems: 'center',
+									justifyContent: 'space-between',
+									padding: '15px 0px',
+								}}>
+									<p className="text-center h3" style={{margin: '0px'}}>Sources</p>
+									<button className="btn btn-primary btn-sm" onClick={showSourcesForm}>Add Source</button>
 								</div>
-								<div className="form-group">
-									<label className="control-label">Form</label>
-									<Field name="fbFormId" component="select" className="form-control">
-										<option value={''} disabled>-- Form Name --</option>
-										{fbLeadgenForms.map(leadgenForm => 
-											<option 
-												key={leadgenForm.id} 
-												value={leadgenForm.id} 
-												// disabled={leadgenForm.status == "ARCHIVED"}
-											>
-												{leadgenForm.name} | {leadgenForm.locale}
-											</option>
+								{fbLeadforms.length > 0 ? 
+									<ul className="list-group" style={{marginBottom: '0px'}}>
+										{fbLeadforms.map(fbLeadform =>
+											<Source
+												key={fbLeadform.id}
+												id={fbLeadform.id}
+												fbPageName={fbLeadform.fbPageName}
+												fbFormId={fbLeadform.fbFormId}
+												destinationsAmount={fbLeadform.fbLeadDestinations.length}
+												handleDelete={handleDeleteFbLeadform}
+											/>
 										)}
-									</Field>
-								</div>
-								<button 
-									type="submit" 
-									className="btn btn-primary btn-block" 
-									disabled={pristine || submitting}>Save source</button>
-							</form>
-						</div>
-					</div>
-				</div>
-				{fbLeadforms.length ? 
-					<div className="col-md-4">
-						<h3 className="text-center">Destinations</h3>
-						<div className="panel panel-default">
-							<div className="panel-body">
-								{fbLeadDestinations.length > 0 ? 
-									<div><ul className="list-group">
-										{fbLeadDestinations.map(fbLeadDestination =>
-											<li 
-												key={fbLeadDestination.id} 
-												className="list-group-item">
-													<FaClose 
-														size="16" 
-														className="text-danger pull-right" 
-														style={{cursor: 'pointer'}} 
-														onClick={() => {
-															if (confirm('Are you sure?')){
-																handleDeleteFbLeadDestination(fbLeadDestination.id)
-															}
-														}} 
-													/>
-													<b className="text-capitalize">
-														{fbLeadDestination.destinationType}
-													</b>
-													<br/>
-													<small>Status: {fbLeadDestination.status}</small>
-											</li>
-										)}
-									</ul><hr/></div>
+									</ul>
 								: null }
-								<p className="text-center hide">
-									<Link 
-										to={'/leadgen/destinations/create'} 
-										className="btn btn-primary btn-lg">
-											Add Destination
-									</Link>
-								</p>
-								{true ? <DestinationCreator /> : null}
 							</div>
-						</div>
+							<div className="panel panel-default">
+								<div className="panel-body">
+									<div style={{
+										display: 'flex',
+										alignItems: 'center',
+										justifyContent: 'space-between',
+										marginBottom: '20px',
+									}}>
+										<p className="text-center h3" style={{margin: '0px'}}>New Source</p>
+										<button type="button" onClick={hideSourcesForm}>x</button>
+									</div>
+									<form className="" onSubmit={e => {
+										return handleSubmit(e).then(() => reset())
+									}}>
+										<div className="form-group">
+											<label className="control-label">Facebook Page</label>
+											<Field name="fbPageIdentifier" component="select" className="form-control"
+												onChange={e => {
+													handlePageChange(e.target.value)
+													change('fbPageIdentifier', e.target.value)
+												}}
+											>
+												<option value={''} disabled>-- Facebook Page --</option>
+												{fbPages.map(page => 
+													<option key={page.id} value={page.identifier}>{page.name}</option>
+												)}
+											</Field>
+										</div>
+										<div className="form-group">
+											<label className="control-label">Form</label>
+											<Field name="fbFormId" component="select" className="form-control">
+												<option value={''} disabled>-- Form Name --</option>
+												{fbLeadgenForms.map(leadgenForm => 
+													<option 
+														key={leadgenForm.id} 
+														value={leadgenForm.id} 
+														// disabled={leadgenForm.status == "ARCHIVED"}
+													>
+														{leadgenForm.name} | {leadgenForm.locale}
+													</option>
+												)}
+											</Field>
+										</div>
+										<button 
+											type="submit" 
+											className="btn btn-primary btn-block" 
+											disabled={pristine || submitting}>Save Source</button>
+									</form>
+								</div>
+							</div>
+						</FlipCard>
 					</div>
-				: null }
+					{fbLeadforms.length ? 
+						<div className="Leadgen-column">
+							<FlipCard disabled={true} flipped={destinationsFormVisible} style={{width: '100%'}}>
+								<div>
+									<div style={{
+										display: 'flex',
+										alignItems: 'center',
+										justifyContent: 'space-between',
+										padding: '15px 0px',
+									}}>
+										<p className="text-center h3" style={{margin: '0px'}}>Destinations</p>
+										<button className="btn btn-primary btn-sm" onClick={showDestinationsForm}>
+											Add Destination
+										</button>
+									</div>
+									{fbLeadDestinations.length > 0 ? 
+										<div><ul className="list-group" style={{marginBottom: '0px'}}>
+											{fbLeadDestinations.map(fbLeadDestination =>
+												<Destination
+													key={fbLeadDestination.id}
+													id={fbLeadDestination.id}
+													destinationType={fbLeadDestination.destinationType}
+													fbPageName={fbLeadDestination.fbPageName}
+													fbFormId={fbLeadDestination.fbFormId}
+													status={fbLeadDestination.status}
+													handleDelete={handleDeleteFbLeadDestination}
+												/>
+											)}
+										</ul></div>
+									: null }
+								</div>
+								<div className="panel panel-default">
+									<div className="panel-body">
+										<div style={{
+											display: 'flex',
+											alignItems: 'center',
+											justifyContent: 'space-between',
+											marginBottom: '20px',
+										}}>
+											<p className="text-center h3" style={{margin: '0px'}}>New Destination</p>
+											<button onClick={hideDestinationsForm}>X</button>
+										</div>
+										<DestinationCreator />
+									</div>
+								</div>
+							</FlipCard>
+						</div>
+					: null }
+				</div>
 			</div>
 		}
 		<ol className="hide">
@@ -187,6 +217,11 @@ const AdminDashboard = ({
 			<li>Add a destination</li>
 			<li>Select a Source: Page, ad, destination</li>
 		</ol>
+		<svg width="224" height="660">
+			<g fill="none" stroke="#dfe4e9" strokeOpacity="0.52">
+				<path d="M0,330.6C89.60000000000001,330.6, 134.4,30.6 224,30.6" strokeWidth="3.5999999999999996"></path>
+			</g>
+		</svg>
 	</div>
 )
 export default AdminDashboard

@@ -7,7 +7,7 @@ import DestinationCreatorView from 'leadgen/components/DestinationCreator'
 import { getAllPages } from 'selectors/pages'
 import { getAppToBeDeleted, getAllAppsByText } from 'selectors/apps'
 import { getLeadformsWithPages } from 'leadgen/selectors/fbLeadforms'
-import { getFbLeadDestinationSettings } from 'leadgen/selectors/fbLeadDestinations'
+// import { getFbLeadDestinationSettings } from 'leadgen/selectors/fbLeadDestinations'
 import { getFbLeadgenForms } from 'leadgen/selectors/fbLeadgenForms'
 import { newFbLeadform, destroyFbLeadform, fetchLeadgenFormsForPage } from 'leadgen/actions/fbLeadforms'
 import { newFbLeadDestination, destroyFbLeadDestination, fetchDestinationTypeSettings } from 'leadgen/actions/fbLeadDestinations'
@@ -24,7 +24,7 @@ let DestinationCreator = ({
 	destinationTypes,
 	fbLeadforms,
 	handleDestinationTypeChange,
-	destinationSettings,
+	// destinationSettings,
 }) => (
 	<DestinationCreatorView
 		pristine={pristine}
@@ -34,7 +34,7 @@ let DestinationCreator = ({
 		handleSubmit={handleSubmit}
 		destinationTypes={destinationTypes}
 		fbLeadforms={fbLeadforms}
-		destinationSettings={destinationSettings}
+		// destinationSettings={destinationSettings}
 		handleDestinationTypeChange={handleDestinationTypeChange}
 	/>
 )
@@ -47,9 +47,28 @@ const mapStateToProps = (state, props) => {
 	return {
 		fbLeadforms: getLeadformsWithPages(state),
 		destinationTypes: [
-			'email',
+			{
+				label: 'Email',
+				type: 'email',
+				enabled: true,
+			},
+			{
+				label: 'Mailchimp',
+				type: 'mailchimp',
+				enabled: false,
+			},
+			{
+				label: 'PipeDrive',
+				type: 'pipedrive',
+				enabled: false,
+			},
+			{
+				label: 'Intercom',
+				type: 'intercom',
+				enabled: false,
+			},
 		],
-		destinationSettings: getFbLeadDestinationSettings(state),
+		// destinationSettings: getFbLeadDestinationSettings(state),
 		// fbLeadforms: getLeadformsWithPages(state),
 		// fbPages: getAllPages(state),
 		// fbLeadgenForms: getFbLeadgenForms(state),

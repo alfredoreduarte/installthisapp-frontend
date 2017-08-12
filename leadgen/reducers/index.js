@@ -7,6 +7,7 @@ import admin from 'reducers/admin'
 import alerts from 'reducers/alerts'
 import activityIndicators from 'reducers/activityIndicators'
 
+import leadgenUI from 'leadgen/reducers/ui'
 import fbLeadforms from 'leadgen/reducers/fbLeadforms'
 import fbLeadgenForms from 'leadgen/reducers/fbLeadgenForms'
 import fbLeadDestinations from 'leadgen/reducers/fbLeadDestinations'
@@ -14,6 +15,7 @@ import fbLeadDestinations from 'leadgen/reducers/fbLeadDestinations'
 const createReducer = asyncReducers => {
 	return combineReducers({
 		routing,
+		leadgenUI,
 		admin,
 		alerts,
 		activityIndicators,

@@ -12,13 +12,12 @@ const DestinationCreator = ({
 	handleSubmit,
 	destinationTypes,
 	fbLeadforms,
-	destinationSettings,
+	// destinationSettings,
 	handleDestinationTypeChange,
 }) => 
 <form onSubmit={e => {
 	return handleSubmit(e).then(() => reset())
 }}>
-	<h4><b>Add Destination</b></h4>
 	<div className="form-group">
 		<label className="control-label">Select type</label>
 		<Field name="destinationType" component="select" className="form-control"
@@ -29,7 +28,11 @@ const DestinationCreator = ({
 		>
 			<option value={''} disabled>-- Select a type --</option>
 			{destinationTypes.map(destinationType => 
-				<option key={destinationType} value={destinationType} className="text-capitalize">{destinationType}</option>
+				<option 
+					key={destinationType.type} 
+					value={destinationType.type} 
+					disabled={!destinationType.enabled} 
+					className="text-capitalize">{destinationType.label}</option>
 			)}
 		</Field>
 	</div>
@@ -45,7 +48,7 @@ const DestinationCreator = ({
 	<div className="form-group">
 		<label className="control-label">Comma-separated Email recipients</label>
 		<Field
-			name={'recipients'}
+			name={'settings.recipients'}
 			className="form-control" 
 			rows={3}
 			component="textarea" />

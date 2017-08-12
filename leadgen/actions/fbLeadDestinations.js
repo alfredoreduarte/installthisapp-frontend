@@ -53,17 +53,16 @@ export const destroyFbLeadDestination = id => {
 
 export const newFbLeadDestination = () => {
 	return (dispatch, getState) => {
-		const fbLeadformId = getLeadformsWithPages(getState())[0].id
+		const state = getState()
+		const values = state.form.fbLeadDestinationCreate.values
 		const settings = {
 			"recipients": "alfredoreduarte@gmail.com"
 		}
 		return postToApi(`fb_lead_destinations.json`, { 
-			fbLeadformId: fbLeadformId,
-			destinationType: 'email',
-			status: 'on',
-			settings: {
-				settings
-			},
+			fbLeadformId: parseInt(values.fbLeadformId),
+			destinationType: values.destinationType,
+			status: "on",
+			settings: values.settings,
 		})
 		.then(response => dispatch(addFbLeadDestination(response)))
 		.catch(exception =>

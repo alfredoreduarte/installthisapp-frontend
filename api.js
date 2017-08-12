@@ -146,6 +146,8 @@ export const postFileToApi = (endpoint: string, body: string, success: () => mix
 export const postToApi = (endpoint: string, body: ?{}, success: () => mixed = temporaryEmptyFunction, camelize: boolean = true) => {
 	const authKeys = getAuthKeys()
 	const elBody = camelize ? processBody(body) : JSON.stringify(body)
+	console.log('auth keys for use with Postman')
+	console.log(authKeys)
 	return 	fetch(API_URL + '/' + endpoint, {
 				method: 'POST',
 				headers: {
