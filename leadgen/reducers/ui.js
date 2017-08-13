@@ -1,8 +1,19 @@
 const ui = (state = {
 	sourcesFormVisible: false,
 	destinationsFormVisible: false,
+	activityIndicators: {
+		leadgenForm: false,
+	}
 }, action) => {
 	switch (action.type) {
+		case 'LEADGEN_UI/SPINNER/LEADGEN_FORM':
+			return {
+				...state,
+				activityIndicators: {
+					...state.activityIndicators,
+					leadgenForm: !state.activityIndicators.leadgenForm,
+				}
+			}
 		case 'LEADGEN_UI/SHOW_SOURCES_FORM':
 			return {
 				...state,

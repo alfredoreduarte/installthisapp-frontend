@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 import FaClose from 'react-icons/lib/fa/close'
+import StatusIndicator from 'components/StatusIndicator'
 
 const Destination = ({ 
 	id,
@@ -22,10 +23,9 @@ const Destination = ({
 		}} 
 	/>
 	<b className="text-capitalize">
-		{destinationType}
-	</b> <small className="text-muted">Receiving data from {fbPageName}</small><br/>
-	<small>Form ID: {fbFormId}</small><br/>
-	<small>Status: {status}</small>
+		<StatusIndicator active={status == 'on'} />{destinationType}
+	</b> <small className="text-muted">Receiving from {fbPageName}</small><br/>
+	<small>Form ID: {fbFormId}</small>
 </li>
 
 export default Destination

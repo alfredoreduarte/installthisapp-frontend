@@ -19,6 +19,16 @@ const AppNavBar = ({ adminId, name, identifier, logout, subscription, remainingT
 			</Navbar.Brand>
 		</Navbar.Header>
 		<div className="collapse navbar-collapse text-right">
+			<ul className="nav navbar-nav navbar-left" style={{
+				display: 'flex',
+				alignItems: 'center',
+			}}>
+				<li>
+					<button onClick={() => {top.location.href = '/leadgen'}} className="btn btn-success btn-sm navbar-btn">
+						<b>New!</b> Lead ads Sync
+					</button>
+				</li>
+			</ul>
 			<ul className="nav navbar-nav navbar-right" style={{
 				display: 'flex',
 				alignItems: 'center',
@@ -32,13 +42,6 @@ const AppNavBar = ({ adminId, name, identifier, logout, subscription, remainingT
 					</a>
 				</li>
 				}
-				<li>
-					
-						<a href='/leadgen' className="btn btn-success btn-sm btn-outline navbar-btn">
-							Lead ads Sync Tool
-						</a>
-					
-				</li>
 				<li className="hide">
 					<button className="btn btn-success btn-sm btn-outline navbar-btn">
 						<Link to='/d/apps/create' className="link-no-underline text-success">

@@ -9,10 +9,12 @@ const DestinationCreator = ({
 	submitting,
 	reset,
 	change,
+	valid,
 	handleSubmit,
 	destinationTypes,
 	fbLeadforms,
 	// destinationSettings,
+	selectedDestinationType,
 	handleDestinationTypeChange,
 }) => 
 <form onSubmit={e => {
@@ -41,22 +43,50 @@ const DestinationCreator = ({
 		<Field name="fbLeadformId" component="select" className="form-control">
 			<option value={''} disabled>-- Select a source --</option>
 			{fbLeadforms.map(fbLeadform => 
-				<option key={fbLeadform.id} value={fbLeadform.id} className="text-capitalize">{fbLeadform.fbPageName} | Form ID {fbLeadform.fbFormId}</option>
+				<option 
+					key={fbLeadform.id} 
+					value={fbLeadform.id} 
+					className="text-capitalize">
+					{fbLeadform.fbPageName} | Form ID {fbLeadform.fbFormId}</option>
 			)}
 		</Field>
 	</div>
-	<div className="form-group">
-		<label className="control-label">Comma-separated Email recipients</label>
-		<Field
-			name={'settings.recipients'}
-			className="form-control" 
-			rows={3}
-			component="textarea" />
+	{selectedDestinationType == 'email' ?
+	<div>
+		<div className="form-group">
+			<label className="control-label">Comma-separated Email recipients</label>
+			<Field
+				name={'settings.recipients'}
+				className="form-control" 
+				rows={3}
+				component="textarea" />
+		</div>
 	</div>
+	: null}
+	{selectedDestinationType == 'mailchimp' ?
+	<div>
+		<div className="form-group">
+			<label className="control-label">Mailchimp API Key</label>
+			<Field
+				name={'settings.apiKey'}
+				className="form-control"
+				type="text"
+				component="input" />
+		</div>
+		<div className="form-group">
+			<label className="control-label">List ID</label>
+			<Field
+				name={'settings.listID'}
+				className="form-control"
+				type="text"
+				component="input" />
+		</div>
+	</div>
+	: null}
 	<button 
 		type="submit" 
 		className="btn btn-primary btn-block" 
-		disabled={pristine || submitting}>Save Destination</button>
+		disabled={!valid || submitting}>Save Destination</button>
 </form>
 
 export default DestinationCreator

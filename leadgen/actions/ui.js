@@ -11,3 +11,7 @@ export const showDestinationsForm = () => ({
 export const hideDestinationsForm = () => ({
 	type: 'LEADGEN_UI/HIDE_DESTINATIONS_FORM'
 })
+
+export const toggleLeadgenFormSpinner = () => ({
+	type: 'LEADGEN_UI/SPINNER/LEADGEN_FORM'
+})

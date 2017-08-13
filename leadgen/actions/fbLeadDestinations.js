@@ -20,28 +20,28 @@ export const receiveFbDestinationSettings = settings => ({
 	payload: settings,
 })
 
-export const fetchDestinationTypeSettings = destinationType => {
-	return dispatch => {
-		if (destinationType == 'email') {
-			return dispatch(receiveFbDestinationSettings(
-				[
-					{
-						label: 'Comma-separated Email recipients',
-						key: "recipients",
-						//
-						recipients: [],
-					},
-					{
-						label: 'Mask Reply-to as',
-						key: "replyTo",
-						// 
-						replyTo: null
-					}
-				]
-			))
-		}
-	}
-}
+// export const fetchDestinationTypeSettings = destinationType => {
+// 	return dispatch => {
+// 		if (destinationType == 'email') {
+// 			return dispatch(receiveFbDestinationSettings(
+// 				[
+// 					{
+// 						label: 'Comma-separated Email recipients',
+// 						key: "recipients",
+// 						//
+// 						recipients: [],
+// 					},
+// 					{
+// 						label: 'Mask Reply-to as',
+// 						key: "replyTo",
+// 						// 
+// 						replyTo: null
+// 					}
+// 				]
+// 			))
+// 		}
+// 	}
+// }
 
 export const destroyFbLeadDestination = id => {
 	return dispatch => {
@@ -55,9 +55,6 @@ export const newFbLeadDestination = () => {
 	return (dispatch, getState) => {
 		const state = getState()
 		const values = state.form.fbLeadDestinationCreate.values
-		const settings = {
-			"recipients": "alfredoreduarte@gmail.com"
-		}
 		return postToApi(`fb_lead_destinations.json`, { 
 			fbLeadformId: parseInt(values.fbLeadformId),
 			destinationType: values.destinationType,

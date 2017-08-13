@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { push } from 'react-router-redux'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 import FacebookLogin from 'react-facebook-login'
 import AdminDashboardView from 'leadgen/components/AdminDashboard'
@@ -9,7 +9,7 @@ import { getAppToBeDeleted, getAllAppsByText } from 'selectors/apps'
 import { getLeadformsWithPages } from 'leadgen/selectors/fbLeadforms'
 import { getLeadDestinationsWithMetadata } from 'leadgen/selectors/fbLeadDestinations'
 import { getFbLeadgenForms } from 'leadgen/selectors/fbLeadgenForms'
-import { newFbLeadform, destroyFbLeadform, fetchLeadgenFormsForPage } from 'leadgen/actions/fbLeadforms'
+import { sendTestLead, newFbLeadform, destroyFbLeadform, fetchLeadgenFormsForPage } from 'leadgen/actions/fbLeadforms'
 import { destroyFbLeadDestination } from 'leadgen/actions/fbLeadDestinations'
 import { setAppToDelete } from 'actions/deleteApp'
 import { hideSourcesForm, showSourcesForm, hideDestinationsForm, showDestinationsForm } from 'leadgen/actions/ui'
@@ -17,12 +17,11 @@ import { fbConnect } from 'actions/admin'
 import { deleteApp, destroy } from 'actions/apps'
 
 let AdminDashboard = ({ 
-	pristine,
-	submitting,
-	change,
-	reset,
-	handleSubmit,
-	handlePageChange,
+	hasSelectedPage,
+	hasSelectedForm,
+	// 
+	fetchingLeadgenForm,
+	// handlePageChange,
 	handleDeleteFbLeadform,
 	handleDeleteFbLeadDestination,
 	fbProfile,
@@ -34,25 +33,22 @@ let AdminDashboard = ({
 	fbLeadgenForms,
 	sourcesFormVisible,
 	destinationsFormVisible,
-	// successfulPurchase,
 	hideSourcesForm,
 	showSourcesForm,
 	hideDestinationsForm,
 	showDestinationsForm,
 }) => (
 	<AdminDashboardView
-		pristine={pristine}
+		fetchingLeadgenForm={fetchingLeadgenForm}
+		hasSelectedPage={hasSelectedPage}
+		hasSelectedForm={hasSelectedForm}
 		hideSourcesForm={hideSourcesForm}
 		showSourcesForm={showSourcesForm}
 		hideDestinationsForm={hideDestinationsForm}
 		showDestinationsForm={showDestinationsForm}
 		sourcesFormVisible={sourcesFormVisible}
 		destinationsFormVisible={destinationsFormVisible}
-		submitting={submitting}
-		change={change}
-		reset={reset}
-		handleSubmit={handleSubmit}
-		handlePageChange={handlePageChange}
+		// handlePageChange={handlePageChange}
 		handleDeleteFbLeadform={handleDeleteFbLeadform}
 		handleDeleteFbLeadDestination={handleDeleteFbLeadDestination}
 		fbProfile={fbProfile}
@@ -60,43 +56,37 @@ let AdminDashboard = ({
 		fbLoginCallback={fbLoginCallback}
 		fbLeadDestinations={fbLeadDestinations}
 		fbLeadforms={fbLeadforms}
-		fbPages={fbPages}
+		// fbPages={fbPages}
 		fbLeadgenForms={fbLeadgenForms}
-		// successfulPurchase={successfulPurchase}
 	/>
 )
-
-AdminDashboard = reduxForm({
-	form: 'fbLeadFormCreate',
-})(AdminDashboard)
 
 const mapStateToProps = (state, props) => {
 	return {
 		fbProfile: state.admin.fbProfile,
 		fbLeadforms: getLeadformsWithPages(state),
-		fbPages: getAllPages(state),
-		fbLeadgenForms: getFbLeadgenForms(state),
+		// fbPages: getAllPages(state),
 		fbLeadDestinations: getLeadDestinationsWithMetadata(state),
-		// successfulPurchase: props.location.query["successful-purchase"],
 		connectingToFacebook: state.activityIndicators.connectingToFacebook,
 		sourcesFormVisible: state.leadgenUI.sourcesFormVisible,
 		destinationsFormVisible: state.leadgenUI.destinationsFormVisible,
 	}
 }
 const mapDispatchToProps = (dispatch, props) => {
+	const reset = props.reset
 	return {
 		fbLoginCallback: response => dispatch(fbConnect(response)),
 		handleSubmit: e => {
 			e.preventDefault()
-			return dispatch(newFbLeadform())
+			return dispatch(newFbLeadform()).then(() => {
+				dispatch(hideSourcesForm())
+			})
 		},
 		handleDeleteFbLeadform: id => dispatch(destroyFbLeadform(id)),
 		handleDeleteFbLeadDestination: id => dispatch(destroyFbLeadDestination(id)),
-		handlePageChange: value => {
-			if (value) {
-				return dispatch(fetchLeadgenFormsForPage(value))
-			}
-		},
+		// sendTest: id => {
+		// 	return dispatch(sendTestLead(id))
+		// },
 		hideSourcesForm: () => dispatch(hideSourcesForm()),
 		showSourcesForm: () => dispatch(showSourcesForm()),
 		hideDestinationsForm: () => dispatch(hideDestinationsForm()),
