@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Alert } from 'react-bootstrap'
 import Loading from 'containers/Loading'
+import AppNavBar from 'components/AppNavBar'
 import { removeAlert } from 'actions/alerts'
 import { possibleOffers } from 'lib/offers'
 
@@ -16,7 +17,7 @@ const Application = ({ adminId, offer, children, global, loaded, alertTitle, ale
 			<strong dangerouslySetInnerHTML={{ __html: alertTitle }}></strong> <span dangerouslySetInnerHTML={{ __html: alertContent }}></span>
 		</Alert>
 		: null }
-		<div className="container-fluid">
+		<div className="container-flui">
 			{loaded ? children : 'cargando'}
 		</div>
 	</div>

@@ -64,12 +64,14 @@ const SourceCreator = ({
 	{hasSelectedPage && fbLeadgenForms.length == 0 && !fetchingLeadgenForm ? 
 		<p>Create a <a 
 			href={`https://fb.com/${hasSelectedPage}/publishing_tools/?section=LEAD_ADS_FORMS`} 
-			target="_blank">Lead Form</a></p>
+			target="_blank">Lead Form</a>?</p>
 	: null}
-	<button 
-		type="submit" 
-		className="btn btn-primary btn-block" 
-		disabled={!valid || submitting}>Save Form</button>
+	<div className="form-group">
+		<button 
+			type="submit" 
+			className="btn btn-primary btn-block" 
+			disabled={!valid || submitting}>Save Form</button>
+	</div>
 </form>
 
 export default SourceCreator

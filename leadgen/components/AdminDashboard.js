@@ -8,7 +8,6 @@ import FacebookLogin from 'react-facebook-login'
 import MdClose from 'react-icons/lib/md/close'
 import MdChevronRight from 'react-icons/lib/md/chevron-right'
 import FbPhoto from 'components/FbPhoto'
-import AppNavBar from 'components/AppNavBar'
 import DestinationCreator from 'leadgen/containers/DestinationCreator'
 import SourceCreator from 'leadgen/containers/SourceCreator'
 import Destination from 'leadgen/components/Destination'
@@ -40,7 +39,6 @@ const AdminDashboard = ({
 	destinationsFormVisible,
 }) => (
 	<div>
-		<AppNavBar />
 		{!fbProfile ? 
 			<div className="col-md-6 col-md-offset-3">
 				<div className="panel panel-default">
@@ -81,6 +79,11 @@ const AdminDashboard = ({
 						tag="a" />
 					</small></p>
 				</div>
+				{fbLeadforms.length == 0 ? 
+					<div className="col-md-12 text-center">
+						<h4>Select one of your Facebook Leadgen Forms</h4>
+					</div>
+				: null}
 				<div className="col-md-12" style={{display: 'flex', justifyContent: 'space-around'}} >
 					<div className="Leadgen-column">
 						<FlipCard disabled={true} flipped={sourcesFormVisible || !fbLeadforms.length } style={{width: '100%'}}>
@@ -112,7 +115,7 @@ const AdminDashboard = ({
 							</div>
 							<div className="panel panel-default">
 								<div className="panel-body">
-									<div style={{
+									<div className={!fbLeadforms.length ? 'hide' : null} style={{
 										display: 'flex',
 										alignItems: 'center',
 										justifyContent: 'space-between',
@@ -125,6 +128,11 @@ const AdminDashboard = ({
 										}} style={{cursor: 'pointer'}} />
 									</div>
 									<SourceCreator />
+									{fbLeadforms.length == 0 ? 
+										<p className="text-center"><small>But... what exactly is a <a 
+											href="http://blog.installthisapp.com/creating-facebook-lead-ads/" 
+											target="_blank">Facebook Leadgen Form</a></small></p>
+									: null}
 								</div>
 							</div>
 						</FlipCard>

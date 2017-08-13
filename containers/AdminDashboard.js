@@ -29,7 +29,7 @@ const AdminDashboard = ({
 	step
 }) => (
 	<div>
-		<AppNavBar />
+		<AppNavBar showLeadgen={true} />
 		{successfulPurchase ? <SuccessfulPurchase /> : null }
 		{apps.length > 0 || filterText ? 
 			<div>

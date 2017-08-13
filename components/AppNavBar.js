@@ -9,45 +9,55 @@ import { logOut } from 'actions/admin'
 import FbPhoto from 'components/FbPhoto'
 import StatusIndicator from 'components/StatusIndicator'
 
-const AppNavBar = ({ adminId, name, identifier, logout, subscription, remainingTrialDays }) => (
-	<Navbar fluid={true}>
-		<Navbar.Header>
-			<Navbar.Brand>
-				<IndexLink to="/d">
-					<img src="/images/logo-v3.png" style={{height: "28px"}} />
-				</IndexLink>
-			</Navbar.Brand>
-		</Navbar.Header>
-		<div className="collapse navbar-collapse text-right">
-			<ul className="nav navbar-nav navbar-left" style={{
+const AppNavBar = ({ adminId, name, identifier, logout, subscription, remainingTrialDays, showLeadgen }) => (
+	<div style={{
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		// padding: '0px 20px',
+		height: '70px',
+		background: 'white',
+		boxShadow: '0px 2px 5px rgba(0,0,0,.05)',
+		marginBottom: '40px',
+	}}>
+		
+		<IndexLink to="/d" style={{
+			padding: '0px 20px',
+			display: 'flex',
+			borderRight: '1px solid #e6e6e6',
+			alignSelf: 'center',
+			height: '100%',
+			alignItems: 'center',
+		}}>
+			<img src="/images/logo-v3.png" style={{height: "28px"}} />
+		</IndexLink>
+
+		<div className="" style={{
+			flexGrow: 1,
+			display: 'flex',
+			justifyContent: 'space-between',
+			padding: '0px 20px',
+		}}>
+			<ul className="list-unstyled" style={{
 				display: 'flex',
 				alignItems: 'center',
+				marginBottom: '0px',
 			}}>
-				<li>
-					<button onClick={() => {top.location.href = '/leadgen'}} className="btn btn-success btn-sm navbar-btn">
-						<b>New!</b> Lead ads Sync
-					</button>
-				</li>
+				{!showLeadgen ? <li><a href='/d'>← Back to contests</a></li> : null}
+				{showLeadgen ? <li>
+					<a href='/leadgen' className="btn btn-primary btn-sm animated rubberBand" style={{letterSpacing: '1px'}}>
+						<b>NEW!</b> Facebook Lead Ads sync
+					</a></li> : null}
 			</ul>
 			<ul className="nav navbar-nav navbar-right" style={{
 				display: 'flex',
 				alignItems: 'center',
+				marginBottom: '0px',
 			}}>
-				{subscription ? 
-					null
-				:
 				<li>
 					<a href='?offer=trial-ended' className="link-no-underline text-success">
 						<small>{remainingTrialDays} | UPGRADE</small>
 					</a>
-				</li>
-				}
-				<li className="hide">
-					<button className="btn btn-success btn-sm btn-outline navbar-btn">
-						<Link to='/d/apps/create' className="link-no-underline text-success">
-							New App
-						</Link>
-					</button>
 				</li>
 				<NavDropdown 
 					eventKey={3} 
@@ -76,7 +86,7 @@ const AppNavBar = ({ adminId, name, identifier, logout, subscription, remainingT
 				</NavDropdown>
 			</ul>
 		</div>
-	</Navbar>
+	</div>
 )
 
 const mapStateToProps = (state) => {

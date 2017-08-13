@@ -90,7 +90,7 @@ const AppDashboardContainer = ({
 				<TwitterShareButton className="btn btn-tw btn-block" url={`https://${window.location.host}/${fbAppCanvasId}/${currentApp.checksum}`}>Share on Twitter</TwitterShareButton>
 			</div>
 		</Modal>
-		<AppNavBar />
+		<AppNavBar showLeadgen={true} />
 		<AppTitleBar 
 			// facebookPageIdentifier={facebookPageIdentifier}
 			handleShare={toggleShareModal}
