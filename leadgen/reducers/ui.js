@@ -4,7 +4,7 @@ const ui = (state = {
 	activityIndicators: {
 		leadgenForm: false,
 	},
-	destinationCreated: 16,
+	destinationCreated: null,
 }, action) => {
 	switch (action.type) {
 		case 'LEADGEN_UI/SPINNER/LEADGEN_FORM':
