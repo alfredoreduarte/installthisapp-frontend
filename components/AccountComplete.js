@@ -48,13 +48,19 @@ const mapStateToProps = state => ({
 	initialValues: state.admin,
 })
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch, props) => {
+	console.log('props')
+	console.log(props)
+	const redirectUri = props.location.query.redirect_uri || 'https://' + window.location.hostname + '/d'
+	console.log('redirectUri')
+	console.log(redirectUri)
 	return { 
 		handleSubmit: e => {
 			e.preventDefault()
 			// dispatch(updateInfo())
 			dispatch(updateInfo()).then(res => {
-				dispatch(push('/d'))
+				// dispatch(push('/d'))
+				top.location.href = redirectUri
 			})
 		}
 	}

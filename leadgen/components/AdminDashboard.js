@@ -16,6 +16,7 @@ import Source from 'leadgen/components/Source'
 
 const AdminDashboard = ({ 
 	adminId,
+	adminName,
 	fetchingLeadgenForm,
 	hasSelectedPage,
 	hasSelectedForm,
@@ -42,22 +43,6 @@ const AdminDashboard = ({
 	<div>
 		{!fbProfile ? 
 			<div className="col-md-12 text-center" style={{marginBottom: '40px'}}>
-				<div className="panel panel-default hide">
-					<div className="panel-body text-center">
-						<h6 className="text-muted text-uppercase text-muted"><b>Step 1</b></h6>
-						<h1>Connect your Facebook Profile</h1>
-						<br/>
-						<br/>
-						<FacebookLogin
-							appId={process.env.FB_APP_ID}
-							autoLoad={true}
-							scope={'manage_pages'}
-							textButton={connectingToFacebook ? 'Please wait...' : 'Connect to Facebook'}
-							fields="name,email,picture"
-							cssClass="btn btn-primary btn-lg"
-							callback={fbLoginCallback} />
-					</div>
-				</div>
 				<br/>
 				<br/>
 				<p><img
@@ -65,18 +50,26 @@ const AdminDashboard = ({
 					width="72px"
 					height="72px"
 				/></p>
+				<h2>Welcome, {adminName}</h2>
 				<h4><b>Connect your Facebook Profile</b></h4>
 				<br/>
 				<br/>
-				<p><small><FacebookLogin
+				<p>
+					{connectingToFacebook ?
+						<button className="btn btn-primary btn-lg" disabled={true}>
+							Please wait...
+						</button>
+					:
+						<FacebookLogin
 							appId={process.env.FB_APP_ID}
 							autoLoad={true}
 							scope={'manage_pages'}
-							textButton={connectingToFacebook ? 'Please wait...' : 'Connect to Facebook'}
+							textButton={'Connect to Facebook'}
 							fields="name,email,picture"
 							cssClass="btn btn-primary btn-lg"
 							callback={fbLoginCallback} />
-				</small></p>
+					}
+				</p>
 			</div>
 		:
 			<div>

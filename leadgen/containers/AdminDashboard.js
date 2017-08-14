@@ -18,6 +18,7 @@ import { deleteApp, destroy } from 'actions/apps'
 
 let AdminDashboard = ({ 
 	adminId,
+	adminName,
 	hasSelectedPage,
 	hasSelectedForm,
 	// 
@@ -41,6 +42,7 @@ let AdminDashboard = ({
 }) => (
 	<AdminDashboardView
 		adminId={adminId}
+		adminName={adminName}
 		fetchingLeadgenForm={fetchingLeadgenForm}
 		hasSelectedPage={hasSelectedPage}
 		hasSelectedForm={hasSelectedForm}
@@ -66,6 +68,7 @@ let AdminDashboard = ({
 const mapStateToProps = (state, props) => {
 	return {
 		adminId: state.admin.id,
+		adminName: state.admin.name,
 		fbProfile: state.admin.fbProfile,
 		fbLeadforms: getLeadformsWithPages(state),
 		// fbPages: getAllPages(state),

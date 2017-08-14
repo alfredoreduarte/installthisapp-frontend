@@ -39,7 +39,10 @@ router.get('/refund-policy', function(req, res) { res.render('landing-v2/refund-
 router.get('/pricing', function(req, res) { res.render('landing-v2/pricing', commonParams(req)) })
 router.get('/contact', function(req, res) { res.render('landing-v2/contact', commonParams(req)) })
 router.get('/white-label-contests', function(req, res) { res.render('landing-v2/white-label', commonParams(req)) })
-router.get('/signup', function(req, res) { res.render('signup', commonParams(req)) })
+// router.get('/signup', function(req, res) { res.render('signup', commonParams(req)) })
+router.get('/signup', function(req, res) { res.render('signup', Object.assign({}, commonParams(req), {
+	redirect: req.query.redirect,
+})) })
 router.get('/login', function(req, res) { res.render('login', commonParams(req)) })
 router.get('/please-confirm', function(req, res) { res.render('please-confirm', Object.assign({}, commonParams(req), {
 	emailAddress: req.query.email,

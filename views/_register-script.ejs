@@ -1,9 +1,16 @@
 <script type="text/javascript">
-var ITAregister = function(){
+var ITAregister = function(appsOrLeadgen){
 	$('#signup-button').attr('disabled', true)
 	$('#signup-button').html('Please wait...')
 	var email = $('#email').val()
 	var password = $('#password').val()
+	var confirm_success_url = null
+	if (appsOrLeadgen == 'leadgen') {
+		confirmSuccessUrl = 'https://' + window.location.hostname + '/d/complete-profile?redirect_uri=https://' + window.location.hostname + '/leadgen'
+	}
+	else {
+		confirmSuccessUrl = 'https://' + window.location.hostname + '/d/complete-profile?redirect_uri=https://' + window.location.hostname + '/d'
+	}
 	if (email && password) {
 		fetch('<%= apiUrl %>/auth.json', {
 			method: 'POST',
@@ -14,7 +21,7 @@ var ITAregister = function(){
 			body: JSON.stringify({
 				email: $('#email').val(),
 				password: $('#password').val(),
-				confirm_success_url: 'https://' + window.location.hostname + '/d/complete-profile'
+				confirm_success_url: confirmSuccessUrl
 			})
 		}).then(response => {
 			// 
