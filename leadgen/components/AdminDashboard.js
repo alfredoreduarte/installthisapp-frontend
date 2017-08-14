@@ -15,6 +15,7 @@ import Source from 'leadgen/components/Source'
 // import SuccessfulPurchase from 'components/SuccessfulPurchase'
 
 const AdminDashboard = ({ 
+	adminId,
 	fetchingLeadgenForm,
 	hasSelectedPage,
 	hasSelectedForm,
@@ -40,8 +41,8 @@ const AdminDashboard = ({
 }) => (
 	<div>
 		{!fbProfile ? 
-			<div className="col-md-6 col-md-offset-3">
-				<div className="panel panel-default">
+			<div className="col-md-12 text-center" style={{marginBottom: '40px'}}>
+				<div className="panel panel-default hide">
 					<div className="panel-body text-center">
 						<h6 className="text-muted text-uppercase text-muted"><b>Step 1</b></h6>
 						<h1>Connect your Facebook Profile</h1>
@@ -57,6 +58,25 @@ const AdminDashboard = ({
 							callback={fbLoginCallback} />
 					</div>
 				</div>
+				<br/>
+				<br/>
+				<p><img
+					src={`/images/user-placeholders/${adminId % 8}.png`}
+					width="72px"
+					height="72px"
+				/></p>
+				<h4><b>Connect your Facebook Profile</b></h4>
+				<br/>
+				<br/>
+				<p><small><FacebookLogin
+							appId={process.env.FB_APP_ID}
+							autoLoad={true}
+							scope={'manage_pages'}
+							textButton={connectingToFacebook ? 'Please wait...' : 'Connect to Facebook'}
+							fields="name,email,picture"
+							cssClass="btn btn-primary btn-lg"
+							callback={fbLoginCallback} />
+				</small></p>
 			</div>
 		:
 			<div>
@@ -131,7 +151,7 @@ const AdminDashboard = ({
 									{fbLeadforms.length == 0 ? 
 										<p className="text-center"><small>But... what exactly is a <a 
 											href="http://blog.installthisapp.com/creating-facebook-lead-ads/" 
-											target="_blank">Facebook Leadgen Form</a></small></p>
+											target="_blank">Facebook Leadgen Form</a>?</small></p>
 									: null}
 								</div>
 							</div>
