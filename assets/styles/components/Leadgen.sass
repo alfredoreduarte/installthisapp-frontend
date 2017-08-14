@@ -2,3 +2,20 @@
 	width: 400px
 .ReactFlipCard__Front, .ReactFlipCard__Back
 	width: 400px
+
++keyframes(leadgenFlow)
+	0%
+		left: -100%
+	100%
+		left: 100%
+
+.leadgen-flow
+	position: absolute
+	left: 0%
+	height: 4px
+	width: 40px
+	background: #8ed7f6
+	+animation-name(leadgenFlow)
+	+animation-duration(800ms)
+	+animation-timing-function(ease)
+	+animation-iteration-count(infinite)

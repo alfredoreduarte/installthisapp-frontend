@@ -12,11 +12,13 @@ import { getFbLeadgenForms } from 'leadgen/selectors/fbLeadgenForms'
 import { sendTestLead, newFbLeadform, destroyFbLeadform, fetchLeadgenFormsForPage } from 'leadgen/actions/fbLeadforms'
 import { destroyFbLeadDestination } from 'leadgen/actions/fbLeadDestinations'
 import { setAppToDelete } from 'actions/deleteApp'
-import { hideSourcesForm, showSourcesForm, hideDestinationsForm, showDestinationsForm } from 'leadgen/actions/ui'
+import { hideSourcesForm, showSourcesForm, hideDestinationsForm, showDestinationsForm, hideDestinationSuccessModal } from 'leadgen/actions/ui'
 import { fbConnect } from 'actions/admin'
 import { deleteApp, destroy } from 'actions/apps'
 
 let AdminDashboard = ({ 
+	hideDestinationSuccessModal,
+	showDestinationSuccessModal,
 	adminId,
 	adminName,
 	hasSelectedPage,
@@ -41,6 +43,8 @@ let AdminDashboard = ({
 	showDestinationsForm,
 }) => (
 	<AdminDashboardView
+		hideDestinationSuccessModal={hideDestinationSuccessModal}
+		showDestinationSuccessModal={showDestinationSuccessModal}
 		adminId={adminId}
 		adminName={adminName}
 		fetchingLeadgenForm={fetchingLeadgenForm}
@@ -67,6 +71,8 @@ let AdminDashboard = ({
 
 const mapStateToProps = (state, props) => {
 	return {
+		// showDestinationSuccessModal: state.leadgenUI.destinationCreated,
+		showDestinationSuccessModal: _.find(getLeadDestinationsWithMetadata(state), {'id': state.leadgenUI.destinationCreated}),
 		adminId: state.admin.id,
 		adminName: state.admin.name,
 		fbProfile: state.admin.fbProfile,
@@ -81,6 +87,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
 	const reset = props.reset
 	return {
+		hideDestinationSuccessModal: response => dispatch(hideDestinationSuccessModal()),
 		fbLoginCallback: response => dispatch(fbConnect(response)),
 		handleSubmit: e => {
 			e.preventDefault()

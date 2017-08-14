@@ -49,11 +49,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch, props) => {
-	console.log('props')
-	console.log(props)
 	const redirectUri = props.location.query.redirect_uri || 'https://' + window.location.hostname + '/d'
-	console.log('redirectUri')
-	console.log(redirectUri)
 	return { 
 		handleSubmit: e => {
 			e.preventDefault()

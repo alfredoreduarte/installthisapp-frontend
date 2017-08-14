@@ -3,7 +3,8 @@ const ui = (state = {
 	destinationsFormVisible: false,
 	activityIndicators: {
 		leadgenForm: false,
-	}
+	},
+	destinationCreated: null,
 }, action) => {
 	switch (action.type) {
 		case 'LEADGEN_UI/SPINNER/LEADGEN_FORM':
@@ -33,6 +34,16 @@ const ui = (state = {
 			return {
 				...state,
 				destinationsFormVisible: false,
+			}
+		case 'LEADGEN_UI/DESTINATIONS/SHOW_SUCCESS_MODAL':
+			return {
+				...state,
+				destinationCreated: action.destinationId,
+			}
+		case 'LEADGEN_UI/DESTINATIONS/HIDE_SUCCESS_MODAL':
+			return {
+				...state,
+				destinationCreated: null,
 			}
 		default:
 			return state

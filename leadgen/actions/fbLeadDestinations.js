@@ -1,6 +1,7 @@
 import { normalize, arrayOf } from 'normalizr'
 import * as schema from 'leadgen/schema'
 import { getFromApi, postToApi, deleteFromApi } from 'api'
+import { showDestinationSuccessModal } from 'leadgen/actions/ui'
 
 // delete later
 import { getLeadformsWithPages } from 'leadgen/selectors/fbLeadforms'
@@ -61,7 +62,10 @@ export const newFbLeadDestination = () => {
 			status: "on",
 			settings: values.settings,
 		})
-		.then(response => dispatch(addFbLeadDestination(response)))
+		.then(response => {
+			dispatch(showDestinationSuccessModal(response.id))
+			return dispatch(addFbLeadDestination(response))
+		})
 		.catch(exception =>
 			console.log('postNewApp: parsing failed', exception)
 		)

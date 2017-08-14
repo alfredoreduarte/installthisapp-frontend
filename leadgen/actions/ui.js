@@ -15,3 +15,12 @@ export const hideDestinationsForm = () => ({
 export const toggleLeadgenFormSpinner = () => ({
 	type: 'LEADGEN_UI/SPINNER/LEADGEN_FORM'
 })
+
+export const showDestinationSuccessModal = destinationId => ({
+	type: 'LEADGEN_UI/DESTINATIONS/SHOW_SUCCESS_MODAL',
+	destinationId,
+})
+
+export const hideDestinationSuccessModal = () => ({
+	type: 'LEADGEN_UI/DESTINATIONS/HIDE_SUCCESS_MODAL'
+})
