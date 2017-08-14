@@ -83,6 +83,27 @@ const DestinationCreator = ({
 		</div>
 	</div>
 	: null}
+	{selectedDestinationType == 'webhook' ?
+	<div>
+		<div className="form-group">
+			<label className="control-label">URL to POST</label>
+			<Field
+				name={'settings.url'}
+				className="form-control"
+				type="text"
+				component="input" />
+			<br/>
+			<p>Request body example:</p>
+			<pre>
+				{JSON.stringify([
+					{"name":"email","values":["test@fb.com"]},
+					{"name":"full_name","values":["Example Name"]},
+					{"name":"phone_number","values":["Example phone number"]}
+				])}
+			</pre>
+		</div>
+	</div>
+	: null}
 	<button 
 		type="submit" 
 		className="btn btn-primary btn-block" 

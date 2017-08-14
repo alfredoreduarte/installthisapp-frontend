@@ -7,6 +7,7 @@ import { Animate } from 'react-move'
 import Modal from 'react-modal'
 import FacebookLogin from 'react-facebook-login'
 import FaEnvelope from 'react-icons/lib/fa/envelope'
+import MdCloud from 'react-icons/lib/md/cloud'
 import MdClose from 'react-icons/lib/md/close'
 import MdChevronRight from 'react-icons/lib/md/chevron-right'
 import FlipCard from 'components/FlipCard'
@@ -143,7 +144,12 @@ const AdminDashboard = ({
 						justifyContent: 'space-around',
 						alignItems: 'center',
 					}}>
-						<FaEnvelope size="50" style={{color: 'white'}} />
+						{showDestinationSuccessModal.destinationType == 'email' ?
+							<FaEnvelope size="50" style={{color: 'white'}} />
+						: null}
+						{showDestinationSuccessModal.destinationType == 'webhook' ?
+							<MdCloud size="50" style={{color: 'white'}} />
+						: null}
 					</div>
 				</div>
 				<p className="text-center">

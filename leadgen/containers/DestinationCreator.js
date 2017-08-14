@@ -74,6 +74,18 @@ const validate = values => {
 			}
 		}
 	}
+	if (values.destinationType == 'webhook') {
+		if (values.settings === undefined) {
+			errors.settings = {
+				url: 'Required',
+			}
+		} 
+		else {
+			if (!values.settings.url) {
+				errors.settings.url = 'Required'
+			}
+		}
+	}
 	return errors
 }
 
@@ -91,6 +103,11 @@ const mapStateToProps = (state, props) => {
 		{
 			label: 'Email',
 			type: 'email',
+			enabled: true,
+		},
+		{
+			label: 'Webhook',
+			type: 'webhook',
 			enabled: true,
 		},
 		{
