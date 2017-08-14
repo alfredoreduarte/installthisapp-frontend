@@ -75,13 +75,13 @@ const AppNavBar = ({ adminId, name, identifier, logout, subscription, remainingT
 						/>
 					} 
 					id="account-dropdown">
-					<LinkContainer className="" to={{ pathname: '/d/account' }}>
-						<MenuItem eventKey={3.3}>
+					
+						<MenuItem eventKey={3.3} href="/d/account">
 							<span>My Account
 							{name ? <span></span> : <span style={{marginLeft: '5px'}}><StatusIndicator active={true} status={'red'} /></span>}
 							</span>
 						</MenuItem>
-					</LinkContainer>
+					
 					<MenuItem eventKey={3.2} href="javascript:void(0)" onClick={logout}>Logout</MenuItem>
 				</NavDropdown>
 			</ul>

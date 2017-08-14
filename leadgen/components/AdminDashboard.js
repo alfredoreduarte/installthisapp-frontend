@@ -93,6 +93,7 @@ const AdminDashboard = ({
 						autoLoad={false}
 						scope={'manage_pages'}
 						fields="name,email,picture"
+						style={{cursor: 'pointer'}}
 						cssClass=""
 						textButton={connectingToFacebook ? 'Please wait...' : 'Refresh permissions'}
 						callback={fbLoginCallback}
