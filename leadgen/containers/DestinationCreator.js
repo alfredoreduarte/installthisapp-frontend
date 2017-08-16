@@ -46,6 +46,9 @@ let DestinationCreator = ({
 
 const validate = values => {
 	const errors = {}
+	if (errors.settings === undefined) {
+		errors.settings = {}
+	}
 	if (!values.destinationType) {
 		errors.destinationType = 'Required'
 	}
@@ -64,7 +67,7 @@ const validate = values => {
 	if (values.destinationType == 'mailchimp') {
 		if (values.settings === undefined) {
 			errors.settings = {
-				listID: 'Required',
+				listId: 'Required',
 				apiKey: 'Required',
 			}
 		} 
@@ -72,8 +75,8 @@ const validate = values => {
 			if (!values.settings.apiKey) {
 				errors.settings.apiKey = 'Required'
 			}
-			else if (!values.settings.listID) {
-				errors.settings.listID = 'Required'
+			else if (!values.settings.listId) {
+				errors.settings.listId = 'Required'
 			}
 		}
 	}

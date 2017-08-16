@@ -78,7 +78,7 @@ const DestinationCreator = ({
 		<div className="form-group">
 			<label className="control-label">List ID</label>
 			<Field
-				name={'settings.listID'}
+				name={'settings.listId'}
 				className="form-control"
 				type="text"
 				component="input" />
