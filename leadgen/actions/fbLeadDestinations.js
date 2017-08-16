@@ -64,7 +64,9 @@ export const newFbLeadDestination = () => {
 		})
 		.then(response => {
 			dispatch(showDestinationSuccessModal(response.id))
-			return analytics.track('FbLeadDestination Created', () => {
+			return analytics.track('FbLeadDestination Created', {
+				destinationType: response.destinationType,
+			}, () => {
 				return dispatch(addFbLeadDestination(response))
 			})
 			

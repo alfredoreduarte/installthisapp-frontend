@@ -69,10 +69,11 @@ const validate = values => {
 			}
 		} 
 		else {
-			if (!values.settings.listID) {
-				errors.settings.listID = 'Required'
-			} else if (!values.settings.apiKey) {
+			if (!values.settings.apiKey) {
 				errors.settings.apiKey = 'Required'
+			}
+			else if (!values.settings.listID) {
+				errors.settings.listID = 'Required'
 			}
 		}
 	}
@@ -117,7 +118,7 @@ const mapStateToProps = (state, props) => {
 		{
 			label: 'Mailchimp',
 			type: 'mailchimp',
-			enabled: false,
+			enabled: true,
 		},
 		{
 			label: 'PipeDrive',
