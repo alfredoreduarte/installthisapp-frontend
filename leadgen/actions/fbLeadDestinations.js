@@ -64,7 +64,10 @@ export const newFbLeadDestination = () => {
 		})
 		.then(response => {
 			dispatch(showDestinationSuccessModal(response.id))
-			return dispatch(addFbLeadDestination(response))
+			return analytics.track('FbLeadDestination Created', () => {
+				return dispatch(addFbLeadDestination(response))
+			})
+			
 		})
 		.catch(exception =>
 			console.log('postNewApp: parsing failed', exception)

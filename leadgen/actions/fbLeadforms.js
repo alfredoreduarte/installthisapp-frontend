@@ -84,7 +84,9 @@ export const newFbLeadform = () => {
 		})
 		.then(response => {
 			if (response) {
-				dispatch(addFbLeadform(response))
+				analytics.track('LeadForm Created', () => {
+					dispatch(addFbLeadform(response))
+				})
 			}
 		})
 		.catch(exception =>
