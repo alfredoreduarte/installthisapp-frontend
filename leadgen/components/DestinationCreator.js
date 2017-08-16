@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
-import { Field, reduxForm } from 'redux-form'
+import { Field, FieldArray, reduxForm } from 'redux-form'
 import FaClose from 'react-icons/lib/fa/close'
 // import SuccessfulPurchase from 'components/SuccessfulPurchase'
+import RenderHttpHeaders from 'leadgen/components/RenderHttpHeaders'
 
 const DestinationCreator = ({ 
 	pristine,
@@ -15,6 +16,7 @@ const DestinationCreator = ({
 	fbLeadforms,
 	// destinationSettings,
 	selectedDestinationType,
+	selectedFbLeadformId,
 	handleDestinationTypeChange,
 }) => 
 <form onSubmit={e => {
@@ -38,7 +40,7 @@ const DestinationCreator = ({
 			)}
 		</Field>
 	</div>
-	<div className="form-group">
+	<div className={`form-group ${!selectedDestinationType ? 'hide' : null}`}>
 		<label className="control-label">Receive data from Source</label>
 		<Field name="fbLeadformId" component="select" className="form-control">
 			<option value={''} disabled>-- Select a source --</option>
@@ -51,7 +53,7 @@ const DestinationCreator = ({
 			)}
 		</Field>
 	</div>
-	{selectedDestinationType == 'email' ?
+	{selectedDestinationType == 'email' && selectedFbLeadformId ?
 	<div>
 		<div className="form-group">
 			<label className="control-label">Comma-separated Email recipients</label>
@@ -63,7 +65,7 @@ const DestinationCreator = ({
 		</div>
 	</div>
 	: null}
-	{selectedDestinationType == 'mailchimp' ?
+	{selectedDestinationType == 'mailchimp' && selectedFbLeadformId ?
 	<div>
 		<div className="form-group">
 			<label className="control-label">Mailchimp API Key</label>
@@ -83,7 +85,7 @@ const DestinationCreator = ({
 		</div>
 	</div>
 	: null}
-	{selectedDestinationType == 'webhook' ?
+	{selectedDestinationType == 'webhook' && selectedFbLeadformId ?
 	<div>
 		<div className="form-group">
 			<label className="control-label">URL to POST</label>
@@ -93,15 +95,16 @@ const DestinationCreator = ({
 				type="text"
 				component="input" />
 			<br/>
-			<p>Request body example:</p>
-			<pre>
-				{JSON.stringify([
-					{"name":"email","values":["test@fb.com"]},
-					{"name":"full_name","values":["Example Name"]},
-					{"name":"phone_number","values":["Example phone number"]}
-				])}
-			</pre>
 		</div>
+		<FieldArray name="settings.httpHeaders" component={RenderHttpHeaders} />
+		<hr />
+		<p>Request body example:</p>
+		<pre>
+			{JSON.stringify([
+				{"name":"email","values":["test@fb.com"]},
+				{"name":"full_name","values":["Example Name"]}
+			])}
+		</pre>
 	</div>
 	: null}
 	<button 

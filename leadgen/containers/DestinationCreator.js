@@ -25,6 +25,7 @@ let DestinationCreator = ({
 	destinationTypes,
 	fbLeadforms,
 	selectedDestinationType,
+	selectedFbLeadformId,
 	handleDestinationTypeChange,
 	// destinationSettings,
 }) => (
@@ -38,6 +39,7 @@ let DestinationCreator = ({
 		destinationTypes={destinationTypes}
 		fbLeadforms={fbLeadforms}
 		selectedDestinationType={selectedDestinationType}
+		selectedFbLeadformId={selectedFbLeadformId}
 		handleDestinationTypeChange={handleDestinationTypeChange}
 	/>
 )
@@ -81,6 +83,8 @@ const validate = values => {
 			}
 		} 
 		else {
+			console.log('llega aca 1 ', values.settings.url)
+			console.log('llega aca 2 ', values.settings)
 			if (!values.settings.url) {
 				errors.settings.url = 'Required'
 			}
@@ -128,6 +132,7 @@ const mapStateToProps = (state, props) => {
 	]
 	return {
 		selectedDestinationType: selector(state, 'destinationType'),
+		selectedFbLeadformId: selector(state, 'fbLeadformId'),
 		fbLeadforms: getLeadformsWithPages(state),
 		destinationTypes: destinationTypes,
 	}
