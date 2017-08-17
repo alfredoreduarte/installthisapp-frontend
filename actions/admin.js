@@ -51,7 +51,7 @@ const identifyAdmin = payload => {
 			// user_id: payload.id,
 			// email: payload.email,
 		// }
-	// })
+	})
 }
 
 export const fetchAdmin = () => {
