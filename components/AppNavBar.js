@@ -26,11 +26,11 @@ const AppNavBar = ({ adminId, name, identifier, logout, subscription, remainingT
 					</li>}
 			</ul>
 			<ul className="nav navbar-nav navbar-right AppNavBar-MenuList">
-				<li className={subscription ? null : 'hide'}>
+				{showLeadgen ? <li className={subscription ? 'hide' : null}>
 					<a href='?offer=trial-ended' className="link-no-underline text-success">
 						<small>{remainingTrialDays} | UPGRADE</small>
 					</a>
-				</li>
+				</li> : null }
 				<NavDropdown eventKey={3} id="account-dropdown"
 					title={
 						identifier ? <FbPhoto identifier={parseInt(identifier)} width={42} height={42} className="img-circle" />
