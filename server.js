@@ -59,20 +59,20 @@ app.use('/node_modules', express.static(__dirname + '/node_modules'))
 // === Canvas ===
 // 
 // Trivia
-// var triviaRouter = require('./canvas/trivia/server.js')
-// app.use(triviaRouter)
+var triviaRouter = require('./canvas/trivia/server.js')
+app.use(triviaRouter)
 // Top Fans
-// var topFansRouter = require('./canvas/top_fans/server.js')
-// app.use(topFansRouter)
+var topFansRouter = require('./canvas/top_fans/server.js')
+app.use(topFansRouter)
 // Photo Contest
-// var photoContestRouter = require('./canvas/photo_contest/server.js')
-// app.use(photoContestRouter)
+var photoContestRouter = require('./canvas/photo_contest/server.js')
+app.use(photoContestRouter)
 // Memory Match
-// var memoryMatchRouter = require('./canvas/memory_match/server.js')
-// app.use(memoryMatchRouter)
+var memoryMatchRouter = require('./canvas/memory_match/server.js')
+app.use(memoryMatchRouter)
 // Catalog
-// var catalogRouter = require('./canvas/catalog/server.js')
-// app.use(catalogRouter)
+var catalogRouter = require('./canvas/catalog/server.js')
+app.use(catalogRouter)
 
 // Serving static HTML
 app.use(function(req, res, next) {
