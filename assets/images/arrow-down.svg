@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="36px" height="44px" viewBox="0 0 36 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>arrow-down</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Lead-ads" transform="translate(-228.000000, -405.000000)" fill-rule="nonzero" fill="#000000">
+            <g id="noun_1041087_cc" transform="translate(227.000000, 404.000000)">
+                <g id="Group">
+                    <g transform="translate(0.000000, 0.637820)" id="arrow-down">
+                        <path d="M19.012066,44.3622 C19.675566,44.3062 20.460366,44.0573 20.887066,43.7059 L35.887106,31.7059 C37.218476,30.536 37.337886,28.7142 36.356076,27.487 C35.374276,26.2597 33.364276,26.0365 32.137106,27.0184 L22.012106,35.1121 L22.012106,3.36215 C22.012106,1.70535 20.668866,0.36215 19.012066,0.36215 C17.355166,0.36215 16.012066,1.70535 16.012066,3.36215 L16.012066,35.1121 L5.887066,27.0184 C4.659966,26.0365 2.695366,26.2974 1.668166,27.487 C0.552066,28.7795 0.909766,30.7242 2.137066,31.7059 L17.137066,43.7059 C17.758666,44.2138 18.215066,44.3533 19.012066,44.3622 L19.012066,44.3622 Z"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

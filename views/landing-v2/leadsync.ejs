@@ -1,78 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include('../_head', {title: "White label contests"}) %>
-<body>
-	<%- include('_navbar') %>
+<%- include('_head-leadgen', {title: "Sync Facebook lead ads with your favorite apps", canonical: canonical ? canonical : false }) %>
+<body style="background: #F9F9FB top center no-repeat">
+	<img src="/images/leadgen-hero-background.png" style="
+	width: 100%;
+	position: absolute;
+	top: 14%;
+	display: none;
+	left: 0px;
+	" />
+	<div style="
+	width: 100%;
+	display: none;
+	position: absolute;
+	top: 14%;
+	left: 0px;
+	background: linear-gradient(#1f1fce 0%, transparent);
+	">
+	</div>
+	<%- include('_navbar-black') %>
 	
-	<header class="jumbotron site-jumbotron white-text-area header-apps-page">
+	<header class="jumbotron site-jumbotron header-apps-page" style="background: none">
 		<div class="container">
 			<div class="header-magic-appearance">
-				<h1 class="text-center site-title">White label contests</h1>
-				<p class="text-center site-subtitle">Continually run fresh campaigns and contests for your clients. Hide our brand and sign with your own brand.</p>
-				<div class="text-center">
-					<a href="/signup?redirect=leadgen" class="btn btn-lg btn-primary site-cta absolute-horizontal-center">Start Now</a>
-					<br />
-					<br />
-				</div>
+				<h1 class="text-center site-title" style="margin-bottom: 40px">Send Facebook Lead Ads Anywhere</h1>
+				<h2 class="text-center" style="margin-bottom: 60px">Get leads delivered to Mailchimp, your inbox, and many more destinies</h2>
+				<p class="text-center site-subtitle">Automation is key because marketers like you have to optimize every single available minute of the day.<br/> Automate your lead generation campaigns now.</p>
+				<p class="text-center" style="margin-top: 40px">
+					<a href="/signup?redirect=leadgen" class="btn btn-lg btn-primary site-cta">Start Now</a>
+				</p>
 			</div>
 		</div>
 	</header>
 
-	<section class="section-about">
-		<div class="container text-center">
-			<h2 class="h1 col-md-12">What can I do with a White Label social contest?</h2>
-			<p>Your agency doesn't have to do all the work. Create contests for your clients and sign them with your own name.</p>
+	<section class="section-about" style="background: none">
+		<div class="container text-center visible-xs">
+			<h2 class="h1" style="margin-bottom: 20px">Get Facebook Lead Ad Leads Where You Can Use Them</h2>
+			<h4 style="margin-bottom: 60px">No more manual syncing with CSV files.</h4>
+			<div class="row"><img src="/images/leadgen-mobile.png" style="position: relative;" class="img-responsive" /></div>
+		</div>
+		<div class="container text-center hidden-xs">
+			<!-- <h2 class="h1" style="margin-bottom: 20px">How does this work?</h2> -->
+			<h2 class="h1 text-primary" style="margin-bottom: 20px"><a href="#how-it-works" id="anch-link">See how it works</a></h2>
+			<a href="#how-it-works"><img src="/images/arrow-down.svg" width="20" height="20" /></a>
+			<hr/>
+			<!-- <h4 style="margin-bottom: 0px">You can automate this process in five minutes:</h4> -->
+			<img src="/images/leadgen-hero-background.png" style="
+				top: -100px;
+				max-width: 100%;
+				position: relative;
+				pointer-events: none;
+				left: 0px;
+				z-index: 0;
+				" />
+			<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3" style="position: relative;z-index: 1;margin-top: -200px" id="how-it-works">
+				<div class="leadgen-destination-item">
+					<p class="text-center"><a href="#"><img src="/images/facebook-logo.png" style="width: 100px" /></a></p>
+					<h3 class="app-title text-center">Facebook Lead Ads</h3>
+					<p>Capture Leads using <a href="http://blog.installthisapp.com/creating-facebook-lead-ads/" target="_blank">Facebook Lead Ads</a>.</p>
+				</div>
+			</div>
+			<!-- <img src="/images/lead-ads.png" style="top: -25px;position: relative;" class="img-responsive animated fadeInDown" /> -->
+			<div class="col-md-12 col-sm-12">
+				<img src="/images/leadgen-unordered.png" style="position: relative;z-index: 0;margin-top: -20px;" />
+			</div>
+			<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3" style="position: relative;z-index: 1;margin-top: -15px;">
+				<div class="leadgen-destination-item">
+					<p class="text-center"><a href="#"><img src="/images/logo.jpg" class="img-rounded" style="width: 100px" /></a></p>
+					<h3 class="app-title text-center">InstallThisApp.com</h3>
+					<p>Connect your forms in minutes. <a href="/signup?redirect=leadgen">Start now</a>.</p>
+				</div>
+			</div>
+			<img src="/images/leadgen-pipes.png" style="width: 70%" />
+			<div class="col-md-12" style="display: flex;
+				align-items: stretch;
+				justify-content: flex-start;
+				flex-direction: row;"
+			>
+				<div class="col-md-4" style="display: flex;flex-grow: 1;">
+					<div class="leadgen-destination-item">
+						<p class="text-center"><a href="#"><img src="/images/third-party-logos/mailchimp.svg" style="width: 100px" /></a></p>
+						<h3 class="app-title text-center">Mailchimp</h3>
+						<p>Add Facebook Leads to your MailChimp lists and start emaildrip campaigns right away, in real time.</p>
+					</div>
+				</div>
+				<div class="col-md-4" style="display: flex;flex-grow: 1;">
+					<div class="leadgen-destination-item">
+						<p class="text-center"><a href="#"><img src="/images/email-logo.png" style="width: 100px" /></a></p>
+						<h3 class="app-title text-center">Email</h3>
+						<p>Unlimited Facebook Leads emailed to you for FREE. <br/>Unlike other companies, you receive all the form data via email, not just an excerpt. Emails are queued and sent almost immediately.</p>
+					</div>
+				</div>
+				<div class="col-md-4" style="display: flex;flex-grow: 1;">
+					<div class="leadgen-destination-item">
+						<p class="text-center"><a href="#"><img src="/images/your-server-logo.png" style="width: 100px" /></a></p>
+						<h3 class="app-title text-center">Webhooks</h3>
+						<p>Give us a URL and we'll send a POST request with all the form data, in real time. Add custom HTTP headers for authentications in case you need them.</p>
+					</div>
+				</div>
+			</div>
 		</div>
 	</section>
 
-	
-	<div class="section gradientlila white-text-area">
+	<section class="section-cta white-text-area text-center" id="call-to-action-area">
 		<div class="container">
-			<div class="col-md-5 vertical-align text-center-xs text-center-sm">
-				<h2 class="h1 app-step-title">your-own-domain.com</h2>
-				<p class="app-step-content">All of our apps, visible under your own domain name --or your client's.</p>
-			</div><!-- 
-			 --><div class="col-md-7 vertical-align">
-				<div class="thumbnail">
-					<img src="" />
-				</div>
-			</div>
+			<h2 class="section-cta-heading">Over 281 happy customers are automating their lead generation process</h2>
+			<h3 class="section-cta-subheading"><i>Grow your email lists in real time</i></h3>
+			<p class="hidden-xs">
+				<a href="/signup?redirect=leadgen" class="btn btn-lg btn-primary site-cta section-cta-button">Start automating your Lead Campaigns</a>
+			</p>
+			<p class="visible-xs hidden-sm hidden-md hidden-lg"><a href="/signup?redirect=leadgen" class="btn btn-lg btn-primary site-cta section-cta-button" >Start automating your Lead Campaigns</a></p>
+			<!-- <p class="tip section-cta-smallprint"><small>In order to install our applications you must first connect with Facebook. Don't worry, we won't post anything to your timeline</small></p> -->
+			<h4 class="section-cta-credit"><i>Trusted by the awesome folks making campaigns for these brands</i></h4>
+			<ul class="list-unstyled customers-list">
+				<li>
+					<div title="See customers using InstallThisApp" class="sprite sprite-client-1">Toyota</div>
+				</li>
+				<li>
+					<div title="See customers using InstallThisApp" class="sprite sprite-client-2">Philips</div>
+				</li>
+				<li>
+					<div title="See customers using InstallThisApp" class="sprite sprite-client-3">Samsung</div>
+				</li>
+				<li>
+					<div title="See customers using InstallThisApp" class="sprite sprite-client-4">AVIS</div>
+				</li>
+				<li>
+					<div title="See customers using InstallThisApp" class="sprite sprite-client-5">Kellogs</div>
+				</li>
+				<li>
+					<div title="See customers using InstallThisApp" class="sprite sprite-client-6">Budweiser</div>
+				</li>
+			</ul>
 		</div>
-	</div>
-	<div class="section">
-		<div class="container">
-			<div class="col-md-7 vertical-align">
-				<div class="thumbnail">
-					<img src="" />
-				</div>
-			</div><!-- 
-			 --><div class="col-md-5 vertical-align text-center-xs text-center-sm">
-				<h2 class="h1 app-step-title">Use your own Facebook App</h2>
-				<p class="app-step-content">Integrate your contest with a Facebook page by using your own customized Facebook App.</p>
-			</div>
-		</div>
-	</div>
-	<div class="section gradientlila white-text-area">
-		<div class="container">
-			<div class="col-md-5 vertical-align text-center-xs text-center-sm">
-				<h2 class="h1 app-step-title">Sign with your logo</h2>
-				<p class="app-step-content">Add your own signature and link to your website.</p>
-			</div><!-- 
-			 --><div class="col-md-7 vertical-align">
-				<div class="thumbnail">
-					<img src="" />
-				</div>
-			</div>
-		</div>
-	</div>
+	</section>
 
-	<%- include('_section-extra-features') %>
+	<section class="section hide">
+		<div class="container text-center">
+			<h2 class="h1" style="margin-bottom: 20px">Pricing</h2>
+			<h4 style="margin-bottom: 60px">Start with a Free Account, grow from there.</h4>
+		</div>
+		<div class="container">
+			<div class="tab-content col-md-6 col-md-offset-3">
+				<div role="tabpanel" class="tab-pane active" id="plans-normal">
+					<table class="table pricing white-text-area responsive-table">
+						<thead>
+							<tr>
+								<td class="featured-plan" style="width: 50%">
+									<p class="plan-name">Free</p>
+									<h3 class="plan-price">
+										<sup>US$</sup>
+										<span>0</span>
+										<sub>/mo</sub>
+									</h3>
+									<div class="features">
+										<p>Notifications from one Facebook form</p>
+										<p>From one Facebook Page</p>
+										<p>Unlimited Email Notifications</p>
+										<p>To One Email Address</p>
+									</div>
+									<p>
+										<a 
+											href="/signup?redirect=leadgen"
+											class="btn btn-primary plan-cta">
+												Start Now
+										</a>
+									</p>
+									<p>
+										<small>
+										</small>
+									</p>
+								</td>
+								<td class="featured-plan">
+									<p class="plan-name">Lead generator</p>
+									<h3 class="plan-price">
+										<sup>US$</sup>
+										<span>10</span>
+										<sub>/mo</sub>
+									</h3>
+									<div class="features">
+										<p>Notifications from 10 Facebook forms</p>
+										<p>From up to 10 Facebook Pages</p>
+										<p>Unlimited Email Notifications</p>
+										<p>Send to up to 10 email addresses</p>
+										<p>Sync with Mailchimp and any Webhook URL you want</p>
+									</div>
+									<p>
+										<a 
+											href="/signup?redirect=leadgen&utm=buy_plan_leadgenerator"
+											class="btn btn-primary plan-cta">
+												Choose plan - 10$
+										</a>
+									</p>
+									<p>
+										<small>
+										</small>
+									</p>
+								</td>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
 
-	<%- include('_cta-area') %>
+	<section class="section-about">
+		<div class="container text-center">
+			<h2 class="h1" style="margin-bottom: 20px">Frequently Asked Questions</h2>
+			<h4 style="margin-bottom: 60px">In case you need more information.</h4>
+		</div>
+	</section>
+
+	<%- include('_section-faq', {
+		items: [
+			{
+				question: "Can I receive the leads on many email addresses?",
+				answer: "Yes, you can send new leads to several email addresses at once",
+			},
+			{
+				question: "Can I send custom HTTP Requests to a webhook?",
+				answer: "Yes, you can add as many HTTP Headers to the POSTs we make to your URL",
+			},
+			{
+				question: "Can I cancel my account?",	
+				answer: "Yes, you can cancel your account at any time, no extra fees.",
+			},
+		]
+	}) %>
 
 	<%- include('_footer') %>
 
 	<%- include('_scripts') %>
+
+	<script type="text/javascript" src="<%= cloudFrontUrl %>/node_modules/jquery.scrollto/jquery.scrollTo.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			console.log('fdsa')
+			console.log($('#anch-link'))
+			// $('#anch-link').scrollTo($("#how-it-works"))
+			$('#anch-link').scrollTo('max');
+		});
+	</script>
 
 	<%- disableSegment ? include('../_disable-segment') : include('../_segment') %>
 	<script type="text/javascript">
