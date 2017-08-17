@@ -8,20 +8,20 @@
 	<title><%= title %></title>
 	<link rel="stylesheet" media="all" href="<%= cloudFrontUrl %><%= cssBundle %>" />
 	<!-- SEO stuff -->
-	<% if ( canonical ) { %><link rel="canonical" href="https://v3.installthisapp.com<%= canonical %>" /><% } %>
-	<meta name="description" content="Sync Facebook Leads ads with Mailchimp, Databases, CRMs, and receive lead data via email." />
-	<meta name="keywords" content="facebook lead ads, lead ads sync, lead ads mailchimp, facebook lead ads mailchimp" />
+	<link rel="canonical" href="https://v3.installthisapp.com<%= canonical %>" />
+	<meta name="description" content="<%= description %>" />
+	<meta name="keywords" content="<%= keywords %>" />
 	<meta name="distribution" content="global"/>
 	<meta name="resource-type" content="document"/>
 	<meta http-equiv="Pragma" content="cache"/>
 	<meta name="robots" content="all,index,follow"/>
 	<meta name="Revisit" content="7 days"/>
 	<meta property="og:title" content="<%= title %>" />
-	<meta property="og:url" content="https://v3.installthisapp.com/lead-ads-sync"/>
+	<meta property="og:url" content="https://v3.installthisapp.com<%= canonical %>"/>
 	<meta property="og:type" content="website" />
-	<meta property="og:image" content="https://v3.installthisapp.com/images/leadgen-facebook-thumbnail.jpg"/>
+	<meta property="og:image" content="https://v3.installthisapp.com/<%= og_image %>"/>
 	<meta property="og:site_name" content="InstallThisApp"/>
-	<meta property="og:description" content="Sync Facebook Leads ads with Mailchimp, Databases, CRMs, and receive lead data via email."/>
+	<meta property="og:description" content="<%= description %>"/>
 	<!-- Bablic.com - automatic translations -->
 	<!-- <script data-cfasync="false" type="text/javascript" data-bablic="596fde33e6e00537e4ba7bc2" data-bablic-m="[0,'en','en',1,[],0,0,0,0,0,0,0,0,[],'v3.installthisapp.com/',[],['_v',2]]" src="//cdn2.bablic.com/js/bablic.3.9.js"></script> -->
 </head>

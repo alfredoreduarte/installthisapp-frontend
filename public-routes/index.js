@@ -36,6 +36,9 @@ router.get('/apps', function(req, res) { res.render('landing-v2/apps', commonPar
 router.get('/lead-ads-sync', function(req, res) { res.render('landing-v2/leadsync', Object.assign({}, commonParams(req), {
 	canonical: '/lead-ads-sync',
 })) })
+router.get('/facebook-lead-ads', function(req, res) { res.render('landing-v2/leadsync-es', Object.assign({}, commonParams(req), {
+	canonical: '/facebook-lead-ads',
+})) })
 router.get('/privacy-policy', function(req, res) { res.render('landing-v2/privacy-policy', commonParams(req)) })
 router.get('/terms-conditions', function(req, res) { res.render('landing-v2/terms-conditions', commonParams(req)) })
 router.get('/refund-policy', function(req, res) { res.render('landing-v2/refund-policy', commonParams(req)) })
