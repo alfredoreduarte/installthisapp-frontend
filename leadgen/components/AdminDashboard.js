@@ -51,7 +51,7 @@ const AdminDashboard = ({
 		{showDestinationSuccessModal ? 
 			<SuccessModal 
 				showDestinationSuccessModal={showDestinationSuccessModal}
-				showDestinationSuccessModal={showDestinationSuccessModal}
+				hideDestinationSuccessModal={hideDestinationSuccessModal}
 			/>
 		: null}
 		{!fbProfile ? 
