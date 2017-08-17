@@ -23,9 +23,9 @@
 	<header class="jumbotron site-jumbotron header-apps-page" style="background: none">
 		<div class="container">
 			<div class="header-magic-appearance">
-				<h1 class="text-center site-title" style="margin-bottom: 40px">Send Facebook Lead Ads Anywhere</h1>
-				<h2 class="text-center" style="margin-bottom: 60px">Get leads delivered to Mailchimp, your inbox, and many more destinies</h2>
-				<p class="text-center site-subtitle">Automation is key because marketers like you have to optimize every single available minute of the day.<br/> Automate your lead generation campaigns now.</p>
+				<h1 class="text-center site-title" style="margin-bottom: 40px">Automate Facebook Lead Ads Campaigns</h1>
+				<h2 class="text-center" style="margin-bottom: 60px">Get leads delivered to your favorite mailing lists and CRMs</h2>
+				<p class="text-center site-subtitle">Leads contacted within sixty minutes are seven times more likely to become customers.<br/> Grow your email lists automatically, receive real-time notifications and trigger automatic responses.</p>
 				<p class="text-center" style="margin-top: 40px">
 					<a href="/signup?redirect=leadgen" class="btn btn-lg btn-primary site-cta">Start Now</a>
 				</p>
@@ -57,7 +57,7 @@
 				<div class="leadgen-destination-item">
 					<p class="text-center"><a href="#"><img src="/images/facebook-logo.png" style="width: 100px" /></a></p>
 					<h3 class="app-title text-center">Facebook Lead Ads</h3>
-					<p>Capture Leads using <a href="http://blog.installthisapp.com/creating-facebook-lead-ads/" target="_blank">Facebook Lead Ads</a>.</p>
+					<p>Capture Leads using <a href="http://blog.installthisapp.com/creating-facebook-lead-ads/" target="_blank">Facebook Lead Forms</a>.</p>
 				</div>
 			</div>
 			<!-- <img src="/images/lead-ads.png" style="top: -25px;position: relative;" class="img-responsive animated fadeInDown" /> -->
@@ -71,7 +71,7 @@
 					<p>Connect your forms in minutes. <a href="/signup?redirect=leadgen">Start now</a>.</p>
 				</div>
 			</div>
-			<img src="/images/leadgen-pipes.png" style="width: 70%" />
+			<img src="/images/leadgen-pipes.png" style="width: 70%;margin-bottom:20px" />
 			<div class="col-md-12" style="display: flex;
 				align-items: stretch;
 				justify-content: flex-start;
@@ -232,16 +232,6 @@
 	<%- include('_footer') %>
 
 	<%- include('_scripts') %>
-
-	<script type="text/javascript" src="<%= cloudFrontUrl %>/node_modules/jquery.scrollto/jquery.scrollTo.min.js"></script>
-	<script>
-		$(document).ready(function(){
-			console.log('fdsa')
-			console.log($('#anch-link'))
-			// $('#anch-link').scrollTo($("#how-it-works"))
-			$('#anch-link').scrollTo('max');
-		});
-	</script>
 
 	<%- disableSegment ? include('../_disable-segment') : include('../_segment') %>
 	<script type="text/javascript">
