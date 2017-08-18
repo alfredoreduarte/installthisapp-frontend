@@ -64,7 +64,8 @@ const AdminDashboard = ({
 					height="72px"
 				/></p>
 				<h2>Welcome, {adminName}</h2>
-				<h4><b>Connect your Facebook Profile</b></h4>
+				<br/>
+				<h4>Connect with Facebook to get your Lead Forms here</h4>
 				<br/>
 				<br/>
 				<p>

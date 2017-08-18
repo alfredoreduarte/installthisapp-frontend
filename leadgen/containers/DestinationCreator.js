@@ -133,6 +133,26 @@ const mapStateToProps = (state, props) => {
 			type: 'intercom',
 			enabled: false,
 		},
+		{
+			label: 'Aweber',
+			type: 'aweber',
+			enabled: false,
+		},
+		{
+			label: 'ActiveCampaign',
+			type: 'active_campaign',
+			enabled: false,
+		},
+		{
+			label: 'Slack',
+			type: 'slack',
+			enabled: false,
+		},
+		{
+			label: 'Campaign Monitor',
+			type: 'campaign_monitor',
+			enabled: false,
+		},
 	]
 	return {
 		selectedDestinationType: selector(state, 'destinationType'),

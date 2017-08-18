@@ -1,6 +1,9 @@
 <script>
 	// This empty object emulates segment.com's js library
 	// to disable every single tracking function when inspecting a user
+	window.Samestate = function() {
+		console.log('Fired Samestate')
+	}
 	window.analytics = {
 		page: (string, options, callback) => {
 			console.log('segment: page("' + string +'") called')
