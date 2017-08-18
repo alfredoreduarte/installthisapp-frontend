@@ -15,13 +15,13 @@ const AppNavBar = ({ adminId, name, identifier, logout, subscription, remainingT
 		<div className="AppNavBar-MenuBar">
 			<ul className="list-unstyled AppNavBar-MenuList">
 				{!showLeadgen ? 
-					<li><a href='/d'>← Back to contests</a></li>
+					<li className="hide"><a href='/d'>← Back to contests</a></li>
 					 : 
 					<li>
 						<a href='/leadgen' 
 							className="btn btn-primary btn-sm animated rubberBand" 
 							style={{letterSpacing: '1px'}}>
-							<b>NEW!</b> Facebook Lead Ads sync
+							<b>NEW!</b> Facebook LeadAds Sync Tool
 						</a>
 					</li>}
 			</ul>
