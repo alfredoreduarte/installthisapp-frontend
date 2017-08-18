@@ -155,18 +155,18 @@ const sitemap = map({
 			changefreq: 'weekly',
 			priority: 1.0,
 		},
-		'/sign-s3': {
-			disallow: true,
-		},
-		'/forgot/sent': {
-			disallow: true,
-		},
-		'/card': {
-			disallow: true,
-		},
-		'/d': {
-			disallow: true,
-		},
+		// '/sign-s3': {
+		// 	disallow: true,
+		// },
+		// '/forgot/sent': {
+		// 	disallow: true,
+		// },
+		// '/card': {
+		// 	disallow: true,
+		// },
+		// '/d': {
+		// 	disallow: true,
+		// },
 	},
 })
 sitemap.generate4(index)
