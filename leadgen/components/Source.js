@@ -29,7 +29,7 @@ const Source = ({
 	<br/>
 	<small>Form ID {fbFormId} | <a 
 		href="https://developers.facebook.com/tools/lead-ads-testing" 
-		target="_blank">Send test lead</a></small>
+		target="_blank" rel="noopener">Send test lead</a></small>
 </li>
 
 export default Source

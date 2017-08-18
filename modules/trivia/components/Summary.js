@@ -73,7 +73,7 @@ const Summary = ({ checksum, type, entries, steps, completed, install, share, ta
 				</tbody>
 			</table>
 			<p className="text-right" style={{marginTop: '16px'}}>
-				<small>Need help? Maybe our <a href="http://help.installthisapp.com/trivia" target="_blank">knowledge center</a> has some answers.</small>
+				<small>Need help? Maybe our <a href="http://help.installthisapp.com/trivia" target="_blank" rel="noopener">knowledge center</a> has some answers.</small>
 			</p>
 		</div>
 		{false ? 

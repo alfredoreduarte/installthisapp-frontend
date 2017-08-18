@@ -64,7 +64,7 @@ const SourceCreator = ({
 	{hasSelectedPage && fbLeadgenForms.length == 0 && !fetchingLeadgenForm ? 
 		<p>Create a <a 
 			href={`https://fb.com/${hasSelectedPage}/publishing_tools/?section=LEAD_ADS_FORMS`} 
-			target="_blank">Lead Form</a>?</p>
+			target="_blank" rel="noopener">Lead Form</a>?</p>
 	: null}
 	<div className="form-group">
 		<button 

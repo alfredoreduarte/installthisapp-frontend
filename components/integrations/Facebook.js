@@ -98,7 +98,7 @@ const Facebook = ({
 								<div className="panel-body">
 									<p>{tabInstalledInPage 
 									? 
-										<span>Tab installed in <a href={`https://fb.com/${pageIdentifier}/app/${fbAppId}`} target="_blank">{tabInstalledInPage}</a></span>
+										<span>Tab installed in <a href={`https://fb.com/${pageIdentifier}/app/${fbAppId}`} target="_blank" rel="noopener">{tabInstalledInPage}</a></span>
 									:
 										'Select a Facebook Page'}</p>
 									{tabInstalledInPage ?

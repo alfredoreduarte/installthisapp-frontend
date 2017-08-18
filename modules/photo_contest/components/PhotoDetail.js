@@ -16,7 +16,7 @@ const PhotoDetail = ({ show, user, attachmentUrl, caption, votes, handleClose, h
 		<Modal.Body>
 			<div className="row">
 				<div className="col-md-6">
-					<a href={attachmentUrl} target="_blank">
+					<a href={attachmentUrl} target="_blank" rel="noopener">
 						<img 
 						src={attachmentUrl}
 						className="img-responsive img-rounded" />

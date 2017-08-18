@@ -159,7 +159,7 @@ const AdminDashboard = ({
 									{fbLeadforms.length == 0 ? 
 										<p className="text-center"><small>But... what exactly is a <a 
 											href="http://blog.installthisapp.com/creating-facebook-lead-ads/" 
-											target="_blank">Facebook Leadgen Form</a>?</small></p>
+											target="_blank" rel="noopener">Facebook Leadgen Form</a>?</small></p>
 									: null}
 								</div>
 							</div>

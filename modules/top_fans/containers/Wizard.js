@@ -232,9 +232,9 @@ const Integrations = ({
 								}}>
 								<p>
 									{integrated ?
-										<s>Like or Comment on <b>your <a href={`https://fb.com/${pageIdentifier}/posts`} target="_blank">latest post</a></b></s>
+										<s>Like or Comment on <b>your <a href={`https://fb.com/${pageIdentifier}/posts`} target="_blank" rel="noopener">latest post</a></b></s>
 									:
-										<span>Like or Comment on <b>your <a href={`https://fb.com/${pageIdentifier}/posts`} target="_blank">latest post</a></b></span>
+										<span>Like or Comment on <b>your <a href={`https://fb.com/${pageIdentifier}/posts`} target="_blank" rel="noopener">latest post</a></b></span>
 									}
 								</p>
 								<p>

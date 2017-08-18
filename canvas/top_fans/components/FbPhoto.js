@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react'
 const FbPhoto = ({ className, identifier, width, height, style }) => (
 	<a 
 		href={`https://fb.com/${identifier}`} 
-		target="_blank" 
+		target="_blank" rel="noopener" 
 		style={{...style, display: 'inline-block', width: width, height: height}}
 		>
 		<img 

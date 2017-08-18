@@ -8,7 +8,7 @@ const ExternalLinksMenu = ({ checksum, fbPageIdentifier, fbAppId, fbAppCanvasId 
 			<li>
 				<a 
 				href={`https://facebook.com/pages/${fbPageIdentifier}/${fbPageIdentifier}?sk=app_${fbAppId}`}
-				target="_blank"
+				target="_blank" rel="noopener"
 				className="text-primary">
 					View on Facebook <small><span className="glyphicon glyphicon-share"></span></small>
 				</a>
@@ -19,7 +19,7 @@ const ExternalLinksMenu = ({ checksum, fbPageIdentifier, fbAppId, fbAppCanvasId 
 			<li>
 				<a 
 				href={`/${fbAppCanvasId}/${checksum}`}
-				target="_blank"
+				target="_blank" rel="noopener"
 				className="text-success">
 					Go to app <small><span className="glyphicon glyphicon-share"></span></small>
 				</a>

@@ -129,7 +129,7 @@ const SuccessModal = ({
 		</div>
 		<p className="text-center">
 			<a href="https://developers.facebook.com/tools/lead-ads-testing" 
-			target="_blank" className="btn btn-primary">Send Test Lead</a></p>
+			target="_blank" rel="noopener" className="btn btn-primary">Send Test Lead</a></p>
 	</Modal>
 	)}
 </Animate>
