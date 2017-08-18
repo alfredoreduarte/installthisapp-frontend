@@ -95,7 +95,10 @@ export const fetchAdmin = () => {
 export const logOut = () => {
 	return dispatch => {
 		// /auth/sign_out
-		// Cookies.remove('api_key')
+		Cookies.remove('access-token')
+		Cookies.remove('uid')
+		Cookies.remove('client')
+		Cookies.remove('token-type')
 		// top.location.href = '/'
 		deleteFromApi(
 			'auth/sign_out.json'
