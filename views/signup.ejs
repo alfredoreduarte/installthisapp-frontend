@@ -5,13 +5,13 @@
 	<div class="container-flex flex-space-around flex-vertical container-full-height flex-grow">
 		<div class="col-md-12">
 			<br/>
-			<a href="/" class="btn btn-default">← Back</a>
+			<a href="/" class="btn btn-default <%= email ? 'hide' : null %>">← Back</a>
 			<br/>
 		</div>
 		<div class="flex-grow flex flex-vertical flex-center">
 			<div class="col-md-12">
 				<p class="text-center"><img src="/images/logo.jpg" class="img-rounded" style="width: 50px" /></p>
-				<h1 class="text-center h2">Create an account</h1>
+				<h1 class="text-center h2"><%= email ? 'Choose a password to continue' : 'Create an account' %></h1>
 				<h4 class="text-center text-muted">It's free!</h4>
 				<br/>
 				<br/>
@@ -22,7 +22,7 @@
 					<div class="panel-body">
 						<form id="signup-form">
 							<div class="form-group">
-								<input type="email" id="email" class="form-control input-lg" placeholder="Email" required autofocus />
+								<input type="email" id="email" class="form-control input-lg" placeholder="Email" value="<%= email %>" required autofocus />
 							</div>
 							<div class="form-group">
 								<input type="password" id="password" class="form-control input-lg" placeholder="Password" required />
@@ -38,7 +38,7 @@
 						</form>
 					</div>
 				</div>
-				<p class="text-right">Already signed up? <a href="/login">Login →</a></p>
+				<p class="text-right <%= email ? 'hide' : null %>">Already signed up? <a href="/login">Login →</a></p>
 			</div>
 		</div>
 	</div>

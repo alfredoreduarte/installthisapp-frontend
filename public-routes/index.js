@@ -48,6 +48,7 @@ router.get('/white-label-contests', function(req, res) { res.render('landing-v2/
 // router.get('/signup', function(req, res) { res.render('signup', commonParams(req)) })
 router.get('/signup', function(req, res) { res.render('signup', Object.assign({}, commonParams(req), {
 	redirect: req.query.redirect,
+	email: req.query.email,
 })) })
 router.get('/login', function(req, res) { res.render('login', commonParams(req)) })
 router.get('/please-confirm', function(req, res) { res.render('please-confirm', Object.assign({}, commonParams(req), {
