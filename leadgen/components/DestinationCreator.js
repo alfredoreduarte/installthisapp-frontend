@@ -84,8 +84,9 @@ const DestinationCreator = ({
 				type="text"
 				component="input" />
 			<span></span>
-			<p className="help-block">You can find your List ID in your <b>Mailchimp list's Settings</b> pane under List <b>Name & Defaults</b>. Your list ID will be at the top of the right column.</p>
+			<p className="help-block">You can find your List ID in your <b>Mailchimp list's Settings</b> pane under <b>List Name & Defaults</b>. Your list ID will be at the top of the right column.</p>
 		</div>
+		<p><a href="http://help.installthisapp.com/lead-ads-integrations/how-to-find-your-mailchimp-api-key-and-list-id" target="_blank">Need Help?</a></p>
 	</div>
 	: null}
 	{selectedDestinationType == 'webhook' && selectedFbLeadformId ?
