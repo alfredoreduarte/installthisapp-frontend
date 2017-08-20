@@ -74,6 +74,7 @@ const DestinationCreator = ({
 				className="form-control"
 				type="text"
 				component="input" />
+			<p className="help-block">You create and copy-paste your MailChimp API Key from <b>Account Settings > Extras > API Keys</b>.</p>
 		</div>
 		<div className="form-group">
 			<label className="control-label">List ID</label>
@@ -82,6 +83,8 @@ const DestinationCreator = ({
 				className="form-control"
 				type="text"
 				component="input" />
+			<span></span>
+			<p className="help-block">You can find your List ID in your <b>Mailchimp list's Settings</b> pane under List <b>Name & Defaults</b>. Your list ID will be at the top of the right column.</p>
 		</div>
 	</div>
 	: null}
