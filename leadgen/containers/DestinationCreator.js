@@ -104,6 +104,7 @@ const selector = formValueSelector(reduxFormName)
 DestinationCreator = reduxForm({
 	form: reduxFormName,
 	validate,
+	enableReinitialize: true,
 })(DestinationCreator)
 
 const mapStateToProps = (state, props) => {
@@ -154,7 +155,21 @@ const mapStateToProps = (state, props) => {
 			enabled: false,
 		},
 	]
+	let initialValues = {}
+	const selectedValues = selector(state, 'destinationType', 'fbLeadformId')
+	if (selectedValues.destinationType == 'email') {
+		initialValues = {
+			...selectedValues,
+			settings: {
+				recipients: state.admin.email,
+			}
+		}
+	}
+	else {
+		initialValues = { ...selectedValues }
+	}
 	return {
+		initialValues: initialValues,
 		selectedDestinationType: selector(state, 'destinationType'),
 		selectedFbLeadformId: selector(state, 'fbLeadformId'),
 		fbLeadforms: getLeadformsWithPages(state),

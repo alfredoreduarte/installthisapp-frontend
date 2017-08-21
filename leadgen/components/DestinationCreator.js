@@ -59,6 +59,7 @@ const DestinationCreator = ({
 			<label className="control-label">Comma-separated Email recipients</label>
 			<Field
 				name={'settings.recipients'}
+				value={'name1@email1.com'}
 				className="form-control" 
 				rows={3}
 				component="textarea" />
@@ -96,6 +97,7 @@ const DestinationCreator = ({
 			<Field
 				name={'settings.url'}
 				className="form-control"
+				placeholder="https://yourwebsite.com/api/webhooks"
 				type="text"
 				component="input" />
 			<br/>
