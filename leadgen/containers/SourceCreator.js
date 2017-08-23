@@ -27,6 +27,7 @@ let SourceCreator = ({
 	handlePageChange,
 	hasSelectedPage,
 	fetchingLeadgenForm,
+	fetchLeadgenForms,
 	fbLeadgenForms,
 }) => (
 	<SourceCreatorView
@@ -40,6 +41,7 @@ let SourceCreator = ({
 		hasSelectedPage={hasSelectedPage}
 		handlePageChange={handlePageChange}
 		fetchingLeadgenForm={fetchingLeadgenForm}
+		fetchLeadgenForms={fetchLeadgenForms}
 		fbLeadgenForms={fbLeadgenForms}
 	/>
 )
@@ -81,6 +83,7 @@ const mapDispatchToProps = (dispatch, props) => {
 				return dispatch(fetchLeadgenFormsForPage(value))
 			}
 		},
+		fetchLeadgenForms: value => dispatch(fetchLeadgenFormsForPage(value)),
 		handleSubmit: e => {
 			e.preventDefault()
 			return dispatch(newFbLeadform()).then(() => {

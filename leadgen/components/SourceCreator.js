@@ -16,6 +16,7 @@ const SourceCreator = ({
 	hasSelectedPage,
 	fetchingLeadgenForm,
 	fbLeadgenForms,
+	fetchLeadgenForms,
 	// destinationSettings,
 }) => 
 <form className="" onSubmit={e => {
@@ -41,12 +42,8 @@ const SourceCreator = ({
 		{fetchingLeadgenForm ? 
 			<p>Fetching forms. Please wait...</p>
 		:
-			<Field name="fbFormId" component="select" className="form-control">
-				{fbLeadgenForms.length ? 
-					<option value={''} disabled>-- Form Name --</option>
-				:
-					<option value={''} disabled>-- This page has no forms --</option>
-				}
+			<Field name="fbFormId" component="select" className={`form-control ${fbLeadgenForms.length == 0 ? 'hide' : null}`}>
+				<option value={''} disabled>-- Form Name --</option>
 				{fbLeadgenForms.map(leadgenForm => 
 					<option 
 						key={leadgenForm.id} 
@@ -59,6 +56,9 @@ const SourceCreator = ({
 				)}
 			</Field>
 		}
+		{fbLeadgenForms.length == 0 && !fetchingLeadgenForm ? 
+			<p>This page has no forms. <a href="javascript:void(0);" onClick={() => fetchLeadgenForms(hasSelectedPage)}>Refresh</a></p>
+		: null}
 	</div>
 	: null}
 	{hasSelectedPage && fbLeadgenForms.length == 0 && !fetchingLeadgenForm ? 
