@@ -391,17 +391,25 @@ const mapDispatchToProps = (dispatch, props) => {
 				payload: fbPageIdentifier,
 			})
 		},
-		installTab: () => dispatch(updateAppSettings()).then(() => {
-			// dispatch(installFacebookTab()).then(success => {
-			dispatch(subscribeToWebhook()).then(success => {
-				if (success) {
-					analytics.track('App Installed', {
-						appType: 'top_fans',
-					})
-					dispatch(pollTopFansEntities(props.params.checksum))
-				}
+		installTab: () => {
+			dispatch({
+				type: 'TOGGLE_ACTIVITY/INSTALLING_TAB'
 			})
-		}),
+			return dispatch(updateAppSettings()).then(() => {
+				// dispatch(installFacebookTab()).then(success => {
+				dispatch(subscribeToWebhook()).then(success => {
+					if (success) {
+						analytics.track('App Installed', {
+							appType: 'top_fans',
+						})
+						dispatch({
+							type: 'TOGGLE_ACTIVITY/INSTALLING_TAB'
+						})
+						dispatch(pollTopFansEntities(props.params.checksum))
+					}
+				})
+			})
+		},
 		// uninstallTab: () => dispatch(uninstallFacebookTab())
 		uninstallTab: () => dispatch(unsubscribeFromWebhook())
 	}

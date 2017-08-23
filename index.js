@@ -33,3 +33,5 @@ render(
 	<Root store={store} history={history} />,
 	document.getElementById('root')
 )
+
+document.getElementById('blank-loading').remove()

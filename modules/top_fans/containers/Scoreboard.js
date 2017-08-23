@@ -24,8 +24,9 @@ const mapStateToProps = (state, props) => {
 	const currentApp = getCurrentAppByState(state)
 	const tabInstalledInPage = getCurrentAppByState(state).page ? _.find(getAllPages(state), {'id': getCurrentAppByState(state).page}).name : null
 	return { 
+		isCurrentlyPolling: state.topFans.ui.isCurrentlyPolling,
 		showResetModal: state.topFans.ui.showResetModal,
-		firstFetchFromDate: currentApp.setting.firstFetchFromDate,
+		// firstFetchFromDate: currentApp.setting.firstFetchFromDate,
 		firstFetchFromDate: currentApp.setting.firstFetchFromDate ? moment(currentApp.setting.firstFetchFromDate) : null,
 		// 
 		tabIntegrated: tabInstalledInPage,
@@ -63,11 +64,14 @@ const mapDispatchToProps = (dispatch, props) => {
 			})
 		},
 		reset: () => {
+			dispatch({
+				type: 'TOP_FANS/TOGGLE_RESET_MODAL',
+			})
+			dispatch({
+				type: 'TOP_FANS/TOGGLE_POLLING_STATE',
+			})
 			dispatch(updateAppSettings()).then(() => {
 				dispatch(resetTopFansEntities()).then(() => {
-					dispatch({
-						type: 'TOP_FANS/TOGGLE_RESET_MODAL',
-					})
 					dispatch(pollTopFansEntities(props.params.checksum))
 				})
 			})

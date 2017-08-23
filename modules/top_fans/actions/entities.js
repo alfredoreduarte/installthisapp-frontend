@@ -3,6 +3,12 @@ import * as schema from 'modules/top_fans/schema'
 import { getFromApi } from 'api'
 import { getCurrentAppByState } from 'selectors/apps'
 
+export const removeTopFansEntities = () => {
+	return {
+		type: 'TOP_FANS/REMOVE_ENTITIES'
+	}
+}
+
 export const receiveTopFansEntities = (entities, applicationLog) => {
 	return {
 		type: 'TOP_FANS/RECEIVE_ENTITIES',
@@ -65,10 +71,11 @@ export const cleanupTopFansEntities = () => {
 
 export const resetTopFansEntities = () => {
 	return (dispatch, getState) => {
+		dispatch(removeTopFansEntities())
 		const checksum = getCurrentAppByState(getState()).checksum
 		return getFromApi(`applications/${checksum}/reset.json`).then( response => {
 			if (response.status) {
-				dispatch(receiveTopFansEntities(response.payload))
+				return dispatch(receiveTopFansEntities(response.payload))
 				// dispatch(fetchTopFansSettings(checksum))
 			}
 			else{

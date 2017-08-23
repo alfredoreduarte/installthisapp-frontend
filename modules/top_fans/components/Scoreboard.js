@@ -22,6 +22,7 @@ import User from 'components/User'
 
 const Scoreboard = ({
 	toggleResetModal,
+	isCurrentlyPolling,
 	showResetModal,
 	firstFetchFromDate,
 	onDateChange,
@@ -69,10 +70,13 @@ const Scoreboard = ({
 			<div className="row">
 				<div className="col-md-12">
 					<h3 className="ita-page-title">
-						Scoreboard 
+						Scoreboard <br/>
 						<small className={selectedItems.length ? '' : 'hide'}>
 							{' '}/ {selectedItems.length} 
 							{' '}user{selectedItems.length > 1 ? 's' : ''} selected
+						</small>
+						<small>
+							Counting likes and comments since {firstFetchFromDate.format("dddd, MMMM Do YYYY")}
 						</small>
 					</h3>
 				</div>
@@ -128,7 +132,16 @@ const Scoreboard = ({
 				</div>
 			</div>
 		</div>
-		{entries.length == 0 ?
+		{isCurrentlyPolling && entries.length == 0 ?
+			<div className="ita-empty text-center">
+				<h3>
+					Please wait. Fetching activity...
+				</h3>
+			</div>
+		:
+			null
+		}
+		{entries.length == 0 && !isCurrentlyPolling ?
 			<div className="ita-empty text-center">
 				<h3>
 					There are no likes or comments yet.
@@ -161,57 +174,65 @@ const Scoreboard = ({
 				{tabIntegrated ? <p><a href="javascript:void(0)" onClick={toggleResetModal}><small>Reset scores</small></a></p> : null}
 			</div>
 		:
-			<Table className="ita-table">
-				<thead>
-					<tr>
-						<th>
-							<span>Name</span>
-						</th>
-						<th>
-							<span>Likes</span>
-						</th>
-						<th>
-							<span>Comments</span>
-						</th>
-						<th>
-							<span>Score</span>
-						</th>
-						<th>
-							<span>Remove</span>
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					{entries.map(entry => 
-					<tr key={entry.senderId}>
-						<td>
-							<User 
-								name={entry.senderName} 
-								identifier={entry.senderId} 
-								small
-								 />
-						</td>
-						<td>
-							{entry.likes}
-						</td>
-						<td>
-							{entry.comments}
-						</td>
-						<td>
-							<b>{entry.score}</b>
-						</td>
-						<td className="text-right">
-							<ul className="list-inline list-no-margin">
-								<li>
-									<FaEyeSlash size={20} color={'black'} style={{cursor: 'pointer'}} title="Hide this user from the scoreboard" onClick={() => addIgnoredUserIdentifier(entry.senderId)} />
-								</li>
-							</ul>
-						</td>
-					</tr>
-					)}
-				</tbody>
-			</Table>
+			null
 		}
+		{entries.length ? 
+		<Table className="ita-table">
+			<thead>
+				<tr>
+					<th>
+						<span>Name</span>
+					</th>
+					<th>
+						<span>Likes</span>
+					</th>
+					<th>
+						<span>Comments</span>
+					</th>
+					<th>
+						<span>Score</span>
+					</th>
+					<th>
+						<span>Remove</span>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				{entries.map(entry => 
+				<tr key={entry.senderId}>
+					<td>
+						<User 
+							name={entry.senderName} 
+							identifier={entry.senderId} 
+							small
+							 />
+					</td>
+					<td>
+						{entry.likes}
+					</td>
+					<td>
+						{entry.comments}
+					</td>
+					<td>
+						<b>{entry.score}</b>
+					</td>
+					<td className="text-right">
+						<ul className="list-inline list-no-margin">
+							<li>
+								<FaEyeSlash 
+									size={20} 
+									color={'black'} 
+									style={{cursor: 'pointer'}} 
+									title="Ignore all actions from this user" 
+									onClick={() => addIgnoredUserIdentifier(entry.senderId)} />
+							</li>
+						</ul>
+					</td>
+				</tr>
+				)}
+			</tbody>
+		</Table>
+		: null }
 	</div>
 )
 

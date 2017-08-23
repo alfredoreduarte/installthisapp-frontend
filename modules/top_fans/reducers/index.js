@@ -7,7 +7,7 @@ const topFans = (state = {
 	// settings: {},
 	wizard: wizard(undefined, {}),
 	log: {},
-	ui: {},
+	ui: ui(undefined, {}),
 	entries: {},
 }, action) => {
 	switch (action.type) {
@@ -22,9 +22,15 @@ const topFans = (state = {
 				wizard: wizard(state.wizard, action),
 			}
 		case 'TOP_FANS/TOGGLE_RESET_MODAL':
+		case 'TOP_FANS/TOGGLE_POLLING_STATE':
 			return {
 				...state,
 				ui: ui(state.ui, action)
+			}
+		case 'TOP_FANS/REMOVE_ENTITIES':
+			return { 
+				...state, 
+				entries: {},
 			}
 		case 'TOP_FANS/RECEIVE_ENTITIES':
 			return { 
