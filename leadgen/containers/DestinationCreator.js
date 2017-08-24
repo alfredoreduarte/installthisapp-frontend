@@ -106,6 +106,14 @@ const mapStateToProps = (state, props) => {
 			}
 		}
 	}
+	else if (selectedValues.destinationType == 'webhook') {
+		initialValues = {
+			...selectedValues,
+			settings: {
+				payloadType: 'json',
+			}
+		}
+	}
 	else {
 		initialValues = { ...selectedValues }
 	}
