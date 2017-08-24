@@ -16,35 +16,7 @@ import { setAppToDelete } from 'actions/deleteApp'
 import { fbConnect } from 'actions/admin'
 import { deleteApp, destroy } from 'actions/apps'
 
-let SourceCreator = ({ 
-	pristine,
-	submitting,
-	reset,
-	valid,
-	change,
-	handleSubmit,
-	fbPages,
-	handlePageChange,
-	hasSelectedPage,
-	fetchingLeadgenForm,
-	fetchLeadgenForms,
-	fbLeadgenForms,
-}) => (
-	<SourceCreatorView
-		pristine={pristine}
-		submitting={submitting}
-		reset={reset}
-		valid={valid}
-		change={change}
-		handleSubmit={handleSubmit}
-		fbPages={fbPages}
-		hasSelectedPage={hasSelectedPage}
-		handlePageChange={handlePageChange}
-		fetchingLeadgenForm={fetchingLeadgenForm}
-		fetchLeadgenForms={fetchLeadgenForms}
-		fbLeadgenForms={fbLeadgenForms}
-	/>
-)
+let SourceCreator = props => <SourceCreatorView { ...props } />
 
 const validate = values => {
 	const errors = {}

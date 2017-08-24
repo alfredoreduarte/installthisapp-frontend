@@ -15,37 +15,14 @@ import { setAppToDelete } from 'actions/deleteApp'
 import { fbConnect } from 'actions/admin'
 import { deleteApp, destroy } from 'actions/apps'
 
-let DestinationCreator = ({ 
-	pristine,
-	submitting,
-	change,
-	reset,
-	valid,
-	handleSubmit,
-	destinationTypes,
-	fbLeadforms,
-	selectedDestinationType,
-	selectedFbLeadformId,
-	handleDestinationTypeChange,
-	// destinationSettings,
-}) => (
-	<DestinationCreatorView
-		pristine={pristine}
-		submitting={submitting}
-		change={change}
-		reset={reset}
-		valid={valid}
-		handleSubmit={handleSubmit}
-		destinationTypes={destinationTypes}
-		fbLeadforms={fbLeadforms}
-		selectedDestinationType={selectedDestinationType}
-		selectedFbLeadformId={selectedFbLeadformId}
-		handleDestinationTypeChange={handleDestinationTypeChange}
-	/>
-)
+import emailValidator from 'leadgen/components/destinations/email/validator'
+import mailChimpValidator from 'leadgen/components/destinations/mailchimp/validator'
+import webhookValidator from 'leadgen/components/destinations/webhook/validator'
+
+let DestinationCreator = props => <DestinationCreatorView { ...props } />
 
 const validate = values => {
-	const errors = {}
+	let errors = {}
 	if (errors.settings === undefined) {
 		errors.settings = {}
 	}
@@ -55,45 +32,9 @@ const validate = values => {
 	if (!values.fbLeadformId) {
 		errors.fbLeadformId = 'Required'
 	}
-	if (values.destinationType == 'email') {
-		if (values.settings === undefined) {
-			errors.settings = {
-				recipients: 'Required'
-			}
-		} else if (!values.settings.recipients) {
-			errors.settings.recipients = 'Required'
-		}
-	}
-	if (values.destinationType == 'mailchimp') {
-		if (values.settings === undefined) {
-			errors.settings = {
-				listId: 'Required',
-				apiKey: 'Required',
-			}
-		} 
-		else {
-			if (!values.settings.apiKey) {
-				errors.settings.apiKey = 'Required'
-			}
-			else if (!values.settings.listId) {
-				errors.settings.listId = 'Required'
-			}
-		}
-	}
-	if (values.destinationType == 'webhook') {
-		if (values.settings === undefined) {
-			errors.settings = {
-				url: 'Required',
-			}
-		} 
-		else {
-			console.log('llega aca 1 ', values.settings.url)
-			console.log('llega aca 2 ', values.settings)
-			if (!values.settings.url) {
-				errors.settings.url = 'Required'
-			}
-		}
-	}
+	if (values.destinationType == 'email') { errors = emailValidator(values, errors) }
+	if (values.destinationType == 'mailchimp') { errors = mailChimpValidator(values, errors) }
+	if (values.destinationType == 'webhook') { errors = webhookValidator(values, errors) }
 	return errors
 }
 

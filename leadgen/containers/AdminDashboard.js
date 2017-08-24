@@ -16,58 +16,7 @@ import { hideSourcesForm, showSourcesForm, hideDestinationsForm, showDestination
 import { fbConnect } from 'actions/admin'
 import { deleteApp, destroy } from 'actions/apps'
 
-let AdminDashboard = ({ 
-	hideDestinationSuccessModal,
-	showDestinationSuccessModal,
-	adminId,
-	adminName,
-	hasSelectedPage,
-	hasSelectedForm,
-	// 
-	fetchingLeadgenForm,
-	// handlePageChange,
-	handleDeleteFbLeadform,
-	handleDeleteFbLeadDestination,
-	fbProfile,
-	connectingToFacebook,
-	fbLoginCallback,
-	fbLeadforms,
-	fbLeadDestinations,
-	fbPages,
-	fbLeadgenForms,
-	sourcesFormVisible,
-	destinationsFormVisible,
-	hideSourcesForm,
-	showSourcesForm,
-	hideDestinationsForm,
-	showDestinationsForm,
-}) => (
-	<AdminDashboardView
-		hideDestinationSuccessModal={hideDestinationSuccessModal}
-		showDestinationSuccessModal={showDestinationSuccessModal}
-		adminId={adminId}
-		adminName={adminName}
-		fetchingLeadgenForm={fetchingLeadgenForm}
-		hasSelectedPage={hasSelectedPage}
-		hasSelectedForm={hasSelectedForm}
-		hideSourcesForm={hideSourcesForm}
-		showSourcesForm={showSourcesForm}
-		hideDestinationsForm={hideDestinationsForm}
-		showDestinationsForm={showDestinationsForm}
-		sourcesFormVisible={sourcesFormVisible}
-		destinationsFormVisible={destinationsFormVisible}
-		// handlePageChange={handlePageChange}
-		handleDeleteFbLeadform={handleDeleteFbLeadform}
-		handleDeleteFbLeadDestination={handleDeleteFbLeadDestination}
-		fbProfile={fbProfile}
-		connectingToFacebook={connectingToFacebook}
-		fbLoginCallback={fbLoginCallback}
-		fbLeadDestinations={fbLeadDestinations}
-		fbLeadforms={fbLeadforms}
-		// fbPages={fbPages}
-		fbLeadgenForms={fbLeadgenForms}
-	/>
-)
+let AdminDashboard = props => <AdminDashboardView { ...props } />
 
 const mapStateToProps = (state, props) => {
 	return {
