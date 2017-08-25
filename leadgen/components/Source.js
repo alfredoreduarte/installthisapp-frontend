@@ -9,7 +9,7 @@ const Source = ({
 	fbFormId,
 	destinationsAmount,
 	handleDelete,
-	// sendTest,
+	sendTest,
 	handleEdit,
 }) => 
 <li className="list-group-item">
@@ -35,9 +35,7 @@ const Source = ({
 		<span><b>{fbPageName}</b> <small className="text-muted">Not sending data</small></span>
 	}
 	<br/>
-	<small>Form ID {fbFormId} | <a 
-		href="https://developers.facebook.com/tools/lead-ads-testing" 
-		target="_blank" rel="noopener">Send test lead</a></small>
+	<small>Form ID {fbFormId} | <a onClick={sendTest}>Send test lead</a></small>
 </li>
 
 export default Source

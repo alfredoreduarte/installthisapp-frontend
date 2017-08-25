@@ -31,7 +31,7 @@ const AdminDashboard = ({
 	handleDeleteFbLeadDestination,
 	// handlePageChange,
 	// 
-	// sendTest,
+	sendTest,
 	fbProfile,
 	connectingToFacebook,
 	fbLoginCallback,
@@ -55,6 +55,7 @@ const AdminDashboard = ({
 	<div>
 		{showDestinationSuccessModal ? 
 			<SuccessModal 
+				sendTest={() => sendTest(showDestinationSuccessModal.fbLeadformId)}
 				showDestinationSuccessModal={showDestinationSuccessModal}
 				hideDestinationSuccessModal={hideDestinationSuccessModal}
 			/>
@@ -136,7 +137,7 @@ const AdminDashboard = ({
 											<Source
 												key={fbLeadform.id}
 												id={fbLeadform.id}
-												// sendTest={() => sendTest(fbLeadform.id)}
+												sendTest={() => sendTest(fbLeadform.id)}
 												fbPageName={fbLeadform.fbPageName}
 												fbFormId={fbLeadform.fbFormId}
 												destinationsAmount={fbLeadform.fbLeadDestinations.length}

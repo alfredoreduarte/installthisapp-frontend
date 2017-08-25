@@ -19,6 +19,7 @@ import Source from 'leadgen/components/Source'
 // import SuccessfulPurchase from 'components/SuccessfulPurchase'
 
 const SuccessModal = ({ 
+	sendTest,
 	hideDestinationSuccessModal,
 	showDestinationSuccessModal,
 }) => <Animate
@@ -127,9 +128,7 @@ const SuccessModal = ({
 				: null}
 			</div>
 		</div>
-		<p className="text-center">
-			<a href="https://developers.facebook.com/tools/lead-ads-testing" 
-			target="_blank" rel="noopener" className="btn btn-primary">Send Test Lead</a></p>
+		<p className="text-center"><a onClick={sendTest} className="btn btn-primary">Send Test Lead</a></p>
 	</Modal>
 	)}
 </Animate>

@@ -5,28 +5,7 @@ import { toggleLeadgenFormSpinner } from 'leadgen/actions/ui'
 
 export const sendTestLead = id => {
 	return dispatch => {
-		return postToApi(`fb_webhooks.json`, {
-			"entry":[
-				{
-					"changes":[
-						{
-							"field":"leadgen",
-							"value":{
-								"ad_id":0,
-								"form_id":342988009476934,
-								"leadgen_id":343201192788949,
-								"created_time":1502560453,
-								"page_id":272699880986,
-								"adgroup_id":0
-							}
-						}
-					],
-					"id":"272699880986",
-					"time":1502560454
-				}
-			],
-			"object":"page"
-		})
+		return postToApi(`fb_leadforms/${id}/test.json`)
 		.then(response => {
 			console.log('res', response)
 		})

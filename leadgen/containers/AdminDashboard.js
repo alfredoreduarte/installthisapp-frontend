@@ -44,9 +44,9 @@ const mapDispatchToProps = (dispatch, props) => {
 		fbLoginCallback: response => dispatch(fbConnect(response)),
 		handleDeleteFbLeadform: id => dispatch(destroyFbLeadform(id)),
 		handleDeleteFbLeadDestination: id => dispatch(destroyFbLeadDestination(id)),
-		// sendTest: id => {
-		// 	return dispatch(sendTestLead(id))
-		// },
+		sendTest: id => {
+			return dispatch(sendTestLead(id))
+		},
 		editSource: id => {
 			dispatch(setSourceFormDefaults(id))
 			dispatch(showSourcesForm())
