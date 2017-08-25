@@ -6,6 +6,8 @@ import { Link } from 'react-router'
 import { Animate } from 'react-move'
 import Modal from 'react-modal'
 import FacebookLogin from 'react-facebook-login'
+import FaCircleO from 'react-icons/lib/fa/circle-o'
+import FaCheckCircleO from 'react-icons/lib/fa/check-circle-o'
 import FaEnvelope from 'react-icons/lib/fa/envelope'
 import MdCloud from 'react-icons/lib/md/cloud'
 import MdClose from 'react-icons/lib/md/close'
@@ -18,7 +20,8 @@ import Destination from 'leadgen/components/Destination'
 import Source from 'leadgen/components/Source'
 // import SuccessfulPurchase from 'components/SuccessfulPurchase'
 
-const SuccessModal = ({ 
+const SuccessModal = ({
+	testStatus,
 	sendTest,
 	hideDestinationSuccessModal,
 	showDestinationSuccessModal,
@@ -128,7 +131,24 @@ const SuccessModal = ({
 				: null}
 			</div>
 		</div>
-		<p className="text-center"><a onClick={sendTest} className="btn btn-primary">Send Test Lead</a></p>
+		{!testStatus.sent && !testStatus.sentToDestinations ? 
+			<p className="text-center"><a onClick={sendTest} className="btn btn-primary">Send Test Lead</a></p>
+		: 	null }
+		{testStatus.sent && !testStatus.sentToDestinations ? 
+			<p className="text-center"><a disabled={true} className="btn btn-primary">Sending Test Lead...</a></p>
+		: 	null }
+		{testStatus.sent && testStatus.sentToDestinations ? 
+			<p className="text-center"><a onClick={sendTest} className="btn btn-primary">Test again</a></p>
+		: 	null }
+		<hr/>
+		<ul className="col-md-6 col-md-offset-3 list-unstyled">
+			{testStatus.receivedOnServer ? 
+				<li><p className="text-success"><FaCheckCircleO size="16" className="pull-right" /> Receive Lead from Facebook</p></li>
+			: 	<li><p className="text-muted">Receive Lead from Facebook</p></li> }
+			{testStatus.sentToDestinations ? 
+				<li><p className="text-success"><FaCheckCircleO size="16" className="pull-right" /> Send to all connected destinations</p></li>
+			: 	<li><p className="text-muted">Send to all connected destinations</p></li> }
+		</ul>
 	</Modal>
 	)}
 </Animate>

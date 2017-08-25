@@ -7,8 +7,37 @@ const ui = (state = {
 	destinationCreated: null,
 	editingFormId: null,
 	editingDestinationId: null,
+	testLead: {
+		sent: false,
+		receivedOnServer: false,
+		sentToDestinations: false,
+	}
 }, action) => {
 	switch (action.type) {
+		case 'LEADGEN_UI/TEST_LEAD/SENT':
+			return {
+				...state,
+				testLead: {
+					...state.testLead,
+					sent: true
+				}
+			}
+		case 'LEADGEN_UI/TEST_LEAD/RECEIVED':
+			return {
+				...state,
+				testLead: {
+					...state.testLead,
+					receivedOnServer: true
+				}
+			}
+		case 'LEADGEN_UI/TEST_LEAD/BROADCASTED':
+			return {
+				...state,
+				testLead: {
+					...state.testLead,
+					sentToDestinations: true
+				}
+			}
 		case 'LEADGEN_UI/EDIT_FORM':
 			return {
 				...state,

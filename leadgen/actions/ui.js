@@ -17,6 +17,18 @@ export const hideDestinationsForm = () => ({
 	type: 'LEADGEN_UI/HIDE_DESTINATIONS_FORM'
 })
 
+// test leads
+export const indicateLeadTestSent = () => ({
+	type: 'LEADGEN_UI/TEST_LEAD/SENT'
+})
+export const indicateLeadTestReceived = () => ({
+	type: 'LEADGEN_UI/TEST_LEAD/RECEIVED'
+})
+export const indicateLeadTestBroadcasted = () => ({
+	type: 'LEADGEN_UI/TEST_LEAD/BROADCASTED'
+})
+// test leads
+
 export const toggleLeadgenFormSpinner = () => ({
 	type: 'LEADGEN_UI/SPINNER/LEADGEN_FORM'
 })

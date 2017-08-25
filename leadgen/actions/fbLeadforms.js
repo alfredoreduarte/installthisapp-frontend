@@ -1,13 +1,20 @@
 import { normalize, arrayOf } from 'normalizr'
 import * as schema from 'leadgen/schema'
 import { getFromApi, postToApi, patchToApi, deleteFromApi } from 'api'
-import { toggleLeadgenFormSpinner } from 'leadgen/actions/ui'
+import { toggleLeadgenFormSpinner, indicateLeadTestSent, indicateLeadTestReceived, indicateLeadTestBroadcasted } from 'leadgen/actions/ui'
 
 export const sendTestLead = id => {
 	return dispatch => {
+		dispatch(indicateLeadTestSent())
 		return postToApi(`fb_leadforms/${id}/test.json`)
 		.then(response => {
 			console.log('res', response)
+			setTimeout(() => {
+				dispatch(indicateLeadTestReceived())
+			}, 4000)
+			setTimeout(() => {
+				dispatch(indicateLeadTestBroadcasted())
+			}, 8000)
 		})
 		.catch(exception =>
 			console.log('postNewApp: parsing failed', exception)

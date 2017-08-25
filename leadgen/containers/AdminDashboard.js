@@ -24,6 +24,7 @@ let AdminDashboard = props => <AdminDashboardView { ...props } />
 const mapStateToProps = (state, props) => {
 	return {
 		// showDestinationSuccessModal: state.leadgenUI.destinationCreated,
+		testStatus: state.leadgenUI.testLead,
 		showDestinationSuccessModal: _.find(getLeadDestinationsWithMetadata(state), {'id': state.leadgenUI.destinationCreated}),
 		adminId: state.admin.id,
 		adminName: state.admin.name,
