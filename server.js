@@ -59,20 +59,20 @@ app.use('/node_modules', express.static(__dirname + '/node_modules'))
 // === Canvas ===
 // 
 // Trivia
-// var triviaRouter = require('./canvas/trivia/server.js')
-// app.use(triviaRouter)
-// // Top Fans
-// var topFansRouter = require('./canvas/top_fans/server.js')
-// app.use(topFansRouter)
-// // Photo Contest
-// var photoContestRouter = require('./canvas/photo_contest/server.js')
-// app.use(photoContestRouter)
-// // Memory Match
-// var memoryMatchRouter = require('./canvas/memory_match/server.js')
-// app.use(memoryMatchRouter)
-// // Catalog
-// var catalogRouter = require('./canvas/catalog/server.js')
-// app.use(catalogRouter)
+var triviaRouter = require('./canvas/trivia/server.js')
+app.use(triviaRouter)
+// Top Fans
+var topFansRouter = require('./canvas/top_fans/server.js')
+app.use(topFansRouter)
+// Photo Contest
+var photoContestRouter = require('./canvas/photo_contest/server.js')
+app.use(photoContestRouter)
+// Memory Match
+var memoryMatchRouter = require('./canvas/memory_match/server.js')
+app.use(memoryMatchRouter)
+// Catalog
+var catalogRouter = require('./canvas/catalog/server.js')
+app.use(catalogRouter)
 
 // Serving static HTML
 app.use(function(req, res, next) {
@@ -86,12 +86,12 @@ app.use(function(req, res, next) {
 // === Landing & Dashboard ===
 // 
 var index = require('./public-routes/index')
-// var campaign = require('./public-routes/campaign')
+var campaign = require('./public-routes/campaign')
 var dashboard = require('./public-routes/dashboard')
 var leadgen = require('./public-routes/leadgen')
 app.get('/d*', dashboard)
 app.get('/leadgen*', leadgen)
-// app.get('/campaign*', campaign)
+app.get('/campaign*', campaign)
 app.get('/*', index)
 
 // 
