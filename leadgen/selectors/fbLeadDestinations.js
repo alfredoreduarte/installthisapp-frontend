@@ -2,6 +2,7 @@ import _ from 'lodash'
 import { createSelector } from 'reselect'
 import { getAllPages } from 'selectors/pages'
 import { getLeadforms } from 'leadgen/selectors/fbLeadforms'
+import { getEditingDestinationId } from 'leadgen/selectors/ui'
 
 // export const getFbLeadDestinationSettings = state => state.fbLeadDestinations.settings
 
@@ -24,4 +25,10 @@ export const getLeadDestinationsWithMetadata = createSelector(
 			}
 		})
 	}
+)
+
+export const getEditingDestination = createSelector(
+	getLeadDestinationsWithMetadata,
+	getEditingDestinationId,
+	(destinations, id) => _.find(destinations, {'id': id})
 )

@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 const admin = (state = {
 	fbPageIdentifierForIntegration: null,
 	currentApp: null
@@ -8,6 +10,19 @@ const admin = (state = {
 			return {
 				...state,
 				fbLeadforms: updated,
+			}
+		case 'FB_LEADFORMS/UPDATE':
+			const forms = state.fbLeadforms.map(form => {
+				if (form.id == action.payload.id) {
+					return action.payload
+				}
+				else {
+					return form
+				}
+			})
+			return {
+				...state,
+				fbLeadforms: forms,
 			}
 		case 'FB_LEADFORMS/REMOVE':
 			const removed = state.fbLeadforms.map(fbLeadform => {
@@ -30,6 +45,19 @@ const admin = (state = {
 			return {
 				...state,
 				fbLeadDestinations: destUpdated,
+			}
+		case 'FB_LEAD_DESTINATIONS/UPDATE':
+			const destinations = state.fbLeadDestinations.map(destination => {
+				if (destination.id == action.payload.id) {
+					return action.payload
+				}
+				else {
+					return destination
+				}
+			})
+			return {
+				...state,
+				fbLeadDestinations: destinations,
 			}
 		case 'FB_LEAD_DESTINATIONS/REMOVE':
 			const destRemoved = state.fbLeadDestinations.map(fbLeadDestination => {

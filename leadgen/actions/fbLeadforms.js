@@ -1,12 +1,7 @@
 import { normalize, arrayOf } from 'normalizr'
 import * as schema from 'leadgen/schema'
-import { getFromApi, postToApi, deleteFromApi } from 'api'
+import { getFromApi, postToApi, patchToApi, deleteFromApi } from 'api'
 import { toggleLeadgenFormSpinner } from 'leadgen/actions/ui'
-
-// export const receiveFbLeadforms = fbLeadforms => ({
-// 	type: 'FB_LEADFORMS/RECEIVE',
-// 	fbLeadforms,
-// })
 
 export const sendTestLead = id => {
 	return dispatch => {
@@ -46,6 +41,11 @@ export const removeFbLeadform = id => ({
 	id,
 })
 
+export const updateFbLeadform = fbLeadform => ({
+	type: 'FB_LEADFORMS/UPDATE',
+	payload: fbLeadform,
+})
+
 export const addFbLeadform = fbLeadform => ({
 	type: 'FB_LEADFORMS/ADD',
 	payload: fbLeadform,
@@ -79,18 +79,33 @@ export const destroyFbLeadform = id => {
 export const newFbLeadform = () => {
 	return (dispatch, getState) => {
 		const fbLeadform = getState().form.fbLeadFormCreate.values
-		return postToApi(`fb_leadforms.json`, { 
-			fbLeadform,
-		})
-		.then(response => {
-			if (response) {
-				analytics.track('LeadForm Created', () => {
-					dispatch(addFbLeadform(response))
-				})
-			}
-		})
-		.catch(exception =>
-			console.log('postNewApp: parsing failed', exception)
-		)
+		if (fbLeadform.id) {
+			return patchToApi(`fb_leadforms/${fbLeadform.id}.json`, { 
+				fbLeadform,
+			})
+			.then(response => {
+				if (response) {
+					dispatch(updateFbLeadform(response))
+				}
+			})
+			.catch(exception =>
+				console.log('postNewApp: parsing failed', exception)
+			)
+		}
+		else {
+			return postToApi(`fb_leadforms.json`, { 
+				fbLeadform,
+			})
+			.then(response => {
+				if (response) {
+					analytics.track('LeadForm Created', () => {
+						dispatch(addFbLeadform(response))
+					})
+				}
+			})
+			.catch(exception =>
+				console.log('postNewApp: parsing failed', exception)
+			)
+		}
 	}
 }

@@ -44,7 +44,12 @@ const AdminDashboard = ({
 	hideDestinationsForm,
 	showDestinationsForm,
 	// 
+	isEditingForm,
+	editSource,
 	sourcesFormVisible,
+	editingDestinationId,
+	editDestination,
+	isEditingDestination,
 	destinationsFormVisible,
 }) => (
 	<div>
@@ -122,7 +127,7 @@ const AdminDashboard = ({
 									justifyContent: 'space-between',
 									padding: '15px 0px',
 								}}>
-									<p className="text-center h3" style={{margin: '0px'}}>Forms</p>
+									<p className="text-center h3" style={{margin: '0px'}}>Sources</p>
 									<button className="btn btn-primary btn-sm" onClick={showSourcesForm}>Add Form</button>
 								</div>
 								{fbLeadforms.length > 0 ? 
@@ -136,6 +141,7 @@ const AdminDashboard = ({
 												fbFormId={fbLeadform.fbFormId}
 												destinationsAmount={fbLeadform.fbLeadDestinations.length}
 												handleDelete={handleDeleteFbLeadform}
+												handleEdit={() => editSource(fbLeadform.id)}
 											/>
 										)}
 									</ul>
@@ -149,7 +155,9 @@ const AdminDashboard = ({
 										justifyContent: 'space-between',
 										marginBottom: '20px',
 									}}>
-										<p className="text-center h3" style={{margin: '0px'}}>New Form</p>
+										<p className="text-center h3" style={{margin: '0px'}}>
+											{isEditingForm ? 'Edit Source' : 'New Source'}
+										</p>
 										<MdClose size="16" className={!fbLeadforms.length ? 'hide' : null} onClick={() => {
 											hideSourcesForm()
 											// reset()
@@ -192,6 +200,7 @@ const AdminDashboard = ({
 													fbFormId={fbLeadDestination.fbFormId}
 													status={fbLeadDestination.status}
 													handleDelete={handleDeleteFbLeadDestination}
+													handleEdit={() => editDestination(fbLeadDestination.id)}
 												/>
 											)}
 										</ul></div>
@@ -205,7 +214,9 @@ const AdminDashboard = ({
 											justifyContent: 'space-between',
 											marginBottom: '20px',
 										}}>
-											<p className="text-center h3" style={{margin: '0px'}}>New Destination</p>
+											<p className="text-center h3" style={{margin: '0px'}}>
+												{isEditingDestination ? 'Edit Destination' : 'New Destination'}
+											</p>
 											<MdClose size="16" className="" onClick={() => {
 												hideDestinationsForm()
 											}} style={{cursor: 'pointer'}} />

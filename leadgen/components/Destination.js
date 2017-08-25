@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 import FaClose from 'react-icons/lib/fa/close'
+import FaEdit from 'react-icons/lib/fa/edit'
 import StatusIndicator from 'components/StatusIndicator'
 
 const Destination = ({ 
@@ -10,6 +11,7 @@ const Destination = ({
 	fbFormId,
 	status,
 	handleDelete,
+	handleEdit,
 }) => 
 <li className="list-group-item">
 	<FaClose 
@@ -21,6 +23,12 @@ const Destination = ({
 				handleDelete(id)
 			}
 		}} 
+	/>
+	<FaEdit 
+		size="16" 
+		className="text-primary pull-right" 
+		style={{cursor: 'pointer'}} 
+		onClick={() => handleEdit(id)} 
 	/>
 	<b className="text-capitalize">
 		<StatusIndicator active={status == 'on'} />{destinationType}

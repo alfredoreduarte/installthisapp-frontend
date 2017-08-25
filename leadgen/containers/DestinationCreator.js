@@ -1,19 +1,15 @@
 import React, { Component, PropTypes } from 'react'
 import { push } from 'react-router-redux'
-import { Field, reduxForm, formValueSelector } from 'redux-form'
+import { Field, reduxForm, formValueSelector, destroy } from 'redux-form'
 import { connect } from 'react-redux'
 import FacebookLogin from 'react-facebook-login'
 import DestinationCreatorView from 'leadgen/components/DestinationCreator'
 import { getAllPages } from 'selectors/pages'
-import { getAppToBeDeleted, getAllAppsByText } from 'selectors/apps'
 import { getLeadformsWithPages } from 'leadgen/selectors/fbLeadforms'
 import { getFbLeadgenForms } from 'leadgen/selectors/fbLeadgenForms'
 import { newFbLeadform, destroyFbLeadform, fetchLeadgenFormsForPage } from 'leadgen/actions/fbLeadforms'
 import { newFbLeadDestination, destroyFbLeadDestination, fetchDestinationTypeSettings } from 'leadgen/actions/fbLeadDestinations'
 import { hideDestinationsForm, showDestinationsForm } from 'leadgen/actions/ui'
-import { setAppToDelete } from 'actions/deleteApp'
-import { fbConnect } from 'actions/admin'
-import { deleteApp, destroy } from 'actions/apps'
 
 import emailValidator from 'leadgen/components/destinations/email/validator'
 import mailChimpValidator from 'leadgen/components/destinations/mailchimp/validator'
@@ -32,9 +28,9 @@ const validate = values => {
 	if (!values.fbLeadformId) {
 		errors.fbLeadformId = 'Required'
 	}
-	if (values.destinationType == 'email') { errors = emailValidator(values, errors) }
-	if (values.destinationType == 'mailchimp') { errors = mailChimpValidator(values, errors) }
-	if (values.destinationType == 'webhook') { errors = webhookValidator(values, errors) }
+	if (values.destinationType == 'email') 		{ errors = emailValidator(values, errors) }
+	if (values.destinationType == 'mailchimp') 	{ errors = mailChimpValidator(values, errors) }
+	if (values.destinationType == 'webhook') 	{ errors = webhookValidator(values, errors) }
 	return errors
 }
 
@@ -98,24 +94,26 @@ const mapStateToProps = (state, props) => {
 	]
 	let initialValues = {}
 	const selectedValues = selector(state, 'destinationType', 'fbLeadformId')
-	if (selectedValues.destinationType == 'email') {
-		initialValues = {
-			...selectedValues,
-			settings: {
-				recipients: state.admin.email,
+	if (!state.leadgenUI.editingDestinationId) {
+		if (selectedValues.destinationType == 'email') {
+			initialValues = {
+				...selectedValues,
+				settings: {
+					recipients: state.admin.email,
+				}
 			}
 		}
-	}
-	else if (selectedValues.destinationType == 'webhook') {
-		initialValues = {
-			...selectedValues,
-			settings: {
-				payloadType: 'json',
+		else if (selectedValues.destinationType == 'webhook') {
+			initialValues = {
+				...selectedValues,
+				settings: {
+					payloadType: 'json',
+				}
 			}
 		}
-	}
-	else {
-		initialValues = { ...selectedValues }
+		else {
+			initialValues = { ...selectedValues }
+		}
 	}
 	return {
 		initialValues: initialValues,
@@ -131,6 +129,7 @@ const mapDispatchToProps = (dispatch, props) => {
 			e.preventDefault()
 			return dispatch(newFbLeadDestination()).then(() => {
 				dispatch(hideDestinationsForm())
+				dispatch(destroy(reduxFormName))
 			})
 		},
 		handleDestinationTypeChange: value => {

@@ -1,20 +1,14 @@
 import React, { Component, PropTypes } from 'react'
 import { push } from 'react-router-redux'
-import { Field, reduxForm, formValueSelector } from 'redux-form'
+import { Field, reduxForm, formValueSelector, change, destroy } from 'redux-form'
 import { connect } from 'react-redux'
-import FacebookLogin from 'react-facebook-login'
 import SourceCreatorView from 'leadgen/components/SourceCreator'
 import { getAllPages } from 'selectors/pages'
-import { getAppToBeDeleted, getAllAppsByText } from 'selectors/apps'
 import { getLeadformsWithPages } from 'leadgen/selectors/fbLeadforms'
-// import { getFbLeadDestinationSettings } from 'leadgen/selectors/fbLeadDestinations'
 import { getFbLeadgenForms } from 'leadgen/selectors/fbLeadgenForms'
 import { newFbLeadform, destroyFbLeadform, fetchLeadgenFormsForPage } from 'leadgen/actions/fbLeadforms'
 import { newFbLeadDestination, destroyFbLeadDestination, fetchDestinationTypeSettings } from 'leadgen/actions/fbLeadDestinations'
 import { hideSourcesForm, hideDestinationsForm, showDestinationsForm } from 'leadgen/actions/ui'
-import { setAppToDelete } from 'actions/deleteApp'
-import { fbConnect } from 'actions/admin'
-import { deleteApp, destroy } from 'actions/apps'
 
 let SourceCreator = props => <SourceCreatorView { ...props } />
 
@@ -52,6 +46,7 @@ const mapDispatchToProps = (dispatch, props) => {
 	return {
 		handlePageChange: value => {
 			if (value) {
+				dispatch(change('fbLeadFormCreate', 'fbFormId', null))
 				return dispatch(fetchLeadgenFormsForPage(value))
 			}
 		},
@@ -60,6 +55,7 @@ const mapDispatchToProps = (dispatch, props) => {
 			e.preventDefault()
 			return dispatch(newFbLeadform()).then(() => {
 				dispatch(hideSourcesForm())
+				dispatch(destroy(reduxFormName))
 			})
 		},
 	}

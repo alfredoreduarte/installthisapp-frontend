@@ -1,3 +1,8 @@
+import { initialize } from 'redux-form'
+import { getEditingDestination } from 'leadgen/selectors/fbLeadDestinations'
+import { getEditingSource } from 'leadgen/selectors/fbLeadforms'
+import { fetchLeadgenFormsForPage } from 'leadgen/actions/fbLeadforms'
+
 export const showSourcesForm = () => ({
 	type: 'LEADGEN_UI/SHOW_SOURCES_FORM'
 })
@@ -24,3 +29,30 @@ export const showDestinationSuccessModal = destinationId => ({
 export const hideDestinationSuccessModal = () => ({
 	type: 'LEADGEN_UI/DESTINATIONS/HIDE_SUCCESS_MODAL'
 })
+
+export const setEditingDestination = id => ({
+	type: 'LEADGEN_UI/EDIT_DESTINATION',
+	id
+})
+
+export const setDestinationFormDefaults = id => {
+	return (dispatch, getState) => {
+		dispatch(setEditingDestination(id))
+		const destination = getEditingDestination(getState())
+		return dispatch(initialize('fbLeadDestinationCreate', destination))
+	}
+}
+
+export const setEditingSource = id => ({
+	type: 'LEADGEN_UI/EDIT_FORM',
+	id
+})
+
+export const setSourceFormDefaults = id => {
+	return (dispatch, getState) => {
+		dispatch(setEditingSource(id))
+		const source = getEditingSource(getState())
+		dispatch(fetchLeadgenFormsForPage(source.fbPageIdentifier))
+		return dispatch(initialize('fbLeadFormCreate', source))
+	}
+}

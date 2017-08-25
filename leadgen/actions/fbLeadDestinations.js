@@ -1,6 +1,6 @@
 import { normalize, arrayOf } from 'normalizr'
 import * as schema from 'leadgen/schema'
-import { getFromApi, postToApi, deleteFromApi } from 'api'
+import { getFromApi, postToApi, patchToApi, deleteFromApi } from 'api'
 import { showDestinationSuccessModal } from 'leadgen/actions/ui'
 
 // delete later
@@ -16,33 +16,15 @@ export const addFbLeadDestination = fbLeadDestination => ({
 	payload: fbLeadDestination,
 })
 
+export const updateFbLeadDestination = fbLeadDestination => ({
+	type: 'FB_LEAD_DESTINATIONS/UPDATE',
+	payload: fbLeadDestination,
+})
+
 export const receiveFbDestinationSettings = settings => ({
 	type: 'FB_LEAD_DESTINATIONS/RECEIVE_SETTINGS',
 	payload: settings,
 })
-
-// export const fetchDestinationTypeSettings = destinationType => {
-// 	return dispatch => {
-// 		if (destinationType == 'email') {
-// 			return dispatch(receiveFbDestinationSettings(
-// 				[
-// 					{
-// 						label: 'Comma-separated Email recipients',
-// 						key: "recipients",
-// 						//
-// 						recipients: [],
-// 					},
-// 					{
-// 						label: 'Mask Reply-to as',
-// 						key: "replyTo",
-// 						// 
-// 						replyTo: null
-// 					}
-// 				]
-// 			))
-// 		}
-// 	}
-// }
 
 export const destroyFbLeadDestination = id => {
 	return dispatch => {
@@ -56,23 +38,35 @@ export const newFbLeadDestination = () => {
 	return (dispatch, getState) => {
 		const state = getState()
 		const values = state.form.fbLeadDestinationCreate.values
-		return postToApi(`fb_lead_destinations.json`, { 
-			fbLeadformId: parseInt(values.fbLeadformId),
-			destinationType: values.destinationType,
-			status: "on",
-			settings: values.settings,
-		})
-		.then(response => {
-			dispatch(showDestinationSuccessModal(response.id))
-			return analytics.track('FbLeadDestination Created', {
-				destinationType: response.destinationType,
-			}, () => {
-				return dispatch(addFbLeadDestination(response))
+		if (values.id) {
+			return patchToApi(`fb_lead_destinations/${values.id}.json`, values)
+			.then(response => {
+				dispatch(showDestinationSuccessModal(response.id))
+				return dispatch(updateFbLeadDestination(response))
 			})
-			
-		})
-		.catch(exception =>
-			console.log('postNewApp: parsing failed', exception)
-		)
+			.catch(exception =>
+				console.log('postNewApp: parsing failed', exception)
+			)
+		}
+		else {
+			return postToApi(`fb_lead_destinations.json`, { 
+				fbLeadformId: parseInt(values.fbLeadformId),
+				destinationType: values.destinationType,
+				status: "on",
+				settings: values.settings,
+			})
+			.then(response => {
+				dispatch(showDestinationSuccessModal(response.id))
+				return analytics.track('FbLeadDestination Created', {
+					destinationType: response.destinationType,
+				}, () => {
+					return dispatch(addFbLeadDestination(response))
+				})
+				
+			})
+			.catch(exception =>
+				console.log('postNewApp: parsing failed', exception)
+			)
+		}
 	}
 }
