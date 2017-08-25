@@ -43,7 +43,7 @@ module.exports = {
 			sourceMap: true,
 			minimize: true,
 			compress: {
-				// warnings: true,
+				warnings: true,
 			},
 		}),
 		new webpack.optimize.CommonsChunkPlugin({
