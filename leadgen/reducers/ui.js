@@ -14,6 +14,15 @@ const ui = (state = {
 	}
 }, action) => {
 	switch (action.type) {
+		case 'LEADGEN_UI/TEST_LEAD/RESET':
+			return {
+				...state,
+				testLead: {
+					sent: false,
+					receivedOnServer: false,
+					sentToDestinations: false,
+				}
+			}
 		case 'LEADGEN_UI/TEST_LEAD/SENT':
 			return {
 				...state,

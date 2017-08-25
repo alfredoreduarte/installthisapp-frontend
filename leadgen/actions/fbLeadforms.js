@@ -8,17 +8,56 @@ export const sendTestLead = id => {
 		dispatch(indicateLeadTestSent())
 		return postToApi(`fb_leadforms/${id}/test.json`)
 		.then(response => {
-			console.log('res', response)
-			setTimeout(() => {
-				dispatch(indicateLeadTestReceived())
-			}, 4000)
-			setTimeout(() => {
-				dispatch(indicateLeadTestBroadcasted())
-			}, 8000)
+			console.log('sendTestLead response: ', response)
+			// setTimeout(() => {
+				if (response.id) {
+					dispatch(pollTestLeadArrival(response.id))
+				}
+			// }, 4000)
+			// setTimeout(() => {
+				// dispatch(indicateLeadTestBroadcasted())
+			// }, 8000)
 		})
 		.catch(exception =>
 			console.log('postNewApp: parsing failed', exception)
 		)
+	}
+}
+
+export const pollTestLeadArrival = leadId => {
+	return dispatch => {
+		const pollTestLeadArrivalInterval = setInterval(() => {
+			getFromApi(`fb_leadforms/${leadId}/poll_test_arrival.json`)
+			.then(response => {
+				console.log('pollTestLeadArrival response: ', response)
+				if (response) {
+					dispatch(indicateLeadTestReceived())
+					dispatch(pollTestLeadNotificationDelivery(leadId))
+					clearInterval(pollTestLeadArrivalInterval)
+				}
+			})
+			.catch(exception =>
+				console.log('postNewApp: parsing failed', exception)
+			)
+		}, 5000)
+	}
+}
+
+export const pollTestLeadNotificationDelivery = leadId => {
+	return dispatch => {
+		const pollTestLeadNotificationDeliveryInterval = setInterval(() => {
+			getFromApi(`fb_leadforms/${leadId}/poll_test_notification_delivery.json`)
+			.then(response => {
+				console.log('pollTestLeadNotificationDelivery response:', response)
+				if (response) {
+					dispatch(indicateLeadTestBroadcasted())
+					clearInterval(pollTestLeadNotificationDeliveryInterval)
+				}
+			})
+			.catch(exception =>
+				console.log('postNewApp: parsing failed', exception)
+			)
+		}, 8000)
 	}
 }
 

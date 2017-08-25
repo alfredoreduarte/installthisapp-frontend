@@ -18,6 +18,9 @@ export const hideDestinationsForm = () => ({
 })
 
 // test leads
+export const resetTestLead = () => ({
+	type: 'LEADGEN_UI/TEST_LEAD/RESET'
+})
 export const indicateLeadTestSent = () => ({
 	type: 'LEADGEN_UI/TEST_LEAD/SENT'
 })

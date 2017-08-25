@@ -100,17 +100,29 @@ const SuccessModal = ({
 				width: '100px',
 			}} src={`https://graph.facebook.com/${showDestinationSuccessModal.fbPageIdentifier}/picture?type=large`} />
 			: null}
-			<div style={{
-				width: '100px',
-				height: '10px',
-				background: '#d4f2ff',
-				display: 'flex',
-				alignItems: 'center',
-				position: 'relative',
-				overflow: 'hidden',
-			}}>
-				<div className="leadgen-flow"></div>
-			</div>
+			{testStatus.sentToDestinations ? 
+				<div style={{
+					width: '100px',
+					height: '10px',
+					display: 'flex',
+					alignItems: 'center',
+					justifyContent: 'center',
+				}}>
+					<FaCheckCircleO className="text-success" size="26" />
+				</div>
+			:
+				<div style={{
+					width: '100px',
+					height: '10px',
+					background: '#d4f2ff',
+					display: 'flex',
+					alignItems: 'center',
+					position: 'relative',
+					overflow: 'hidden',
+				}}>
+					<div className="leadgen-flow"></div>
+				</div>
+			}
 			<div style={{
 				width: '100px',
 				height: '100px',
@@ -132,13 +144,13 @@ const SuccessModal = ({
 			</div>
 		</div>
 		{!testStatus.sent && !testStatus.sentToDestinations ? 
-			<p className="text-center"><a onClick={sendTest} className="btn btn-primary">Send Test Lead</a></p>
+			<p className="text-center"><a onClick={sendTest} className="btn btn-success">Send Test Lead</a></p>
 		: 	null }
 		{testStatus.sent && !testStatus.sentToDestinations ? 
-			<p className="text-center"><a disabled={true} className="btn btn-primary">Sending Test Lead...</a></p>
+			<p className="text-center"><a disabled={true} className="btn btn-success">Testing...</a></p>
 		: 	null }
 		{testStatus.sent && testStatus.sentToDestinations ? 
-			<p className="text-center"><a onClick={sendTest} className="btn btn-primary">Test again</a></p>
+			<p className="text-center"><a onClick={sendTest} className="btn btn-primary btn-outline">Test again</a></p>
 		: 	null }
 		<hr/>
 		<ul className="col-md-6 col-md-offset-3 list-unstyled">

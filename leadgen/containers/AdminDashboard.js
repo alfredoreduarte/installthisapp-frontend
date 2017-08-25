@@ -16,6 +16,7 @@ import {
 	hideDestinationSuccessModal,
 	setDestinationFormDefaults,
 	setSourceFormDefaults,
+	resetTestLead,
 } from 'leadgen/actions/ui'
 import { fbConnect } from 'actions/admin'
 
@@ -41,7 +42,10 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
 	const reset = props.reset
 	return {
-		hideDestinationSuccessModal: response => dispatch(hideDestinationSuccessModal()),
+		hideDestinationSuccessModal: response => {
+			dispatch(resetTestLead())
+			return dispatch(hideDestinationSuccessModal())
+		},
 		fbLoginCallback: response => dispatch(fbConnect(response)),
 		handleDeleteFbLeadform: id => dispatch(destroyFbLeadform(id)),
 		handleDeleteFbLeadDestination: id => dispatch(destroyFbLeadDestination(id)),
