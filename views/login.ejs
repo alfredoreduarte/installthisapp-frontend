@@ -81,10 +81,10 @@
 							// top.location = location.protocol + '//' + window.location.host + '/d'
 							var confirmSuccessUrl = null
 							if (appsOrLeadgen == 'leadgen') {
-								confirmSuccessUrl = 'https://' + window.location.hostname + '/d/complete-profile?redirect_uri=https://' + window.location.hostname + '/leadgen'
+								confirmSuccessUrl = window.location.protocol + '//' + window.location.hostname + '/d/complete-profile?redirect_uri=https://' + window.location.hostname + '/leadgen'
 							}
 							else {
-								confirmSuccessUrl = 'https://' + window.location.hostname + '/d/complete-profile?redirect_uri=https://' + window.location.hostname + '/d'
+								confirmSuccessUrl = window.location.protocol + '//' + window.location.hostname + '/d/complete-profile?redirect_uri=https://' + window.location.hostname + '/d'
 							}
 							top.location = confirmSuccessUrl
 						}
