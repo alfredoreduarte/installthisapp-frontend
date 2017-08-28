@@ -47,7 +47,7 @@
 					},
 					body: JSON.stringify({
 						email: email,
-						redirect_url: 'https://' + window.location.hostname + '/reset-password'
+						redirect_url: window.location.protocol + '//' + window.location.hostname + '/reset-password'
 					})
 				}).then(response => {
 					return response.json()
