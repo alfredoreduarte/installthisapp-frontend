@@ -8,7 +8,7 @@ let AccountComplete = ({ handleSubmit, fetching }) => (
 	<form onSubmit={handleSubmit}>
 		<div className="row">
 			<div className="col-md-4 col-md-offset-4" style={{marginTop: '60px'}}>
-				<p className="text-center"><img src="/images/logo-long.png" style={{width: '40%'}} /></p>
+				<p className="text-center"><img src="/images/logo.jpg" className="img-rounded" style={{width: "50px"}} /></p>
 				<br/>
 				<br/>
 				<h2 className="text-center"><b>Complete your profile</b></h2>
@@ -49,7 +49,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch, props) => {
-	const redirectUri = props.location.query.redirect_uri || 'https://' + window.location.hostname + '/d'
+	const redirectUri = props.location.query.redirect_uri || window.location.protocol + '//' + window.location.hostname + '/d'
 	return { 
 		handleSubmit: e => {
 			e.preventDefault()

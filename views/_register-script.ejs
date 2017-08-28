@@ -38,7 +38,7 @@ var ITAregister = function(appsOrLeadgen){
 		.then(json => {
 			if (json.status == "success") {
 				// ITAlogin(email, password, false)
-				const redirectString = location.protocol + '//' + window.location.host + '/please-confirm?email=' + email
+				const redirectString = window.location.protocol + '//' + window.location.host + '/please-confirm?email=' + email
 				ITAlogin(email, password, false, redirectString)
 				// top.location = location.protocol + '//' + window.location.host + '/please-confirm?email=' + email
 			}
