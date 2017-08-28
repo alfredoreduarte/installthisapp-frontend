@@ -1594,10 +1594,11 @@ lp.jQuery = jQuery.noConflict( true );
 <script src="//builder-assets.unbounce.com/modules/lp-form/public/main-15aa9b2.z.js" type="text/javascript"></script>
 <script src="//builder-assets.unbounce.com/modules/lp-button/public/main-d9cd5d4.z.js" type="text/javascript"></script>
 <script>
+window.redirectDomain = window.location.hostname
 window.module = window.module || {};
 window.module.lp = window.module.lp || {};
 window.module.lp.form = window.module.lp.form || {};
-window.module.lp.form.data = {"formContainerId":"lp-pom-form-65","errorContainerId":"lp-pom-form-65-errors","confirmAction":"url","passParams":true,"confirmData":"https://v3.installthisapp.com/signup?redirect=leadgen","confirmTarget":"_parent","validationRules":{"email":{"required":false,"email":true}},"validationMessages":{"email":{}},"formButtonId":"lp-pom-button-66"};
+window.module.lp.form.data = {"formContainerId":"lp-pom-form-65","errorContainerId":"lp-pom-form-65-errors","confirmAction":"url","passParams":true,"confirmData":"http://" + redirectDomain + "/signup?redirect=leadgen","confirmTarget":"_parent","validationRules":{"email":{"required":false,"email":true}},"validationMessages":{"email":{}},"formButtonId":"lp-pom-button-66"};
 </script>
 <script>lp.jQuery().ready(function() {lp.jQuery("#lp-pom-button-66").bind("click tap touchstart", function(e) {e.preventDefault();e.stopPropagation();lp.jQuery("div.lp-pom-form form").submit();});});</script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>

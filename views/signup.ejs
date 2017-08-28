@@ -5,7 +5,7 @@
 	<div class="container-flex flex-space-around flex-vertical container-full-height flex-grow">
 		<div class="col-md-12">
 			<br/>
-			<a href="/" class="btn btn-default <%= email ? 'hide' : null %>">← Back</a>
+			<a href="/" class="btn btn-default <%= redirect == 'leadgen' ? 'hide' : null %>">← Back</a>
 			<br/>
 		</div>
 		<div class="flex-grow flex flex-vertical flex-center">
@@ -38,7 +38,7 @@
 						</form>
 					</div>
 				</div>
-				<p class="text-right <%= email ? 'hide' : null %>">Already signed up? <a href="/login">Login →</a></p>
+				<p class="text-right <%= email ? 'hide' : null %>">Already signed up? <a href="/login?redirect=<%= redirect %>">Login →</a></p>
 			</div>
 		</div>
 	</div>

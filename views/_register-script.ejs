@@ -4,7 +4,7 @@ var ITAregister = function(appsOrLeadgen){
 	$('#signup-button').html('Please wait...')
 	var email = $('#email').val()
 	var password = $('#password').val()
-	var confirm_success_url = null
+	var confirmSuccessUrl = null
 	if (appsOrLeadgen == 'leadgen') {
 		confirmSuccessUrl = 'https://' + window.location.hostname + '/d/complete-profile?redirect_uri=https://' + window.location.hostname + '/leadgen'
 	}

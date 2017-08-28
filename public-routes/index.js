@@ -50,7 +50,10 @@ router.get('/signup', function(req, res) { res.render('signup', Object.assign({}
 	redirect: req.query.redirect,
 	email: req.query.email,
 })) })
-router.get('/login', function(req, res) { res.render('login', commonParams(req)) })
+router.get('/login', function(req, res) { res.render('login', Object.assign({}, commonParams(req), {
+	redirect: req.query.redirect,
+	email: req.query.email,
+})) })
 router.get('/please-confirm', function(req, res) { res.render('please-confirm', Object.assign({}, commonParams(req), {
 	emailAddress: req.query.email,
 })) })

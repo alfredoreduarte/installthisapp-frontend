@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Alert } from 'react-bootstrap'
 import Loading from 'containers/Loading'
-import AppNavBar from 'components/AppNavBar'
+import AppNavBar from 'leadgen/components/AppNavBar'
 import { removeAlert } from 'actions/alerts'
 import { possibleOffers } from 'lib/offers'
 

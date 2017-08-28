@@ -5,7 +5,7 @@
 	<div class="container-flex flex-space-around flex-vertical container-full-height flex-grow">
 		<div class="col-md-12">
 			<br/>
-			<a href="/" class="btn btn-default">← Back</a>
+			<a href="/" class="btn btn-default <%= redirect == 'leadgen' ? 'hide' : null %>">← Back</a>
 			<br/>
 		</div>
 		<div class="flex-grow flex flex-vertical flex-center">
@@ -78,7 +78,15 @@
 							alert(json.errors)
 						}
 						else{
-							top.location = location.protocol + '//' + window.location.host + '/d'
+							// top.location = location.protocol + '//' + window.location.host + '/d'
+							var confirmSuccessUrl = null
+							if (appsOrLeadgen == 'leadgen') {
+								confirmSuccessUrl = 'https://' + window.location.hostname + '/d/complete-profile?redirect_uri=https://' + window.location.hostname + '/leadgen'
+							}
+							else {
+								confirmSuccessUrl = 'https://' + window.location.hostname + '/d/complete-profile?redirect_uri=https://' + window.location.hostname + '/d'
+							}
+							top.location = confirmSuccessUrl
 						}
 					})
 					.catch(exception => {
