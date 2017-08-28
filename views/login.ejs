@@ -43,6 +43,7 @@
 	<script type="text/javascript" src="<%= cloudFrontUrl %>/node_modules/js-cookie/src/js.cookie.js"></script>
 	<script type="text/javascript" src="<%= cloudFrontUrl %>/node_modules/whatwg-fetch/fetch.js"></script>
 	<script>
+		var appsOrLeadgen = '<%= redirect %>'
 		$(document).ready(function(){
 			$('#login-form').submit(function(e){
 				e.preventDefault()

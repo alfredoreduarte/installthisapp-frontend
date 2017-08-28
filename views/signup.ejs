@@ -38,7 +38,7 @@
 						</form>
 					</div>
 				</div>
-				<p class="text-right <%= email ? 'hide' : null %>">Already signed up? <a href="/login?redirect=<%= redirect %>">Login →</a></p>
+				<p class="text-right <%= email ? 'hide' : null %>">Already signed up? <a href="/login<%= redirect ? '?redirect=' + redirect : null %>">Login →</a></p>
 			</div>
 		</div>
 	</div>
