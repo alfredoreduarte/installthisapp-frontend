@@ -45,6 +45,9 @@ else {
 	}))
 }
 
+var pipeleadRoutes = require('./public-routes/pipelead')
+app.use(vhost('www.pipelead.co', pipeleadRoutes))
+
 // Images and other static asssets
 app.use('/images', express.static(__dirname + '/assets/images'))
 app.use('/fonts', cors(), express.static(__dirname + '/assets/fonts'))
