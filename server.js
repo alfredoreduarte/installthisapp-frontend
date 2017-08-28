@@ -3,13 +3,14 @@ var express = require('express')
 var map = require('express-sitemap')
 var helmet = require('helmet')
 var cors = require('cors')
+var vhost = require('vhost')
 
 const app = express()
 app.set('view engine', 'ejs')
 
-var express_enforces_ssl = require('express-enforces-ssl')
-app.enable('trust proxy')
-app.use(express_enforces_ssl())
+// var express_enforces_ssl = require('express-enforces-ssl')
+// app.enable('trust proxy')
+// app.use(express_enforces_ssl())
 
 // 
 // Force SSL
