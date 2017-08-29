@@ -35,7 +35,7 @@ const Source = ({
 		<span><b>{fbPageName}</b> <small className="text-muted">Not sending data</small></span>
 	}
 	<br/>
-	<small>Form ID {fbFormId} | <a onClick={sendTest}>Send test lead</a></small>
+	<small>Form ID {fbFormId} | <a onClick={sendTest} style={{cursor: 'pointer', textDecoration: 'underline'}}>Send test lead</a></small>
 </li>
 
 export default Source

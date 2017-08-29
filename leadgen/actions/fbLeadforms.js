@@ -1,7 +1,13 @@
 import { normalize, arrayOf } from 'normalizr'
 import * as schema from 'leadgen/schema'
 import { getFromApi, postToApi, patchToApi, deleteFromApi } from 'api'
-import { toggleLeadgenFormSpinner, indicateLeadTestSent, indicateLeadTestReceived, indicateLeadTestBroadcasted } from 'leadgen/actions/ui'
+import { 
+	toggleLeadgenFormSpinner, 
+	indicateLeadTestSent, 
+	indicateLeadTestReceived, 
+	indicateLeadTestBroadcasted,
+	receiveTestLeadData,
+} from 'leadgen/actions/ui'
 
 export const sendTestLead = id => {
 	return dispatch => {
@@ -32,7 +38,8 @@ export const pollTestLeadArrival = leadId => {
 				console.log('pollTestLeadArrival response: ', response)
 				if (response) {
 					dispatch(indicateLeadTestReceived())
-					dispatch(pollTestLeadNotificationDelivery(leadId))
+					dispatch(receiveTestLeadData(response.fieldData))
+					// dispatch(pollTestLeadNotificationDelivery(leadId))
 					clearInterval(pollTestLeadArrivalInterval)
 				}
 			})

@@ -17,6 +17,7 @@ import SourceCreator from 'leadgen/containers/SourceCreator'
 import Destination from 'leadgen/components/Destination'
 import Source from 'leadgen/components/Source'
 import SuccessModal from 'leadgen/components/SuccessModal'
+import SourceTestModal from 'leadgen/components/SourceTestModal'
 // import SuccessfulPurchase from 'components/SuccessfulPurchase'
 
 const AdminDashboard = ({ 
@@ -52,6 +53,14 @@ const AdminDashboard = ({
 	editDestination,
 	isEditingDestination,
 	destinationsFormVisible,
+	// sources testing
+	showSourceTestModal,
+	sourceTestStatus,
+	sendSourceTest,
+	handleSourceTestModalHide,
+	sourceTestModalVisible,
+	sourceForTesting,
+	sourceTestLeadData,
 }) => (
 	<div>
 		{showDestinationSuccessModal ? 
@@ -60,6 +69,17 @@ const AdminDashboard = ({
 				sendTest={() => sendTest(showDestinationSuccessModal.fbLeadformId)}
 				showDestinationSuccessModal={showDestinationSuccessModal}
 				hideDestinationSuccessModal={hideDestinationSuccessModal}
+			/>
+		: null}
+		{sourceTestModalVisible ? 
+			<SourceTestModal 
+				testStatus={sourceTestStatus}
+				testLeadData={sourceTestLeadData}
+				sendTest={() => sendSourceTest(sourceForTesting.id)}
+				handleHide={handleSourceTestModalHide}
+				show={sourceTestModalVisible}
+				fbPageIdentifier={sourceForTesting.fbPageIdentifier}
+				createDestination={showDestinationsForm}
 			/>
 		: null}
 		{!fbProfile ? 
@@ -139,7 +159,7 @@ const AdminDashboard = ({
 											<Source
 												key={fbLeadform.id}
 												id={fbLeadform.id}
-												sendTest={() => sendTest(fbLeadform.id)}
+												sendTest={() => showSourceTestModal(fbLeadform.id)}
 												fbPageName={fbLeadform.fbPageName}
 												fbFormId={fbLeadform.fbFormId}
 												destinationsAmount={fbLeadform.fbLeadDestinations.length}

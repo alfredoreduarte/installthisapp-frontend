@@ -11,7 +11,14 @@ const ui = (state = {
 		sent: false,
 		receivedOnServer: false,
 		sentToDestinations: false,
-	}
+	},
+	testingSourceWithId: null,
+	sourceTestLeadData: [],
+	// sourceTestLeadData: [
+	// {"name":"email","values":["test@fb.com"]},
+	// {"name":"full_name","values":["\u003ctest lead: dummy data for full_name\u003e"]},
+	// {"name":"phone_number","values":["\u003ctest lead: dummy data for phone_number\u003e"]},
+	// {"name":"relationship_status","values":["\u003ctest lead: dummy data for relationship_status\u003e"]}],
 }, action) => {
 	switch (action.type) {
 		case 'LEADGEN_UI/TEST_LEAD/RESET':
@@ -21,7 +28,8 @@ const ui = (state = {
 					sent: false,
 					receivedOnServer: false,
 					sentToDestinations: false,
-				}
+				},
+				testingSourceWithId: null,
 			}
 		case 'LEADGEN_UI/TEST_LEAD/SENT':
 			return {
@@ -96,6 +104,21 @@ const ui = (state = {
 			return {
 				...state,
 				destinationCreated: null,
+			}
+		case 'LEADGEN_UI/SOURCES/SHOW_TEST_MODAL':
+			return {
+				...state,
+				testingSourceWithId: action.sourceId,
+			}
+		case 'LEADGEN_UI/SOURCES/HIDE_TEST_MODAL':
+			return {
+				...state,
+				testingSourceWithId: null,
+			}
+		case 'LEADGEN_UI/SOURCES/RECEIVE_TEST_DATA':
+			return {
+				...state,
+				sourceTestLeadData: action.lead,
 			}
 		default:
 			return state

@@ -32,6 +32,22 @@ export const indicateLeadTestBroadcasted = () => ({
 })
 // test leads
 
+// testing sources
+export const showSourceTestModal = sourceId => ({
+	type: 'LEADGEN_UI/SOURCES/SHOW_TEST_MODAL',
+	sourceId,
+})
+
+export const hideSourceTestModal = () => ({
+	type: 'LEADGEN_UI/SOURCES/HIDE_TEST_MODAL'
+})
+
+export const receiveTestLeadData = lead => ({
+	type: 'LEADGEN_UI/SOURCES/RECEIVE_TEST_DATA',
+	lead,
+})
+// testing sources
+
 export const toggleLeadgenFormSpinner = () => ({
 	type: 'LEADGEN_UI/SPINNER/LEADGEN_FORM'
 })
