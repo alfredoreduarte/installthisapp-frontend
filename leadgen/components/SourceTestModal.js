@@ -89,12 +89,11 @@ const SourceTestModal = ({
 			<p className="text-center">Test your Facebook Lead Ads integration by sending us a lead.</p>
 		: null}
 		{testStatus.receivedOnServer ? 
-			<div>
+			<div style={{marginBottom: '20px'}}>
 				<p className="text-center">Review the lead below.</p>
 				<p className="text-center">We'll use this as a sample for setting up the destinations for this source.</p>
 			</div>
 		: null}
-		{!testLeadData.length ? 
 		<div style={{
 			padding: '40px 0px',
 			display: 'flex',
@@ -115,29 +114,17 @@ const SourceTestModal = ({
 				}}>
 					<FaCheckCircleO className="text-success animated fadeInUp" size="26" />
 				</div>
-			: null}
-			{testStatus.sent && !testStatus.receivedOnServer ?
-				<div style={{
-					width: '100px',
-					height: '10px',
-					background: '#d4f2ff',
-					display: 'flex',
-					alignItems: 'center',
-					position: 'relative',
-					overflow: 'hidden',
-				}}>
-					<div className="leadgen-flow"></div>
-				</div>
 			: <div style={{
-					width: '100px',
-					height: '10px',
-					display: 'flex',
-					alignItems: 'center',
-					position: 'relative',
-					overflow: 'hidden',
-				}}>
-					
-				</div>}
+				width: '100px',
+				height: '10px',
+				background: '#d4f2ff',
+				display: 'flex',
+				alignItems: 'center',
+				position: 'relative',
+				overflow: 'hidden',
+			}}>
+				<div className="leadgen-flow"></div>
+			</div>}
 			<div style={{
 				width: '100px',
 				height: '100px',
@@ -150,20 +137,20 @@ const SourceTestModal = ({
 				<MdCloud size="50" style={{color: 'white'}} />
 			</div>
 		</div>
-		: 
-		<div style={{ height: "200px", overflow: "scroll" }}>
+		{testLeadData.length ? 
+		<div style={{ height: "200px", overflow: "scroll", marginBottom: '20px' }}>
 			<table className="table table-striped table-bordered">
-			<tbody>
-			{testLeadData.map(field => 
-				<tr key={field.id}>
-					<td><b>{field.name}</b></td>
-					<td>{field.values}</td>
-				</tr>
-			)}
-			</tbody>
+				<tbody>
+				{testLeadData.map(field => 
+					<tr key={field.name}>
+						<td><b>{field.name}</b></td>
+						<td>{field.values}</td>
+					</tr>
+				)}
+				</tbody>
 			</table>
 		</div>
-		}
+		: null }
 		{!testStatus.sent && !testStatus.receivedOnServer ? 
 			<p className="text-center"><a onClick={sendTest} className="btn btn-success">Send Test Lead</a></p>
 		: 	null }
@@ -171,21 +158,25 @@ const SourceTestModal = ({
 			<p className="text-center"><a disabled={true} className="btn btn-success">Testing...</a></p>
 		: 	null }
 		{testStatus.sent && testStatus.receivedOnServer ? 
-			<div className="col-md-12">
+			<div className="row"><div className="col-md-12">
 				<a onClick={sendTest} className="btn btn-primary btn-outline btn-sm pull-left">Test again</a>
-				<a onClick={createDestination} className="btn btn-success pull-right">Send leads from here to...</a>
-			</div>
+				<a onClick={createDestination} className="btn btn-success pull-right">Send leads from this form to...</a>
+			</div></div>
 		: 	null }
-		<hr/>
 		{!testStatus.receivedOnServer ? 
-		<ul className="col-md-6 col-md-offset-3 list-unstyled">
-			{testStatus.sent ? 
-				<li><p className="text-success"><FaCheckCircleO size="16" className="pull-right" /> Send Lead data</p></li>
-			: 	<li><p className="text-muted">Send Lead data</p></li> }
-			{testStatus.receivedOnServer ? 
-				<li><p className="text-success"><FaCheckCircleO size="16" className="pull-right" /> Receive Lead from Facebook</p></li>
-			: 	<li><p className="text-muted">Receive Lead from Facebook</p></li> }
-		</ul>
+		<div>
+			<hr/>
+			<ul className="col-md-6 col-md-offset-3 list-unstyled">
+				{testStatus.sent ? 
+					<li><p className="text-success">
+						<FaCheckCircleO size="16" className="pull-right" /> Send Lead data</p></li>
+				: 	<li><p className="text-muted">Send Lead data</p></li> }
+				{testStatus.receivedOnServer ? 
+					<li><p className="text-success">
+						<FaCheckCircleO size="16" className="pull-right" /> Receive Lead from Facebook</p></li>
+				: 	<li><p className="text-muted">Receive Lead from Facebook</p></li> }
+			</ul>
+		</div>
 		: null }
 	</Modal>
 	)}

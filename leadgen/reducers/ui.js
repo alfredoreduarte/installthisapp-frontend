@@ -15,10 +15,11 @@ const ui = (state = {
 	testingSourceWithId: null,
 	sourceTestLeadData: [],
 	// sourceTestLeadData: [
-	// {"name":"email","values":["test@fb.com"]},
-	// {"name":"full_name","values":["\u003ctest lead: dummy data for full_name\u003e"]},
-	// {"name":"phone_number","values":["\u003ctest lead: dummy data for phone_number\u003e"]},
-	// {"name":"relationship_status","values":["\u003ctest lead: dummy data for relationship_status\u003e"]}],
+		// {"name":"email","values":["test@fb.com"]},
+		// {"name":"full_name","values":["\u003ctest lead: dummy data for full_name\u003e"]},
+		// {"name":"phone_number","values":["\u003ctest lead: dummy data for phone_number\u003e"]},
+		// {"name":"relationship_status","values":["\u003ctest lead: dummy data for relationship_status\u003e"]}
+	// ],
 }, action) => {
 	switch (action.type) {
 		case 'LEADGEN_UI/TEST_LEAD/RESET':

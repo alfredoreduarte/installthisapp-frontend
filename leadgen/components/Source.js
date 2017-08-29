@@ -11,6 +11,7 @@ const Source = ({
 	handleDelete,
 	sendTest,
 	handleEdit,
+	handleAddDestination,
 }) => 
 <li className="list-group-item">
 	<FaClose 
@@ -35,7 +36,10 @@ const Source = ({
 		<span><b>{fbPageName}</b> <small className="text-muted">Not sending data</small></span>
 	}
 	<br/>
-	<small>Form ID {fbFormId} | <a onClick={sendTest} style={{cursor: 'pointer', textDecoration: 'underline'}}>Send test lead</a></small>
+	<small>
+		Form ID {fbFormId} | <a onClick={sendTest} style={{cursor: 'pointer', textDecoration: 'underline'}}>Test</a> | 
+		<a onClick={handleAddDestination} style={{cursor: 'pointer', textDecoration: 'underline'}}>Add Destination</a>
+	</small>
 </li>
 
 export default Source

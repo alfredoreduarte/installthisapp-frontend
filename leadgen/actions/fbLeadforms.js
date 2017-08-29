@@ -7,6 +7,7 @@ import {
 	indicateLeadTestReceived, 
 	indicateLeadTestBroadcasted,
 	receiveTestLeadData,
+	showSourceTestModal,
 } from 'leadgen/actions/ui'
 
 export const sendTestLead = id => {
@@ -130,8 +131,11 @@ export const newFbLeadform = () => {
 			})
 			.then(response => {
 				if (response) {
+					console.log('locor')
+					console.log(response)
 					analytics.track('LeadForm Created', () => {
 						dispatch(addFbLeadform(response))
+						dispatch(showSourceTestModal(response.id))
 					})
 				}
 			})

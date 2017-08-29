@@ -8,7 +8,7 @@ import { getLeadformsWithPages } from 'leadgen/selectors/fbLeadforms'
 import { getFbLeadgenForms } from 'leadgen/selectors/fbLeadgenForms'
 import { newFbLeadform, destroyFbLeadform, fetchLeadgenFormsForPage } from 'leadgen/actions/fbLeadforms'
 import { newFbLeadDestination, destroyFbLeadDestination, fetchDestinationTypeSettings } from 'leadgen/actions/fbLeadDestinations'
-import { hideSourcesForm, hideDestinationsForm, showDestinationsForm } from 'leadgen/actions/ui'
+import { hideSourcesForm, hideDestinationsForm, showDestinationsForm, showSourceTestModal } from 'leadgen/actions/ui'
 
 let SourceCreator = props => <SourceCreatorView { ...props } />
 
@@ -53,7 +53,10 @@ const mapDispatchToProps = (dispatch, props) => {
 		fetchLeadgenForms: value => dispatch(fetchLeadgenFormsForPage(value)),
 		handleSubmit: e => {
 			e.preventDefault()
-			return dispatch(newFbLeadform()).then(() => {
+			return dispatch(newFbLeadform()).then(elForm => {
+				// dispatch(showSourceTestModal(id))
+				console.log('created')
+				console.log(elForm)
 				dispatch(hideSourcesForm())
 				dispatch(destroy(reduxFormName))
 			})
