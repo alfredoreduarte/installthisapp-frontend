@@ -13,6 +13,13 @@ export const hideSourcesForm = () => ({
 export const showDestinationsForm = () => ({
 	type: 'LEADGEN_UI/SHOW_DESTINATIONS_FORM'
 })
+export const setDefaultLeadFormForDestinationCreation = id => ({
+	type: 'LEADGEN_UI/SET_DEFAULT_LEADFORM',
+	id,
+})
+export const resetDefaultLeadFormForDestinationCreation = () => ({
+	type: 'LEADGEN_UI/RESET_DEFAULT_LEADFORM',
+})
 export const hideDestinationsForm = () => ({
 	type: 'LEADGEN_UI/HIDE_DESTINATIONS_FORM'
 })

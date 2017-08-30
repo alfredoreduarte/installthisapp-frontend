@@ -9,7 +9,7 @@ import { getLeadformsWithPages } from 'leadgen/selectors/fbLeadforms'
 import { getFbLeadgenForms } from 'leadgen/selectors/fbLeadgenForms'
 import { newFbLeadform, destroyFbLeadform, fetchLeadgenFormsForPage } from 'leadgen/actions/fbLeadforms'
 import { newFbLeadDestination, destroyFbLeadDestination, fetchDestinationTypeSettings } from 'leadgen/actions/fbLeadDestinations'
-import { hideDestinationsForm, showDestinationsForm } from 'leadgen/actions/ui'
+import { hideDestinationsForm, showDestinationsForm, resetDefaultLeadFormForDestinationCreation } from 'leadgen/actions/ui'
 
 import emailValidator from 'leadgen/components/destinations/email/validator'
 import mailChimpValidator from 'leadgen/components/destinations/mailchimp/validator'
@@ -123,6 +123,12 @@ const mapStateToProps = (state, props) => {
 			initialValues = { ...selectedValues }
 		}
 	}
+	if (state.leadgenUI.defaultLeadFormIdForDestinationCreator) {
+		initialValues = {
+			...initialValues,
+			fbLeadformId: state.leadgenUI.defaultLeadFormIdForDestinationCreator,
+		}
+	}
 	return {
 		initialValues: initialValues,
 		selectedDestinationType: selector(state, 'destinationType'),
@@ -138,6 +144,7 @@ const mapDispatchToProps = (dispatch, props) => {
 			return dispatch(newFbLeadDestination()).then(() => {
 				dispatch(hideDestinationsForm())
 				dispatch(destroy(reduxFormName))
+				dispatch( resetDefaultLeadFormForDestinationCreation() )
 			})
 		},
 		handleDestinationTypeChange: value => {

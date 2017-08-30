@@ -45,6 +45,7 @@ const AdminDashboard = ({
 	showSourcesForm,
 	hideDestinationsForm,
 	showDestinationsForm,
+	showDestinationsFormWithDefaultSourceId,
 	// 
 	isEditingForm,
 	editSource,
@@ -79,7 +80,7 @@ const AdminDashboard = ({
 				handleHide={handleSourceTestModalHide}
 				show={sourceTestModalVisible}
 				fbPageIdentifier={sourceForTesting.fbPageIdentifier}
-				createDestination={showDestinationsForm}
+				createDestination={() => showDestinationsFormWithDefaultSourceId(sourceForTesting.id)}
 			/>
 		: null}
 		{!fbProfile ? 
@@ -209,7 +210,7 @@ const AdminDashboard = ({
 										padding: '15px 0px',
 									}}>
 										<p className="text-center h3" style={{margin: '0px'}}>Destinations</p>
-										<button className="btn btn-primary btn-sm" onClick={showDestinationsForm}>
+										<button className="btn btn-primary btn-sm hide" onClick={showDestinationsForm}>
 											Add Destination
 										</button>
 									</div>

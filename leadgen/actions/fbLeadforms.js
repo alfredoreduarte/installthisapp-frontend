@@ -16,14 +16,9 @@ export const sendTestLead = (id, testDestinations) => {
 		return postToApi(`fb_leadforms/${id}/test.json`)
 		.then(response => {
 			console.log('sendTestLead response: ', response)
-			// setTimeout(() => {
-				if (response.id) {
-					dispatch(pollTestLeadArrival(response.id, testDestinations))
-				}
-			// }, 4000)
-			// setTimeout(() => {
-				// dispatch(indicateLeadTestBroadcasted())
-			// }, 8000)
+			if (response.id) {
+				dispatch(pollTestLeadArrival(response.id, testDestinations))
+			}
 		})
 		.catch(exception =>
 			console.log('postNewApp: parsing failed', exception)
@@ -124,7 +119,7 @@ export const newFbLeadform = () => {
 				}
 			})
 			.catch(exception =>
-				console.log('postNewApp: parsing failed', exception)
+				console.log('newFbLeadform: parsing failed', exception)
 			)
 		}
 		else {
@@ -133,8 +128,7 @@ export const newFbLeadform = () => {
 			})
 			.then(response => {
 				if (response) {
-					console.log('locor')
-					console.log(response)
+					console.log('LeadForm creation response', response)
 					analytics.track('LeadForm Created', () => {
 						dispatch(addFbLeadform(response))
 						dispatch(showSourceTestModal(response.id))

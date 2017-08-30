@@ -13,6 +13,7 @@ import {
 	showSourcesForm, 
 	hideDestinationsForm, 
 	showDestinationsForm, 
+	setDefaultLeadFormForDestinationCreation,
 	hideDestinationSuccessModal,
 	setDestinationFormDefaults,
 	setSourceFormDefaults,
@@ -75,6 +76,11 @@ const mapDispatchToProps = (dispatch, props) => {
 		},
 		showDestinationsForm: () => {
 			dispatch(resetTestLead())
+			return dispatch( showDestinationsForm() )
+		},
+		showDestinationsFormWithDefaultSourceId: id => {
+			dispatch(resetTestLead())
+			dispatch( setDefaultLeadFormForDestinationCreation(id) )
 			return dispatch( showDestinationsForm() )
 		},
 		// sources testing

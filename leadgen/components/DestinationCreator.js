@@ -40,7 +40,7 @@ const DestinationCreator = ({
 			)}
 		</Field>
 	</div>
-	<div className={`form-group ${!selectedDestinationType ? 'hide' : null}`}>
+	<div className={`form-group ${!selectedDestinationType ? 'hidee' : null}`}>
 		<label className="control-label">Receive data from Source</label>
 		<Field name="fbLeadformId" component="select" className="form-control">
 			<option value={''} disabled>-- Select a source --</option>
