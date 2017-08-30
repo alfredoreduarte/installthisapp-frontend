@@ -209,7 +209,7 @@ const AdminDashboard = ({
 										padding: '15px 0px',
 									}}>
 										<p className="text-center h3" style={{margin: '0px'}}>Destinations</p>
-										<button className="btn btn-primary btn-sm hide" onClick={showDestinationsForm}>
+										<button className="btn btn-primary btn-sm" onClick={showDestinationsForm}>
 											Add Destination
 										</button>
 									</div>

@@ -55,7 +55,7 @@ const mapDispatchToProps = (dispatch, props) => {
 		fbLoginCallback: response => dispatch(fbConnect(response)),
 		handleDeleteFbLeadform: id => dispatch(destroyFbLeadform(id)),
 		handleDeleteFbLeadDestination: id => dispatch(destroyFbLeadDestination(id)),
-		sendTest: id => dispatch( sendTestLead(id) ),
+		sendTest: id => dispatch( sendTestLead(id, true) ),
 		editSource: id => {
 			dispatch(setSourceFormDefaults(id))
 			dispatch(showSourcesForm())
@@ -79,7 +79,7 @@ const mapDispatchToProps = (dispatch, props) => {
 		},
 		// sources testing
 		showSourceTestModal: id => dispatch( showSourceTestModal(id) ),
-		sendSourceTest: id => dispatch( sendTestLead(id) ),
+		sendSourceTest: id => dispatch( sendTestLead(id, false) ),
 		handleSourceTestModalHide: () => dispatch(resetTestLead()),
 	}
 }

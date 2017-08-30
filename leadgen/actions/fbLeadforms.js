@@ -10,7 +10,7 @@ import {
 	showSourceTestModal,
 } from 'leadgen/actions/ui'
 
-export const sendTestLead = id => {
+export const sendTestLead = (id, testDestinations) => {
 	return dispatch => {
 		dispatch(indicateLeadTestSent())
 		return postToApi(`fb_leadforms/${id}/test.json`)
@@ -18,7 +18,7 @@ export const sendTestLead = id => {
 			console.log('sendTestLead response: ', response)
 			// setTimeout(() => {
 				if (response.id) {
-					dispatch(pollTestLeadArrival(response.id))
+					dispatch(pollTestLeadArrival(response.id, testDestinations))
 				}
 			// }, 4000)
 			// setTimeout(() => {
@@ -31,7 +31,7 @@ export const sendTestLead = id => {
 	}
 }
 
-export const pollTestLeadArrival = leadId => {
+export const pollTestLeadArrival = (leadId, testDestinations) => {
 	return dispatch => {
 		const pollTestLeadArrivalInterval = setInterval(() => {
 			getFromApi(`fb_leadforms/${leadId}/poll_test_arrival.json`)
@@ -40,7 +40,9 @@ export const pollTestLeadArrival = leadId => {
 				if (response) {
 					dispatch(indicateLeadTestReceived())
 					dispatch(receiveTestLeadData(response.fieldData))
-					// dispatch(pollTestLeadNotificationDelivery(leadId))
+					if (testDestinations) {
+						dispatch(pollTestLeadNotificationDelivery(leadId))
+					}
 					clearInterval(pollTestLeadArrivalInterval)
 				}
 			})

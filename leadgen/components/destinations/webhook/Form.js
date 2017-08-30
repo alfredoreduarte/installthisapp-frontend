@@ -1,6 +1,7 @@
 import React from 'react'
 import { Field, FieldArray } from 'redux-form'
-import RenderHttpHeaders from 'leadgen/components/RenderHttpHeaders'
+import RenderHttpHeaders from 'leadgen/components/destinations/webhook/RenderHttpHeaders'
+import FieldsDictionary from 'leadgen/components/destinations/webhook/FieldsDictionary'
 
 const payloadTypes = [
 	{
@@ -24,13 +25,11 @@ const Form = () =>
 		<Field
 			name={'settings.url'}
 			className="form-control"
-			placeholder="https://yourwebsite.com/api/webhooks"
+			placeholder="https://yourwebsite.com/api/webhook"
 			type="text"
 			component="input" />
 		<br/>
 	</div>
-	<FieldArray name="settings.httpHeaders" component={RenderHttpHeaders} />
-	<hr />
 	<p className="hide"><a href="#">Show Advanced Options</a></p>
 	<div className="form-group">
 		<label className="control-label">Payload Type</label>
@@ -43,6 +42,9 @@ const Form = () =>
 			)}
 		</Field>
 	</div>
+	<FieldArray name="settings.fieldsDictionary" component={FieldsDictionary} />
+	<hr />
+	<FieldArray name="settings.httpHeaders" component={RenderHttpHeaders} />
 	<div className="hide">
 		<p>Request body example:</p>
 		<pre>
