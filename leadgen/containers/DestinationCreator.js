@@ -92,37 +92,37 @@ const mapStateToProps = (state, props) => {
 			enabled: false,
 		},
 	]
-	let initialValues = {
-		destinationType: 'webhook',
-		fbLeadformId: 16,
-		settings: {
-			url: 'https://requestb.in/x50qohx5',
-			payloadType: 'json',
-		},
-	}
-	// let initialValues = {}
-	// const selectedValues = selector(state, 'destinationType', 'fbLeadformId')
-	// if (!state.leadgenUI.editingDestinationId) {
-	// 	if (selectedValues.destinationType == 'email') {
-	// 		initialValues = {
-	// 			...selectedValues,
-	// 			settings: {
-	// 				recipients: state.admin.email,
-	// 			}
-	// 		}
-	// 	}
-	// 	else if (selectedValues.destinationType == 'webhook') {
-	// 		initialValues = {
-	// 			...selectedValues,
-	// 			settings: {
-	// 				payloadType: 'json',
-	// 			}
-	// 		}
-	// 	}
-	// 	else {
-	// 		initialValues = { ...selectedValues }
-	// 	}
+	// let initialValues = {
+	// 	destinationType: 'webhook',
+	// 	fbLeadformId: 16,
+	// 	settings: {
+	// 		url: 'https://requestb.in/x50qohx5',
+	// 		payloadType: 'json',
+	// 	},
 	// }
+	let initialValues = {}
+	const selectedValues = selector(state, 'destinationType', 'fbLeadformId')
+	if (!state.leadgenUI.editingDestinationId) {
+		if (selectedValues.destinationType == 'email') {
+			initialValues = {
+				...selectedValues,
+				settings: {
+					recipients: state.admin.email,
+				}
+			}
+		}
+		else if (selectedValues.destinationType == 'webhook') {
+			initialValues = {
+				...selectedValues,
+				settings: {
+					payloadType: 'json',
+				}
+			}
+		}
+		else {
+			initialValues = { ...selectedValues }
+		}
+	}
 	return {
 		initialValues: initialValues,
 		selectedDestinationType: selector(state, 'destinationType'),
