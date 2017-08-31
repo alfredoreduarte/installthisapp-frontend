@@ -20,17 +20,38 @@ const identifyAdmin = payload => {
 	// 
 	// Segment
 	// 
-	analytics.identify(payload.id, {
-		name: payload.name,
+	console.log('ident')
+	console.log(payload)
+	console.log(payload.name)
+	console.log(payload.confirmedAt)
+	let dataForSegment = { 
 		email: payload.email,
 		created_at: payload.createdAt,
-		confirmed_at: payload.confirmedAt,
-		facebook_pages: payload.facebookPages,
-		applications: payload.applications,
-		published_applications: payload.publishedApplications,
+	}
+	if (payload.name) {
+		dataForSegment = {
+			...dataForSegment,
+			name: payload.name,
+		}
+	}
+	if (payload.confirmedAt) {
+		dataForSegment = {
+			...dataForSegment,
+			confirmed_at: payload.confirmedAt,
+		}
+	}
+	analytics.identify(payload.id, dataForSegment)
+	// analytics.identify(payload.id, {
+		// name: payload.name,
+		// email: payload.email,
+		// created_at: payload.createdAt,
+		// confirmed_at: payload.confirmedAt,
+		// facebook_pages: payload.facebookPages,
+		// applications: payload.applications,
+		// published_applications: payload.publishedApplications,
 		// plan: 'demo',
 		// 'Experiment: Trial Offer': experimentTrialOfferVariation,
-	})
+	// })
 	// 
 	// Profitwell
 	// 
