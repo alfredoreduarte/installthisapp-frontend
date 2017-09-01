@@ -9,6 +9,7 @@ const manifestPath = `${process.cwd()}/webpack-assets.json`
 const manifest = jsonfile.readFileSync(manifestPath)
 const manifestBundle = manifest['manifest']['js']
 const jsBundle = manifest['landing']['js']
+const jsPublicLoginBundle = manifest['publiclogin']['js'] // publiclogin
 const cssBundle = manifest['landing']['css']
 const vendorBundle = manifest['common']['js']
 // const isOldUser = req.query.segment == 'old_users'
@@ -42,7 +43,9 @@ router.get('/facebook-lead-ads', function(req, res) { res.render('landing-v2/lea
 router.get('/privacy-policy', function(req, res) { res.render('landing-v2/privacy-policy', commonParams(req)) })
 router.get('/terms-conditions', function(req, res) { res.render('landing-v2/terms-conditions', commonParams(req)) })
 router.get('/refund-policy', function(req, res) { res.render('landing-v2/refund-policy', commonParams(req)) })
-router.get('/pricing', function(req, res) { res.render('landing-v2/pricing', commonParams(req)) })
+router.get('/pricing', function(req, res) { res.render('landing-v2/pricing', Object.assign({}, commonParams(req), {
+	jsPublicLoginBundle: jsPublicLoginBundle,
+})) })
 router.get('/contact', function(req, res) { res.render('landing-v2/contact', commonParams(req)) })
 router.get('/white-label-contests', function(req, res) { res.render('landing-v2/white-label', commonParams(req)) })
 // router.get('/signup', function(req, res) { res.render('signup', commonParams(req)) })
