@@ -47,6 +47,7 @@
     "bourbon": "^4.2.7",
     "chart.js": "^2.5.0",
     "classnames": "^2.2.5",
+    "compression": "^1.7.0",
     "cors": "^2.8.1",
     "css": "^2.2.1",
     "css-loader": "^0.23.1",

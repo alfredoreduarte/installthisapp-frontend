@@ -5,6 +5,7 @@ var helmet = require('helmet')
 var cors = require('cors')
 var vhost = require('vhost')
 var minifyHTML = require('express-minify-html')
+var compression = require('compression')
 
 const app = express()
 app.set('view engine', 'ejs')
@@ -24,6 +25,9 @@ app.use(helmet.hsts({
 	preload: true,
 	force: true,
 }))
+
+// Enable GZIP compression on all requests
+app.use(compression())
 
 // Minify HTML to earn some points with google
 app.use(minifyHTML({
