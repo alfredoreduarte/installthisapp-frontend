@@ -4,6 +4,8 @@ var map = require('express-sitemap')
 var helmet = require('helmet')
 var cors = require('cors')
 var vhost = require('vhost')
+var minifyHTML = require('express-minify-html')
+var compression = require('compression')
 
 const app = express()
 app.set('view engine', 'ejs')
@@ -24,6 +26,24 @@ app.use(helmet.hsts({
 	force: true,
 }))
 
+// Enable GZIP compression on all requests
+app.use(compression())
+
+// Minify HTML to earn some points with google
+app.use(minifyHTML({
+	override:      true,
+	exception_url: false,
+	htmlMinifier: {
+		removeComments:            true,
+		collapseWhitespace:        true,
+		collapseBooleanAttributes: true,
+		removeAttributeQuotes:     true,
+		removeEmptyAttributes:     true,
+		minifyCSS:                  true,
+		minifyJS:                  true,
+	}
+}));
+
 const isDeveloping = process.env.NODE_ENV !== 'production'
 
 // Hot Module Reloading
@@ -40,9 +60,7 @@ if (isDeveloping) {
 	app.use(require('webpack-hot-middleware')(compiler))
 }
 else {
-	app.use('/static', cors(), express.static(__dirname + '/dist', {
-		maxAge: 600000,
-	}))
+	app.use('/static', cors(), express.static(__dirname + '/dist', {maxAge: "30d"}))
 }
 
 var pipeleadRoutes = require('./public-routes/pipelead')
@@ -50,11 +68,12 @@ app.use(vhost('www.pipelead.*', pipeleadRoutes))
 app.use(vhost('pipelead.*', pipeleadRoutes))
 
 // Images and other static asssets
-app.use('/images', express.static(__dirname + '/assets/images'))
-app.use('/fonts', cors(), express.static(__dirname + '/assets/fonts'))
-app.use('/styles', express.static(__dirname + '/assets/styles'))
-app.use('/landing', express.static(__dirname + '/assets/landing'))
+app.use('/images', express.static(__dirname + '/assets/images', {maxAge: "30d"}))
+app.use('/fonts', cors(), express.static(__dirname + '/assets/fonts', {maxAge: "30d"}))
+app.use('/styles', express.static(__dirname + '/assets/styles', {maxAge: "30d"}))
+app.use('/landing', express.static(__dirname + '/assets/landing', {maxAge: "30d"}))
 app.use('/public', express.static(__dirname + '/assets/newlanding'))
+// app.use('/public', express.static(path.join(__dirname, 'public'), {maxAge: "30d"}))
 app.use('/googleaf3715fff09887cb.html', express.static(__dirname + '/public/googleaf3715fff09887cb.html'))
 app.use('/sw.js', express.static(__dirname + '/assets/newlanding/sw.js'))
 app.use('/canvas', express.static(__dirname + '/assets/canvas'))
