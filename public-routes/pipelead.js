@@ -60,7 +60,7 @@ client.sync({initial: true}).then( function(response){
 	deleteEntries(response.deletedEntries)
 })
 
-router.get('/forcesync', function(req, res) {
+router.use('/forcesync', function(req, res) {
 	subsequent()
 	res.send('fired a sync')
 })
