@@ -12,6 +12,7 @@ module.exports = {
 		common: 'moment',
 		dashboard: 'index.js',
 		leadgen: './leadgen/index',
+		publiclogin: './publiclogin/index',
 		landing: './assets/landing/index',
 		"campaign-one": './assets/campaign/one',
 		"campaign-two": './assets/campaign/two',

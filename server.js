@@ -47,12 +47,13 @@ app.use(minifyHTML({
 const isDeveloping = process.env.NODE_ENV !== 'production'
 
 // Hot Module Reloading
+// if (false) {
 if (isDeveloping) {
 	var webpack = require('webpack')
 	var config = require('./webpack.config.dev')
-	var DashboardPlugin = require('webpack-dashboard/plugin')
+	// var DashboardPlugin = require('webpack-dashboard/plugin')
 	const compiler = webpack(config)
-	compiler.apply(new DashboardPlugin())
+	// compiler.apply(new DashboardPlugin())
 	app.use(require('webpack-dev-middleware')(compiler, {
 		noInfo: true,
 		publicPath: config.output.publicPath
@@ -62,10 +63,6 @@ if (isDeveloping) {
 else {
 	app.use('/static', cors(), express.static(__dirname + '/dist', {maxAge: "30d"}))
 }
-
-var pipeleadRoutes = require('./public-routes/pipelead')
-app.use(vhost('www.pipelead.*', pipeleadRoutes))
-app.use(vhost('pipelead.*', pipeleadRoutes))
 
 // Images and other static asssets
 app.use('/images', express.static(__dirname + '/assets/images', {maxAge: "30d"}))
@@ -83,20 +80,20 @@ app.use('/node_modules', express.static(__dirname + '/node_modules'))
 // === Canvas ===
 // 
 // Trivia
-// var triviaRouter = require('./canvas/trivia/server.js')
-// app.use(triviaRouter)
+var triviaRouter = require('./canvas/trivia/server.js')
+app.use(triviaRouter)
 // Top Fans
-// var topFansRouter = require('./canvas/top_fans/server.js')
-// app.use(topFansRouter)
+var topFansRouter = require('./canvas/top_fans/server.js')
+app.use(topFansRouter)
 // Photo Contest
-// var photoContestRouter = require('./canvas/photo_contest/server.js')
-// app.use(photoContestRouter)
+var photoContestRouter = require('./canvas/photo_contest/server.js')
+app.use(photoContestRouter)
 // Memory Match
-// var memoryMatchRouter = require('./canvas/memory_match/server.js')
-// app.use(memoryMatchRouter)
+var memoryMatchRouter = require('./canvas/memory_match/server.js')
+app.use(memoryMatchRouter)
 // Catalog
-// var catalogRouter = require('./canvas/catalog/server.js')
-// app.use(catalogRouter)
+var catalogRouter = require('./canvas/catalog/server.js')
+app.use(catalogRouter)
 
 // Serving static HTML
 app.use(function(req, res, next) {
@@ -105,6 +102,11 @@ app.use(function(req, res, next) {
 	else
 		next()
 })
+
+// Pipelead
+var pipeleadRoutes = require('./public-routes/pipelead')
+app.use(vhost('www.pipelead.*', pipeleadRoutes))
+app.use(vhost('pipelead.*', pipeleadRoutes))
 
 // 
 // === Landing & Dashboard ===
