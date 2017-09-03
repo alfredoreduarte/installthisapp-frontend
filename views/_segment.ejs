@@ -5,4 +5,4 @@ analytics.load("<%= process.env.SEGMENT_WRITE_KEY %>");
 }}();
 </script>
 <!-- Using raven manually because it doesn't work if we get it from segment *and* also use their redux logger -->
-<!-- <script src="<%= cloudFrontUrl %>/node_modules/raven-js/dist/raven.js"></script> -->
+<!-- <script src="<%#= cloudFrontUrl %>/node_modules/raven-js/dist/raven.js"></script> -->
