@@ -70,7 +70,7 @@ app.use('/fonts', cors(), express.static(__dirname + '/assets/fonts', {maxAge: "
 app.use('/styles', express.static(__dirname + '/assets/styles', {maxAge: "30d"}))
 app.use('/landing', express.static(__dirname + '/assets/landing', {maxAge: "30d"}))
 // app.use('/public', express.static(__dirname + '/assets/newlanding'))
-app.use('/public', express.static(__dirname + '/public'))
+app.use('/public', express.static(__dirname + '/public', {maxAge: "30d"}))
 // app.use('/public', express.static(path.join(__dirname, 'public'), {maxAge: "30d"}))
 app.use('/googleaf3715fff09887cb.html', express.static(__dirname + '/public/googleaf3715fff09887cb.html'))
 app.use('/sw.js', express.static(__dirname + '/assets/newlanding/sw.js'))
