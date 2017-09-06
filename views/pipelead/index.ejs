@@ -1,98 +1,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title><%= meta.title %></title>
-<meta name="keywords" content="facebook lead ads, lead ads, lead ads integrations, lead ads notifications, lead ads mailchimp, lead ads zapier">
-<meta name="description" content="<%= meta.description %>">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="distribution" content="global"/>
-<meta name="resource-type" content="document"/>
-<meta http-equiv="Pragma" content="cache"/>
-<meta name="robots" content="all,index,follow"/>
-<meta name="Revisit" content="7 days"/>
-<meta property="og:title" content="<%= meta.description %>"/>
-<meta property="og:url" content="http://www.pipelead.co"/>
-<meta property="og:type" content="website"/>
-<meta property="og:image" content="https://v3.installthisapp.com/images/leadgen-facebook-thumbnail.jpg"/>
-<meta property="og:site_name" content="PipeLead"/>
-<meta property="og:description" content="<%= meta.description %>"/>
-<%- include('_styles') %>
-<!-- lp:insertions start head -->
-<link href="//builder-assets.unbounce.com/published/page-defaults-b629ba5.z.css" rel="stylesheet" media="screen" type="text/css"/>
-<link rel="stylesheet" media="screen" href="//builder-assets.unbounce.com/published/jquery.ubpoverlay-45e86c0.z.css" type="text/css"/>
-<script>window.module = window.module || {};</script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
-<script src="//builder-assets.unbounce.com/published/jquery.validate.min-3b750e1.z.js" type="text/javascript"></script>
-<script src="//builder-assets.unbounce.com/published/additional-methods-09a5c5a.z.js" type="text/javascript"></script>
-<script src="//builder-assets.unbounce.com/published/jquery.ubpoverlay-d9900bb.z.js" type="text/javascript"></script>
-<script type="text/javascript" src="//d2xxq4ijfwetlm.cloudfront.net/m/lp-webapp/api/unbounce.js"></script>
-<script type="text/javascript">
-window.ub.page.id = "b7540bd8-2145-4926-b868-5e03ea309fe4";
-window.ub.page.variantId = "a";
-window.ub.page.usedAs = "main";
-window.ub.page.name = "Lead Integrations";
-window.ub.page.url = "http://unbouncepages.com/leadsync-integrations/";
-window.ub.page.dimensions = {"desktop":{"width":940,"height":1588},"mobile":{"width":320,"height":2239}};
-</script>
-<script type="text/javascript">
-var lp = lp || {};
-lp.jQuery = jQuery.noConflict( true );
-</script>
-<script src="//builder-assets.unbounce.com/modules/lp-block/public/main-90cd9cc.z.js" type="text/javascript"></script>
-<script src="//builder-assets.unbounce.com/published/matchMedia-ba7af92.z.js" type="text/javascript"></script>
-<script src="//builder-assets.unbounce.com/modules/lp-image/public/main-8ff2ac3.z.js" type="text/javascript"></script>
-<script src="//builder-assets.unbounce.com/modules/lp-text/public/main-428abbf.z.js" type="text/javascript"></script>
-<script src="//builder-assets.unbounce.com/modules/lp-form/public/main-15aa9b2.z.js" type="text/javascript"></script>
-<script src="//builder-assets.unbounce.com/modules/lp-button/public/main-d9cd5d4.z.js" type="text/javascript"></script>
-<script>
-window.redirectDomain = window.location.hostname
-window.module = window.module || {};
-window.module.lp = window.module.lp || {};
-window.module.lp.form = window.module.lp.form || {};
-window.module.lp.form.data = {"formContainerId":"lp-pom-form-65","errorContainerId":"lp-pom-form-65-errors","confirmAction":"url","passParams":true,"confirmData":"https://v3.installthisapp.com/signup?redirect=leadgen","confirmTarget":"_parent","validationRules":{"email":{"required":false,"email":true}},"validationMessages":{"email":{}},"formButtonId":"lp-pom-button-66"};
-</script>
-<script>lp.jQuery().ready(function() {lp.jQuery("#lp-pom-button-66").bind("click tap touchstart", function(e) {e.preventDefault();e.stopPropagation();lp.jQuery("div.lp-pom-form form").submit();});});</script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
-<script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
-<script>
-lp = lp || {};
-lp.webFontLoad = {
-	google: {
-		families: ['PT Sans:400,400italic,700,700italic','Cabin:400,400italic,700,700italic','Arvo:400,400italic,700,700italic','Cabin:400,400italic,700,700italic','Lato:400,400italic,700,700italic']
-	},
-	active: function() {
-	 if(lp && lp.text && typeof lp.text.fixTextHeights === "function")  {
-		 lp.text.runTextFixes(true)
-	 }
-	}
-};
-window.WebFont.load(lp.webFontLoad);
-</script>
-<!--[if IE 7]>
-<script>
-(function() {
-	var sheet = document.styleSheets[1];
-	var rules = sheet.rules;
-	var rule;
-	var index = -1;
-	for (var i=0, l=rules.length; i<l; i++){
-		rule = rules[i];
-		if (rule.selectorText.toLowerCase() == 'div.lp-pom-root .lp-pom-text span') {
-			index = i;
-			break;
-		}
-	}
-	if (index > -1) {
-		sheet.removeRule(index);
-		sheet.addRule('div.lp-pom-root .lp-pom-text span', 'line-height:inherit');
-	}
-})();
-</script>
-<![endif]-->
-<script src="//builder-assets.unbounce.com/published/ub-browser-879f873.z.js" type="text/javascript"></script>
-<!-- lp:insertions end head -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title><%= meta.title %></title>
+	<meta name="keywords" content="facebook lead ads, lead ads, lead ads integrations, lead ads notifications, lead ads mailchimp, lead ads zapier">
+	<meta name="description" content="<%= meta.description %>">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="distribution" content="global"/>
+	<meta name="resource-type" content="document"/>
+	<meta http-equiv="Pragma" content="cache"/>
+	<meta name="robots" content="all,index,follow"/>
+	<meta name="Revisit" content="7 days"/>
+	<meta property="og:title" content="<%= meta.description %>"/>
+	<meta property="og:url" content="http://www.pipelead.co"/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:image" content="https://v3.installthisapp.com/images/leadgen-facebook-thumbnail.jpg"/>
+	<meta property="og:site_name" content="PipeLead"/>
+	<meta property="og:description" content="<%= meta.description %>"/>
+	<link rel="shortcut icon" href="<%= cloudFrontUrl %>/public/pipelead/images/logo-rombo-100.png">
+	<%- include('_styles') %>
 </head>
 <body class="lp-pom-body ">
 <!-- lp:insertions start body:before -->
@@ -101,6 +28,9 @@ window.WebFont.load(lp.webFontLoad);
 	<div id="lp-pom-root-color-overlay">
 	</div>
 	<div class="lp-positioned-content">
+		<div class="lp-element lp-pom-image" id="login-link">
+			<a href="/login">Login »</a>
+		</div>
 		<div class="lp-element lp-pom-image" id="lp-pom-image-9">
 			<div class="lp-pom-image-container" style="overflow: hidden;">
 				<img src="/images/pipelead/logo-white.png" alt="">
@@ -131,9 +61,14 @@ window.WebFont.load(lp.webFontLoad);
 				<img src="//d9hhrg4mnvzow.cloudfront.net/unbouncepages.com/leadsync-integrations/82955cbe-radius-wave-icon.png" alt="">
 			</div>
 		</div>
-		<div class="lp-element lp-pom-image" id="lp-pom-image-25">
+		<!-- <div class="lp-element lp-pom-image" id="lp-pom-image-25">
 			<div class="lp-pom-image-container" style="overflow: hidden;">
 				<img src="//d9hhrg4mnvzow.cloudfront.net/unbouncepages.com/leadsync-integrations/transparent.gif" alt="">
+			</div>
+		</div> -->
+		<div class="lp-element lp-pom-image" id="lp-pom-image-25">
+			<div class="lp-pom-image-container" style="overflow:hidden">
+				<img src="http://www.pipelead.co/images/pipelead/pipelead-image.png" alt="" />
 			</div>
 		</div>
 		<div class="lp-element lp-pom-box" id="lp-pom-box-27">
@@ -150,7 +85,6 @@ window.WebFont.load(lp.webFontLoad);
 		</div>
 		<div class="lp-element lp-pom-text nlh" id="lp-pom-text-30">
 			<h1 style="text-align: center; line-height: 45px;">
-				<!-- <span style="color: rgb(255, 255, 255); font-family: cabin; font-size: 50px; line-height: 45px; text-align: center;">Automated Facebook Lead Ads Integrations</span> -->
 				<span style="color: rgb(255, 255, 255); font-family: cabin; font-size: 50px; line-height: 45px; text-align: center;">
 					<%= content.h1 %>
 				</span>
@@ -241,16 +175,16 @@ window.WebFont.load(lp.webFontLoad);
 			</p>
 		</div>
 		<div class="lp-element lp-pom-form" id="lp-pom-form-65">
-			<form action="https://v3.installthisapp.com/signup?redirect=leadgen" method="GET">
-				<input type="hidden" name="pageId" value="b7540bd8-2145-4926-b868-5e03ea309fe4"><input type="hidden" name="pageVariant" value="a">
+			<form action="/signup?" method="GET">
 				<fieldset class="clearfix">
 					<div class="lp-pom-form-field legacy clearfix" id="container_email">
 						<label for="email" class="main lp-form-label" id="label_email"><span class="labelStyle">Your Email</span></label><input type="text" id="email" name="email" placeholder="" class="text form_elem_email">
 					</div>
 				</fieldset>
-				<input type="text" id="ZAmRLn4R1s5BBfsBBy54ixQoXRVZ9Io2" name="ubafs-ZAmRLn4R1s5BBfsBBy54ixQoXRVZ9Io2" style="display:none !important;">
+				<input type="hidden" name="redirect" value="leadgen">
+				<button class="lp-element lp-pom-button" type="submit" id="lp-pom-button-66"><span class="label">GET STARTED</span></button>
 			</form>
-			<a class="lp-element lp-pom-button" id="lp-pom-button-66" href="#"><span class="label">GET STARTED</span></a>
+			<p id="login-paragraph" style="font-family: cabin;">Already have an account? <a href="/login"> Log in here </a> </p>
 		</div>
 	</div>
 	<div class="lp-element lp-pom-block" id="lp-pom-block-8">
@@ -292,63 +226,65 @@ window.WebFont.load(lp.webFontLoad);
 			</ul>
 		</div>
 	</div>
+	<link rel="stylesheet" type="text/css" href="<%= cloudFrontUrl %>/public/pipelead/styles/unbounce-a/defaults.css">
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
-	function updateViewport() {
-		var viewport = document.querySelector('meta[name="viewport"]');
-		if (viewport && window.innerWidth > 600 && window.innerWidth < 1024) {
-			var defaultDeviceWidth = window.innerWidth;
-			var defaultPageWidth = document.getElementById('lp-pom-root').offsetWidth;
-			var calculatedScale = (defaultDeviceWidth / defaultPageWidth);
-			var viewportContent = 'initial-scale=' + calculatedScale + ', user-scalable=yes';
-			if (defaultDeviceWidth >= defaultPageWidth) {
-				viewportContent = 'initial-scale=1.0, ' + 'width=device-width, ' + 'user-scalable=yes';
+		var lp = lp || {};
+		lp.jQuery = jQuery.noConflict( true );
+	</script>
+	<script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+	<script>
+		lp = lp || {};
+		lp.webFontLoad = {
+			google: {
+				families: ['PT Sans:400,400italic,700,700italic','Cabin:400,400italic,700,700italic','Arvo:400,400italic,700,700italic','Cabin:400,400italic,700,700italic','Lato:400,400italic,700,700italic']
+			},
+			active: function() {
+			 if(lp && lp.text && typeof lp.text.fixTextHeights === "function")  {
+				 lp.text.runTextFixes(true)
+			 }
 			}
-			viewport.content = viewportContent;
+		};
+		window.WebFont.load(lp.webFontLoad);
+	</script>
+	<script type="text/javascript">
+		function updateViewport() {
+			var viewport = document.querySelector('meta[name="viewport"]');
+			if (viewport && window.innerWidth > 600 && window.innerWidth < 1024) {
+				var defaultDeviceWidth = window.innerWidth;
+				var defaultPageWidth = document.getElementById('lp-pom-root').offsetWidth;
+				var calculatedScale = (defaultDeviceWidth / defaultPageWidth);
+				var viewportContent = 'initial-scale=' + calculatedScale + ', user-scalable=yes';
+				if (defaultDeviceWidth >= defaultPageWidth) {
+					viewportContent = 'initial-scale=1.0, ' + 'width=device-width, ' + 'user-scalable=yes';
+				}
+				viewport.content = viewportContent;
+			}
 		}
-	}
-	lp.jQuery(document).ready(updateViewport);
-	window.addEventListener('orientationchange', updateViewport);
+		lp.jQuery(document).ready(updateViewport);
+		window.addEventListener('orientationchange', updateViewport);
 	</script>
 	<script>
-function disableParallaxOnMobile() {
-	if (navigator.userAgent.match(/(Android|iPod|iPhone|iPad|iemobile|blackberry)/)) {
-		var parallaxEls = lp.jQuery('.lp-pom-root, .lp-pom-block');
-		for (i = 0; i < parallaxEls.length; i++) {
-			var parallaxEl = parallaxEls[i];
-			if (lp.jQuery(parallaxEl).css('background-attachment') === 'fixed') {
-				parallaxEl.style['background-attachment'] = 'scroll';
-			};
-		};
-	}
-}
-disableParallaxOnMobile();
-window.addEventListener("orientationchange", function() {
-	disableParallaxOnMobile();
-}, false);
+		function disableParallaxOnMobile() {
+			if (navigator.userAgent.match(/(Android|iPod|iPhone|iPad|iemobile|blackberry)/)) {
+				var parallaxEls = lp.jQuery('.lp-pom-root, .lp-pom-block');
+				for (i = 0; i < parallaxEls.length; i++) {
+					var parallaxEl = parallaxEls[i];
+					if (lp.jQuery(parallaxEl).css('background-attachment') === 'fixed') {
+						parallaxEl.style['background-attachment'] = 'scroll';
+					};
+				};
+			}
+		}
+		disableParallaxOnMobile();
+		window.addEventListener("orientationchange", function() {
+			disableParallaxOnMobile();
+		}, false);
 	</script>
-	<script type="text/javascript">// See README.md for documentation
-lp.jQuery().ready(function($) {
-	$('input[name^=ubafs-]', 'form').remove();
-	var info = JSON.stringify({
-		date: new Date(),
-		agent: navigator.userAgent,
-		screen: {
-			availWidth: screen.availWidth,
-			availHeight: screen.availHeight,
-			width: screen.width,
-			height: screen.height
-		},
-		window: {
-			innerWidth: window.innerWidth,
-			innerHeight: window.innerHeight
-		},
-		hasPlugins: ('length' in navigator.plugins && navigator.plugins.length > 0)
-	});
-	// var jevField = $('<input type="hidden" id="ubafs-jev" name="ubafs-jev">').val(info);
-	// $('form').append(jevField);
-});
+	<%- disableSegment  ? include('../_disable-segment') : include('../_segment') %>
+	<script type="text/javascript">
+		analytics.page('PipeLead Home')
 	</script>
-	<!-- lp:insertions end body:after -->
-	<%- include('../_segment') %>
 </body>
 </html>

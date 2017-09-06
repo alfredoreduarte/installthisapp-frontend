@@ -4,6 +4,7 @@ const removeMd = require('remove-markdown')
 const marked = require('marked')
 const router = express.Router()
 const contentful = require('contentful')
+const jsonfile = require('jsonfile')
 
 const client = contentful.createClient({
 	space: 'lm5ligtbptz1',
@@ -75,6 +76,44 @@ const subsequent = function(){
 	})
 }
 
+const cloudFrontUrl = process.env.CLOUDFRONT_URL
+const manifestPath = `${process.cwd()}/webpack-assets.json`
+const manifest = jsonfile.readFileSync(manifestPath)
+const manifestBundle = manifest['manifest']['js']
+const jsBundle = manifest['landing']['js']
+const cssBundle = manifest['landing']['css']
+const vendorBundle = manifest['common']['js']
+
+const commonParams = req => {
+	return {
+		canonical: false,
+		req: req,
+		disableSegment: req.query[process.env.ALIAS_PARAM_KEY] || process.env.NODE_ENV == 'development',
+		cloudFrontUrl: cloudFrontUrl,
+		apiUrl: process.env.API_URL,
+		jsBundle,
+		cssBundle,
+		vendorBundle,
+		manifestBundle,
+	}
+}
+
+// Images and other static asssets
+router.use('/images', express.static(__dirname + '/assets/pipelead/images', {maxAge: "30d"}))
+router.use('/styles', express.static(__dirname + '/assets/pipelead/styles', {maxAge: "30d"}))
+
+// Signup
+router.get('/signup', function(req, res) { res.render('pipelead/signup', Object.assign({}, commonParams(req), {
+	redirect: req.query.redirect,
+	email: req.query.email,
+})) })
+
+// Signup
+router.get('/login', function(req, res) { res.render('pipelead/login', Object.assign({}, commonParams(req), {
+	redirect: req.query.redirect,
+	email: req.query.email,
+})) })
+
 /* GET home page. */
 router.get('/*', function(req, res) {
 	const landingVariant = req.path.substr(1) || 'default'
@@ -83,8 +122,8 @@ router.get('/*', function(req, res) {
 	})
 	if (entry) {
 		const processedSubheading = marked(entry.fields.subheading[locale])
-		const plainSubheading = removeMd(entry.fields.subheading[locale])
-		res.render('pipelead/index', {
+		const plainSubheading = removeMd(entry.fields.subheading[locale]).replace(/(\r\n|\n|\r)/gm,"")
+		res.render('pipelead/index', Object.assign({}, commonParams(req), {
 			meta: {
 				title: entry.fields.heading[locale],
 				description: plainSubheading,
@@ -93,7 +132,7 @@ router.get('/*', function(req, res) {
 				h1: entry.fields.heading[locale],
 				subheading: processedSubheading,
 			}
-		})
+		}))
 	}
 	else{
 		res.locals.message = 'Not found'

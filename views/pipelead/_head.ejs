@@ -1,0 +1,25 @@
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- always keep the above 3 lines there, everything else goes below -->
+	<link rel="icon" type="image/png" href="/images/favicon.png" />
+	<link rel="manifest" href="/public/manifest.json">
+	<title><%= title %></title>
+	<link rel="stylesheet" media="all" href="<%= cloudFrontUrl %><%= cssBundle %>" />
+	<!-- SEO stuff -->
+	<% if ( canonical ) { %><link rel="canonical" href="http://www.pipelead.com<%= canonical %>" /><% } %>
+	<meta name="description" content="Integrate your Facebook Lead Ads with all the services you already use. Send new lead data to all your marketing tools in real time." />
+	<meta name="keywords" content="facebook lead ads, facebook lead ads integrations, lead ads integrations, lead ads mailchimp, lead ads crm, lead ads email notifications" />
+	<meta name="distribution" content="global"/>
+	<meta name="resource-type" content="document"/>
+	<meta http-equiv="Pragma" content="cache"/>
+	<meta name="robots" content="all,index,follow"/>
+	<meta name="Revisit" content="7 days"/>
+	<meta property="og:title" content="<%= title %>" />
+	<meta property="og:url" content="http://www.pipelead.com"/>
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content="http://www.pipelead.com"/>
+	<meta property="og:site_name" content="PipeLead by InstallThisApp"/>
+	<meta property="og:description" content="Integrate your Facebook Lead Ads with all the services you already use. Send new lead data to all your marketing tools in real time."/>
+</head>
