@@ -90,6 +90,7 @@ const commonParams = req => {
 		req: req,
 		disableSegment: req.query[process.env.ALIAS_PARAM_KEY] || process.env.NODE_ENV == 'development',
 		cloudFrontUrl: cloudFrontUrl,
+		hostname: process.env.HOSTNAME,
 		apiUrl: process.env.API_URL,
 		jsBundle,
 		cssBundle,

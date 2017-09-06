@@ -6,10 +6,10 @@ var ITAregister = function(appsOrLeadgen){
 	var password = $('#password').val()
 	var confirmSuccessUrl = null
 	if (appsOrLeadgen == 'leadgen') {
-		confirmSuccessUrl = window.location.protocol + '//' + 'localhost.ssl:5000' + '/d/complete-profile?redirect_uri=' + window.location.protocol + '//' + 'localhost.ssl:5000' + '/leadgen'
+		confirmSuccessUrl = window.location.protocol + '//' + "<%= hostname %>" + '/d/complete-profile?redirect_uri=' + window.location.protocol + '//' + "<%= hostname %>" + '/leadgen'
 	}
 	else {
-		confirmSuccessUrl = window.location.protocol + '//' + 'localhost.ssl:5000' + '/d/complete-profile?redirect_uri=' + window.location.protocol + '//' + 'localhost.ssl:5000' + '/d'
+		confirmSuccessUrl = window.location.protocol + '//' + "<%= hostname %>" + '/d/complete-profile?redirect_uri=' + window.location.protocol + '//' + "<%= hostname %>" + '/d'
 	}
 	if (email && password) {
 		fetch('<%= apiUrl %>/auth.json', {
@@ -38,9 +38,9 @@ var ITAregister = function(appsOrLeadgen){
 		.then(json => {
 			if (json.status == "success") {
 				// ITAlogin(email, password, false)
-				const redirectString = window.location.protocol + '//' + 'localhost.ssl:5000' + '/please-confirm?email=' + email
+				const redirectString = window.location.protocol + '//' + "<%= hostname %>" + '/please-confirm?email=' + email
 				ITAlogin(email, password, false, redirectString)
-				// top.location = location.protocol + '//' + 'localhost.ssl:5000' + '/please-confirm?email=' + email
+				// top.location = location.protocol + '//' + "<%= hostname %>" + '/please-confirm?email=' + email
 			}
 			else {
 				$('#signup-button').attr('disabled', false)

@@ -20,10 +20,6 @@ const identifyAdmin = payload => {
 	// 
 	// Segment
 	// 
-	console.log('ident')
-	console.log(payload)
-	console.log(payload.name)
-	console.log(payload.confirmedAt)
 	let dataForSegment = { 
 		email: payload.email,
 		created_at: payload.createdAt,

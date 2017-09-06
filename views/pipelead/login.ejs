@@ -25,7 +25,7 @@
 					<div id="login-form-wrap" class="mc-mini-content centered padding--lv1">
 						<div class="alignc margin--lv5 !margin-left-right--lv0 !margin-bottom--lv2">
 							<div class="freddie freddie--login centered" style="display: flex;justify-content: center;align-items: center;">
-								<a href="/signup" title="PipeLead">
+								<a href="/login?redirect=leadgen" title="PipeLead">
 									<img src="<%= cloudFrontUrl %>/public/pipelead/images/logo-rombo-100.png" />
 								</a>
 							</div>
@@ -35,10 +35,10 @@
 						</div>
 						<div id="login-content" class="line selfclear !margin-bottom--lv6">
 							<div class="lastUnit overflow-visible">
-								<form action="https://login.mailchimp.com/login/post/" id="login-form" class="c-largeForm">
+								<form id="login-form" class="c-largeForm">
 									<div class="!margin-bottom--lv5">
 										<h1 class="text-align--center !margin-bottom--lv3">Log In</h1>
-										<p class="flex align-items--baseline flex-wrap--wrap"> <span class="padding-right--lv1">Need a new account? </span> <a href="/signup" title="Login to your PipeLead account"> Create an account </a> </p>
+										<p class="flex align-items--baseline flex-wrap--wrap"> <span class="padding-right--lv1">Need a new account? </span> <a href="/signup?redirect=leadgen" title="Login to your PipeLead account"> Create an account </a> </p>
 									</div>
 									<fieldset>
 										<div class="line login-field">
@@ -57,7 +57,7 @@
 											<button type="submit" value="log in" class="button-large button-wide full-width p1 !margin-bottom--lv5" tabindex="3">Log in</button>
 										</div>
 										<div class="alignc">
-											<p class="inline-block margin--lv1 !margin-top-bottom--lv0 !margin-right--lv0"> <a href="/forgot"> Forgot password?</a> </p>
+											<!-- <p class="inline-block margin--lv1 !margin-top-bottom--lv0 !margin-right--lv0"> <a href="/forgot"> Forgot password?</a> </p> -->
 										</div>
 									</fieldset>
 								</form>
@@ -123,13 +123,14 @@
 							alert(json.errors)
 						}
 						else{
-							// top.location = location.protocol + '//' + 'localhost.ssl:5000' + '/d'
+							// top.location = location.protocol + '//' + "<%= hostname %>" + '/d'
 							var confirmSuccessUrl = null
 							if (appsOrLeadgen == 'leadgen') {
-								confirmSuccessUrl = window.location.protocol + '//' + 'localhost.ssl:5000' + '/d/complete-profile?redirect_uri=' + window.location.protocol + '//' + 'localhost.ssl:5000' + '/leadgen'
+								// confirmSuccessUrl = window.location.protocol + '//' + "<%= hostname %>" + '/d/complete-profile?redirect_uri=' + window.location.protocol + '//' + "<%= hostname %>" + '/leadgen'
+								confirmSuccessUrl = window.location.protocol + '//' + "<%= hostname %>" + '/leadgen'
 							}
 							else {
-								confirmSuccessUrl = window.location.protocol + '//' + 'localhost.ssl:5000' + '/d/complete-profile?redirect_uri=' + window.location.protocol + '//' + 'localhost.ssl:5000' + '/d'
+								// confirmSuccessUrl = window.location.protocol + '//' + "<%= hostname %>" + '/d/complete-profile?redirect_uri=' + window.location.protocol + '//' + "<%= hostname %>" + '/d'
 							}
 							top.location = confirmSuccessUrl
 						}
@@ -147,7 +148,7 @@
 	<%- include('../_scripts') %>
 	<%- disableSegment  ? include('../_disable-segment') : include('../_segment') %>
 	<script type="text/javascript">
-		analytics.page('Login')
+		analytics.page('PipeLead Login')
 	</script>
 </body>
 </html>

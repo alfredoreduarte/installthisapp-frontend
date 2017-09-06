@@ -25,7 +25,7 @@
 					<div id="login-form-wrap" class="mc-mini-content centered padding--lv1">
 						<div class="alignc margin--lv5 !margin-left-right--lv0 !margin-bottom--lv2">
 							<div class="freddie freddie--login centered" style="display: flex;justify-content: center;align-items: center;">
-								<a href="/signup" title="PipeLead">
+								<a href="/signup?redirect=leadgen" title="PipeLead">
 									<img src="<%= cloudFrontUrl %>/public/pipelead/images/logo-rombo-100.png" />
 								</a>
 							</div>
@@ -35,7 +35,7 @@
 						</div>
 						<div id="login-content" class="line selfclear !margin-bottom--lv6">
 							<div class="lastUnit overflow-visible">
-								<form action="https://login.mailchimp.com/login/post/" id="signup-form" class="c-largeForm">
+								<form id="signup-form" class="c-largeForm">
 									<div class="!margin-bottom--lv5">
 										<h1 class="text-align--center !margin-bottom--lv3">Sign up</h1>
 										<p class="flex align-items--baseline flex-wrap--wrap"> <span class="padding-right--lv1">Create a free PipeLead account to sync Facebook Lead forms with all your marketing tools. </span>  </p>
@@ -57,7 +57,7 @@
 											<button type="submit" value="Sign up" class="button-large button-wide full-width p1 !margin-bottom--lv5" tabindex="3">Get stated!</button>
 										</div>
 										<div class="alignc">
-											<p class="inline-block margin--lv1 !margin-top-bottom--lv0 !margin-left--lv0"> Already have an account? <a href="/login"> Log in here </a> </p>
+											<p class="inline-block margin--lv1 !margin-top-bottom--lv0 !margin-left--lv0"> Already have an account? <a href="/login?redirect=leadgen"> Log in here </a> </p>
 										</div>
 									</fieldset>
 								</form>

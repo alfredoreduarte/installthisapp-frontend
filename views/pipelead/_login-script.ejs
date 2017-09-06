@@ -39,10 +39,10 @@ var ITAlogin = function(
 			}
 			else {
 				if (card) {
-					top.location = location.protocol + '//' + 'localhost.ssl:5000' + '/d?offer=starter'
+					top.location = location.protocol + '//' + "<%= hostname %>" + '/d?offer=starter'
 				}
 				else{
-					top.location = location.protocol + '//' + 'localhost.ssl:5000' + '/d'
+					top.location = location.protocol + '//' + "<%= hostname %>" + '/d'
 				}
 			}
 		})
