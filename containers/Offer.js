@@ -4,6 +4,7 @@ import { getBasicPlanIfExists } from 'selectors/plans'
 
 import Card from 'containers/Card'
 import CardOverlay from 'containers/CardOverlay'
+import CardHalfForever from 'containers/CardHalfForever'
 import CardTrialEnded from 'containers/CardTrialEnded'
 import CardAppLimit from 'containers/CardAppLimit'
 
@@ -15,6 +16,7 @@ const Offer = ({
 }) => 
 {
 	switch (type) {
+		case 'half-forever': 		return <CardHalfForever busy={busy} plan={plan} onSuccess={onSuccess} />
 		case 'starter': 			return <CardOverlay 	busy={busy} plan={plan} onSuccess={onSuccess} />
 		case 'trial-ended': 		return <CardTrialEnded 	busy={busy} plan={plan} onSuccess={onSuccess} />
 		case 'app-limit-reached': 	return <CardAppLimit 	busy={busy} plan={plan} onSuccess={onSuccess} />
