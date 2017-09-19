@@ -37,38 +37,10 @@ const identifyAdmin = payload => {
 		}
 	}
 	analytics.identify(payload.id, dataForSegment)
-	// analytics.identify(payload.id, {
-		// name: payload.name,
-		// email: payload.email,
-		// created_at: payload.createdAt,
-		// confirmed_at: payload.confirmedAt,
-		// facebook_pages: payload.facebookPages,
-		// applications: payload.applications,
-		// published_applications: payload.publishedApplications,
-		// plan: 'demo',
-		// 'Experiment: Trial Offer': experimentTrialOfferVariation,
-	// })
 	// 
 	// Profitwell
 	// 
 	profitwell('user_email', payload.email)
-	// 
-	// Samestate
-	// 
-	// window.Samestate({
-	// 	// Required fields. At least one of user_id or email is required.
-		// token: '2bc168b9dcd4|15d5cb784da', // Your Samestate token
-		// user_id: payload.id,
-		// email: payload.email,
-
-	// 	// Optional properties
-	// 	// name: ...,
-	// 	// censor: ['.ignore .this', '#and.this'], // Censor fields matching css selectors
-		// intercom: { // Add this to load user data from Intercom
-			// user_id: payload.id,
-			// email: payload.email,
-		// }
-	// })
 }
 
 export const fetchAdmin = () => {
