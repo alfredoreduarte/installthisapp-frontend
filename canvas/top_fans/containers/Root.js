@@ -29,16 +29,19 @@ class Root extends Component {
 			<Provider store={store}>
 				<Router history={history}>
 					<Route 
-						path={`/${window.canvasId}(/:checksum)`} 
+						// path={`/${window.canvasId}(/:checksum)`} 
+						path={`/top_fans(/:checksum)`} 
 						onEnter={(nextState, replace, next) => getData(nextState, replace, next, dispatch)}
 						component={Intro} />
 					<Route 
-						path={`/${window.canvasId}(/:checksum)/scores`} 
+						// path={`/${window.canvasId}(/:checksum)/scores`} 
+						path={`/top_fans(/:checksum)/scores`} 
 						// onEnter={(nextState, replace, next) => requireAuth(nextState, replace, next, dispatch)}
 						onEnter={(nextState, replace, next) => getData(nextState, replace, next, dispatch)}
 						component={Index} />
 					<Route 
-						path={`/${window.canvasId}/:checksum/login`} 
+						// path={`/${window.canvasId}/:checksum/login`} 
+						path={`/top_fans/:checksum/login`} 
 						component={Login}/>
 				</Router>
 			</Provider>

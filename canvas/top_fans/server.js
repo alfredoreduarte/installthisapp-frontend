@@ -14,7 +14,8 @@ var canvasRouter = express.Router()
 // var canvasSubdomain = `${canvasId}-localui`
 // app.use(subdomain(canvasSubdomain, canvasRouter))
 var canvasParser = bodyParser.urlencoded({ extended: true })
-canvasRouter.get(`/${canvasId}/favicon.ico`, function(req, res) {
+// canvasRouter.get(`/${canvasId}/favicon.ico`, function(req, res) {
+canvasRouter.get(`/${moduleName}/favicon.ico`, function(req, res) {
 	res.sendStatus(200)
 })
 canvasRouter.use(function(req, res, next) {
@@ -80,7 +81,8 @@ canvasRouter.post(`/${canvasId}`, canvasParser, function(req, res) {
 		}
 	)
 })
-canvasRouter.get(`/${canvasId}/:checksum*`, canvasParser, function(req, res) {
+// canvasRouter.get(`/${canvasId}/:checksum*`, canvasParser, function(req, res) {
+canvasRouter.get(`/${moduleName}/:checksum*`, canvasParser, function(req, res) {
 	const manifestPath = `${process.cwd()}/webpack-assets.json`
 	const manifest = jsonfile.readFileSync(manifestPath)
 	const manifestBundle = manifest['manifest']['js']
@@ -93,7 +95,7 @@ canvasRouter.get(`/${canvasId}/:checksum*`, canvasParser, function(req, res) {
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({
-			canvas_id: canvasId,
+			// canvas_id: canvasId,
 			checksum: req.params.checksum,
 		})
 	})

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title><%= applicationTitle %></title>
+	<meta property="og:url" content="<%= gatewayUrl %>" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="<%= applicationTitle %>" />
+	<meta property="og:description" content="<%= applicationTitle %>" />
+	<meta property="og:image" content="<%= gatewayUrl %>" />
+</head>
+<body>
+	<h1><%= applicationTitle %></h1>
+	Redirecting...
+	<script>
+	function isMobileDevice() {
+		return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+	};
+	if ( isMobileDevice() ) {
+		top.location.href = "<%= canvasUrl %>";
+	}
+	else {
+		if (<%= hasFacebookTab ? true : false %>) {
+			top.location.href = "<%= facebookTabUrl %>";
+		}
+		else {
+			top.location.href = "<%= canvasUrl %>";
+		}
+	}
+	</script>
+</body>
+</html>

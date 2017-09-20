@@ -44,26 +44,31 @@ class Root extends Component {
 			<Provider store={store}>
 				<Router history={history}>
 					<Route 
-						path={`/${window.canvasId}(/:checksum)`}
+						// path={`/${window.canvasId}(/:checksum)`}
+						path={`/photo_contest(/:checksum)`}
 						onEnter={(nextState, replace, next) => getStaticContentWithIntroRedirect(nextState, replace, next, dispatch)}
 						component={Intro} />
 					<Route 
-						path={`/${window.canvasId}(/:checksum)/photos`}
+						// path={`/${window.canvasId}(/:checksum)/photos`}
+						path={`/photo_contest(/:checksum)/photos`}
 						onEnter={(nextState, replace, next) => getPhotos(nextState, replace, next, dispatch)}
 						component={Index} />
 					<Route 
-						path={`/${window.canvasId}/:checksum/upload`} 
+						// path={`/${window.canvasId}/:checksum/upload`} 
+						path={`/photo_contest/:checksum/upload`} 
 						onEnter={requireAuth}
 						component={Upload} />
 					<Route 
-						path={`/${window.canvasId}/:checksum/login`} 
+						pathpath={`/photo_contest/:checksum/login`} 
 						component={Login}/>
 					<Route 
-						path={`/${window.canvasId}/:checksum/logout`}
+						// path={`/${window.canvasId}/:checksum/logout`}
+						path={`/photo_contest/:checksum/logout`}
 						onEnter={(nextState, replace, next) => logout(nextState, replace, next, dispatch)}
 						component={() => (<div></div>)} />
 					<Route 
-						path={`/${window.canvasId}/:checksum/:photoId`}
+						// path={`/${window.canvasId}/:checksum/:photoId`}
+						path={`/photo_contest/:checksum/:photoId`}
 						onEnter={(nextState, replace, next) => getPhotosWithoutRedirects(nextState, replace, next, dispatch)}
 						component={SinglePhoto} />
 				</Router>

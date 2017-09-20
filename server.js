@@ -26,24 +26,6 @@ app.use(helmet.hsts({
 	force: true,
 }))
 
-// Enable GZIP compression on all requests
-app.use(compression())
-
-// Minify HTML to earn some points with google
-app.use(minifyHTML({
-	override:      true,
-	exception_url: false,
-	htmlMinifier: {
-		removeComments:            true,
-		collapseWhitespace:        true,
-		collapseBooleanAttributes: true,
-		removeAttributeQuotes:     true,
-		removeEmptyAttributes:     true,
-		minifyCSS:                  true,
-		minifyJS:                  true,
-	}
-}));
-
 const isDeveloping = process.env.NODE_ENV !== 'production'
 
 // Hot Module Reloading
@@ -61,6 +43,23 @@ if (isDeveloping) {
 	app.use(require('webpack-hot-middleware')(compiler))
 }
 else {
+	// Enable GZIP compression on all requests
+	app.use(compression())
+
+	// Minify HTML to earn some points with google
+	app.use(minifyHTML({
+		override:      true,
+		exception_url: false,
+		htmlMinifier: {
+			removeComments:            true,
+			collapseWhitespace:        true,
+			collapseBooleanAttributes: true,
+			removeAttributeQuotes:     true,
+			removeEmptyAttributes:     true,
+			minifyCSS:                  true,
+			minifyJS:                  true,
+		}
+	}));
 	app.use('/static', cors(), express.static(__dirname + '/dist', {maxAge: "30d"}))
 }
 
@@ -115,10 +114,12 @@ app.use(vhost('pipelead.*', pipeleadRoutes))
 var index = require('./public-routes/index')
 var campaign = require('./public-routes/campaign')
 var dashboard = require('./public-routes/dashboard')
+var canvasGateway = require('./public-routes/canvasGateway')
 var leadgen = require('./public-routes/leadgen')
 app.get('/d*', dashboard)
 app.get('/leadgen*', leadgen)
 app.get('/campaign*', campaign)
+app.get('/gateway*', canvasGateway)
 app.get('/*', index)
 
 // 

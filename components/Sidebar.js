@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Link, IndexLink } from 'react-router'
 
-const ExternalLinksMenu = ({ checksum, fbPageIdentifier, fbAppId, fbAppCanvasId }) => (
+const ExternalLinksMenu = ({ checksum, appType, fbPageIdentifier, fbAppId, fbAppCanvasId }) => (
 	<div>
 		<ul className="list-unstyled">
 			{fbPageIdentifier && fbAppId ? 
@@ -18,7 +18,8 @@ const ExternalLinksMenu = ({ checksum, fbPageIdentifier, fbAppId, fbAppCanvasId 
 			}
 			<li>
 				<a 
-				href={`/${fbAppCanvasId}/${checksum}`}
+				// href={`/${fbAppCanvasId}/${checksum}`}
+				href={`/${appType}/${checksum}`}
 				target="_blank" rel="noopener"
 				className="text-success">
 					Go to app <small><span className="glyphicon glyphicon-share"></span></small>
@@ -35,6 +36,7 @@ const Sidebar = ({ installed, checksum, type, children, menu, facebookPageIdenti
 			checksum={checksum}
 			fbPageIdentifier={facebookPageIdentifier}
 			fbAppId={fbAppId} 
+			appType={type} 
 			fbAppCanvasId={fbAppCanvasId} /> : null}
 		<ul className="list-unstyled">
 			<li><IndexLink to={`/d/apps/${type}/${checksum}`} activeClassName="active">Dashboard</IndexLink></li>

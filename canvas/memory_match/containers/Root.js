@@ -30,7 +30,8 @@ class Root extends Component {
 			<Provider store={store}>
 				<Router history={history}>
 					<Route 
-						path={`/${window.canvasId}(/:checksum)`} 
+						// path={`/${window.canvasId}(/:checksum)`} 
+						path={`/memory_match(/:checksum)`} 
 						// 
 						// The Intro view downloads only the static assets (images and texts) necessary to show the app
 						// regardless of the visitor being identified or not.
@@ -39,21 +40,25 @@ class Root extends Component {
 						onEnter={(nextState, replace, next) => getStaticContent(nextState, replace, next, dispatch)}
 						component={Intro} />
 					<Route 
-						path={`/${window.canvasId}(/:checksum)/game`}
+						// path={`/${window.canvasId}(/:checksum)/game`}
+						path={`/memory_match(/:checksum)/game`}
 						onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
 						component={Index} />
 					<Route 
-						path={`/${window.canvasId}(/:checksum)/thanks`}
+						// path={`/${window.canvasId}(/:checksum)/thanks`}
+						path={`/memory_match(/:checksum)/thanks`}
 						onEnter={(nextState, replace, next) => getStaticContent(nextState, replace, next, dispatch)}
 						// onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
 						component={Thanks} />
 					<Route 
-						path={`/${window.canvasId}(/:checksum)/already-played`}
+						// path={`/${window.canvasId}(/:checksum)/already-played`}
+						path={`/memory_match(/:checksum)/already-played`}
 						onEnter={(nextState, replace, next) => getStaticContent(nextState, replace, next, dispatch)}
 						// onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
 						component={AlreadyPlayed} />
 					<Route 
-						path={`/${window.canvasId}/:checksum/login`} 
+						// path={`/${window.canvasId}/:checksum/login`} 
+						path={`/memory_match/:checksum/login`} 
 						component={Login}/>
 				</Router>
 			</Provider>

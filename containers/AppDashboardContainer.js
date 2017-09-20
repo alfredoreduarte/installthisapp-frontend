@@ -62,11 +62,11 @@ const AppDashboardContainer = ({
 						display: 'flex',
 						justifyContent: 'space-between',
 					}}
-					text={`https://${window.location.host}/${fbAppCanvasId}/${currentApp.checksum}`}
+					text={`https://${window.location.host}/gateway/${currentApp.checksum}`}
 					onCopy={() => onShareLinkCopy()}
 					>
 					<span>
-						{`https://${window.location.host}/${fbAppCanvasId}/${currentApp.checksum}`}
+						{`https://${window.location.host}/gateway/${currentApp.checksum}`}
 						<span style={{
 							display: 'inline-block',
 							padding: '4px 10px 0px',
@@ -84,10 +84,10 @@ const AppDashboardContainer = ({
 				<br/>
 			</div>
 			<div className="col-md-3 col-md-offset-3">
-				<FacebookShareButton className="btn btn-fb btn-block" url={`https://${window.location.host}/${fbAppCanvasId}/${currentApp.checksum}`}>Share on Facebook</FacebookShareButton>
+				<FacebookShareButton className="btn btn-fb btn-block" url={`https://${window.location.host}/gateway/${currentApp.checksum}`}>Share on Facebook</FacebookShareButton>
 			</div>
 			<div className="col-md-3">
-				<TwitterShareButton className="btn btn-tw btn-block" url={`https://${window.location.host}/${fbAppCanvasId}/${currentApp.checksum}`}>Share on Twitter</TwitterShareButton>
+				<TwitterShareButton className="btn btn-tw btn-block" url={`https://${window.location.host}/gateway/${currentApp.checksum}`}>Share on Twitter</TwitterShareButton>
 			</div>
 		</Modal>
 		<AppNavBar showLeadgen={true} />

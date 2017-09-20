@@ -28,7 +28,8 @@ class Root extends Component {
 			<Provider store={store}>
 				<Router history={history}>
 					<Route 
-						path={`/${window.canvasId}(/:checksum)`} 
+						// path={`/${window.canvasId}(/:checksum)`} 
+						path={`/catalog(/:checksum)`} 
 						// 
 						// The Intro view downloads only the static assets (images and texts) necessary to show the app
 						// regardless of the visitor being identified or not.
@@ -37,28 +38,32 @@ class Root extends Component {
 						onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
 						component={Index} />
 					<Route 
-						path={`/${window.canvasId}(/:checksum)/categories`}
+						// path={`/${window.canvasId}(/:checksum)/categories`}
+						path={`/catalog(/:checksum)/categories`}
 						// 
 						// 
 						// 
 						onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
 						component={Categories} />
 					<Route 
-						path={`/${window.canvasId}(/:checksum)/categories/:categorySlug`}
+						// path={`/${window.canvasId}(/:checksum)/categories/:categorySlug`}
+						path={`/catalog(/:checksum)/categories/:categorySlug`}
 						// 
 						// 
 						// 
 						onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
 						component={Index} />
 					<Route 
-						path={`/${window.canvasId}(/:checksum)/:productSlug`}
+						// path={`/${window.canvasId}(/:checksum)/:productSlug`}
+						path={`/catalog(/:checksum)/:productSlug`}
 						// 
 						// 
 						// 
 						onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
 						component={SingleProduct} />
 					<Route 
-						path={`/${window.canvasId}/:checksum/login`} 
+						// path={`/${window.canvasId}/:checksum/login`} 
+						path={`/catalog/:checksum/login`} 
 						component={Login}/>
 				</Router>
 			</Provider>

@@ -36,30 +36,35 @@ class Root extends Component {
 			<Provider store={store}>
 				<Router history={history}>
 					<Route 
-						path={`/${window.canvasId}(/:checksum)`} 
+						// path={`/${window.canvasId}(/:checksum)`} 
+						path={`/memory_match(/:checksum)`} 
 						// onEnter={requireAuth}
 						// onEnter={(nextState, replace, next) => getData(nextState, replace, next, dispatch)}
 						onEnter={(nextState, replace, next) => getStaticContentWithIntroRedirect(nextState, replace, next, dispatch)}
 						component={Intro} />
 					<Route 
-						path={`/${window.canvasId}(/:checksum)/questions`} 
+						// path={`/${window.canvasId}(/:checksum)/questions`} 
+						path={`/memory_match(/:checksum)/questions`} 
 						onEnter={(nextState, replace, next) => startTimer(nextState, replace, next, dispatch)}
 						// onEnter={(nextState, replace, next) => requireAuth(nextState, replace, next, dispatch)}
 						// onEnter={(nextState, replace, next) => getData(nextState, replace, next, dispatch)}
 						component={Index} />
 					<Route 
-						path={`/${window.canvasId}(/:checksum)/thanks`}
+						// path={`/${window.canvasId}(/:checksum)/thanks`}
+						path={`/memory_match(/:checksum)/thanks`}
 						// onEnter={(nextState, replace, next) => getData(nextState, replace, next, dispatch)}
 						// onEnter={(nextState, replace, next) => getStaticContentIfItDoesntExist(nextState, replace, next, dispatch)}
 						onEnter={(nextState, replace, next) => getStaticContent(nextState, replace, next, dispatch)}
 						component={Thanks} />
 					<Route 
-						path={`/${window.canvasId}(/:checksum)/already-played`}
+						// path={`/${window.canvasId}(/:checksum)/already-played`}
+						path={`/memory_match(/:checksum)/already-played`}
 						// onEnter={(nextState, replace, next) => getData(nextState, replace, next, dispatch)}
 						onEnter={(nextState, replace, next) => getStaticContent(nextState, replace, next, dispatch)}
 						component={AlreadyPlayed} />
 					<Route 
-						path={`/${window.canvasId}/:checksum/login`} 
+						// path={`/${window.canvasId}/:checksum/login`} 
+						path={`/memory_match/:checksum/login`} 
 						component={Login}/>
 				</Router>
 			</Provider>
