@@ -58,14 +58,14 @@ export const loginCallback = () => {
 	return dispatch => {
 		return dispatch(fetchEntities()).then(() => dispatch(fetchImages())).then(() => dispatch(fetchMessages()))
 		// return dispatch(fetchEntities()).then(() => dispatch(fetchMessages())).then(() => {
-		// 	return dispatch(push(`/${window.canvasId}/${window.checksum}`))
+		// 	return dispatch(push(`/photo_contest/${window.checksum}`))
 		// })
 	}
 }
 
 export const fetchEntities = () => {
 	return (dispatch, getState) => {
-		const { checksum, canvasId } = getState().applicationData
+		const { checksum } = getState().applicationData
 		return getFromApi(`${checksum}/entities.json`).then( json => {
 			const payload = normalize(json.payload, schema.payload)
 			const settings = json.settings
@@ -77,7 +77,7 @@ export const fetchEntities = () => {
 
 export const fetchMessages = () => {
 	return (dispatch, getState) => {
-		const { checksum, canvasId } = getState().applicationData
+		const { checksum } = getState().applicationData
 		return getExternal(window.messagesUrl).then( json => {
 			dispatch(receiveMessages(json))
 			return Promise.resolve()

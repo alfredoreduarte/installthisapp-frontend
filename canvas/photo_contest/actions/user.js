@@ -20,10 +20,10 @@ export const digestFacebookResponse = (response, redirectUri) => {
 		writeToApiWithoutAuth(`users.json`, body, response => {
 			window.canvasApiKey = response.apiKey
 			window.loggedUserId = response.id
-			Cookies.set('apiKey', response.apiKey, { expires: 7, path: `/${canvasId}/${checksum}` })
-			Cookies.set('loggedUserId', response.id, { expires: 7, path: `/${canvasId}/${checksum}` })
-			Cookies.set('loggedUserIdentifier', response.identifier, { expires: 7, path: `/${canvasId}/${checksum}` })
-			Cookies.set('loggedUserName', response.name, { expires: 7, path: `/${canvasId}/${checksum}` })
+			Cookies.set('apiKey', response.apiKey, { expires: 7, path: `/photo_contest/${checksum}` })
+			Cookies.set('loggedUserId', response.id, { expires: 7, path: `/photo_contest/${checksum}` })
+			Cookies.set('loggedUserIdentifier', response.identifier, { expires: 7, path: `/photo_contest/${checksum}` })
+			Cookies.set('loggedUserName', response.name, { expires: 7, path: `/photo_contest/${checksum}` })
 			dispatch(loginCallback()).then(() => {
 				dispatch(logUserIn(response))
 				const ownPhotos = photosByUploaderId(getState())
@@ -31,7 +31,7 @@ export const digestFacebookResponse = (response, redirectUri) => {
 					dispatch(push(redirectUri))
 				}
 				else {
-					dispatch(push(`/${canvasId}/${checksum}/photos`))
+					dispatch(push(`/photo_contest/${checksum}/photos`))
 				}
 			})
 		})
