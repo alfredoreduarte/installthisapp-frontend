@@ -8,6 +8,7 @@ import FbPhoto from 'components/FbPhoto'
 
 const AppTitleBarButtons = ({ 
 	status,
+	applicationType,
 	scheduled = false,
 	handleInstall,
 	handleUninstall,
@@ -17,14 +18,14 @@ const AppTitleBarButtons = ({
 		{status == 'installed' ?
 			<div>
 				<button className="btn btn-lg btn-primary btn-outline" style={{marginRight: '20px'}} onClick={handleShare}>Share</button>
-				<button onClick={() => handleUninstall()} className="btn btn-lg btn-gray btn-outline">Unpublish</button>
+				<button onClick={() => handleUninstall()} className={`btn btn-lg btn-gray btn-outline ${applicationType == 'top_fans' ? 'hide' : ' '}`}>Unpublish</button>
 			</div>
 		:	
 			""
 		}
 
 		{status == 'uninstalled' || status == 'ready' ?
-			<button onClick={() => handleInstall()} className="btn btn-lg btn-success">Publish</button>
+			<button onClick={() => handleInstall()} className={`btn btn-lg btn-success ${applicationType == 'top_fans' ? 'hide' : ' '}`}>Publish</button>
 		:	
 			""
 		}
@@ -84,8 +85,8 @@ const AppTitleBar = ({
 						</ul>
 					</div>
 				</div>
-				<div className={`col-md-6 text-right ${applicationType == 'top_fans' ? 'hide' : ' '}`}>
-					<AppTitleBarButtons status={status} handleInstall={handleInstall} handleUninstall={handleUninstall} handleShare={handleShare} />
+				<div className={`col-md-6 text-right`}>
+					<AppTitleBarButtons status={status} applicationType={applicationType} handleInstall={handleInstall} handleUninstall={handleUninstall} handleShare={handleShare} />
 				</div>
 			</div>
 		</div>
