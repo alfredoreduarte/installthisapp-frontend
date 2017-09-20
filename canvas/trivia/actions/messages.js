@@ -7,7 +7,7 @@ export const receiveMessages = payload => ({
 
 export const fetchMessages = () => {
 	return (dispatch, getState) => {
-		const { checksum, canvasId } = getState().applicationData
+		const { checksum } = getState().applicationData
 		return getExternal(window.messagesUrl).then( json => {
 			return dispatch(receiveMessages(json))
 			// return Promise.resolve()

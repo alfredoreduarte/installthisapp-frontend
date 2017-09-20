@@ -8,14 +8,14 @@ export const receiveImages = payload => ({
 
 export const fetchImages = redirectIfNoIntro => {
 	return (dispatch, getState) => {
-		const { checksum, canvasId } = getState().applicationData
+		const { checksum } = getState().applicationData
 		return getExternal(window.imagesUrl).then( json => {
 			if (!json.intro || json.intro == "https://s3-us-west-2.amazonaws.com/installthisapp/intro.jpg") {
 				if (redirectIfNoIntro) {
-					dispatch(push(`/${canvasId}/${checksum}${redirectIfNoIntro}`))
+					dispatch(push(`/trivia/${checksum}${redirectIfNoIntro}`))
 				}
 				else {
-					dispatch(push(`/${canvasId}/${checksum}/login`))	
+					dispatch(push(`/trivia/${checksum}/login`))	
 				}
 			}
 			return dispatch(receiveImages(json))

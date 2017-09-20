@@ -19,8 +19,8 @@ export const digestFacebookResponse = response => {
 		writeToApiWithoutAuth(`users.json`, body).then( response => {
 			window.canvasApiKey = response.apiKey
 			window.loggedUserId = response.id
-			Cookies.set('apiKey', response.apiKey, { expires: 7, path: `/${canvasId}/${checksum}` })
-			Cookies.set('loggedUserId', response.id, { expires: 7, path: `/${canvasId}/${checksum}` })
+			Cookies.set('apiKey', response.apiKey, { expires: 7, path: `/trivia/${checksum}` })
+			Cookies.set('loggedUserId', response.id, { expires: 7, path: `/trivia/${checksum}` })
 			return dispatch(loginCallback())
 		})
 	}
@@ -35,11 +35,11 @@ export const loginCallback = () => {
 			const { checksum, canvasId } = state.applicationData
 			if (!hasAnsweredAllQuestions(state)) {
 				console.log('hay preguntas disponibles')
-				dispatch(push(`/${canvasId}/${checksum}/questions`))
+				dispatch(push(`/trivia/${checksum}/questions`))
 			}
 			else{
 				console.log('NO hay preguntas disponibles')
-				dispatch(push(`/${canvasId}/${checksum}/already-played`))
+				dispatch(push(`/trivia/${checksum}/already-played`))
 			}
 		})
 // return dispatch => 	dispatch(fetchSettings())

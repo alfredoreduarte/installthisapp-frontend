@@ -7,7 +7,7 @@ export const receiveSettings = payload => ({
 
 export const fetchSettings = checksum => {
 	return (dispatch, getState) =>{
-		const { checksum, canvasId } = getState().applicationData
+		const { checksum } = getState().applicationData
 		return getFromApi(`${checksum}/settings.json`).then( response => {
 			dispatch(receiveSettings(response))
 		})
