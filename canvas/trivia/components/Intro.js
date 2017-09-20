@@ -8,13 +8,9 @@ import Credits from 'canvas/trivia/components/Credits'
 const Intro = ({ intro }) => (
 	<div className="col-sm-12">
 		<div className="row">
-			{window.canvasId ?
-				<Link to={`/${window.canvasId}/${window.checksum}/login`}>
-					<HeaderImage source={intro} />
-				</Link>
-			:
+			<Link to={`/trivia/${window.checksum}/login`}>
 				<HeaderImage source={intro} />
-			}
+			</Link>
 		</div>
 		<Credits />
 	</div>

@@ -8,13 +8,9 @@ import Credits from 'canvas/top_fans/components/Credits'
 const Intro = ({ intro }) => (
 	<div className="col-sm-12">
 		<div className="row">
-			{window.canvasId ?
-				<Link to={`/${window.canvasId}/${window.checksum}/scores`}>
-					<HeaderImage source={intro} />
-				</Link>
-			:
+			<Link to={`/top_fans/${window.checksum}/scores`}>
 				<HeaderImage source={intro} />
-			}
+			</Link>
 		</div>
 		<Credits />
 	</div>

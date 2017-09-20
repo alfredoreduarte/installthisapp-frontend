@@ -68,11 +68,11 @@ const Index = ({
 					<div>
 						<div className="visible-xs visible-sm hidden-md hidden-lg text-center">
 							<p className="ita-cali-please-log-in">{anonUserLoginPrompt}</p>
-							<Link to={`/${window.canvasId}/${window.checksum}/login`} className="btn btn-default ita-cali-login-button">{signInLabel}</Link>
+							<Link to={`/top_fans/${window.checksum}/login`} className="btn btn-default ita-cali-login-button">{signInLabel}</Link>
 						</div>
 						<div className="hidden-xs hidden-sm visible-md visible-lg">
 							<p className="ita-cali-please-log-in">{anonUserLoginPrompt}</p>
-							<Link to={`/${window.canvasId}/${window.checksum}/login`} className="btn btn-default ita-cali-login-button">{signInLabel}</Link>
+							<Link to={`/top_fans/${window.checksum}/login`} className="btn btn-default ita-cali-login-button">{signInLabel}</Link>
 						</div>
 					</div>
 				}

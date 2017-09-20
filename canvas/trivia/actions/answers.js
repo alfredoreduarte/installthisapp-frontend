@@ -46,7 +46,8 @@ const prePostAnswers = () => {
 			dispatch(postAnswers())
 				.then(success => {
 					dispatch(toggleActivityIndicator())
-					dispatch(push(`/${window.canvasId}/${window.checksum}/thanks`))
+					// dispatch(push(`/${window.canvasId}/${window.checksum}/thanks`))
+					dispatch(push(`/trivia/${window.checksum}/thanks`))
 				}, failure => {
 					console.log('FAILURE', failure)
 				}

@@ -26,8 +26,10 @@ const mapStateToProps = (state, props) => {
 			return v.user.id == state.loggedUser.id && v.photoId == photo.id
 		}).length > 0,
 		photo,
-		uploadUrl: `/${window.canvasId}/${window.checksum}/upload`,
-		backUrl: `/${window.canvasId}/${window.checksum}/photos`,
+		// uploadUrl: `/${window.canvasId}/${window.checksum}/upload`,
+		uploadUrl: `/photo_contest/${window.checksum}/upload`,
+		// backUrl: `/${window.canvasId}/${window.checksum}/photos`,
+		backUrl: `/photo_contest/${window.checksum}/photos`,
 		loading: false,
 	}
 }

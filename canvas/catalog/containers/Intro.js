@@ -11,7 +11,8 @@ class Intro extends Component {
 const mapStateToProps = state => {
 	return {
 		image: state.images.intro,
-		linkUrl: `/${window.canvasId}/${window.checksum}/login`
+		// linkUrl: `/${window.canvasId}/${window.checksum}/login`
+		linkUrl: `/catalog/${window.checksum}/login`
 	}
 }
 

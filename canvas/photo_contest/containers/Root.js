@@ -16,7 +16,8 @@ const requireAuth = (nextState, replace) => {
 	}
 	else{
 		replace({
-			pathname: `/${window.canvasId}/${window.checksum}/login`,
+			// pathname: `/${window.canvasId}/${window.checksum}/login`,
+			pathname: `/photo_contest/${window.checksum}/login`,
 			state: { nextPathname: nextState.location.pathname },
 		})
 		// next()
@@ -24,13 +25,13 @@ const requireAuth = (nextState, replace) => {
 }
 
 const logout = (nextState, replace, next) => {
-	Cookies.remove('apiKey', { path: `/${window.canvasId}/${window.checksum}` })
-	Cookies.remove('api_key', { path: `/${window.canvasId}/${window.checksum}` })
-	Cookies.remove('loggedUserId', { path: `/${window.canvasId}/${window.checksum}` })
-	Cookies.remove('loggedUserIdentifier', { path: `/${window.canvasId}/${window.checksum}` })
-	Cookies.remove('loggedUserName', { path: `/${window.canvasId}/${window.checksum}` })
+	Cookies.remove('apiKey', { path: `/photo_contest/${window.checksum}` })
+	Cookies.remove('api_key', { path: `/photo_contest/${window.checksum}` })
+	Cookies.remove('loggedUserId', { path: `/photo_contest/${window.checksum}` })
+	Cookies.remove('loggedUserIdentifier', { path: `/photo_contest/${window.checksum}` })
+	Cookies.remove('loggedUserName', { path: `/photo_contest/${window.checksum}` })
 	replace({
-		pathname: `/${window.canvasId}/${window.checksum}`,
+		pathname: `/photo_contest/${window.checksum}`,
 	})
 	next()
 }

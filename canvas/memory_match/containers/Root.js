@@ -17,7 +17,8 @@ const requireAuth = (nextState, replace, next, dispatch) => {
 	}
 	else{
 		replace({
-			pathname: `/${window.canvasId}/${window.checksum}/login`,
+			// pathname: `/${window.canvasId}/${window.checksum}/login`,
+			pathname: `/memory_match/${window.checksum}/login`,
 		})
 		next()
 	}

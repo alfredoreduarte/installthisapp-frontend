@@ -23,7 +23,8 @@ const requireAuth = (nextState, replace, next, dispatch) => {
 	}
 	else{
 		replace({
-			pathname: `/${window.canvasId}/${window.checksum}/login`,
+			// pathname: `/${window.canvasId}/${window.checksum}/login`,
+			pathname: `/trivia/${window.checksum}/login`,
 		})
 		next()
 	}
@@ -37,34 +38,34 @@ class Root extends Component {
 				<Router history={history}>
 					<Route 
 						// path={`/${window.canvasId}(/:checksum)`} 
-						path={`/memory_match(/:checksum)`} 
+						path={`/trivia(/:checksum)`} 
 						// onEnter={requireAuth}
 						// onEnter={(nextState, replace, next) => getData(nextState, replace, next, dispatch)}
 						onEnter={(nextState, replace, next) => getStaticContentWithIntroRedirect(nextState, replace, next, dispatch)}
 						component={Intro} />
 					<Route 
 						// path={`/${window.canvasId}(/:checksum)/questions`} 
-						path={`/memory_match(/:checksum)/questions`} 
+						path={`/trivia(/:checksum)/questions`} 
 						onEnter={(nextState, replace, next) => startTimer(nextState, replace, next, dispatch)}
 						// onEnter={(nextState, replace, next) => requireAuth(nextState, replace, next, dispatch)}
 						// onEnter={(nextState, replace, next) => getData(nextState, replace, next, dispatch)}
 						component={Index} />
 					<Route 
 						// path={`/${window.canvasId}(/:checksum)/thanks`}
-						path={`/memory_match(/:checksum)/thanks`}
+						path={`/trivia(/:checksum)/thanks`}
 						// onEnter={(nextState, replace, next) => getData(nextState, replace, next, dispatch)}
 						// onEnter={(nextState, replace, next) => getStaticContentIfItDoesntExist(nextState, replace, next, dispatch)}
 						onEnter={(nextState, replace, next) => getStaticContent(nextState, replace, next, dispatch)}
 						component={Thanks} />
 					<Route 
 						// path={`/${window.canvasId}(/:checksum)/already-played`}
-						path={`/memory_match(/:checksum)/already-played`}
+						path={`/trivia(/:checksum)/already-played`}
 						// onEnter={(nextState, replace, next) => getData(nextState, replace, next, dispatch)}
 						onEnter={(nextState, replace, next) => getStaticContent(nextState, replace, next, dispatch)}
 						component={AlreadyPlayed} />
 					<Route 
 						// path={`/${window.canvasId}/:checksum/login`} 
-						path={`/memory_match/:checksum/login`} 
+						path={`/trivia/:checksum/login`} 
 						component={Login}/>
 				</Router>
 			</Provider>

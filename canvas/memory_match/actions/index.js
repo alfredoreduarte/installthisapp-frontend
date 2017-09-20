@@ -55,7 +55,8 @@ export const postResults = () => {
 			}
 		}).then(response => {
 			if (response.success) {
-				return dispatch(push(`/${window.canvasId}/${window.checksum}/thanks`))
+				// return dispatch(push(`/${window.canvasId}/${window.checksum}/thanks`))
+				return dispatch(push(`/memory_match/${window.checksum}/thanks`))
 			}
 			else{
 				console.log(response)

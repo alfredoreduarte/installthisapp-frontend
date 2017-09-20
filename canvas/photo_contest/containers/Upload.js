@@ -22,7 +22,8 @@ const mapStateToProps = state => {
 		userIdentifier: state.loggedUser.identifier,
 		busy: state.activityIndicators.photoUpload,
 		loading: false,
-		backUrl: `/${window.canvasId}/${window.checksum}/photos`,
+		// backUrl: `/${window.canvasId}/${window.checksum}/photos`,
+		backUrl: `/photo_contest/${window.checksum}/photos`,
 	}
 }
 
@@ -39,7 +40,7 @@ const mapDispatchToProps = dispatch => {
 				formData.append('photo[caption]', document.querySelector("[name='photo[caption]']").value)
 				formData.append('photo[attachment_url]', fileUrl)
 				dispatch(postPhoto(formData)).then( response => {
-					dispatch(fetchEntities()).then(() => dispatch(push(`/${window.canvasId}/${window.checksum}/${response.id}`)))
+					dispatch(fetchEntities()).then(() => dispatch(push(`/photo_contest/${window.checksum}/${response.id}`)))
 				})
 			})
 		}

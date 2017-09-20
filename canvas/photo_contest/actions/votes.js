@@ -32,8 +32,10 @@ export const postVote = id => {
 		}
 		else {
 			return dispatch(push({
-				pathname: `/${window.canvasId}/${window.checksum}/login`,
-				state: { nextPathname: `/${window.canvasId}/${window.checksum}/${id}` },
+				// pathname: `/${window.canvasId}/${window.checksum}/login`,
+				pathname: `/photo_contest/${window.checksum}/login`,
+				// state: { nextPathname: `/${window.canvasId}/${window.checksum}/${id}` },
+				state: { nextPathname: `/photo_contest/${window.checksum}/${id}` },
 			}))
 			// return Promise.resolve({})
 		}

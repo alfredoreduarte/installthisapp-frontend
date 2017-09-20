@@ -28,8 +28,10 @@ const mapStateToProps = state => {
 		sort: state.sort,
 		searchQuery: state.search,
 		photos: photosBySearchQuery(state),
-		uploadUrl: `/${window.canvasId}/${window.checksum}/upload`,
-		singlePhotoUrl: `/${window.canvasId}/${window.checksum}`,
+		// uploadUrl: `/${window.canvasId}/${window.checksum}/upload`,
+		uploadUrl: `/photo_contest/${window.checksum}/upload`,
+		// singlePhotoUrl: `/${window.canvasId}/${window.checksum}`,
+		singlePhotoUrl: `/photo_contest/${window.checksum}`,
 		loading: false,
 	}
 }

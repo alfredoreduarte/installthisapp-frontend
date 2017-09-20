@@ -15,7 +15,8 @@ const requireAuth = (nextState, replace, next, dispatch) => {
 	}
 	else{
 		replace({
-			pathname: `/${window.canvasId}/${window.checksum}/login`,
+			// pathname: `/${window.canvasId}/${window.checksum}/login`,
+			pathname: `/example/${window.checksum}/login`,
 		})
 		next()
 	}
@@ -28,7 +29,8 @@ class Root extends Component {
 			<Provider store={store}>
 				<Router history={history}>
 					<Route 
-						path={`/${window.canvasId}(/:checksum)`} 
+						// path={`/${window.canvasId}(/:checksum)`} 
+						path={`/example(/:checksum)`} 
 						// 
 						// The Intro view downloads only the static assets (images and texts) necessary to show the app
 						// regardless of the visitor being identified or not.
@@ -37,14 +39,16 @@ class Root extends Component {
 						onEnter={(nextState, replace, next) => getStaticContent(nextState, replace, next, dispatch)}
 						component={Intro} />
 					<Route 
-						path={`/${window.canvasId}(/:checksum)/entries`}
+						// path={`/${window.canvasId}(/:checksum)/entries`}
+						path={`/example(/:checksum)/entries`}
 						// 
 						// 
 						// 
 						onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
 						component={Index} />
 					<Route 
-						path={`/${window.canvasId}/:checksum/login`} 
+						// path={`/${window.canvasId}/:checksum/login`} 
+						path={`/example/:checksum/login`} 
 						component={Login}/>
 				</Router>
 			</Provider>
