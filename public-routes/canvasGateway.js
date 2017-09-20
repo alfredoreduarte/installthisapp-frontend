@@ -12,7 +12,7 @@ router.get('/gateway/:checksum', function(req, res) {
 	.then(function(response){ return response.json() })
 	.then(function(json){
 		console.log(json)
-		const hasFacebookTab = json.has_facebook_tab
+		const hasFacebookTab = json.has_fb_tab
 		const facebookTabUrl = json.facebook_tab_url
 		const applicationType = json.application_type
 		res.render('gateway', 
