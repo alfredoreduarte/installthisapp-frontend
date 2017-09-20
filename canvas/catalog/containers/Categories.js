@@ -16,7 +16,7 @@ const Categories = ({
 const mapStateToProps = (state, props) => ({
 	messages: {...state.messages},
 	images: {...state.images},
-	homeUrl: `/${state.applicationData.canvasId}/${state.applicationData.checksum}`,
+	homeUrl: `/catalog/${state.applicationData.checksum}`,
 	categories: getAllCategories(state),
 })
 

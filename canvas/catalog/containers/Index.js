@@ -46,7 +46,7 @@ const mapStateToProps = (state, props) => ({
 	images: {...state.images},
 	currency: state.settings.currency,
 	products: props.params.categorySlug ? getAllProductsByCategory(state, props) : getAllProducts(state),
-	homeUrl: `/${state.applicationData.canvasId}/${state.applicationData.checksum}`,
+	homeUrl: `/catalog/${state.applicationData.checksum}`,
 	productListDisplayMode: state.ui.productListDisplayMode,
 	category: props.params.categorySlug ? getCategoryByUrlSlug(state, props) : null,
 	categories: getAllCategories(state),

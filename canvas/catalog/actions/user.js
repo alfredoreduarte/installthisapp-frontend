@@ -19,12 +19,12 @@ export const digestFacebookResponse = (response, redirectUri) => {
 		writeToApiWithoutAuth(`users.json`, body, response => {
 			window.canvasApiKey = response.apiKey
 			window.loggedUserId = response.id
-			Cookies.set('apiKey', response.apiKey, { expires: 7, path: `/${canvasId}/${checksum}` })
-			Cookies.set('loggedUserId', response.id, { expires: 7, path: `/${canvasId}/${checksum}` })
-			Cookies.set('loggedUserIdentifier', response.identifier, { expires: 7, path: `/${canvasId}/${checksum}` })
-			Cookies.set('loggedUserName', response.name, { expires: 7, path: `/${canvasId}/${checksum}` })
+			Cookies.set('apiKey', response.apiKey, { expires: 7, path: `/catalog/${checksum}` })
+			Cookies.set('loggedUserId', response.id, { expires: 7, path: `/catalog/${checksum}` })
+			Cookies.set('loggedUserIdentifier', response.identifier, { expires: 7, path: `/catalog/${checksum}` })
+			Cookies.set('loggedUserName', response.name, { expires: 7, path: `/catalog/${checksum}` })
 			dispatch(loginCallback()).then(() => {
-				dispatch(logIn(response)).then(() => dispatch(push(`/${canvasId}/${checksum}/entries`)))				
+				dispatch(logIn(response)).then(() => dispatch(push(`/catalog/${checksum}/entries`)))				
 			})
 		})
 	}

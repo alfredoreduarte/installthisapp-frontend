@@ -84,7 +84,7 @@ const mapStateToProps = (state, props) => {
 		description: description,
 		price: price ? `${currency} ${price}` : null,
 		categories: getAllCategories(state),
-		homeUrl: `/${state.applicationData.canvasId}/${state.applicationData.checksum}`,
+		homeUrl: `/catalog/${state.applicationData.checksum}`,
 		showContactModal: state.ui.showContactModal,
 		// related
 		relatedProducts: _.take(getAllProducts(state), 3),
