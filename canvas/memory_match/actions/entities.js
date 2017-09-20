@@ -10,14 +10,14 @@ export const receiveEntities = entities => ({
 
 export const fetchEntities = () => {
 	return (dispatch, getState) => {
-		const { checksum, canvasId } = getState().applicationData
+		const { checksum } = getState().applicationData
 		return getFromApi(`${checksum}/entities_authenticated.json`, response => {
 			if (response.success) {
 				const normalized = normalize(response, schema.entities)
 				return dispatch(receiveEntities(normalized.entities))
 			}
 			else {
-				return dispatch(push(`/${canvasId}/${checksum}/already-played`))
+				return dispatch(push(`/memory_match/${checksum}/already-played`))
 			}
 		})
 	}

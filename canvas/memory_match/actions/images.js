@@ -13,13 +13,13 @@ export const receiveImages = payload => {
 
 export const fetchImages = () => {
 	return (dispatch, getState) => {
-		const { checksum, canvasId } = getState().applicationData
+		const { checksum } = getState().applicationData
 		return getExternal(window.imagesUrl).then( json => {
 			if (!json.intro || json.intro == "https://s3-us-west-2.amazonaws.com/installthisapp/intro.jpg") {
 				return dispatch(receiveImages(json))
 				// dispatch(receiveImages(json))
-				// return dispatch(push(`/${canvasId}/${checksum}/login`))
-				// return dispatch(receiveImages(json)).then(() => dispatch(push(`/${canvasId}/${checksum}/login`)))
+				// return dispatch(push(`/memory_match/${checksum}/login`))
+				// return dispatch(receiveImages(json)).then(() => dispatch(push(`/memory_match/${checksum}/login`)))
 			}
 			else {
 				return dispatch(receiveImages(json))
