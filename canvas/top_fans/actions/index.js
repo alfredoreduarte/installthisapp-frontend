@@ -25,11 +25,11 @@ export const receiveEntries = entities => ({
 
 export const fetchEntities = () => {
 	return (dispatch, getState) => {
-		const { checksum, canvasId } = getState().applicationData
+		const { checksum } = getState().applicationData
 		return getFromApi(`${checksum}/entries.json`, response => {
 			if (response.success) {
 				dispatch(receiveEntries(response))
-				// dispatch(push(`/${canvasId}/${checksum}`))
+				// dispatch(push(`/top_fans/${checksum}`))
 			}
 		})
 	}
@@ -42,7 +42,7 @@ export const receiveTopFansSettings = payload => ({
 
 export const fetchTopFansSettings = checksum => {
 	return (dispatch, getState) =>{
-		const { checksum, canvasId } = getState().applicationData
+		const { checksum } = getState().applicationData
 		return getFromApi(`${checksum}/settings.json`).then( response => {
 			dispatch(receiveTopFansSettings(response))
 		})
@@ -56,7 +56,7 @@ export const receiveMessages = payload => ({
 
 export const fetchMessages = () => {
 	return (dispatch, getState) => {
-		const { checksum, canvasId } = getState().applicationData
+		const { checksum } = getState().applicationData
 		return getExternal(window.messagesUrl).then( json => {
 			const defaultMessages = require('modules/top_fans/messages').default
 			const messages = { ...defaultMessages, ...json}
@@ -75,11 +75,11 @@ export const receiveImages = payload => ({
 
 export const fetchImages = () => {
 	return (dispatch, getState) => {
-		const { checksum, canvasId } = getState().applicationData
+		const { checksum } = getState().applicationData
 		return getExternal(window.imagesUrl).then( json => {
 			dispatch(receiveImages(json))
 			if (json.intro == null) {
-				dispatch(push(`/${canvasId}/${checksum}/scores`))
+				dispatch(push(`/top_fans/${checksum}/scores`))
 			}
 			return Promise.resolve()
 		})

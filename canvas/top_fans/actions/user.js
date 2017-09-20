@@ -13,11 +13,11 @@ export const digestFacebookResponse = response => {
 		return writeToApiWithoutAuth(`users.json`, body, response => {
 			window.canvasApiKey = response.apiKey
 			window.loggedUserId = response.id
-			Cookies.set('apiKey', response.apiKey, { expires: 7, path: `/${canvasId}/${checksum}` })
-			Cookies.set('loggedUserId', response.id, { expires: 7, path: `/${canvasId}/${checksum}` })
+			Cookies.set('apiKey', response.apiKey, { expires: 7, path: `/top_fans/${checksum}` })
+			Cookies.set('loggedUserId', response.id, { expires: 7, path: `/top_fans/${checksum}` })
 			return dispatch(loginCallback()).then(() => {
 				dispatch(getSingleUserScores()).then(() => {
-					dispatch(push(`/${canvasId}/${checksum}/scores`))
+					dispatch(push(`/top_fans/${checksum}/scores`))
 				})
 			})
 		})
@@ -26,7 +26,7 @@ export const digestFacebookResponse = response => {
 
 export const getSingleUserScores = () => {
 	return (dispatch, getState) => {
-		const { checksum, canvasId } = getState().applicationData
+		const { checksum } = getState().applicationData
 		return getFromApi(`${checksum}/single_user_scores.json`, response => {
 			if (response.success) {
 				dispatch({
