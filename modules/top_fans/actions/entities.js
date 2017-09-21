@@ -9,6 +9,28 @@ export const removeTopFansEntities = () => {
 	}
 }
 
+export const receiveTopFansDetails = (senderId, payload) => {
+	return {
+		type: 'TOP_FANS/RECEIVE_DETAILS',
+		senderId: senderId,
+		payload: payload,
+	}
+}
+
+export const fetchTopFansDetails = senderId => {
+	return (dispatch, getState) => {
+		const checksum = getCurrentAppByState(getState()).checksum
+		return getFromApi(`applications/${checksum}/detail_by_user_and_page.json?sender_id=${senderId}`)
+		.then( response => {
+			dispatch(receiveTopFansDetails(response.payload.user.senderId, {
+				name: response.payload.user.senderName,
+				likes: response.payload.likes,
+				comments: response.payload.comments,
+			}))
+		})
+	}
+}
+
 export const receiveTopFansEntities = (entities, applicationLog) => {
 	return {
 		type: 'TOP_FANS/RECEIVE_ENTITIES',
@@ -18,11 +40,6 @@ export const receiveTopFansEntities = (entities, applicationLog) => {
 		}
 	}
 }
-
-export const receiveTopFansSettings = payload => ({
-	type: 'TOP_FANS/RECEIVE_SETTINGS',
-	payload,
-})
 
 export const fetchTopFansEntities = checksum => {
 	return dispatch => 
@@ -46,6 +63,11 @@ export const pollTopFansEntities = checksum => {
 		}, 3500)
 	}
 }
+
+export const receiveTopFansSettings = payload => ({
+	type: 'TOP_FANS/RECEIVE_SETTINGS',
+	payload,
+})
 
 export const fetchTopFansSettings = checksum => {
 	return dispatch => 

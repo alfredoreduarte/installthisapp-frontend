@@ -3,6 +3,7 @@ import confirm from 'react-confirm2'
 import Select from 'react-select'
 import Modal from 'react-modal'
 import moment from 'moment'
+import { Link } from 'react-router'
 import { SingleDatePicker } from 'react-dates'
 import FaEyeSlash from 'react-icons/lib/fa/eye-slash'
 import { ButtonToolbar, Table, DropdownButton, MenuItem } from 'react-bootstrap'
@@ -21,6 +22,10 @@ import SearchForm from 'components/SearchForm'
 import User from 'components/User'
 
 const Scoreboard = ({
+	handleDetailsModalClose,
+	showDetailModal,
+	detailData,
+	checksum,
 	toggleResetModal,
 	isCurrentlyPolling,
 	showResetModal,
@@ -41,6 +46,7 @@ const Scoreboard = ({
 	handleUserSelectBatch,
 	handleSort,
 	addIgnoredUserIdentifier,
+	getDetailsForUser,
 }) => (
 	<div className="ita-table-view">
 		<Modal
@@ -66,6 +72,29 @@ const Scoreboard = ({
 			<div className="col-md-6">
 			</div>
 		</Modal>
+		{detailData ? 
+		<Modal
+			isOpen={showDetailModal ? true : false}
+			onAfterOpen={() => console.log('afteropen')}
+			// onRequestClose={toggleDetailModal}
+			contentLabel="Modal"
+		>
+			<a href="javascript:void(0)" onClick={handleDetailsModalClose}><small>← back</small></a>
+			<h2>{detailData.name}</h2>
+			<p><b>Likes</b></p>
+			<ul>
+				{detailData.likes.map(like => <li key={like.parentId + like.postId}>
+					<a target="_blank" href={`https://fb.com/${like.parentId}`}>Post</a> | 1 like
+				</li>)}
+			</ul>
+			<p><b>Comments</b></p>
+			<ul>
+				{detailData.comments.map(comment => <li key={comment.parentId + comment.postId}>
+					<a target="_blank" href={`https://fb.com/${comment.parentId}`}>Post</a> | 1 comment
+				</li>)}
+			</ul>
+		</Modal>
+		: null }
 		<div className="ita-table-toolbar">
 			<div className="row">
 				<div className="col-md-12">
@@ -206,6 +235,7 @@ const Scoreboard = ({
 							identifier={entry.senderId} 
 							small
 							 />
+						<Link to={`/d/apps/top_fans/${checksum}/scoreboard/${entry.senderId}`} onClick={() => getDetailsForUser(entry.senderId)}>Get details</Link>
 					</td>
 					<td>
 						{entry.likes}

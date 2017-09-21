@@ -9,6 +9,7 @@ const topFans = (state = {
 	log: {},
 	ui: ui(undefined, {}),
 	entries: {},
+	details: {},
 }, action) => {
 	switch (action.type) {
 		// case 'TOP_FANS/RECEIVE_SETTINGS':
@@ -37,6 +38,14 @@ const topFans = (state = {
 				...state, 
 				entries: action.response.entities, 
 				log: action.response.applicationLog
+			}
+		case 'TOP_FANS/RECEIVE_DETAILS':
+			return { 
+				...state,
+				details: {
+					...state.details,
+					[action.senderId]: action.payload,
+				}
 			}
 		default:
 			return state

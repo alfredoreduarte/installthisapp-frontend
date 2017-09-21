@@ -4,12 +4,20 @@ import Select from 'react-select'
 import Modal from 'react-modal'
 import moment from 'moment'
 import { connect } from 'react-redux'
+import { goBack } from 'react-router-redux'
 import { getCurrentUsersByKeyword } from 'selectors/users'
 import { getAllPages } from 'selectors/pages'
 import { getCurrentAppByState } from 'selectors/apps'
 import { selectItemOnTable, sortUsersBy } from 'actions/users'
 import { updateAppSettings } from 'actions/apps'
-import { fetchTopFansEntities, fetchTopFansSettings, cleanupTopFansEntities, resetTopFansEntities, pollTopFansEntities } from 'modules/top_fans/actions/entities'
+import { 
+	fetchTopFansEntities, 
+	fetchTopFansSettings, 
+	cleanupTopFansEntities, 
+	resetTopFansEntities, 
+	pollTopFansEntities,
+	fetchTopFansDetails
+} from 'modules/top_fans/actions/entities'
 import { getEntriesForPage } from 'modules/top_fans/selectors/entries'
 import { editAppSpecificSettings, addIgnoredUserIdentifier } from 'modules/top_fans/actions'
 import ScoreboardView from 'modules/top_fans/components/Scoreboard'
@@ -24,6 +32,7 @@ const mapStateToProps = (state, props) => {
 	const currentApp = getCurrentAppByState(state)
 	const tabInstalledInPage = getCurrentAppByState(state).page ? _.find(getAllPages(state), {'id': getCurrentAppByState(state).page}).name : null
 	return { 
+		checksum: currentApp.checksum,
 		isCurrentlyPolling: state.topFans.ui.isCurrentlyPolling,
 		showResetModal: state.topFans.ui.showResetModal,
 		// firstFetchFromDate: currentApp.setting.firstFetchFromDate,
@@ -33,7 +42,9 @@ const mapStateToProps = (state, props) => {
 		entries: getEntriesForPage(state),
 		users: getCurrentUsersByKeyword(state, props),
 		selectedItems: state.selectedItems,
-		sortBy: state.usersSorting
+		sortBy: state.usersSorting,
+		showDetailModal: props.params.senderId,
+		detailData: state.topFans.details[props.params.senderId],
 	}
 }
 
@@ -76,7 +87,9 @@ const mapDispatchToProps = (dispatch, props) => {
 				})
 			})
 		},
-		addIgnoredUserIdentifier: id => dispatch(addIgnoredUserIdentifier(id))
+		addIgnoredUserIdentifier: id => dispatch(addIgnoredUserIdentifier(id)),
+		getDetailsForUser: userId => dispatch(fetchTopFansDetails(userId)),
+		handleDetailsModalClose: () => dispatch(goBack()),
 	}
 }
 
