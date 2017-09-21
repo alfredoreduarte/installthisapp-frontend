@@ -15,7 +15,8 @@
 	height: 4px
 	width: 40px
 	background: #8ed7f6
-	+animation-name(leadgenFlow)
 	+animation-duration(800ms)
 	+animation-timing-function(ease)
 	+animation-iteration-count(infinite)
+	&.active
+		+animation-name(leadgenFlow)

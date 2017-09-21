@@ -30,7 +30,7 @@ const SourceCreator = ({
 				change('fbPageIdentifier', e.target.value)
 			}}
 		>
-			<option value={''} disabled>-- Facebook Page --</option>
+			<option value={''} disabled>- Select one -</option>
 			{fbPages.map(page => 
 				<option key={page.id} value={page.identifier}>{page.name}</option>
 			)}
@@ -70,7 +70,7 @@ const SourceCreator = ({
 		<button 
 			type="submit" 
 			className="btn btn-primary btn-block" 
-			disabled={!valid || submitting}>Save Form</button>
+			disabled={!valid || submitting || fetchingLeadgenForm}>Save Source</button>
 	</div>
 </form>
 

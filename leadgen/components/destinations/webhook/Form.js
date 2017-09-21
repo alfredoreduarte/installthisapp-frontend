@@ -42,6 +42,7 @@ const Form = () =>
 			)}
 		</Field>
 	</div>
+	<hr />
 	<FieldArray name="settings.fieldsDictionary" component={FieldsDictionary} />
 	<hr />
 	<FieldArray name="settings.httpHeaders" component={RenderHttpHeaders} />

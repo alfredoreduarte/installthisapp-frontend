@@ -23,14 +23,14 @@ const DestinationCreator = ({
 }) => 
 <form onSubmit={e => handleSubmit(e).then(() => reset())}>
 	<div className="form-group">
-		<label className="control-label">Select type</label>
+		<label className="control-label">Destination type</label>
 		<Field name="destinationType" component="select" className="form-control"
 			onChange={e => {
 				handleDestinationTypeChange(e.target.value)
 				change('destinationType', e.target.value)
 			}}
 		>
-			<option value={''} disabled>-- Select a type --</option>
+			<option value={''} disabled>- Email, Webhooks, MailChimp... -</option>
 			{destinationTypes.map(destinationType => 
 				<option 
 					key={destinationType.type} 

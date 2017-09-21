@@ -8,8 +8,10 @@ import Modal from 'react-modal'
 import FacebookLogin from 'react-facebook-login'
 import FaCircleO from 'react-icons/lib/fa/circle-o'
 import FaCheckCircleO from 'react-icons/lib/fa/check-circle-o'
+import FaArrowRight from 'react-icons/lib/fa/arrow-right'
 import MdCloud from 'react-icons/lib/md/cloud'
 import MdClose from 'react-icons/lib/md/close'
+import StepLabel from 'leadgen/components/StepLabel'
 import FbPhoto from 'components/FbPhoto'
 
 const SourceTestModal = ({
@@ -82,11 +84,12 @@ const SourceTestModal = ({
 				top: '-20px',
 				right: '-20px',
 			}} onClick={handleHide} />
+		<StepLabel number={2} />
 		<h1 className="text-center" style={{fontSize: '24px'}}>
-			{testStatus.receivedOnServer ? <span>Success!</span> : <span>Test Facebook Lead Ads</span>}
+			{testStatus.receivedOnServer ? <span>Success!</span> : <span>Test the connection</span>}
 		</h1>
 		{!testStatus.receivedOnServer ? 
-			<p className="text-center">Test your Facebook Lead Ads integration by sending us a lead.</p>
+			<p className="text-center">We'll send a test lead to confirm it's working.</p>
 		: null}
 		{testStatus.receivedOnServer ? 
 			<div style={{marginBottom: '20px'}}>
@@ -123,7 +126,7 @@ const SourceTestModal = ({
 				position: 'relative',
 				overflow: 'hidden',
 			}}>
-				<div className="leadgen-flow"></div>
+				{testStatus.sent && !testStatus.receivedOnServer ? <div className="leadgen-flow active"></div> : null}
 			</div>}
 			<div style={{
 				width: '100px',
@@ -158,10 +161,21 @@ const SourceTestModal = ({
 			<p className="text-center"><a disabled={true} className="btn btn-success">Testing...</a></p>
 		: 	null }
 		{testStatus.sent && testStatus.receivedOnServer ? 
-			<div className="row"><div className="col-md-12">
-				<a onClick={sendTest} className="btn btn-primary btn-outline btn-sm pull-left">Test again</a>
-				<a onClick={createDestination} className="btn btn-success pull-right">Send leads from this form to...</a>
-			</div></div>
+			<div className="row">
+				<div className="col-md-6">
+					<a onClick={sendTest} className="btn btn-primary btn-outline btn-sm pull-left">Test again</a>
+				</div>
+				<div className="col-md-6" style={{
+						display: 'flex',
+						justifyContent: 'space-between',
+						alignItems: 'center',
+					}}>
+					<FaArrowRight size="20" className="animated wobble" style={{
+						animationIterationCount: 'infinite'
+					}} />
+					<a onClick={createDestination} className="btn btn-success pull-right">Send leads from this form to...</a>
+				</div>
+			</div>
 		: 	null }
 		{!testStatus.receivedOnServer ? 
 		<div>
@@ -170,11 +184,11 @@ const SourceTestModal = ({
 				{testStatus.sent ? 
 					<li><p className="text-success">
 						<FaCheckCircleO size="16" className="pull-right" /> Send Lead data</p></li>
-				: 	<li><p className="text-muted">Send Lead data</p></li> }
+				: 	<li><FaCheckCircleO size="16" className="pull-right" /><p className="text-muted">Send Lead data</p></li> }
 				{testStatus.receivedOnServer ? 
 					<li><p className="text-success">
 						<FaCheckCircleO size="16" className="pull-right" /> Receive Lead from Facebook</p></li>
-				: 	<li><p className="text-muted">Receive Lead from Facebook</p></li> }
+				: 	<li><FaCheckCircleO size="16" className="pull-right" /><p className="text-muted">Receive Lead from Facebook</p></li> }
 			</ul>
 		</div>
 		: null }

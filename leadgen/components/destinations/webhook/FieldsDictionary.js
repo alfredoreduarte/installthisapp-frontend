@@ -3,16 +3,16 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { Field, reduxForm } from 'redux-form'
 import FaClose from 'react-icons/lib/fa/close'
+import FaArrowsH from 'react-icons/lib/fa/arrows-h'
 
 
 const FieldsDictionary = ({ originalLabels, fields, meta: { error, submitFailed } }) =>
 <div className="form-group">
-	<p 
-		className="control-label"><b>Data</b> <span className="text-muted">Optional</span>
-		<a 
-		className="pull-right" 
-		style={{textDecoration: 'underline', cursor: 'pointer'}} 
-		onClick={() => fields.push({})}>+</a></p>
+	<p className="control-label"><b>Data</b> <small className="text-muted">Optional</small>
+	<a 
+	className="pull-right" 
+	style={{textDecoration: 'underline', cursor: 'pointer'}} 
+	onClick={() => fields.push({})}>Add Field</a></p>
 	<p className="control-label">
 		If you leave this empty, it will default to including the raw data 
 		from the previous step. Key, value pairs sent as data. 
@@ -33,8 +33,9 @@ const FieldsDictionary = ({ originalLabels, fields, meta: { error, submitFailed 
 					type="text"
 					component="input"
 					className="form-control"
-					placeholder="Key"
+					placeholder="Custom name"
 				/>
+				<FaArrowsH size="46" className="text-muted" style={{margin: '0px 10px'}} />
 				<Field name={`${header}.value`} component="select" className="form-control">
 					<option value={''} disabled>-- Select a field --</option>
 					{originalLabels.map(originalLabel => 
@@ -43,7 +44,9 @@ const FieldsDictionary = ({ originalLabels, fields, meta: { error, submitFailed 
 							value={originalLabel.name}>{originalLabel.name}</option>
 					)}
 				</Field>
-				<FaClose onClick={() => fields.remove(index)} size="22" style={{margin: '0px 10px', cursor: 'pointer'}} />
+				<div onClick={() => fields.remove(index)} className="btn btn-danger btn-xs" style={{margin: '0px 10px'}}>
+					<FaClose size="12" />
+				</div>
 			</div>
 		)}
 	</div>

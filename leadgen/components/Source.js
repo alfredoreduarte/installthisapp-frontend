@@ -38,7 +38,7 @@ const Source = ({
 	<br/>
 	<small>
 		Form ID {fbFormId} | <a onClick={sendTest} style={{cursor: 'pointer', textDecoration: 'underline'}}>Test</a> | 
-		<a onClick={handleAddDestination} style={{cursor: 'pointer', textDecoration: 'underline'}}>Add Destination</a>
+		 <a onClick={handleAddDestination} style={{cursor: 'pointer', textDecoration: 'underline'}}>Add Destination</a>
 	</small>
 </li>
 

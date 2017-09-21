@@ -15,6 +15,7 @@ import FbPhoto from 'components/FbPhoto'
 import DestinationCreator from 'leadgen/containers/DestinationCreator'
 import SourceCreator from 'leadgen/containers/SourceCreator'
 import Destination from 'leadgen/components/Destination'
+import StepLabel from 'leadgen/components/StepLabel'
 import Source from 'leadgen/components/Source'
 import SuccessModal from 'leadgen/components/SuccessModal'
 import SourceTestModal from 'leadgen/components/SourceTestModal'
@@ -130,17 +131,19 @@ const AdminDashboard = ({
 						scope={'manage_pages'}
 						fields="name,email,picture"
 						style={{cursor: 'pointer'}}
-						cssClass=""
+						cssClass="btn btn-default btn-xs"
 						textButton={connectingToFacebook ? 'Please wait...' : 'Refresh permissions'}
 						callback={fbLoginCallback}
 						tag="a" />
 					</small></p>
 				</div>
-				{fbLeadforms.length == 0 ? 
+				{fbLeadforms.length == 0 && !connectingToFacebook ? 
 					<div className="col-md-12 text-center">
-						<h4>Select one of your Facebook Leadgen Forms</h4>
+						<StepLabel number={1} />
+						<h3>Create a <i>Source</i> <br/><small><i>noun</i> | one of your Facebook Leadgen Forms</small></h3>
 					</div>
 				: null}
+				{!connectingToFacebook ? 
 				<div className="col-md-12" style={{display: 'flex', justifyContent: 'space-around'}} >
 					<div className="Leadgen-column">
 						<FlipCard disabled={true} flipped={sourcesFormVisible || !fbLeadforms.length } style={{width: '100%'}}>
@@ -189,12 +192,12 @@ const AdminDashboard = ({
 										}} style={{cursor: 'pointer'}} />
 									</div>
 									<SourceCreator />
-									{fbLeadforms.length == 0 ? 
-										<p className="text-center"><small>But... what exactly is a <a 
-											href="http://blog.installthisapp.com/creating-facebook-lead-ads/" 
-											target="_blank" rel="noopener">Facebook Leadgen Form</a>?</small></p>
-									: null}
 								</div>
+								{fbLeadforms.length == 0 ? 
+									<p className="text-center"><small><a 
+										href="http://blog.installthisapp.com/creating-facebook-lead-ads/" 
+										target="_blank" rel="noopener">What is a Facebook Leadgen Form?</a></small></p>
+								: null}
 							</div>
 						</FlipCard>
 					</div>
@@ -233,6 +236,7 @@ const AdminDashboard = ({
 								</div>
 								<div className="panel panel-default">
 									<div className="panel-body">
+										{!isEditingDestination ? <StepLabel number={4} /> : null}
 										<div style={{
 											display: 'flex',
 											alignItems: 'center',
@@ -253,6 +257,7 @@ const AdminDashboard = ({
 						</div>
 					: null }
 				</div>
+				: null }
 			</div>
 		}
 		<ol className="hide">
