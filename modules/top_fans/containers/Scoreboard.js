@@ -16,7 +16,6 @@ import {
 	cleanupTopFansEntities, 
 	resetTopFansEntities, 
 	pollTopFansEntities,
-	fetchTopFansDetails
 } from 'modules/top_fans/actions/entities'
 import { getEntriesForPage } from 'modules/top_fans/selectors/entries'
 import { editAppSpecificSettings, addIgnoredUserIdentifier } from 'modules/top_fans/actions'
@@ -29,12 +28,15 @@ const Scoreboard = props => (
 const handleScore = score => score ? score : 0
 
 const mapStateToProps = (state, props) => {
+	// console.log('props.params')
+	// console.log(props.params)
+	// console.log(props)
 	const currentApp = getCurrentAppByState(state)
 	const tabInstalledInPage = getCurrentAppByState(state).page ? _.find(getAllPages(state), {'id': getCurrentAppByState(state).page}).name : null
 	return { 
 		checksum: currentApp.checksum,
 		isCurrentlyPolling: state.topFans.ui.isCurrentlyPolling,
-		showResetModal: state.topFans.ui.showResetModal,
+		// showResetModal: state.topFans.ui.showResetModal,
 		// firstFetchFromDate: currentApp.setting.firstFetchFromDate,
 		firstFetchFromDate: currentApp.setting.firstFetchFromDate ? moment(currentApp.setting.firstFetchFromDate) : null,
 		// 
@@ -43,19 +45,17 @@ const mapStateToProps = (state, props) => {
 		users: getCurrentUsersByKeyword(state, props),
 		selectedItems: state.selectedItems,
 		sortBy: state.usersSorting,
-		showDetailModal: props.params.senderId,
-		detailData: state.topFans.details[props.params.senderId],
 	}
 }
 
 const mapDispatchToProps = (dispatch, props) => {
 	return {
-		toggleResetModal: () => dispatch({
-			type: 'TOP_FANS/TOGGLE_RESET_MODAL',
-		}),
-		onDateChange: date => {
-			dispatch(editAppSpecificSettings(date.format()))
-		},
+		// toggleResetModal: () => dispatch({
+		// 	type: 'TOP_FANS/TOGGLE_RESET_MODAL',
+		// }),
+		// onDateChange: date => {
+		// 	dispatch(editAppSpecificSettings(date.format()))
+		// },
 		// 
 		handleUserSelect: id => {
 			dispatch(selectItemOnTable(id))
@@ -74,22 +74,20 @@ const mapDispatchToProps = (dispatch, props) => {
 				// close: () => console.log('close!'),
 			})
 		},
-		reset: () => {
-			dispatch({
-				type: 'TOP_FANS/TOGGLE_RESET_MODAL',
-			})
-			dispatch({
-				type: 'TOP_FANS/TOGGLE_POLLING_STATE',
-			})
-			dispatch(updateAppSettings()).then(() => {
-				dispatch(resetTopFansEntities()).then(() => {
-					dispatch(pollTopFansEntities(props.params.checksum))
-				})
-			})
-		},
+		// reset: () => {
+		// 	dispatch({
+		// 		type: 'TOP_FANS/TOGGLE_RESET_MODAL',
+		// 	})
+		// 	dispatch({
+		// 		type: 'TOP_FANS/TOGGLE_POLLING_STATE',
+		// 	})
+		// 	dispatch(updateAppSettings()).then(() => {
+		// 		dispatch(resetTopFansEntities()).then(() => {
+		// 			dispatch(pollTopFansEntities(props.params.checksum))
+		// 		})
+		// 	})
+		// },
 		addIgnoredUserIdentifier: id => dispatch(addIgnoredUserIdentifier(id)),
-		getDetailsForUser: userId => dispatch(fetchTopFansDetails(userId)),
-		handleDetailsModalClose: () => dispatch(goBack()),
 	}
 }
 

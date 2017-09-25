@@ -24,6 +24,7 @@ export const fetchTopFansDetails = senderId => {
 		.then( response => {
 			dispatch(receiveTopFansDetails(response.payload.user.senderId, {
 				name: response.payload.user.senderName,
+				identifier: response.payload.user.senderId,
 				likes: response.payload.likes,
 				comments: response.payload.comments,
 			}))

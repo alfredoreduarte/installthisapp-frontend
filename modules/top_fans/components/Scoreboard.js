@@ -15,6 +15,7 @@ import { getAllPages } from 'selectors/pages'
 import { getCurrentAppByState } from 'selectors/apps'
 import { getEntriesForPage } from 'modules/top_fans/selectors/entries'
 import { pollTopFansEntities } from 'modules/top_fans/actions/entities'
+// import UserDetailsContainer from 'modules/top_fans/containers/UserDetailsContainer'
 import { selectItemOnTable, sortUsersBy } from 'actions/users'
 import { updateAppSettings } from 'actions/apps'
 import { editAppSpecificSettings } from 'modules/top_fans/actions'
@@ -22,13 +23,10 @@ import SearchForm from 'components/SearchForm'
 import User from 'components/User'
 
 const Scoreboard = ({
-	handleDetailsModalClose,
-	showDetailModal,
-	detailData,
 	checksum,
-	toggleResetModal,
+	// toggleResetModal,
 	isCurrentlyPolling,
-	showResetModal,
+	// showResetModal,
 	firstFetchFromDate,
 	onDateChange,
 	// 
@@ -46,55 +44,8 @@ const Scoreboard = ({
 	handleUserSelectBatch,
 	handleSort,
 	addIgnoredUserIdentifier,
-	getDetailsForUser,
 }) => (
 	<div className="ita-table-view">
-		<Modal
-			isOpen={showResetModal}
-			onAfterOpen={() => console.log('afteropen')}
-			onRequestClose={toggleResetModal}
-			contentLabel="Modal"
-		>
-			<a href="javascript:void(0)" onClick={toggleResetModal}><small>← back</small></a>
-			<h1>Reset Scoreboard</h1>
-			<p>Track past activities starting at:</p>
-			<div className="col-md-6">
-				<SingleDatePicker 
-					id="lafecha"
-					date={firstFetchFromDate}
-					isOutsideRange={day => day.isAfter(moment().subtract(1, 'days')) || day.isBefore(moment().subtract(240, 'days'))}
-					numberOfMonths={1}
-					focused={true}
-					onDateChange={onDateChange}
-				/>
-				<button style={{marginLeft: '20px'}} onClick={reset} className="btn btn-primary" disabled={firstFetchFromDate ? false : true}>Reset Scoreboard</button>
-			</div>
-			<div className="col-md-6">
-			</div>
-		</Modal>
-		{detailData ? 
-		<Modal
-			isOpen={showDetailModal ? true : false}
-			onAfterOpen={() => console.log('afteropen')}
-			// onRequestClose={toggleDetailModal}
-			contentLabel="Modal"
-		>
-			<a href="javascript:void(0)" onClick={handleDetailsModalClose}><small>← back</small></a>
-			<h2>{detailData.name}</h2>
-			<p><b>Likes</b></p>
-			<ul>
-				{detailData.likes.map(like => <li key={like.parentId + like.postId}>
-					<a target="_blank" href={`https://fb.com/${like.parentId}`}>Post</a> | 1 like
-				</li>)}
-			</ul>
-			<p><b>Comments</b></p>
-			<ul>
-				{detailData.comments.map(comment => <li key={comment.parentId + comment.postId}>
-					<a target="_blank" href={`https://fb.com/${comment.parentId}`}>Post</a> | 1 comment
-				</li>)}
-			</ul>
-		</Modal>
-		: null }
 		<div className="ita-table-toolbar">
 			<div className="row">
 				<div className="col-md-12">
@@ -105,9 +56,10 @@ const Scoreboard = ({
 							{' '}user{selectedItems.length > 1 ? 's' : ''} selected
 						</small>
 						<small>
-							Counting likes and comments since {firstFetchFromDate.format("dddd, MMMM Do YYYY")}
+							Counting likes and comments since <i>{firstFetchFromDate.format("dddd, MMMM Do YYYY")}</i>
 						</small>
 					</h3>
+					<p><small>Need to exclude yourself or another person? Click the <FaEyeSlash size={14} color={'black'} /> at the right side of the profile.</small></p>
 				</div>
 			</div>
 			<div className="row">
@@ -119,9 +71,9 @@ const Scoreboard = ({
 						null
 					:
 					<ButtonToolbar>
-						<button className="btn btn-sm btn-danger pull-right" onClick={toggleResetModal}>
+						<Link to={`/d/apps/top_fans/${checksum}/scoreboard/reset`} className="btn btn-sm btn-danger pull-right">
 							Reset
-						</button>
+						</Link>
 						<button className="btn btn-sm btn-danger pull-right hide" onClick={cleanup}>
 							Reset starting now
 						</button>
@@ -200,7 +152,7 @@ const Scoreboard = ({
 						Check again
 					</button>
 				</p>
-				{tabIntegrated ? <p><a href="javascript:void(0)" onClick={toggleResetModal}><small>Reset scores</small></a></p> : null}
+				{!tabIntegrated || <p><Link to={`/d/apps/top_fans/${checksum}/scoreboard/reset`}><small>Reset scores</small></Link></p>}
 			</div>
 		:
 			null
@@ -221,8 +173,8 @@ const Scoreboard = ({
 					<th>
 						<span>Score</span>
 					</th>
-					<th>
-						<span>Remove</span>
+					<th className="text-right">
+						<span>Ignore</span>
 					</th>
 				</tr>
 			</thead>
@@ -235,7 +187,6 @@ const Scoreboard = ({
 							identifier={entry.senderId} 
 							small
 							 />
-						<Link to={`/d/apps/top_fans/${checksum}/scoreboard/${entry.senderId}`} onClick={() => getDetailsForUser(entry.senderId)}>Get details</Link>
 					</td>
 					<td>
 						{entry.likes}
@@ -245,6 +196,8 @@ const Scoreboard = ({
 					</td>
 					<td>
 						<b>{entry.score}</b>
+						{' | '}
+						<Link to={`/d/apps/top_fans/${checksum}/scoreboard/${entry.senderId}`}>Get details</Link>
 					</td>
 					<td className="text-right">
 						<ul className="list-inline list-no-margin">

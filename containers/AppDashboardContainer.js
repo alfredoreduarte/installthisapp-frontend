@@ -23,6 +23,7 @@ const AppDashboardContainer = ({
 	main, 
 	secondary,
 	sidebar, 
+	modal, 
 	applicationType, 
 	// facebookPageIdentifier, 
 	fbAppId,
@@ -90,6 +91,7 @@ const AppDashboardContainer = ({
 				<TwitterShareButton className="btn btn-tw btn-block" url={`https://${window.location.host}/gateway/${currentApp.checksum}`}>Share on Twitter</TwitterShareButton>
 			</div>
 		</Modal>
+		{modal}
 		<AppNavBar showLeadgen={true} />
 		<AppTitleBar 
 			// facebookPageIdentifier={facebookPageIdentifier}

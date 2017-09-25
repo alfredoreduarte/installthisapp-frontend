@@ -19,7 +19,7 @@ const User = ({ name, small, identifier, email, time }) => (
 				</a>
 			{!small || email ? <p><a href={`mailto:${email}`}><small>{email}</small></a></p> : null}
 			{small ? null : <p><a href={`https://fb.com/${identifier}`} target="_blank" rel="noopener"><small>fb.com/{identifier}</small></a></p>}
-			{!small || time ? <p><small><TimeAgo date={time} /></small></p> : null}
+			{!small && time ? <p><small><TimeAgo date={time} /></small></p> : null}
 		</div>
 	</div>
 )
