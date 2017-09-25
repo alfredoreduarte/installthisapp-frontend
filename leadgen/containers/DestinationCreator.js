@@ -92,14 +92,6 @@ const mapStateToProps = (state, props) => {
 			enabled: false,
 		},
 	]
-	// let initialValues = {
-	// 	destinationType: 'webhook',
-	// 	fbLeadformId: 16,
-	// 	settings: {
-	// 		url: 'https://requestb.in/x50qohx5',
-	// 		payloadType: 'json',
-	// 	},
-	// }
 	let initialValues = {}
 	const selectedValues = selector(state, 'destinationType', 'fbLeadformId')
 	if (!state.leadgenUI.editingDestinationId) {

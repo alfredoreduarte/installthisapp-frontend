@@ -2,6 +2,7 @@ import React from 'react'
 import { Field, FieldArray } from 'redux-form'
 import RenderHttpHeaders from 'leadgen/components/destinations/webhook/RenderHttpHeaders'
 import FieldsDictionary from 'leadgen/components/destinations/webhook/FieldsDictionary'
+import FixedValues from 'leadgen/components/destinations/webhook/FixedValues'
 
 const payloadTypes = [
 	{
@@ -44,6 +45,8 @@ const Form = () =>
 	</div>
 	<hr />
 	<FieldArray name="settings.fieldsDictionary" component={FieldsDictionary} />
+	<hr />
+	<FieldArray name="settings.fixedValues" component={FixedValues} />
 	<hr />
 	<FieldArray name="settings.httpHeaders" component={RenderHttpHeaders} />
 	<div className="hide">
