@@ -55,7 +55,7 @@ const DestinationCreator = ({
 					key={fbLeadform.id} 
 					value={fbLeadform.id} 
 					className="text-capitalize">
-					{fbLeadform.fbPageName} | Form ID {fbLeadform.fbFormId}</option>
+					{fbLeadform.fbPageName} | {fbLeadform.fbFormName}</option>
 			)}
 		</Field>
 	</div>
