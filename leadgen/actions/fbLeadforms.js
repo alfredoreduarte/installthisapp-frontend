@@ -10,6 +10,8 @@ import {
 	showSourceTestModal,
 } from 'leadgen/actions/ui'
 
+let pollTestLeadArrivalInterval
+
 export const sendTestLead = (id, testDestinations) => {
 	return dispatch => {
 		dispatch(indicateLeadTestSent())
@@ -26,9 +28,30 @@ export const sendTestLead = (id, testDestinations) => {
 	}
 }
 
+export const getTestLead = id => {
+	return dispatch => {
+		return getFromApi(`fb_leadforms/${id}/get_existing_test_lead.json`)
+		.then(response => {
+			console.log('getTestLead response: ', response)
+			if (response) {
+				dispatch(receiveTestLeadData(response.fieldData))
+			}
+		})
+		.catch(exception =>
+			console.log('postNewApp: parsing failed', exception)
+		)
+	}
+}
+
+export const stopPollTestArrival = () => {
+	return dispatch => {
+		clearInterval(pollTestLeadArrivalInterval)
+	}
+}
+
 export const pollTestLeadArrival = (leadId, testDestinations) => {
 	return dispatch => {
-		const pollTestLeadArrivalInterval = setInterval(() => {
+		pollTestLeadArrivalInterval = setInterval(() => {
 			getFromApi(`fb_leadforms/${leadId}/poll_test_arrival.json`)
 			.then(response => {
 				console.log('pollTestLeadArrival response: ', response)
@@ -109,7 +132,7 @@ export const destroyFbLeadform = id => {
 export const newFbLeadform = () => {
 	return (dispatch, getState) => {
 		const fbLeadform = getState().form.fbLeadFormCreate.values
-		if (fbLeadform.id) {
+		if (fbLeadform.id) { // Editing
 			return patchToApi(`fb_leadforms/${fbLeadform.id}.json`, { 
 				fbLeadform,
 			})
@@ -122,13 +145,12 @@ export const newFbLeadform = () => {
 				console.log('newFbLeadform: parsing failed', exception)
 			)
 		}
-		else {
+		else { // Creating a new one
 			return postToApi(`fb_leadforms.json`, { 
 				fbLeadform,
 			})
 			.then(response => {
 				if (response) {
-					console.log('LeadForm creation response', response)
 					analytics.track('LeadForm Created', () => {
 						dispatch(addFbLeadform(response))
 						dispatch(showSourceTestModal(response.id))

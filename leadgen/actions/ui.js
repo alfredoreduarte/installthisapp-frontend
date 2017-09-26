@@ -1,7 +1,7 @@
 import { initialize } from 'redux-form'
 import { getEditingDestination } from 'leadgen/selectors/fbLeadDestinations'
 import { getEditingSource } from 'leadgen/selectors/fbLeadforms'
-import { fetchLeadgenFormsForPage } from 'leadgen/actions/fbLeadforms'
+import { fetchLeadgenFormsForPage, getTestLead } from 'leadgen/actions/fbLeadforms'
 
 export const showSourcesForm = () => ({
 	type: 'LEADGEN_UI/SHOW_SOURCES_FORM'
@@ -77,7 +77,9 @@ export const setDestinationFormDefaults = id => {
 	return (dispatch, getState) => {
 		dispatch(setEditingDestination(id))
 		const destination = getEditingDestination(getState())
-		return dispatch(initialize('fbLeadDestinationCreate', destination))
+		return dispatch( getTestLead(destination.fbLeadformId) ).then(() => {
+			return dispatch(initialize('fbLeadDestinationCreate', destination))
+		})
 	}
 }
 

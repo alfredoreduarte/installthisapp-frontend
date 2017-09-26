@@ -15,13 +15,16 @@ import StepLabel from 'leadgen/components/StepLabel'
 import FbPhoto from 'components/FbPhoto'
 
 const SourceTestModal = ({
+	// values
+	sourceForTesting,
 	testStatus,
-	sendTest,
-	handleHide,
-	show,
 	fbPageIdentifier,
 	testLeadData,
-	createDestination,
+	// actions
+	handleSendTest,
+	handleHide,
+	show,
+	showDestinationFormForSourceWithId,
 }) => <Animate
 	// Set some default data
 	default={{
@@ -155,7 +158,7 @@ const SourceTestModal = ({
 		</div>
 		: null }
 		{!testStatus.sent && !testStatus.receivedOnServer ? 
-			<p className="text-center"><a onClick={sendTest} className="btn btn-success">Send Test Lead</a></p>
+			<p className="text-center"><a onClick={() => handleSendTest(sourceForTesting.id)} className="btn btn-success">Send Test Lead</a></p>
 		: 	null }
 		{testStatus.sent && !testStatus.receivedOnServer ? 
 			<p className="text-center"><a disabled={true} className="btn btn-success">Testing...</a></p>
@@ -163,7 +166,7 @@ const SourceTestModal = ({
 		{testStatus.sent && testStatus.receivedOnServer ? 
 			<div className="row">
 				<div className="col-md-6">
-					<a onClick={sendTest} className="btn btn-primary btn-outline btn-sm pull-left">Test again</a>
+					<a onClick={() => handleSendTest(sourceForTesting.id)} className="btn btn-primary btn-outline btn-sm pull-left">Test again</a>
 				</div>
 				<div className="col-md-6" style={{
 						display: 'flex',
@@ -173,7 +176,9 @@ const SourceTestModal = ({
 					<FaArrowRight size="20" className="animated wobble" style={{
 						animationIterationCount: 'infinite'
 					}} />
-					<a onClick={createDestination} className="btn btn-success pull-right">Send leads from this form to...</a>
+					<a 
+						onClick={() => showDestinationFormForSourceWithId(sourceForTesting.id)} 
+						className="btn btn-success pull-right">Send leads from this form to...</a>
 				</div>
 			</div>
 		: 	null }
@@ -184,11 +189,11 @@ const SourceTestModal = ({
 				{testStatus.sent ? 
 					<li><p className="text-success">
 						<FaCheckCircleO size="16" className="pull-right" /> Send Lead data</p></li>
-				: 	<li><FaCheckCircleO size="16" className="pull-right" /><p className="text-muted">Send Lead data</p></li> }
+				: 	<li><FaCheckCircleO size="16" className="text-muted pull-right" /><p className="text-muted">Send Lead data</p></li> }
 				{testStatus.receivedOnServer ? 
 					<li><p className="text-success">
 						<FaCheckCircleO size="16" className="pull-right" /> Receive Lead from Facebook</p></li>
-				: 	<li><FaCheckCircleO size="16" className="pull-right" /><p className="text-muted">Receive Lead from Facebook</p></li> }
+				: 	<li><FaCheckCircleO size="16" className="text-muted pull-right" /><p className="text-muted">Receive Lead from Facebook</p></li> }
 			</ul>
 		</div>
 		: null }

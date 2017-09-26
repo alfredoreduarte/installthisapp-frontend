@@ -36,6 +36,7 @@ const ui = (state = {
 					sentToDestinations: false,
 				},
 				testingSourceWithId: null,
+				sourceTestLeadData: [],
 			}
 		case 'LEADGEN_UI/TEST_LEAD/SENT':
 			return {

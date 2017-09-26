@@ -6,7 +6,7 @@ import FacebookLogin from 'react-facebook-login'
 import AdminDashboardView from 'leadgen/components/AdminDashboard'
 import { getLeadformsWithPages } from 'leadgen/selectors/fbLeadforms'
 import { getLeadDestinationsWithMetadata } from 'leadgen/selectors/fbLeadDestinations'
-import { sendTestLead, destroyFbLeadform, fetchLeadgenFormsForPage } from 'leadgen/actions/fbLeadforms'
+import { sendTestLead, destroyFbLeadform, fetchLeadgenFormsForPage, getTestLead } from 'leadgen/actions/fbLeadforms'
 import { destroyFbLeadDestination } from 'leadgen/actions/fbLeadDestinations'
 import { 
 	hideSourcesForm, 
@@ -39,12 +39,6 @@ const mapStateToProps = (state, props) => {
 		sourcesFormVisible: state.leadgenUI.sourcesFormVisible,
 		isEditingDestination: state.leadgenUI.editingDestinationId ? true : false,
 		destinationsFormVisible: state.leadgenUI.destinationsFormVisible,
-		// sources testing
-		sourceForTesting: _.find(getLeadformsWithPages(state), {'id': state.leadgenUI.testingSourceWithId}),
-		// sourceTestStatus: state.leadgenUI.sourceTest,
-		sourceTestStatus: state.leadgenUI.testLead,
-		sourceTestLeadData: state.leadgenUI.sourceTestLeadData,
-		sourceTestModalVisible: state.leadgenUI.testingSourceWithId ? true : false,
 	}
 }
 const mapDispatchToProps = (dispatch, props) => {
@@ -56,12 +50,16 @@ const mapDispatchToProps = (dispatch, props) => {
 		fbLoginCallback: response => dispatch(fbConnect(response)),
 		handleDeleteFbLeadform: id => dispatch(destroyFbLeadform(id)),
 		handleDeleteFbLeadDestination: id => dispatch(destroyFbLeadDestination(id)),
-		sendTest: id => dispatch( sendTestLead(id, true) ),
+		sendTest: id => {
+			dispatch(resetTestLead())
+			return dispatch( sendTestLead( id, true ) )
+		},
 		editSource: id => {
 			dispatch(setSourceFormDefaults(id))
 			dispatch(showSourcesForm())
 		},
 		hideSourcesForm: () => {
+			dispatch(resetTestLead())
 			dispatch(destroy('fbLeadFormCreate'))
 			return dispatch(hideSourcesForm())
 		},
@@ -71,6 +69,7 @@ const mapDispatchToProps = (dispatch, props) => {
 			dispatch(showDestinationsForm())
 		},
 		hideDestinationsForm: () => {
+			dispatch(resetTestLead())
 			dispatch(destroy('fbLeadDestinationCreate'))
 			return dispatch(hideDestinationsForm())
 		},
@@ -79,14 +78,15 @@ const mapDispatchToProps = (dispatch, props) => {
 			return dispatch( showDestinationsForm() )
 		},
 		showDestinationsFormWithDefaultSourceId: id => {
-			dispatch(resetTestLead())
+			dispatch( resetTestLead() )
 			dispatch( setDefaultLeadFormForDestinationCreation(id) )
-			return dispatch( showDestinationsForm() )
+			dispatch( getTestLead(id) ).then( () => dispatch( showDestinationsForm() ) )
+			// return dispatch( getTestLead(id) ).then( () => dispatch( showDestinationsForm() ) )
+			// return dispatch( showDestinationsForm() )
 		},
 		// sources testing
 		showSourceTestModal: id => dispatch( showSourceTestModal(id) ),
 		sendSourceTest: id => dispatch( sendTestLead(id, false) ),
-		handleSourceTestModalHide: () => dispatch(resetTestLead()),
 	}
 }
 

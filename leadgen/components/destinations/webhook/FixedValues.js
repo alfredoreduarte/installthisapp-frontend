@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { Field, reduxForm } from 'redux-form'
-import FaClose from 'react-icons/lib/fa/close'
+import MdClose from 'react-icons/lib/md/close'
 import FaArrowsH from 'react-icons/lib/fa/arrows-h'
 
 const FixedValues = ({ originalLabels, fields, meta: { error, submitFailed } }) =>
@@ -13,8 +13,8 @@ const FixedValues = ({ originalLabels, fields, meta: { error, submitFailed } }) 
 	style={{textDecoration: 'underline', cursor: 'pointer'}} 
 	onClick={() => fields.push({})}>Add Value</a></p>
 	<p className="control-label">
-		Use this to include fixed values across all leads, like
-		UTM fields for conversion tracking
+		Use this to include fixed values to all leads,
+		like UTM fields for conversion tracking.
 	</p>
 	{submitFailed &&
 		error &&
@@ -41,9 +41,7 @@ const FixedValues = ({ originalLabels, fields, meta: { error, submitFailed } }) 
 					className="form-control"
 					placeholder="Value"
 				/>
-				<div onClick={() => fields.remove(index)} className="btn btn-danger btn-xs" style={{margin: '0px 10px'}}>
-					<FaClose size="12" />
-				</div>
+				<MdClose size="62" className="text-danger" onClick={() => fields.remove(index)} style={{margin: '0px 10px', cursor: 'pointer'}} />
 			</div>
 		)}
 	</div>

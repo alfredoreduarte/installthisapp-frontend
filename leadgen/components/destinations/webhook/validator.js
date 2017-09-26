@@ -1,16 +1,12 @@
 const validator = ( values, errors ) => {
 	if (values.settings === undefined) {
 		errors.settings = {
-			listId: 'Required',
-			apiKey: 'Required',
+			url: 'Required',
 		}
 	} 
 	else {
-		if (!values.settings.apiKey) {
-			errors.settings.apiKey = 'Required'
-		}
-		else if (!values.settings.listId) {
-			errors.settings.listId = 'Required'
+		if (!values.settings.url) {
+			errors.settings.url = 'Required'
 		}
 	}
 	return errors

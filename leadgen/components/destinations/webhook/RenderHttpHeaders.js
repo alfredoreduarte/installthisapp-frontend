@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 import { Field, reduxForm } from 'redux-form'
-import FaClose from 'react-icons/lib/fa/close'
-
+import MdClose from 'react-icons/lib/md/close'
+import FaArrowsH from 'react-icons/lib/fa/arrows-h'
 
 const RenderHttpHeaders = ({ fields, meta: { error, submitFailed } }) =>
 <div className="form-group">
@@ -28,6 +28,7 @@ const RenderHttpHeaders = ({ fields, meta: { error, submitFailed } }) =>
 					className="form-control"
 					placeholder="Key"
 				/>
+				<FaArrowsH size="46" className="text-muted" style={{margin: '0px 10px'}} />
 				<Field
 					name={`${header}.value`}
 					type="text"
@@ -35,9 +36,7 @@ const RenderHttpHeaders = ({ fields, meta: { error, submitFailed } }) =>
 					component="input"
 					placeholder="Value"
 				/>
-				<div onClick={() => fields.remove(index)} className="btn btn-danger btn-xs" style={{margin: '0px 10px'}}>
-					<FaClose size="12" />
-				</div>
+				<MdClose size="62" className="text-danger" onClick={() => fields.remove(index)} style={{margin: '0px 10px', cursor: 'pointer'}} />
 			</div>
 		)}
 	</div>

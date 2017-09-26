@@ -14,6 +14,7 @@ import MdClose from 'react-icons/lib/md/close'
 import MdChevronRight from 'react-icons/lib/md/chevron-right'
 import FlipCard from 'components/FlipCard'
 import FbPhoto from 'components/FbPhoto'
+import StepLabel from 'leadgen/components/StepLabel'
 import DestinationCreator from 'leadgen/containers/DestinationCreator'
 import SourceCreator from 'leadgen/containers/SourceCreator'
 import Destination from 'leadgen/components/Destination'
@@ -87,8 +88,9 @@ const SuccessModal = ({
 				top: '-20px',
 				right: '-20px',
 			}} onClick={hideDestinationSuccessModal} />
-		<h1 className="text-center" style={{fontSize: '24px'}}>Success!</h1>
-		<p className="text-center">Now let's send a test lead just to make sure everything's in place</p>
+		<StepLabel number={5} />
+		<h1 className="text-center" style={{fontSize: '24px'}}>Test this destination</h1>
+		<p className="text-center">The destination has been saved. Let's just send a test lead to make sure it's receiving data</p>
 		<div style={{
 			padding: '40px 0px',
 			display: 'flex',
@@ -108,21 +110,19 @@ const SuccessModal = ({
 					alignItems: 'center',
 					justifyContent: 'center',
 				}}>
-					<FaCheckCircleO className="text-success" size="26" />
+					<FaCheckCircleO className="text-success animated fadeInUp" size="26" />
 				</div>
-			:
-				<div style={{
-					width: '100px',
-					height: '10px',
-					background: '#d4f2ff',
-					display: 'flex',
-					alignItems: 'center',
-					position: 'relative',
-					overflow: 'hidden',
-				}}>
-					<div className="leadgen-flow"></div>
-				</div>
-			}
+			: <div style={{
+				width: '100px',
+				height: '10px',
+				background: '#d4f2ff',
+				display: 'flex',
+				alignItems: 'center',
+				position: 'relative',
+				overflow: 'hidden',
+			}}>
+				{testStatus.sent && !testStatus.receivedOnServer ? <div className="leadgen-flow active"></div> : null}
+			</div>}
 			<div style={{
 				width: '100px',
 				height: '100px',
@@ -155,11 +155,13 @@ const SuccessModal = ({
 		<hr/>
 		<ul className="col-md-6 col-md-offset-3 list-unstyled">
 			{testStatus.receivedOnServer ? 
-				<li><p className="text-success"><FaCheckCircleO size="16" className="pull-right" /> Receive Lead from Facebook</p></li>
-			: 	<li><p className="text-muted">Receive Lead from Facebook</p></li> }
+				<li><p className="text-success">
+					<FaCheckCircleO size="16" className="pull-right" /> Receive Lead from Facebook</p></li>
+			: 	<li><FaCheckCircleO size="16" className="text-muted pull-right" /><p className="text-muted">Receive Lead from Facebook</p></li> }
 			{testStatus.sentToDestinations ? 
-				<li><p className="text-success"><FaCheckCircleO size="16" className="pull-right" /> Send to all connected destinations</p></li>
-			: 	<li><p className="text-muted">Send to all connected destinations</p></li> }
+				<li><p className="text-success">
+					<FaCheckCircleO size="16" className="pull-right" /> Send to all connected destinations</p></li>
+			: 	<li><FaCheckCircleO size="16" className="text-muted pull-right" /><p className="text-muted">Send to all connected destinations</p></li> }
 		</ul>
 	</Modal>
 	)}

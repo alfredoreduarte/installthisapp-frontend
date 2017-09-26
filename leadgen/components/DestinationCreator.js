@@ -20,6 +20,7 @@ const DestinationCreator = ({
 	selectedDestinationType,
 	selectedFbLeadformId,
 	handleDestinationTypeChange,
+	handleDestinationSourceChange,
 }) => 
 <form onSubmit={e => handleSubmit(e).then(() => reset())}>
 	<div className="form-group">
@@ -42,7 +43,12 @@ const DestinationCreator = ({
 	</div>
 	<div className={`form-group ${!selectedDestinationType ? 'hidee' : null}`}>
 		<label className="control-label">Receive data from Source</label>
-		<Field name="fbLeadformId" component="select" className="form-control">
+		<Field name="fbLeadformId" component="select" className="form-control"
+			onChange={e => {
+				handleDestinationSourceChange(e.target.value)
+				change('fbLeadformId', e.target.value)
+			}}
+		>
 			<option value={''} disabled>-- Select a source --</option>
 			{fbLeadforms.map(fbLeadform => 
 				<option 

@@ -1,27 +1,26 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import { Link } from 'react-router'
 import { Field, reduxForm } from 'redux-form'
 import FaClose from 'react-icons/lib/fa/close'
-// import SuccessfulPurchase from 'components/SuccessfulPurchase'
 
 const SourceCreator = ({ 
+	// Redux-form
 	pristine,
 	submitting,
 	reset,
 	valid,
 	change,
-	handleSubmit,
+	// values
+	selectedFbPageIdentifier,
 	fbPages,
-	handlePageChange,
-	hasSelectedPage,
-	fetchingLeadgenForm,
+	fetchingLeadgenForms,
 	fbLeadgenForms,
+	// actions
+	handlePageChange,
 	fetchLeadgenForms,
-	// destinationSettings,
+	handleSubmit,
 }) => 
-<form className="" onSubmit={e => {
-	return handleSubmit(e).then(() => reset())
-}}>
+<form className="" onSubmit={e => handleSubmit(e).then(() => reset())}>
 	<div className="form-group">
 		<label className="control-label">Facebook Page</label>
 		<Field name="fbPageIdentifier" component="select" className="form-control"
@@ -36,10 +35,9 @@ const SourceCreator = ({
 			)}
 		</Field>
 	</div>
-	{hasSelectedPage ? 
-	<div className="form-group">
+	<div className={`form-group ${selectedFbPageIdentifier || 'hide'}`}>
 		<label className="control-label">Form</label>
-		{fetchingLeadgenForm ? 
+		{fetchingLeadgenForms ? 
 			<p>Fetching forms. Please wait...</p>
 		:
 			<Field name="fbFormId" component="select" className={`form-control ${fbLeadgenForms.length == 0 ? 'hide' : null}`}>
@@ -56,21 +54,20 @@ const SourceCreator = ({
 				)}
 			</Field>
 		}
-		{fbLeadgenForms.length == 0 && !fetchingLeadgenForm ? 
-			<p>This page has no forms. <a href="javascript:void(0);" onClick={() => fetchLeadgenForms(hasSelectedPage)}>Refresh</a></p>
+		{selectedFbPageIdentifier && fbLeadgenForms.length == 0 && !fetchingLeadgenForms ? 
+			<p>This page has no forms. <a href="javascript:void(0);" onClick={() => fetchLeadgenForms(selectedFbPageIdentifier)}>Refresh</a></p>
 		: null}
 	</div>
-	: null}
-	{hasSelectedPage && fbLeadgenForms.length == 0 && !fetchingLeadgenForm ? 
+	{fbLeadgenForms.length == 0 && !fetchingLeadgenForms ? 
 		<p>Create a <a 
-			href={`https://fb.com/${hasSelectedPage}/publishing_tools/?section=LEAD_ADS_FORMS`} 
+			href={`https://fb.com/${selectedFbPageIdentifier}/publishing_tools/?section=LEAD_ADS_FORMS`} 
 			target="_blank" rel="noopener">Lead Form</a>?</p>
 	: null}
 	<div className="form-group">
 		<button 
 			type="submit" 
 			className="btn btn-primary btn-block" 
-			disabled={!valid || submitting || fetchingLeadgenForm}>Save Source</button>
+			disabled={!valid || submitting || fetchingLeadgenForms}>Save Source</button>
 	</div>
 </form>
 

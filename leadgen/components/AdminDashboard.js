@@ -12,20 +12,19 @@ import MdClose from 'react-icons/lib/md/close'
 import MdChevronRight from 'react-icons/lib/md/chevron-right'
 import FlipCard from 'components/FlipCard'
 import FbPhoto from 'components/FbPhoto'
+import FacebookConnectContainer from 'leadgen/containers/FacebookConnectContainer'
 import DestinationCreator from 'leadgen/containers/DestinationCreator'
 import SourceCreator from 'leadgen/containers/SourceCreator'
 import Destination from 'leadgen/components/Destination'
 import StepLabel from 'leadgen/components/StepLabel'
 import Source from 'leadgen/components/Source'
+import SourceTestModalContainer from 'leadgen/containers/SourceTestModalContainer'
 import SuccessModal from 'leadgen/components/SuccessModal'
-import SourceTestModal from 'leadgen/components/SourceTestModal'
 // import SuccessfulPurchase from 'components/SuccessfulPurchase'
 
 const AdminDashboard = ({ 
 	hideDestinationSuccessModal,
 	showDestinationSuccessModal,
-	adminId,
-	adminName,
 	fetchingLeadgenForm,
 	hasSelectedPage,
 	hasSelectedForm,
@@ -57,14 +56,12 @@ const AdminDashboard = ({
 	destinationsFormVisible,
 	// sources testing
 	showSourceTestModal,
-	sourceTestStatus,
 	sendSourceTest,
 	handleSourceTestModalHide,
-	sourceTestModalVisible,
 	sourceForTesting,
-	sourceTestLeadData,
 }) => (
 	<div>
+		<SourceTestModalContainer />
 		{showDestinationSuccessModal ? 
 			<SuccessModal 
 				testStatus={testStatus}
@@ -73,48 +70,8 @@ const AdminDashboard = ({
 				hideDestinationSuccessModal={hideDestinationSuccessModal}
 			/>
 		: null}
-		{sourceTestModalVisible ? 
-			<SourceTestModal 
-				testStatus={sourceTestStatus}
-				testLeadData={sourceTestLeadData}
-				sendTest={() => sendSourceTest(sourceForTesting.id)}
-				handleHide={handleSourceTestModalHide}
-				show={sourceTestModalVisible}
-				fbPageIdentifier={sourceForTesting.fbPageIdentifier}
-				createDestination={() => showDestinationsFormWithDefaultSourceId(sourceForTesting.id)}
-			/>
-		: null}
 		{!fbProfile ? 
-			<div className="col-md-12 text-center" style={{marginBottom: '40px'}}>
-				<br/>
-				<br/>
-				<p><img
-					src={`/images/user-placeholders/${adminId % 8}.png`}
-					width="72px"
-					height="72px"
-				/></p>
-				<h2>Welcome, {adminName}</h2>
-				<br/>
-				<h4>Connect with Facebook to get your Lead Forms here</h4>
-				<br/>
-				<br/>
-				<p>
-					{connectingToFacebook ?
-						<button className="btn btn-primary btn-lg" disabled={true}>
-							Please wait...
-						</button>
-					:
-						<FacebookLogin
-							appId={process.env.FB_APP_ID}
-							autoLoad={true}
-							scope={'manage_pages'}
-							textButton={'Connect to Facebook'}
-							fields="name,email,picture"
-							cssClass="btn btn-primary btn-lg"
-							callback={fbLoginCallback} />
-					}
-				</p>
-			</div>
+			<FacebookConnectContainer />
 		:
 			<div>
 				<div className="col-md-12 text-center" style={{marginBottom: '40px'}}>
@@ -169,7 +126,7 @@ const AdminDashboard = ({
 												destinationsAmount={fbLeadform.fbLeadDestinations.length}
 												handleDelete={handleDeleteFbLeadform}
 												handleEdit={() => editSource(fbLeadform.id)}
-												handleAddDestination={showDestinationsForm}
+												handleAddDestination={() => showDestinationsFormWithDefaultSourceId(fbLeadform.id)}
 											/>
 										)}
 									</ul>
@@ -188,7 +145,6 @@ const AdminDashboard = ({
 										</p>
 										<MdClose size="16" className={!fbLeadforms.length ? 'hide' : null} onClick={() => {
 											hideSourcesForm()
-											// reset()
 										}} style={{cursor: 'pointer'}} />
 									</div>
 									<SourceCreator />
@@ -213,7 +169,7 @@ const AdminDashboard = ({
 										padding: '15px 0px',
 									}}>
 										<p className="text-center h3" style={{margin: '0px'}}>Destinations</p>
-										<button className="btn btn-primary btn-sm hide" onClick={showDestinationsForm}>
+										<button className="btn btn-primary btn-sm" onClick={showDestinationsForm}>
 											Add Destination
 										</button>
 									</div>

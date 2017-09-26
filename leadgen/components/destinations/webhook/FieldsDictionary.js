@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { Field, reduxForm } from 'redux-form'
-import FaClose from 'react-icons/lib/fa/close'
+import MdClose from 'react-icons/lib/md/close'
 import FaArrowsH from 'react-icons/lib/fa/arrows-h'
 
 
@@ -14,9 +14,9 @@ const FieldsDictionary = ({ originalLabels, fields, meta: { error, submitFailed 
 	style={{textDecoration: 'underline', cursor: 'pointer'}} 
 	onClick={() => fields.push({})}>Add Field</a></p>
 	<p className="control-label">
+		Use this to assign custom names to the default fields sent by Facebook.
 		If you leave this empty, it will default to including the raw data 
-		from the previous step. Key, value pairs sent as data. 
-		Do not place raw JSON or form encoded values here!
+		from the Facebook form.
 	</p>
 	{submitFailed &&
 		error &&
@@ -44,9 +44,7 @@ const FieldsDictionary = ({ originalLabels, fields, meta: { error, submitFailed 
 							value={originalLabel.name}>{originalLabel.name}</option>
 					)}
 				</Field>
-				<div onClick={() => fields.remove(index)} className="btn btn-danger btn-xs" style={{margin: '0px 10px'}}>
-					<FaClose size="12" />
-				</div>
+				<MdClose size="62" className="text-danger" onClick={() => fields.remove(index)} style={{margin: '0px 10px', cursor: 'pointer'}} />
 			</div>
 		)}
 	</div>

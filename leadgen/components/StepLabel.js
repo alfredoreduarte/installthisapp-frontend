@@ -8,6 +8,6 @@ const StepLabel = ({
 	fontSize: '10px', 
 	fontWeight: 'bold',
 	textAlign: 'center',
-}}>Step {number} of 4</p>
+}}>Step {number} of 5</p>
 
 export default StepLabel

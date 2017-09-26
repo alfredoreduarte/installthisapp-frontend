@@ -34,11 +34,9 @@ SourceCreator = reduxForm({
 
 const mapStateToProps = (state, props) => {
 	return {
-		// Sloppy validation
-		hasSelectedPage: selector(state, 'fbPageIdentifier'),
-		// 
+		selectedFbPageIdentifier: selector(state, 'fbPageIdentifier'),
 		fbPages: getAllPages(state),
-		fetchingLeadgenForm: state.leadgenUI.activityIndicators.leadgenForm,
+		fetchingLeadgenForms: state.leadgenUI.activityIndicators.leadgenForm,
 		fbLeadgenForms: getFbLeadgenForms(state),
 	}
 }
@@ -54,9 +52,6 @@ const mapDispatchToProps = (dispatch, props) => {
 		handleSubmit: e => {
 			e.preventDefault()
 			return dispatch(newFbLeadform()).then(elForm => {
-				// dispatch(showSourceTestModal(id))
-				console.log('created')
-				console.log(elForm)
 				dispatch(hideSourcesForm())
 				dispatch(destroy(reduxFormName))
 			})
