@@ -6,6 +6,7 @@ import FaEdit from 'react-icons/lib/fa/edit'
 const Source = ({ 
 	id,
 	fbPageName,
+	fbFormName,
 	fbFormId,
 	destinationsAmount,
 	handleDelete,
@@ -37,7 +38,7 @@ const Source = ({
 	}
 	<br/>
 	<small>
-		Form ID {fbFormId} | <a onClick={sendTest} style={{cursor: 'pointer', textDecoration: 'underline'}}>Test</a> | 
+		{fbFormName ? fbFormName : `Form ID ${fbFormId}`} | <a onClick={sendTest} style={{cursor: 'pointer', textDecoration: 'underline'}}>Test</a> | 
 		 <a onClick={handleAddDestination} style={{cursor: 'pointer', textDecoration: 'underline'}}>Add Destination</a>
 	</small>
 </li>

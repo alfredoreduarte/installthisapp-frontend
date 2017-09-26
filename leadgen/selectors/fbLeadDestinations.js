@@ -21,6 +21,7 @@ export const getLeadDestinationsWithMetadata = createSelector(
 				...destination,
 				fbPageIdentifier: form.fbPageIdentifier,
 				fbPageName: _.find(pages, {'identifier': form.fbPageIdentifier}).name,
+				fbFormName: form.fbFormName,
 				fbFormId: form.fbFormId,
 			}
 		})

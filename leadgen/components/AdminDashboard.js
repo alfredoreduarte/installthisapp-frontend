@@ -122,6 +122,7 @@ const AdminDashboard = ({
 												id={fbLeadform.id}
 												sendTest={() => showSourceTestModal(fbLeadform.id)}
 												fbPageName={fbLeadform.fbPageName}
+												fbFormName={fbLeadform.fbFormName}
 												fbFormId={fbLeadform.fbFormId}
 												destinationsAmount={fbLeadform.fbLeadDestinations.length}
 												handleDelete={handleDeleteFbLeadform}
@@ -181,6 +182,7 @@ const AdminDashboard = ({
 													id={fbLeadDestination.id}
 													destinationType={fbLeadDestination.destinationType}
 													fbPageName={fbLeadDestination.fbPageName}
+													fbFormName={fbLeadDestination.fbFormName}
 													fbFormId={fbLeadDestination.fbFormId}
 													status={fbLeadDestination.status}
 													handleDelete={handleDeleteFbLeadDestination}

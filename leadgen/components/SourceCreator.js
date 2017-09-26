@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash'
 import { Link } from 'react-router'
 import { Field, reduxForm } from 'redux-form'
 import FaClose from 'react-icons/lib/fa/close'
@@ -37,15 +38,26 @@ const SourceCreator = ({
 	</div>
 	<div className={`form-group ${selectedFbPageIdentifier || 'hide'}`}>
 		<label className="control-label">Form</label>
+		<Field
+			name={'fbFormName'}
+			type="hidden"
+			component="input" />
 		{fetchingLeadgenForms ? 
 			<p>Fetching forms. Please wait...</p>
 		:
-			<Field name="fbFormId" component="select" className={`form-control ${fbLeadgenForms.length == 0 ? 'hide' : null}`}>
+			<Field name="fbFormId" component="select" className={`form-control ${fbLeadgenForms.length == 0 ? 'hide' : null}`}
+				onChange={e => {
+					const name = _.find(fbLeadgenForms, {'id': e.target.value}).name
+					change('fbFormId', e.target.value)
+					change('fbFormName', name)
+				}}
+			>
 				<option value={''} disabled>-- Form Name --</option>
 				{fbLeadgenForms.map(leadgenForm => 
 					<option 
 						key={leadgenForm.id} 
 						value={leadgenForm.id} 
+						label={leadgenForm.name} 
 						disabled={leadgenForm.status == "ARCHIVED"}
 					>
 						{leadgenForm.status == "ARCHIVED" ? '[ARCHIVED] ' : null}

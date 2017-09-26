@@ -8,6 +8,7 @@ const Destination = ({
 	id,
 	destinationType,
 	fbPageName,
+	fbFormName,
 	fbFormId,
 	status,
 	handleDelete,
@@ -33,7 +34,7 @@ const Destination = ({
 	<b className="text-capitalize">
 		<StatusIndicator active={status == 'on'} />{destinationType}
 	</b> <small className="text-muted">Receiving from {fbPageName}</small><br/>
-	<small>Form ID: {fbFormId}</small>
+	<small>{fbFormName ? fbFormName : `Form ID ${fbFormId}`}</small>
 </li>
 
 export default Destination
