@@ -38,8 +38,15 @@ const Source = ({
 	}
 	<br/>
 	<small>
-		{fbFormName ? fbFormName : `Form ID ${fbFormId}`} | <a onClick={sendTest} style={{cursor: 'pointer', textDecoration: 'underline'}}>Test</a> | 
-		 <a onClick={handleAddDestination} style={{cursor: 'pointer', textDecoration: 'underline'}}>Add Destination</a>
+		{fbFormName ? fbFormName : ''}
+	</small>
+	<br/>
+	<small>
+		Form ID {fbFormId}
+		{' | '}
+		<a onClick={sendTest} style={{cursor: 'pointer', textDecoration: 'underline'}}>Test</a>
+		{' | '}
+		<a onClick={handleAddDestination} style={{cursor: 'pointer', textDecoration: 'underline'}}>Add Destination</a>
 	</small>
 </li>
 
