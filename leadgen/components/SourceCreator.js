@@ -57,7 +57,6 @@ const SourceCreator = ({
 					<option 
 						key={leadgenForm.id} 
 						value={leadgenForm.id} 
-						label={leadgenForm.name} 
 						disabled={leadgenForm.status == "ARCHIVED"}
 					>
 						{leadgenForm.status == "ARCHIVED" ? '[ARCHIVED] ' : null}
