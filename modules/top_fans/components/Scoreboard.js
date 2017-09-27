@@ -23,6 +23,10 @@ import SearchForm from 'components/SearchForm'
 import User from 'components/User'
 
 const Scoreboard = ({
+	// CSV
+	fetchDetailsDemo,
+	generateCsv,
+	// CSV
 	checksum,
 	// toggleResetModal,
 	isCurrentlyPolling,
@@ -79,6 +83,12 @@ const Scoreboard = ({
 						</button>
 						<button className="btn btn-sm btn-default pull-right" onClick={fetch}>
 							Refresh
+						</button>
+						<button className="btn btn-sm btn-default pull-right" onClick={generateCsv}>
+							Export as CSV
+						</button>
+						<button className="btn btn-sm btn-default pull-right" onClick={fetchDetailsDemo}>
+							demo details
 						</button>
 					</ButtonToolbar>
 					}

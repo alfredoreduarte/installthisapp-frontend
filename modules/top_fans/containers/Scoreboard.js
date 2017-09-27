@@ -16,9 +16,10 @@ import {
 	cleanupTopFansEntities, 
 	resetTopFansEntities, 
 	pollTopFansEntities,
+	fetchTopFansDetails,
 } from 'modules/top_fans/actions/entities'
 import { getEntriesForPage } from 'modules/top_fans/selectors/entries'
-import { editAppSpecificSettings, addIgnoredUserIdentifier } from 'modules/top_fans/actions'
+import { editAppSpecificSettings, addIgnoredUserIdentifier, generateCsv } from 'modules/top_fans/actions'
 import ScoreboardView from 'modules/top_fans/components/Scoreboard'
 
 const Scoreboard = props => (
@@ -50,6 +51,9 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => {
 	return {
+		generateCsv: () => dispatch(generateCsv()),
+		// 10211176012778316
+		fetchDetailsDemo: () => dispatch(fetchTopFansDetails(10211176012778316)),
 		// toggleResetModal: () => dispatch({
 		// 	type: 'TOP_FANS/TOGGLE_RESET_MODAL',
 		// }),

@@ -1,3 +1,5 @@
+import 'isomorphic-fetch'
+import downloadjs from 'downloadjs'
 import { normalize } from 'normalizr'
 import * as globalSchema from 'schema'
 import * as schema from 'modules/top_fans/schema'
@@ -5,9 +7,50 @@ import { getCurrentAppByState } from 'selectors/apps'
 import { receiveEntities } from 'actions/entities'
 import { setAlert } from 'actions/alerts'
 import { receiveAdmin } from 'actions/admin'
+import { getEntriesForPage } from 'modules/top_fans/selectors/entries'
 import { toggleActivityUpdatingApp } from 'actions/activityIndicators'
 import { updateApp } from 'actions/apps'
 import { postToApi, getFromApi } from 'api'
+
+// CSV generator
+export const generateCsv = () => {
+	return ( dispatch, getState ) => {
+		const state = getState()
+		const currentApp = getCurrentAppByState(state)
+		const csvHeaders = ['identifier', 'name', 'likes', 'comments', 'score']
+		const entries = getEntriesForPage(state)
+		const arrayOfArrays = entries.map(entry => {
+			return Object.values(entry)
+		})
+		const entriesWithHeaders = [ csvHeaders, ...arrayOfArrays ]
+		console.log('entriesWithHeaders')
+		console.log(entriesWithHeaders)
+		fetch('/generate-csv', {
+				method: 'POST',
+				headers: {
+					// 'Accept': 'application/json',
+					// 'spy-user': spy,
+					'Content-Type': 'application/json',
+					// ...authKeys,
+				},
+				body: JSON.stringify({
+					data: entriesWithHeaders
+				}),
+			})
+			.then(function(resp) {
+				return resp.blob();
+			}).then(function(blob) {
+				downloadjs(blob);
+			})
+			// .then(response => {
+			// 	console.log(response)
+			// })
+			.catch(exception =>
+				console.log('parsing failed', exception)
+			)
+	}
+}
+// CSV generator
 
 export const editAppSpecificSettings = date => {
 	return (dispatch, getState) => {
