@@ -87,7 +87,7 @@ const Scoreboard = ({
 						<button className="btn btn-sm btn-default pull-right" onClick={generateCsv}>
 							Export as CSV
 						</button>
-						<button className="btn btn-sm btn-default pull-right" onClick={fetchDetailsDemo}>
+						<button className="btn btn-sm btn-default pull-right hide" onClick={fetchDetailsDemo}>
 							demo details
 						</button>
 					</ButtonToolbar>
