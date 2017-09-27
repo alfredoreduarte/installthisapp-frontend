@@ -51,7 +51,7 @@ class Root extends Component {
 						component={Intro} />
 					<Route 
 						// path={`/${window.canvasId}(/:checksum)/photos`}
-						path={`/photo_contest(/:checksum)/photos`}
+						path={`/photo_contest/:checksum/photos`}
 						onEnter={(nextState, replace, next) => getPhotos(nextState, replace, next, dispatch)}
 						component={Index} />
 					<Route 
@@ -60,7 +60,7 @@ class Root extends Component {
 						onEnter={requireAuth}
 						component={Upload} />
 					<Route 
-						pathpath={`/photo_contest/:checksum/login`} 
+						path={`/photo_contest/:checksum/login`} 
 						component={Login}/>
 					<Route 
 						// path={`/${window.canvasId}/:checksum/logout`}

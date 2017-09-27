@@ -19,7 +19,7 @@ const ExternalLinksMenu = ({ checksum, appType, fbPageIdentifier, fbAppId, fbApp
 			<li>
 				<a 
 				// href={`/${fbAppCanvasId}/${checksum}`}
-				href={`/${appType}/${checksum}`}
+				href={`/gateway/${checksum}`}
 				target="_blank" rel="noopener"
 				className="text-success">
 					Go to app <small><span className="glyphicon glyphicon-share"></span></small>

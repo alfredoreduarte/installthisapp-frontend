@@ -253,6 +253,9 @@ export const installFacebookTab = () => {
 		})
 		.catch(exception => {
 			console.log('parsing failed', exception)
+			dispatch({
+				type: 'TOGGLE_ACTIVITY/INSTALLING_TAB'
+			})
 			dispatch(setAlert(`Error`, `Unexpected error. Please contact support.`))
 		})
 	}

@@ -24,12 +24,10 @@ export const getStaticContentWithIntroRedirect = (nextState, replace, next, disp
 						// })
 						.then(() => dispatch(fetchImages(`/photos`)))
 						.then(next())
-export const getPhotosWithoutRedirects = (nextState, replace, next, dispatch) =>
-						dispatch(fetchMessages())
-						.then(() => {
-							return dispatch(fetchImages(`/${nextState.params.photoId}`))
-						})
-						.then(next())
+
+export const getPhotosWithoutRedirects = (nextState, replace, next, dispatch) => dispatch(fetchMessages()).then(() => {
+	return dispatch(fetchImages(`/${nextState.params.photoId}`))
+}).then(next())
 
 export function toggleActivityIndicator(){
 	return {
