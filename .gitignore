@@ -47,3 +47,4 @@ dist
 Procfile.dev
 webpack-assets.json
 dump.rdb
+v3-certs

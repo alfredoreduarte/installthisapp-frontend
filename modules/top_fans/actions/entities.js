@@ -22,11 +22,13 @@ export const fetchTopFansDetails = senderId => {
 		const checksum = getCurrentAppByState(getState()).checksum
 		return getFromApi(`applications/${checksum}/detail_by_user_and_page.json?sender_id=${senderId}`)
 		.then( response => {
+			console.log('viene pio comment')
+			console.log(response.payload)
 			dispatch(receiveTopFansDetails(response.payload.user.senderId, {
 				name: response.payload.user.senderName,
 				identifier: response.payload.user.senderId,
-				likes: response.payload.likes,
-				comments: response.payload.comments,
+				likes: response.payload.likes || [], // temporary solution because API returns null instead of an empty array
+				comments: response.payload.comments || [], // temporary solution because API returns null instead of an empty array
 			}))
 		})
 	}
