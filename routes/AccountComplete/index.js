@@ -1,4 +1,4 @@
-module.exports = {
+export default (store, dispatch) => ({
 	path: '/d/complete-profile',
 	onEnter: (nextState, replace) => {
 		analytics.page('Complete Profile')
@@ -11,4 +11,4 @@ module.exports = {
 	indexRoute: {
 		component: require('components/AccountComplete').default
 	}
-}
+})

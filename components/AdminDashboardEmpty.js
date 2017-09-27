@@ -16,7 +16,7 @@ const AdminDashboardEmpty = () => (
 			<br />
 			<p>
 				<Link to='/d/apps/create' className="btn btn-success btn-lg animated fadeInUp">
-					Create your first App
+					Create your first Contest or Catalog
 				</Link>
 			</p>
 		</div>

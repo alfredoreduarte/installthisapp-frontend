@@ -74,7 +74,11 @@ export const fetchAdmin = () => {
 						top.location.href = '/d/complete-profile'
 					}, 300)
 				}
-				// dispatch(push('/d/complete-profile'))
+			}
+			else {
+				if (getState().routing.locationBeforeTransitions.pathname == '/d/complete-profile') {
+					top.location.href = '/d'
+				}
 			}
 			return dispatch(receiveAdmin(admin))
 		})
