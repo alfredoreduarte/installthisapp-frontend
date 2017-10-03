@@ -24,6 +24,7 @@ module.exports = {
 		photo_contest: 'canvas/photo_contest/index.js',
 		memory_match: 'canvas/memory_match/index',
 		catalog: 'canvas/catalog/index',
+		form: 'canvas/form/index',
 	},
 	output: {
 		path: path.join(__dirname, '/dist'),

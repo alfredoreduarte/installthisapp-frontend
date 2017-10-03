@@ -8,7 +8,7 @@ const example = (state = {
 		case 'EXAMPLE/RECEIVE_ENTITIES':
 			return {
 				...state,
-				entities: entities(state.entities, action)
+				entities: entities(state.entities, action),
 				log: action.applicationLog,
 			}
 		default:

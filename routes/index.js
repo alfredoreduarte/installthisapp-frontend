@@ -71,5 +71,6 @@ export const createRoutes = (store, dispatch) => ({
 		},
 		require('routes/Dashboard').default(store, dispatch),
 		require('routes/Design').default(store, dispatch),
+		require('routes/Editor').default(store, dispatch),
 	]
 })

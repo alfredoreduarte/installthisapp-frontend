@@ -94,6 +94,9 @@ app.use(memoryMatchRouter)
 // Catalog
 var catalogRouter = require('./canvas/catalog/server.js')
 app.use(catalogRouter)
+// Form
+var formRouter = require('./canvas/form/server.js')
+app.use(formRouter)
 
 // Serving static HTML
 app.use(function(req, res, next) {

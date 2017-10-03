@@ -5,6 +5,7 @@ const entities = (state = {
 		'photo_contest',
 		'memory_match',
 		'catalog',
+		// 'form',
 	],
 	inactive: [
 		
