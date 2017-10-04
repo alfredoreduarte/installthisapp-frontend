@@ -1,6 +1,6 @@
 export default {
 	"welcomeHeadline": "Headline Text",
-	"welcomeCopy": "Nulla vitae elit libero, a pharetra augue.",
+	"welcomeCopy": "Complete the form to start participating",
 	"startButton": "Start now",
 	"formHeading": "Sign up by providing your info below",
 	"submitButton": "Send",

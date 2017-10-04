@@ -10,8 +10,9 @@ export const receiveEntities = entities => ({
 
 export const fetchEntities = () => {
 	return (dispatch, getState) => {
-		const { checksum } = getState().applicationData
-		const { fetched } = getState().entities
+		const state = getState()
+		const { checksum } = state.applicationData
+		const { fetched } = state.entities
 		if (fetched) {
 			return Promise.resolve(true)
 		}

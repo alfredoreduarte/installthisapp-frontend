@@ -9,8 +9,9 @@ export const receiveSettings = payload => ({
 
 export const fetchSettings = () => {
 	return (dispatch, getState) => {
-		const { checksum } = getState().applicationData
-		const { fetched } = getState().settings
+		const state = getState()
+		const { checksum } = state.applicationData
+		const { fetched } = state.settings
 		if (fetched) {
 			return Promise.resolve(true)
 		}

@@ -33,9 +33,17 @@ const OptionsDictionary = ({ fields, meta: { error, submitFailed } }) =>
 	</p>}
 </div>
 
+const orderField = ({ input: { value, onChange }, meta: { error, submitFailed } }) => (
+	<div className="input-row">
+		<span onClick={() => onChange(value - 1)}>UP</span>
+		<span onClick={() => onChange(value + 1)}>DOWN</span>
+		
+	</div>
+)
+
+
 const FieldsDictionary = ({ schemaFieldsForTypeConditions, fields, meta: { error, submitFailed } }) =>
 <div className="form-group">
-	<p>What information would you like to ask for?</p>
 	{submitFailed && error && <p className="text-danger">{error}</p>}
 	{fields.map((field, index) =>{
 		const este = schemaFieldsForTypeConditions[index]
@@ -53,8 +61,18 @@ const FieldsDictionary = ({ schemaFieldsForTypeConditions, fields, meta: { error
 						className="form-control"
 						placeholder="Question"
 					/>
+					<div className="checkbox">
+						<label>
+							<Field
+								name={`${field}.required`}
+								type="checkbox"
+								component="input"
+							/>
+							Required
+						</label>
+					</div>
 					<MdClose 
-						size="62" 
+						size="42" 
 						className="text-danger" 
 						onClick={() => fields.remove(index)} style={{margin: '0px 10px', cursor: 'pointer'}} />
 				</div>

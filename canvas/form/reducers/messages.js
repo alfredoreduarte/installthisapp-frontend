@@ -5,8 +5,8 @@ const messages = (state = {
 		case 'RECEIVE_MESSAGES':
 			return {
 				...state,
-				fetched: true,
 				...action.payload,
+				fetched: true,
 			}
 		default:
 			return state

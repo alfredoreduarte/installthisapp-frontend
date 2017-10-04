@@ -159,21 +159,6 @@ const uploadFile = (file, signedRequest, url) => {
 	}
 }
 
-// Deprecated:
-// 
-// export const saveImage = body => {
-// 	return (dispatch, getState) => {
-// 		dispatch(toggleActivitySavingDesign())
-// 		const checksum = getState().admin.currentApp
-// 		return postFileToApi(`applications/${checksum}/save_image_from_new_editor.json`, body)
-// 				.then(response => {
-// 					console.log('res', response)
-// 					dispatch(toggleActivitySavingDesign())
-// 					return Promise.resolve(response)
-// 				})
-// 	}
-// }
-
 export const editImage = (key, value) => {
 	return {
 		type: 'EDIT_IMAGES',

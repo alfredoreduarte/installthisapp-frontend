@@ -3,7 +3,7 @@ import { getCurrentAppByState } from 'selectors/apps'
 import * as schema from 'modules/form/schema'
 import { getFromApi } from 'api'
 
-export const receiveEntities = (entities, applicationLog) => ({
+export const receiveEntities = (entities, applicationLog, entries) => ({
 	type: 'FORM/RECEIVE_ENTITIES',
 	entities,
 	applicationLog,
@@ -15,7 +15,6 @@ export const fetchEntities = () => {
 		return getFromApi(`applications/${currentApp.checksum}/entities.json`).then( response => {
 			if (response) {
 				const normalized = normalize(response, schema.entities)
-				console.log(normalized)
 				dispatch(receiveEntities(normalized.entities, response.applicationLog))
 			}
 		})

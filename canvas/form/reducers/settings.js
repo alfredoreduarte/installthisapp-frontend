@@ -5,8 +5,8 @@ const settings = (state = {
 		case 'RECEIVE_SETTINGS':
 			return {
 				...state,
-				fetched: true,
 				...action.payload,
+				fetched: true,
 			}
 		default:
 			return state

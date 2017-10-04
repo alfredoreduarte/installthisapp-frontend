@@ -2,8 +2,10 @@ import React, { Component, PropTypes } from 'react'
 import { Provider, connect } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
 import { getStaticContent, getStaticContentAndEntities } from 'canvas/form/actions'
-import Index from 'canvas/form/containers/Index'
+import WelcomeContainer from 'canvas/form/containers/WelcomeContainer'
 import FormContainer from 'canvas/form/containers/FormContainer'
+import ThanksContainer from 'canvas/form/containers/ThanksContainer'
+import Index from 'canvas/form/containers/Index'
 import Intro from 'canvas/form/containers/Intro'
 import Login from 'canvas/form/containers/Login'
 import Cookies from 'js-cookie'
@@ -30,7 +32,6 @@ class Root extends Component {
 			<Provider store={store}>
 				<Router history={history}>
 					<Route 
-						// path={`/${window.canvasId}(/:checksum)`} 
 						path={`/form(/:checksum)`} 
 						// 
 						// The Intro view downloads only the static assets (images and texts) necessary to show the app
@@ -38,15 +39,15 @@ class Root extends Component {
 						// Some apps may also download the dynamic content (e.g. photos from a photo contest) 
 						// 
 						onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
+						component={WelcomeContainer} />
+					<Route 
+						path={`/form(/:checksum)/form`} 
+						onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
 						component={FormContainer} />
 					<Route 
-						// path={`/${window.canvasId}(/:checksum)/entries`}
-						path={`/form(/:checksum)/entries`}
-						// 
-						// 
-						// 
+						path={`/form(/:checksum)/thanks`}
 						onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
-						component={Index} />
+						component={ThanksContainer} />
 					<Route 
 						// path={`/${window.canvasId}/:checksum/login`} 
 						path={`/form/:checksum/login`} 

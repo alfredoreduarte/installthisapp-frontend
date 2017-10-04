@@ -1,10 +1,12 @@
 import React from 'react'
+import _ from 'lodash'
 import { ButtonToolbar, Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import SearchForm from 'components/SearchForm'
 import User from 'components/User'
 
 const Entries = ({
 	entries,
+	schema,
 	selectedItems,
 	fetchEntries,
 }) => (
@@ -63,28 +65,28 @@ const Entries = ({
 			<Table className="ita-table">
 				<thead>
 					<tr>
-						<th>
-							<span>Name</span>
-						</th>
-						<th>
-							<span>Score</span>
-						</th>
+						{schema.map(field =>
+							<th key={field.id}>
+								<span>{field.question}</span>
+							</th>
+						)}
+						<td>
+							Sent at
+						</td>
 					</tr>
 				</thead>
 				<tbody>
 					{entries.map(entry => 
-					<tr key={entry.id}>
-						<td>
-							<User 
-								name={entry.user.name} 
-								identifier={entry.user.identifier} 
-								small
-								 />
-						</td>
-						<td>
-							{entry.score}
-						</td>
-					</tr>
+						<tr key={entry.id}>
+							{entry.payload.map( (data, index) =>
+								<td key={data.id}>
+									{data.content}
+								</td>
+							)}
+							<td>
+								{entry.createdAt}
+							</td>
+						</tr>
 					)}
 				</tbody>
 			</Table>

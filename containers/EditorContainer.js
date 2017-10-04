@@ -6,22 +6,30 @@ import { push } from 'react-router-redux'
 import { saveForm } from 'modules/form/actions'
 import { getSchema } from 'modules/form/selectors/schema'
 import Editor from 'components/Editor'
+import EditorPreview from 'components/EditorPreview'
 
-let EditorContainer = props => <Editor {...props} />
+let EditorContainer = props => <div>
+	<Editor {...props} />
+	<EditorPreview {...props} />
+</div>
 
 EditorContainer = reduxForm({
 	form: 'formEditor',
 })(EditorContainer)
 
-// const selector = formValueSelector('formEditor')
+const selector = formValueSelector('formEditor')
 
 const mapStateToProps = (state, props) => {
 	return {
 		initialValues: {
 			messages: {...state.styles.messages},
+			settings: {...state.styles.settings},
+			images: {...state.styles.images},
 			schema: getSchema(state),
 		},
-		// schemaFieldsForTypeConditions: selector(state, 'FieldsDictionary'),
+		selectedValues: {
+			welcomeLayout: selector(state, 'settings.welcomeLayout')
+		},
 	}
 }
 

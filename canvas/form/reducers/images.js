@@ -5,8 +5,8 @@ const images = (state = {
 		case 'RECEIVE_IMAGES':
 			return {
 				...state,
-				fetched: true,
 				...action.payload,
+				fetched: true,
 			}
 		default:
 			return state

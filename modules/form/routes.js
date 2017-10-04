@@ -19,34 +19,12 @@ export default (store, dispatch) => ({
 						require.ensure([], (require) => {
 							dispatch(turnOffGlobalIndicator())
 							cb(null, {
-								main: require('modules/form/containers/Entries').default,
+								main: require('modules/form/containers/EntriesContainer').default,
 								sidebar: require('modules/form/components/Sidebar').default,
 							})
 						})
 					}
 				},
-				// {
-				// 	path: 'editor',
-				// 	getComponent(nextState, cb) {
-				// 		require.ensure([], require => {
-				// 			dispatch(turnOffGlobalIndicator())
-				// 			cb(null, require('containers/EditorContainer').default)
-				// 		})
-				// 	},
-				// 	onEnter: (nextState, replace, next) => {
-				// 		dispatch(turnOnGlobalIndicator())
-				// 		// analytics.page('Form Wizard')
-				// 		dispatch(fetchStyles()).then(() => {
-				// 			dispatch(fetchMessages()).then(() => {
-				// 				dispatch(fetchSettings()).then(() => {
-				// 					dispatch(fetchEntities()).then(() => {
-				// 						dispatch(fetchImages()).then(() => next())
-				// 					})
-				// 				})
-				// 			})
-				// 		})
-				// 	},		
-				// },
 			])
 		})
 	},
