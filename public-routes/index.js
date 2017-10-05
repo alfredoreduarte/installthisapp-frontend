@@ -76,27 +76,20 @@ router.get('/reset-password', function(req, res) { res.render('reset-password', 
 // }) })
 
 // Module landings
+const topFansHandler = function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
+	canonical: '/top-fans',
+	app: "top_fans",
+	appExampleLink: 'https://v3.installthisapp.com/app2/DUPFER',
+	pageTitle: "Top Fans Ranking for Facebook Pages",
+	pageSubTitle: "This app scans your Facebook Page's timeline to collect every single like and comment in real time. Scores are shown in a list, with your own style, and you can share it everywhere.",
+	whatCanIDoQuestion: "What can I do with the Top Fans app?",
+	whatCanIDoAnswer: "Save hundreds of $ by incentivizing people to like and comment on your content instead of paying for promoted posts",
+	createText: "Create a Top Fans app",
+})) }
+router.get('/top-fans-for-facebook-pages.html', topFansHandler)
+router.get('/top-fans/', topFansHandler)
+router.post('/top-fans/', topFansHandler)
 
-router.get('/top-fans-for-facebook-pages.html', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
-	canonical: '/top-fans',
-	app: "top_fans",
-	appExampleLink: 'https://v3.installthisapp.com/app2/DUPFER',
-	pageTitle: "Top Fans Ranking for Facebook Pages",
-	pageSubTitle: "This app scans your Facebook Page's timeline to collect every single like and comment in real time. Scores are shown in a list, with your own style, and you can share it everywhere.",
-	whatCanIDoQuestion: "What can I do with the Top Fans app?",
-	whatCanIDoAnswer: "Save hundreds of $ by incentivizing people to like and comment on your content instead of paying for promoted posts",
-	createText: "Create a Top Fans app",
-})) })
-router.use('/top-fans/', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
-	canonical: '/top-fans',
-	app: "top_fans",
-	appExampleLink: 'https://v3.installthisapp.com/app2/DUPFER',
-	pageTitle: "Top Fans Ranking for Facebook Pages",
-	pageSubTitle: "This app scans your Facebook Page's timeline to collect every single like and comment in real time. Scores are shown in a list, with your own style, and you can share it everywhere.",
-	whatCanIDoQuestion: "What can I do with the Top Fans app?",
-	whatCanIDoAnswer: "Save hundreds of $ by incentivizing people to like and comment on your content instead of paying for promoted posts",
-	createText: "Create a Top Fans app",
-})) })
 router.get('/photo-contest.html', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
 	canonical: '/photo-contest',
 	app: "photo_contest",
@@ -128,6 +121,17 @@ router.get('/trivia-contest.html', function(req, res) { res.render('landing-v2/a
 	createText: "Create a Trivia app and write some questions",
 })) })
 router.use('/trivia', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
+	canonical: '/trivia',
+	app: "trivia",
+	appExampleLink: 'https://v3.installthisapp.com/app1/ZRRDDP',
+	pageTitle: "Trivia game for Social Campaigns",
+	pageSubTitle: "Test your audience's knowledge about any subject, and spice it up a bit with a countdown",
+	whatCanIDoQuestion: "What can I do with the Trivia app?",
+	whatCanIDoAnswer: "Test your audience's knowledge about any subject, and spice it up a bit with a countdown",
+	createText: "Create a Trivia app and write some questions",
+})) })
+// avoiding URL conflict with trivia canvas POST
+router.post('/trivia-fb-search/', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
 	canonical: '/trivia',
 	app: "trivia",
 	appExampleLink: 'https://v3.installthisapp.com/app1/ZRRDDP',
