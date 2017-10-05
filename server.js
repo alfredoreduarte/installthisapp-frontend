@@ -129,7 +129,7 @@ app.get('/d*', dashboard)
 app.get('/leadgen*', leadgen)
 app.get('/campaign*', campaign)
 app.get('/gateway*', canvasGateway)
-app.use('/*', index)
+app.all('/*', index)
 
 // 
 // === AWS Uploader ===

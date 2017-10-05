@@ -87,10 +87,12 @@ const topFansHandler = function(req, res) { res.render('landing-v2/app', _.merge
 	createText: "Create a Top Fans app",
 })) }
 router.get('/top-fans-for-facebook-pages.html', topFansHandler)
-router.get('/top-fans/', topFansHandler)
-router.post('/top-fans/', topFansHandler)
+router.all('/top-fans/', topFansHandler)
 
-router.get('/photo-contest.html', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
+const memoryMatchHandler = function(req, res) { res.redirect('/apps') }
+router.all('/memory-match/', memoryMatchHandler)
+
+const photoContestHandler = function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
 	canonical: '/photo-contest',
 	app: "photo_contest",
 	appExampleLink: 'https://v3.installthisapp.com/app3/7EHEU0',
@@ -99,18 +101,11 @@ router.get('/photo-contest.html', function(req, res) { res.render('landing-v2/ap
 	whatCanIDoQuestion: "What can I do with the Photo Contest app?",
 	whatCanIDoAnswer: "Imagine launching a competition where people share their favorite christmas photos and ask all of their friends for votes.",
 	createText: "Create a Top Fans app",
-})) })
-router.use('/photo-contest', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
-	canonical: '/photo-contest',
-	app: "photo_contest",
-	appExampleLink: 'https://v3.installthisapp.com/app3/7EHEU0',
-	pageTitle: "Photo Contest for social media campaigns",
-	pageSubTitle: "Create contests about people's best holiday, birthday, conert photos",
-	whatCanIDoQuestion: "What can I do with the Photo Contest app?",
-	whatCanIDoAnswer: "Imagine launching a competition where people share their favorite christmas photos and ask all of their friends for votes.",
-	createText: "Create a Top Fans app",
-})) })
-router.get('/trivia-contest.html', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
+})) }
+router.get('/photo-contest.html', photoContestHandler)
+router.all('/photo-contest', photoContestHandler)
+
+const triviaHandler = function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
 	canonical: '/trivia',
 	app: "trivia",
 	appExampleLink: 'https://v3.installthisapp.com/app1/ZRRDDP',
@@ -119,27 +114,10 @@ router.get('/trivia-contest.html', function(req, res) { res.render('landing-v2/a
 	whatCanIDoQuestion: "What can I do with the Trivia app?",
 	whatCanIDoAnswer: "Test your audience's knowledge about any subject, and spice it up a bit with a countdown",
 	createText: "Create a Trivia app and write some questions",
-})) })
-router.use('/trivia', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
-	canonical: '/trivia',
-	app: "trivia",
-	appExampleLink: 'https://v3.installthisapp.com/app1/ZRRDDP',
-	pageTitle: "Trivia game for Social Campaigns",
-	pageSubTitle: "Test your audience's knowledge about any subject, and spice it up a bit with a countdown",
-	whatCanIDoQuestion: "What can I do with the Trivia app?",
-	whatCanIDoAnswer: "Test your audience's knowledge about any subject, and spice it up a bit with a countdown",
-	createText: "Create a Trivia app and write some questions",
-})) })
+})) }
+router.get('/trivia-contest.html', triviaHandler)
+router.all('/trivia', triviaHandler)
 // avoiding URL conflict with trivia canvas POST
-router.post('/trivia-fb-search/', function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {
-	canonical: '/trivia',
-	app: "trivia",
-	appExampleLink: 'https://v3.installthisapp.com/app1/ZRRDDP',
-	pageTitle: "Trivia game for Social Campaigns",
-	pageSubTitle: "Test your audience's knowledge about any subject, and spice it up a bit with a countdown",
-	whatCanIDoQuestion: "What can I do with the Trivia app?",
-	whatCanIDoAnswer: "Test your audience's knowledge about any subject, and spice it up a bit with a countdown",
-	createText: "Create a Trivia app and write some questions",
-})) })
+router.all('/trivia-fb-search/', triviaHandler)
 
 module.exports = router
