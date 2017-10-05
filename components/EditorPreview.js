@@ -7,7 +7,7 @@ import { updateInfo } from 'actions/admin'
 import FieldsDictionary from 'components/form-editor/FieldsDictionary'
 
 const EditorPreview = ({ array, handleSubmit }) => 
-<div className="col-sm-6">
+<div className="editor-preview">
 	<img src="/images/iphone6-portrait.png" />
 </div>
 

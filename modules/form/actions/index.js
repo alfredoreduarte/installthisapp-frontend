@@ -10,6 +10,13 @@ export const saveForm = () => {
 		const state = getState()
 		const checksum = getCurrentAppByState(state).checksum
 		const formSchema = state.form.formEditor.values.schema
+		const fields = state.form.formEditor.registeredFields.map(field => field.name)
+		// Redux-form actions
+		dispatch({
+			type: '@@redux-form/START_SUBMIT',
+			meta: { form: 'formEditor', fields },
+			error: false
+		})
 		return postToApi(`applications/${checksum}/save.json`, {
 			schema: formSchema
 		}).then( response => {
@@ -18,7 +25,6 @@ export const saveForm = () => {
 
 				// Use this instead of saveStyles at actions/styles because
 				// now we're using redux-form
-				dispatch(toggleActivitySavingDesign())
 				const cssString = css.stringify(state.styles.ruleset)
 				const messages = JSON.stringify(state.form.formEditor.values.messages)
 				const images = JSON.stringify(state.form.formEditor.values.images)
@@ -28,7 +34,19 @@ export const saveForm = () => {
 					messages,
 					images,
 					settings,
-				}).then(response => dispatch(toggleActivitySavingDesign()))
+				}).then(response => {
+					// Redux-form actions
+					dispatch({
+						type: '@@redux-form/STOP_SUBMIT',
+						meta: { form: 'formEditor', fields },
+						error: false
+					})
+					dispatch({
+						type: '@@redux-form/SET_SUBMIT_SUCCEEDED',
+						meta: { form: 'formEditor', fields },
+						error: false
+					})
+				})
 			}
 		})
 	}

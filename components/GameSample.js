@@ -17,15 +17,8 @@ const GameSample = ({ screen, previews, messages, images, settings, coso }) => (
 )
 
 const mapStateToProps = (state, ownProps) => {
-	// const coso = require(`../canvas/${ownProps.previews}/containers/Previews`).default
-	// const coso = require(`!babel!../canvas/${ownProps.previews}/containers/Previews`).default
-	// const defaultStyles = require(`!css!sass!../assets/canvas/${params.application.application_type}.sass`).toString()
-	// console.log('coso')
-	// console.log(coso)
-	// console.log(React.isValidElement(coso))
 	return {
 		screen: state.styles.screen,
-		// coso,
 	}	
 }
 

@@ -19,6 +19,7 @@ import mouseTrap from 'reducers/design-helper/mouseTrap'
 import activityIndicators from 'reducers/activityIndicators'
 import applicationData from 'reducers/applicationData'
 import applicationLog from 'reducers/applicationLog'
+import formEditorUI from 'reducers/formEditorUI'
 
 // Modules
 import trivia from 'modules/trivia/reducers/'
@@ -49,6 +50,7 @@ const createReducer = asyncReducers => {
 		applicationData,
 		applicationLog,
 		form: formReducer,
+		formEditorUI,
 		trivia,
 		topFans,
 		photoContest,

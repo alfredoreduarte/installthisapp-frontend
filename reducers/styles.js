@@ -1,7 +1,8 @@
 import _ from 'lodash'
 
 const initialState = {
-	platform: 'desktop',
+	// platform: 'desktop',
+	platform: 'mobile',
 	screen: 'intro',
 	componentsOrBody: 'content',
 	hoveredSelector: [],
