@@ -26,7 +26,7 @@ let WelcomeForm = ({ active, selectedValues }) =>
 					<div className="form-group">
 						<label className="col-sm-2 control-label">Flyer</label>
 						<div className="col-sm-10">
-							<Field name={'images.welcome'} component={ImageUploaderDropZone} />
+							<Field name={'images.welcome'} recommendedDimensions="820x1000" component={ImageUploaderDropZone} />
 							<p className="help-block">The image will act as a link to the next screen, so you might want to include a button in your design.</p>
 						</div>
 					</div>
@@ -37,7 +37,7 @@ let WelcomeForm = ({ active, selectedValues }) =>
 				<div className="form-group">
 					<label className="col-sm-2 control-label">Header image</label>
 					<div className="col-sm-10">
-						<Field name={'images.header'} component={ImageUploaderDropZone} />
+						<Field name={'images.header'} recommendedDimensions="820x250" component={ImageUploaderDropZone} />
 					</div>
 				</div>
 				<div className="form-group">
