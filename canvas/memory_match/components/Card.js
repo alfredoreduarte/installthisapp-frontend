@@ -10,7 +10,7 @@ const Card = ({
 }) => (
 	<div className={`Card ${flipped ? 'card-flipped' : ''}`} onClick={() => flipped ? void(0) : onFlip()} style={{visibility: hidden ? 'hidden' : 'visible'}}>
 		<div className="face front" style={{
-			backgroundImage: `url(${cardBack})`,
+			backgroundImage: `url("${cardBack}")`,
 		}}></div>
 		<div className="face back" style={{
 			backgroundImage: `url("${attachmentUrl}")`,
