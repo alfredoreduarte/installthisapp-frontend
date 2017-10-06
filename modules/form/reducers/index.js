@@ -1,10 +1,14 @@
 import entities from 'modules/form/reducers/entities'
 
-const form = (state = {
+const defaultState = {
 	log: {},
 	entities: {},
-}, action) => {
+}
+
+const form = (state = defaultState, action) => {
 	switch (action.type) {
+		case 'ALL_MODULES/CLEANUP':
+			return defaultState
 		case 'FORM/RECEIVE_ENTITIES':
 			return {
 				...state,

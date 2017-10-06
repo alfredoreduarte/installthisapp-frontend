@@ -2,13 +2,17 @@ import _ from 'lodash'
 import questions from 'modules/trivia/reducers/questions'
 import answers from 'modules/trivia/reducers/answers'
 
-const trivia = (state = {
+const defaultState = {
 	log: {},
 	questions: {},
 	answers: {},
 	options: {},
-}, action) => {
+}
+
+const trivia = (state = defaultState, action) => {
 	switch (action.type) {
+		case 'ALL_MODULES/CLEANUP':
+			return defaultState
 		case 'TRIVIA/DELETE_QUESTION':
 			return Object.assign({}, state, {
 				questions: questions(state.questions, action)

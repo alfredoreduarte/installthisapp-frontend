@@ -3,17 +3,18 @@ import _ from 'lodash'
 import ui from 'modules/top_fans/reducers/ui'
 import wizard from 'modules/top_fans/reducers/wizard'
 
-const topFans = (state = {
-	// settings: {},
+const defaultState = {
 	wizard: wizard(undefined, {}),
-	log: {},
 	ui: ui(undefined, {}),
+	log: {},
 	entries: {},
 	details: {},
-}, action) => {
+}
+
+const topFans = (state = defaultState, action) => {
 	switch (action.type) {
-		// case 'TOP_FANS/RECEIVE_SETTINGS':
-			// return { ...state, settings: settings(state.settings, action) }
+		case 'ALL_MODULES/CLEANUP':
+			return defaultState
 		case 'UPDATE_WIZARD_STEP':
 		case 'WIZARD_UPDATE_FB_PAGE':
 		case 'WIZARD_TOGGLE_TRACK_FROM_DATE':

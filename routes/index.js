@@ -25,23 +25,27 @@ export const createRoutes = (store, dispatch) => ({
 	path: '/d',
 	component: require('containers/Application').default,
 	indexRoute: {
-		component: require('containers/AdminDashboard').default
-	},
-	onChange: (prevState, nextState, replace, next) => {
-		if (nextState.location.pathname == '/d') {
-			dispatch(fetchAdmin()).then(() => {
-				next()
+		getComponent(nextState, cb) {
+			require.ensure([], (require) => {
+				// 
+				// Un-instantiate all apps
+				// 
+				dispatch({
+					type: 'ALL_MODULES/CLEANUP'
+				})
+				dispatch(fetchAdmin()).then(() => {
+					cb(null, require('containers/AdminDashboard').default)
+				})
 			})
 		}
-		else{
-			next()
-		}
 	},
+	onChange: (prevState, nextState, replace, next) => next(),
 	onEnter: (nextState, replace, next) => {
 		analytics.page('Admin Dashboard')
 		shouldTrackOffer(nextState.location.query["offer"])
 		shouldTrackAccountConfirmation(nextState.location.query["account_confirmation_success"])
 		dispatch(fetchAdmin()).then(() => {
+			console.log('onEnter')
 			next()
 		})
 	},

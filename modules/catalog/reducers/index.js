@@ -1,12 +1,16 @@
 import ui from 'modules/catalog/reducers/ui'
 import entities from 'modules/catalog/reducers/entities'
 
-const catalog = (state = {
+const defaultState = {
 	log: {},
 	ui: {},
 	entities: {},
-}, action) => {
+}
+
+const catalog = (state = defaultState, action) => {
 	switch (action.type) {
+		case 'ALL_MODULES/CLEANUP':
+			return defaultState
 		case 'CATALOG/RECEIVE_ENTITIES':
 			return {
 				...state,

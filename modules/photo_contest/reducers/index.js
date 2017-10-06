@@ -2,13 +2,17 @@ import ui from 'modules/photo_contest/reducers/ui'
 import photos from 'modules/photo_contest/reducers/photos'
 import votes from 'modules/photo_contest/reducers/votes'
 
-const photoContest = (state = {
+const defaultState = {
 	log: {},
 	ui: {},
 	photos: {},
 	votes: {},
-}, action) => {
+}
+
+const photoContest = (state = defaultState, action) => {
 	switch (action.type) {
+		case 'ALL_MODULES/CLEANUP':
+			return defaultState
 		case 'PHOTO_CONTEST/SHOW_WINNER_MODAL':
 			return {
 				...state,

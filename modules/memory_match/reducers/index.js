@@ -1,10 +1,14 @@
 import entities from 'modules/memory_match/reducers/entities'
 
-const memoryMatch = (state = {
+const defaultState = {
 	log: {},
 	entities: {},
-}, action) => {
+}
+
+const memoryMatch = (state = defaultState, action) => {
 	switch (action.type) {
+		case 'ALL_MODULES/CLEANUP':
+			return defaultState
 		case 'MEMORY_MATCH/RECEIVE_ENTITIES':
 			return {
 				...state,
