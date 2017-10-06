@@ -7,12 +7,6 @@ import Image from 'canvas/form/components/Image'
 
 const Thanks = ({ messages, images, settings }) => 
 <div>
-	<div className="text-center">
-		<img src={images.header} style={{
-			width: '820px',
-			maxWidth: '100%',
-		}} />
-	</div>
 	<div className="container-fluid">
 		<div className="col-xs-12 col-md-6 col-md-offset-3 text-center">
 			<h1 style={{

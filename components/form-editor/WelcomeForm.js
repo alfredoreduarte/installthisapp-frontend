@@ -4,9 +4,9 @@ import { reduxForm, formValueSelector } from 'redux-form'
 import { Field, FieldArray } from 'redux-form'
 import ImageUploaderDropZone from 'components/form-editor/ImageUploaderDropZone'
 
-let WelcomeForm = ({ active, selectedValues }) => 
+let WelcomeForm = ({ active, selectedValues, onTitleClick }) => 
 <div className={`editor-tab-item ${active && 'active'}`}>
-	<div className="editor-tab-item-title">
+	<div className="editor-tab-item-title" onClick={onTitleClick}>
 		Welcome screen
 	</div>
 	<div className="editor-tab-item-body">

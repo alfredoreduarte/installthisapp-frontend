@@ -19,22 +19,22 @@ const OptionsDictionary = ({ input, label, type, meta: { touched, error } }) =>
 		<span key={key} {...other}>
 			{getTagDisplayValue(tag)}
 				{!disabled &&
-				<a className={classNameRemove} onClick={(e) => onRemove(key)}><MdClear size={16} style={{
-					color: 'white',
-					cursor: 'pointer',
-				}} /></a>
+				<a className={classNameRemove} onClick={(e) => onRemove(key)}>
+					<MdClear size={16} style={{
+						color: 'white',
+						cursor: 'pointer',
+					}} />
+				</a>
 			}
 		</span>
 	}
-	onChange={tags => {
-		console.log(tags)
-		input.onChange(tags)
-	}} />
+	onChange={ tags => input.onChange(tags) } />
 
 const NiceFieldType = ({ type }) => <div className="editor-field-type">
 	{type == 'email' && 'Email'}
 	{type == 'shortText' && 'Short Text'}
 	{type == 'longText' && 'Long Text'}
+	{type == 'multipleChoice' && 'Multiple Choice'}
 </div>
 
 const FormFieldsArray = ({ activeFieldIndex, schemaFieldsForTypeConditions, changeIndex, fields, meta }) =>

@@ -2,9 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Summary from 'modules/example/components/Summary'
 
-const Dashboard = ({ checksum, type, entries }) => (
-	<Summary checksum={checksum} type={type} entries={entries} />
-)
+const Dashboard = props => <Summary {...props} />
 
 const mapStateToProps = (state, props) => {
 	return {

@@ -25,10 +25,10 @@ const Editor = ({ platform, handleSubmit, submitting, selectedValues, setEditorS
 					)}
 				</div>
 				<form onSubmit={handleSubmit} className="editor-tabs-container">
-					<WelcomeForm active={editorCurrentStep == 0} />
-					<EntryForm active={editorCurrentStep == 1} />
-					<LegalForm active={editorCurrentStep == 2} />
-					<ThankYouForm active={editorCurrentStep == 3} />
+					<WelcomeForm onTitleClick={() => setEditorStep(0)} active={editorCurrentStep == 0} />
+					<EntryForm onTitleClick={() => setEditorStep(1)} active={editorCurrentStep == 1} />
+					<LegalForm onTitleClick={() => setEditorStep(2)} active={editorCurrentStep == 2} />
+					<ThankYouForm onTitleClick={() => setEditorStep(3)} active={editorCurrentStep == 3} />
 					<div className="editor-tabs-container-footer">
 						{editorCurrentStep < 3 && <a 
 							href="javascript:void(0)" 
