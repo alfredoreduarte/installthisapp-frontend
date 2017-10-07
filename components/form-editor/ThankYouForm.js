@@ -60,8 +60,10 @@ let ThankYouForm = ({ active, onTitleClick }) =>
 	</div>
 </div>
 
+const reduxFormName =  'formEditor'
+
 ThankYouForm = reduxForm({
-	form: 'formEditor',              // <------ same form name
+	form: reduxFormName,              // <------ same form name
 	destroyOnUnmount: false,     // <------ preserve form data
 })(ThankYouForm)
 

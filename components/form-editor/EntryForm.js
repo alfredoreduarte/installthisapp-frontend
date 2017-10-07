@@ -27,25 +27,21 @@ let EntryForm = ({ array, active, onTitleClick }) =>
 			<h5 className="text-center">What information would you like to ask for?</h5>
 			<div className="editor-form-button-rack">
 				<a className="btn btn-sm btn-primary btn-outline" onClick={() => array.push('schema', {
-					index: 0,
 					question: 'Question text',
 					id: v4(),
 					type: 'shortText',
 				})}>Short text</a>
 				<a className="btn btn-sm btn-success btn-outline" onClick={() => array.push('schema', {
-					index: 0,
 					question: 'Question text',
 					id: v4(),
 					type: 'longText',
 				})}>Long text field</a>
 				<a className="btn btn-sm btn-danger btn-outline" onClick={() => array.push('schema', {
-					index: 0,
 					question: 'Question text',
 					id: v4(),
 					type: 'email',
 				})}>Email</a>
 				<a className="btn btn-sm btn-warning btn-outline" onClick={() => array.push('schema', {
-					index: 0,
 					question: 'Question text',
 					id: v4(),
 					type: 'multipleChoice',
@@ -140,8 +136,10 @@ let EntryForm = ({ array, active, onTitleClick }) =>
 	</div>
 </div>
 
+const reduxFormName =  'formEditor'
+
 EntryForm = reduxForm({
-	form: 'formEditor',              // <------ same form name
+	form: reduxFormName,              // <------ same form name
 	destroyOnUnmount: false,     // <------ preserve form data
 })(EntryForm)
 

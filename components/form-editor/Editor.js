@@ -6,9 +6,9 @@ import WelcomeForm from 'components/form-editor/WelcomeForm'
 import EntryForm from 'components/form-editor/EntryForm'
 import LegalForm from 'components/form-editor/LegalForm'
 import ThankYouForm from 'components/form-editor/ThankYouForm'
-import EditorPreview from 'components/form-editor/EditorPreview'
+import PreviewContainer from 'containers/form-editor/PreviewContainer'
 
-const Editor = ({ platform, handleSubmit, submitting, selectedValues, setEditorStep, editorCurrentStep }) => 
+const Editor = ({ handleSubmit, submitting, selectedValues, setEditorStep, editorCurrentStep }) => 
 <div>
 	<NavBar />
 	<div className="container">
@@ -16,12 +16,9 @@ const Editor = ({ platform, handleSubmit, submitting, selectedValues, setEditorS
 			<div className="editor-forms-column">
 				<div className="editor-steps-list">
 					{['welcome', 'entry', 'legal', 'thankyou'].map((step, index) =>
-						<a 
-							key={index} 
-							href="javascript:void(0)" 
-							className={`editor-steps-list-item ${editorCurrentStep == index ? 'active' : ''}`}
-							onClick={() => setEditorStep(index)}
-						>{index + 1}</a>	
+						<div key={index} className={`editor-steps-list-item ${editorCurrentStep == index ? 'active' : ''}`} onClick={() => setEditorStep(index)}>
+							{index + 1}
+						</div>	
 					)}
 				</div>
 				<form onSubmit={handleSubmit} className="editor-tabs-container">
@@ -40,7 +37,7 @@ const Editor = ({ platform, handleSubmit, submitting, selectedValues, setEditorS
 					</div>
 				</form>
 			</div>
-			<EditorPreview platform={platform} />
+			<PreviewContainer />
 		</div>
 	</div>
 </div>

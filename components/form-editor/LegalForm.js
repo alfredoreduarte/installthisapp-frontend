@@ -38,8 +38,10 @@ let Legal = ({ active, onTitleClick }) =>
 	</div>
 </div>
 
+const reduxFormName =  'formEditor'
+
 Legal = reduxForm({
-	form: 'formEditor',              // <------ same form name
+	form: reduxFormName,              // <------ same form name
 	destroyOnUnmount: false,     // <------ preserve form data
 })(Legal)
 

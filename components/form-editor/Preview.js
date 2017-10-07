@@ -1,26 +1,15 @@
 import React from 'react'
-import _ from 'lodash'
 import Frame from 'react-frame-component'
-import { connect } from 'react-redux'
 import TiMediaPlayReverse from 'react-icons/lib/ti/media-play-reverse'
 import TiMediaPlay from 'react-icons/lib/ti/media-play'
-import { setCurrentScreen } from 'actions/styles'
-import Previews from 'canvas/form/containers/Previews'
 import PlatformSelector from 'components/form-editor/PlatformSelector'
 
-const PreviewsForm = require('canvas/form/containers/Previews').default.screens
-// Provisorio
-
-const screens = {
-	form: PreviewsForm,
-}
-
-const EditorPreview = ({ platform, handleScreenChange, currentScreen, screensLength, currentScreenIndex, currentScreenLabel, availableScreens }) => 
+const EditorPreview = ({ platform, handleScreenChange, currentScreen, screensLength, currentScreenIndex, currentScreenLabel, availableScreens, previews }) => 
 <div className={`editor-preview-column ${platform}`}>
 	<Frame 
 		className={`editor-preview-frame ${platform}`}
 		head={<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />}>
-		<Previews />
+		{previews}
 	</Frame>
 	<div className="editor-preview-navigation">
 		{false && <PlatformSelector />}
@@ -41,22 +30,4 @@ const EditorPreview = ({ platform, handleScreenChange, currentScreen, screensLen
 	</div>
 </div>
 
-const mapStateToProps = (state, props) => {
-	const screenObject = _.find(screens['form'], {'value': state.styles.screen})
-	const availableScreens = screens['form']
-	return {
-		screensLength: availableScreens.length,
-		currentScreen: state.styles.screen,
-		currentScreenIndex: availableScreens.indexOf(screenObject),
-		currentScreenLabel: screenObject.label,
-		availableScreens: availableScreens,
-	}
-}
-
-const mapDispatchToProps = (dispatch, props) => ({
-	handleScreenChange: screenIndex => {
-		dispatch(setCurrentScreen(screens['form'][screenIndex].value))
-	},
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(EditorPreview)
+export default EditorPreview
