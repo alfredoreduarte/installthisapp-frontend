@@ -7,26 +7,20 @@ import { setEditorStep } from 'actions/formEditorUI'
 import { saveForm } from 'modules/form/actions'
 import { setCurrentScreen } from 'actions/styles'
 import { getSchema } from 'modules/form/selectors/schema'
-import Editor from 'components/Editor'
+import Editor from 'components/form-editor/Editor'
 
-let EditorContainer = props => 
-<div className="editor-main-wrapper">
-	<div className="">
-		<Editor {...props} />
-	</div>
-</div>
+let EditorContainer = props => <div className="editor-main-wrapper"><Editor {...props} /></div>
+
+const reduxFormName =  'formEditor'
 
 EditorContainer = reduxForm({
-	form: 'formEditor',
-	// onSubmit: submit,
-	// onSubmit: saveForm,
+	form: reduxFormName,
 })(EditorContainer)
 
-const selector = formValueSelector('formEditor')
+const selector = formValueSelector(reduxFormName)
 
 const mapStateToProps = (state, props) => {
 	return {
-		platform: state.styles.platform,
 		editorCurrentStep: state.formEditorUI.formStep,
 		initialValues: {
 			messages: {...state.styles.messages},

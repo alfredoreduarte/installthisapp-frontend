@@ -132,6 +132,7 @@ $gray-lighter: #F2F4F7
 	color: $gray-light
 	font-size: 18px
 	transition: color linear 100ms
+	cursor: pointer
 	&:hover, &:active, &:focus
 		color: $editor-highlight
 		text-decoration: none
@@ -153,7 +154,7 @@ $gray-lighter: #F2F4F7
 			color: $gray
 		.editor-tab-item-body
 			display: flex
-		& + .editor-tab-item
+		& ~ .editor-tab-item
 			display: none
 .editor-tab-item-title
 	color: $gray-light
@@ -162,6 +163,9 @@ $gray-lighter: #F2F4F7
 	align-items: center
 	display: flex
 	margin-bottom: 16px
+	cursor: pointer
+	&:hover
+		color: $gray
 .editor-tab-item-body
 	overflow: scroll
 	display: none

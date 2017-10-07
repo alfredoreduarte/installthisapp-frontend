@@ -1,8 +1,6 @@
 import React from 'react'
-import _ from 'lodash'
 import { ButtonToolbar, Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import SearchForm from 'components/SearchForm'
-import User from 'components/User'
 
 const Entries = ({
 	entries,
@@ -70,22 +68,19 @@ const Entries = ({
 								<span>{field.question}</span>
 							</th>
 						)}
-						<td>
-							Sent at
-						</td>
+						<th>
+							<span>Created at</span>
+						</th>
 					</tr>
 				</thead>
 				<tbody>
 					{entries.map(entry => 
-						<tr key={entry.id}>
-							{entry.payload.map( (data, index) =>
-								<td key={data.id}>
-									{data.content}
+						<tr key={entry}>
+							{entry.map( (data, index) =>
+								<td key={index}>
+									{data}
 								</td>
 							)}
-							<td>
-								{entry.createdAt}
-							</td>
 						</tr>
 					)}
 				</tbody>

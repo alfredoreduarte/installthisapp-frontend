@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
+import defaultImages from 'lib/defaultImages'
+
 // Screens
 import Welcome from 'canvas/form/components/Welcome'
 import Form from 'canvas/form/components/Form'
@@ -40,8 +42,8 @@ const mapStateToProps = (state, props) => {
 		messages: state.form.formEditor.values.messages,
 		images: {
 			...state.form.formEditor.values.images,
-			welcome: state.form.formEditor.values.images.welcome || 'https://s3-us-west-2.amazonaws.com/installthisapp/intro.jpg',
-			header: state.form.formEditor.values.images.header || 'https://s3-us-west-2.amazonaws.com/installthisapp/header.jpg',
+			welcome: state.form.formEditor.values.images.welcome || defaultImages.welcome,
+			header: state.form.formEditor.values.images.header || defaultImages.header,
 		},
 		settings: state.form.formEditor.values.settings,
 		schema: state.form.formEditor.values.schema,
@@ -56,8 +58,6 @@ Previews.screens = [
 	{ value: 'intro', label: 'Welcome Screen'},
 	{ value: 'form', label: 'Form'},
 	{ value: 'thanks', label: '"Thank You" screen'},
-	// { value: 'upload', label: 'Upload Form'},
-	// { value: 'single', label: 'Individual Photo'},
 ]
 
 Previews.propTypes = {

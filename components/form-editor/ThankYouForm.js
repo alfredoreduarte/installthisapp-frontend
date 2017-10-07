@@ -5,9 +5,9 @@ import { reduxForm, formValueSelector, Field, FieldArray } from 'redux-form'
 import TagsInput from 'react-tagsinput'
 import FormFieldsArray from 'components/form-editor/FormFieldsArray'
 
-let ThankYouForm = ({ array, active }) => 
+let ThankYouForm = ({ active, onTitleClick }) => 
 <div className={`editor-tab-item ${active && 'active'}`}>
-	<div className="editor-tab-item-title">
+	<div className="editor-tab-item-title" onClick={onTitleClick}>
 		"Thank You" screen
 	</div>
 	<div className="editor-tab-item-body">
@@ -60,8 +60,10 @@ let ThankYouForm = ({ array, active }) =>
 	</div>
 </div>
 
+const reduxFormName =  'formEditor'
+
 ThankYouForm = reduxForm({
-	form: 'formEditor',              // <------ same form name
+	form: reduxFormName,              // <------ same form name
 	destroyOnUnmount: false,     // <------ preserve form data
 })(ThankYouForm)
 

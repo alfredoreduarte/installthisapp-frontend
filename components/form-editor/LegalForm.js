@@ -5,9 +5,9 @@ import { reduxForm, formValueSelector, Field, FieldArray } from 'redux-form'
 import TagsInput from 'react-tagsinput'
 import FormFieldsArray from 'components/form-editor/FormFieldsArray'
 
-let Legal = ({ array, active }) => 
+let Legal = ({ active, onTitleClick }) => 
 <div className={`editor-tab-item ${active && 'active'}`}>
-	<div className="editor-tab-item-title">
+	<div className="editor-tab-item-title" onClick={onTitleClick}>
 		Legal Stuff
 	</div>
 	<div className="editor-tab-item-body">
@@ -38,8 +38,10 @@ let Legal = ({ array, active }) =>
 	</div>
 </div>
 
+const reduxFormName =  'formEditor'
+
 Legal = reduxForm({
-	form: 'formEditor',              // <------ same form name
+	form: reduxFormName,              // <------ same form name
 	destroyOnUnmount: false,     // <------ preserve form data
 })(Legal)
 

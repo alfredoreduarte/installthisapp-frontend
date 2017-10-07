@@ -18,7 +18,7 @@ export default (store, dispatch) => ({
 	},
 	onEnter: (nextState, replace, next) => {
 		dispatch(turnOnGlobalIndicator())
-		analytics.page('Form Editor')
+		analytics.page('App Editor')
 		dispatch(setCurrentAppChecksum(nextState.params.checksum)).then(() => {
 			dispatch(fetchStyles()).then(() => {
 				dispatch(fetchMessages()).then(() => {

@@ -6,7 +6,7 @@ import Dropzone from 'react-dropzone'
 import MdCloudUpload from 'react-icons/lib/md/cloud-upload'
 import MdClear from 'react-icons/lib/md/clear'
 
-const ImageUploader = ({ handleChange, busyName, name, input: { value, onChange }, meta: { error, submitFailed, submitting } }) =>
+const ImageUploader = ({ handleChange, recommendedDimensions, busyName, name, input: { value, onChange }, meta: { error, submitFailed, submitting } }) =>
 <Dropzone 
 	onDrop={handleChange} 
 	multiple={false} 
@@ -27,7 +27,7 @@ const ImageUploader = ({ handleChange, busyName, name, input: { value, onChange 
 	:
 	<span className="editor-dropzone-tip">
 		{submitFailed && error && <p className="text-danger">{error}</p>}
-		Drop an image here or click to browse. Recommended size: 820x1200 px
+		Drop an image here or click to browse. {recommendedDimensions && `Recommended size: ${recommendedDimensions}px`}
 	</span>
 	}
 </Dropzone>
