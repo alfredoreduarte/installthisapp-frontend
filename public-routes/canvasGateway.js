@@ -17,6 +17,7 @@ router.get('/gateway/:checksum', function(req, res) {
 		const applicationType = json.application_type
 		res.render('gateway', 
 			{
+				checksum: checksum,
 				applicationTitle: json.title,
 				hasFacebookTab: hasFacebookTab,
 				gatewayUrl: 'https://' + req.headers.host + '/gateway/' + checksum,
