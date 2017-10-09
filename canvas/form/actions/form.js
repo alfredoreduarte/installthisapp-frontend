@@ -26,7 +26,7 @@ export const submitForm = () => {
 			id: key,
 			content: val,
 		}))
-		return postToApi(`${checksum}/entries_create.json`, {
+		return postToApi(`${checksum}/unauthenticated_entries_create.json`, {
 			entry: digested,
 		}, response => {
 			if (response.success) {
