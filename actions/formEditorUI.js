@@ -4,7 +4,7 @@ export const setActiveEntryFormField = index => ({
 })
 
 export const setEditorStep = step => ({
-	type: 'FORM/SET_EDITOR_STEP',
+	type: 'EDITOR/SET_STEP',
 	step,
 })
 

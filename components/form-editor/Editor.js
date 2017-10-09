@@ -8,15 +8,17 @@ import LegalForm from 'components/form-editor/LegalForm'
 import ThankYouForm from 'components/form-editor/ThankYouForm'
 import PreviewContainer from 'containers/form-editor/PreviewContainer'
 
-const Editor = ({ handleSubmit, submitting, selectedValues, setEditorStep, editorCurrentStep }) => 
+const Editor = ({ handleSubmit, submitting, steps, setEditorStep, editorCurrentStep }) => 
 <div>
 	<NavBar />
 	<div className="container">
 		<div className="editor-container">
 			<div className="editor-forms-column">
 				<div className="editor-steps-list">
-					{['welcome', 'entry', 'legal', 'thankyou'].map((step, index) =>
-						<div key={index} className={`editor-steps-list-item ${editorCurrentStep == index ? 'active' : ''}`} onClick={() => setEditorStep(index)}>
+					{steps.map((step, index) =>
+						<div key={index} 
+							className={`editor-steps-list-item ${editorCurrentStep == index ? 'active' : ''}`} 
+							onClick={() => setEditorStep(index)}>
 							{index + 1}
 						</div>	
 					)}

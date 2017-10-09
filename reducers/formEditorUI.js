@@ -1,6 +1,6 @@
 const formEditorUI = (state = {
 	submittingImageWithFieldName: null,
-	formStep: 0,
+	step: 0,
 	activeFieldIndex: null,
 }, action) => {
 	switch (action.type) {
@@ -9,7 +9,7 @@ const formEditorUI = (state = {
 				...state, 
 				activeFieldIndex: action.index
 			}
-		case 'FORM/SET_EDITOR_STEP':
+		case 'EDITOR/SET_STEP':
 			return {
 				...state, 
 				formStep: action.step

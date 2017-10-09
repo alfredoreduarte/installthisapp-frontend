@@ -4,10 +4,11 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 // 
 import { setEditorStep } from 'actions/formEditorUI'
-import { saveForm } from 'modules/form/actions'
 import { setCurrentScreen } from 'actions/styles'
-import { getSchema } from 'modules/form/selectors/schema'
 import Editor from 'components/form-editor/Editor'
+
+import { saveForm } from 'modules/form/actions'
+import { getSchema } from 'modules/form/selectors/schema'
 
 let EditorContainer = props => <div className="editor-main-wrapper"><Editor {...props} /></div>
 
@@ -17,30 +18,14 @@ EditorContainer = reduxForm({
 	form: reduxFormName,
 })(EditorContainer)
 
-const selector = formValueSelector(reduxFormName)
-
-const mapStateToProps = (state, props) => {
-	return {
-		editorCurrentStep: state.formEditorUI.formStep,
-		initialValues: {
-			messages: {...state.styles.messages},
-			settings: {...state.styles.settings},
-			images: {...state.styles.images},
-			schema: getSchema(state),
-		},
-		selectedValues: {
-			welcomeLayout: selector(state, 'settings.welcomeLayout')
-		},
-	}
-}
-
 // Provisorio
+const currentModule = 'form' // -----> Dynamize this!
 const PreviewsForm = require('canvas/form/containers/Previews').default.screens
 const screens = {
 	form: PreviewsForm,
 }
 const availableScreens = screens['form']
-const stepsThatTriggerScreenChange = [
+const editorSteps = [
 	{
 		step: 0,
 		screen: availableScreens[0].value,
@@ -59,6 +44,19 @@ const stepsThatTriggerScreenChange = [
 	},
 ]
 
+const mapStateToProps = (state, props) => {
+	return {
+		steps: editorSteps,
+		editorCurrentStep: state.formEditorUI.step,
+		initialValues: {
+			messages: {...state.styles.messages},
+			settings: {...state.styles.settings},
+			images: {...state.styles.images},
+			schema: getSchema(state),
+		}
+	}
+}
+
 const mapDispatchToProps = (dispatch, props) => ({
 	handleSubmit: e => {
 		e.preventDefault()
@@ -68,7 +66,7 @@ const mapDispatchToProps = (dispatch, props) => ({
 		// change preview screen accordingly
 		// Some steps do not trigger screen changes, so:
 		if (stepsThatTriggerScreenChange[step].screen) {
-			dispatch(setCurrentScreen(stepsThatTriggerScreenChange[step].screen))
+			dispatch(setCurrentScreen(editorSteps[step].screen))
 		}
 		dispatch(setEditorStep(step))
 	}

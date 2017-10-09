@@ -25,6 +25,7 @@ module.exports = {
 		memory_match: 'canvas/memory_match/index',
 		catalog: 'canvas/catalog/index',
 		form: 'canvas/form/index',
+		fan_gate: 'canvas/fan_gate/index',
 	},
 	output: {
 		path: path.join(__dirname, '/dist'),
