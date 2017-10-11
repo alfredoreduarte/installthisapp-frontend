@@ -11,7 +11,7 @@ const Form = ({ messages, settings, schema, handleSubmit }) => (
 			<div className="col-sm-6">
 				<h1>{messages.formHeading}</h1>
 			</div>
-			<div className="col-sm-6">
+			<div className="col-sm-6" style={{marginTop: '42px'}}>
 				<form onSubmit={handleSubmit}>
 					{schema.map(field => 
 						<div key={field.id}>
