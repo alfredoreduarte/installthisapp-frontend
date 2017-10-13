@@ -24,3 +24,8 @@ export const getFilteredEntries = createSelector(
 		return tableBody
 	}
 )
+
+export const getWinnerEntry = createSelector(
+	getFilteredEntries,
+	entries => _.sample(entries)
+)

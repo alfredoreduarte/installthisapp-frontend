@@ -3,6 +3,9 @@ import entities from 'modules/form/reducers/entities'
 const defaultState = {
 	log: {},
 	entities: {},
+	ui: {
+		winnerModalVisible: false,
+	},
 }
 
 const form = (state = defaultState, action) => {
@@ -14,6 +17,14 @@ const form = (state = defaultState, action) => {
 				...state,
 				entities: entities(state.entities, action),
 				log: action.applicationLog,
+			}
+		case 'FORM/TOGGLE_WINNER_MODAL':
+			return {
+				...state,
+				ui: {
+					...state.ui,
+					winnerModalVisible: !state.ui.winnerModalVisible,
+				}
 			}
 		default:
 			return state
