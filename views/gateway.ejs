@@ -6,7 +6,7 @@
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content="<%= applicationTitle %>" />
 	<meta property="og:description" content="<%= applicationTitle %>" />
-	<meta property="og:image" content="<%= gatewayUrl %>" />
+	<meta property="og:image" content="<%= checksum == 'SPH78L' ? 'https://s3-us-west-2.amazonaws.com/installthisapp/application-assets/SPH78L/images/og.jpg' : '' %><%= checksum == 'Y43R1Z' || checksum == 'RB19VF' ? 'https://s3-us-west-2.amazonaws.com/installthisapp/application-assets/Y43R1Z/images/sfo-wallpost.jpg' : '' %>" />
 </head>
 <body>
 	<h1><%= applicationTitle %></h1>

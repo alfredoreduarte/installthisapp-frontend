@@ -14,7 +14,6 @@ export const getStaticContent = (nextState, replace, next, dispatch) => dispatch
 export const getStaticContentAndEntities = (nextState, replace, next, dispatch) => dispatch(fetchMessages())
 																		.then(() => dispatch(fetchImages()))
 																		.then(() => {
-																			console.log('llega')
 																			dispatch(fetchEntities())
 																		})
 																		.then(() => next())

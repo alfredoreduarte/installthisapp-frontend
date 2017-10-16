@@ -1,14 +1,19 @@
 import React from 'react'
 import { ButtonToolbar, Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import SearchForm from 'components/SearchForm'
+import WinnerModal from 'modules/form/components/WinnerModal'
 
 const Entries = ({
 	entries,
 	schema,
 	selectedItems,
 	fetchEntries,
+	toggleWinnerModal,
+	showWinner,
+	winnerEntry,
 }) => (
 	<div className="ita-table-view">
+		{showWinner && <WinnerModal show={showWinner} entry={winnerEntry} onRaffle={toggleWinnerModal} onHide={toggleWinnerModal} schema={schema} />}
 		<div className="ita-table-toolbar">
 			<div className="row">
 				<div className="col-md-12">
@@ -32,6 +37,9 @@ const Entries = ({
 					<ButtonToolbar>
 						<button className="btn btn-sm btn-default pull-right" onClick={fetchEntries}>
 							Refresh
+						</button>
+						<button className="btn btn-sm btn-success pull-right" onClick={toggleWinnerModal}>
+							Get one winner entry
 						</button>
 					</ButtonToolbar>
 					}
