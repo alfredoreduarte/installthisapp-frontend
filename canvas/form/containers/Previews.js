@@ -38,7 +38,7 @@ const Previews = ({ screen, messages, images, settings, schema, emptyFunc }) => 
 
 const mapStateToProps = (state, props) => {
 	return {
-		screen: state.styles.screen,
+		screen: state.formEditorUI.editorScreens[state.formEditorUI.screen].value,
 		messages: state.form.formEditor.values.messages,
 		images: {
 			...state.form.formEditor.values.images,
@@ -53,12 +53,6 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = dispatch => ({
 	emptyFunc: () => {}
 })
-
-Previews.screens = [
-	{ value: 'intro', label: 'Welcome Screen'},
-	{ value: 'form', label: 'Form'},
-	{ value: 'thanks', label: '"Thank You" screen'},
-]
 
 Previews.propTypes = {
 	screen: PropTypes.string.isRequired,

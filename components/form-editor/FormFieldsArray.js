@@ -4,6 +4,7 @@ import ClickOutside from 'react-click-outside'
 import TagsInput from 'react-tagsinput'
 import { Link } from 'react-router'
 import { Field, FieldArray, reduxForm, formValueSelector } from 'redux-form'
+import { APP_EDITOR_FORM_NAME } from 'config'
 import { setActiveEntryFormField } from 'actions/formEditorUI'
 import MdClear from 'react-icons/lib/md/clear'
 import MdArrowDropDown from 'react-icons/lib/md/arrow-drop-down'
@@ -97,7 +98,7 @@ const FormFieldsArray = ({ activeFieldIndex, schemaFieldsForTypeConditions, chan
 	})}
 </div>
 
-const selector = formValueSelector('formEditor')
+const selector = formValueSelector(APP_EDITOR_FORM_NAME)
 
 const mapStateToProps = (state, props) => {
 	const schemaFieldsForTypeConditions = selector(state, 'schema')

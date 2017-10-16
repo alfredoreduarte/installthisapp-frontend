@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { reduxForm, formValueSelector } from 'redux-form'
 import { Field, FieldArray } from 'redux-form'
+import { APP_EDITOR_FORM_NAME } from 'config'
 import EditorContainer from 'containers/EditorContainer'
 import ImageUploaderDropZone from 'components/form-editor/ImageUploaderDropZone'
 
@@ -79,14 +80,12 @@ let WelcomeForm = ({ active, selectedValues, onTitleClick }) =>
 	</div>
 </div>
 
-const reduxFormName =  'formEditor'
-
 WelcomeForm = reduxForm({
-	form: reduxFormName, 		// <------ same form name
+	form: APP_EDITOR_FORM_NAME, 		// <------ same form name
 	destroyOnUnmount: false, 	// <------ preserve form data
 })(WelcomeForm)
 
-const selector = formValueSelector(reduxFormName)
+const selector = formValueSelector(APP_EDITOR_FORM_NAME)
 
 const mapStateToProps = (state, props) => {
 	return {

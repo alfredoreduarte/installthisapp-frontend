@@ -1,4 +1,5 @@
 import { normalize, arrayOf } from 'normalizr'
+import { APP_EDITOR_FORM_NAME } from 'config'
 import { getCurrentAppByState } from 'selectors/apps'
 import { toggleActivitySavingDesign } from 'actions/activityIndicators'
 import css from 'css'
@@ -14,7 +15,7 @@ export const saveForm = () => {
 		// Redux-form actions
 		dispatch({
 			type: '@@redux-form/START_SUBMIT',
-			meta: { form: 'formEditor', fields },
+			meta: { form: APP_EDITOR_FORM_NAME, fields },
 			error: false
 		})
 		return postToApi(`applications/${checksum}/save.json`, {
@@ -38,12 +39,12 @@ export const saveForm = () => {
 					// Redux-form actions
 					dispatch({
 						type: '@@redux-form/STOP_SUBMIT',
-						meta: { form: 'formEditor', fields },
+						meta: { form: APP_EDITOR_FORM_NAME, fields },
 						error: false
 					})
 					dispatch({
 						type: '@@redux-form/SET_SUBMIT_SUCCEEDED',
-						meta: { form: 'formEditor', fields },
+						meta: { form: APP_EDITOR_FORM_NAME, fields },
 						error: false
 					})
 				})

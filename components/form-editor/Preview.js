@@ -4,7 +4,7 @@ import TiMediaPlayReverse from 'react-icons/lib/ti/media-play-reverse'
 import TiMediaPlay from 'react-icons/lib/ti/media-play'
 import PlatformSelector from 'components/form-editor/PlatformSelector'
 
-const EditorPreview = ({ platform, handleScreenChange, currentScreen, screensLength, currentScreenIndex, currentScreenLabel, availableScreens, previews }) => 
+const EditorPreview = ({ platform, handleScreenChange, screensLength, currentScreenIndex, currentScreenLabel, availableScreens, previews }) => 
 <div className={`editor-preview-column ${platform}`}>
 	<Frame 
 		className={`editor-preview-frame ${platform}`}

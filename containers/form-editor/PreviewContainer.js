@@ -4,38 +4,30 @@ import Frame from 'react-frame-component'
 import { connect } from 'react-redux'
 import TiMediaPlayReverse from 'react-icons/lib/ti/media-play-reverse'
 import TiMediaPlay from 'react-icons/lib/ti/media-play'
-import { setCurrentScreen } from 'actions/styles'
+import { setEditorScreenIndex } from 'actions/formEditorUI'
+import { getCurrentAppByState } from 'selectors/apps'
 import Preview from 'components/form-editor/Preview'
-
-// Provisorio
-import Previews from 'canvas/form/containers/Previews'
-const PreviewsForm = require('canvas/form/containers/Previews').default.screens
-// Provisorio
-
-const screens = {
-	form: PreviewsForm,
-}
 
 const PreviewContainer = props => <Preview {...props} />
 
+const previewComponentSelector = appType => require(`canvas/${appType}/containers/Previews`).default
+
 const mapStateToProps = (state, props) => {
-	const screenObject = _.find(screens['form'], {'value': state.styles.screen})
-	const availableScreens = screens['form']
+	const availableScreens = state.formEditorUI.editorScreens
+	const currentScreen = availableScreens[state.formEditorUI.screen]
+	const Previews = previewComponentSelector( getCurrentAppByState(state).applicationType )
 	return {
 		previews: <Previews />,
-		platform: state.styles.platform,
+		platform: state.formEditorUI.platform,
 		screensLength: availableScreens.length,
-		currentScreen: state.styles.screen,
-		currentScreenIndex: availableScreens.indexOf(screenObject),
-		currentScreenLabel: screenObject.label,
+		currentScreenIndex: state.formEditorUI.screen,
+		currentScreenLabel: currentScreen.label,
 		availableScreens: availableScreens,
 	}
 }
 
 const mapDispatchToProps = (dispatch, props) => ({
-	handleScreenChange: screenIndex => {
-		dispatch(setCurrentScreen(screens['form'][screenIndex].value))
-	},
+	handleScreenChange: screenIndex => dispatch( setEditorScreenIndex(screenIndex) ),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PreviewContainer)

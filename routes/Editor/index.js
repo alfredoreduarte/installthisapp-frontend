@@ -1,4 +1,5 @@
 import { setCurrentAppChecksum } from 'actions/apps'
+import { initializeEditorScreensAndSteps } from 'actions/formEditorUI'
 import { fetchEntities } from 'modules/form/actions/entities'
 import { 
 	turnOnGlobalIndicator, 
@@ -18,6 +19,12 @@ export default (store, dispatch) => ({
 	},
 	onEnter: (nextState, replace, next) => {
 		dispatch(turnOnGlobalIndicator())
+		// Instantiating steps and screens from the current app
+		const app = nextState.params.type
+		const editorSteps = require(`modules/${app}/editorSteps`).default
+		const editorScreens = require(`modules/${app}/editorScreens`).default
+		dispatch(initializeEditorScreensAndSteps(editorSteps, editorScreens))
+		// 
 		analytics.page('App Editor')
 		dispatch(setCurrentAppChecksum(nextState.params.checksum)).then(() => {
 			dispatch(fetchStyles()).then(() => {

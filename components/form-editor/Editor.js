@@ -9,7 +9,7 @@ import ThankYouForm from 'components/form-editor/ThankYouForm'
 import PreviewContainer from 'containers/form-editor/PreviewContainer'
 
 const Editor = ({ handleSubmit, submitting, steps, setEditorStep, editorCurrentStep }) => 
-<div>
+<div className="editor-main-wrapper">
 	<NavBar />
 	<div className="container">
 		<div className="editor-container">

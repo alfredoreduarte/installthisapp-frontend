@@ -12,15 +12,16 @@ const reactRouterMiddleware = routerMiddleware(browserHistory)
 let configureStore
 
 if (process.env.NODE_ENV == 'development') {
-	const createLogger = require('redux-logger')
+	// const createLogger = require('redux-logger')
 	configureStore = (preloadedState) => {
-		const logger = createLogger()
+		// const logger = createLogger()
 		let store = createStore(
 			createReducer(),
 			preloadedState,
 			compose(
 				// applyMiddleware(thunkMiddleware, reactRouterMiddleware, ravenMiddleware, logger),
-				applyMiddleware(thunkMiddleware, reactRouterMiddleware, logger),
+				// applyMiddleware(thunkMiddleware, reactRouterMiddleware, logger),
+				applyMiddleware(thunkMiddleware, reactRouterMiddleware), //no logger
 				window.devToolsExtension ? window.devToolsExtension() : (f) => f
 			)
 		)
