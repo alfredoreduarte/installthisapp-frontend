@@ -77,13 +77,6 @@ const Previews = ({ screen, messages, images }) => {
 	}
 }
 
-Previews.screens = [
-	{ value: 'intro', label: 'Introduction'},
-	{ value: 'index', label: 'Photos'},
-	{ value: 'upload', label: 'Upload Form'},
-	{ value: 'single', label: 'Individual Photo'},
-]
-
 Previews.propTypes = {
 	screen: PropTypes.string.isRequired,
 }

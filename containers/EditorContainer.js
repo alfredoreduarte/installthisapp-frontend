@@ -3,10 +3,10 @@ import { reduxForm, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { APP_EDITOR_FORM_NAME } from 'config'
-import { setEditorStepIndexWithConditionalScreen, setEditorScreenIndex } from 'actions/formEditorUI'
+import { setEditorStepIndexWithConditionalScreen, setEditorScreenIndex, saveAppFromNewEditor } from 'actions/formEditorUI'
 import Editor from 'components/form-editor/Editor'
 
-import { saveForm } from 'modules/form/actions'
+// import { saveForm } from 'modules/form/actions'
 import { getSchema } from 'modules/form/selectors/schema'
 
 let EditorContainer = props => <Editor {...props} />
@@ -31,7 +31,8 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => ({
 	handleSubmit: e => {
 		e.preventDefault()
-		dispatch(saveForm())
+		// dispatch(saveForm())
+		dispatch( saveAppFromNewEditor() )
 	},
 	setEditorStep: index => dispatch(setEditorStepIndexWithConditionalScreen(index))
 })
