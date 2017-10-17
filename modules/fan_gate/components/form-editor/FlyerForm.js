@@ -20,17 +20,15 @@ let FlyerForm = ({ active, selectedValues, onTitleClick }) =>
 					<p className="help-block">The image will act as a link to the URL you specify below, so you might want to include a button in your design.</p>
 				</div>
 			</div>
-			<div className="form-group">
-				<label className="col-sm-2 control-label">Flyer link</label>
-				<div className="col-sm-10">
-					<Field 
-						className="form-control"
-						name={'settings.flyerLinkUrl'} 
-						component="input"
-						type="text" 
-						placeholder={'https://yourwebsite.com'} />
-				</div>
-			</div>
+		</div>
+		<div className="form-group">
+			<label className="ontrol-label">Flyer link</label>
+			<Field 
+				className="form-control"
+				name={'settings.flyerLinkUrl'} 
+				component="input"
+				type="text" 
+				placeholder={'https://yourwebsite.com'} />
 		</div>
 	</div>
 </div>

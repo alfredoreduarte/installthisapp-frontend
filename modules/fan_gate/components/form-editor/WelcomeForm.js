@@ -21,16 +21,13 @@ let WelcomeForm = ({ active, selectedValues, onTitleClick }) =>
 			</div>
 		</div>
 		<div className="form-group">
-			<label className="col-sm-2 control-label">URL to like</label>
-			<div className="col-sm-10">
-				<Field 
-					className="form-control"
-					name={'settings.likeUrl'} 
-					component="input"
-					type="text" 
-					placeholder={'https://www.facebook.com/InstallThisApp'} />
-				<p className="help-block">This can be any URL, but if you want it to work with a Facebook Page, paste the page's URL with this format: https://www.facebook.com/InstallThisApp.</p>
-			</div>
+			<label className="control-label">URL to like</label>
+			<Field 
+				className="form-control"
+				name={'settings.likeUrl'} 
+				component="input"
+				type="text" 
+				placeholder={'https://www.facebook.com/InstallThisApp'} />
 		</div>
 	</div>
 </div>

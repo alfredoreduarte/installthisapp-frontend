@@ -8,8 +8,6 @@ import { setEditorStepIndexWithConditionalScreen } from 'actions/formEditorUI'
 import WelcomeForm from 'modules/fan_gate/components/form-editor/WelcomeForm'
 import FlyerForm from 'modules/fan_gate/components/form-editor/FlyerForm'
 
-import { getSchema } from 'modules/form/selectors/schema'
-
 let Editor = ({ setEditorStep, editorCurrentStep }) => 
 <div>
 	<WelcomeForm onTitleClick={() => setEditorStep(0)} active={editorCurrentStep == 0} />
@@ -23,10 +21,6 @@ Editor = reduxForm({
 
 const mapStateToProps = (state, props) => ({
 	editorCurrentStep: state.formEditorUI.step,
-	initialValues: {
-		...state.form.formEditor,
-		schema: getSchema(state),
-	}
 })
 
 const mapDispatchToProps = (dispatch, props) => ({

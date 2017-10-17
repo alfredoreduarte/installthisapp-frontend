@@ -8,9 +8,6 @@ import { setEditorStepIndexWithConditionalScreen, setEditorScreenIndex, saveAppF
 import { getCurrentAppByState } from 'selectors/apps'
 import Editor from 'components/form-editor/Editor'
 
-// create a generic way to load initial values!
-// import { getSchema } from 'modules/form/selectors/schema'
-
 let EditorContainer = props => <Editor {...props} />
 
 EditorContainer = reduxForm({
@@ -34,7 +31,6 @@ const mapStateToProps = (state, props) => {
 			settings: {...state.styles.settings},
 			images: {...state.styles.images},
 			...initialState,
-			// schema: getSchema(state),
 		}
 	}
 }
