@@ -3,7 +3,7 @@ import { Provider, connect } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
 import { getStaticContent, getStaticContentAndEntities } from 'canvas/example/actions'
 import Index from 'canvas/example/containers/Index'
-import Intro from 'canvas/example/containers/Intro'
+import Welcome from 'canvas/example/containers/Welcome'
 import Login from 'canvas/example/containers/Login'
 import Cookies from 'js-cookie'
 

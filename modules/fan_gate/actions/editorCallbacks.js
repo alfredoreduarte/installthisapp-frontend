@@ -9,10 +9,11 @@ const editorCallback = () => {
 	return (dispatch, getState) => {
 		const state = getState()
 		const checksum = getCurrentAppByState(state).checksum
-		const formSchema = state.form.formEditor.values.schema
-		return postToApi(`applications/${checksum}/save.json`, {
-			schema: formSchema
-		})
+		// const formSchema = state.form.formEditor.values.schema
+		// return postToApi(`applications/${checksum}/save.json`, {
+		// 	schema: formSchema
+		// })
+		return Promise.resolve()
 	}
 }
 

@@ -200,7 +200,7 @@ export const postNewApp = () => {
 				// 
 				if (body.module == 'top_fans') {
 					dispatch(push(`/d/apps/${response.app.applicationType}/${response.app.checksum}/setup-guide`))
-				} else if (body.module == 'form') {
+				} else if (body.module == 'form' || body.module == 'fan_gate') {
 					dispatch(push(`/d/apps/${response.app.applicationType}/${response.app.checksum}/editor`))
 				} else {
 					dispatch(push(`/d/apps/${response.app.applicationType}/${response.app.checksum}`))

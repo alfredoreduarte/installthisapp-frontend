@@ -3,9 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 
 const Sidebar = ({ checksum, type }) => (
-	<ul className="list-unstyled">
-		<li><Link to={`/d/apps/${type}/${checksum}/entries`} activeClassName="active">Entries</Link></li>
-	</ul>
+	<div></div>
 )
 
 const mapStateToProps = ( state, props ) => ({

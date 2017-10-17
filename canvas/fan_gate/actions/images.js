@@ -15,9 +15,6 @@ export const fetchImages = () => {
 		}
 		else {
 			return getExternal(window.imagesUrl).then( json => {
-				if (!json.intro || json.intro == "https://s3-us-west-2.amazonaws.com/installthisapp/intro.jpg") {
-					dispatch(push(`/example/${checksum}`))
-				}
 				return dispatch(receiveImages(json))
 			})
 		}

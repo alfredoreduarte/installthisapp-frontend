@@ -1,5 +1,5 @@
-var moduleName = 'example'
-var canvasId = 'appX'
+var moduleName = 'fan_gate'
+var canvasId = 'app7'
 
 var express = require('express')
 var jsonfile = require('jsonfile')

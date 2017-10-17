@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { reduxForm, formValueSelector, Field, FieldArray } from 'redux-form'
 import TagsInput from 'react-tagsinput'
 import { APP_EDITOR_FORM_NAME } from 'config'
-import FormFieldsArray from 'components/form-editor/FormFieldsArray'
 
 let Legal = ({ active, onTitleClick }) => 
 <div className={`editor-tab-item ${active && 'active'}`}>

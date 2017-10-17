@@ -7,10 +7,10 @@ const editorCallback = () => {
 	return (dispatch, getState) => {
 		const state = getState()
 		const checksum = getCurrentAppByState(state).checksum
-		// const formSchema = state.form.example.values
-		return postToApi(`applications/${checksum}/save.json`, {
-			key: 'value'
-		})
+		// return postToApi(`applications/${checksum}/save.json`, {
+		// 	key: 'value'
+		// })
+		return Promise.resolve()
 	}
 }
 

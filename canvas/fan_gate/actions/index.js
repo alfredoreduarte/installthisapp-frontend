@@ -1,22 +1,24 @@
-import { fetchImages } from 'canvas/example/actions/images'
-import { fetchMessages } from 'canvas/example/actions/messages'
-import { fetchEntities } from 'canvas/example/actions/entities'
-import { fetchSettings } from 'canvas/example/actions/settings'
+import { fetchImages } from 'canvas/fan_gate/actions/images'
+import { fetchMessages } from 'canvas/fan_gate/actions/messages'
+import { fetchSettings } from 'canvas/fan_gate/actions/settings'
+import Cookies from 'js-cookie'
+// import Facebook from 'react-facebook/src/Facebook'
 
-export const getStaticContent = (nextState, replace, next, dispatch) => dispatch(fetchMessages())
-																		.then(() => dispatch(fetchImages()))
-																		.then(() => dispatch(fetchSettings()))
-																		.then(() => next())
-
-export const getStaticContentAndEntities = (nextState, replace, next, dispatch) => dispatch(fetchMessages())
-																		.then(() => dispatch(fetchImages()))
-																		.then(() => dispatch(fetchSettings()))
-																		.then(() => dispatch(fetchEntities()))
-																		.then(() => next())
-
-export const loginCallback = () => {
-	return dispatch => dispatch( fetchEntities() )
-	.then( () => dispatch(fetchImages()) )
+export const getStaticContent = (nextState, replace, next, dispatch) => 
+	dispatch(fetchMessages())
+	.then(() => dispatch(fetchImages()))
 	.then(() => dispatch(fetchSettings()))
-	.then( () => dispatch(fetchMessages()) )
-}
+	.then(() => {
+		return next()
+	}
+)
+
+let fbSafeInterval = setInterval(() => {
+	if (window.FB) {
+		FB.Event.subscribe ('edge.create', function (response) {
+			Cookies.set('fanGatePassed', window.checksum, { expires: 365, path: `/` })
+			window.location.href = `/${window.module}/${window.checksum}/flyer`
+		})
+		clearInterval(fbSafeInterval)
+	}
+}, 100)

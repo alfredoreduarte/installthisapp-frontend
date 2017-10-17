@@ -97,6 +97,9 @@ app.use(catalogRouter)
 // Form
 var formRouter = require('./canvas/form/server.js')
 app.use(formRouter)
+// Fan gate
+var fanGateRouter = require('./canvas/fan_gate/server.js')
+app.use(fanGateRouter)
 
 // Serving static HTML
 app.use(function(req, res, next) {
