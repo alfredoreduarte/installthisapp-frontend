@@ -8,7 +8,7 @@ import { getCurrentAppByState } from 'selectors/apps'
 import { saveAppFromNewEditor } from 'actions/formEditorUI'
 
 const NavBar = ({ saving, dashboardPath, handleSave }) =>
-<div className={`editor-navbar-pain-coat ${saving ? 'busy' : ''}`}>
+<div className={`editor-navbar-paint-coat ${saving ? 'busy' : ''}`}>
 	<div className="container">
 		<div className={`editor-navbar`}>
 			<Link to={dashboardPath} className="editor-navbar-back">

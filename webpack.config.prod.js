@@ -27,6 +27,7 @@ module.exports = {
 		form: 'canvas/form/index',
 		fan_gate: 'canvas/fan_gate/index',
 		coupons: 'canvas/coupons/index',
+		static_html: 'canvas/static_html/index',
 	},
 	output: {
 		path: path.join(__dirname, '/dist'),

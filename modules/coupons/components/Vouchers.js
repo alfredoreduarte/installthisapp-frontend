@@ -39,7 +39,7 @@ const Vouchers = ({
 							Refresh
 						</button>
 						<Link to={createCouponPath} className="btn btn-sm btn-success btn-outline pull-right">
-							Add coupon vouchers
+							Add more vouchers
 						</Link>
 					</ButtonToolbar>
 					}

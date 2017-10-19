@@ -29,6 +29,7 @@ import memoryMatch from 'modules/memory_match/reducers/'
 import catalog from 'modules/catalog/reducers/'
 import form from 'modules/form/reducers/'
 import coupons from 'modules/coupons/reducers/'
+import staticHtml from 'modules/static_html/reducers/'
 
 const createReducer = asyncReducers => {
 	return combineReducers({
@@ -59,6 +60,7 @@ const createReducer = asyncReducers => {
 		catalog,
 		formModule: form,
 		coupons,
+		staticHtml,
 		// asyncReducers: asyncReducers
 	})
 }

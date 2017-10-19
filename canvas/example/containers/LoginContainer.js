@@ -2,10 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { digestFacebookResponse } from 'canvas/example/actions/user'
 import { toggleLogin } from 'canvas/example/actions/activityIndicators'
-import LoginView from 'canvas/example/components/Login'
+import Login from 'canvas/example/components/Login'
 
-const Login = ({ logging, title, fbCallback }) => (
-	<LoginView title={title} fbCallback={fbCallback} logging={logging} />
+const LoginContainer = ({ logging, title, fbCallback }) => (
+	<Login title={title} fbCallback={fbCallback} logging={logging} />
 )
 
 const mapStateToProps = state => ({
@@ -27,4 +27,4 @@ const mapDispatchToProps = (dispatch, props) => ({
 	}
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer)

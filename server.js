@@ -100,9 +100,12 @@ app.use(formRouter)
 // Fan gate
 var fanGateRouter = require('./canvas/fan_gate/server.js')
 app.use(fanGateRouter)
-// Fan gate
+// Coupons
 var couponsRouter = require('./canvas/coupons/server.js')
 app.use(couponsRouter)
+// Static HTML
+var staticHtmlRouter = require('./canvas/static_html/server.js')
+app.use(staticHtmlRouter)
 
 // Serving static HTML
 app.use(function(req, res, next) {

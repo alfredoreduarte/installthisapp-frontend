@@ -5,6 +5,8 @@ $gray: #717171
 $gray-light: #D5D6D7
 $gray-lighter: #F2F4F7
 
+$navbar-height: 6vh
+
 // Navbar
 +keyframes(editBarPivotAnimation)
 	0%
@@ -13,7 +15,10 @@ $gray-lighter: #F2F4F7
 		background: lighten($editor-primary, 15%)
 	100%
 		background: $editor-primary
-.editor-navbar-pain-coat
+.editor-navbar-paint-coat
+	position: fixed
+	top: 0
+	width: 100%
 	background: $editor-primary
 	+animation-duration(1.5s)
 	+animation-timing-function(ease)
@@ -24,7 +29,7 @@ $gray-lighter: #F2F4F7
 		+animation-name(editBarPivotAnimation)
 .editor-navbar
 	width: 100%
-	height: 6vh
+	height: $navbar-height
 	padding: 10px 20px
 	display: flex
 	justify-content: space-between
@@ -63,6 +68,7 @@ $gray-lighter: #F2F4F7
 	align-items: stretch
 	justify-content: space-between
 	padding: 40px 20px 20px
+	margin-top: $navbar-height
 .editor-forms-column
 	margin-right: 15px
 	flex-grow: 1

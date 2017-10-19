@@ -41,22 +41,27 @@
 				clearInterval(fbSafeInterval)
 			}
 		}, 100)
-		// window.fbAsyncInit = function() {
-		// 	window.fbLoaded = true
-		// 	FB.init({
-		// 		appId      : window.facebookAppId,
-		// 		xfbml      : true,
-		// 		version    : 'v2.7'
-		// 	});
-		// 	FB.Canvas.setAutoGrow();
-		// };
-		// (function(d, s, id){
-		// var js, fjs = d.getElementsByTagName(s)[0];
-		// if (d.getElementById(id)) {return;}
-		// js = d.createElement(s); js.id = id;
-		// js.src = "//connect.facebook.net/en_US/sdk.js";
-		// fjs.parentNode.insertBefore(js, fjs);
-		// }(document, 'script', 'facebook-jssdk'));
+		// 
+		// Some modules either don't need FB or use their own script, so...
+		// 
+		<% if (module != 'fan_gate') { %>
+		window.fbAsyncInit = function() {
+			window.fbLoaded = true
+			FB.init({
+				appId      : window.facebookAppId,
+				xfbml      : true,
+				version    : 'v2.7'
+			});
+			FB.Canvas.setAutoGrow();
+		};
+		(function(d, s, id){
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+		<% } %>
 	</script>
 	<script src="<%= cloudFrontUrl %><%= manifestBundle %>"></script>
 	<script src="<%= cloudFrontUrl %><%= vendorBundle %>"></script>

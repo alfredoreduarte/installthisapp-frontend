@@ -8,13 +8,13 @@ const entities = (state = {
 		'form',
 		'fan_gate',
 		'coupons',
+		'static_html',
 	],
 	inactive: [
-		'photo_trivia',
-		'audio_trivia',
-		'spot_the_difference',
 		'story_contest',
 		'puzzle',
+		'photo_trivia',
+		'audio_trivia',
 	]
 }, action) => {
 	switch (action.type) {

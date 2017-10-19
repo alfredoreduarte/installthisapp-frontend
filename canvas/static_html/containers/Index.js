@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { getFilteredEntries } from 'canvas/example/selectors/entries'
-import Loading from 'canvas/example/components/Loading'
-import IndexView from 'canvas/example/components/Index'
+import { getFilteredEntries } from 'canvas/static_html/selectors/entries'
+import Loading from 'canvas/static_html/components/Loading'
+import IndexView from 'canvas/static_html/components/Index'
 
 const Index = ({ 
 	messages,
