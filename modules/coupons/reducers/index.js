@@ -15,6 +15,11 @@ const coupons = (state = defaultState, action) => {
 				entities: entities(state.entities, action),
 				log: action.applicationLog,
 			}
+		case 'COUPONS/REMOVE_VOUCHER':
+			return {
+				...state,
+				entities: entities(state.entities, action),
+			}
 		default:
 			return state
 	}

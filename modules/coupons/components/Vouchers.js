@@ -2,6 +2,7 @@ import React from 'react'
 import { ButtonToolbar, Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import { Link } from 'react-router'
 import SearchForm from 'components/SearchForm'
+import FaTrashO from 'react-icons/lib/fa/trash-o'
 import User from 'components/User'
 import CreateVouchersContainer from 'modules/coupons/containers/CreateVouchersContainer'
 
@@ -10,6 +11,7 @@ const Vouchers = ({
 	selectedVouchers,
 	selectedItems,
 	fetchEntities,
+	handleDelete,
 	createCouponPath,
 	showCreationModal,
 }) => (
@@ -66,6 +68,7 @@ const Vouchers = ({
 						<th>
 							<span>Status</span>
 						</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -75,8 +78,18 @@ const Vouchers = ({
 							{voucher.code}
 						</td>
 						<td>
-							{voucher.user && <User name={'Claimed by: ' + voucher.user.name} identifier={voucher.user.identifier} small />}
+							{voucher.user && <User 
+									name={'Claimed by: ' + voucher.user.name} 
+									identifier={voucher.user.identifier} 
+									small />}
 							{!voucher.user && <span className="text-success">available</span>}
+						</td>
+						<td className="text-right">
+							<FaTrashO 
+								size={20} 
+								className="text-primary" 
+								style={{cursor: 'pointer'}} 
+								onClick={() => handleDelete(voucher.id)} />
 						</td>
 					</tr>
 					)}

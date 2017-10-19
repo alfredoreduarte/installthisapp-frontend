@@ -5,6 +5,17 @@ const entities = (state = {}, action) => {
 				...state,
 				...action.entities,
 			}
+		case 'COUPONS/REMOVE_VOUCHER':
+			return {
+				...state,
+				vouchers: {
+					...state.vouchers,
+					[action.id]: {
+						...state.vouchers[action.id],
+						status: 'deleted',
+					}
+				}
+			}
 		default:
 			return state
 	}

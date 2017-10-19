@@ -48,8 +48,6 @@ export const createProduct = product => {
 		const currentApp = getCurrentAppByState(getState())
 		const checksum = currentApp.checksum
 		return postToApi(`applications/${checksum}/products_create.json`, { product: product }).then(response => {
-			console.log('resp')
-			console.log(response)
 			dispatch(removeProduct(thisUUID))
 			return dispatch(addProduct(response))
 		})

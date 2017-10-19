@@ -2,7 +2,6 @@ import React from 'react'
 import v4 from 'node-uuid'
 import { connect } from 'react-redux'
 import { reduxForm, formValueSelector, Field, FieldArray } from 'redux-form'
-import TagsInput from 'react-tagsinput'
 import { APP_EDITOR_FORM_NAME } from 'config'
 
 let Legal = ({ active, onTitleClick }) => 

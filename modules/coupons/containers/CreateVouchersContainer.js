@@ -12,8 +12,11 @@ CreateVouchersContainer = reduxForm({
 	form: 'couponVouchersCreator',  // <------ same form name
 	validate: values => {
 		const errors = {}
-		if (!values.quantity) {
-			errors.quantity = 'Required'
+		if ( values.mode == 'auto' && (!values.quantity || values.quantity <= 0) ) {
+			errors.quantity = 'Please insert a positive number'
+		}
+		if ( values.mode == 'custom' && values.codes.length == 0 ) {
+			errors.codes = 'Please insert at least one code'
 		}
 		return errors
 	}
@@ -23,10 +26,11 @@ CreateVouchersContainer = reduxForm({
 const selector = formValueSelector('couponVouchersCreator')
 
 const mapStateToProps = (state, props) => ({
-	quantity: selector(state, 'quantity'),
 	initialValues: {
-		quantity: 1,
-	}
+		mode: 'auto',
+		codes: [],
+	},
+	mode: selector(state, 'mode'),
 })
 
 const mapDispatchToProps = (dispatch, props) => ({

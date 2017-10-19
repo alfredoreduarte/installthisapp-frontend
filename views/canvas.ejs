@@ -44,7 +44,7 @@
 		// 
 		// Some modules either don't need FB or use their own script, so...
 		// 
-		<% if (module != 'fan_gate') { %>
+		<% if (module != 'fan_gate' && module != 'coupons') { %>
 		window.fbAsyncInit = function() {
 			window.fbLoaded = true
 			FB.init({
