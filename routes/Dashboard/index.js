@@ -54,5 +54,6 @@ export default (store, dispatch) => ({
 		require('modules/memory_match/routes').default(store, dispatch),
 		require('modules/catalog/routes').default(store, dispatch),
 		require('modules/form/routes').default(store, dispatch),
+		require('modules/coupons/routes').default(store, dispatch),
 	]
 })

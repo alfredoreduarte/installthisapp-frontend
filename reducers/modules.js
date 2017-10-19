@@ -7,6 +7,7 @@ const entities = (state = {
 		'catalog',
 		'form',
 		'fan_gate',
+		'coupons',
 	],
 	inactive: [
 		'photo_trivia',

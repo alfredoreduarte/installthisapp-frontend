@@ -42,8 +42,8 @@ const Sidebar = ({ installed, checksum, type, children, menu, facebookPageIdenti
 			<li><IndexLink to={`/d/apps/${type}/${checksum}`} activeClassName="active">Dashboard</IndexLink></li>
 			<li className="hide"><Link to={`/d/apps/${type}/${checksum}/analytics`} activeClassName="active">Analytics</Link></li>
 			<li className="hide"><Link to={`/d/apps/${type}/${checksum}/integrations`} activeClassName="active">Facebook Tab</Link></li>
-			{type != 'form' && type != 'fan_gate' && <li><Link to={`/d/apps/${type}/${checksum}/design`} activeClassName="active">Design</Link></li>}
-			{type == 'form' || type == 'fan_gate' && <li><Link to={`/d/apps/${type}/${checksum}/editor`} activeClassName="active">Editor</Link></li>}
+			{type != 'form' && type != 'fan_gate' && type != 'coupons' && <li><Link to={`/d/apps/${type}/${checksum}/design`} activeClassName="active">Design</Link></li>}
+			{type == 'form' || type == 'fan_gate' || type == 'coupons' && <li><Link to={`/d/apps/${type}/${checksum}/editor`} activeClassName="active">Editor</Link></li>}
 			<li className="hide"><Link to={`/d/apps/${type}/${checksum}/users`} activeClassName="active">Users</Link></li>
 		</ul>
 		{children}
@@ -52,7 +52,7 @@ const Sidebar = ({ installed, checksum, type, children, menu, facebookPageIdenti
 			<li>
 				<Link to={`/d/apps/${type}/${checksum}/preferences`} activeClassName="active">Preferences</Link>
 				<ul className="list-unstyled">
-					{type != 'form' && type != 'fan_gate' && <li><Link to={`/d/apps/${type}/${checksum}/preferences/specific`} activeClassName="active">App-specific settings</Link></li>}
+					{type != 'form' && type != 'fan_gate' && type != 'fan_gate' && <li><Link to={`/d/apps/${type}/${checksum}/preferences/specific`} activeClassName="active">App-specific settings</Link></li>}
 					<li className="hide"><Link to={`/d/apps/${type}/${checksum}/preferences`}>Localization</Link></li>
 					<li className="hide"><Link to={`/d/apps/${type}/${checksum}/preferences`}>Custom Scripts</Link></li>
 					<li className="hide"><Link to={`/d/apps/${type}/${checksum}/preferences/delete`}><span className="text-red">Delete App</span></Link></li>

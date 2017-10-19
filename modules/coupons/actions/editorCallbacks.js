@@ -2,17 +2,17 @@ import { normalize, arrayOf } from 'normalizr'
 import { APP_EDITOR_FORM_NAME } from 'config'
 import { getCurrentAppByState } from 'selectors/apps'
 import { toggleActivitySavingDesign } from 'actions/activityIndicators'
-import css from 'css'
-import * as schema from 'modules/form/schema'
 import { postToApi } from 'api'
 
-export const editorCallback = () => {
+const editorCallback = () => {
 	return (dispatch, getState) => {
 		const state = getState()
 		const checksum = getCurrentAppByState(state).checksum
-		const formSchema = state.form.formEditor.values.schema
-		return postToApi(`applications/${checksum}/save.json`, {
-			schema: formSchema
-		})
+		// return postToApi(`applications/${checksum}/save.json`, {
+			
+		// })
+		return Promise.resolve()
 	}
 }
+
+export default editorCallback

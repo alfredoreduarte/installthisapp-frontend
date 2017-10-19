@@ -28,6 +28,7 @@ import photoContest from 'modules/photo_contest/reducers/'
 import memoryMatch from 'modules/memory_match/reducers/'
 import catalog from 'modules/catalog/reducers/'
 import form from 'modules/form/reducers/'
+import coupons from 'modules/coupons/reducers/'
 
 const createReducer = asyncReducers => {
 	return combineReducers({
@@ -57,6 +58,7 @@ const createReducer = asyncReducers => {
 		memoryMatch,
 		catalog,
 		formModule: form,
+		coupons,
 		// asyncReducers: asyncReducers
 	})
 }

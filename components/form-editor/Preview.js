@@ -22,7 +22,7 @@ const EditorPreview = ({ platform, handleScreenChange, screensLength, currentScr
 				className="editor-preview-navigation-arrow" 
 				onClick={() => handleScreenChange(currentScreenIndex - 1)} />}
 			<div className="editor-preview-page-number">{currentScreenIndex + 1} of {availableScreens.length}</div>
-			{currentScreenIndex < screensLength && <TiMediaPlay 
+			{currentScreenIndex < screensLength - 1 && <TiMediaPlay 
 				size={20} 
 				className="editor-preview-navigation-arrow" 
 				onClick={() => handleScreenChange(currentScreenIndex + 1)} />}
