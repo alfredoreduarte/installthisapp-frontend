@@ -4,23 +4,26 @@ import { submit } from 'redux-form'
 import { Link } from 'react-router'
 import MdArrowBack from 'react-icons/lib/md/arrow-back'
 import { APP_EDITOR_FORM_NAME } from 'config'
+import { getCurrentAppByState } from 'selectors/apps'
 import { saveAppFromNewEditor } from 'actions/formEditorUI'
 
-const NavBar = ({ saving, handleClose, handleSave }) =>
+const NavBar = ({ saving, dashboardPath, handleSave }) =>
 <div className={`editor-navbar-pain-coat ${saving ? 'busy' : ''}`}>
 	<div className="container">
 		<div className={`editor-navbar`}>
-			<div onClick={handleClose} className="editor-navbar-back">
+			<Link to={dashboardPath} className="editor-navbar-back">
 				<MdArrowBack size={20} /> <span>Back to the dashboard</span>
-			</div>
+			</Link>
 			<button className="editor-navbar-button" disabled={saving} onClick={handleSave}>{saving ? 'Saving...' : 'Save'}</button>
 		</div>
 	</div>
 </div>
 
 const mapStateToProps = (state, props) => {
+	const currentApp = getCurrentAppByState(state)
 	return {
 		saving: state.form.formEditor.submitting,
+		dashboardPath: `/d/apps/${currentApp.applicationType}/${currentApp.checksum}/`,
 	}
 }
 

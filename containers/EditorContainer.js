@@ -36,7 +36,6 @@ const mapStateToProps = (state, props) => {
 }
 
 const mapDispatchToProps = (dispatch, props) => ({
-	handleClose: () => browserHistory.goBack(),
 	handleSubmit: e => {
 		e.preventDefault()
 		dispatch( saveAppFromNewEditor() )

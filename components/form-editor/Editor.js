@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import NavBar from 'components/form-editor/NavBar'
 import PreviewContainer from 'containers/form-editor/PreviewContainer'
 
-const Editor = ({ handleSubmit, handleClose, submitting, steps, stepsForms, setEditorStep, editorCurrentStep }) =>
+const Editor = ({ handleSubmit, submitting, steps, stepsForms, setEditorStep, editorCurrentStep }) =>
 <div className="editor-main-wrapper">
-	<NavBar handleClose={handleClose} />
+	<NavBar />
 	<div className="container">
 		<div className="editor-container">
 			<div className="editor-forms-column">

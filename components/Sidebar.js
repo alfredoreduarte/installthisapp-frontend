@@ -43,7 +43,7 @@ const Sidebar = ({ installed, checksum, type, children, menu, facebookPageIdenti
 			<li className="hide"><Link to={`/d/apps/${type}/${checksum}/analytics`} activeClassName="active">Analytics</Link></li>
 			<li className="hide"><Link to={`/d/apps/${type}/${checksum}/integrations`} activeClassName="active">Facebook Tab</Link></li>
 			{type != 'form' && type != 'fan_gate' && type != 'coupons' && <li><Link to={`/d/apps/${type}/${checksum}/design`} activeClassName="active">Design</Link></li>}
-			{type == 'form' || type == 'fan_gate' || type == 'coupons' && <li><Link to={`/d/apps/${type}/${checksum}/editor`} activeClassName="active">Editor</Link></li>}
+			{(type == 'form' || type == 'fan_gate' || type == 'coupons') && <li><Link to={`/d/apps/${type}/${checksum}/editor`} activeClassName="active">Editor</Link></li>}
 			<li className="hide"><Link to={`/d/apps/${type}/${checksum}/users`} activeClassName="active">Users</Link></li>
 		</ul>
 		{children}
