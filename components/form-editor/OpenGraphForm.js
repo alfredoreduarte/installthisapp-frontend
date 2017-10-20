@@ -31,8 +31,8 @@ let OpenGraphForm = ({ active, selectedValues, onTitleClick }) =>
 					<Field 
 						className="form-control"
 						name={'settings.openGraphDescription'} 
-						component="input"
-						type="text" 
+						component="textarea"
+						rows="3"
 						placeholder={'Title for posts shared on Facebook'} />
 					<p className="help-block">Usually between 2 and 4 sentences.</p>
 				</div>

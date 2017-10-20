@@ -43,7 +43,7 @@ const Index = ({
 			<TopBar homeUrl={homeUrl} logoImage={logoMobile} />
 			<CategoriesListMobile showBack={category ? true : false} categories={categories} />
 			{category ? <CategoryTitle text={category.name} /> : null}
-			<div style={{display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap'}}>
+			<div style={{display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap'}}>
 				{products.map( ({ id, permalink, name, price, shortDescription, featured, featuredImage }) => 
 					<Product 
 						key={id} 
@@ -91,7 +91,7 @@ const Index = ({
 				<div className="col-xs-3 col-sm-3 col-md-2">
 					<CategoriesList title={categoriesListTitle} categories={categories} />
 				</div>
-				{productListDisplayMode == 'grid' ? <div className="col-xs-9 col-sm-9 col-md-9 col-md-offset-1" style={{display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap'}}>
+				{productListDisplayMode == 'grid' ? <div className="col-xs-9 col-sm-9 col-md-9 col-md-offset-1" style={{display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap'}}>
 					{products.map( ({ id, permalink, name, price, shortDescription, featured, featuredImage }) => 
 						<Product 
 							key={id} 
@@ -106,7 +106,7 @@ const Index = ({
 						/>
 					)}
 				</div> : 
-				<div className="col-xs-9 col-sm-9 col-md-9 col-md-offset-1" style={{display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap'}}>
+				<div className="col-xs-9 col-sm-9 col-md-9 col-md-offset-1" style={{display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap'}}>
 					{products.map( ({ id, permalink, name, price, shortDescription, featured, featuredImage }) => 
 						<ProductListView 
 							key={id} 
