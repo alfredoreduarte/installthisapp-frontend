@@ -37,20 +37,20 @@
 		<img class="thumbnail" src="<%= ogImage %>" />
 	</div>
 	<script>
-	// function isMobileDevice() {
-	// 	return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
-	// };
-	// if ( isMobileDevice() ) {
-	// 	top.location.href = "<%= canvasUrl %>";
-	// }
-	// else {
-	// 	if (<%= hasFacebookTab ? true : false %>) {
-	// 		top.location.href = "<%= facebookTabUrl %>";
-	// 	}
-	// 	else {
-	// 		top.location.href = "<%= canvasUrl %>";
-	// 	}
-	// }
+	function isMobileDevice() {
+		return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+	};
+	if ( isMobileDevice() ) {
+		top.location.href = "<%= canvasUrl %>";
+	}
+	else {
+		if (<%= hasFacebookTab ? true : false %>) {
+			top.location.href = "<%= facebookTabUrl %>";
+		}
+		else {
+			top.location.href = "<%= canvasUrl %>";
+		}
+	}
 	</script>
 </body>
 </html>
