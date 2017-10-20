@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { reduxForm, formValueSelector } from 'redux-form'
 import { Field, FieldArray } from 'redux-form'
 import { APP_EDITOR_FORM_NAME } from 'config'
-import EditorContainer from 'containers/EditorContainer'
 import ImageUploaderDropZone from 'components/form-editor/ImageUploaderDropZone'
 
 let WelcomeForm = ({ active, selectedValues, onTitleClick }) => 

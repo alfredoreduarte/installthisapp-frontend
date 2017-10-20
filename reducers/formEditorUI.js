@@ -12,7 +12,13 @@ const defaultState = {
 const formEditorUI = (state = defaultState, action) => {
 	switch (action.type) {
 		case 'EDITOR/RESET':
-			return defaultState
+			return {
+				...defaultState,
+				// These two stay the same to avoid exceptions onLeave because components
+				// do not get unmounted fast enough
+				editorSteps: state.editorSteps,
+				editorScreens: state.editorScreens,
+			}
 		case 'EDITOR/SET_ACTIVE_FIELD':
 			return {
 				...state, 

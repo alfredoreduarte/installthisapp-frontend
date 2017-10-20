@@ -5,6 +5,7 @@ import Select from 'react-select'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { updateAppSpecificSettings } from 'actions/apps'
+import OpenGraphFormFieldsForSettingsPage from 'components/OpenGraphFormFieldsForSettingsPage'
 
 let Settings = ({ handleSubmit, fetching, settings }) => (
 	<form onSubmit={handleSubmit}>
@@ -42,9 +43,21 @@ let Settings = ({ handleSubmit, fetching, settings }) => (
 					</div>
 				</div>
 			</div>
+			<div className="col-md-6">
+				<div className="panel panel-default">
+					<div className="panel-body">
+						<div className="form-horizontal">
+							<OpenGraphFormFieldsForSettingsPage />
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</form>
 )
+// openGraphTitle
+// openGraphDescription
+// openGraphImage
 
 Settings = reduxForm({
 	form: 'appSpecificSettings',

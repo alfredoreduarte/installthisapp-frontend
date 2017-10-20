@@ -15,6 +15,7 @@ const Previews = ({ screen, messages, images, settings, emptyFunc }) => {
 				images={images}
 				settings={settings}
 				nextPath={null}
+				isPreview={true}
 			 />
 		case 'flyer':
 			return <Flyer

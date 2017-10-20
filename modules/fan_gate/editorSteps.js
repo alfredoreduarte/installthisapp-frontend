@@ -8,4 +8,7 @@ export default [
 	{
 		triggerScreen: null,
 	},
+	{
+		triggerScreen: null,
+	},
 ]

@@ -4,28 +4,53 @@
 	<title><%= applicationTitle %></title>
 	<meta property="og:url" content="<%= gatewayUrl %>" />
 	<meta property="og:type" content="article" />
-	<meta property="og:title" content="<%= applicationTitle %>" />
-	<meta property="og:description" content="<%= applicationTitle %>" />
-	<meta property="og:image" content="<%= checksum == 'SPH78L' ? 'https://s3-us-west-2.amazonaws.com/installthisapp/application-assets/SPH78L/images/og.jpg' : '' %><%= checksum == 'Y43R1Z' || checksum == 'RB19VF' ? 'https://s3-us-west-2.amazonaws.com/installthisapp/application-assets/Y43R1Z/images/sfo-wallpost.jpg' : '' %>" />
+	<meta property="og:title" content="<%= ogTitle %>" />
+	<meta property="og:description" content="<%= ogDescription %>" />
+	<meta property="og:image" content="<%= checksum == 'SPH78L' ? 'https://s3-us-west-2.amazonaws.com/installthisapp/application-assets/SPH78L/images/og.jpg' : '' %><%= checksum == 'Y43R1Z' || checksum == 'RB19VF' ? 'https://s3-us-west-2.amazonaws.com/installthisapp/application-assets/Y43R1Z/images/sfo-wallpost.jpg' : '' %><%= ogImage %>" />
+	<style>
+		body{
+			background: #9090C7;
+			font-family: sans-serif;
+		}
+		.container{
+			text-align: center;
+			padding: 50px 40px;
+		}
+		.title{
+			font-size: 42px;
+			color: white;
+		}
+		.copy{
+			color: white;
+		}
+		.thumbnail{
+			width: 420px;
+			box-shadow: 0px 5px 10px rgba(0,0,0,.3);
+		}
+	</style>
 </head>
 <body>
-	<h1><%= applicationTitle %></h1>
-	Redirecting...
+	<div class="container">
+		<h1 class="title"><%= applicationTitle %></h1>
+		<p class="copy"><%= ogDescription %></p>
+		<p class="copy"><small>Redirecting, please wait...</small></p>
+		<img class="thumbnail" src="<%= ogImage %>" />
+	</div>
 	<script>
-	function isMobileDevice() {
-		return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
-	};
-	if ( isMobileDevice() ) {
-		top.location.href = "<%= canvasUrl %>";
-	}
-	else {
-		if (<%= hasFacebookTab ? true : false %>) {
-			top.location.href = "<%= facebookTabUrl %>";
-		}
-		else {
-			top.location.href = "<%= canvasUrl %>";
-		}
-	}
+	// function isMobileDevice() {
+	// 	return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+	// };
+	// if ( isMobileDevice() ) {
+	// 	top.location.href = "<%= canvasUrl %>";
+	// }
+	// else {
+	// 	if (<%= hasFacebookTab ? true : false %>) {
+	// 		top.location.href = "<%= facebookTabUrl %>";
+	// 	}
+	// 	else {
+	// 		top.location.href = "<%= canvasUrl %>";
+	// 	}
+	// }
 	</script>
 </body>
 </html>

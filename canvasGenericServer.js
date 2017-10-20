@@ -61,6 +61,10 @@ const commonParamsGenerator = function(moduleName, json){
 		messagesUrl: json.messages_url,
 		imagesUrl: json.images_url,
 		customJavascript: json.custom_javascript,
+		// opengraph
+		ogTitle: json.open_graph_title,
+		ogDescription: json.open_graph_description,
+		ogImage: json.open_graph_image,
 	}
 }
 

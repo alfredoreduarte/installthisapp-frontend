@@ -22,6 +22,9 @@ router.get('/gateway/:checksum', function(req, res) {
 				gatewayUrl: 'https://' + req.headers.host + '/gateway/' + checksum,
 				canvasUrl: 'https://' + req.headers.host + '/' + applicationType + '/' + checksum,
 				facebookTabUrl: facebookTabUrl,
+				ogTitle: json.open_graph_title,
+				ogDescription: json.open_graph_description,
+				ogImage: json.open_graph_image,
 			}
 		)
 	})

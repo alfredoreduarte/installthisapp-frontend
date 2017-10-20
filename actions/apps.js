@@ -145,12 +145,7 @@ export const updateAppSpecificSettings = () => {
 		const currentAppChecksum = getState().admin.currentApp
 		const rawSettings = getState().form.appSpecificSettings.values
 		const setting = handleTopFansEdgeCase(rawSettings)
-		postToApi(
-			`applications/${currentAppChecksum}/update_setting.json`, 
-			{
-				setting
-			}
-		).then(response => {
+		postToApi(`applications/${currentAppChecksum}/update_setting.json`, { setting }).then(response => {
 			if (response.success) {
 				dispatch({
 					type: 'UPDATE_APP_SETTING',
