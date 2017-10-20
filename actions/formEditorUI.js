@@ -32,6 +32,15 @@ export const initializeEditorScreensAndSteps = ( editorSteps, editorScreens ) =>
 	editorScreens,
 })
 
+export const initializeEditorDefaultStylesheet = styles => ({
+	type: 'EDITOR/INITIALIZE_STYLESHEET',
+	payload: styles,
+})
+
+export const reset = () => ({
+	type: 'EDITOR/RESET',
+})
+
 export const setEditorStepIndexWithConditionalScreen = index => {
 	return (dispatch, getState) => {
 		dispatch(setEditorStepIndex(index))
@@ -63,7 +72,8 @@ export const saveAppFromNewEditor = () => {
 
 		// Use this instead of saveStyles at actions/styles because
 		// now we're using redux-form
-		const cssString = css.stringify(state.styles.ruleset)
+		// const cssString = css.stringify(state.styles.ruleset)
+		const cssString = state.form.formEditor.values.css
 		const messages = JSON.stringify(state.form.formEditor.values.messages)
 		const images = JSON.stringify(state.form.formEditor.values.images)
 		const settings = state.form.formEditor.values.settings

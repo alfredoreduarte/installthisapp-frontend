@@ -1,5 +1,5 @@
 import { setCurrentAppChecksum } from 'actions/apps'
-import { initializeEditorScreensAndSteps } from 'actions/formEditorUI'
+import { initializeEditorScreensAndSteps, initializeEditorDefaultStylesheet, reset } from 'actions/formEditorUI'
 import { fetchEntities } from 'modules/form/actions/entities'
 import { 
 	turnOnGlobalIndicator, 
@@ -17,6 +17,9 @@ export default (store, dispatch) => ({
 			cb(null, require('containers/EditorContainer').default)
 		})
 	},
+	onLeave: (prevState) => {
+		dispatch(reset())
+	},
 	onEnter: (nextState, replace, next) => {
 		dispatch(turnOnGlobalIndicator())
 		// Instantiating steps and screens from the current app
@@ -24,6 +27,9 @@ export default (store, dispatch) => ({
 		const editorSteps = require(`modules/${app}/editorSteps`).default
 		const editorScreens = require(`modules/${app}/editorScreens`).default
 		dispatch(initializeEditorScreensAndSteps(editorSteps, editorScreens))
+
+		const defaultStyles = require(`!css-loader!sass-loader?outputStyle=expanded&indentType=tab&indentWidth=1!../../assets/canvas/${app}.sass`).toString()
+		dispatch(initializeEditorDefaultStylesheet(defaultStyles))
 		// 
 		analytics.page('App Editor')
 		dispatch(setCurrentAppChecksum(nextState.params.checksum)).then(() => {

@@ -6,6 +6,7 @@ import { push } from 'react-router-redux'
 import { APP_EDITOR_FORM_NAME } from 'config'
 import { setEditorStepIndexWithConditionalScreen, setEditorScreenIndex, saveAppFromNewEditor } from 'actions/formEditorUI'
 import { getCurrentAppByState } from 'selectors/apps'
+import { getStringifiedRulesetWithoutTag } from 'selectors/styles'
 import Editor from 'components/form-editor/Editor'
 
 let EditorContainer = props => <Editor {...props} />
@@ -30,6 +31,7 @@ const mapStateToProps = (state, props) => {
 			messages: {...state.styles.messages},
 			settings: {...state.styles.settings},
 			images: {...state.styles.images},
+			css: getStringifiedRulesetWithoutTag(state),
 			...initialState,
 		}
 	}

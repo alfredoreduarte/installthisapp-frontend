@@ -17,6 +17,7 @@ export const getCurrentMessageValue = createSelector(
 )
 
 export const getStringifiedRuleset = state => state.styles.ruleset.type ? `<style>${css.stringify(state.styles.ruleset)}</style>` : null
+export const getStringifiedRulesetWithoutTag = state => state.styles.ruleset.type ? css.stringify(state.styles.ruleset) : null
 
 const getAllRules = createSelector(
 	getStylesObject,

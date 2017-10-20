@@ -1,0 +1,82 @@
+$gray-base:             #000
+$gray-darker:           lighten($gray-base, 13.5%)
+$gray-dark:             lighten($gray-base, 20%)
+$gray:                  lighten($gray-base, 33.5%)
+$gray-light:            lighten($gray-base, 60%)
+$gray-lighter:          lighten($gray-base, 86.5%)
+
+$brand-primary:	        #2174F1
+$brand-success:         #44BBA4
+$brand-info:            #FFC253
+$brand-warning:         #F39237
+$brand-danger:          #D63230
+
+$body-bg:               #fff
+$text-color:            $gray
+$headings-color:        $gray-darker
+$link-color:            $brand-primary
+$link-hover-color:      darken($link-color, 15%)
+$link-hover-decoration: underline
+
+$border-radius-base: 	5px
+
+$input-bg:              #fff
+$input-bg-disabled:     $gray-lighter
+$input-color:           $gray
+$input-border:          $gray-lighter
+$input-border-focus:    $brand-primary
+$input-border-radius:   $border-radius-base
+
+body
+	background-color: $body-bg
+	color: $text-color
+
+h1, h2, h3, h4, h5, h6
+	color: $headings-color
+
+a
+	color: $link-color
+	&:hover
+		color: $link-hover-color
+		text-decoration: $link-hover-decoration
+
+// Buttons
+.btn-primary
+	background-color: $brand-primary
+	border-color: darken($brand-primary, 10)
+	&:hover
+		background-color: darken($brand-primary, 5)
+		border-color: darken($brand-primary, 15)
+.btn-success
+	background-color: $brand-success
+	border-color: darken($brand-success, 10)
+	&:hover
+		background-color: darken($brand-success, 5)
+		border-color: darken($brand-success, 15)
+.btn-info
+	background-color: $brand-info
+	border-color: darken($brand-info, 10)
+	&:hover
+		background-color: darken($brand-info, 5)
+		border-color: darken($brand-info, 15)
+.btn-warning
+	background-color: $brand-warning
+	border-color: darken($brand-warning, 10)
+	&:hover
+		background-color: darken($brand-warning, 5)
+		border-color: darken($brand-warning, 15)
+.btn-danger
+	background-color: $brand-danger
+	border-color: darken($brand-danger, 10)
+	&:hover
+		background-color: darken($brand-danger, 5)
+		border-color: darken($brand-danger, 15)
+
+// Form
+.form-control
+	background-color: $input-bg
+	color: $input-color
+	border-color: $input-border
+	border-radius: $input-border-radius
+	&:focus
+		border-color: $input-border-focus

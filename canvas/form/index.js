@@ -4,7 +4,10 @@ import { browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import Root from 'canvas/form/containers/Root'
 import configureStore from 'canvas/form/store/configureStore'
-require('lib/addToHomeScreen.js')
+// 
+// Useless? 
+// 
+// require('lib/addToHomeScreen.js')
 
 const store = configureStore({
 	applicationData: {

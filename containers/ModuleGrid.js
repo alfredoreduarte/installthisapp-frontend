@@ -10,7 +10,7 @@ const ModuleGrid = ({ modules, futureModules, handleFutureModuleSelection, handl
 		<div className="container-flex">
 			{modules.map( module => {
 				return (
-					<div className="col-flex" key={module}>
+					<div className="col-flex" key={module} style={{margin: '0px 40px 20px'}}>
 						<div className="media media-stacked text-center">
 							<div className="media-left media-middle">
 								<a

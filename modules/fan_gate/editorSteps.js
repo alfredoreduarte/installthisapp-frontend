@@ -5,4 +5,7 @@ export default [
 	{
 		triggerScreen: 'flyer',
 	},
+	{
+		triggerScreen: null,
+	},
 ]

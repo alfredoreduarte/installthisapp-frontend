@@ -16,6 +16,7 @@
 	<link rel="apple-touch-icon-precomposed" href="/images/module-icons/<%= module %>-big.jpg" />
 	<meta name="mobile-web-app-capable" content="yes">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="<%= cloudFrontUrl %>/node_modules/animate.css/animate.min.css" />
 	<link rel="stylesheet" type="text/css" href="<%= stylesheetUrl %>" />
 	<link rel="icon" type="image/png" href="/images/favicon.png" />
 	<title><%= module %></title>
@@ -45,30 +46,31 @@
 		// Some modules either don't need FB or use their own script, so...
 		// 
 		<% if (module != 'fan_gate' && module != 'coupons') { %>
-		window.fbAsyncInit = function() {
-			window.fbLoaded = true
-			FB.init({
-				appId      : window.facebookAppId,
-				xfbml      : true,
-				version    : 'v2.7'
-			});
-			FB.Canvas.setAutoGrow();
-		};
-		(function(d, s, id){
-		var js, fjs = d.getElementsByTagName(s)[0];
-		if (d.getElementById(id)) {return;}
-		js = d.createElement(s); js.id = id;
-		js.src = "//connect.facebook.net/en_US/sdk.js";
-		fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
+			window.fbAsyncInit = function() {
+				window.fbLoaded = true
+				FB.init({
+					appId      : window.facebookAppId,
+					xfbml      : true,
+					version    : 'v2.7'
+				});
+				FB.Canvas.setAutoGrow();
+			};
+			(function(d, s, id){
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {return;}
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
 		<% } %>
 	</script>
 	<script src="<%= cloudFrontUrl %><%= manifestBundle %>"></script>
 	<script src="<%= cloudFrontUrl %><%= vendorBundle %>"></script>
 	<script src="<%= cloudFrontUrl %><%= moduleBundle %>"></script>
 	<script type="text/javascript">
-		addToHomescreen();
+		if (typeof addToHomescreen !== 'undefined') { addToHomescreen(); }
 	</script>
+	<%- customJavascript %>
 	<% if (checksum == '76W3VL'){ %>
 		<script>
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

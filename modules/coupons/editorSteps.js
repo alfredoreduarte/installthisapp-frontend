@@ -6,9 +6,12 @@ export default [
 		triggerScreen: 'coupon',
 	},
 	{
+		triggerScreen: 'noCoupons',
+	},
+	{
 		triggerScreen: null,
 	},
 	{
-		triggerScreen: 'noCoupons',
+		triggerScreen: null,
 	}
 ]

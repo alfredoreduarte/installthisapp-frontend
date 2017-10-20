@@ -6,9 +6,12 @@ export default [
 		triggerScreen: 'form',
 	},
 	{
+		triggerScreen: 'thanks',
+	},
+	{
 		triggerScreen: null,
 	},
 	{
-		triggerScreen: 'thanks',
+		triggerScreen: null,
 	}
 ]

@@ -8,6 +8,7 @@ import { setEditorStepIndexWithConditionalScreen } from 'actions/formEditorUI'
 import WelcomeForm from 'components/form-editor/WelcomeForm'
 import LegalForm from 'components/form-editor/LegalForm'
 import ThankYouForm from 'components/form-editor/ThankYouForm'
+import CodeForm from 'components/form-editor/CodeForm'
 
 import CouponForm from 'modules/coupons/components/form-editor/CouponForm'
 import NoCouponsForm from 'modules/coupons/components/form-editor/NoCouponsForm'
@@ -16,8 +17,9 @@ let Editor = ({ setEditorStep, editorCurrentStep }) =>
 <div>
 	<WelcomeForm onTitleClick={() => setEditorStep(0)} active={editorCurrentStep == 0} />
 	<CouponForm onTitleClick={() => setEditorStep(1)} active={editorCurrentStep == 1} />
-	<LegalForm onTitleClick={() => setEditorStep(2)} active={editorCurrentStep == 2} />
-	<NoCouponsForm onTitleClick={() => setEditorStep(3)} active={editorCurrentStep == 3} />
+	<NoCouponsForm onTitleClick={() => setEditorStep(2)} active={editorCurrentStep == 2} />
+	<CodeForm onTitleClick={() => setEditorStep(3)} active={editorCurrentStep == 3} />
+	<LegalForm onTitleClick={() => setEditorStep(4)} active={editorCurrentStep == 4} />
 </div>
 
 Editor = reduxForm({

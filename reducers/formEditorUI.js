@@ -1,4 +1,4 @@
-const formEditorUI = (state = {
+const defaultState = {
 	submittingImageWithFieldName: null,
 	activeFieldIndex: null,
 	editorSteps: null,
@@ -6,8 +6,13 @@ const formEditorUI = (state = {
 	step: 0,
 	screen: 0,
 	platform: 'mobile',
-}, action) => {
+	defaultStylesheet: null,
+}
+
+const formEditorUI = (state = defaultState, action) => {
 	switch (action.type) {
+		case 'EDITOR/RESET':
+			return defaultState
 		case 'EDITOR/SET_ACTIVE_FIELD':
 			return {
 				...state, 
@@ -33,6 +38,11 @@ const formEditorUI = (state = {
 				...state, 
 				editorSteps: action.editorSteps,
 				editorScreens: action.editorScreens,
+			}
+		case 'EDITOR/INITIALIZE_STYLESHEET':
+			return {
+				...state, 
+				defaultStylesheet: action.payload,
 			}
 		default:
 			return state

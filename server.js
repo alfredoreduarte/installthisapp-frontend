@@ -76,37 +76,6 @@ app.use('/sw.js', express.static(__dirname + '/assets/newlanding/sw.js'))
 app.use('/canvas', express.static(__dirname + '/assets/canvas'))
 app.use('/node_modules', express.static(__dirname + '/node_modules'))
 
-// 
-// === Canvas ===
-// 
-// Trivia
-var triviaRouter = require('./canvas/trivia/server.js')
-app.use(triviaRouter)
-// Top Fans
-var topFansRouter = require('./canvas/top_fans/server.js')
-app.use(topFansRouter)
-// Photo Contest
-var photoContestRouter = require('./canvas/photo_contest/server.js')
-app.use(photoContestRouter)
-// Memory Match
-var memoryMatchRouter = require('./canvas/memory_match/server.js')
-app.use(memoryMatchRouter)
-// Catalog
-var catalogRouter = require('./canvas/catalog/server.js')
-app.use(catalogRouter)
-// Form
-var formRouter = require('./canvas/form/server.js')
-app.use(formRouter)
-// Fan gate
-var fanGateRouter = require('./canvas/fan_gate/server.js')
-app.use(fanGateRouter)
-// Coupons
-var couponsRouter = require('./canvas/coupons/server.js')
-app.use(couponsRouter)
-// Static HTML
-var staticHtmlRouter = require('./canvas/static_html/server.js')
-app.use(staticHtmlRouter)
-
 // Serving static HTML
 app.use(function(req, res, next) {
 	if(req.url.substr(-1) == '/' && req.url.length > 1)
@@ -133,11 +102,13 @@ var index = require('./public-routes/index')
 var campaign = require('./public-routes/campaign')
 var dashboard = require('./public-routes/dashboard')
 var canvasGateway = require('./public-routes/canvasGateway')
+var genericCanvasRouter = require('./canvasGenericServer.js')
 var leadgen = require('./public-routes/leadgen')
 app.get('/d*', dashboard)
 app.get('/leadgen*', leadgen)
 app.get('/campaign*', campaign)
 app.get('/gateway*', canvasGateway)
+app.use(genericCanvasRouter)
 app.all('/*', index)
 
 // 

@@ -68,12 +68,6 @@ router.get('/reset-password', function(req, res) { res.render('reset-password', 
 	uid: req.query.uid,
 	token: req.query.token,
 })) })
-// router.get('/reset-password', function(req, res) { res.render('reset-password', {
-// 	...commonParams,
-// 	clientId: req.query.client_id,
-// 	uid: req.query.uid,
-// 	token: req.query.token,
-// }) })
 
 // Module landings
 const topFansHandler = function(req, res) { res.render('landing-v2/app', _.merge(commonParams(req), {

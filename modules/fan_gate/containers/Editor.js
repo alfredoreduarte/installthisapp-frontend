@@ -7,11 +7,13 @@ import { setEditorStepIndexWithConditionalScreen } from 'actions/formEditorUI'
 
 import WelcomeForm from 'modules/fan_gate/components/form-editor/WelcomeForm'
 import FlyerForm from 'modules/fan_gate/components/form-editor/FlyerForm'
+import CodeForm from 'components/form-editor/CodeForm'
 
 let Editor = ({ setEditorStep, editorCurrentStep }) => 
 <div>
 	<WelcomeForm onTitleClick={() => setEditorStep(0)} active={editorCurrentStep == 0} />
 	<FlyerForm onTitleClick={() => setEditorStep(1)} active={editorCurrentStep == 1} />
+	<CodeForm onTitleClick={() => setEditorStep(2)} active={editorCurrentStep == 2} />
 </div>
 
 Editor = reduxForm({

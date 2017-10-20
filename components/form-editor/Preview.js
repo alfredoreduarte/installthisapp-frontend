@@ -4,11 +4,16 @@ import TiMediaPlayReverse from 'react-icons/lib/ti/media-play-reverse'
 import TiMediaPlay from 'react-icons/lib/ti/media-play'
 import PlatformSelector from 'components/form-editor/PlatformSelector'
 
-const EditorPreview = ({ platform, handleScreenChange, screensLength, currentScreenIndex, currentScreenLabel, availableScreens, previews }) => 
+const style = '.btn-primary{background: red}'
+
+const EditorPreview = ({ platform, handleScreenChange, screensLength, currentScreenIndex, 
+	currentScreenLabel, availableScreens, previews, styles }) => 
 <div className={`editor-preview-column ${platform}`}>
 	<Frame 
 		className={`editor-preview-frame ${platform}`}
-		head={<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />}>
+		head={<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />}
+		>
+		<div className="styles" dangerouslySetInnerHTML={{__html: styles}}></div>
 		{previews}
 	</Frame>
 	<div className="editor-preview-navigation">
