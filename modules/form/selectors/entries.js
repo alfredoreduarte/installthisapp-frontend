@@ -16,7 +16,20 @@ export const getFilteredEntries = createSelector(
 			const payload = entry.payload
 			let idealReturn = extractSchemaOrder.map(order => {
 				const correspondingResponse = _.find(payload, {'id': order})
-				return correspondingResponse ? correspondingResponse.content : ''
+				const result = correspondingResponse ? correspondingResponse.content : ''
+				let toReturn = ''
+				if (typeof result == 'object') {
+					_.forIn(result, (value, key) => {
+						if (value) {
+							toReturn = toReturn + key + ', '
+						}
+					})
+					toReturn = toReturn.slice(0, -2)
+				}
+				else{
+					toReturn = result
+				}
+				return toReturn
 			})
 			idealReturn.push(moment(entry.createdAt).format("MMMM Do YYYY, h:mm:ss a"))
 			return idealReturn

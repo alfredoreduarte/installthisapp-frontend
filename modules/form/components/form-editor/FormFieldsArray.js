@@ -16,6 +16,11 @@ const OptionsDictionary = ({ input, label, type, meta: { touched, error } }) =>
 	inputProps={{placeholder: 'Type in each choice and press enter.'}}
 	className="editor-field-input editor-field-tag-input"
 	value={input.value}
+	addOnPaste={true}
+	pasteSplit={data => {
+		const separators = [',', ';', '\\(', '\\)', '\\*', '/', ':', '\\?', '\n', '\r']
+		return data.split(new RegExp(separators.join('|'))).map(d => d.trim())
+	}}
 	renderTag={({ tag, key, disabled, onRemove, classNameRemove, getTagDisplayValue, ...other }) =>
 		<span key={key} {...other}>
 			{getTagDisplayValue(tag)}
@@ -36,6 +41,7 @@ const NiceFieldType = ({ type }) => <div className="editor-field-type">
 	{type == 'shortText' && 'Short Text'}
 	{type == 'longText' && 'Long Text'}
 	{type == 'multipleChoice' && 'Multiple Choice'}
+	{type == 'checkboxes' && 'Checkboxes'}
 </div>
 
 const FormFieldsArray = ({ activeFieldIndex, schemaFieldsForTypeConditions, changeIndex, fields, meta }) =>

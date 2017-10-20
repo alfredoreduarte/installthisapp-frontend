@@ -37,7 +37,7 @@ let EntryForm = ({ array, active, onTitleClick }) =>
 					type: 'longText',
 				})}>Long text field</a>
 				<a className="btn btn-sm btn-danger btn-outline" onClick={() => array.push('schema', {
-					question: 'Question text',
+					question: 'Your email',
 					id: v4(),
 					type: 'email',
 				})}>Email</a>
@@ -47,6 +47,12 @@ let EntryForm = ({ array, active, onTitleClick }) =>
 					type: 'multipleChoice',
 					options: ['First option'],
 				})}>Multiple choice</a>
+				<a className="btn btn-sm btn-info btn-outline" onClick={() => array.push('schema', {
+					question: 'Question text',
+					id: v4(),
+					type: 'checkboxes',
+					options: ['First option'],
+				})}>Checkboxes</a>
 			</div>
 			<FieldArray name="schema" component={FormFieldsArray} />
 			<hr />
