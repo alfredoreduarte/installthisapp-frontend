@@ -104,14 +104,14 @@ const Design = ({
 						<h4><u>Images</u></h4>
 						{imagesDictionary.map( image =>
 							<div key={image.key}> 
-							 <ImageUploader 
-							 	imgOrBackground="img"
-							 	property={image.key} 
-							 	onChange={val => handleImageChange(image.key, val)} 
-							 	value={image.value} 
-							 />
-							 <br/>
-							 </div>
+								<ImageUploader 
+									imgOrBackground="img"
+									property={image.key} 
+									onChange={val => handleImageChange(image.key, val)} 
+									value={image.value} 
+								/>
+								<br/>
+							</div>
 						)}
 						<hr/>
 						<h4><u>Texts</u></h4>

@@ -16,7 +16,13 @@ const ImageUploader = ({
 }) => (
 	<div className="ita-flex-box ita-flex-box-horizontal">
 		<div className="ita-flex-box ita-flex-items-center ita-flex-shrink">
-			<label>{_.capitalize(humps.decamelize(property).split("_").join(" "))}</label>
+			<label>
+				{_.capitalize(humps.decamelize(property).split("_").join(" "))}
+				{property == 'header' && <small className="ita-sidebar-image-tip">width: 820px<br/>height: variable</small>}
+				{property == 'footer' && <small className="ita-sidebar-image-tip">width: 820px<br/>height: variable</small>}
+				{property == 'logoDesktop' && <small className="ita-sidebar-image-tip">width: variable<br/>height: 50px</small>}
+				{property == 'logoMobile' && <small className="ita-sidebar-image-tip">width: variable<br/>height: 26px</small>}
+			</label>
 		</div>
 		<div className="ita-flex-box ita-flex-items-center ita-flex-justify-end ita-flex-block text-right">
 			<FileInput 

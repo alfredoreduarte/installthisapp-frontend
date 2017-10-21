@@ -39,6 +39,9 @@ const Index = ({
 	toggleListGrid,
 }) => (
 	<div>
+		<div>
+			<Image source={headerImage} />
+		</div>
 		<div className="visible-xs hidden-sm hidden-md hidden-lg">
 			<TopBar homeUrl={homeUrl} logoImage={logoMobile} />
 			<CategoriesListMobile showBack={category ? true : false} categories={categories} />
@@ -124,6 +127,9 @@ const Index = ({
 				}
 			</div>
 			<Footer copy={footerCopy} />
+		</div>
+		<div>
+			<Image source={footerImage} />
 		</div>
 	</div>
 )

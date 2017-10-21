@@ -39,33 +39,17 @@ class Root extends Component {
 						onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
 						component={Index} />
 					<Route 
-						// path={`/${window.canvasId}(/:checksum)/categories`}
 						path={`/catalog(/:checksum)/categories`}
-						// 
-						// 
-						// 
 						onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
 						component={Categories} />
 					<Route 
-						// path={`/${window.canvasId}(/:checksum)/categories/:categorySlug`}
 						path={`/catalog(/:checksum)/categories/:categorySlug`}
-						// 
-						// 
-						// 
 						onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
 						component={Index} />
 					<Route 
-						// path={`/${window.canvasId}(/:checksum)/:productSlug`}
 						path={`/catalog(/:checksum)/:productSlug`}
-						// 
-						// 
-						// 
 						onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
 						component={SingleProduct} />
-					<Route 
-						// path={`/${window.canvasId}/:checksum/login`} 
-						path={`/catalog/:checksum/login`} 
-						component={Login}/>
 				</Router>
 			</Provider>
 		)

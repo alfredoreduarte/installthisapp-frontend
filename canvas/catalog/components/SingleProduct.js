@@ -69,6 +69,9 @@ const SingleProduct = ({
 	requestFormSubmit,
 }) => (
 	<div>
+		<div>
+			<Image source={headerImage} />
+		</div>
 		<div className="visible-xs hidden-sm hidden-md hidden-lg">
 			<SimpleModal
 				show={showContactModal}
@@ -286,6 +289,9 @@ const SingleProduct = ({
 				</div>
 			</div>
 			<Footer copy={footerCopy} />
+		</div>
+		<div>
+			<Image source={footerImage} />
 		</div>
 	</div>
 )

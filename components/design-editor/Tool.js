@@ -1,7 +1,10 @@
 import React, { PropTypes } from 'react'
+import humps from 'humps'
 import FontFamily from 'components/design-editor/FontFamily'
 import TextOrientation from 'components/design-editor/TextOrientation'
 import BackgroundSize from 'components/design-editor/BackgroundSize'
+import BackgroundPosition from 'components/design-editor/BackgroundPosition'
+import BackgroundAttachment from 'components/design-editor/BackgroundAttachment'
 import TextAlign from 'components/design-editor/TextAlign'
 import Slider from 'components/design-editor/Slider'
 import ColorPicker from 'components/design-editor/ColorPicker'
@@ -41,8 +44,14 @@ const Tool = ({ property, value, handleChange }) => (
 			case 'background-size':
 				return <BackgroundSize property={property} onChange={val => handleChange(property, val)} value={value} />
 				break
+			case 'background-position':
+				return <BackgroundPosition property={property} onChange={val => handleChange(property, val)} value={value} />
+				break
 			case 'background-repeat':
 				return <BackgroundRepeat onChange={val => handleChange(property, val)} value={value} />
+				break
+			case 'background-attachment':
+				return <BackgroundAttachment onChange={val => handleChange(property, val)} value={value} />
 				break
 			case 'direction':
 				return <TextOrientation onChange={val => handleChange(property, val)} value={value} />
@@ -65,11 +74,9 @@ const Tool = ({ property, value, handleChange }) => (
 				break
 			case 'texts':
 				return <TextStyles onChange={(prop, val) => handleChange(prop, val)} value={value} />
-			case 'background-attachment':
-			case 'background-position':
 			default:
 				return <div>
-					<label>{property}</label>
+					<label>{_.capitalize(humps.decamelize(property).split("-").join(" "))}</label>
 					<input 
 						type="text" 
 						className="form-control"
