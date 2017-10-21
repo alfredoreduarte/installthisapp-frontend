@@ -74,7 +74,7 @@ const SingleProduct = ({
 				show={showContactModal}
 				title={title}
 				subtitle={price}
-				thumbnail={productMedia[0].thumbnail}
+				thumbnail={productMedia.length > 0 ? productMedia[0].thumbnail : 'https://via.placeholder.com/100x100'}
 				handleClose={handleToggleContact}
 				requestFormTitle={requestFormTitle}
 				requestFormHint={requestFormHint}
@@ -103,7 +103,7 @@ const SingleProduct = ({
 				<MdClose onClick={browserHistory.goBack} size={20} color={'#DBDBDB'} style={{
 					alignSelf: 'flex-end',
 				}} />
-				<ImageGallery
+				{productMedia.length > 0 && <ImageGallery
 					items={productMedia}
 					slideInterval={2000}
 					lazyLoad={true}
@@ -112,7 +112,7 @@ const SingleProduct = ({
 					showFullscreenButton={false}
 					showThumbnails={false}
 					showPlayButton={false}
-					onImageLoad={() => console.log('load')}/>
+					onImageLoad={() => console.log('load')}/>}
 				<h1 className="ita-cali-mobile-single-product-title" style={{
 					margin: '.5em 0em .1em',
 				}}>{title}</h1>
@@ -136,7 +136,7 @@ const SingleProduct = ({
 				show={showContactModal}
 				title={title}
 				subtitle={price}
-				thumbnail={productMedia[0].thumbnail}
+				thumbnail={productMedia.length > 0 ? productMedia[0].thumbnail : 'https://via.placeholder.com/100x100'}
 				handleClose={handleToggleContact}
 				requestFormTitle={requestFormTitle}
 				requestFormHint={requestFormHint}
@@ -170,14 +170,14 @@ const SingleProduct = ({
 				<div className="col-xs-12 col-sm-4 col-md-6 col-lg-6" style={{
 					marginTop: '30px',
 				}}>
-					<ImageGallery
+					{productMedia.length > 0 && <ImageGallery
 						showBullets={true}
 						showNav={false}
 						items={productMedia}
 						slideInterval={2000}
 						lazyLoad={true}
 						showPlayButton={false}
-						onImageLoad={() => console.log('load')}/>
+						onImageLoad={() => console.log('load')}/>}
 				</div>
 				<div className="col-xs-12 col-sm-8 col-md-6 col-lg-6">
 					<h1 className="ita-cali-desktop-single-product-title" style={{
@@ -279,7 +279,7 @@ const SingleProduct = ({
 							title={name} 
 							featured={featured} 
 							price={price ? `${currency} ${price}` : null} 
-							thumbnail={featuredImage.attachmentUrl} 
+							thumbnail={featuredImage ? featuredImage.attachmentUrl : 'https://via.placeholder.com/100x100'} 
 							subtitle={shortDescription}
 						/>
 					)}
@@ -311,8 +311,8 @@ SingleProduct.propTypes = {
 	permalink: PropTypes.string.isRequired,
 	productId: PropTypes.number.isRequired,
 	title: PropTypes.string.isRequired,
-	description: PropTypes.string.isRequired,
-	price: PropTypes.string.isRequired,
+	description: PropTypes.string,
+	price: PropTypes.string,
 	relatedProducts: PropTypes.array,
 	messageSent: PropTypes.bool.isRequired,
 	showContactModal: PropTypes.bool.isRequired,

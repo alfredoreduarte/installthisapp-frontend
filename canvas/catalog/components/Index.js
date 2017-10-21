@@ -53,7 +53,7 @@ const Index = ({
 						title={name} 
 						featured={featured} 
 						price={price ? `${currency} ${price}` : null} 
-						thumbnail={featuredImage.attachmentUrl} 
+						thumbnail={featuredImage ? featuredImage.attachmentUrl : 'http://via.placeholder.com/100x100'} 
 						subtitle={shortDescription}
 					/>
 				)}
@@ -101,7 +101,7 @@ const Index = ({
 							title={name} 
 							featured={featured} 
 							price={price ? `${currency} ${price}` : null} 
-							thumbnail={featuredImage.attachmentUrl} 
+							thumbnail={featuredImage ? featuredImage.attachmentUrl : 'http://via.placeholder.com/100x100'} 
 							subtitle={shortDescription}
 						/>
 					)}
