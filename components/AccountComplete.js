@@ -55,8 +55,8 @@ const mapDispatchToProps = (dispatch, props) => {
 			e.preventDefault()
 			// dispatch(updateInfo())
 			dispatch(updateInfo()).then(res => {
-				// dispatch(push('/d'))
-				top.location.href = redirectUri
+				dispatch(push('/d'))
+				// top.location.href = redirectUri
 			})
 		}
 	}

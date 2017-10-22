@@ -71,13 +71,15 @@ export const fetchAdmin = () => {
 			if (!admin.name) {
 				if (getState().routing.locationBeforeTransitions.pathname != '/d/complete-profile') {
 					setTimeout(() => {
-						top.location.href = '/d/complete-profile'
+						// top.location.href = '/d/complete-profile'
+						dispatch(push('/d/complete-profile'))
 					}, 300)
 				}
 			}
 			else {
 				if (getState().routing.locationBeforeTransitions.pathname == '/d/complete-profile') {
-					top.location.href = '/d'
+					// top.location.href = '/d'
+					dispatch(push('/d'))
 				}
 			}
 			return dispatch(receiveAdmin(admin))
