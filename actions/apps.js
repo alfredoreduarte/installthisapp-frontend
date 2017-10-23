@@ -195,7 +195,7 @@ export const postNewApp = () => {
 				// 
 				if (body.module == 'top_fans') {
 					dispatch(push(`/d/apps/${response.app.applicationType}/${response.app.checksum}/setup-guide`))
-				} else if (body.module == 'form' || body.module == 'fan_gate' || body.module == 'coupons') {
+				} else if (body.module == 'form' || body.module == 'fan_gate' || body.module == 'coupons' || body.module == 'static_html') {
 					dispatch(push(`/d/apps/${response.app.applicationType}/${response.app.checksum}/editor`))
 				} else {
 					dispatch(push(`/d/apps/${response.app.applicationType}/${response.app.checksum}`))

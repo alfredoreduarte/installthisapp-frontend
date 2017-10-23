@@ -55,6 +55,7 @@ const SingleProduct = ({
 	handleToggleContact,
 	// 
 	currency,
+	receiveOrders,
 	relatedProducts,
 	orderButton,
 	relatedProductsTitle,
@@ -126,12 +127,12 @@ const SingleProduct = ({
 					margin: '.5em 0em',
 				}}>{description}</p>
 			</div>
-			<button onClick={handleToggleContact} className="btn ita-cali-mobile-single-product-order-button" style={{
+			{receiveOrders && <button onClick={handleToggleContact} className="btn ita-cali-mobile-single-product-order-button" style={{
 				padding: '1em',
 				margin: '.5em 1em',
 				border: 'none',
 				borderRadius: '.25em',
-			}}>{orderButton}</button>
+			}}>{orderButton}</button>}
 		</div>
 
 		<div className="hidden-xs visible-sm visible-md visible-lg">
@@ -206,12 +207,12 @@ const SingleProduct = ({
 					<p className="ita-cali-desktop-single-product-price" style={{
 						marginBottom: '2em',
 					}}>{price}</p>
-					<p><button onClick={handleToggleContact} className="btn ita-cali-desktop-single-product-order-button" style={{
+					{receiveOrders && <p><button onClick={handleToggleContact} className="btn ita-cali-desktop-single-product-order-button" style={{
 						padding: '1em 2em',
 						marginBottom: '2em',
 						border: 'none',
 						borderRadius: '.25em',
-					}}>{orderButton}</button></p>
+					}}>{orderButton}</button></p>}
 					<div style={{
 						marginBottom: '2em',
 					}}>
@@ -323,6 +324,7 @@ SingleProduct.propTypes = {
 	messageSent: PropTypes.bool.isRequired,
 	showContactModal: PropTypes.bool.isRequired,
 	handleToggleContact: PropTypes.func.isRequired,
+	receiveOrders: PropTypes.bool.isRequired,
 	orderButton: PropTypes.string.isRequired,
 	relatedProductsTitle: PropTypes.string.isRequired,
 	// 

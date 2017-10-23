@@ -95,6 +95,7 @@ const Previews = ({ screen, messages, images, settings }) => {
 				categories={demoCategories} 
 				homeUrl="#"
 				currency={settings.currency} 
+				receiveOrders={settings.receiveOrders} 
 				// screen-specific
 				productCategories={demoProducts.slice(0, 2)}
 				productMedia={demoProductMedia}

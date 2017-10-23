@@ -24,6 +24,7 @@ const SingleProduct = ({
 	showContactModal,
 	handleToggleContact,
 	// 
+	receiveOrders,
 	currency,
 	relatedProducts,
 }) => (
@@ -42,6 +43,7 @@ const SingleProduct = ({
 		categories={categories} 
 		homeUrl={homeUrl} 
 		currency={currency} 
+		receiveOrders={receiveOrders}
 		// screen-specific
 		productCategories={productCategories}
 		productMedia={productMedia}
@@ -70,13 +72,14 @@ const SingleProduct = ({
 
 const mapStateToProps = (state, props) => {
 	const { id, price, permalink, name, description } = getProductByUrlSlug(state, props)
-	const { currency } = state.settings
+	const { currency, receiveOrders } = state.settings
 	return {
 		messages: {...state.messages},
 		images: {...state.images},
 		productCategories: getProductCategories(state, props),
 		productMedia: getProductMedia(state, props),
 		currency: currency,
+		receiveOrders: receiveOrders,
 		permalink: permalink,
 		productId: id,
 		messageSent: state.ui.productRequestSent,

@@ -41,6 +41,18 @@ let Settings = ({ handleSubmit, fetching, settings }) => (
 							</div>
 							<div className="form-group">
 								<div className="col-md-6">
+									<label className="control-label">Open to receive orders</label>
+								</div>
+								<div className="col-md-6">
+									<Field
+										name={'receiveOrders'}
+										type="checkbox"
+										className="form-control" 
+										component="input" />
+								</div>
+							</div>
+							<div className="form-group">
+								<div className="col-md-6">
 									<label className="control-label">Comma-separated Email recipients for product consultations</label>
 								</div>
 								<div className="col-md-6">

@@ -65,6 +65,19 @@ const Summary = ({ checksum, type, entries, steps, completed, install, share, ta
 					</td>
 				</tr>
 				<tr>
+					<td style={styles.td}>
+						<FaCheckCircle size={50} color={'#D1D1D1'} />
+					</td>
+					<td style={styles.td}>
+						<b>Enable orders</b> and add your email addresses <small>(optional)</small>
+					</td>
+					<td style={styles.td}>
+						<Link 
+							to={`/d/apps/${type}/${checksum}/preferences/specific`} 
+							className="btn btn-block btn-primary btn-outline">Go to settings</Link>
+					</td>
+				</tr>
+				<tr>
 					<td style={styles.td} colSpan={3}>
 						{tabInstalled ? <s><b>Optional:</b> Display the catalog inside a <Link to={`/d/apps/${type}/${checksum}/integrations`}>Facebook Page Tab</Link></s>
 						: <span><b>Optional:</b> Display the catalog inside a <Link to={`/d/apps/${type}/${checksum}/integrations`}>Facebook Page Tab</Link></span>}
