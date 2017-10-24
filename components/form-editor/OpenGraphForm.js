@@ -48,6 +48,7 @@ let OpenGraphForm = ({ active, selectedValues, onTitleClick }) =>
 					</p>
 				</div>
 			</div>
+			<p>Remember to <a href="http://help.installthisapp.com/common-issues/refreshing-facebooks-shared-links-cache" target="_blank">clear Facebook's cache</a> each time you edit any of the previous fields, or you won't see the changes reflected.</p>
 		</div>
 	</div>
 </div>
