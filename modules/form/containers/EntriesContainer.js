@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { generateCsv } from 'modules/form/actions'
 import { getSchema } from 'modules/form/selectors/schema'
 import { getFilteredEntries, getWinnerEntry } from 'modules/form/selectors/entries'
 import { fetchEntities } from 'modules/form/actions/entities'
@@ -17,6 +18,7 @@ const mapStateToProps = (state, props) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+	generateCsv: () => dispatch(generateCsv()),
 	fetchEntries: () => dispatch(fetchEntities()),
 	toggleWinnerModal: () => dispatch(toggleWinnerModal()),
 })

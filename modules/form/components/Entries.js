@@ -11,6 +11,7 @@ const Entries = ({
 	toggleWinnerModal,
 	showWinner,
 	winnerEntry,
+	generateCsv,
 }) => (
 	<div className="ita-table-view">
 		{showWinner && <WinnerModal show={showWinner} entry={winnerEntry} onRaffle={toggleWinnerModal} onHide={toggleWinnerModal} schema={schema} />}
@@ -37,6 +38,9 @@ const Entries = ({
 					<ButtonToolbar>
 						<button className="btn btn-sm btn-default pull-right" onClick={fetchEntries}>
 							Refresh
+						</button>
+						<button className="btn btn-sm btn-default pull-right" onClick={generateCsv}>
+							Download as CSV
 						</button>
 						<button className="btn btn-sm btn-success pull-right" onClick={toggleWinnerModal}>
 							Get one winner entry

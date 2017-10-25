@@ -5,6 +5,7 @@ import Image from 'canvas/form/components/Image'
 
 const Form = ({ messages, images, settings, schema, handleSubmit }) => 
 <div>
+	{`hola ${settings.showHeaderImageAtForm}`}
 	{settings.showHeaderImageAtForm && <Image source={images.header} />}
 	<div className="col-sm-12">
 		<div className="row">

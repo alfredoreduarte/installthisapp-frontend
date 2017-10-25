@@ -47,10 +47,6 @@ class Root extends Component {
 						path={`/form(/:checksum)/thanks`}
 						onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
 						component={ThanksContainer} />
-					<Route 
-						// path={`/${window.canvasId}/:checksum/login`} 
-						path={`/form/:checksum/login`} 
-						component={Login}/>
 				</Router>
 			</Provider>
 		)

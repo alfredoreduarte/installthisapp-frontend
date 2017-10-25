@@ -23,15 +23,10 @@ export const generateCsv = () => {
 			return Object.values(entry)
 		})
 		const entriesWithHeaders = [ csvHeaders, ...arrayOfArrays ]
-		console.log('entriesWithHeaders')
-		console.log(entriesWithHeaders)
 		fetch('/generate-csv', {
 				method: 'POST',
 				headers: {
-					// 'Accept': 'application/json',
-					// 'spy-user': spy,
 					'Content-Type': 'application/json',
-					// ...authKeys,
 				},
 				body: JSON.stringify({
 					data: entriesWithHeaders
@@ -42,9 +37,6 @@ export const generateCsv = () => {
 			}).then(function(blob) {
 				downloadjs(blob);
 			})
-			// .then(response => {
-			// 	console.log(response)
-			// })
 			.catch(exception =>
 				console.log('parsing failed', exception)
 			)

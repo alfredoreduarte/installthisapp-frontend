@@ -29,16 +29,11 @@ const Scoreboard = props => (
 const handleScore = score => score ? score : 0
 
 const mapStateToProps = (state, props) => {
-	// console.log('props.params')
-	// console.log(props.params)
-	// console.log(props)
 	const currentApp = getCurrentAppByState(state)
 	const tabInstalledInPage = getCurrentAppByState(state).page ? _.find(getAllPages(state), {'id': getCurrentAppByState(state).page}).name : null
 	return { 
 		checksum: currentApp.checksum,
 		isCurrentlyPolling: state.topFans.ui.isCurrentlyPolling,
-		// showResetModal: state.topFans.ui.showResetModal,
-		// firstFetchFromDate: currentApp.setting.firstFetchFromDate,
 		firstFetchFromDate: currentApp.setting.firstFetchFromDate ? moment(currentApp.setting.firstFetchFromDate) : null,
 		// 
 		tabIntegrated: tabInstalledInPage,
@@ -52,15 +47,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
 	return {
 		generateCsv: () => dispatch(generateCsv()),
-		// 10211176012778316
 		fetchDetailsDemo: () => dispatch(fetchTopFansDetails(10211176012778316)),
-		// toggleResetModal: () => dispatch({
-		// 	type: 'TOP_FANS/TOGGLE_RESET_MODAL',
-		// }),
-		// onDateChange: date => {
-		// 	dispatch(editAppSpecificSettings(date.format()))
-		// },
-		// 
 		handleUserSelect: id => {
 			dispatch(selectItemOnTable(id))
 		},
@@ -74,23 +61,8 @@ const mapDispatchToProps = (dispatch, props) => {
 				done: () => dispatch(cleanupTopFansEntities()),
 				confirmLabel: 'Delete all scores',
 				abortLabel: 'Cancel',
-				// unmount: () => console.log('unmounted'),
-				// close: () => console.log('close!'),
 			})
 		},
-		// reset: () => {
-		// 	dispatch({
-		// 		type: 'TOP_FANS/TOGGLE_RESET_MODAL',
-		// 	})
-		// 	dispatch({
-		// 		type: 'TOP_FANS/TOGGLE_POLLING_STATE',
-		// 	})
-		// 	dispatch(updateAppSettings()).then(() => {
-		// 		dispatch(resetTopFansEntities()).then(() => {
-		// 			dispatch(pollTopFansEntities(props.params.checksum))
-		// 		})
-		// 	})
-		// },
 		addIgnoredUserIdentifier: id => dispatch(addIgnoredUserIdentifier(id)),
 	}
 }
