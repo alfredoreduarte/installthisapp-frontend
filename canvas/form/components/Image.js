@@ -10,7 +10,6 @@ const styles = {
 		textAlign: 'center',
 	},
 	img: {
-		width: '820px',
 		maxWidth: '100%',
 	},
 }

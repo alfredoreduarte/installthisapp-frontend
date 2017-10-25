@@ -7,7 +7,7 @@ import Image from 'canvas/form/components/Image'
 const Thanks = ({ messages, images, settings }) => 
 <div>
 	{settings.showHeaderImageAtThankYou && <Image source={images.header} />}
-	<div className="container-fluid">
+	<div className="container">
 		<div className="col-xs-12 col-md-6 col-md-offset-3 text-center">
 			<h1 style={{
 				marginTop: '86px',

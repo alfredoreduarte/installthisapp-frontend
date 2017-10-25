@@ -10,7 +10,7 @@ const Welcome = ({ messages, images, settings, formPath }) =>
 	{settings.welcomeLayout == 'html' &&
 		<div>
 			<Image source={images.header} />
-			<div className="container-fluid">
+			<div className="container">
 				<div className="col-xs-12 col-md-6 col-md-offset-3 text-center">
 					<h1 style={{
 						marginTop: '86px',

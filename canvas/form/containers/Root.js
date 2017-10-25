@@ -17,7 +17,6 @@ const requireAuth = (nextState, replace, next, dispatch) => {
 	}
 	else{
 		replace({
-			// pathname: `/${window.canvasId}/${window.checksum}/login`,
 			pathname: `/form/${window.checksum}/login`,
 		})
 		next()
@@ -31,16 +30,11 @@ class Root extends Component {
 			<Provider store={store}>
 				<Router history={history}>
 					<Route 
-						path={`/form(/:checksum)`} 
-						// 
-						// The Intro view downloads only the static assets (images and texts) necessary to show the app
-						// regardless of the visitor being identified or not.
-						// Some apps may also download the dynamic content (e.g. photos from a photo contest) 
-						// 
+						path={`/form(/:checksum)`}
 						onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
 						component={WelcomeContainer} />
 					<Route 
-						path={`/form(/:checksum)/form`} 
+						path={`/form(/:checksum)/form`}
 						onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
 						component={FormContainer} />
 					<Route 

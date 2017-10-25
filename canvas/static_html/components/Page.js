@@ -6,9 +6,7 @@ const Page = ({ messages, images, settings }) =>
 	{settings.contentMode == 'iframe' &&
 		<iframe style={frameStyles} src={settings.iframeUrl} />
 	}
-	{settings.contentMode == 'html' && <Frame style={frameStyles}>
-		<div dangerouslySetInnerHTML={{__html:settings.htmlContent}} />
-	</Frame>}
+	{settings.contentMode == 'html' && <div dangerouslySetInnerHTML={{__html:settings.htmlContent}} />}
 </div>
 
 Page.propTypes = {

@@ -15,7 +15,7 @@ FormContainer = reduxForm({
 const mapStateToProps = state => ({
 	messages: {...state.messages},
 	images: {...state.images},
-	settings: {...state.setttings},
+	settings: {...state.settings},
 	schema: getSchema(state),
 })
 
