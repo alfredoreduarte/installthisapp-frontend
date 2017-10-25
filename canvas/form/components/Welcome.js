@@ -5,16 +5,11 @@ import { Link } from 'react-router'
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
 import Image from 'canvas/form/components/Image'
 
-const Welcome = ({ messages, images, settings, formPath }) => (
-	<div>
-		{settings.welcomeLayout == 'html' &&
+const Welcome = ({ messages, images, settings, formPath }) => 
+<div>
+	{settings.welcomeLayout == 'html' &&
 		<div>
-			<div className="text-center">
-				<img src={images.header} style={{
-					width: '820px',
-					maxWidth: '100%',
-				}} />
-			</div>
+			<Image source={images.header} />
 			<div className="container-fluid">
 				<div className="col-xs-12 col-md-6 col-md-offset-3 text-center">
 					<h1 style={{
@@ -30,24 +25,18 @@ const Welcome = ({ messages, images, settings, formPath }) => (
 				</div>
 			</div>
 		</div>
-		}
-		{settings.welcomeLayout == 'flyer' &&
-		<div className="text-center">
-			<Link to={formPath}>
-				<img src={images.welcome} style={{
-					width: '820px',
-					maxWidth: '100%',
-				}} />
-			</Link>
-		</div>
-		}
-		<p className="text-center" style={{marginTop: '46px'}}>
-			<a href={settings.privacyPolicyUrl} target="_blank">
-				{messages.privacyPolicyLinkText}
-			</a>
-		</p>
-	</div>
-)
+	}
+	{settings.welcomeLayout == 'flyer' &&
+		<Link to={formPath}>
+			<Image source={images.welcome} />
+		</Link>
+	}
+	<p className="text-center" style={{marginTop: '46px'}}>
+		<a href={settings.privacyPolicyUrl} target="_blank">
+			{messages.privacyPolicyLinkText}
+		</a>
+	</p>
+</div>
 
 Welcome.propTypes = {
 	

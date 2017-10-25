@@ -1,14 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import { Provider, connect } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
+import Cookies from 'js-cookie'
+
 import { getStaticContent, getStaticContentAndEntities } from 'canvas/form/actions'
+
 import WelcomeContainer from 'canvas/form/containers/WelcomeContainer'
 import FormContainer from 'canvas/form/containers/FormContainer'
 import ThanksContainer from 'canvas/form/containers/ThanksContainer'
-import Index from 'canvas/form/containers/Index'
-import Intro from 'canvas/form/containers/Intro'
-import Login from 'canvas/form/containers/Login'
-import Cookies from 'js-cookie'
 
 const getData = (nextState, replace, next, dispatch) => dispatch(loginCallback()).then(() => next())
 

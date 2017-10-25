@@ -12,6 +12,15 @@ let EntryForm = ({ array, active, onTitleClick }) =>
 	</div>
 	<div className="editor-tab-item-body">
 		<div className="form-horizontal">
+			<div className="checkbox">
+				<label>
+					<Field 
+						name={'settings.showHeaderImageAtForm'} 
+						component="input"
+						type="checkbox" /> Include Header image
+				</label>
+			</div>
+			<hr/>
 			<div className="form-group">
 				<label className="col-sm-2 control-label">Headline</label>
 				<div className="col-sm-10">

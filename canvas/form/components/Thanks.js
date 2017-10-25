@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react'
 import { Field } from 'redux-form'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
-import { ListGroup, ListGroupItem } from 'react-bootstrap'
+
 import Image from 'canvas/form/components/Image'
 
 const Thanks = ({ messages, images, settings }) => 
 <div>
+	{settings.showHeaderImageAtThankYou && <Image source={images.header} />}
 	<div className="container-fluid">
 		<div className="col-xs-12 col-md-6 col-md-offset-3 text-center">
 			<h1 style={{

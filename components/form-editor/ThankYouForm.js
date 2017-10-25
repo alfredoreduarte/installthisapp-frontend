@@ -11,6 +11,15 @@ let ThankYouForm = ({ active, onTitleClick }) =>
 	</div>
 	<div className="editor-tab-item-body">
 		<div className="">
+			<div className="checkbox">
+				<label>
+					<Field 
+						name={'settings.showHeaderImageAtThankYou'} 
+						component="input"
+						type="checkbox" /> Include Header image
+				</label>
+			</div>
+			<hr/>
 			<div className="form-group">
 				<label className="control-label">Heading</label>
 				<div className="">
