@@ -1,4 +1,4 @@
-export const updateCoords = (coords) => ({
-	type: 'UPDATE_COORDS',
-	coords
+export const updateCoords = coords => ({
+  type: 'UPDATE_COORDS',
+  coords,
 })

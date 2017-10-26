@@ -6,21 +6,15 @@ import AccountSidebar from 'components/AccountSidebar'
 import DashboardContentDecorator from 'containers/DashboardContentDecorator'
 
 const Console = ({ children, enabled }) => (
-	<div>
-		<AppNavBar />
-		<TitleBar title="API Console" />
-		{enabled ? 
-			<DashboardContentDecorator>
-				{React.cloneElement(children)}
-			</DashboardContentDecorator>
-		:
-			<p>Not authorized</p>
-		}
-	</div>
+  <div>
+    <AppNavBar />
+    <TitleBar title="API Console" />
+    {enabled ? <DashboardContentDecorator>{React.cloneElement(children)}</DashboardContentDecorator> : <p>Not authorized</p>}
+  </div>
 )
 
-const mapStateToProps = ({ admin }) => ({ 
-	enabled: admin.id === 5
+const mapStateToProps = ({ admin }) => ({
+  enabled: admin.id === 5,
 })
 
 export default connect(mapStateToProps)(Console)

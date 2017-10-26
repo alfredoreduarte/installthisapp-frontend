@@ -1,14 +1,14 @@
 export default [
-	{
-		triggerScreen: 'intro',
-	},
-	{
-		triggerScreen: 'flyer',
-	},
-	{
-		triggerScreen: null,
-	},
-	{
-		triggerScreen: null,
-	},
+  {
+    triggerScreen: 'intro',
+  },
+  {
+    triggerScreen: 'flyer',
+  },
+  {
+    triggerScreen: null,
+  },
+  {
+    triggerScreen: null,
+  },
 ]

@@ -1,8 +1,8 @@
 export default [
-	{
-		triggerScreen: 'intro',
-	},
-	{
-		triggerScreen: null,
-	},
+  {
+    triggerScreen: 'intro',
+  },
+  {
+    triggerScreen: null,
+  },
 ]

@@ -7,29 +7,27 @@ import { getEditingDestinationId } from 'leadgen/selectors/ui'
 // export const getFbLeadDestinationSettings = state => state.fbLeadDestinations.settings
 
 export const getFbLeadDestinations = state => {
-	return _.filter(state.admin.fbLeadDestinations, fbLeadDestination => !fbLeadDestination.deleted )
+  return _.filter(state.admin.fbLeadDestinations, fbLeadDestination => !fbLeadDestination.deleted)
 }
 
 export const getLeadDestinationsWithMetadata = createSelector(
-	getFbLeadDestinations,
-	getAllPages,
-	getLeadforms,
-	(destinations, pages, forms) => {
-		return destinations.map(destination => {
-			const form = _.find(forms, {'id': destination.fbLeadformId})
-			return {
-				...destination,
-				fbPageIdentifier: form.fbPageIdentifier,
-				fbPageName: _.find(pages, {'identifier': form.fbPageIdentifier}).name,
-				fbFormName: form.fbFormName,
-				fbFormId: form.fbFormId,
-			}
-		})
-	}
+  getFbLeadDestinations,
+  getAllPages,
+  getLeadforms,
+  (destinations, pages, forms) => {
+    return destinations.map(destination => {
+      const form = _.find(forms, { id: destination.fbLeadformId })
+      return {
+        ...destination,
+        fbPageIdentifier: form.fbPageIdentifier,
+        fbPageName: _.find(pages, { identifier: form.fbPageIdentifier }).name,
+        fbFormName: form.fbFormName,
+        fbFormId: form.fbFormId,
+      }
+    })
+  }
 )
 
-export const getEditingDestination = createSelector(
-	getLeadDestinationsWithMetadata,
-	getEditingDestinationId,
-	(destinations, id) => _.find(destinations, {'id': id})
+export const getEditingDestination = createSelector(getLeadDestinationsWithMetadata, getEditingDestinationId, (destinations, id) =>
+  _.find(destinations, { id: id })
 )

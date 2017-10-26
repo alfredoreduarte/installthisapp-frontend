@@ -27,7 +27,4 @@ import configureStore from 'leadgen/store/configureStore'
 const store = configureStore()
 // const history = syncHistoryWithStore(browserHistory, store)
 
-render(
-	<Root store={store} />,
-	document.getElementById('coso')
-)
+render(<Root store={store} />, document.getElementById('coso'))

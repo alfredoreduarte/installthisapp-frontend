@@ -32,43 +32,45 @@ import coupons from 'modules/coupons/reducers/'
 import staticHtml from 'modules/static_html/reducers/'
 
 const createReducer = asyncReducers => {
-	return combineReducers({
-		routing,
-		filterText,
-		wizard,
-		usersSorting,
-		appsSorting,
-		selectedItems,
-		admin,
-		plans,
-		alerts,
-		newApp,
-		deleteApp,
-		modules,
-		entities,
-		styles,
-		mouseTrap,
-		activityIndicators,
-		applicationData,
-		applicationLog,
-		form: formReducer,
-		formEditorUI,
-		trivia,
-		topFans,
-		photoContest,
-		memoryMatch,
-		catalog,
-		formModule: form,
-		coupons,
-		staticHtml,
-		// asyncReducers: asyncReducers
-	})
+  return combineReducers({
+    routing,
+    filterText,
+    wizard,
+    usersSorting,
+    appsSorting,
+    selectedItems,
+    admin,
+    plans,
+    alerts,
+    newApp,
+    deleteApp,
+    modules,
+    entities,
+    styles,
+    mouseTrap,
+    activityIndicators,
+    applicationData,
+    applicationLog,
+    form: formReducer,
+    formEditorUI,
+    trivia,
+    topFans,
+    photoContest,
+    memoryMatch,
+    catalog,
+    formModule: form,
+    coupons,
+    staticHtml,
+    // asyncReducers: asyncReducers
+  })
 }
 
 export default createReducer
 
 export const injectAsyncReducer = (store, name, asyncReducer) => {
-	if (!store.asyncReducers) { store.asyncReducers = {} }
-	store.asyncReducers[name] = asyncReducer
-	store.replaceReducer(createReducer(store.asyncReducers))
+  if (!store.asyncReducers) {
+    store.asyncReducers = {}
+  }
+  store.asyncReducers[name] = asyncReducer
+  store.replaceReducer(createReducer(store.asyncReducers))
 }

@@ -14,11 +14,11 @@ module.exports = {
 		leadgen: './leadgen/index',
 		publiclogin: './publiclogin/index',
 		landing: './assets/landing/index',
-		"campaign-one": './assets/campaign/one',
-		"campaign-two": './assets/campaign/two',
-		"campaign-three": './assets/campaign/three',
-		"campaign-four": './assets/campaign/four',
-		"campaign-five": './assets/campaign/five',
+		'campaign-one': './assets/campaign/one',
+		'campaign-two': './assets/campaign/two',
+		'campaign-three': './assets/campaign/three',
+		'campaign-four': './assets/campaign/four',
+		'campaign-five': './assets/campaign/five',
 		trivia: 'canvas/trivia/index.js',
 		top_fans: 'canvas/top_fans/index.js',
 		photo_contest: 'canvas/photo_contest/index.js',
@@ -33,7 +33,7 @@ module.exports = {
 		path: path.join(__dirname, '/dist'),
 		filename: '[hash].[name].js',
 		chunkFilename: '[chunkhash].[id].chunk.js',
-		publicPath: '/static/'
+		publicPath: '/static/',
 	},
 	plugins: [
 		assetsPluginInstance,
@@ -52,16 +52,16 @@ module.exports = {
 			},
 		}),
 		new webpack.optimize.CommonsChunkPlugin({
-			names: ['common', 'manifest']
+			names: ['common', 'manifest'],
 		}),
 		new webpack.ProvidePlugin({
-			$: "jquery",
-			jQuery: "jquery"
-		})
+			$: 'jquery',
+			jQuery: 'jquery',
+		}),
 	],
 	resolve: {
 		modules: [__dirname, 'node_modules'],
-		extensions: ['.js', '.json', '.sass']
+		extensions: ['.js', '.json', '.sass'],
 	},
 	module: {
 		loaders: [
@@ -72,29 +72,29 @@ module.exports = {
 				exclude: /node_modules/,
 				include: __dirname,
 				query: {
-					presets: ['es2015', 'react']
-				}
+					presets: ['es2015', 'react'],
+				},
 			},
 			// images
 			{
 				test: /\.(png|jpg|jpeg|gif)$/,
-				loaders: ['file-loader']
+				loaders: ['file-loader'],
 			},
 			// sass
 			{
-                test: /\.(sass|scss)$/,
-                loader: ExtractTextPlugin.extract('css-loader?minimize!sass-loader')
-            },
+				test: /\.(sass|scss)$/,
+				loader: ExtractTextPlugin.extract('css-loader?minimize!sass-loader'),
+			},
 			// css
 			{
 				test: /\.(css)$/,
-				loader: ExtractTextPlugin.extract('css-loader')
+				loader: ExtractTextPlugin.extract('css-loader'),
 			},
 			// fonts
 			{
 				test: /\.(ttf|woff|woff2|eot|svg)$/,
-				loader: 'file-loader'
-			}
-		]
-	}
+				loader: 'file-loader',
+			},
+		],
+	},
 }

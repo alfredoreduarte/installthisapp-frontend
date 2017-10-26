@@ -33,7 +33,7 @@ module.exports = {
 		path: path.join(__dirname, '/dist'),
 		filename: '[name].js',
 		chunkFilename: '[id].chunk.js',
-		publicPath: '/static/'
+		publicPath: '/static/',
 	},
 	plugins: [
 		assetsPluginInstance,
@@ -46,53 +46,53 @@ module.exports = {
 			'process.env.API_URL': JSON.stringify(process.env.API_URL),
 		}),
 		new webpack.optimize.CommonsChunkPlugin({
-			names: ['common', 'manifest']
+			names: ['common', 'manifest'],
 		}),
 		new webpack.ProvidePlugin({
-			$: "jquery",
-			jQuery: "jquery"
-		})
+			$: 'jquery',
+			jQuery: 'jquery',
+		}),
 	],
 	resolve: {
 		modules: [__dirname, 'node_modules'],
-		extensions: ['.js', '.json', '.sass']
+		extensions: ['.js', '.json', '.sass'],
 	},
 	module: {
 		loaders: [
 			// json
 			{
 				test: /\.json$/,
-				loaders: [ 'file-loader' ],
+				loaders: ['file-loader'],
 				exclude: /node_modules/,
-				include: __dirname
+				include: __dirname,
 			},
 			// js
 			{
 				test: /\.js$/,
-				loaders: [ 'babel-loader' ],
+				loaders: ['babel-loader'],
 				exclude: /node_modules/,
-				include: __dirname
+				include: __dirname,
 			},
 			// images
 			{
 				test: /\.(png|jpg|jpeg|gif)$/,
-				loaders: ['file-loader']
+				loaders: ['file-loader'],
 			},
 			// sass
 			{
-                test: /\.(sass|scss)$/,
-                loader: ExtractTextPlugin.extract('css-loader!sass-loader')
-            },
+				test: /\.(sass|scss)$/,
+				loader: ExtractTextPlugin.extract('css-loader!sass-loader'),
+			},
 			// css
 			{
 				test: /\.(css)$/,
-				loader: ExtractTextPlugin.extract('css-loader')
+				loader: ExtractTextPlugin.extract('css-loader'),
 			},
 			// fonts
 			{
 				test: /\.(ttf|woff|woff2|eot|svg)$/,
-				loaders: ['file-loader']
-			}
-		]
-	}
+				loaders: ['file-loader'],
+			},
+		],
+	},
 }
