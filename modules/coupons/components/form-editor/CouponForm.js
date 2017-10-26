@@ -37,7 +37,7 @@ let CouponForm = ({ active, vouchersCreatorPath, onTitleClick }) =>
 				</div>
 			</div>
 			<div className="form-group">
-				<label className="col-sm-2 control-label">Coupon Text</label>
+				<label className="col-sm-2 control-label">Coupon Label</label>
 				<div className="col-sm-10">
 					<Field 
 						className="form-control"
@@ -45,6 +45,11 @@ let CouponForm = ({ active, vouchersCreatorPath, onTitleClick }) =>
 						component="textarea"
 						cols={5}
 						placeholder={'20% OFF on all smartphones'} />
+				</div>
+				<div className="col-md-12">
+					<p className="text-right">
+						<a href={vouchersCreatorPath} target="_blank">Load coupon codes →</a>
+					</p>
 				</div>
 			</div>
 			<div className="form-group">
@@ -80,10 +85,6 @@ let CouponForm = ({ active, vouchersCreatorPath, onTitleClick }) =>
 						placeholder={'Print my coupon'} />
 				</div>
 			</div>
-			<hr/>
-			<p className="text-right">
-				<a href={vouchersCreatorPath} target="_blank" className="btn btn-success btn-outline">Create coupon codes</a>
-			</p>
 		</div>
 	</div>
 </div>
