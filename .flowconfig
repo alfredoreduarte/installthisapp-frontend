@@ -3,6 +3,7 @@
 .*/node_modules/fbjs/.*
 .*/node_modules/react-facebook-login/.*
 .*/node_modules/react-timeago/.*
+.*/flow-typed/npm/*.*
 .*/*.sass
 [include]
 

@@ -1,6 +1,4 @@
-/**
- * @flow
- *
+/*
  * DUMMY DOCUMENTATION EXAMPLE:
  *
  * Creates a store enhancer that applies middleware to the dispatch method

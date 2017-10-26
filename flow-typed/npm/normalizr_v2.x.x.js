@@ -1,5 +1,5 @@
-// flow-typed signature: 8b4e81417cdc2bee0f08e1e62d60809e
-// flow-typed version: bba36190a2/normalizr_v2.x.x/flow_>=v0.23.x
+// flow-typed signature: cb1d7de99931f6c329dcbd2f5fdb2236
+// flow-typed version: b43dff3e0e/normalizr_v2.x.x/flow_>=v0.15.x
 
 declare class Normalizr$Schema {
   define(nestedSchema: Object): void;
