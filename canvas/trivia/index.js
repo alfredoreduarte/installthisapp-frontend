@@ -1,19 +1,3 @@
-import React from 'react'
-import { render } from 'react-dom'
-import { browserHistory } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
-import Root from 'canvas/trivia/containers/Root'
-import configureStore from 'canvas/trivia/store/configureStore'
-require('lib/addToHomeScreen.js')
+import renderer from 'canvas'
 
-const store = configureStore({
-	applicationData: {
-		checksum: window.checksum,
-		// apiKey: window.canvasApiKey,
-		canvasId: window.canvasId,
-		appId: window.facebookAppId,
-	},
-})
-const history = syncHistoryWithStore(browserHistory, store)
-
-render(<Root store={store} history={history} />, document.getElementById('root'))
+renderer('trivia')

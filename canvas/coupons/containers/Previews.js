@@ -11,27 +11,12 @@ import NoCoupons from 'canvas/coupons/components/NoCoupons'
 const Previews = ({ screen, messages, images, settings, emptyFunc }) => {
 	switch (screen) {
 		case 'intro':
-			return <Welcome
-				messages={messages}
-				images={images}
-				settings={settings}
-				isPreview={true}
-				handleLogin={emptyFunc}
-			 />
+			return <Welcome messages={messages} images={images} settings={settings} isPreview={true} handleLogin={emptyFunc} />
 		case 'coupon':
-			return <Coupon
-				messages={messages}
-				images={images}
-				settings={settings}
-				code={'DEMOCODE'}
-			 />
+			return <Coupon messages={messages} images={images} settings={settings} code={'DEMOCODE'} />
 		case 'noCoupons':
-			return <NoCoupons
-				messages={messages}
-				images={images}
-				settings={settings}
-			 />
-		default: 
+			return <NoCoupons messages={messages} images={images} settings={settings} />
+		default:
 			return <div>empty</div>
 	}
 }
@@ -50,7 +35,7 @@ const mapStateToProps = (state, props) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-	emptyFunc: () => {}
+	emptyFunc: () => {},
 })
 
 Previews.propTypes = {

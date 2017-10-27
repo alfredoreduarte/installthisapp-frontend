@@ -3,21 +3,22 @@ import { Field } from 'redux-form'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
-import Image from 'canvas/form/components/Image'
+import Image from 'canvas/common-components/Image'
 
 const Flyer = ({ messages, images, settings }) => (
 	<div className="text-center">
 		<a href={settings.flyerLinkUrl} target="_blank">
-			<img src={images.flyer} style={{
-				width: '820px',
-				maxWidth: '100%',
-			}} />
+			<img
+				src={images.flyer}
+				style={{
+					width: '820px',
+					maxWidth: '100%',
+				}}
+			/>
 		</a>
 	</div>
 )
 
-Flyer.propTypes = {
-	
-}
+Flyer.propTypes = {}
 
 export default Flyer

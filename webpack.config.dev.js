@@ -29,6 +29,9 @@ module.exports = {
 		coupons: './canvas/coupons/index',
 		static_html: './canvas/static_html/index',
 	},
+	stats: {
+		errorDetails: true,
+	},
 	output: {
 		path: path.join(__dirname, '/dist'),
 		filename: '[name].js',
