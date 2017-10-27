@@ -7,11 +7,11 @@ import configureStore from 'canvas/coupons/store/configureStore'
 require('lib/addToHomeScreen.js')
 
 const store = configureStore({
-  applicationData: {
-    checksum: window.checksum,
-    canvasId: window.canvasId,
-    appId: window.facebookAppId,
-  },
+	applicationData: {
+		checksum: window.checksum,
+		canvasId: window.canvasId,
+		appId: window.facebookAppId,
+	},
 })
 const history = syncHistoryWithStore(browserHistory, store)
 

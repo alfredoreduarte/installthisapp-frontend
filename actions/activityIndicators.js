@@ -1,45 +1,45 @@
 // @flow
 export const turnOnGlobalIndicator = () => ({
-  type: 'TOGGLE_ACTIVITY_ON/GLOBAL',
+	type: 'TOGGLE_ACTIVITY_ON/GLOBAL',
 })
 
 export const turnOffGlobalIndicator = () => ({
-  type: 'TOGGLE_ACTIVITY_OFF/GLOBAL',
+	type: 'TOGGLE_ACTIVITY_OFF/GLOBAL',
 })
 
 export const turnOnActivityCreatingApp = () => ({
-  type: 'TOGGLE_ACTIVITY_ON/CREATING_APP',
+	type: 'TOGGLE_ACTIVITY_ON/CREATING_APP',
 })
 
 export const turnOffActivityCreatingApp = () => ({
-  type: 'TOGGLE_ACTIVITY_OFF/CREATING_APP',
+	type: 'TOGGLE_ACTIVITY_OFF/CREATING_APP',
 })
 
 export const turnOnActivityLoadingApp = (checksum: string) => ({
-  type: 'TOGGLE_ACTIVITY_ON/LOADING_APP',
-  checksum,
+	type: 'TOGGLE_ACTIVITY_ON/LOADING_APP',
+	checksum,
 })
 
 export const turnOffActivityLoadingApp = () => ({
-  type: 'TOGGLE_ACTIVITY_OFF/LOADING_APP',
+	type: 'TOGGLE_ACTIVITY_OFF/LOADING_APP',
 })
 
 export const toggleActivityUpdatingAdmin = () => ({
-  type: 'TOGGLE_ACTIVITY/UPDATING_ADMIN',
+	type: 'TOGGLE_ACTIVITY/UPDATING_ADMIN',
 })
 
 export const toggleActivityUpdatingApp = () => ({
-  type: 'TOGGLE_ACTIVITY/UPDATING_APP',
+	type: 'TOGGLE_ACTIVITY/UPDATING_APP',
 })
 
 export const toggleActivitySavingDesign = () => ({
-  type: 'TOGGLE_ACTIVITY/SAVING_DESIGN',
+	type: 'TOGGLE_ACTIVITY/SAVING_DESIGN',
 })
 
 export const toggleActivityLoadingPages = () => ({
-  type: 'TOGGLE_ACTIVITY/LOADING_PAGES',
+	type: 'TOGGLE_ACTIVITY/LOADING_PAGES',
 })
 
 export const toggleActivityPurchasing = () => ({
-  type: 'TOGGLE_ACTIVITY/PURCHASING',
+	type: 'TOGGLE_ACTIVITY/PURCHASING',
 })

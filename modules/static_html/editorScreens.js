@@ -1,6 +1,6 @@
 export default [
-  {
-    value: 'intro',
-    label: 'Welcome Screen',
-  },
+	{
+		value: 'intro',
+		label: 'Welcome Screen',
+	},
 ]

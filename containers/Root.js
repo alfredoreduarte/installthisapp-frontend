@@ -4,20 +4,20 @@ import { Router } from 'react-router'
 import { createRoutes } from 'routes'
 
 class Root extends Component {
-  render() {
-    const { store, dispatch, history } = this.props
-    const routes = createRoutes(store, dispatch)
-    return (
-      <Provider store={store}>
-        <Router history={history} routes={routes} />
-      </Provider>
-    )
-  }
+	render() {
+		const { store, dispatch, history } = this.props
+		const routes = createRoutes(store, dispatch)
+		return (
+			<Provider store={store}>
+				<Router history={history} routes={routes} />
+			</Provider>
+		)
+	}
 }
 
 Root.propTypes = {
-  store: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
+	store: PropTypes.object.isRequired,
+	history: PropTypes.object.isRequired,
 }
 
 export default connect()(Root)

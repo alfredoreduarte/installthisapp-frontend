@@ -1,13 +1,13 @@
 const corresponding = {
-	'trivia': 			'app1',
-	'top_fans': 		'app2',
-	'photo_contest': 	'app3',
-	'memory_match': 	'app4',
-	'catalog': 			'app5',
-	'form': 			'app6',
-	'fan_gate': 		'app7',
-	'coupons': 			'app8',
-	'static_html': 		'app9',
+	trivia: 'app1',
+	top_fans: 'app2',
+	photo_contest: 'app3',
+	memory_match: 'app4',
+	catalog: 'app5',
+	form: 'app6',
+	fan_gate: 'app7',
+	coupons: 'app8',
+	static_html: 'app9',
 }
 
 const modulesRegex = 'trivia|top_fans|photo_contest|memory_match|catalog|form|fan_gate|coupons|static_html'
@@ -33,10 +33,8 @@ canvasRouter.get(`/:moduleName(${modulesRegex})/favicon.ico`, (req, res) => {
 
 // Remove trailing slash from URL
 canvasRouter.use((req, res, next) => {
-	if(req.url.substr(-1) == '/' && req.url.length > 1)
-		res.redirect(301, req.url.slice(0, -1))
-	else
-		next()
+	if (req.url.substr(-1) == '/' && req.url.length > 1) res.redirect(301, req.url.slice(0, -1))
+	else next()
 })
 canvasRouter.use('/static', express.static(__dirname + '/dist'))
 
@@ -46,7 +44,7 @@ const manifest = jsonfile.readFileSync(manifestPath)
 const manifestBundle = manifest['manifest']['js']
 const vendorBundle = manifest['common']['js']
 
-const commonParamsGenerator = function(moduleName, json){
+const commonParamsGenerator = function(moduleName, json) {
 	return {
 		manifestBundle,
 		vendorBundle,
@@ -71,52 +69,56 @@ const commonParamsGenerator = function(moduleName, json){
 const fetchParams = {
 	method: 'POST',
 	headers: {
-		'Accept': 'application/json',
+		Accept: 'application/json',
 		'Content-Type': 'application/json',
-	}
+	},
 }
 
-// 
+//
 // Auth from facebook page tab
-// 
+//
 canvasRouter.post(`/:moduleName(${modulesRegex})`, canvasParser, (req, res) => {
-	fetch(`${apiUrl}/fb_tab_auth.json`, Object.assign( {}, fetchParams, {
-		body: JSON.stringify( Object.assign({}, req.body, {
-			canvas_id: corresponding[req.params.moduleName],
-		}) )
-	} ))
-	.then(response => response.json())
-	.then(json => {
-		const commonParams = commonParamsGenerator(req.params.moduleName, json)
-		res.render('canvas', commonParams)
-	})
-	.catch(exception =>
-		{
+	fetch(
+		`${apiUrl}/fb_tab_auth.json`,
+		Object.assign({}, fetchParams, {
+			body: JSON.stringify(
+				Object.assign({}, req.body, {
+					canvas_id: corresponding[req.params.moduleName],
+				})
+			),
+		})
+	)
+		.then(response => response.json())
+		.then(json => {
+			const commonParams = commonParamsGenerator(req.params.moduleName, json)
+			res.render('canvas', commonParams)
+		})
+		.catch(exception => {
 			console.log('Parsing failed 1', exception)
-			res.json({'error': exception})
-		}
-	)
+			res.json({ error: exception })
+		})
 })
-// 
+//
 // Auth from standalone app page
-// 
+//
 // try this regex for checksum: (^[a-zA-Z0-9]{6})
-// 
+//
 canvasRouter.get(`/:moduleName(${modulesRegex})/:checksum*`, canvasParser, (req, res) => {
-	fetch(`${apiUrl}/standalone_auth.json`, Object.assign( {}, fetchParams, {
-		body: JSON.stringify({ checksum: req.params.checksum })
-	} ))
-	.then(response => response.json())
-	.then(json =>{
-		const commonParams = commonParamsGenerator(req.params.moduleName, json)
-		res.render('canvas', commonParams)
-	})
-	.catch(exception =>
-		{
-			console.log('Parsing failed 2', exception)
-			res.json({'error': exception})
-		}
+	fetch(
+		`${apiUrl}/standalone_auth.json`,
+		Object.assign({}, fetchParams, {
+			body: JSON.stringify({ checksum: req.params.checksum }),
+		})
 	)
+		.then(response => response.json())
+		.then(json => {
+			const commonParams = commonParamsGenerator(req.params.moduleName, json)
+			res.render('canvas', commonParams)
+		})
+		.catch(exception => {
+			console.log('Parsing failed 2', exception)
+			res.json({ error: exception })
+		})
 })
 
 module.exports = canvasRouter

@@ -6,38 +6,38 @@ import { setActiveSelector, setActiveEditedContent, handleHover, resetMouseTrap 
 import GameSample from 'components/GameSample'
 
 const DesignHelper = ({ previews, messages, images, settings, coords, handleHover, handleMouseOut, handleClick }) => (
-  <div>
-    <MouseTrap pos={coords} handleClick={handleClick} />
-    <div onMouseOver={handleHover}>
-      <GameSample previews={previews} messages={messages} images={images} settings={settings} />
-    </div>
-  </div>
+	<div>
+		<MouseTrap pos={coords} handleClick={handleClick} />
+		<div onMouseOver={handleHover}>
+			<GameSample previews={previews} messages={messages} images={images} settings={settings} />
+		</div>
+	</div>
 )
 
 const mapStateToProps = state => ({
-  coords: state.mouseTrap,
-  messages: state.styles.messages,
-  images: state.styles.images,
-  settings: state.styles.settings,
+	coords: state.mouseTrap,
+	messages: state.styles.messages,
+	images: state.styles.images,
+	settings: state.styles.settings,
 })
 
 const mapDispatchToProps = dispatch => ({
-  handleHover: e => dispatch(handleHover(e)),
-  handleMouseOut: e => dispatch(resetMouseTrap(e)),
-  handleClick: e => {
-    dispatch(setActiveEditedContent())
-    dispatch(setActiveSelector())
-  },
+	handleHover: e => dispatch(handleHover(e)),
+	handleMouseOut: e => dispatch(resetMouseTrap(e)),
+	handleClick: e => {
+		dispatch(setActiveEditedContent())
+		dispatch(setActiveSelector())
+	},
 })
 
 DesignHelper.propTypes = {
-  previews: PropTypes.string.isRequired,
-  messages: PropTypes.object.isRequired,
-  images: PropTypes.object.isRequired,
-  settings: PropTypes.object.isRequired,
-  handleHover: PropTypes.func.isRequired,
-  handleMouseOut: PropTypes.func.isRequired,
-  handleClick: PropTypes.func.isRequired,
+	previews: PropTypes.string.isRequired,
+	messages: PropTypes.object.isRequired,
+	images: PropTypes.object.isRequired,
+	settings: PropTypes.object.isRequired,
+	handleHover: PropTypes.func.isRequired,
+	handleMouseOut: PropTypes.func.isRequired,
+	handleClick: PropTypes.func.isRequired,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DesignHelper)

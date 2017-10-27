@@ -11,24 +11,24 @@ const router = express.Router()
 // defined as ALIAS_PARAM_KEY env variable.
 //
 router.get('/leadgen*', function(req, res) {
-  const manifestPath = `${process.cwd()}/webpack-assets.json`
-  const manifest = jsonfile.readFileSync(manifestPath)
-  const manifestBundle = manifest['manifest']['js']
-  const jsBundle = manifest['leadgen']['js']
-  const cssBundle = manifest['leadgen']['css']
-  const vendorBundle = manifest['common']['js']
-  res.render('dashboard', {
-    disableSegment: req.query[process.env.ALIAS_PARAM_KEY] || process.env.NODE_ENV == 'development',
-    alias: req.query[process.env.ALIAS_PARAM_KEY],
-    cloudFrontUrl: cloudFrontUrl,
-    apiUrl: process.env.API_URL,
-    facebookAppId: process.env.FB_APP_ID,
-    stripeKey: process.env.STRIPE_KEY,
-    jsBundle,
-    cssBundle,
-    vendorBundle,
-    manifestBundle,
-  })
+	const manifestPath = `${process.cwd()}/webpack-assets.json`
+	const manifest = jsonfile.readFileSync(manifestPath)
+	const manifestBundle = manifest['manifest']['js']
+	const jsBundle = manifest['leadgen']['js']
+	const cssBundle = manifest['leadgen']['css']
+	const vendorBundle = manifest['common']['js']
+	res.render('dashboard', {
+		disableSegment: req.query[process.env.ALIAS_PARAM_KEY] || process.env.NODE_ENV == 'development',
+		alias: req.query[process.env.ALIAS_PARAM_KEY],
+		cloudFrontUrl: cloudFrontUrl,
+		apiUrl: process.env.API_URL,
+		facebookAppId: process.env.FB_APP_ID,
+		stripeKey: process.env.STRIPE_KEY,
+		jsBundle,
+		cssBundle,
+		vendorBundle,
+		manifestBundle,
+	})
 })
 
 module.exports = router

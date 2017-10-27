@@ -10,9 +10,13 @@ router.post('/generate-csv', bodyParser.json(), (req, res) => {
 	res.statusCode = 200
 	res.setHeader('Content-Type', 'text/csv')
 	dataAsString.data.forEach(function(item) {
-		res.write(item.map(function(field) {
-			return '"' + field.toString().replace(/\"/g, '""') + '"'
-		}).toString() + '\r\n')
+		res.write(
+			item
+				.map(function(field) {
+					return '"' + field.toString().replace(/\"/g, '""') + '"'
+				})
+				.toString() + '\r\n'
+		)
 	})
 	res.end()
 })

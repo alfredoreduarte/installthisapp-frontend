@@ -1,4 +1,4 @@
 export default {
-  welcome: null,
-  flyer: null,
+	welcome: null,
+	flyer: null,
 }

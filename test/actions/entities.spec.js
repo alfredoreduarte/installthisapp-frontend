@@ -11,8 +11,8 @@ const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
 describe('Async Actions', () => {
-  afterEach(() => {
-    nock.cleanAll()
-  })
-  it('Gets entities from API')
+	afterEach(() => {
+		nock.cleanAll()
+	})
+	it('Gets entities from API')
 })

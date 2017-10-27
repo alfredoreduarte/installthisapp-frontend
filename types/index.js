@@ -6,16 +6,16 @@ export type Id = number
 export type Text = string
 
 export type GeneralActivityIndicators = {
-  purchasing: boolean,
-  globalIndicator: boolean,
-  loadingPages: boolean,
-  savingDesign: boolean,
-  updatingAdmin: boolean,
-  updatingApp: boolean,
-  appCreation: boolean,
-  appChecksumDashboardLoading: ?string,
-  connectingToFacebook: boolean,
-  installingFacebookTab: boolean,
+	purchasing: boolean,
+	globalIndicator: boolean,
+	loadingPages: boolean,
+	savingDesign: boolean,
+	updatingAdmin: boolean,
+	updatingApp: boolean,
+	appCreation: boolean,
+	appChecksumDashboardLoading: ?string,
+	connectingToFacebook: boolean,
+	installingFacebookTab: boolean,
 }
 
 // export type Todo = {

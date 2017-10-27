@@ -6,7 +6,7 @@ import { Field, FieldArray, reduxForm, formValueSelector, getFormValues } from '
 import { connect } from 'react-redux'
 import { sendProductMessage } from 'canvas/catalog/actions/contacts'
 
-let ContactForm = ({ 
+let ContactForm = ({
 	sent,
 	fields,
 	handleSubmit,
@@ -30,7 +30,7 @@ let ContactForm = ({
 						name={'email'}
 						type="email"
 						required={true}
-						className="form-control ita-cali-form-input" 
+						className="form-control ita-cali-form-input"
 						component="input"
 						style={{
 							boxShadow: 'none',
@@ -44,8 +44,8 @@ let ContactForm = ({
 					<label className="control-label ita-cali-form-label">{requestFormPhone}</label>
 					<Field
 						name={'phone'}
-						type="text" 
-						className="form-control ita-cali-form-input" 
+						type="text"
+						className="form-control ita-cali-form-input"
 						component="input"
 						style={{
 							boxShadow: 'none',
@@ -70,17 +70,24 @@ let ContactForm = ({
 					/>
 				</div>
 			</div>
-			<div className="col-md-12" style={{
-				padding: '0px',
-				display: 'flex',
-				flexDirection: 'column',
-			}}>
-				<button type="submit" className="btn ita-cali-form-submit" style={{
-					padding: '1em',
-					margin: '.5em 1em',
-					border: 'none',
-					borderRadius: '.25em',
-				}}>{requestFormSubmit}</button>
+			<div
+				className="col-md-12"
+				style={{
+					padding: '0px',
+					display: 'flex',
+					flexDirection: 'column',
+				}}>
+				<button
+					type="submit"
+					className="btn ita-cali-form-submit"
+					style={{
+						padding: '1em',
+						margin: '.5em 1em',
+						border: 'none',
+						borderRadius: '.25em',
+					}}>
+					{requestFormSubmit}
+				</button>
 			</div>
 		</div>
 	</form>
@@ -92,7 +99,7 @@ const validate = values => {
 	const errors = {}
 	if (!values.content) {
 		errors.content = 'Required'
-	} 
+	}
 	if (!values.email) {
 		errors.email = 'Required'
 	} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
@@ -109,14 +116,15 @@ ContactForm = reduxForm({
 const selector = formValueSelector(reduxFormName)
 
 const mapStateToProps = (state, ownProps) => {
-	return {
-		
-	}
+	return {}
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
-		handleSubmit: e => { e.preventDefault(); dispatch(sendProductMessage(ownProps.productId)); }
+		handleSubmit: e => {
+			e.preventDefault()
+			dispatch(sendProductMessage(ownProps.productId))
+		},
 	}
 }
 

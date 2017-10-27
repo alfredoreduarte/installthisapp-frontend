@@ -13,26 +13,26 @@ import fbLeadgenForms from 'leadgen/reducers/fbLeadgenForms' // actual FB forms
 // import fbLeadDestinations from 'leadgen/reducers/fbLeadDestinations'
 
 const createReducer = asyncReducers => {
-  return combineReducers({
-    routing,
-    leadgenUI,
-    admin,
-    alerts,
-    activityIndicators,
-    entities,
-    //
-    fbLeadgenForms,
-    //
-    form: formReducer,
-  })
+	return combineReducers({
+		routing,
+		leadgenUI,
+		admin,
+		alerts,
+		activityIndicators,
+		entities,
+		//
+		fbLeadgenForms,
+		//
+		form: formReducer,
+	})
 }
 
 export default createReducer
 
 export const injectAsyncReducer = (store, name, asyncReducer) => {
-  if (!store.asyncReducers) {
-    store.asyncReducers = {}
-  }
-  store.asyncReducers[name] = asyncReducer
-  store.replaceReducer(createReducer(store.asyncReducers))
+	if (!store.asyncReducers) {
+		store.asyncReducers = {}
+	}
+	store.asyncReducers[name] = asyncReducer
+	store.replaceReducer(createReducer(store.asyncReducers))
 }

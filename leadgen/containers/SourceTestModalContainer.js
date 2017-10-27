@@ -9,28 +9,28 @@ import { sendTestLead, getTestLead, stopPollTestArrival } from 'leadgen/actions/
 const SourceTestModalContainer = props => <SourceTestModal {...props} />
 
 export default connect(
-  state => {
-    const sourceForTesting = _.find(getLeadformsWithPages(state), { id: state.leadgenUI.testingSourceWithId })
-    return {
-      sourceForTesting,
-      testStatus: state.leadgenUI.testLead,
-      testLeadData: state.leadgenUI.sourceTestLeadData,
-      fbPageIdentifier: sourceForTesting ? sourceForTesting.fbPageIdentifier : null,
-      show: state.leadgenUI.testingSourceWithId ? true : false,
-    }
-  },
-  dispatch => {
-    return {
-      handleHide: () => {
-        dispatch(stopPollTestArrival())
-        dispatch(resetTestLead())
-      },
-      handleSendTest: id => dispatch(sendTestLead(id, false)),
-      showDestinationFormForSourceWithId: id => {
-        dispatch(resetTestLead())
-        dispatch(setDefaultLeadFormForDestinationCreation(id))
-        dispatch(getTestLead(id)).then(() => dispatch(showDestinationsForm()))
-      },
-    }
-  }
+	state => {
+		const sourceForTesting = _.find(getLeadformsWithPages(state), { id: state.leadgenUI.testingSourceWithId })
+		return {
+			sourceForTesting,
+			testStatus: state.leadgenUI.testLead,
+			testLeadData: state.leadgenUI.sourceTestLeadData,
+			fbPageIdentifier: sourceForTesting ? sourceForTesting.fbPageIdentifier : null,
+			show: state.leadgenUI.testingSourceWithId ? true : false,
+		}
+	},
+	dispatch => {
+		return {
+			handleHide: () => {
+				dispatch(stopPollTestArrival())
+				dispatch(resetTestLead())
+			},
+			handleSendTest: id => dispatch(sendTestLead(id, false)),
+			showDestinationFormForSourceWithId: id => {
+				dispatch(resetTestLead())
+				dispatch(setDefaultLeadFormForDestinationCreation(id))
+				dispatch(getTestLead(id)).then(() => dispatch(showDestinationsForm()))
+			},
+		}
+	}
 )(SourceTestModalContainer)

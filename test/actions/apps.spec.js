@@ -11,14 +11,14 @@ const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
 describe('Async Actions', () => {
-  afterEach(() => {
-    nock.cleanAll()
-  })
-  it('posts new data and returns server response')
+	afterEach(() => {
+		nock.cleanAll()
+	})
+	it('posts new data and returns server response')
 })
 
 describe('Actions', () => {
-  describe('deleteApp', () => {
-    it('should generate action for marking app as deleted')
-  })
+	describe('deleteApp', () => {
+		it('should generate action for marking app as deleted')
+	})
 })

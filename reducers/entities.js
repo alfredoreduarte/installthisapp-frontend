@@ -3,21 +3,21 @@ import users from 'reducers/users'
 import pages from 'reducers/pages'
 
 const entities = (state = { apps: {}, users: {}, pages: {} }, action) => {
-  switch (action.type) {
-    case 'INSTALLING_APP':
-    case 'UNINSTALLING_APP':
-    case 'CANCEL_INSTALLING_APP':
-    case 'UPDATE_APP':
-    case 'UPDATE_APP_SETTING':
-      return {
-        ...state,
-        apps: apps(state.apps, action),
-      }
-    case 'RECEIVE_ENTITIES':
-      return { ...state, ...action.response.entities }
-    default:
-      return state
-  }
+	switch (action.type) {
+		case 'INSTALLING_APP':
+		case 'UNINSTALLING_APP':
+		case 'CANCEL_INSTALLING_APP':
+		case 'UPDATE_APP':
+		case 'UPDATE_APP_SETTING':
+			return {
+				...state,
+				apps: apps(state.apps, action),
+			}
+		case 'RECEIVE_ENTITIES':
+			return { ...state, ...action.response.entities }
+		default:
+			return state
+	}
 }
 
 export default entities

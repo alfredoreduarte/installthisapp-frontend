@@ -1,6 +1,6 @@
 export const selectItemOnTable = id => ({
-  type: 'SELECT_ITEM',
-  id,
+	type: 'SELECT_ITEM',
+	id,
 })
 
 // export const resetTableSelection = () => ({
@@ -8,6 +8,6 @@ export const selectItemOnTable = id => ({
 // })
 
 export const sortUsersBy = key => ({
-  type: 'SORT_USERS',
-  payload: key,
+	type: 'SORT_USERS',
+	payload: key,
 })

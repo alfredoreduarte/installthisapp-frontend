@@ -2,11 +2,10 @@ const express = require('express')
 const aws = require('aws-sdk')
 const router = express.Router()
 
-
-// 
+//
 // Direct uploads to S3 as instructed by
 // https://devcenter.heroku.com/articles/s3-upload-node
-// 
+//
 router.get('/sign-s3', (req, res) => {
 	const s3 = new aws.S3()
 	const fileName = req.query['file-name']
@@ -16,7 +15,7 @@ router.get('/sign-s3', (req, res) => {
 		Key: fileName,
 		Expires: 60,
 		ContentType: fileType,
-		ACL: 'public-read'
+		ACL: 'public-read',
 	}
 	s3.getSignedUrl('putObject', s3Params, (err, data) => {
 		if (err) {
@@ -25,7 +24,7 @@ router.get('/sign-s3', (req, res) => {
 		}
 		const returnData = {
 			signedRequest: data,
-			url: `https://${process.env.CLOUDFRONT_DOMAIN}/${fileName}`
+			url: `https://${process.env.CLOUDFRONT_DOMAIN}/${fileName}`,
 		}
 		res.write(JSON.stringify(returnData))
 		res.end()
