@@ -5,10 +5,10 @@ export const photo = new Schema('photos')
 const vote = new Schema('votes')
 
 photo.define({
-	votes: arrayOf(vote)
+	votes: arrayOf(vote),
 })
 
-export const payload = {
+export const entities = {
 	photos: arrayOf(photo),
 	votes: arrayOf(vote),
 }

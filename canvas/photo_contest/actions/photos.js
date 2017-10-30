@@ -1,76 +1,50 @@
-import { postFileToApi } from 'canvas/api'
-import { togglePhotoUploadIndicator } from 'canvas/photo_contest/actions/activityIndicators'
+import { normalize, arrayOf } from 'normalizr'
+import { push } from 'react-router-redux'
+import { postToApi, getExternal } from 'canvas/api'
+import { fetchEntities, resetEntitiesCacheFlag } from 'canvas/photo_contest/actions/entities'
+import { getPhotoForUser } from 'canvas/photo_contest/selectors/photos'
+import * as schema from 'canvas/photo_contest/schema'
+import { togglePostingPhoto } from 'canvas/photo_contest/actions/activityIndicators'
 
-export const getSignedRequest = file => {
-	return (dispatch, getState)  => {
-		dispatch(togglePhotoUploadIndicator())
-		const applicationChecksum = getState().applicationData.checksum
-		return makeRequest('GET', `/sign-s3?file-name=photo-contest-photos/${applicationChecksum}/${Date.now()}-${file.name}&file-type=${file.type}`)
-		.then( response => {
-			return JSON.parse(response)
-		})
-		.then( json => {
-			return dispatch(uploadFile(file, json.signedRequest, json.url))
-		})
-		.catch( error => {
-			console.error('Augh, there was an error!', error.statusText)
-		})
-	}
-}
-const makeRequest = (method, url) => {
-	return new Promise( (resolve, reject) => {
-		var xhr = new XMLHttpRequest()
-		xhr.open(method, url)
-		xhr.onload = function() {
-			if (this.status >= 200 && this.status < 300) {
-				resolve(xhr.response)
-			} else {
-				reject({
-					status: this.status,
-					statusText: xhr.statusText
-				})
-			}
-		}
-		xhr.onerror = function() {
-			reject({
-				status: this.status,
-				statusText: xhr.statusText
-			})
-		}
-		xhr.send()
-	})
-}
-const uploadFile = (file, signedRequest, url) => {
-	return dispatch => {
-		return new Promise( ( resolve, reject ) => {
-			const xhr = new XMLHttpRequest()
-			xhr.open('PUT', signedRequest)
-			xhr.onreadystatechange = () => {
-				if ( xhr.readyState === 4 ) {
-					if ( xhr.status === 200 ) {
-						resolve(url)
-					}
-					else {
-						reject({
-							status: xhr.status,
-							statusText: xhr.statusText
-						})
-						alert('Could not upload file.')
-					}
-				}
-			}
-			xhr.send(file)
-		})		
-	}
-}
+// export const receivePhotos = entities => ({
+// 	type: 'RECEIVE_PHOTOS',
+// 	entities,
+// })
 
-export const postPhoto = body => {
+export const uploadPhoto = () => {
 	return (dispatch, getState) => {
-		const { checksum } = getState().applicationData
-		return postFileToApi(`${checksum}/upload.json`, body)
-				.then(response => {
-					dispatch(togglePhotoUploadIndicator())
-					return Promise.resolve(response)
-				})
+		dispatch(togglePostingPhoto())
+		const state = getState()
+		const { checksum } = state.applicationData
+		return postToApi(
+			`${checksum}/upload.json`,
+			{
+				photo: state.form.uploadForm.values,
+			},
+			response => {
+				dispatch(togglePostingPhoto())
+				dispatch(resetEntitiesCacheFlag())
+				return dispatch(fetchEntities()).then(() => dispatch(push(`/photo_contest/${window.checksum}/${response.id}`)))
+				//
+				// const normalized = normalize(response, schema.entities)
+				// return dispatch(receiveEntities(normalized.entities))
+			}
+		)
+	}
+}
+
+export const handleUploadIntention = () => {
+	return (dispatch, getState) => {
+		const state = getState()
+		const photo = getPhotoForUser(state)
+		const multipleUploadsAllowed = state.settings.multiplePhotosPerUser
+		if (multipleUploadsAllowed) {
+			return dispatch(push(`/photo_contest/${window.checksum}/upload`))
+		} else if (photo) {
+			return dispatch(push(`/photo_contest/${window.checksum}/${photo.id}`))
+		} else {
+			return dispatch(push(`/photo_contest/${window.checksum}/upload`))
+		}
+		// dispatch(push(`/photo_contest/${window.checksum}/upload`))
 	}
 }

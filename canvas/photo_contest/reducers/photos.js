@@ -1,14 +1,18 @@
-import _ from 'lodash'
+// const photos = (state = {}, action) => {
+// 	switch (action.type) {
+// 		case 'RECEIVE_ENTITIES':
+// 			return {
+// 				...state,
+// 				...action.entities,
+// 			}
+// 		case 'RECEIVE_PHOTOS':
+// 			return {
+// 				...state,
+// 				...action.entities,
+// 			}
+// 		default:
+// 			return state
+// 	}
+// }
 
-const entities = (state = {}, action) => {
-	switch (action.type) {
-		case 'VOTE':
-			return Object.assign({}, state[action.id], {
-				votesCount: state[action.id].votesCount + 1
-			})
-		default:
-			return state
-	}
-}
-
-export default entities
+// export default photos

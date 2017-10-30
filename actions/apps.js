@@ -199,6 +199,7 @@ export const postNewApp = () => {
 						body.module == 'form' ||
 						body.module == 'fan_gate' ||
 						body.module == 'coupons' ||
+						body.module == 'photo_contest' ||
 						body.module == 'static_html'
 					) {
 						dispatch(push(`/d/apps/${response.app.applicationType}/${response.app.checksum}/editor`))

@@ -1,7 +1,16 @@
-const messages = (state = {}, action) => {
+const messages = (
+	state = {
+		fetched: false,
+	},
+	action
+) => {
 	switch (action.type) {
 		case 'RECEIVE_MESSAGES':
-			return { ...state, ...action.payload }
+			return {
+				...state,
+				fetched: true,
+				...action.payload,
+			}
 		default:
 			return state
 	}

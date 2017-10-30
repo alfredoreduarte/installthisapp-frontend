@@ -1,192 +1,112 @@
-@import "~animate.css/animate"
-@import libraries/addtohome
+@import new-generic
 
-body
-	direction: ltr
-	background-color: white
-	background-image: none
-	background-repeat: no-repeat
-	background-position: center
-	background-attachment: fixed
-	background-size: cover
-	color: #747474
+#topbar
+	padding: 10px 0px
+	margin-bottom: 10px
+#topbar-content
+	display: flex
+	justify-content: space-between
+#upload-button
 
-// Search Form
-.ita-cali-search-form
-	border-bottom-color: #989898
+#submit-button
 
-// Buttons
-.ita-cali-button
-	background-color: #86E32B
-	border-style: solid
-	border-width: 1px
-	border-color: transparent
-	line-height: 1.5
-	color: white
-	letter-spacing: 0px
-	font-size: 12px
-	font-family: 'Helvetica'
+#upload-form
+	margin-top: 0px
+
+#photos-list
+	width: 100%
+	float: left
+
+.votes-heart
+	color: $brand-primary
+	width: 14px
+
+.photo
+	display: block
+	padding: 10px
+	width: 100%
+	margin: 0px 0px 15px
+	background: #fff
+	box-shadow: 0px 3px 8px rgba(0,0,0,0.25)
+
+.meta
+	display: flex
+	flex-direction: column
+	padding-top: 8px
+	justify-content: space-between
+
+.photo-title
+	color: #000000
 	font-weight: bold
-	font-style: normal
-	text-decoration: none
-	text-transform: uppercase
-	&:hover
+	text-align: center
+	font-size: 16px
+	margin: 0px
+	flex: 1
+
+.photo-votes
+	color: #666
+	margin: 0px
+	font-size: 12px
+
+#single-photo
+	display: block
+	padding: 10px
+	width: 100%
+	margin: 0px 0px 15px
+	background: #fff
+	box-shadow: 0px 3px 8px rgba(0,0,0,0.25)
+	text-align: center
+
+#vote-button
+
+// 
+// Dropzone
+@keyframes dropZoneBusyAnimation
+	0%
+		background-color: white
+		color: $brand-success
+	50%
+		background-color: $brand-success
 		color: white
-		text-decoration: none
-.ita-cali-button--secondary
-	// background-color: #C6C6C6
-	background-color: transparent
-	border-style: solid
-	border-width: 1px
-	border-color: transparent
-	line-height: 1.5
-	// color: #747474
-	color: #C6C6C6
-	letter-spacing: 0px
-	font-size: 12px
-	font-family: 'Helvetica'
-	font-weight: normal
-	font-style: normal
-	text-decoration: none
-	text-transform: uppercase
-	&:hover
-		color: #747474
-		text-decoration: none
-
-// Titles
-.ita-cali-title
-	line-height: 1.5
+	100%
+		background-color: white
+		color: $brand-success
+//
+.editor-dropzone-image
+	border: 1px dashed gray
+	display: flex
+	justify-content: center
+	align-items: center
+	padding: 20px
+	border-radius: 5px
+	&[aria-disabled=true]
+		.editor-dropzone-tip
+			display: none
+	&:hover:not([aria-disabled=true])
+		border-color: $brand-success
+		color: $brand-success
+		cursor: pointer
+.editor-dropzone-image-preview
+	width: 100%
+	position: relative
+	.editor-dropzone-image-remove, .editor-dropzone-image-busy-indicator, .editor-dropzone-image-done-indicator
+		background: $brand-success
+		position: absolute
+		border-radius: 100px
+		color: white
+		top: -14px
+		right: -14px
+		cursor: pointer
+		padding: 3px
+		box-shadow: 0px 2px 2px rgba(0,0,0,.05)
+		:hover
+			box-shadow: 0px 2px 3px rgba(0,0,0,.1)
+	.editor-dropzone-image-busy-indicator
+		animation-duration: 1.5s
+		animation-timing-function: ease
+		animation-iteration-count: infinite
+		animation-name: dropZoneBusyAnimation
+	img
+		width: 100%
+.editor-dropzone-tip
 	text-align: center
-	color: #747474
-	letter-spacing: 0px
-	font-size: 36px
-	font-family: 'Georgia'
-	font-weight: normal
-	font-style: normal
-	text-decoration: none
-	text-transform: none
-.ita-cali-subtitle
-	line-height: 1.5
-	text-align: center
-	color: #C6C6C6
-	letter-spacing: 0px
-	font-size: 14px
-	font-family: 'Helvetica'
-	font-weight: lighter
-	font-style: normal
-	text-decoration: none
-	text-transform: uppercase
-
-// Sorter tabs
-.ita-cali-sorter, .ita-cali-sorter--active
-	line-height: 1.5
-	text-align: center
-	letter-spacing: 0px
-	font-size: 12px
-	font-family: 'Helvetica'
-	font-weight: normal
-	font-style: normal
-	text-decoration: none
-	text-transform: uppercase
-.ita-cali-sorter
-	color: #C6C6C6
-.ita-cali-sorter:hover ,.ita-cali-sorter--active
-	color: #747474
-
-// Photo item
-.ita-cali-photo-name
-	line-height: 1.2
-	text-align: left
-	color: #ffffff
-	letter-spacing: 0px
-	font-size: 11px
-	font-family: 'Helvetica'
-	font-weight: normal
-	font-style: normal
-	text-decoration: none
-	text-transform: uppercase
-.ita-cali-vote-count
-	line-height: 1.2
-	text-align: left
-	color: #ffffff
-	letter-spacing: 0px
-	font-size: 40px
-	font-family: 'Helvetica'
-	font-weight: lighter
-	font-style: normal
-	text-decoration: none
-	text-transform: uppercase
-.ita-cali-vote-count--full
-	color: #747474
-.ita-cali-vote-label
-	line-height: 1.2
-	text-align: left
-	color: #ffffff
-	letter-spacing: 0px
-	font-size: 11px
-	font-family: 'Helvetica'
-	font-weight: lighter
-	font-style: normal
-	text-decoration: none
-	text-transform: none
-.ita-cali-vote-label--full
-	color: #747474
-.ita-cali-vote-button
-	color: #ffffff
-.ita-cali-vote-button:hover, .ita-cali-vote-button--active
-	color: #86E32B
-.ita-cali-vote-button-full
-	color: #C6C6C6
-.ita-cali-vote-button-full:hover, .ita-cali-vote-button-full--active
-	color: #86E32B
-// Single Photo
-.ita-cali-caption-full
-	line-height: 1.2
-	text-align: left
-	color: #C6C6C6
-	letter-spacing: 0px
-	font-size: 24px
-	font-family: 'Georgia'
-	font-weight: lighter
-	font-style: italic
-	text-decoration: none
-	text-transform: none
-.ita-cali-name-full
-	line-height: 1.2
-	text-align: left
-	color: #747474
-	letter-spacing: 0px
-	font-size: 16px
-	font-family: 'Georgia'
-	font-weight: bold
-	font-style: none
-	text-decoration: none
-	text-transform: none
-
-// Upload form
-.ita-cali-form-label
-	line-height: 1.2
-	text-align: left
-	color: #747474
-	letter-spacing: 0px
-	font-size: 16px
-	font-family: 'Georgia'
-	font-weight: bold
-	font-style: italic
-	text-decoration: none
-	text-transform: none
-.ita-cali-input, .ita-cali-input:active, .ita-cali-input:hover, .ita-cali-input:focus
-	border-color: #C6C6C6
-
-// User at upload form
-.ita-cali-uploading-user-name
-	line-height: 1.2
-	text-align: left
-	color: #747474
-	letter-spacing: 0px
-	font-size: 12px
-	font-family: 'Georgia'
-	font-weight: bold
-	font-style: normal
-	text-decoration: none
-	text-transform: none

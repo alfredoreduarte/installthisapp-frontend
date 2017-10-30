@@ -1,78 +1,54 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
-import HeaderImage from 'canvas/photo_contest/components/HeaderImage'
-import Header from 'canvas/photo_contest/components/Header'
-import ToolBar from 'canvas/photo_contest/components/ToolBar'
-import User from 'canvas/photo_contest/components/User'
-import Credits from 'canvas/photo_contest/components/Credits'
+import { Field } from 'redux-form'
 
-const Upload = ({ headerImg, footerImg, title, subtitle, uploadPhoto, submitButton, photoFormLabel, captionFormLabel, back, backUrl, busy, userName, userIdentifier }) => (
-	<div>
-		<div className="row">
-			<HeaderImage source={headerImg} />
-		</div>
-		<div className="container">
-			<Header title={title} subtitle={subtitle} />
-			<ToolBar backUrl={backUrl} back={back} />
-			<div className="col-xs-12 col-sm-6">
-				<div className="form-group">
-					<label className="ita-cali-form-label" data-editable-message-key="photoFormLabel">{photoFormLabel}</label>
-					<input type="file" style={styles.input} className="form-control" name="photo[attachment]" />
-				</div>
-			</div>
-			<div className="col-xs-12 col-sm-6">
-				<User name={userName} identifier={userIdentifier} />
-				<div className="form-group">
-					<label className="ita-cali-form-label" data-editable-message-key="captionFormLabel">{captionFormLabel}</label>
-					<textarea style={styles.input} className="form-control ita-cali-input" name="photo[caption]" rows={10} />
-				</div>
-				<div className="form-group text-right">
-					<button 
-						style={styles.button} 
-						className="ita-cali-button" 
-						onClick={uploadPhoto}
-						disabled={busy}
-						data-editable-message-key="submitButton"
-						>
-						{busy ? 'Uploading...' : submitButton}
+import Image from 'canvas/common-components/Image'
+
+import ImageUploaderField from 'canvas/photo_contest/components/ImageUploaderField'
+
+const Upload = ({ messages, images, settings, formValues: { caption, attachmentUrl }, busy, handleSubmit, listPath }) => (
+	<form onSubmit={handleSubmit}>
+		{settings.showHeaderImageAtUploadScreen && <Image source={images.header} />}
+		<div id="topbar">
+			<div className="container">
+				<div id="topbar-content">
+					<Link to={listPath} className="btn btn-primary" id="back-button">
+						{messages.backButtonLabel}
+					</Link>
+					<button
+						type="submit"
+						disabled={caption == undefined || attachmentUrl == undefined || busy}
+						className="btn btn-primary"
+						id="submit-button">
+						{messages.submitButtonLabel}
 					</button>
 				</div>
 			</div>
 		</div>
-		<div className="row">
-			<HeaderImage source={footerImg} />
+		<div className="container">
+			<div className="col-xs-12 col-sm-6">
+				<div id="upload-form">
+					<div className="form-group">
+						<Field name="attachmentUrl" label={messages.photoFieldLabel} component={ImageUploaderField} />
+					</div>
+				</div>
+			</div>
+			<div className="col-xs-12 col-sm-6">
+				<div className="form-group">
+					<label>{messages.captionFieldLabel}</label>
+					<Field className="form-control" name="caption" required={true} component={'textarea'} rows="3" />
+				</div>
+			</div>
 		</div>
-		<Credits />
-	</div>
+		<p className="text-center" style={{ marginTop: '46px' }}>
+			<a href={settings.privacyPolicyUrl} target="_blank">
+				{messages.privacyPolicyLinkText}
+			</a>
+		</p>
+		{settings.showFooterImageAtUploadScreen && <Image source={images.footer} />}
+	</form>
 )
 
-const styles = {
-	button: {
-		padding: '12px 24px',
-		borderRadius: '3px',
-	},
-	input: {
-		borderRadius: '3px',
-		boxShadow: 'none',
-		":hover": {
-			boxShadow: 'none',
-		}
-	},
-}
-
-Upload.propTypes = {
-	headerImg: PropTypes.string, 
-	footerImg: PropTypes.string, 
-	userName: PropTypes.string.isRequired,
-	userIdentifier: PropTypes.string.isRequired,
-	//
-	uploadPhoto: PropTypes.func.isRequired,
-	backUrl: PropTypes.string.isRequired,
-	submitButton: PropTypes.string.isRequired,
-	photoFormLabel: PropTypes.string.isRequired,
-	captionFormLabel: PropTypes.string.isRequired,
-	back: PropTypes.string.isRequired,
-	busy: PropTypes.bool.isRequired,
-}
+Upload.propTypes = {}
 
 export default Upload

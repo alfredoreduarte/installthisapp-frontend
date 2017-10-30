@@ -66,6 +66,7 @@ const Sidebar = ({ installed, checksum, type, children, menu, facebookPageIdenti
 			{type != 'form' &&
 				type != 'fan_gate' &&
 				type != 'coupons' &&
+				type != 'photo_contest' &&
 				type != 'static_html' && (
 					<li>
 						<Link to={`/d/apps/${type}/${checksum}/design`} activeClassName="active">
@@ -73,7 +74,7 @@ const Sidebar = ({ installed, checksum, type, children, menu, facebookPageIdenti
 						</Link>
 					</li>
 				)}
-			{(type == 'form' || type == 'fan_gate' || type == 'coupons' || type == 'static_html') && (
+			{(type == 'form' || type == 'fan_gate' || type == 'coupons' || type == 'static_html' || type == 'photo_contest') && (
 				<li>
 					<Link to={`/d/apps/${type}/${checksum}/editor`} activeClassName="active">
 						Editor

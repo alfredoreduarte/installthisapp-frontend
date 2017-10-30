@@ -1,5 +1,13 @@
-import _ from 'lodash'
 import { createSelector } from 'reselect'
-import { getCurrentApp } from 'selectors/apps'
+import { getSchema } from 'modules/example/selectors/schema'
 
-export const getSchema = state => _.values(state.example.entities.schema)
+// export const initialStateSelectorForEditor = createSelector(
+// 	getSchema,
+// 	(schema) => {
+// 		return {
+// 			schema: schema,
+// 		}
+// 	}
+// )
+
+export const initialStateSelectorForEditor = () => {}

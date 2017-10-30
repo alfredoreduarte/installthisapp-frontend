@@ -1,18 +1,12 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
-import Image from 'canvas/example/components/Image'
+import Image from 'canvas/common-components/Image'
 
-const Index = ({ 
-	headerImage,
-	footerImage,
-	entries
-}) => (
+const Index = ({ headerImage, footerImage, entries }) => (
 	<div>
 		<Image source={headerImage} />
 		<h1>Entries</h1>
-		<ul>
-			{entries.map( entry => <li>{entry}</li>)}
-		</ul>
+		<ul>{entries.map(entry => <li>{entry}</li>)}</ul>
 		<Image source={footerImage} />
 	</div>
 )

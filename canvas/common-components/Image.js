@@ -1,9 +1,6 @@
 import React, { PropTypes } from 'react'
 
-const Image = ({ source }) => 
-<div style={styles.container}>
-	{source && <img src={source} style={styles.img} />}
-</div>
+const Image = ({ source }) => <div style={styles.container}>{source && <img src={source} style={styles.img} />}</div>
 
 const styles = {
 	container: {
@@ -15,7 +12,7 @@ const styles = {
 }
 
 Image.propTypes = {
-	source: PropTypes.string.isRequired,
+	source: PropTypes.string,
 }
 
 export default Image

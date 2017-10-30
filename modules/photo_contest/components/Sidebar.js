@@ -1,18 +1,14 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { Link, IndexLink } from 'react-router'
+import React from 'react'
+import { Link } from 'react-router'
 
-const Sidebar = ({ checksum, type }) => (
+const Sidebar = ({ params: { checksum, type } }) => (
 	<ul className="list-unstyled">
-		<li><Link to={`/d/apps/${type}/${checksum}/photos`} activeClassName="active">Photos</Link></li>
+		<li>
+			<Link to={`/d/apps/${type}/${checksum}/photos`} activeClassName="active">
+				Participants
+			</Link>
+		</li>
 	</ul>
 )
 
-const mapStateToProps = (state, props) => {
-	return {
-		checksum: props.params.checksum,
-		type: props.params.type
-	}
-}
-
-export default connect(mapStateToProps)(Sidebar)
+export default Sidebar

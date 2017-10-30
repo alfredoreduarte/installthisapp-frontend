@@ -10,19 +10,10 @@ import Index from 'canvas/example/components/Index'
 const Previews = ({ screen, messages, images, settings, emptyFunc }) => {
 	switch (screen) {
 		case 'intro':
-			return <Welcome
-				messages={messages}
-				images={images}
-				settings={settings}
-				formPath={null}
-			 />
-		case 'thanks':
-			return <Thanks
-				messages={messages}
-				images={images}
-				settings={settings}
-			 />
-		default: 
+			return <Welcome messages={messages} images={images} settings={settings} formPath={null} />
+		case 'index':
+			return <Index messages={messages} images={images} settings={settings} />
+		default:
 			return <div>empty</div>
 	}
 }
@@ -41,7 +32,7 @@ const mapStateToProps = (state, props) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-	emptyFunc: () => {}
+	emptyFunc: () => {},
 })
 
 Previews.propTypes = {

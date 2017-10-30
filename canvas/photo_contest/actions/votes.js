@@ -1,14 +1,14 @@
-import { postFileToApi } from 'canvas/api'
+import { postToApi } from 'canvas/api'
 import { push } from 'react-router-redux'
 import { normalize, arrayOf } from 'normalizr'
 import Cookies from 'js-cookie'
 import * as schema from 'canvas/photo_contest/schema'
-import { receiveEntities } from 'canvas/photo_contest/actions'
+import { receiveEntities } from 'canvas/photo_contest/actions/entities'
 
 const vote = id => {
 	return {
 		type: 'VOTE',
-		id
+		id,
 	}
 }
 
@@ -17,27 +17,15 @@ export const postVote = id => {
 		const apiKey = Cookies.get('apiKey') || window.canvasApiKey
 		if (apiKey) {
 			const { checksum } = getState().applicationData
-			let formData = new FormData()
-			formData.append('vote[photo_id]', id)
-			return postFileToApi(`${checksum}/vote.json`, formData)
-					.then(response => {
-						console.log('vote response')
-						console.log(response)
-						const payload = normalize(response, schema.photo)
-						console.log('payload')
-						console.log(payload)
-						dispatch(receiveEntities(payload.entities))
-						return Promise.resolve(response)
-					})
-		}
-		else {
-			return dispatch(push({
-				// pathname: `/${window.canvasId}/${window.checksum}/login`,
-				pathname: `/photo_contest/${window.checksum}/login`,
-				// state: { nextPathname: `/${window.canvasId}/${window.checksum}/${id}` },
-				state: { nextPathname: `/photo_contest/${window.checksum}/${id}` },
-			}))
-			// return Promise.resolve({})
+			return postToApi(`${checksum}/vote.json`, {
+				vote: {
+					photoId: id,
+				},
+			}).then(response => {
+				const payload = normalize(response, schema.photo)
+				dispatch(receiveEntities(payload.entities))
+				return Promise.resolve(response)
+			})
 		}
 	}
 }
