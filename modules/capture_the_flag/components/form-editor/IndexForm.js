@@ -29,6 +29,16 @@ let IndexForm = ({ active, selectedValues, onTitleClick }) => (
 				/>
 			</div>
 			<div className="form-group">
+				<label className="control-label">No current winner</label>
+				<Field
+					className="form-control"
+					name={'messages.nobodyHasPrize'}
+					component="input"
+					type="text"
+					placeholder={'Nobody has the flag'}
+				/>
+			</div>
+			<div className="form-group">
 				<label className="control-label">Headline</label>
 				<Field
 					className="form-control"

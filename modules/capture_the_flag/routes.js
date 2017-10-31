@@ -6,7 +6,7 @@ export default (store, dispatch) => ({
 		require.ensure([], require => {
 			cb(null, [
 				{
-					path: 'entries',
+					path: 'participants',
 					onEnter: (nextState, replace, next) => {
 						dispatch(turnOnGlobalIndicator())
 						dispatch(fetchEntities(nextState.params.checksum)).then(() => {

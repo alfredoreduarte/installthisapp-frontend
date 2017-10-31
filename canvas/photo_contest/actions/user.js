@@ -11,8 +11,6 @@ export const logIn = payload => ({
 export const digestFacebookResponse = (response, redirectUri) => {
 	return (dispatch, getState) => {
 		const { checksum } = getState().applicationData
-		console.log('response')
-		console.log(response)
 		const { signedRequest } = response.tokenDetail
 		const body = {
 			signedRequest,

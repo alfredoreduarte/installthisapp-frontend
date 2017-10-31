@@ -9,9 +9,6 @@ export default [
 		triggerScreen: 'captcha',
 	},
 	{
-		triggerScreen: 'claimed',
-	},
-	{
 		triggerScreen: null, // Legal
 	},
 	{
