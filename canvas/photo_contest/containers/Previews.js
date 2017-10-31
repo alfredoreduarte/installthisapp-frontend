@@ -78,7 +78,15 @@ const Previews = ({ screen, messages, images, settings, emptyFunc }) => {
 				/>
 			)
 		case 'upload':
-			return <Upload messages={messages} images={images} settings={settings} isPreview={true} />
+			return (
+				<Upload
+					messages={messages}
+					images={images}
+					settings={settings}
+					formValues={{ caption: null, attachmentUrl: null }}
+					isPreview={true}
+				/>
+			)
 		case 'single':
 			return (
 				<Single

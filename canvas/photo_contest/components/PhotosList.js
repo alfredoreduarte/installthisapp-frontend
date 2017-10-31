@@ -11,7 +11,7 @@ const PhotosList = ({ messages, images, settings, photos, handleLogin, singlePat
 		<div id="topbar">
 			<div className="container">
 				<div id="topbar-content">
-					<div />
+					<div> </div>
 					{!isPreview && (
 						<FacebookProvider appId={window.facebookAppId}>
 							<Login
