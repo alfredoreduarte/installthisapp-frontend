@@ -24,6 +24,7 @@ const topUsers = [
 	{
 		id: 2,
 		elapsedSeconds: 1231,
+		hasFlag: true,
 		user: currentWinner.user,
 	},
 	{

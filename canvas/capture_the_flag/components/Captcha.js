@@ -8,7 +8,7 @@ import TopUsers from 'canvas/capture_the_flag/components/TopUsers'
 const Captcha = ({ messages, images, settings, entries, shuffledCaptcha, claim }) => (
 	<div>
 		<Image source={images.header} />
-		<TopUsers entries={entries} />
+		<TopUsers entries={entries} flagLabel={messages.flagLabel} />
 		<div className="container">
 			<h1 id="captcha-question">{messages.captchaQuestion}</h1>
 		</div>

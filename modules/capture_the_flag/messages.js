@@ -3,6 +3,7 @@ export default {
 	welcomeCopy: 'Complete the form to start participating',
 	startButton: 'Start now',
 	// Main
+	flagLabel: 'FLAG',
 	nobodyHasPrize: 'Nobody posesses the flag right now',
 	mainScreenTitle: "Who's got the prize now?",
 	claimButtonLabel: 'Capture the prize',

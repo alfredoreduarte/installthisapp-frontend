@@ -9,7 +9,7 @@ import TopUsers from 'canvas/capture_the_flag/components/TopUsers'
 const Index = ({ messages, images, settings, entries, currentWinner, timer, captchaPath, claim, isPreview, logged, isItMe }) => (
 	<div>
 		<Image source={images.header} />
-		<TopUsers entries={entries} />
+		<TopUsers entries={entries} flagLabel={messages.flagLabel} />
 		<div className="container">
 			<div className="col-xs-12">
 				<div className="text-center">
