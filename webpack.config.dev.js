@@ -28,6 +28,7 @@ module.exports = {
 		fan_gate: './canvas/fan_gate/index',
 		coupons: './canvas/coupons/index',
 		static_html: './canvas/static_html/index',
+		capture_the_flag: './canvas/capture_the_flag/index',
 	},
 	stats: {
 		errorDetails: true,

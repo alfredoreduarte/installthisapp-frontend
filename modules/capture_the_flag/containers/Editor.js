@@ -12,17 +12,15 @@ import WelcomeForm from 'components/form-editor/WelcomeForm'
 
 import IndexForm from 'modules/capture_the_flag/components/form-editor/IndexForm'
 import CaptchaForm from 'modules/capture_the_flag/components/form-editor/CaptchaForm'
-import ClaimedForm from 'modules/capture_the_flag/components/form-editor/ClaimedForm'
 
 let Editor = ({ setEditorStep, editorCurrentStep }) => (
 	<div>
 		<WelcomeForm onTitleClick={() => setEditorStep(0)} active={editorCurrentStep == 0} />
 		<IndexForm onTitleClick={() => setEditorStep(1)} active={editorCurrentStep == 1} />
 		<CaptchaForm onTitleClick={() => setEditorStep(2)} active={editorCurrentStep == 2} />
-		<ClaimedForm onTitleClick={() => setEditorStep(3)} active={editorCurrentStep == 3} />
-		<CodeForm onTitleClick={() => setEditorStep(4)} active={editorCurrentStep == 4} />
-		<LegalForm onTitleClick={() => setEditorStep(5)} active={editorCurrentStep == 5} />
-		<OpenGraphForm onTitleClick={() => setEditorStep(6)} active={editorCurrentStep == 6} />
+		<CodeForm onTitleClick={() => setEditorStep(3)} active={editorCurrentStep == 3} />
+		<LegalForm onTitleClick={() => setEditorStep(4)} active={editorCurrentStep == 4} />
+		<OpenGraphForm onTitleClick={() => setEditorStep(5)} active={editorCurrentStep == 5} />
 	</div>
 )
 

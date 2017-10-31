@@ -1,26 +1,66 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import moment from 'moment'
+import FacebookProvider, { Login } from 'react-facebook'
 import Image from 'canvas/common-components/Image'
 import FbPhoto from 'canvas/capture_the_flag/components/FbPhoto'
 import TopUsers from 'canvas/capture_the_flag/components/TopUsers'
 
-const Index = ({ messages, images, settings, entries, currentWinner, captchaPath }) => (
+const Index = ({ messages, images, settings, entries, currentWinner, timer, captchaPath, claim, isPreview, logged, isItMe }) => (
 	<div>
 		<Image source={images.header} />
 		<TopUsers entries={entries} />
 		<div className="container">
 			<div className="col-xs-12">
-				<div id="timer">14:00:08:37</div>
-				<h1 id="main-screen-title">{messages.mainScreenTitle}</h1>
+				<div className="text-center">
+					<div id="timer">{timer}</div>
+				</div>
+				{currentWinner ? (
+					<div>
+						<h1 id="main-screen-title">{messages.mainScreenTitle}</h1>
+						<p className="text-center">
+							<FbPhoto identifier={currentWinner.user.identifier} className="current-winner-pic" />
+						</p>
+						<h3 className="current-winner-name">{currentWinner.user.name}</h3>
+					</div>
+				) : (
+					<div>
+						<h1 id="main-screen-title">{messages.nobodyHasPrize}</h1>
+					</div>
+				)}
 				<p className="text-center">
-					<FbPhoto identifier={currentWinner.identifier} className="current-winner-pic" />
-				</p>
-				<h3 className="current-winner-name">{currentWinner.name}</h3>
-				<p className="text-center">
-					<button className="btn btn-primary btn-lg" id="claim-button">
-						{messages.claimButtonLabel}
-					</button>
+					{!isPreview &&
+						!isItMe &&
+						!logged && (
+							<FacebookProvider appId={window.facebookAppId}>
+								<Login
+									scope="email"
+									onResponse={claim}
+									onError={e => {}}
+									render={({ isLoading, isWorking, onClick }) => (
+										<button
+											disabled={isLoading || isWorking}
+											className="btn btn-primary btn-lg"
+											id="claim-button"
+											onClick={onClick}>
+											{isLoading || isWorking ? '...' : messages.claimButtonLabel}
+										</button>
+									)}
+								/>
+							</FacebookProvider>
+						)}
+					{!isPreview &&
+						logged &&
+						!isItMe && (
+							<Link to={captchaPath} className="btn btn-primary btn-lg" id="claim-button">
+								{messages.claimButtonLabel}
+							</Link>
+						)}
+					{isPreview && (
+						<button className="btn btn-primary btn-lg" id="claim-button">
+							{messages.claimButtonLabel}
+						</button>
+					)}
 				</p>
 			</div>
 		</div>

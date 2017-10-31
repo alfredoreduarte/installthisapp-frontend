@@ -1,9 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { reduxForm, formValueSelector } from 'redux-form'
+import Kronos from 'react-kronos'
 import { Field, FieldArray } from 'redux-form'
 import { APP_EDITOR_FORM_NAME } from 'config'
 import ImageUploaderDropZone from 'components/form-editor/ImageUploaderDropZone'
+
+const renderDatePicker = ({
+	input,
+	// focused,
+	// onFocusChange,
+}) => <Kronos date={input.value} time={input.value} onChange={input.onChange} />
 
 let IndexForm = ({ active, selectedValues, onTitleClick }) => (
 	<div className={`editor-tab-item ${active && 'active'}`}>
@@ -11,6 +18,26 @@ let IndexForm = ({ active, selectedValues, onTitleClick }) => (
 			Main screen
 		</div>
 		<div className="editor-tab-item-body">
+			<div className="form-group">
+				<label className="control-label">Run timer until</label>
+				<Field
+					className="form-control"
+					name={'settings.endTime'}
+					component="input"
+					type="text"
+					placeholder={'dd/mm/yyyy hh:mm'}
+				/>
+			</div>
+			<div className="form-group">
+				<label className="control-label">No current winner</label>
+				<Field
+					className="form-control"
+					name={'messages.nobodyHasPrize'}
+					component="input"
+					type="text"
+					placeholder={'Nobody has the flag'}
+				/>
+			</div>
 			<div className="form-group">
 				<label className="control-label">Headline</label>
 				<Field

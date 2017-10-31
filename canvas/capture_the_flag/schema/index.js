@@ -1,9 +1,9 @@
 import { Schema, arrayOf } from 'normalizr'
 
-export const item = new Schema('items', {
-	idAttribute: 'id',
-})
+export const entry = new Schema('entries')
+export const timeLeft = new Schema('timeLeft')
 
 export const entities = {
-	items: arrayOf(item),
+	entries: arrayOf(entry),
+	timeLeft: timeLeft,
 }

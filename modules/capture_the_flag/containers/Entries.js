@@ -4,9 +4,7 @@ import { getFilteredEntries } from 'modules/capture_the_flag/selectors/entries'
 import { fetchEntities } from 'modules/capture_the_flag/actions/entities'
 import EntriesView from 'modules/capture_the_flag/components/Entries'
 
-const Entries = ({ entries, selectedItems, fetchEntries }) => (
-	<EntriesView entries={entries} fetchEntries={fetchEntries} selectedItems={selectedItems} />
-)
+const Entries = props => <EntriesView {...props} />
 
 const mapStateToProps = state => ({
 	entries: getFilteredEntries(state),
