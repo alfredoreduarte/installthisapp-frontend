@@ -29,11 +29,6 @@ class Root extends Component {
 				<Router history={history}>
 					<Route
 						path={`/capture_the_flag(/:checksum)`}
-						//
-						// The Welcome view only downloads static assets (images and texts) necessary to show the app
-						// regardless of visitors being identified or not.
-						// Some apps may also download the dynamic content (e.g. photos from a photo contest)
-						//
 						onEnter={(nextState, replace, next) => getStaticContent(nextState, replace, next, dispatch)}
 						component={WelcomeContainer}
 					/>

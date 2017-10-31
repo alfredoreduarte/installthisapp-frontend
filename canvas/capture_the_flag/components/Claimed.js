@@ -5,13 +5,13 @@ import Image from 'canvas/common-components/Image'
 import FbPhoto from 'canvas/capture_the_flag/components/FbPhoto'
 import TopUsers from 'canvas/capture_the_flag/components/TopUsers'
 
-const Claimed = ({ messages, images, settings, entries, currentWinner }) => (
+const Claimed = ({ messages, images, settings, entries, timer, currentWinner }) => (
 	<div>
 		<Image source={images.header} />
 		<TopUsers entries={entries} />
 		<div className="container">
 			<div className="col-xs-12">
-				<div id="timer">14:00:08:37</div>
+				<div id="timer">{timer}</div>
 				<h1 id="claimed-screen-title">{messages.claimedScreenTitle}</h1>
 				<p className="text-center">
 					<FbPhoto identifier={currentWinner.identifier} className="current-winner-pic" />

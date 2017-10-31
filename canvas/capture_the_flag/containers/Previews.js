@@ -55,13 +55,22 @@ const topUsers = [
 const Previews = ({ screen, messages, images, settings, emptyFunc }) => {
 	switch (screen) {
 		case 'intro':
-			return <Welcome messages={messages} images={images} settings={settings} captchaPath={null} />
+			return <Welcome messages={messages} images={images} settings={settings} timer={'03:14:16'} captchaPath={null} />
 		case 'index':
 			return <Index messages={messages} images={images} settings={settings} currentWinner={currentWinner} entries={topUsers} />
 		case 'captcha':
 			return <Captcha messages={messages} images={images} settings={settings} entries={topUsers} />
 		case 'claimed':
-			return <Claimed messages={messages} images={images} settings={settings} currentWinner={currentWinner} entries={topUsers} />
+			return (
+				<Claimed
+					messages={messages}
+					images={images}
+					settings={settings}
+					timer={'03:14:16'}
+					currentWinner={currentWinner}
+					entries={topUsers}
+				/>
+			)
 		default:
 			return <div>empty</div>
 	}
