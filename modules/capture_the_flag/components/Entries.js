@@ -60,7 +60,7 @@ const Entries = ({ entries, selectedItems, fetchEntries }) => (
 							<span>Name</span>
 						</th>
 						<th>
-							<span>Score</span>
+							<span>Accumulated seconds</span>
 						</th>
 					</tr>
 				</thead>
@@ -70,7 +70,7 @@ const Entries = ({ entries, selectedItems, fetchEntries }) => (
 							<td>
 								<User name={entry.user.name} identifier={entry.user.identifier} small />
 							</td>
-							<td>{entry.score}</td>
+							<td>{entry.elapsedSeconds}</td>
 						</tr>
 					))}
 				</tbody>
