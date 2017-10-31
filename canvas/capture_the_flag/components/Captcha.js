@@ -15,7 +15,7 @@ const Captcha = ({ messages, images, settings, entries, shuffledCaptcha, claim }
 		<div className="container">
 			<div className="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2">
 				<div id="captcha">
-					{_.shuffle(shuffledCaptcha).map(image => (
+					{shuffledCaptcha.map(image => (
 						<img key={image} src={image} className="captcha-item" onClick={() => claim(image)} />
 					))}
 				</div>
