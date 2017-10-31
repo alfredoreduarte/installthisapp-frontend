@@ -2,19 +2,15 @@ import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import Image from 'canvas/common-components/Image'
 
-const Index = ({ headerImage, footerImage, entries }) => (
+const Index = ({ messages, images, settings, entries }) => (
 	<div>
-		<Image source={headerImage} />
+		<Image source={images.header} />
 		<h1>Entries</h1>
 		<ul>{entries.map(entry => <li>{entry}</li>)}</ul>
-		<Image source={footerImage} />
+		<Image source={images.footer} />
 	</div>
 )
 
-Index.propTypes = {
-	headerImage: PropTypes.string,
-	footerImage: PropTypes.string,
-	entries: PropTypes.array.isRequired,
-}
+Index.propTypes = {}
 
 export default Index

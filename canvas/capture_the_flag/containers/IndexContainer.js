@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { getFilteredEntries } from 'canvas/example/selectors/entries'
-import Index from 'canvas/example/components/Index'
+import { getFilteredEntries } from 'canvas/capture_the_flag/selectors/entries'
+import Index from 'canvas/capture_the_flag/components/Index'
 
 const IndexContainer = props => <Index {...props} />
 

@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react'
 import Cookies from 'js-cookie'
 import { Provider, connect } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
-import { getStaticContent, getStaticContentAndEntities } from 'canvas/example/actions'
+import { getStaticContent, getStaticContentAndEntities } from 'canvas/capture_the_flag/actions'
 
-import WelcomeContainer from 'canvas/example/containers/WelcomeContainer'
-import IndexContainer from 'canvas/example/containers/IndexContainer'
-import LoginContainer from 'canvas/example/containers/LoginContainer'
+import WelcomeContainer from 'canvas/capture_the_flag/containers/WelcomeContainer'
+import IndexContainer from 'canvas/capture_the_flag/containers/IndexContainer'
+import LoginContainer from 'canvas/capture_the_flag/containers/LoginContainer'
 
 const getData = (nextState, replace, next, dispatch) => dispatch(loginCallback()).then(() => next())
 
@@ -15,7 +15,7 @@ const requireAuth = (nextState, replace, next, dispatch) => {
 		next()
 	} else {
 		replace({
-			pathname: `/example/${window.checksum}/login`,
+			pathname: `/capture_the_flag/${window.checksum}/login`,
 		})
 		next()
 	}
@@ -28,7 +28,7 @@ class Root extends Component {
 			<Provider store={store}>
 				<Router history={history}>
 					<Route
-						path={`/example(/:checksum)`}
+						path={`/capture_the_flag(/:checksum)`}
 						//
 						// The Welcome view only downloads static assets (images and texts) necessary to show the app
 						// regardless of visitors being identified or not.
@@ -38,11 +38,11 @@ class Root extends Component {
 						component={WelcomeContainer}
 					/>
 					<Route
-						path={`/example(/:checksum)/entries`}
+						path={`/capture_the_flag(/:checksum)/entries`}
 						onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
 						component={IndexContainer}
 					/>
-					<Route path={`/example/:checksum/login`} component={LoginContainer} />
+					<Route path={`/capture_the_flag/:checksum/login`} component={LoginContainer} />
 				</Router>
 			</Provider>
 		)

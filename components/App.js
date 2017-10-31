@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import humps from 'humps'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import Spinner from 'react-spinkit'
@@ -62,7 +63,12 @@ const App = ({
 				</Link>
 				<br />
 				<small style={{ fontSize: '10px' }} className="text-uppercase text-muted">
-					<b>{applicationType.replace('_', ' ')}</b>
+					<b>
+						{humps
+							.decamelize(applicationType)
+							.split('_')
+							.join(' ')}
+					</b>
 				</small>
 			</div>
 		</div>
