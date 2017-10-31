@@ -25,7 +25,7 @@ class ImageUploaderField extends React.Component {
 		})
 	}
 	handleImageUploads(file) {
-		const checksum = '6PH6F5'
+		const checksum = this.props.checksum
 		return this.getSignedRequest(file, checksum).then(url => {
 			//
 			// As per https://github.com/okonet/react-dropzone#word-of-caution-when-working-with-previews
@@ -120,6 +120,7 @@ class ImageUploaderField extends React.Component {
 const mapStateToProps = state => {
 	return {
 		busy: state.activityIndicators.uploadingImage,
+		checksum: window.checksum,
 	}
 }
 

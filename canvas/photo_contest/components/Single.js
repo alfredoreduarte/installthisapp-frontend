@@ -13,7 +13,7 @@ const Single = ({ messages, images, settings, photo, handleVote, listPath, isPre
 					<Link to={listPath} className="btn btn-primary" id="back-button">
 						{messages.backButtonLabel}
 					</Link>
-					<div />
+					<div style={{ opacity: 0 }}>.</div>
 				</div>
 			</div>
 		</div>
