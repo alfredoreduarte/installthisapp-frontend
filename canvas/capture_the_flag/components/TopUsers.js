@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import moment from 'moment'
 import FbPhoto from 'canvas/capture_the_flag/components/FbPhoto'
-import { toHHMMSS } from 'canvas/capture_the_flag/selectors/entries'
+import toHHMMSS from 'lib/toHHMMSS'
 
 const TopUsers = ({ entries, flagLabel }) => (
 	<div className="container" id="top-users">

@@ -2,44 +2,32 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link, IndexLink } from 'react-router'
 import { ButtonToolbar, Table, DropdownButton, MenuItem } from 'react-bootstrap'
-import User from 'components/User'
+import MdEdit from 'react-icons/lib/md/edit'
+import MdPerson from 'react-icons/lib/md/person'
+import FaFacebookOfficial from 'react-icons/lib/fa/facebook-official'
+import SummarySquare from 'components/SummarySquare'
 
 const Summary = ({ checksum, type, entries }) => (
 	<div>
-		<p className="h1 page-header">Summary</p>
-		<p className="h6 text-uppercase">
-			<b>Top 5 users</b>
-		</p>
-		<div className="col-md-6">
-			{entries.length == 0 ? (
-				<div className="ita-empty text-cente">
-					<h5>No entries yet.</h5>
-				</div>
-			) : (
-				<div>
-					<Table className="ita-table">
-						<tbody>
-							{entries.map(entry => (
-								<tr key={entry.user.identifier}>
-									<td>
-										<User name={entry.user.name} identifier={entry.user.identifier} small />
-									</td>
-									<td>
-										<b>{entry.score} points</b>
-									</td>
-								</tr>
-							))}
-						</tbody>
-					</Table>
-					<p>
-						<Link to={`/d/apps/${type}/${checksum}/entries`} className="btn btn-primary btn-sm" activeClassName="active">
-							View full list
-						</Link>
-					</p>
-				</div>
-			)}
+		<div className="col-md-4">
+			<SummarySquare icon={<MdEdit size={42} />} link={`/d/apps/${type}/${checksum}/editor`} variant="one" label="Edit App" />
 		</div>
-		<div className="col-md-6" />
+		<div className="col-md-4">
+			<SummarySquare
+				icon={<MdPerson size={42} />}
+				link={`/d/apps/${type}/${checksum}/photos`}
+				variant="two"
+				label={`View ${entries.length} participants`}
+			/>
+		</div>
+		<div className="col-md-4">
+			<SummarySquare
+				icon={<FaFacebookOfficial size={42} />}
+				link={`/d/apps/${type}/${checksum}/integrations/facebook`}
+				variant="fb"
+				label={`Integrate with Facebook`}
+			/>
+		</div>
 	</div>
 )
 
