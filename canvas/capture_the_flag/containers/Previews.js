@@ -2,6 +2,9 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 import defaultImages from 'lib/defaultImages'
+import testUsers from 'lib/testUsers'
+
+import { getFilteredEntries } from 'modules/capture_the_flag/selectors/entries'
 
 // Screens
 import Welcome from 'canvas/capture_the_flag/components/Welcome'
@@ -9,52 +12,34 @@ import Index from 'canvas/capture_the_flag/components/Index'
 import Captcha from 'canvas/capture_the_flag/components/Captcha'
 
 const currentWinner = {
-	user: {
-		identifier: 10211176012778316,
-		name: 'Alfredo Re',
-	},
+	user: testUsers[0],
 }
 
 const topUsers = [
 	{
 		id: 1,
 		elapsedSeconds: 1231,
-		user: currentWinner.user,
+		user: testUsers[0],
 	},
 	{
 		id: 2,
 		elapsedSeconds: 1231,
 		hasFlag: true,
-		user: currentWinner.user,
+		user: testUsers[1],
 	},
 	{
 		id: 3,
 		elapsedSeconds: 1231,
-		user: currentWinner.user,
+		user: testUsers[2],
 	},
 	{
 		id: 4,
 		elapsedSeconds: 1231,
-		user: currentWinner.user,
-	},
-	{
-		id: 5,
-		elapsedSeconds: 1231,
-		user: currentWinner.user,
-	},
-	{
-		id: 6,
-		elapsedSeconds: 1231,
-		user: currentWinner.user,
-	},
-	{
-		id: 7,
-		elapsedSeconds: 1231,
-		user: currentWinner.user,
+		user: testUsers[3],
 	},
 ]
 
-const Previews = ({ screen, messages, images, settings, emptyFunc }) => {
+const Previews = ({ screen, messages, images, settings, entries, emptyFunc }) => {
 	switch (screen) {
 		case 'intro':
 			return <Welcome messages={messages} images={images} settings={settings} isPreview={true} captchaPath={null} />
@@ -70,7 +55,7 @@ const Previews = ({ screen, messages, images, settings, emptyFunc }) => {
 					currentWinner={currentWinner}
 					logged={false}
 					captchaPath={null}
-					entries={topUsers}
+					entries={entries}
 				/>
 			)
 		case 'captcha':
@@ -80,7 +65,7 @@ const Previews = ({ screen, messages, images, settings, emptyFunc }) => {
 					images={images}
 					settings={settings}
 					isPreview={true}
-					entries={topUsers}
+					entries={entries}
 					shuffledCaptcha={[images.captcha.incorrect[0], images.captcha.correct, images.captcha.incorrect[1]]}
 				/>
 			)
@@ -99,6 +84,8 @@ const mapStateToProps = (state, props) => {
 			header: state.form.formEditor.values.images.header || defaultImages.header,
 		},
 		settings: state.form.formEditor.values.settings,
+		//
+		entries: getFilteredEntries(state).length > 0 ? getFilteredEntries(state) : topUsers,
 	}
 }
 

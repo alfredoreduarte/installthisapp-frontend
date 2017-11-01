@@ -5,7 +5,7 @@ const defaultState = {
 	editorScreens: null,
 	step: 0,
 	screen: 0,
-	platform: 'mobile',
+	platform: 'desktop',
 	defaultStylesheet: null,
 }
 

@@ -30,6 +30,7 @@ export default (store, dispatch) => ({
 
 		const defaultStyles = require(`!css-loader!sass-loader?outputStyle=expanded&indentType=tab&indentWidth=1!../../assets/canvas/${app}.sass`).toString()
 		dispatch(initializeEditorDefaultStylesheet(defaultStyles))
+
 		//
 		analytics.page('App Editor')
 		dispatch(setCurrentAppChecksum(nextState.params.checksum)).then(() => {
@@ -38,6 +39,13 @@ export default (store, dispatch) => ({
 					dispatch(fetchSettings()).then(() => {
 						dispatch(fetchEntities()).then(() => {
 							dispatch(fetchImages()).then(() => {
+								// module entities
+								const beforeShowingDashboard = require(`modules/${app}/actions/entities`).beforeShowingDashboard
+								if (beforeShowingDashboard) {
+									dispatch(beforeShowingDashboard(nextState.params.checksum))
+								} else {
+								}
+								//
 								dispatch(turnOffActivityCreatingApp())
 								dispatch(turnOffActivityLoadingApp())
 								return next()
