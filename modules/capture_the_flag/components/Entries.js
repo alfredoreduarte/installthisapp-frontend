@@ -80,7 +80,7 @@ const Entries = ({ entries, selectedItems, fetchEntries }) => (
 							<td>
 								<User name={entry.user.name} identifier={entry.user.identifier} small />
 							</td>
-							<td>{toHHMMSS(entry.elapsedSeconds)}</td>
+							<td>{entry.hasFlag ? 'accumulating...' : toHHMMSS(entry.elapsedSeconds)}</td>
 							<td>{entry.hasFlag && <FaFlag className="text-success" size={42} />}</td>
 						</tr>
 					))}
