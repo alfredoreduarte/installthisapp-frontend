@@ -33,8 +33,8 @@ const SuccessModal = ({ testStatus, sendTest, hideDestinationSuccessModal, showD
 			scale: 1,
 			opacity: 1,
 		}}
-		duration={800}>
-		// easing='easeQuadIn'
+		duration={800}
+		easing="easeQuadIn">
 		{data => (
 			<Modal
 				isOpen={showDestinationSuccessModal ? true : false}

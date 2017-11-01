@@ -1,15 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
-import { Field, reduxForm } from 'redux-form'
-import { Link } from 'react-router'
-import { Animate } from 'react-move'
-import Modal from 'react-modal'
 import FacebookLogin from 'react-facebook-login'
-import FaEnvelope from 'react-icons/lib/fa/envelope'
-import MdCloud from 'react-icons/lib/md/cloud'
 import MdClose from 'react-icons/lib/md/close'
 import MdChevronRight from 'react-icons/lib/md/chevron-right'
+
 import FlipCard from 'components/FlipCard'
 import FbPhoto from 'components/FbPhoto'
 import FacebookConnectContainer from 'leadgen/containers/FacebookConnectContainer'
@@ -20,7 +15,6 @@ import StepLabel from 'leadgen/components/StepLabel'
 import Source from 'leadgen/components/Source'
 import SourceTestModalContainer from 'leadgen/containers/SourceTestModalContainer'
 import SuccessModal from 'leadgen/components/SuccessModal'
-// import SuccessfulPurchase from 'components/SuccessfulPurchase'
 
 const AdminDashboard = ({
 	hideDestinationSuccessModal,
