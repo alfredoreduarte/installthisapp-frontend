@@ -103,7 +103,7 @@ const Photos = ({
 							<td>
 								<img src={entry.attachmentUrl} style={{ width: '100px' }} className="img-responsive img-rounded" />
 							</td>
-							<td>{entry.votes.length}</td>
+							<td>{entry.votesCount}</td>
 							<td>
 								<TimeAgo date={entry.createdAt} />
 							</td>

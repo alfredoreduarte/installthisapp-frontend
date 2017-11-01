@@ -23,7 +23,7 @@ const Single = ({ messages, images, settings, photo, handleVote, listPath, isPre
 					<img src={photo.attachmentUrl} className="img-responsive" />
 					<h4>{photo.user.name}</h4>
 					<p>
-						{photo.votes.length} {messages.votesLabel}
+						{photo.votesCount} {messages.votesLabel}
 					</p>
 					{!isPreview && (
 						<FacebookProvider appId={window.facebookAppId}>

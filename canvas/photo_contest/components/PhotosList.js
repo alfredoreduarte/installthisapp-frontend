@@ -48,7 +48,7 @@ const PhotosList = ({ messages, images, settings, photos, handleLogin, singlePat
 						<div className="meta">
 							<h2 className="photo-title">{photo.user.name}</h2>
 							<p className="photo-votes">
-								{photo.votes.length} <FaHeart className="votes-heart" size={20} />
+								{photo.votesCount} <FaHeart className="votes-heart" size={20} />
 							</p>
 						</div>
 					</div>
