@@ -19,7 +19,7 @@ const Summary = ({ checksum, type, entries }) => (
 		</div>
 		<div className="col-md-4">
 			<div className="panel panel-default text-center">
-				<Link to={`/d/apps/${type}/${checksum}/entries`} className="panel-body">
+				<Link to={`/d/apps/${type}/${checksum}/participants`} className="panel-body">
 					<MdPerson size={22} />
 					Download {entries.length} entries
 				</Link>
