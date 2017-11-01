@@ -5,7 +5,7 @@ const apiUrl = process.env.API_URL
 
 /* GET home page. */
 router.get('/gateway/:checksum', function(req, res) {
-	const checksum = req.param('checksum')
+	const checksum = req.params.checksum
 	fetch(`${apiUrl}/${checksum}/data_for_gateway.json`, {
 		method: 'GET',
 	})

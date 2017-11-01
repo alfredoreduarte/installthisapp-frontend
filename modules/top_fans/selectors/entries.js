@@ -7,7 +7,7 @@ import { getCurrentAppByState } from 'selectors/apps'
 
 const getAllEntries = state => state.topFans.entries
 
-const handleScore = score => score ? score : 0
+const handleScore = score => (score ? score : 0)
 
 let verifiedScoresEventSent = false // this avoids sending duplicate events to segment (which costs money)
 export const getEntriesForPage = createSelector(
@@ -20,20 +20,21 @@ export const getEntriesForPage = createSelector(
 		if (app && fbPageFeedWebhookIntegration) {
 			// ! basarse en el app_integration y no en el app.page
 			// const page = _.find(allPages, {'id': app.page})
-			const page = _.find(allPages, {'identifier': fbPageFeedWebhookIntegration.settings.fbPageIdentifier})
-			console.log('el page?')
-			console.log(page)
+			const page = _.find(allPages, { identifier: fbPageFeedWebhookIntegration.settings.fbPageIdentifier })
 			const identifier = parseInt(page.identifier)
 			const likeMultiplier = app.setting.pointsPerLike
 			const commentMultiplier = app.setting.pointsPerComment
 			const ignoredUserIdentifiers = app.setting.ignoredUserIdentifiers
 			if (entries) {
-				if (entries[identifier]){
+				if (entries[identifier]) {
 					const allPageEntries = entries[identifier]
-					// hide ignored users 
+					// hide ignored users
 					const selectedEntries = {
 						likes: _.filter(allPageEntries.likes, entry => ignoredUserIdentifiers.indexOf(parseInt(entry.senderId)) === -1),
-						comments: _.filter(allPageEntries.comments, entry => ignoredUserIdentifiers.indexOf(parseInt(entry.senderId)) === -1),
+						comments: _.filter(
+							allPageEntries.comments,
+							entry => ignoredUserIdentifiers.indexOf(parseInt(entry.senderId)) === -1
+						),
 					}
 					if (selectedEntries.likes.length > 0 || selectedEntries.comments.length > 0) {
 						const arrResult = merge(selectedEntries.likes, selectedEntries.comments, 'senderId')
@@ -53,20 +54,16 @@ export const getEntriesForPage = createSelector(
 							verifiedScoresEventSent = !verifiedScoresEventSent
 						}
 						return _.take(arrResultOrdered, 100)
-					}
-					else{
+					} else {
 						return []
 					}
-				}
-				else{
+				} else {
 					return []
 				}
-			}
-			else{
+			} else {
 				return []
 			}
-		}
-		else{
+		} else {
 			return []
 		}
 	}

@@ -5,7 +5,7 @@ import { getCurrentApp } from 'selectors/apps'
 const getAllEntries = state => _.values(state.entities.entries)
 
 export const getFilteredEntries = createSelector(getAllEntries, entries => {
-	return _.filter(entries, entry => entry.id > 0)
+	return _.orderBy(entries, ['hasFlag', 'elapsedSeconds'], ['desc', 'desc'])
 })
 
 export const getCurrentWinner = createSelector(getFilteredEntries, entries => _.find(entries, { hasFlag: true }))
