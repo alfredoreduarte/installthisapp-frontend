@@ -1,4 +1,5 @@
 import React from 'react'
+import { postToApi } from 'api'
 import { connect } from 'react-redux'
 import { generateCsv } from 'modules/form/actions'
 import { getSchema } from 'modules/form/selectors/schema'
@@ -9,7 +10,7 @@ import EntriesView from 'modules/form/components/Entries'
 
 const Entries = props => <EntriesView {...props} />
 
-const mapStateToProps = (state, props) => ({ 
+const mapStateToProps = (state, props) => ({
 	schema: getSchema(state),
 	entries: getFilteredEntries(state),
 	selectedItems: state.selectedItems,
@@ -18,6 +19,9 @@ const mapStateToProps = (state, props) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+	msg: () => {
+		postToApi(`applications/RM9859/msg.json`)
+	},
 	generateCsv: () => dispatch(generateCsv()),
 	fetchEntries: () => dispatch(fetchEntities()),
 	toggleWinnerModal: () => dispatch(toggleWinnerModal()),

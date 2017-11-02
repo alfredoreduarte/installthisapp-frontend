@@ -13,9 +13,7 @@ let Settings = ({ handleSubmit, fetching, settings }) => (
 				<h3 className="ita-page-title">App preferences</h3>
 			</div>
 			<div className="col-md-8 text-right">
-				<button 
-					type="submit"
-					className="btn btn-sm btn-primary btn-outline" disabled={fetching}>
+				<button type="submit" className="btn btn-sm btn-primary btn-outline" disabled={fetching}>
 					{fetching ? 'Saving...' : 'Save'}
 				</button>
 			</div>
@@ -28,14 +26,10 @@ let Settings = ({ handleSubmit, fetching, settings }) => (
 						<div className="form-horizontal">
 							<div className="form-group">
 								<div className="col-md-6">
-									<label className="control-label">Allow playing multiple times</label>
+									<label className="control-label">Comma-separated Email recipients for notifications</label>
 								</div>
 								<div className="col-md-6">
-									<Field
-										name={'playMultipleTimes'}
-										type="checkbox"
-										className="form-control" 
-										component="input" />
+									<Field name={'emailRecipients'} className="form-control" rows={3} component="textarea" />
 								</div>
 							</div>
 						</div>
@@ -59,11 +53,11 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = dispatch => {
-	return { 
+	return {
 		handleSubmit: e => {
 			e.preventDefault()
 			dispatch(updateAppSpecificSettings())
-		}
+		},
 	}
 }
 

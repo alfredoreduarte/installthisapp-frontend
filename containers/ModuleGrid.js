@@ -10,15 +10,15 @@ const ModuleGrid = ({ modules, futureModules, handleFutureModuleSelection, handl
 		<div className="container-flex">
 			{modules.map(module => {
 				return (
-					<div className="col-flex" key={module} style={{ margin: '0px 40px 20px' }}>
-						<div className="media media-stacked text-center">
+					<div className="col-flex animated fadeInUp" key={module} style={{ margin: '0px 40px 20px' }}>
+						<div className="media media-stacked text-center media-module-option">
 							<div className="media-left media-middle">
 								<a href="javascript:void(0)" onClick={() => handleModuleSelection(module)}>
-									<img className="media-object img-rounded" src={`/images/module-icons/${module}.png`} />
+									<img className="media-object img-rounded" src={`/images/module-icons/${module}.jpg`} />
 								</a>
 							</div>
 							<div className="media-body media-middle">
-								<a href="javascript:void(0)" onClick={() => handleModuleSelection(module)}>
+								<div onClick={() => handleModuleSelection(module)}>
 									<h5 className="
 										media-heading 
 										text-relevant-title 
@@ -27,7 +27,7 @@ const ModuleGrid = ({ modules, futureModules, handleFutureModuleSelection, handl
 										text-capitalize">
 										{_.capitalize(module.split('_').join(' '))}
 									</h5>
-								</a>
+								</div>
 								<p className="hide">
 									<small>Description Mattis Sem Malesuada Tortor</small>
 								</p>
@@ -47,14 +47,14 @@ const ModuleGrid = ({ modules, futureModules, handleFutureModuleSelection, handl
 			{futureModules.map(module => {
 				return (
 					<div className="col-flex" key={module}>
-						<div className="media media-stacked text-center">
+						<div className="media media-stacked text-center media-module-option">
 							<div className="media-left media-middle">
 								<a href="javascript:void(0)">
-									<img className="media-object img-rounded" src={`/images/module-icons/${module}.png`} />
+									<img className="media-object img-rounded" src={`/images/module-icons/${module}.jpg`} />
 								</a>
 							</div>
 							<div className="media-body media-middle">
-								<a href="javascript:void(0)">
+								<div>
 									<h5 className="
 										media-heading 
 										text-relevant-title 
@@ -63,7 +63,7 @@ const ModuleGrid = ({ modules, futureModules, handleFutureModuleSelection, handl
 										text-capitalize">
 										{_.capitalize(module.split('_').join(' '))}
 									</h5>
-								</a>
+								</div>
 								<p className="hide">
 									<small>Description Mattis Sem Malesuada Tortor</small>
 								</p>

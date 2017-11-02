@@ -105,8 +105,7 @@ const Sidebar = ({ installed, checksum, type, children, menu, facebookPageIdenti
 					Preferences
 				</Link>
 				<ul className="list-unstyled">
-					{type != 'form' &&
-						type != 'fan_gate' &&
+					{type != 'fan_gate' &&
 						type != 'static_html' && (
 							<li>
 								<Link to={`/d/apps/${type}/${checksum}/preferences/specific`} activeClassName="active">

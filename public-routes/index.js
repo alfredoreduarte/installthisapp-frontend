@@ -150,6 +150,11 @@ const memoryMatchHandler = function(req, res) {
 }
 router.all('/memory-match/', memoryMatchHandler)
 
+const formHandler = function(req, res) {
+	res.redirect('/apps')
+}
+router.all('/form/', formHandler)
+
 const photoContestHandler = function(req, res) {
 	res.render(
 		'landing-v2/app',

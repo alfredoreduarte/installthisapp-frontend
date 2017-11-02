@@ -105,11 +105,6 @@ const AppTitleBar = ({
 				<div className="col-md-6">
 					<div className="ita-breadcrumb">
 						<ul className="list-inline ita-breadcrumb-list">
-							<li>
-								<IndexLink to="/">
-									<img className="img-rounded" src={`/images/module-icons/${applicationType}.png`} />
-								</IndexLink>
-							</li>
 							<li className="weight-thin text-primary">
 								<span className="h1 weight-thin text-primary">{title}</span>
 							</li>

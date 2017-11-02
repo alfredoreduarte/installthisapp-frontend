@@ -130,3 +130,19 @@ body
 // Greyed out images
 .img-grayscale
 	+filter(grayscale(1))
+
+// module selector
+.media-module-option
+	overflow: visible
+	&:hover
+		img
+			box-shadow: 0 40px 120px -20px rgba(0,0,0,.6)
+			transform: scale3d(1.03,1.03,1)
+		.media-heading
+			transform: translateY(5px)
+	img
+		width: 120px
+		transition: transform .25s cubic-bezier(.215,.61,.355,1),background .15s cubic-bezier(.215,.61,.355,1),box-shadow .25s cubic-bezier(.215,.61,.355,1),-webkit-transform .25s cubic-bezier(.215,.61,.355,1)
+		box-shadow: 0 2px 4px 0 rgba(0,0,0,.3)
+	.media-heading
+		transition: transform .25s cubic-bezier(.215,.61,.355,1),background .15s cubic-bezier(.215,.61,.355,1),box-shadow .25s cubic-bezier(.215,.61,.355,1),-webkit-transform .25s cubic-bezier(.215,.61,.355,1)
