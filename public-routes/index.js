@@ -154,6 +154,8 @@ const formHandler = function(req, res) {
 	res.redirect('/apps')
 }
 router.all('/form/', formHandler)
+// avoiding URL conflict with trivia canvas POST
+router.all('/form-fb-search/', formHandler)
 
 const photoContestHandler = function(req, res) {
 	res.render(
