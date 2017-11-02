@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import moment from 'moment'
 import FacebookProvider, { Login } from 'react-facebook'
+import Credits from 'canvas/common-components/Credits'
 import Image from 'canvas/common-components/Image'
 import FbPhoto from 'canvas/capture_the_flag/components/FbPhoto'
 import TopUsers from 'canvas/capture_the_flag/components/TopUsers'
@@ -65,6 +66,7 @@ const Index = ({ messages, images, settings, entries, currentWinner, timer, capt
 			</div>
 		</div>
 		<Image source={images.footer} />
+		<Credits />
 	</div>
 )
 

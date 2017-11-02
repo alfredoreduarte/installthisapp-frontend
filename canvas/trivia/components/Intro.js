@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
 import HeaderImage from 'canvas/trivia/components/HeaderImage'
-import Credits from 'canvas/trivia/components/Credits'
+import Credits from 'canvas/common-components/Credits'
 
 const Intro = ({ intro }) => (
 	<div className="col-sm-12">

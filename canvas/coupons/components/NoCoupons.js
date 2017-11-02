@@ -3,6 +3,7 @@ import { Field } from 'redux-form'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
+import Credits from 'canvas/common-components/Credits'
 import Image from 'canvas/common-components/Image'
 
 const NoCoupons = ({ messages, images, settings, nextPath, code }) => (
@@ -29,6 +30,7 @@ const NoCoupons = ({ messages, images, settings, nextPath, code }) => (
 				{messages.privacyPolicyLinkText}
 			</a>
 		</p>
+		<Credits />
 	</div>
 )
 

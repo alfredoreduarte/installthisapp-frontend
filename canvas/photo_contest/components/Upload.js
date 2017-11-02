@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import { Field } from 'redux-form'
 
+import Credits from 'canvas/common-components/Credits'
 import Image from 'canvas/common-components/Image'
 
 import ImageUploaderField from 'canvas/photo_contest/components/ImageUploaderField'
@@ -46,6 +47,7 @@ const Upload = ({ messages, images, settings, formValues: { caption, attachmentU
 			</a>
 		</p>
 		{settings.showFooterImageAtUploadScreen && <Image source={images.footer} />}
+		<Credits />
 	</form>
 )
 

@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import moment from 'moment'
+import Credits from 'canvas/common-components/Credits'
 import Image from 'canvas/common-components/Image'
 import FbPhoto from 'canvas/capture_the_flag/components/FbPhoto'
 import TopUsers from 'canvas/capture_the_flag/components/TopUsers'
@@ -22,6 +23,7 @@ const Captcha = ({ messages, images, settings, entries, shuffledCaptcha, claim }
 			</div>
 		</div>
 		<Image source={images.footer} />
+		<Credits />
 	</div>
 )
 

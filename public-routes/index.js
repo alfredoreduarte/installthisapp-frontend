@@ -154,8 +154,27 @@ const formHandler = function(req, res) {
 	res.redirect('/apps')
 }
 router.all('/form/', formHandler)
-// avoiding URL conflict with trivia canvas POST
+// avoiding URL conflict with form canvas POST
 router.all('/form-fb-search/', formHandler)
+
+const couponsHandler = function(req, res) {
+	res.redirect('/apps')
+}
+router.all('/coupons/', couponsHandler)
+// avoiding URL conflict with coupons canvas POST
+router.all('/coupons-fb-search/', couponsHandler)
+
+const fanGateHandler = function(req, res) {
+	res.redirect('/apps')
+}
+router.all('/fan-gate/', fanGateHandler)
+
+const catalogHandler = function(req, res) {
+	res.redirect('/apps')
+}
+router.all('/catalog/', catalogHandler)
+// avoiding URL conflict with catalog canvas POST
+router.all('/catalog-fb-search/', catalogHandler)
 
 const photoContestHandler = function(req, res) {
 	res.render(

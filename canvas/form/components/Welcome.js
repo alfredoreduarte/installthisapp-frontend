@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 
+import Credits from 'canvas/common-components/Credits'
 import Image from 'canvas/common-components/Image'
 
 const Welcome = ({ messages, images, settings, formPath }) => (
@@ -40,6 +41,7 @@ const Welcome = ({ messages, images, settings, formPath }) => (
 				{messages.privacyPolicyLinkText}
 			</a>
 		</p>
+		<Credits />
 	</div>
 )
 

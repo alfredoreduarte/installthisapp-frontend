@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Field } from 'redux-form'
 
+import Credits from 'canvas/common-components/Credits'
 import Image from 'canvas/common-components/Image'
 
 const Form = ({ messages, images, settings, schema, handleSubmit }) => (
@@ -105,6 +106,7 @@ const Form = ({ messages, images, settings, schema, handleSubmit }) => (
 				</div>
 			</div>
 		</div>
+		<Credits />
 	</div>
 )
 

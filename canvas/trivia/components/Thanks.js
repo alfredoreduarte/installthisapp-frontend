@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import HeaderImage from 'canvas/trivia/components/HeaderImage'
-import Credits from 'canvas/trivia/components/Credits'
+import Credits from 'canvas/common-components/Credits'
 
 const Thanks = ({ title, foot, header, footer }) => (
 	<div>
@@ -8,7 +8,9 @@ const Thanks = ({ title, foot, header, footer }) => (
 			<HeaderImage source={header} />
 		</div>
 		<div className="col-sm-12">
-			<h1 className="ita-cali-message-text" data-editable-message-key="thankYou">{title}</h1>
+			<h1 className="ita-cali-message-text" data-editable-message-key="thankYou">
+				{title}
+			</h1>
 			<h3 className="hide">{foot}</h3>
 		</div>
 		<div className="row">

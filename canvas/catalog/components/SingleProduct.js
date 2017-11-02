@@ -11,6 +11,7 @@ import FaFacebook from 'react-icons/lib/fa/facebook'
 import FaWhatsapp from 'react-icons/lib/fa/whatsapp'
 import MediaQuery from 'react-responsive'
 import ImageGallery from 'react-image-gallery'
+import Credits from 'canvas/common-components/Credits'
 import Image from 'canvas/catalog/components/Image'
 import Product from 'canvas/catalog/components/Product'
 
@@ -23,25 +24,21 @@ import Breadcrumbs from 'canvas/catalog/components/desktop/Breadcrumbs'
 import LogoBar from 'canvas/catalog/components/desktop/LogoBar'
 import Footer from 'canvas/catalog/components/desktop/Footer'
 
-const {
-	FacebookShareButton,
-	WhatsappShareButton,
-	TwitterShareButton,
-} = ShareButtons
+const { FacebookShareButton, WhatsappShareButton, TwitterShareButton } = ShareButtons
 
-const SingleProduct = ({ 
+const SingleProduct = ({
 	headerImage,
 	footerImage,
 	logoDesktop,
 	logoMobile,
-	// 
+	//
 	footerCopy,
 	topBarCopy,
 	homePageLabel,
 	categoriesListTitle,
-	// 
-	productCategories, 
-	productMedia, 
+	//
+	productCategories,
+	productMedia,
 	permalink,
 	productId,
 	messageSent,
@@ -50,16 +47,16 @@ const SingleProduct = ({
 	price,
 	categories,
 	homeUrl,
-	// 
+	//
 	showContactModal,
 	handleToggleContact,
-	// 
+	//
 	currency,
 	receiveOrders,
 	relatedProducts,
 	orderButton,
 	relatedProductsTitle,
-	// 
+	//
 	requestFormTitle,
 	requestFormHint,
 	requestFormSentTitle,
@@ -81,10 +78,9 @@ const SingleProduct = ({
 				thumbnail={productMedia.length > 0 ? productMedia[0].thumbnail : 'https://via.placeholder.com/100x100'}
 				handleClose={handleToggleContact}
 				requestFormTitle={requestFormTitle}
-				requestFormHint={requestFormHint}
-			>
-				<ContactForm 
-					sent={messageSent} 
+				requestFormHint={requestFormHint}>
+				<ContactForm
+					sent={messageSent}
 					productId={productId}
 					requestFormSentTitle={requestFormSentTitle}
 					requestFormSentHint={requestFormSentHint}
@@ -95,44 +91,72 @@ const SingleProduct = ({
 				/>
 			</SimpleModal>
 			<TopBar homeUrl={homeUrl} logoImage={logoMobile} />
-			<div style={{
-				boxShadow: '0px 0px 8px rgba(0, 0, 0, .15)',
-				borderRadius: '.25em',
-				padding: '1em',
-				display: 'flex',
-				flexDirection: 'column',
-				margin: '.5em 1em',
-				background: 'white'
-			}}>
-				<MdClose onClick={browserHistory.goBack} size={20} color={'#DBDBDB'} style={{
-					alignSelf: 'flex-end',
-				}} />
-				{productMedia.length > 0 && <ImageGallery
-					items={productMedia}
-					slideInterval={2000}
-					lazyLoad={true}
-					showBullets={true}
-					showNav={false}
-					showFullscreenButton={false}
-					showThumbnails={false}
-					showPlayButton={false}
-					onImageLoad={() => console.log('load')}/>}
-				<h1 className="ita-cali-mobile-single-product-title" style={{
-					margin: '.5em 0em .1em',
-				}}>{title}</h1>
-				<h3 className="ita-cali-mobile-single-product-price" style={{
-					margin: '0em 0em .5em',
-				}}>{price}</h3>
-				<p className="ita-cali-mobile-single-product-description" style={{
-					margin: '.5em 0em',
-				}}>{description}</p>
+			<div
+				style={{
+					boxShadow: '0px 0px 8px rgba(0, 0, 0, .15)',
+					borderRadius: '.25em',
+					padding: '1em',
+					display: 'flex',
+					flexDirection: 'column',
+					margin: '.5em 1em',
+					background: 'white',
+				}}>
+				<MdClose
+					onClick={browserHistory.goBack}
+					size={20}
+					color={'#DBDBDB'}
+					style={{
+						alignSelf: 'flex-end',
+					}}
+				/>
+				{productMedia.length > 0 && (
+					<ImageGallery
+						items={productMedia}
+						slideInterval={2000}
+						lazyLoad={true}
+						showBullets={true}
+						showNav={false}
+						showFullscreenButton={false}
+						showThumbnails={false}
+						showPlayButton={false}
+						onImageLoad={() => console.log('load')}
+					/>
+				)}
+				<h1
+					className="ita-cali-mobile-single-product-title"
+					style={{
+						margin: '.5em 0em .1em',
+					}}>
+					{title}
+				</h1>
+				<h3
+					className="ita-cali-mobile-single-product-price"
+					style={{
+						margin: '0em 0em .5em',
+					}}>
+					{price}
+				</h3>
+				<p
+					className="ita-cali-mobile-single-product-description"
+					style={{
+						margin: '.5em 0em',
+					}}>
+					{description}
+				</p>
 			</div>
-			{receiveOrders && <button onClick={handleToggleContact} className="btn ita-cali-mobile-single-product-order-button" style={{
-				padding: '1em',
-				margin: '.5em 1em',
-				border: 'none',
-				borderRadius: '.25em',
-			}}>{orderButton}</button>}
+			{receiveOrders && (
+				<button
+					onClick={handleToggleContact}
+					className="btn ita-cali-mobile-single-product-order-button"
+					style={{
+						padding: '1em',
+						margin: '.5em 1em',
+						border: 'none',
+						borderRadius: '.25em',
+					}}>
+					{orderButton}
+				</button>
+			)}
 		</div>
 
 		<div className="hidden-xs visible-sm visible-md visible-lg">
@@ -143,10 +167,9 @@ const SingleProduct = ({
 				thumbnail={productMedia.length > 0 ? productMedia[0].thumbnail : 'https://via.placeholder.com/100x100'}
 				handleClose={handleToggleContact}
 				requestFormTitle={requestFormTitle}
-				requestFormHint={requestFormHint}
-			>
-				<ContactForm 
-					sent={messageSent} 
+				requestFormHint={requestFormHint}>
+				<ContactForm
+					sent={messageSent}
 					productId={productId}
 					requestFormSentTitle={requestFormSentTitle}
 					requestFormSentHint={requestFormSentHint}
@@ -169,54 +192,79 @@ const SingleProduct = ({
 						homeUrl={homeUrl}
 						childLabel={productCategories.length ? productCategories[productCategories.length - 1].name : null}
 						childUrl={productCategories.length ? productCategories[productCategories.length - 1].permalink : null}
-					 />
+					/>
 				</div>
-				<div className="col-xs-12 col-sm-4 col-md-6 col-lg-6" style={{
-					marginTop: '30px',
-				}}>
-					{productMedia.length > 0 && <ImageGallery
-						showBullets={true}
-						showNav={false}
-						items={productMedia}
-						slideInterval={2000}
-						lazyLoad={true}
-						showPlayButton={false}
-						onImageLoad={() => console.log('load')}/>}
+				<div
+					className="col-xs-12 col-sm-4 col-md-6 col-lg-6"
+					style={{
+						marginTop: '30px',
+					}}>
+					{productMedia.length > 0 && (
+						<ImageGallery
+							showBullets={true}
+							showNav={false}
+							items={productMedia}
+							slideInterval={2000}
+							lazyLoad={true}
+							showPlayButton={false}
+							onImageLoad={() => console.log('load')}
+						/>
+					)}
 				</div>
 				<div className="col-xs-12 col-sm-8 col-md-6 col-lg-6">
-					<h1 className="ita-cali-desktop-single-product-title" style={{
-						marginBottom: '0px',
-					}}>{title}</h1>
-					{productCategories.length ? 
-						<p style={{
-							marginBottom: '2em',
+					<h1
+						className="ita-cali-desktop-single-product-title"
+						style={{
+							marginBottom: '0px',
 						}}>
-							<Link 
-								to={productCategories[productCategories.length - 1].permalink} 
-								className="ita-cali-desktop-single-product-category"
-							>
+						{title}
+					</h1>
+					{productCategories.length ? (
+						<p
+							style={{
+								marginBottom: '2em',
+							}}>
+							<Link
+								to={productCategories[productCategories.length - 1].permalink}
+								className="ita-cali-desktop-single-product-category">
 								{productCategories[productCategories.length - 1].name}
 							</Link>
 						</p>
-					: null }
-					<div className="ita-cali-desktop-single-product-description" style={{
-						marginBottom: '2em',
-					}}>
+					) : null}
+					<div
+						className="ita-cali-desktop-single-product-description"
+						style={{
+							marginBottom: '2em',
+						}}>
 						{description}
 					</div>
-					<p className="ita-cali-desktop-single-product-price" style={{
-						marginBottom: '2em',
-					}}>{price}</p>
-					{receiveOrders && <p><button onClick={handleToggleContact} className="btn ita-cali-desktop-single-product-order-button" style={{
-						padding: '1em 2em',
-						marginBottom: '2em',
-						border: 'none',
-						borderRadius: '.25em',
-					}}>{orderButton}</button></p>}
-					<div style={{
-						marginBottom: '2em',
-					}}>
-						<FacebookShareButton 
+					<p
+						className="ita-cali-desktop-single-product-price"
+						style={{
+							marginBottom: '2em',
+						}}>
+						{price}
+					</p>
+					{receiveOrders && (
+						<p>
+							<button
+								onClick={handleToggleContact}
+								className="btn ita-cali-desktop-single-product-order-button"
+								style={{
+									padding: '1em 2em',
+									marginBottom: '2em',
+									border: 'none',
+									borderRadius: '.25em',
+								}}>
+								{orderButton}
+							</button>
+						</p>
+					)}
+					<div
+						style={{
+							marginBottom: '2em',
+						}}>
+						<FacebookShareButton
 							url={`${location.protocol}//${window.location.host}${permalink}`}
 							style={{
 								display: 'inline-block',
@@ -226,11 +274,10 @@ const SingleProduct = ({
 								padding: '15px',
 								lineHeight: 1,
 								cursor: 'pointer',
-							}}
-						>
+							}}>
 							<FaFacebook size={14} color={'#ffffff'} />
 						</FacebookShareButton>
-						<TwitterShareButton 
+						<TwitterShareButton
 							url={`${location.protocol}//${window.location.host}${permalink}`}
 							style={{
 								display: 'inline-block',
@@ -240,11 +287,10 @@ const SingleProduct = ({
 								padding: '15px',
 								lineHeight: 1,
 								cursor: 'pointer',
-							}}
-						>
+							}}>
 							<FaTwitter size={14} color={'#ffffff'} />
 						</TwitterShareButton>
-						<WhatsappShareButton 
+						<WhatsappShareButton
 							url={`${location.protocol}//${window.location.host}${permalink}`}
 							style={{
 								display: 'inline-block',
@@ -254,8 +300,7 @@ const SingleProduct = ({
 								padding: '15px',
 								lineHeight: 1,
 								cursor: 'pointer',
-							}}
-						>
+							}}>
 							<FaWhatsapp size={14} color={'#ffffff'} />
 						</WhatsappShareButton>
 					</div>
@@ -266,27 +311,28 @@ const SingleProduct = ({
 					<hr />
 					<h3 className="ita-cali-desktop-single-product-related-title">{relatedProductsTitle}</h3>
 				</div>
-				<div style={{
-					display: 'flex', 
-					justifyContent: 'space-around', 
-					flexWrap: 'wrap', 
-					width: '100%', 
-					padding: '0px 10%', 
-					marginBottom: '2em'
-				}}>
-					{relatedProducts.map( ({ id, permalink, name, price, shortDescription, featured, featuredImage }) => 
-						<Product 
-							key={id} 
+				<div
+					style={{
+						display: 'flex',
+						justifyContent: 'space-around',
+						flexWrap: 'wrap',
+						width: '100%',
+						padding: '0px 10%',
+						marginBottom: '2em',
+					}}>
+					{relatedProducts.map(({ id, permalink, name, price, shortDescription, featured, featuredImage }) => (
+						<Product
+							key={id}
 							size={33}
-							displayMode={'grid'} 
-							permalink={permalink} 
-							title={name} 
-							featured={featured} 
-							price={price ? `${currency} ${price}` : null} 
-							thumbnail={featuredImage ? featuredImage.attachmentUrl : 'https://via.placeholder.com/100x100'} 
+							displayMode={'grid'}
+							permalink={permalink}
+							title={name}
+							featured={featured}
+							price={price ? `${currency} ${price}` : null}
+							thumbnail={featuredImage ? featuredImage.attachmentUrl : 'https://via.placeholder.com/100x100'}
 							subtitle={shortDescription}
 						/>
-					)}
+					))}
 				</div>
 			</div>
 			<Footer copy={footerCopy} />
@@ -294,21 +340,22 @@ const SingleProduct = ({
 		<div>
 			<Image source={footerImage} />
 		</div>
+		<Credits />
 	</div>
 )
 
 SingleProduct.propTypes = {
-	// 
+	//
 	headerImage: PropTypes.string,
 	footerImage: PropTypes.string,
 	logoDesktop: PropTypes.string,
 	logoMobile: PropTypes.string,
-	// 
+	//
 	footerCopy: PropTypes.string,
 	topBarCopy: PropTypes.string,
 	homePageLabel: PropTypes.string,
 	categoriesListTitle: PropTypes.string,
-	// 
+	//
 	categories: PropTypes.array.isRequired,
 	homeUrl: PropTypes.string.isRequired,
 	currency: PropTypes.string.isRequired,
@@ -327,7 +374,7 @@ SingleProduct.propTypes = {
 	receiveOrders: PropTypes.bool.isRequired,
 	orderButton: PropTypes.string.isRequired,
 	relatedProductsTitle: PropTypes.string.isRequired,
-	// 
+	//
 	requestFormTitle: PropTypes.string.isRequired,
 	requestFormHint: PropTypes.string.isRequired,
 	requestFormSentTitle: PropTypes.string.isRequired,

@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 
+import Credits from 'canvas/common-components/Credits'
 import Image from 'canvas/common-components/Image'
 
 const Thanks = ({ messages, images, settings }) => (
@@ -25,6 +26,7 @@ const Thanks = ({ messages, images, settings }) => (
 				</a>
 			</div>
 		</div>
+		<Credits />
 	</div>
 )
 

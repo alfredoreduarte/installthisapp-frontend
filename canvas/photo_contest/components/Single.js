@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import FacebookProvider, { Login } from 'react-facebook'
 
+import Credits from 'canvas/common-components/Credits'
 import Image from 'canvas/common-components/Image'
 
 const Single = ({ messages, images, settings, photo, handleVote, listPath, isPreview }) => (
@@ -57,6 +58,7 @@ const Single = ({ messages, images, settings, photo, handleVote, listPath, isPre
 			</div>
 		</div>
 		{settings.showFooterImageAtSinglePhotoScreen && <Image source={images.footer} />}
+		<Credits />
 	</div>
 )
 

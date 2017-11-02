@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import FaHeart from 'react-icons/lib/fa/heart'
 import FacebookProvider, { Login } from 'react-facebook'
 
+import Credits from 'canvas/common-components/Credits'
 import Image from 'canvas/common-components/Image'
 
 const PhotosList = ({ messages, images, settings, photos, handleLogin, singlePath, getMore, isPreview }) => (
@@ -63,6 +64,7 @@ const PhotosList = ({ messages, images, settings, photos, handleLogin, singlePat
 			)}
 		</p>
 		<Image source={images.footer} />
+		<Credits />
 	</div>
 )
 

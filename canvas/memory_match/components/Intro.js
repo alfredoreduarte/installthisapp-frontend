@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
 import Image from 'canvas/memory_match/components/Image'
-import Credits from 'canvas/memory_match/components/Credits'
+import Credits from 'canvas/common-components/Credits'
 
 const IntroView = ({ image, linkUrl }) => (
 	<div className="col-sm-12">
