@@ -6,7 +6,7 @@ import SearchForm from 'components/SearchForm'
 import User from 'components/User'
 import toHHMMSS from 'lib/toHHMMSS'
 
-const Entries = ({ entries, selectedItems, fetchEntries }) => (
+const Entries = ({ entries, selectedItems, fetchEntries, generateCsv }) => (
 	<div className="ita-table-view">
 		<div className="ita-table-toolbar">
 			<div className="row">
@@ -32,6 +32,9 @@ const Entries = ({ entries, selectedItems, fetchEntries }) => (
 						<ButtonToolbar>
 							<button className="btn btn-sm btn-default pull-right" onClick={fetchEntries}>
 								Refresh
+							</button>
+							<button className="btn btn-sm btn-default pull-right" onClick={generateCsv}>
+								Export as CSV
 							</button>
 							<ReactInterval timeout={3000} enabled={true} callback={() => fetchEntries()} />
 						</ButtonToolbar>

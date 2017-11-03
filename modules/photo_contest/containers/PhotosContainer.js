@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { postDeletePhotos } from 'modules/photo_contest/actions/photos'
 import { getFilteredEntries, getRandomWinner } from 'modules/photo_contest/selectors/entries'
 import { isWinnerModalVisible } from 'modules/photo_contest/selectors/ui'
-import { fetchEntities } from 'modules/photo_contest/actions/entities'
+import { fetchEntities, generateCsv } from 'modules/photo_contest/actions/entities'
 import Photos from 'modules/photo_contest/components/Photos'
 
 const PhotosContainer = props => <Photos {...props} />
@@ -20,6 +20,7 @@ const mapStateToProps = (state, props) => ({
 })
 
 const mapDispatchToProps = (dispatch, props) => ({
+	generateCsv: () => dispatch(generateCsv()),
 	fetchEntries: () => dispatch(fetchEntities()),
 	// fetchAgain: () => dispatch(fetchPhotoContestEntities()),
 	handleSelect: id => dispatch(selectItemOnTable(id)),

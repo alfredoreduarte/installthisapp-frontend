@@ -17,6 +17,7 @@ const Photos = ({
 	randomWinner,
 	winnerModalVisible,
 	closeWinnerModal,
+	generateCsv,
 }) => (
 	<div className="ita-table-view">
 		<div className="ita-table-toolbar">
@@ -43,6 +44,9 @@ const Photos = ({
 							</button>
 							<button className="btn btn-default btn-sm pull-right" onClick={getRandomWinner}>
 								Get random winner
+							</button>
+							<button className="btn btn-sm btn-default pull-right" onClick={generateCsv}>
+								Export as CSV
 							</button>
 						</ButtonToolbar>
 					)}
