@@ -12,6 +12,14 @@ let ThanksForm = ({ active, selectedValues, onTitleClick }) => (
 			"Thank You" screen
 		</div>
 		<div className="editor-tab-item-body">
+			<div className="form-horizontal">
+				<div className="checkbox">
+					<label>
+						<Field name={'settings.showHeaderImageAtThanks'} component="input" type="checkbox" /> Include Header image
+					</label>
+				</div>
+				<hr />
+			</div>
 			<div className="form-group">
 				<label className="control-label">Title</label>
 				<Field className="form-control" name={'messages.thanksTitle'} component="input" type="text" />

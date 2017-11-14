@@ -12,6 +12,14 @@ let IndexForm = ({ active, selectedValues, onTitleClick }) => (
 			Main screen
 		</div>
 		<div className="editor-tab-item-body">
+			<div className="form-horizontal">
+				<div className="checkbox">
+					<label>
+						<Field name={'settings.showHeaderImageAtIndex'} component="input" type="checkbox" /> Include Header image
+					</label>
+				</div>
+				<hr />
+			</div>
 			<div className="form-group">
 				<label className="control-label">Title</label>
 				<Field className="form-control" name={'messages.indexTitle'} component="input" type="text" />

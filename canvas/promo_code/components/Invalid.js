@@ -8,7 +8,7 @@ import FbPhoto from 'canvas/promo_code/components/FbPhoto'
 
 const Invalid = ({ messages, images, settings }) => (
 	<div>
-		<Image source={images.header} />
+		{settings.showHeaderImageAtInvalid && <Image source={images.header} />}
 		<div className="container">
 			<div className="col-xs-12 col-md-6 col-md-offset-3 text-center">
 				<h1

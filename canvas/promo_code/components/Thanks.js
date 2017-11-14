@@ -8,7 +8,7 @@ import FbPhoto from 'canvas/promo_code/components/FbPhoto'
 
 const Thanks = ({ messages, images, settings, entriesCount }) => (
 	<div>
-		<Image source={images.header} />
+		{settings.showHeaderImageAtThanks && <Image source={images.header} />}
 		<div className="container">
 			<div className="col-xs-12 col-md-6 col-md-offset-3 text-center">
 				<h1
