@@ -58,5 +58,6 @@ export default (store, dispatch) => ({
 		require('modules/form/routes').default(store, dispatch),
 		require('modules/coupons/routes').default(store, dispatch),
 		require('modules/capture_the_flag/routes').default(store, dispatch),
+		require('modules/promo_code/routes').default(store, dispatch),
 	],
 })

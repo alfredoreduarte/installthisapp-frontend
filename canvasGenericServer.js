@@ -9,9 +9,10 @@ const corresponding = {
 	coupons: 'app8',
 	static_html: 'app9',
 	capture_the_flag: 'app10',
+	promo_code: 'app11',
 }
 
-const modulesRegex = 'trivia|top_fans|photo_contest|memory_match|catalog|form|fan_gate|coupons|static_html|capture_the_flag'
+const modulesRegex = 'trivia|top_fans|photo_contest|memory_match|catalog|form|fan_gate|coupons|static_html|capture_the_flag|promo_code'
 
 var express = require('express')
 var jsonfile = require('jsonfile')

@@ -15,9 +15,9 @@ const Summary = ({ checksum, type, entries }) => (
 		<div className="col-md-4">
 			<SummarySquare
 				icon={<MdPerson size={42} />}
-				link={`/d/apps/${type}/${checksum}/entries`}
+				link={`/d/apps/${type}/${checksum}/code`}
 				variant="two"
-				label={`See ${entries.length} entries`}
+				label={`See ${entries.length} code`}
 			/>
 		</div>
 		<div className="col-md-4">

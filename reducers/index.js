@@ -31,6 +31,7 @@ import form from 'modules/form/reducers/'
 import coupons from 'modules/coupons/reducers/'
 import staticHtml from 'modules/static_html/reducers/'
 import captureTheFlag from 'modules/capture_the_flag/reducers/'
+import promoCode from 'modules/promo_code/reducers/'
 
 const createReducer = asyncReducers => {
 	return combineReducers({
@@ -63,6 +64,7 @@ const createReducer = asyncReducers => {
 		coupons,
 		staticHtml,
 		captureTheFlag,
+		promoCode,
 		// asyncReducers: asyncReducers
 	})
 }

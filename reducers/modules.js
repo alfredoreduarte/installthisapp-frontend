@@ -11,6 +11,7 @@ const entities = (
 			'coupons',
 			'static_html',
 			'capture_the_flag',
+			'promo_code',
 		],
 		inactive: ['story_contest', 'puzzle', 'photo_trivia', 'audio_trivia'],
 	},

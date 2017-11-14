@@ -29,6 +29,7 @@ module.exports = {
 		coupons: 'canvas/coupons/index',
 		static_html: 'canvas/static_html/index',
 		capture_the_flag: 'canvas/capture_the_flag/index',
+		promo_code: 'canvas/promo_code/index',
 	},
 	output: {
 		path: path.join(__dirname, '/dist'),
