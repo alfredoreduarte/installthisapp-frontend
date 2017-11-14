@@ -1,10 +1,10 @@
 import { normalize, arrayOf } from 'normalizr'
 import { getCurrentAppByState } from 'selectors/apps'
-import * as schema from 'modules/example/schema'
+import * as schema from 'modules/promo_code/schema'
 import { getFromApi } from 'api'
 
 export const receiveEntities = (entities, applicationLog) => ({
-	type: 'EXAMPLE/RECEIVE_ENTITIES',
+	type: 'PROMO_CODE/RECEIVE_ENTITIES',
 	entities,
 	applicationLog,
 })

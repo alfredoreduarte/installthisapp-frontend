@@ -68,6 +68,7 @@ const Sidebar = ({ installed, checksum, type, children, menu, facebookPageIdenti
 				type != 'coupons' &&
 				type != 'photo_contest' &&
 				type != 'capture_the_flag' &&
+				type != 'promo_code' &&
 				type != 'static_html' && (
 					<li>
 						<Link to={`/d/apps/${type}/${checksum}/design`} activeClassName="active">
@@ -80,6 +81,7 @@ const Sidebar = ({ installed, checksum, type, children, menu, facebookPageIdenti
 				type == 'coupons' ||
 				type == 'static_html' ||
 				type == 'photo_contest' ||
+				type == 'promo_code' ||
 				type == 'capture_the_flag') && (
 				<li>
 					<Link to={`/d/apps/${type}/${checksum}/editor`} activeClassName="active">

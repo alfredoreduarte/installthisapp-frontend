@@ -1,6 +1,6 @@
 const entities = (state = {}, action) => {
 	switch (action.type) {
-		case 'EXAMPLE/RECEIVE_ENTITIES':
+		case 'PROMO_CODE/RECEIVE_ENTITIES':
 			return {
 				...state,
 				...action.entities,

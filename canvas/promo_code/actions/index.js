@@ -1,7 +1,7 @@
-import { fetchImages } from 'canvas/example/actions/images'
-import { fetchMessages } from 'canvas/example/actions/messages'
-import { fetchEntities } from 'canvas/example/actions/entities'
-import { fetchSettings } from 'canvas/example/actions/settings'
+import { fetchImages } from 'canvas/promo_code/actions/images'
+import { fetchMessages } from 'canvas/promo_code/actions/messages'
+import { fetchEntities } from 'canvas/promo_code/actions/entities'
+import { fetchSettings } from 'canvas/promo_code/actions/settings'
 
 export const getStaticContent = (nextState, replace, next, dispatch) =>
 	dispatch(fetchMessages())

@@ -1,7 +1,7 @@
 import { normalize, arrayOf } from 'normalizr'
 import { getFromApi, getExternal } from 'canvas/api'
 import { push } from 'react-router-redux'
-import * as schema from 'canvas/example/schema'
+import * as schema from 'canvas/promo_code/schema'
 
 export const receiveEntities = entities => ({
 	type: 'RECEIVE_ENTITIES',

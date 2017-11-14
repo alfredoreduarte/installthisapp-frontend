@@ -92,7 +92,7 @@ const Form = ({ messages, images, settings, schema, handleSubmit }) => (
 								</div>
 							))}
 							<div className="form-group">
-								<button type="submit" className="btn btn-primary  btn-lg">
+								<button type="submit" className="btn btn-primary btn-lg">
 									{messages.submitButton}
 								</button>
 							</div>

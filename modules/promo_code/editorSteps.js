@@ -3,12 +3,21 @@ export default [
 		triggerScreen: 'intro',
 	},
 	{
-		triggerScreen: 'form',
+		triggerScreen: 'index',
+	},
+	{
+		triggerScreen: 'thanks',
+	},
+	{
+		triggerScreen: 'invalid',
 	},
 	{
 		triggerScreen: null,
 	},
 	{
-		triggerScreen: 'thanks',
+		triggerScreen: null,
+	},
+	{
+		triggerScreen: null,
 	},
 ]

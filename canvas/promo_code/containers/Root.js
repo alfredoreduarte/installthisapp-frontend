@@ -2,11 +2,12 @@ import React, { Component, PropTypes } from 'react'
 import Cookies from 'js-cookie'
 import { Provider, connect } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
-import { getStaticContent, getStaticContentAndEntities } from 'canvas/example/actions'
+import { getStaticContent, getStaticContentAndEntities } from 'canvas/promo_code/actions'
 
-import WelcomeContainer from 'canvas/example/containers/WelcomeContainer'
-import IndexContainer from 'canvas/example/containers/IndexContainer'
-import LoginContainer from 'canvas/example/containers/LoginContainer'
+import WelcomeContainer from 'canvas/promo_code/containers/WelcomeContainer'
+import IndexContainer from 'canvas/promo_code/containers/IndexContainer'
+import ThanksContainer from 'canvas/promo_code/containers/ThanksContainer'
+import InvalidContainer from 'canvas/promo_code/containers/InvalidContainer'
 
 const getData = (nextState, replace, next, dispatch) => dispatch(loginCallback()).then(() => next())
 
@@ -15,7 +16,7 @@ const requireAuth = (nextState, replace, next, dispatch) => {
 		next()
 	} else {
 		replace({
-			pathname: `/example/${window.checksum}/login`,
+			pathname: `/promo_code/${window.checksum}/login`,
 		})
 		next()
 	}
@@ -28,7 +29,7 @@ class Root extends Component {
 			<Provider store={store}>
 				<Router history={history}>
 					<Route
-						path={`/example(/:checksum)`}
+						path={`/promo_code(/:checksum)`}
 						//
 						// The Welcome view only downloads static assets (images and texts) necessary to show the app
 						// regardless of visitors being identified or not.
@@ -38,11 +39,20 @@ class Root extends Component {
 						component={WelcomeContainer}
 					/>
 					<Route
-						path={`/example(/:checksum)/entries`}
-						onEnter={(nextState, replace, next) => getStaticContentAndEntities(nextState, replace, next, dispatch)}
+						path={`/promo_code(/:checksum)/form`}
+						onEnter={(nextState, replace, next) => getStaticContent(nextState, replace, next, dispatch)}
 						component={IndexContainer}
 					/>
-					<Route path={`/example/:checksum/login`} component={LoginContainer} />
+					<Route
+						path={`/promo_code(/:checksum)/thanks`}
+						onEnter={(nextState, replace, next) => getStaticContent(nextState, replace, next, dispatch)}
+						component={ThanksContainer}
+					/>
+					<Route
+						path={`/promo_code(/:checksum)/invalid`}
+						onEnter={(nextState, replace, next) => getStaticContent(nextState, replace, next, dispatch)}
+						component={InvalidContainer}
+					/>
 				</Router>
 			</Provider>
 		)

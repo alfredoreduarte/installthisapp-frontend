@@ -201,7 +201,8 @@ export const postNewApp = () => {
 						body.module == 'coupons' ||
 						body.module == 'photo_contest' ||
 						body.module == 'capture_the_flag' ||
-						body.module == 'static_html'
+						body.module == 'static_html' ||
+						body.module == 'promo_code'
 					) {
 						dispatch(push(`/d/apps/${response.app.applicationType}/${response.app.checksum}/editor`))
 					} else {

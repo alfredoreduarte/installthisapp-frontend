@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Summary from 'modules/example/components/Summary'
+import Summary from 'modules/promo_code/components/Summary'
 
 const Dashboard = props => <Summary {...props} />
 

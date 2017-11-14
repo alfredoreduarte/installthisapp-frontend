@@ -5,11 +5,24 @@ import { APP_EDITOR_FORM_NAME } from 'config'
 
 import { setEditorStepIndexWithConditionalScreen } from 'actions/formEditorUI'
 
+import LegalForm from 'components/form-editor/LegalForm'
+import CodeForm from 'components/form-editor/CodeForm'
+import OpenGraphForm from 'components/form-editor/OpenGraphForm'
 import WelcomeForm from 'components/form-editor/WelcomeForm'
+
+import IndexForm from 'modules/promo_code/components/form-editor/IndexForm'
+import ThanksForm from 'modules/promo_code/components/form-editor/ThanksForm'
+import InvalidForm from 'modules/promo_code/components/form-editor/InvalidForm'
 
 let Editor = ({ setEditorStep, editorCurrentStep }) => (
 	<div>
 		<WelcomeForm onTitleClick={() => setEditorStep(0)} active={editorCurrentStep == 0} />
+		<IndexForm onTitleClick={() => setEditorStep(1)} active={editorCurrentStep == 1} />
+		<ThanksForm onTitleClick={() => setEditorStep(2)} active={editorCurrentStep == 2} />
+		<InvalidForm onTitleClick={() => setEditorStep(3)} active={editorCurrentStep == 3} />
+		<CodeForm onTitleClick={() => setEditorStep(4)} active={editorCurrentStep == 4} />
+		<LegalForm onTitleClick={() => setEditorStep(5)} active={editorCurrentStep == 5} />
+		<OpenGraphForm onTitleClick={() => setEditorStep(6)} active={editorCurrentStep == 6} />
 	</div>
 )
 

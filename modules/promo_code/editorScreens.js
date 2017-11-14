@@ -4,11 +4,15 @@ export default [
 		label: 'Welcome Screen',
 	},
 	{
-		value: 'form',
-		label: 'Form',
+		value: 'index',
+		label: 'Main screen',
 	},
 	{
 		value: 'thanks',
 		label: '"Thank You" Screen',
+	},
+	{
+		value: 'invalid',
+		label: '"Invalid Code" Screen',
 	},
 ]

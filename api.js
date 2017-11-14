@@ -60,6 +60,7 @@ export const getFromApi = (endpoint: string, success: () => mixed = temporaryEmp
 					return response.json()
 				case 401:
 					processUnauthorized()
+					return false
 				default:
 					console.log('Status: ' + response.status)
 					// top.location.href = '/'
@@ -177,7 +178,10 @@ export const postToApi = (endpoint: string, body: ?{}, success: () => mixed = te
 				success(response)
 				return Promise.resolve(response)
 			})
-			.catch(exception => console.log('parsing failed', exception))
+			.catch(exception => {
+				console.log('parsing failed', exception)
+				return Promise.reject(exception)
+			})
 	)
 }
 

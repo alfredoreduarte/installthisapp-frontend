@@ -4,15 +4,21 @@ import { connect } from 'react-redux'
 import defaultImages from 'lib/defaultImages'
 
 // Screens
-import Welcome from 'canvas/example/components/Welcome'
-import Index from 'canvas/example/components/Index'
+import Welcome from 'canvas/promo_code/components/Welcome'
+import Index from 'canvas/promo_code/components/Index'
+import Thanks from 'canvas/promo_code/components/Thanks'
+import Invalid from 'canvas/promo_code/components/Invalid'
 
 const Previews = ({ screen, messages, images, settings, emptyFunc }) => {
 	switch (screen) {
 		case 'intro':
-			return <Welcome messages={messages} images={images} settings={settings} formPath={null} />
+			return <Welcome messages={messages} images={images} settings={settings} isPreview={true} handleLogin={emptyFunc} />
 		case 'index':
-			return <Index messages={messages} images={images} settings={settings} />
+			return <Index messages={messages} images={images} settings={settings} handleSubmit={emptyFunc} />
+		case 'thanks':
+			return <Thanks messages={messages} images={images} settings={settings} entriesCount={3} />
+		case 'invalid':
+			return <Invalid messages={messages} images={images} settings={settings} />
 		default:
 			return <div>empty</div>
 	}
