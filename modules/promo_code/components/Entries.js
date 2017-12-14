@@ -10,6 +10,8 @@ const Entries = ({ entries, selectedItems, fetchEntries }) => (
 				<div className="col-md-12">
 					<h3 className="ita-page-title">
 						Entries
+						<small>{entries.length}</small>
+						<br/>
 						<small className={selectedItems.length ? '' : 'hide'}>
 							{' '}
 							/ {selectedItems.length} user{selectedItems.length > 1 ? 's' : ''} selected
