@@ -3,7 +3,7 @@ import { ButtonToolbar, Table, DropdownButton, MenuItem } from 'react-bootstrap'
 import SearchForm from 'components/SearchForm'
 import User from 'components/User'
 
-const Entries = ({ entries, selectedItems, fetchEntries }) => (
+const Entries = ({ entries, selectedItems, fetchEntries, generateCsv }) => (
 	<div className="ita-table-view">
 		<div className="ita-table-toolbar">
 			<div className="row">
@@ -11,7 +11,7 @@ const Entries = ({ entries, selectedItems, fetchEntries }) => (
 					<h3 className="ita-page-title">
 						Entries
 						<small> / {entries.length}</small>
-						<br/>
+						<br />
 						<small className={selectedItems.length ? '' : 'hide'}>
 							{' '}
 							/ {selectedItems.length} user{selectedItems.length > 1 ? 's' : ''} selected
@@ -28,6 +28,9 @@ const Entries = ({ entries, selectedItems, fetchEntries }) => (
 						<ButtonToolbar>
 							<button className="btn btn-sm btn-default pull-right" onClick={fetchEntries}>
 								Refresh
+							</button>
+							<button className="btn btn-sm btn-default pull-right" onClick={generateCsv}>
+								Export as CSV
 							</button>
 						</ButtonToolbar>
 					)}

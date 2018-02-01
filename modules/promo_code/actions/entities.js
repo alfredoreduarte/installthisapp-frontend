@@ -1,5 +1,6 @@
 import { normalize, arrayOf } from 'normalizr'
 import { getCurrentAppByState } from 'selectors/apps'
+import { getFilteredEntries } from 'modules/promo_code/selectors/entries'
 import * as schema from 'modules/promo_code/schema'
 import { getFromApi } from 'api'
 
@@ -20,5 +21,44 @@ export const fetchEntities = () => {
 		})
 	}
 }
+
+// CSV generator
+export const generateCsv = () => {
+	return (dispatch, getState) => {
+		const state = getState()
+		const currentApp = getCurrentAppByState(state)
+		const csvHeaders = ['Facebook ID', 'name', 'code']
+		const entries = getFilteredEntries(state)
+		const sanitizedForSheet = entries.map(entry => {
+			return {
+				identifier: entry.user.identifier,
+				name: entry.user.name,
+				code: entry.code,
+				// time: entry.time,
+			}
+		})
+		const arrayOfArrays = sanitizedForSheet.map(entry => {
+			return Object.values(entry)
+		})
+		const entriesWithHeaders = [csvHeaders, ...arrayOfArrays]
+		fetch('/generate-csv', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				data: entriesWithHeaders,
+			}),
+		})
+			.then(function(resp) {
+				return resp.blob()
+			})
+			.then(function(blob) {
+				downloadjs(blob)
+			})
+			.catch(exception => console.log('parsing failed', exception))
+	}
+}
+// CSV generator
 
 export const beforeShowingDashboard = fetchEntities
