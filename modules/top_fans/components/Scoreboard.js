@@ -59,9 +59,9 @@ const Scoreboard = ({
 							{' '}/ {selectedItems.length} 
 							{' '}user{selectedItems.length > 1 ? 's' : ''} selected
 						</small>
-						<small>
+						{firstFetchFromDate && <small>
 							Counting likes and comments since <i>{firstFetchFromDate.format("dddd, MMMM Do YYYY")}</i>
-						</small>
+						</small>}
 					</h3>
 					<p><small>Need to exclude yourself or another person? Click the <FaEyeSlash size={14} color={'black'} /> at the right side of the profile.</small></p>
 				</div>
