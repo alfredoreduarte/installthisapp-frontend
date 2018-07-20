@@ -7,15 +7,10 @@ import scrollTo from 'jquery.scrollto'
 import visible from 'jquery-visible'
 import featuresPageChart from 'assets/landing/features-chart'
 require('assets/landing-v2/styles.sass')
-require('damnGdpr/src/damnGdpr.js')
-require('damnGdpr/src/damnGdpr.css')
+// require('damnGdpr/src/damnGdpr.js')
+// require('damnGdpr/src/damnGdpr.css')
 
 $(document).ready(() => {
-	$.damnGdpr({
-		language: 'en',
-		readMoreUrl: 'https://staging.installthisapp.com/privacy-policy',
-		cookieNames: ['cookie1', 'cookie1'],
-	})
 	// featuresPageChart('features-chart')
 	if ($('#create').length > 0) {
 		$(window).on('scroll', () => {

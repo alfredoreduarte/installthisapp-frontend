@@ -3,3 +3,29 @@
 <script src="<%= cloudFrontUrl %><%= manifestBundle %>"></script>
 <script src="<%= cloudFrontUrl %><%= vendorBundle %>"></script>
 <script src="<%= cloudFrontUrl %><%= jsBundle %>"></script>
+<script src="https://cdn.jsdelivr.net/npm/damngdpr/src/damnGdpr.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/damngdpr/src/damnGdpr.min.css">
+<script type="text/javascript">
+	$(document).ready(function(){
+		$.damnGdpr({
+			language: 'en',
+			readMoreUrl: 'https://www.installthisapp.com/privacy-policy',
+			cookieNames: [
+				"ajs_group_id",
+				"ajs_user_id",
+				"__hssc",
+				"__hssrc",
+				"__hstc",
+				"hubspotutk",
+				"fs_uid",
+				"_ga",
+				"_gid",
+				"amplitude_id_cde97f85edc4e45ded881e1bc9088e70installthisapp",
+				"amplitude_idundefinedinstallthisapp",
+				"wooTracker",
+				"_gat",
+				"ajs_anonymous_id",
+			]
+		})
+	})
+</script>
